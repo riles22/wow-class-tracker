@@ -242,8 +242,11 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
 - **YouTube transcripts**: two transports, same captions. On the nightly runner the
   deterministic `src/fetch-transcripts.mjs` step (the only holder of the optional
   `TRANSCRIPT_API_KEY`) pulls YouTube's own auto-captions through the Supadata API
-  (`mode=native`, 25/run inside the free tier) for videos queued in
+  (`mode=native`, at most 25 requests/run with durable usage and retry tracking) for videos queued in
   `data/pending-transcripts.json` — datacenter IPs can't reach YouTube directly
   (bot-wall; the android-client workaround failed 2026-07-17). Local/residential runs
-  still use yt-dlp with a short sleep between requests. Either way: low volume, store
+  still use yt-dlp with a short sleep between requests. The nightly reuses encrypted
+  cached captions after publication failures and holds uncertain consumption for
+  review; its optional rolling allowance does not assume a provider billing plan.
+  See [transcript operations](docs/transcript-operations.md). Either way: low volume, store
   summaries + short excerpts with links — never redistribute full transcripts.

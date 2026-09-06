@@ -1922,7 +1922,7 @@ export function publicationPayload(payload) {
   };
 }
 
-export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, frozenForecast = null, officialNotes = null, now = null }) {
+export function buildPayload({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshot, historySnapshots, seasonFinal = null, frozenForecast = null, officialNotes = null, wclCoverage = null, now = null }) {
   const scored = dummyDomeScores(metricRanks(fightLabels(decorateSpecs(specs, sources, scales, seasonFinal))));
   // Prefer the full history (skip snapshots identical to the present state); fall back to
   // the single-snapshot param for callers/tests that pass one directly.
@@ -1961,6 +1961,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
     ptrBuilds: ptrBuilds ?? null,
     // Deliberately assembled only after every ranking and frozen forecast is done.
     officialNotes: officialNotesView(officialNotes),
+    wclCoverage,
     creatorTakes: creatorTakes ?? null,
     encounterTiers: encounterTiers ?? null,
     dataHealth: dataHealth(decorated, sources),

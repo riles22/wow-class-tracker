@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { fetchItems, getText, itemIdsFrom, parsedItemIssues } from "./lib-wowhead.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DATA_PATH = join(ROOT, "data", "tier-items.json");
+const DATA_PATH = join(process.env.WOW_GEARING_DATA_DIR || join(ROOT, "data"), "tier-items.json");
 const ACCEPT_ITEM_CHANGES = process.env.WOW_ACCEPT_TIER_CHANGES === "1";
 const SET_URL = (setId) => `https://www.wowhead.com/item-set=${setId}`;
 const SLOT_ORDER = ["Head", "Shoulder", "Chest", "Hands", "Legs"];

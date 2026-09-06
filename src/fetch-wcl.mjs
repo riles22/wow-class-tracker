@@ -28,6 +28,7 @@ import { applyMetrics } from "./apply-metrics.mjs";
 import { PHASES } from "./normalize.mjs";
 import { createHash } from "node:crypto";
 import { collectLeaderboards } from "./wcl-live.mjs";
+import { createWclCoverage } from "./wcl-coverage.mjs";
 
 // Header recipe proven by the 2026-07-14 run (see refresh-metrics SKILL.md, "WCL v2
 // API status"): browser UA on the token POST; Origin + Referer + sec-ch-ua clear
@@ -328,6 +329,7 @@ export async function runWcl({ root = rootDir, outDir = "wcl-fetch", id = proces
     }
   }
   await writeFile(path.join(outDir, "evidence.json"), JSON.stringify(evidence, null, 2) + "\n");
+  await writeFile(path.join(root, "data/wcl-coverage.json"), JSON.stringify(createWclCoverage(evidence, roster), null, 2) + "\n");
   console.log(`WCL: ${evidence.verdict} — ${evidence.detail}`);
   if (!["success", "partial"].includes(evidence.verdict)) console.log(`::warning title=WCL collection degraded::${evidence.detail}`);
   return { evidence, updates };

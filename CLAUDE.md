@@ -1085,9 +1085,10 @@ The title is a bad predictor: the 2026-08-08 local run filtered 42 of 47 videos 
 titles and thereby skipped **Tactyks and J-Funk entirely**, the two creators added days
 earlier to close Protection Paladin and Windwalker, because their uploads read "dungeon
 guide" — and a Method guide author's dungeon guide routinely carries spec analysis. The
-**nightly keeps the filter**: Supadata's free tier is **100 requests per MONTH**
-(`PER_RUN_CAP = 25` is only the per-run guard), so an unfiltered nightly would exhaust the
-month in two runs. Corollary that is easy to get wrong: **fetch broadly, queue narrowly** —
+**nightly keeps the filter**: Supadata requests are metered (`PER_RUN_CAP = 25`
+per run), with durable usage tracking and an optional configured rolling allowance.
+Do not infer a current subscription from older free-plan limits.
+Corollary that is easy to get wrong: **fetch broadly, queue narrowly** —
 `pending-transcripts.json` is drained by the paid API, so a local run must not queue the
 title-irrelevant videos it happened to fail on. Expect `skipped[]` to grow; that is the
 point, since a verified skip costs one fetch once while a title guess costs the take
@@ -1321,7 +1322,13 @@ OPTIONAL `TRANSCRIPT_API_KEY`) drains the agent-maintained
 `data/pending-transcripts.json` queue through the Supadata captions API
 (`mode=native` — YouTube's own auto-captions; offsets in ms) into
 `transcript-fetch/` for the agents to distill; a missing key is a clean
-"no-credentials" skip (datacenter IPs can't reach YouTube directly — 2026-07
+"no-credentials" skip. The workflow restores trusted operational state, uploads a
+request reservation before collection, then saves results before agents run.
+Requests have 45-second deadlines and a six-minute stage budget; unavailable
+captions back off, ambiguous consumption waits for explicit review, and successful
+captions are cached encrypted across failed publications. No plaintext transcript
+is included in state artifacts. See `docs/transcript-operations.md` for usage,
+first-install initialization and reviewed retries. (Datacenter IPs can't reach YouTube directly — 2026-07
 bot-wall, android-client workaround failed 2026-07-17). The published-date stage
 (`src/fetch-published.mjs`, no credentials) records what each published-bearing
 registry page says about its own update date into `published-evidence/evidence.json`

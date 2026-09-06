@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { LIVE_LEADERBOARDS, expectedMetricName } from "./wcl-live.mjs";
 import { PHASES } from "./normalize.mjs";
+import { createWclCoverage } from "./wcl-coverage.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export const wclDigest = value => createHash("sha256").update(JSON.stringify(value)).digest("hex");
@@ -21,7 +22,7 @@ const tuple = row => `${row.class}|${row.spec}|${row.source}|${row.bracket}|${ro
 const sorted = rows => rows.toSorted((a, b) => tuple(a).localeCompare(tuple(b)));
 const iso = v => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(v) && Number.isFinite(Date.parse(v));
 
-export function checkWclMetrics({ baseline, current, evidence, updates, manifest, now = new Date() }) {
+export function checkWclMetrics({ baseline, current, evidence, updates, manifest, coverage, now = new Date() }) {
   const errors = [];
   try {
     const before = storedWclRows(baseline), after = storedWclRows(current);
@@ -100,6 +101,8 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
       expected.set(tuple(row), row);
     }
     if (!isDeepStrictEqual(sorted([...expected.values()]), sorted(after))) throw new Error("Canonical WCL rows differ from trusted updates; failed/sparse cuts and historical data must be retained exactly");
+    if (coverage !== undefined && !isDeepStrictEqual(coverage, createWclCoverage(evidence, baseline)))
+      throw new Error("Public WCL coverage differs from the trusted collection receipt");
   } catch (error) { errors.push(error.message); }
   return errors;
 }
@@ -110,6 +113,7 @@ export async function runWclCheck({ root = ROOT, evidenceDir = path.join(root, "
   const json = async p => JSON.parse(await readFile(p, "utf8"));
   return checkWclMetrics({ baseline, current: await json(path.join(root, "data/specs.json")),
     evidence: await json(path.join(evidenceDir, "evidence.json")), updates: await json(path.join(evidenceDir, "updates.json")),
+    coverage: await json(path.join(root, "data/wcl-coverage.json")),
     ...(manifestPath ? { manifest: await json(path.resolve(root, manifestPath)) } : {}) });
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

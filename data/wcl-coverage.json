@@ -1,0 +1,6477 @@
+{
+  "schemaVersion": 1,
+  "season": "s2",
+  "checkedAt": "2026-09-06T13:47:23.559Z",
+  "encounters": {
+    "raid": [
+      {
+        "id": 3470,
+        "name": "Nek'zali the Soulcoiler"
+      },
+      {
+        "id": 3445,
+        "name": "Entombed Sentinels"
+      },
+      {
+        "id": 3455,
+        "name": "Vashnik the Malignant"
+      },
+      {
+        "id": 3497,
+        "name": "The Lost Explorers"
+      },
+      {
+        "id": 3420,
+        "name": "Sszorak"
+      },
+      {
+        "id": 3421,
+        "name": "The Twin Fangs"
+      },
+      {
+        "id": 3429,
+        "name": "The Coiled Altar"
+      },
+      {
+        "id": 3492,
+        "name": "Ula'tek"
+      }
+    ],
+    "mplus": [
+      {
+        "id": 12993,
+        "name": "Altar of Fangs"
+      },
+      {
+        "id": 12825,
+        "name": "Den of Nalorakk"
+      },
+      {
+        "id": 61762,
+        "name": "Kings' Rest"
+      },
+      {
+        "id": 12813,
+        "name": "Murder Row"
+      },
+      {
+        "id": 112521,
+        "name": "Ruby Life Pools"
+      },
+      {
+        "id": 61877,
+        "name": "Temple of Sethraliss"
+      },
+      {
+        "id": 12859,
+        "name": "The Blinding Vale"
+      },
+      {
+        "id": 12923,
+        "name": "Voidscar Arena"
+      }
+    ]
+  },
+  "cuts": [
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:26.505Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:26.506Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:26.506Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:26.506Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:26.506Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:27.339Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:27.339Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:27.339Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:27.340Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:27.340Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.166Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.166Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.166Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.166Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.167Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 85,
+      "checkedAt": "2026-09-06T13:47:28.980Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.980Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 17,
+      "checkedAt": "2026-09-06T13:47:28.980Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.980Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:28.980Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:29.815Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:29.815Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:29.815Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:29.816Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:29.816Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:30.698Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:30.698Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:30.698Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:30.698Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:30.698Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:31.531Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:31.531Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:31.531Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:31.531Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:31.531Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:32.360Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:32.361Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:32.361Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:32.361Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3470,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:32.361Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.191Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 33,
+      "checkedAt": "2026-09-06T13:47:33.989Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.989Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 23,
+      "checkedAt": "2026-09-06T13:47:33.989Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 79,
+      "checkedAt": "2026-09-06T13:47:33.989Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:33.989Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:34.879Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:34.879Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:34.879Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:34.879Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:34.879Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 10,
+      "checkedAt": "2026-09-06T13:47:35.671Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:35.671Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "insufficient",
+      "entries": 5,
+      "checkedAt": "2026-09-06T13:47:35.671Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 48,
+      "checkedAt": "2026-09-06T13:47:35.672Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:35.672Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:36.502Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:36.503Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:36.503Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:36.503Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:36.503Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 63,
+      "checkedAt": "2026-09-06T13:47:37.359Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:37.359Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:37.359Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:37.359Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 33,
+      "checkedAt": "2026-09-06T13:47:37.359Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:38.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:38.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 72,
+      "checkedAt": "2026-09-06T13:47:38.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:38.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 15,
+      "checkedAt": "2026-09-06T13:47:38.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 33,
+      "checkedAt": "2026-09-06T13:47:38.964Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:38.964Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:38.964Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 15,
+      "checkedAt": "2026-09-06T13:47:38.964Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3445,
+      "status": "success",
+      "entries": 66,
+      "checkedAt": "2026-09-06T13:47:38.964Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:40.568Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:40.569Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:40.569Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:40.569Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:40.569Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 19,
+      "checkedAt": "2026-09-06T13:47:41.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:41.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "insufficient",
+      "entries": 8,
+      "checkedAt": "2026-09-06T13:47:41.365Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 55,
+      "checkedAt": "2026-09-06T13:47:41.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:41.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:42.192Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:42.193Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:42.193Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 96,
+      "checkedAt": "2026-09-06T13:47:42.193Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:42.193Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "insufficient",
+      "entries": 4,
+      "checkedAt": "2026-09-06T13:47:42.971Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:42.971Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:47:42.971Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "insufficient",
+      "entries": 4,
+      "checkedAt": "2026-09-06T13:47:42.971Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 79,
+      "checkedAt": "2026-09-06T13:47:42.971Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:43.860Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:43.860Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:43.860Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:43.860Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:43.860Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 40,
+      "checkedAt": "2026-09-06T13:47:44.664Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:44.664Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:44.664Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 71,
+      "checkedAt": "2026-09-06T13:47:44.664Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 19,
+      "checkedAt": "2026-09-06T13:47:44.664Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:45.489Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:45.489Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 38,
+      "checkedAt": "2026-09-06T13:47:45.489Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:45.489Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "insufficient",
+      "entries": 7,
+      "checkedAt": "2026-09-06T13:47:45.489Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:46.318Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 12,
+      "checkedAt": "2026-09-06T13:47:46.318Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:46.318Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 18,
+      "checkedAt": "2026-09-06T13:47:46.318Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3455,
+      "status": "success",
+      "entries": 35,
+      "checkedAt": "2026-09-06T13:47:46.318Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:47.204Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:47.204Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:47.204Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:47.204Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:47.204Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.080Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.080Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 87,
+      "checkedAt": "2026-09-06T13:47:48.080Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.080Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.080Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.911Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.911Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.912Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.912Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:48.912Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 38,
+      "checkedAt": "2026-09-06T13:47:49.764Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:49.764Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 13,
+      "checkedAt": "2026-09-06T13:47:49.764Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:49.764Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:49.764Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:50.587Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:50.587Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:50.587Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:50.587Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:50.588Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:51.478Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:51.479Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:51.479Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:51.479Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:51.479Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:52.304Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:52.304Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:52.304Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:52.305Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 54,
+      "checkedAt": "2026-09-06T13:47:52.305Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:53.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:53.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:53.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 35,
+      "checkedAt": "2026-09-06T13:47:53.168Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3497,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:53.169Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:54.702Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 32,
+      "checkedAt": "2026-09-06T13:47:54.702Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 41,
+      "checkedAt": "2026-09-06T13:47:54.702Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 69,
+      "checkedAt": "2026-09-06T13:47:54.702Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:54.702Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 14,
+      "checkedAt": "2026-09-06T13:47:55.519Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:55.519Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 6,
+      "checkedAt": "2026-09-06T13:47:55.519Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 27,
+      "checkedAt": "2026-09-06T13:47:55.519Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 28,
+      "checkedAt": "2026-09-06T13:47:55.519Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:56.328Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 42,
+      "checkedAt": "2026-09-06T13:47:56.328Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:56.328Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:56.328Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 99,
+      "checkedAt": "2026-09-06T13:47:56.328Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 2,
+      "checkedAt": "2026-09-06T13:47:57.134Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:57.134Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:47:57.134Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 3,
+      "checkedAt": "2026-09-06T13:47:57.134Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 21,
+      "checkedAt": "2026-09-06T13:47:57.134Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 19,
+      "checkedAt": "2026-09-06T13:47:57.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:57.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:57.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 51,
+      "checkedAt": "2026-09-06T13:47:57.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 28,
+      "checkedAt": "2026-09-06T13:47:57.933Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 12,
+      "checkedAt": "2026-09-06T13:47:58.745Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:58.745Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 41,
+      "checkedAt": "2026-09-06T13:47:58.745Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 5,
+      "checkedAt": "2026-09-06T13:47:58.745Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 5,
+      "checkedAt": "2026-09-06T13:47:58.745Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:59.544Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:47:59.544Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 14,
+      "checkedAt": "2026-09-06T13:47:59.544Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 82,
+      "checkedAt": "2026-09-06T13:47:59.544Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 21,
+      "checkedAt": "2026-09-06T13:47:59.544Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:00.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "insufficient",
+      "entries": 5,
+      "checkedAt": "2026-09-06T13:48:00.337Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:00.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 33,
+      "checkedAt": "2026-09-06T13:48:00.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3420,
+      "status": "success",
+      "entries": 10,
+      "checkedAt": "2026-09-06T13:48:00.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 6,
+      "checkedAt": "2026-09-06T13:48:01.119Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 5,
+      "checkedAt": "2026-09-06T13:48:01.119Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:48:01.119Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 15,
+      "checkedAt": "2026-09-06T13:48:01.119Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 23,
+      "checkedAt": "2026-09-06T13:48:01.119Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:48:01.883Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 38,
+      "checkedAt": "2026-09-06T13:48:01.883Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:01.883Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:48:01.883Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:01.883Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 25,
+      "checkedAt": "2026-09-06T13:48:02.660Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 21,
+      "checkedAt": "2026-09-06T13:48:02.660Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 45,
+      "checkedAt": "2026-09-06T13:48:02.661Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:48:02.661Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 66,
+      "checkedAt": "2026-09-06T13:48:02.661Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:03.419Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 37,
+      "checkedAt": "2026-09-06T13:48:03.419Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:03.419Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 24,
+      "checkedAt": "2026-09-06T13:48:03.419Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:03.419Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 3,
+      "checkedAt": "2026-09-06T13:48:04.190Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 32,
+      "checkedAt": "2026-09-06T13:48:04.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 27,
+      "checkedAt": "2026-09-06T13:48:04.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 60,
+      "checkedAt": "2026-09-06T13:48:04.190Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 7,
+      "checkedAt": "2026-09-06T13:48:04.190Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 16,
+      "checkedAt": "2026-09-06T13:48:04.977Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 22,
+      "checkedAt": "2026-09-06T13:48:04.977Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 13,
+      "checkedAt": "2026-09-06T13:48:04.977Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 30,
+      "checkedAt": "2026-09-06T13:48:04.977Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 2,
+      "checkedAt": "2026-09-06T13:48:04.977Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 4,
+      "checkedAt": "2026-09-06T13:48:05.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 19,
+      "checkedAt": "2026-09-06T13:48:05.738Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 2,
+      "checkedAt": "2026-09-06T13:48:05.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 28,
+      "checkedAt": "2026-09-06T13:48:05.738Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:48:05.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 46,
+      "checkedAt": "2026-09-06T13:48:06.508Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 6,
+      "checkedAt": "2026-09-06T13:48:06.508Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "success",
+      "entries": 73,
+      "checkedAt": "2026-09-06T13:48:06.508Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:06.508Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3421,
+      "status": "insufficient",
+      "entries": 1,
+      "checkedAt": "2026-09-06T13:48:06.508Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:07.987Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:07.987Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:07.987Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:07.987Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:07.987Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:08.735Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:08.735Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:08.735Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:08.735Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:08.735Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:09.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:09.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:09.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:09.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:09.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.238Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.238Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.238Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.238Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.238Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.988Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.988Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.988Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.988Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:10.988Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:11.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:11.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:11.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:11.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:11.738Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:12.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:12.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:12.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:12.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:12.485Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:13.236Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:13.236Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:13.236Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:13.236Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3429,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:13.236Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.775Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.775Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.775Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.775Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:14.775Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:15.530Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:15.530Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:15.530Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:15.530Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:15.530Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:16.274Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:16.274Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:16.274Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:16.274Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:16.274Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.026Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.773Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.773Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.773Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.773Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:17.773Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:18.550Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:18.550Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:18.550Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:18.550Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:18.550Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:19.300Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:19.300Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:19.300Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:19.300Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "raid",
+      "encounterId": 3492,
+      "status": "insufficient",
+      "entries": 0,
+      "checkedAt": "2026-09-06T13:48:19.300Z",
+      "reason": "Fewer than 10 ranked entries"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:21.769Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:21.769Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:21.769Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:21.769Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:21.770Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:22.847Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:22.848Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:22.848Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:22.848Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:22.848Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:23.889Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:23.889Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:23.889Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:23.889Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:23.890Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:25.003Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:25.003Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:25.004Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:25.004Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:25.004Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:26.110Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:26.111Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:26.111Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:26.111Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:26.111Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:27.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:27.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:27.187Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:27.187Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:27.187Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:28.211Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:28.211Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:28.211Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:28.211Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:28.212Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:29.319Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:29.319Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:29.319Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:29.319Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12993,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:29.320Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:30.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:30.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:30.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:30.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:30.337Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:31.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:31.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:31.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:31.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:31.365Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:32.463Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:32.463Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:32.463Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:32.463Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:32.463Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:33.552Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:33.552Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:33.552Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:33.553Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:33.553Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:34.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:34.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:34.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:34.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:34.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:35.705Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:35.705Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:35.705Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:35.705Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:35.705Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:36.737Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:36.738Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:36.738Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:36.738Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:36.738Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:37.870Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:37.870Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:37.870Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:37.870Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12825,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:37.870Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:39.654Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:39.654Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:39.654Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:39.654Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:39.654Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:40.782Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:40.782Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:40.782Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:40.782Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:40.782Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:41.802Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:41.802Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:41.802Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:41.802Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:41.802Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:42.926Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:42.926Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:42.926Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:42.926Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:42.926Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:43.942Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:43.943Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:43.943Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:43.943Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:43.943Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:44.962Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:44.963Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:44.963Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:44.963Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:44.963Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:45.973Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:45.974Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:45.974Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:45.974Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:45.974Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:46.916Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:46.916Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:46.916Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:46.916Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 61762,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:46.916Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:48.043Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:48.043Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:48.043Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:48.043Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:48.043Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:49.074Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:49.074Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:49.074Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:49.074Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:49.074Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:50.184Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:50.184Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:50.184Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:50.184Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:50.184Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:51.201Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:51.201Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:51.202Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:51.202Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:51.202Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:52.241Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:52.241Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:52.241Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:52.241Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:52.241Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:53.272Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:53.272Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:53.272Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:53.272Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:53.272Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:54.303Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:54.303Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:54.303Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:54.303Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:54.303Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:55.323Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:55.323Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:55.323Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:55.323Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12813,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:55.323Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:57.223Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:57.223Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:57.223Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:57.223Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:57.223Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:58.246Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:58.246Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:58.246Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:58.246Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:58.246Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:59.249Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:59.249Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:59.249Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:59.249Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:48:59.249Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:00.270Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:00.270Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:00.270Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:00.271Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:00.271Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:01.281Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:01.281Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:01.281Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:01.281Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:01.281Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:02.300Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:02.300Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:02.300Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:02.300Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:02.300Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:03.325Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:03.325Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:03.325Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:03.325Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:03.325Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:04.351Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:04.351Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:04.351Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:04.351Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 112521,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:04.351Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:05.465Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:05.465Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:05.465Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:05.465Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:05.466Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:06.494Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:06.494Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:06.494Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:06.494Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:06.494Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:07.501Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:07.501Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:07.501Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:07.501Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:07.501Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:08.508Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:08.508Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:08.508Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:08.508Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:08.509Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:09.588Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:09.588Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:09.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:09.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:09.589Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:10.606Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:10.606Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:10.606Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:10.606Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:10.606Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:11.618Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:11.618Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:11.618Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:11.618Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:11.618Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:12.796Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:12.797Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:12.797Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:12.797Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 61877,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:12.797Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:14.554Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:14.555Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:14.555Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:14.555Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:14.555Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:15.682Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:15.682Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:15.682Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:15.682Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:15.682Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:16.679Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:16.679Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:16.679Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:16.679Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:16.679Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:17.776Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:17.776Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:17.776Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:17.776Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:17.776Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:18.821Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:18.821Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:18.821Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:18.822Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:18.822Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:19.898Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:19.898Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:19.898Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:19.898Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:19.898Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:20.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:20.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:20.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:20.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:20.932Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:21.940Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:21.941Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:21.941Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:21.941Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12859,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:21.941Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:23.055Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:23.055Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:23.056Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:23.056Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:23.056Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:24.089Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:24.089Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:24.089Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:24.090Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:24.090Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:25.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:25.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:25.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Beast Mastery",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:25.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:25.186Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:26.155Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:26.155Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:26.155Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:26.156Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:26.156Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:27.154Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:27.154Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:27.154Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:27.155Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:27.155Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:28.158Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:28.158Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:28.158Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:28.158Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:28.159Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:29.174Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:29.174Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:29.174Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:29.174Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:29.174Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:30.276Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:30.276Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:30.276Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Fury",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:30.276Z",
+      "reason": "Usable leaderboard sample"
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "bracket": "mplus",
+      "encounterId": 12923,
+      "status": "success",
+      "entries": 100,
+      "checkedAt": "2026-09-06T13:49:30.276Z",
+      "reason": "Usable leaderboard sample"
+    }
+  ]
+}

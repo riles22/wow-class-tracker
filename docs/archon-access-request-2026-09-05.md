@@ -1,6 +1,6 @@
 # Archon aggregate access request
 
-Status: ready for Riley to send, per owner decision2026-09-05; not sent.
+Status: sent September 6, 2026 at 19:04 UTC, following Riley's approval of all five next steps. Gmail confirmed the message in Sent. Awaiting a response; no paid service authorized.
 
 To: support@warcraftlogs.com
 

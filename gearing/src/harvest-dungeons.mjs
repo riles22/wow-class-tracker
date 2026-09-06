@@ -15,7 +15,7 @@ import { fileURLToPath } from "node:url";
 import { getText, dungeonLootIdsFrom, dungeonBossDropsFrom, fetchItems, parsedItemIssues } from "./lib-wowhead.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DATA_PATH = join(ROOT, "data", "dungeon-items.json");
+const DATA_PATH = join(process.env.WOW_GEARING_DATA_DIR || join(ROOT, "data"), "dungeon-items.json");
 const ACCEPT_LOOT_CHANGES = process.env.WOW_ACCEPT_LOOT_CHANGES === "1";
 let previous = null;
 let hasPrevious = false;

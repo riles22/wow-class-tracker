@@ -11,6 +11,7 @@ import { extractPriority } from "../src/lib-icy-veins.mjs";
 import { validateData } from "../src/validate-data.mjs";
 import { buildGuidePayload } from "../src/lib-guides.mjs";
 import { buildSpecSync, loadSpecSyncInputs } from "../src/harvest-specs.mjs";
+import { currentVerification } from "../src/verify-sources.mjs";
 
 const fromRoot = (path) => new URL(`../${path}`, import.meta.url);
 const rootPath = fileURLToPath(new URL("..", import.meta.url));
@@ -428,10 +429,18 @@ test("self-contained output embeds current data and valid browser JavaScript", a
   // guides is PRECOMPUTED by build.mjs from data/guides/*.json (Phase C) — assert its
   // shape and provenance here, and byte-equality for every directly-embedded dataset.
   const { guides, ...direct } = payload;
-  assert.deepEqual(direct, {
+  let sourceVerification = null;
+  try { sourceVerification = await currentVerification(await json("data/source-verification.json")); }
+  catch (error) { if (error.code !== "ENOENT") throw error; }
+  const expectedDirect = {
     raid, specs, dungeons, sheet, itemEligibility, tier, catalyst, catalystAllocations,
-    icons: icons.icons,
-  });
+    sourceVerification, icons: icons.icons,
+  };
+  assert.deepEqual(Object.keys(direct).sort(), Object.keys(expectedDirect).sort());
+  for (const key of Object.keys(expectedDirect)) assert.equal(
+    createHash("sha256").update(JSON.stringify(direct[key])).digest("hex"),
+    createHash("sha256").update(JSON.stringify(expectedDirect[key])).digest("hex"),
+    `${key}: embedded payload differs from current data or validated verification receipt`);
   assert.deepEqual(Object.keys(guides.sources).sort(), ["icyveins", "method", "wowhead"]);
   assert.equal(Object.keys(guides.specs).length, 40);
   assert.ok(Object.values(guides.specs).every((s) => s.builds.length >= 1),

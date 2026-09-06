@@ -133,6 +133,11 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 2. **`watch-creators`** — draining the transcript queue is the main reason this run
    exists. Honour the `skipped[]` lane (durable verified-skips), the same-lens supersede
    pass, and the `generalCreators` → `metaNotes[]` firewall.
+   Supadata collection belongs in the nightly's durable usage/cache workflow;
+   do not run `fetch-transcripts.mjs` with a new local ledger against the same API
+   key or clear a review hold. A direct API run requires the latest trusted state
+   and coordinated persistence back to the nightly; see
+   `docs/transcript-operations.md`. Residential catch-up keeps its existing lane.
 3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. 🛑 **Do not apply WoWMeta
    M+ rows or re-stamp their `snapshot`** while that source is under review (see
    `refresh-tiers/log.md`, 2026-07-31).
