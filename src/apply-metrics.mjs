@@ -38,6 +38,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
     if (row.n != null) entry.n = row.n;
     if (row.asOf != null) entry.asOf = row.asOf;
     if (row.era != null) entry.era = row.era; // era gating must survive the merge, not ride on name inference
+    if (row.sample != null) entry.sample = structuredClone(row.sample); // reviewed WCL leaderboard provenance
     if (existing >= 0) spec.metrics[existing] = entry; else spec.metrics.push(entry);
     metricsApplied++;
   }

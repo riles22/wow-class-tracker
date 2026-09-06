@@ -17,7 +17,8 @@
    every push.
 
    Run locally with:
-     npm run build && npm i --no-save playwright && npx playwright install chromium && npm test
+     npm run build && npx playwright install chromium firefox webkit
+     PLAYWRIGHT_BROWSER=firefox node --test test/ui-invariants.test.mjs
    The `playwright` package ships no postinstall browser download, so omitting the third
    command leaves node_modules complete but no browser on disk — and these tests then FAIL
    (11 red) rather than skip, because a browser that will not launch is deliberately not a
@@ -37,19 +38,21 @@ const DIST = path.join(ROOT, "dist", "index.html");
 /* Chromium may be preinstalled at a pinned path (CI images, the Claude Code sandbox)
    under a build number that does not match the playwright package's expectation, which
    makes the default launch fail. Prefer an explicit executable when one is configured. */
-const EXECUTABLE = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || null;
+const ENGINE = process.env.PLAYWRIGHT_BROWSER || "chromium";
+if (!["chromium", "firefox", "webkit"].includes(ENGINE)) throw new Error(`Invalid PLAYWRIGHT_BROWSER: ${ENGINE}; choose chromium, firefox, or webkit.`);
+const EXECUTABLE = ENGINE === "chromium" ? process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE || null : null;
 
 async function loadPlaywright() {
   try {
-    const { chromium } = await import("playwright");
-    return chromium;
+    const playwright = await import("playwright");
+    return playwright[ENGINE];
   } catch {
     return null;
   }
 }
 
-const chromium = await loadPlaywright();
-const reason = !chromium
+const browserType = await loadPlaywright();
+const reason = !browserType
   ? "playwright not installed — UI invariants skipped (see the header of this file)"
   : !existsSync(DIST)
     ? "dist/index.html not built — run `npm run build` first"
@@ -58,7 +61,7 @@ const reason = !chromium
 /* One browser for the whole file; each test gets a fresh page. */
 let browser = null;
 const ensureBrowser = async () => {
-  if (!browser) browser = await chromium.launch(EXECUTABLE ? { executablePath: EXECUTABLE } : {});
+  if (!browser) browser = await browserType.launch(EXECUTABLE ? { executablePath: EXECUTABLE } : {});
   return browser;
 };
 const newPage = async (hash = "") => {
@@ -585,9 +588,17 @@ test("no agent-writable field can inject markup or a handler into the rendered p
     if (b0) {
       b0.specsAffected = [...new Set([...(b0.specsAffected ?? []), `${s.spec} ${s.class}`])];
       b0.highlights = [`${s.spec} ${s.class} ${TEXT_BREAK}`, ...(b0.highlights ?? [])];
-      b0.label = ATTR_BREAK;
+      // Keep the official citation that the intake ledger cross-checks while
+      // poisoning this prose sink; otherwise validation correctly rejects the fixture.
+      b0.label = `${ATTR_BREAK} ${b0.label ?? ""}`;
       await save("ptr-builds.json", builds);
     }
+
+    const official = await load("official-notes.json");
+    for (const source of Object.values(official.sources)) for (const post of source.posts)
+      for (const section of post.sections) for (const preview of section.resolution.notes ?? [])
+        preview.summary += ` ${TEXT_BREAK}`;
+    await save("official-notes.json", official);
 
     const { build } = await import("../src/build.mjs");
     await build(root);   // real pipeline, including validation
@@ -630,7 +641,7 @@ test("no agent-writable field can inject markup or a handler into the rendered p
           // (2026-08-12) — a deliberate one-name addition, not a pattern; the 12.2 cycle
           // adds s2 here as its own reviewed edit. Anchored both ends; any other relative
           // href, or a path prefix wrapped around one of these, is still a finding.
-          .filter(e => !/^(?:index|gearing|s1)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
+          .filter(e => !/^(?:index|gearing|s1|forecast-report)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
@@ -1485,4 +1496,107 @@ test("the spark header states the real window, not a hard-coded duration", skipO
   const days = Math.round((Date.parse(dates.at(-1)) - Date.parse(dates[dates.length - n])) / 86400000);
   assert.equal(head, days + "d",
     `header "${head}" disagrees with the payload's own dates (${days}d over the last ${n} snapshots)`);
+});
+
+ui("keyboard sorting preserves the activated header's focus", async page => {
+  for(const key of ["Enter", "Space"]){
+    await page.locator('.hsort[data-sort="mplus"]').focus();
+    await page.keyboard.press(key);
+    assert.equal(await page.evaluate(()=>document.activeElement?.dataset.sort), "mplus");
+    assert.equal(await page.locator('#sortsel').inputValue(), "mplus");
+  }
+  await page.locator('#sortsel').focus();
+  await page.selectOption('#sortsel', "raid");
+  assert.equal(await page.evaluate(()=>document.activeElement?.id), "sortsel", "dropdown sorting must not steal focus");
+});
+
+ui("fractional consensus presentation explains a rounded boundary without changing scores", async page => {
+  const shown = await page.evaluate(()=>{
+    const s = SPECS[0];
+    s.consensus.mplus = { tier:"B", score:58, diverges:false,
+      perSource:[{score:57,label:"First",tier:"B"},{score:58,label:"Second",tier:"A"}] };
+    state.source = "consensus";
+    const r = ratingFor(s, "mplus");
+    const result = {tier:r.tier,score:r.score,displayScore:r.displayScore,html:tierEl(r,null)};
+    COMPARE.clear();
+    COMPARE.add(`${s.class}|${s.spec}`);
+    COMPARE.add(`${SPECS[1].class}|${SPECS[1].spec}`);
+    openCompare();
+    return {...result,compare:document.getElementById('cmp-ov').innerText};
+  });
+  assert.equal(shown.tier, "B");
+  assert.equal(shown.score, 58, "calculation and ordering remain unchanged");
+  assert.equal(shown.displayScore, 57.5);
+  assert.match(shown.html, /57\.5\/100/);
+  assert.match(shown.compare, /57\.5\/100/);
+});
+
+ui("a settled forecast report is reachable and separate from today's comparison", async page => {
+  const report = payload().meta.forecastReport;
+  if(!report){
+    assert.equal(await page.locator('#forecast-grade').isVisible(), false);
+    return;
+  }
+  const chip = page.locator('#forecast-grade');
+  assert.equal(await chip.isVisible(), true);
+  assert.match(await chip.innerText(), new RegExp(`${report.coverage.graded}/${report.coverage.obtainable} cells`));
+  assert.ok((await chip.innerText()).includes(report.actualDate));
+  assert.equal(await chip.locator('a').getAttribute('href'), 'forecast-report.html');
+  assert.ok(!(await page.locator('#movers').innerText()).includes('not yet a grade'));
+  await chip.locator('a').click();
+  await page.waitForLoadState('domcontentloaded');
+  const text = await page.locator('body').innerText();
+  assert.ok(text.includes(report.actualDate));
+  assert.match(text, /carry.forward/i);
+  assert.equal(await page.locator('script').count(), 0);
+});
+
+ui("retained rating disclosure names actual older contributors without changing consensus", async page => {
+  const expected = await page.evaluate(()=>{
+    const ids = new Set(SPECS.flatMap(s=>['raid','mplus'].flatMap(b=>
+      (s.consensus?.[b]?.perSource ?? []).filter(p=>p.lane !== 'frozen').map(p=>p.source))));
+    return SOURCES.filter(s=>s.kind==='tier-list' && ids.has(s.id)).map(s=>({name:s.name,
+      date:s.pages.filter(p=>!p.ancillary && p.seasonVerified===PHASE.liveSeason).map(p=>p.snapshot).filter(Boolean).sort()[0]
+    })).filter(s=>s.date && s.date<META.latestSnapshot);
+  });
+  assert.equal(await page.locator('#retained-ratings').isVisible(), expected.length>0);
+  if(expected.length){
+    const text = await page.locator('#retained-ratings').innerText();
+    for(const s of expected) assert.ok(text.includes(`${s.name} last verified ${s.date}`));
+    assert.match(text,/still contribute to consensus/);
+    assert.match(text,/Freshness alerts remain active/);
+  }
+});
+
+ui("official previews keep their attribution and not-live label in mobile spec drawers", async page => {
+  const notes = payload().officialNotes?.previews ?? [];
+  if (!notes.length) return; // A notes lane may legitimately be empty between previews.
+  await page.setViewportSize({ width: 390, height: 844 });
+  const footer = await page.locator('#officialnotes').innerText();
+  assert.match(footer, /PTR preview — not live/i);
+  for (const note of notes) {
+    const [cls, spec] = note.specKey.split('|');
+    const index = payload().specs.findIndex(s => s.class === cls && s.spec === spec);
+    const row = page.locator(`.row[data-idx="${index}"]`);
+    // Use the full roster and leave earlier drawers open: their layout must not
+    // move a later spec's hit target between pointer-down and pointer-up.
+    await row.locator('.spec-txt').scrollIntoViewIfNeeded();
+    await row.locator('.spec-txt').click();
+    await page.waitForFunction(index => {
+      const row = document.querySelector(`.row[data-idx="${index}"]`);
+      return row?.classList.contains('open') && !row.classList.contains('motion-enter')
+        && row.querySelector('.drawer').style.maxHeight === 'none';
+    }, index, { timeout: 5000 });
+    const fold = row.locator('details.dfold').filter({ has: page.locator('.preview-notes') });
+    await fold.locator('summary').scrollIntoViewIfNeeded();
+    await fold.locator('summary').click();
+    assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
+    const preview = row.locator('.preview-notes');
+    await preview.waitFor({ state: 'visible', timeout: 5000 });
+    assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
+    const text = await preview.innerText();
+    assert.ok(text.includes(note.summary) && text.includes(note.date));
+    assert.equal(await preview.locator('a').first().getAttribute('href'), note.url);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
+  }
 });

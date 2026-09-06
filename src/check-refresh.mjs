@@ -97,6 +97,12 @@ export function probeDate(req, data) {
     return dates[0] ?? null;
   }
   if (p.type === "metrics") return coverage(matchMetrics(p, data.specs).map(m => m.asOf).filter(Boolean).sort());
+  // A partition leaderboard can be rechecked without its included log dates moving.
+  // Its trusted sample receipt dates collection separately; never apply this probe
+  // to historical aggregates or silently restamp their source-owned asOf values.
+  if (p.type === "leaderboardChecks") return coverage(matchMetrics(p, data.specs)
+    .filter(m => m.sample?.kind === "leaderboard-entries")
+    .map(m => m.sample.observedAt?.slice(0, 10)).filter(Boolean).sort());
   if (p.type === "ptrDummy") return coverage(data.specs.map(s => s.ptrDummy?.asOf).filter(Boolean).sort());
   // Sims live on spec.fightProfile, not spec.metrics, so a "metrics" probe can't see
   // them and bloodmallet was left reading its own page snapshot (audit 2026-07-24, D3).
@@ -175,8 +181,7 @@ export function checkManifest(config, manifest, data, now, evidence = null) {
     if (!ISO_DATE.test(eDate) || Math.abs(ageDays(nowDate, eDate)) > 1) {
       errors.push(`wcl evidence: attemptedAt ${JSON.stringify(evidence.attemptedAt ?? null)} is not from this run — a stale or malformed wcl-fetch/evidence.json must not vouch for anything`);
     }
-    if (evidence.verdict === "rdps-restored") notes.push('wcl evidence: the rDPS metric family works again upstream — owner decision needed: freeze a deterministic median recipe into src/fetch-wcl.mjs targeting the live S2 zones 53/55 (see refresh-metrics SKILL.md) before any WCL cut can land');
-    if (["no-credentials", "oauth-failed", "network-failed"].includes(evidence.verdict)) {
+    if (["no-credentials", "oauth-failed", "network-failed", "merge-failed"].includes(evidence.verdict)) {
       degraded.push(`wcl evidence: ${evidence.verdict} — ${evidence.detail ?? "the deterministic WCL fetch step failed before reaching a metric conclusion"}`);
     }
   }
@@ -426,6 +431,8 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 /* --- the heartbeat ----------------------------------------------------------------- */
 
+export const FLOOR_RESTORE_DUE = "2026-10-01", FULL_FLOOR = 7;
+
 export function checkFreshness(config, manifest, data, now, gearing = null) {
   const violations = [], report = [], keys = [];
   const nowDate = dateOf(now);
@@ -486,10 +493,16 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
      recorded only in a comment and a commit message; if the date passed unremembered the
      floor stayed silently weakened. Restoring the value silences this permanently — it
      cannot become a standing nag; if the window legitimately needs extending, move the
-     date here in the same reviewed edit that decides so. */
-  const FLOOR_RESTORE_DUE = "2026-09-01", FULL_FLOOR = 7;
+     date here in the same reviewed edit that decides so.
+     EXTENDED 2026-09-01 -> 2026-10-01 (Riley, 2026-09-03, that reviewed edit): the nine
+     nightlies 2026-08-26..09-03 landed 5-7 successes of 21 (two at exactly 5), because 13
+     requirements were structurally unable to succeed — the nine archon-* rows behind the
+     human-verification wall, wcl-live x2 on the upstream rDPS 500, and both sim rows held
+     pre-adoption. Restoring 7 would have redded six of those nine nights for no new fact.
+     The same-day wholesale MID2 adoption lifts the reachable ceiling by two; restore to 7
+     when Archon returns or by the new date, whichever first. */
   if ((config.minSuccessfulSources ?? FULL_FLOOR) < FULL_FLOOR && dateOf(nowDate) > FLOOR_RESTORE_DUE) {
-    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01". Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
+    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01" and extended once to ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
     keys.push("min-sources-floor");
   }
   for (const req of config.requirements) {
@@ -519,6 +532,28 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
       keys.push(`${req.key}-published`);
     }
   }
+  // A successful night elsewhere must not hide a stalled official-note collector.
+  // These instants verify intake coverage; they never advance a tuning fact's date.
+  for (const id of config.officialNotes?.sources ?? []) {
+    const key = `official-notes-${id}`;
+    const source = data.officialNotes?.sources?.[id];
+    const checkedAt = source?.checkedAt;
+    const checkedMs = typeof checkedAt === "string" && ISO_INSTANT.test(checkedAt) ? Date.parse(checkedAt) : NaN;
+    const hours = (nowMs - checkedMs) / 3600000;
+    report.push(`${key}: ${checkedAt ?? "no verification receipt"}${Number.isFinite(hours) ? ` (${Math.round(hours)}h, max ${config.officialNotes.maxAgeHours}h)` : ""}`);
+    if (!Number.isFinite(hours)) {
+      violations.push(`${key}: no valid official-note verification receipt`); keys.push(key);
+    } else if (hours < -5 / 60) {
+      violations.push(`${key}: verification receipt is in the future`); keys.push(key);
+    } else if (hours > config.officialNotes.maxAgeHours) {
+      violations.push(`${key}: official-note intake has not been verified for ${Math.round(hours)}h (max ${config.officialNotes.maxAgeHours}h)`); keys.push(key);
+    }
+    const pending = [...(source?.posts ?? []).flatMap(post => post.sections ?? []), ...(source?.removedSections ?? [])]
+      .filter(section => section.resolution?.disposition === "unresolved").length;
+    if (pending) {
+      violations.push(`${key}: ${pending} official-note class section(s) still need review`); keys.push(`${key}-unresolved`);
+    }
+  }
   /* GEARING FRESHNESS (2026-08-08). The gearing subproject had no staleness surface of any
      kind: nothing in required-sources.json, check-refresh, freshness.yml, validate.mjs or
      snapshot.mjs mentioned it, and its own validator's seven "stale" strings are all COUNT
@@ -527,7 +562,7 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
      Deliberately HEARTBEAT-ONLY, and deliberately a sibling of `requirements[]` rather than an
      entry in it. requirements[] is consumed by checkManifest as well as this function, so a row
      there would make the nightly publish gate demand a run-manifest entry for a subproject the
-     nightly cannot refresh — gearing harvests are MANUAL because Wowhead is unreachable from CI.
+     tracker manifest does not claim external gearing work — guides have a separate weekly workflow.
      A sibling key is read only by the loop that iterates it. That is structural, not a
      convention. It is also NOT in gearing/src/validate-data.mjs, so `npm test` (nightly Gate 1)
      can never go red on a date the nightly has no way to fix.
@@ -543,15 +578,23 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
         report.push(`${ds.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${ds.maxAgeDays}d)` : ""}`);
         if (date == null) { violations.push(`${ds.key}: gearing/data/${ds.file} carries no ${ds.dateField} date`); keys.push(ds.key); }
         else if (age > ds.maxAgeDays) {
-          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Gearing harvests are manual; see gearing/README.md`);
+          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Check the weekly guide workflow or the dataset's harvest procedure in gearing/README.md`);
           keys.push(ds.key);
         }
+        if (ds.dateField === "structuralSync.checkedAt" && age != null && age < 0) {
+          violations.push(`${ds.key}: local consistency check date is in the future`);
+          keys.push(ds.key);
+        }
+      }
+      if (config.gearing.structuralSync && gearing.structuralSyncError) {
+        violations.push(`gearing-specs-sync: ${gearing.structuralSyncError}`);
+        keys.push("gearing-specs-sync");
       }
       /* The check that actually earns its keep. Age only says a harvest is old; THIS says the
          page is publishing something the tracker has already corrected — which is what
          happened with a superseded Preservation Evoker set bonus. Cheap, exact, no clock. */
       if (gearing.tierSetDrift > 0) {
-        violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/sync-tracker-fields.mjs\``);
+        violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/harvest-specs.mjs\``);
         keys.push("gearing-tierset-sync");
       }
     }
@@ -637,7 +680,7 @@ if (isMain) {
       try {
         const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", ds.file), "utf8"));
         present = true;
-        dates[ds.file] = doc?.[ds.dateField] ?? null;
+        dates[ds.file] = ds.dateField.split(".").reduce((value, key) => value?.[key], doc) ?? null;
       } catch { dates[ds.file] = null; }
     }
     let tierSetDrift = 0;
@@ -645,7 +688,18 @@ if (isMain) {
       const { syncTrackerFields } = await import("../gearing/src/sync-tracker-fields.mjs");
       tierSetDrift = (await syncTrackerFields({ check: true })).filter(c => c.textChanged).length;
     } catch { /* subproject absent or unreadable — the per-file report above already says so */ }
-    return { present, dates, tierSetDrift };
+    let structuralSyncError = null;
+    if (present && config.gearing.structuralSync) {
+      try {
+        const { loadSpecSyncInputs, checkSpecSync } = await import("../gearing/src/harvest-specs.mjs");
+        const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", "specs.json"), "utf8"));
+        checkSpecSync(doc, await loadSpecSyncInputs({ root: path.join(root, "gearing") }));
+      } catch (error) {
+        dates["specs.json"] = null;
+        structuralSyncError = error.message;
+      }
+    }
+    return { present, dates, tierSetDrift, structuralSyncError };
   };
 
   let failures = [];

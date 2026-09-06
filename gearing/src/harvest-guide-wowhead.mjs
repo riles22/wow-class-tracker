@@ -35,10 +35,14 @@ const roleSlug = (r) => (/tank/i.test(r) ? "tank" : /heal/i.test(r) ? "healer" :
 
 async function fetchWowhead(url) {
   // curl FIRST: Wowhead 403s Node fetch by TLS fingerprint but serves curl (2026-08-18).
-  const direct = await fetchTextCurl(url);
+  let direct;
+  try { direct = await fetchTextCurl(url); }
+  catch { /* the documented HTML proxy is the fallback transport */ }
+  if (direct === null) return null; // origin HTTP 404, verified absence
   if (direct && direct.includes("WH.markup.printHtml")) return direct;
   const proxied = await fetchText(`https://r.jina.ai/${url}`, { headers: { "x-return-format": "html" } });
-  return proxied && proxied.includes("WH.markup.printHtml") ? proxied : null;
+  if (proxied && proxied.includes("WH.markup.printHtml")) return proxied;
+  throw new Error(`Wowhead guide unavailable or markup missing: ${url}`);
 }
 
 /** The inline printHtml body (the call whose first arg is a string literal, not getPageData). */

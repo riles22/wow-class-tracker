@@ -102,7 +102,40 @@ jobs:
         with:
           name: wcl-evidence
           retention-days: 7
+          if-no-files-found: error
           path: wcl-fetch/
+
+      - name: Deterministic public-source availability evidence
+        run: node src/fetch-source-health.mjs
+
+      - name: Save public-source availability evidence
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: source-health
+          retention-days: 7
+          path: source-health/
+
+      - name: Deterministic Murlok and Mythicstats collection
+        run: node src/fetch-stable-metrics.mjs
+
+      - name: Save stable metric receipts before the agents run
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: stable-metrics
+          retention-days: 7
+          if-no-files-found: error
+          path: metrics-fetch/
+
+      - name: Collect official note revisions and changed class sections
+        run: node src/fetch-official-notes.mjs
+
+      - name: Save official note receipts before the agents run
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: official-notes
+          retention-days: 7
+          if-no-files-found: error
+          path: official-notes/
 
       # Deterministic transcript stage (owner-approved 2026-07-17): the ONLY step
       # holding TRANSCRIPT_API_KEY (Supadata; mode=native = YouTube's own captions,
@@ -173,28 +206,39 @@ jobs:
             memory or guesses. Expected source degradation must leave existing data
             unchanged and be recorded honestly.
 
-            WARCRAFT LOGS: you hold NO WCL credentials. A deterministic step already ran
-            src/fetch-wcl.mjs and wrote wcl-fetch/evidence.json — your ONLY WCL input.
-            The live S2 zones are 53 (raid, The Venomous Abyss) and 55 (M+); the PTR
-            zones (52/54/56) belong to the CLOSED 12.1 cycle and are no longer fetched.
-            Write the two WCL manifest rows (wcl-live-raid, wcl-live-mplus) from the
-            evidence honestly. A WCL row may claim success ONLY when
-            evidence.landed[key] shows rows — currently none do (the transport outage
-            is an OWNER-ACCEPTED standing red; see the rows' labels in
-            data/required-sources.json), so both rows normally record the evidence
-            verdict as their degradation detail. Historically the three *-raw keys, whose
-            raw-DPS medians the fetch step merges into specs.json ITSELF before you start
-            (never re-fetch, recompute, or edit those rows; if a landed entry is absent,
-            report that key partial/unreachable/parse_error with the evidence's
-            rawRecipes[key] detail — an empty PTR zone between testing windows is
-            "partial", not an error). While the evidence reports verdict "rdps-broken",
-            the five frozen rDPS/normalized cuts are unreachable with that detail and
-            their stored data stays unchanged — the publish gate cross-checks an evidence
-            artifact uploaded before you started, which you cannot modify. If the verdict
-            is "rdps-restored", put "WCL RDPS RESTORED — owner decision needed on the
-            median recipe" at the TOP of the summary; if it is "no-credentials" or
-            "oauth-failed", surface that at the top too. Do NOT fetch anything from
-            warcraftlogs.com yourself, by any means — no API, no HTML scraping, no workarounds.
+            MURLOK / MYTHICSTATS: read metrics-fetch/evidence.json and apply only
+            metrics-fetch/updates.json through src/apply-metrics.mjs. These tested
+            collectors are the only input for these two metric families; never parse
+            a second copy yourself. A source's update date is not the fetch date.
+            Preserve unchanged undated observations and failed sources exactly.
+            Run node src/check-stable-metrics.mjs before finishing; publish checks
+            against the separate pre-agent artifact, not your working-tree copy.
+
+            OFFICIAL NOTES: read official-notes/evidence.json and pending.json.
+            Reconcile data/official-notes.json per ptr-watch: every changed class
+            section needs an applied reference, an explicit irrelevant reason, or
+            an unresolved disposition. Unresolved sections block publication until
+            handled. This includes edits to older posts. The 12.1.5 PTR lane is
+            NOTES ONLY: never change PHASES, write 12.1.5 material into ptr-builds
+            or ptr verdicts, reopen forecasts, or relabel archived 12.1 PTR metrics.
+            Run node src/check-official-notes.mjs before finishing.
+
+            WARCRAFT LOGS: you hold NO WCL credentials. The deterministic collector
+            already applied supported WoW leaderboard rows and wrote wcl-fetch/evidence.json
+            plus updates.json. Never re-fetch, recompute, or edit any WCL metric row.
+            New wcl-leaderboard-raid and wcl-leaderboard-mplus manifest rows must match
+            evidence.brackets[key].status and evidence.landed[key].rows. Mark success
+            only for a successful bracket; partial/invalid/unreachable cuts keep old
+            observations unchanged and carry their actual reason (invalid -> parse_error).
+            These are per-encounter top-100-entry medians, not population medians.
+            The two older wcl-live-raid/mplus rows still record evidence.legacy[key]
+            as unreachable: no verified exact aggregate endpoint exists. New series
+            cannot green the historical aggregate requirements. rdps is FFXIV-only;
+            its failure is not a WoW outage. Closed PTR52/54/56 rows remain untouched.
+            Run node src/check-wcl-metrics.mjs --manifest data/run-manifest.json.
+            Publication verifies exact canonical rows against the separate trusted
+            pre-agent artifact. Surface no-credentials/oauth-failed/merge-failed.
+            No WCL API/HTML/proxy fetching by the agent.
 
             PTR watch must check the official forum thread and the Wowhead news RSS for new
             builds (the WCL zone-54/52 parts are evidence-only, per above). Creator watch must
@@ -214,21 +258,25 @@ jobs:
             keep queueing pending as before. Verdict "unauthorized" or "limit-exceeded" =
             put "TRANSCRIPT API KEY problem: <verdict>" near the top of the manifest summary.
 
-            SEASON NOTE (the 12.1-live migration LANDED 2026-08-18 — the old season-flip
-            guard is retired): the live season is S2 and pages verifying as Season 2 /
-            12.1 are the CORRECT pages. A source still describing Season 1 (Archon until
-            its S2 rebuild lands) simply stays out of the consensus via seasonVerified —
-            record it honestly, do not chase it. The night Archon flips to S2 the
-            consensus recomposes and may trip the anomaly gate: that red is DESIGNED and
-            needs the human anomaly_ack input, not an agent workaround.
+            SEASON NOTE: the live season is S2. ARCHON RETENTION (owner-confirmed
+            2026-09-05): its last verified S2 letters still contribute to consensus during
+            the access wall; an outage does not remove a source. Earlier three-source
+            claims were wrong. Read source-health/evidence.json for this run's ordinary
+            public-route diagnostics before attempting Archon; never solve/replay a human
+            verification challenge. Availability is not verified game data or a new date.
+            Report each requirement honestly, keep failed-fetch dates unchanged, and parse
+            source data only if actually accessible. Read encounter-tiers.json itself for
+            its season/date; its S1 archive remains quarantined until S2 observations land.
 
             Rebuild data/run-manifest.json from scratch for THIS run — the committed copy is
             the PREVIOUS run's record and never excuses skipping work. It must contain today's
             UTC run date, a current full UTC startedAt instant, a <=180-character summary, and
             exactly one source row per requirement key, each with previousAsOf/newAsOf (the
             stored dates before/after this run — copy them from the actual data files, never
-            fabricate) and an honest result: "success" ONLY when the source's stored dates
-            actually advanced this run; anything less is partial/unreachable/blocked/
+            fabricate) and an honest result: "success" ONLY when this run verified the
+            source and its stored coverage date is no more than one day old, matching
+            checkManifest. A same-day recheck may confirm unchanged fresh data; it must
+            not advance a source-owned date. Failed or stale verification is partial/unreachable/blocked/
             parse_error WITH the reason; "skipped" without a detail fails the publish. NEVER
             write an "anomalyAck" field — the gate rejects any manifest carrying it. If a mass
             tier shift looks like a REAL Blizzard retune (not a parse artifact), set
@@ -282,6 +330,7 @@ jobs:
         continue-on-error: true
         env:
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+          VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
         run: |
           set -euo pipefail
           if git diff --quiet -- data/run-manifest.json; then
@@ -289,6 +338,9 @@ jobs:
             exit 1
           fi
           node src/check-refresh.mjs --manifest
+          node src/check-wcl-metrics.mjs --manifest data/run-manifest.json
+          node src/check-stable-metrics.mjs --manifest data/run-manifest.json
+          node src/check-official-notes.mjs
 
       - name: Recovery pass for incomplete refresh
         if: steps.primary_agent.outcome != 'success' || steps.primary_check.outcome != 'success'
@@ -320,18 +372,34 @@ jobs:
             not delete the requirement. Publish diffs the contract against master and fails
             the night red either way, so removing a requirement only wastes the run.
 
-            WARCRAFT LOGS: you hold NO WCL credentials — wcl-fetch/evidence.json (written by the
-            deterministic pre-agent step) is your only WCL input; write the two WCL manifest
-            rows (wcl-live-raid, wcl-live-mplus) from it honestly. Success is allowed ONLY where
-            evidence.landed[key] shows rows — currently none do (owner-accepted standing red
-            while the S2 transport outage lasts; the PTR *-raw recipes were retired at the
-            2026-08-18 flip and their stored rows in specs.json are final receipts — never
-            re-fetch or edit those rows); both rows stay degraded with the
-            evidence's verdict detail (the publish gate cross-checks a
-            pre-agent artifact copy you cannot modify). Do not fetch warcraftlogs.com yourself,
-            by any means. Same for YouTube transcripts: distill only from the pre-fetched
-            transcript-fetch/ files (offsets in ms), maintain data/pending-transcripts.json
-            honestly, and never fetch transcripts yourself.
+            WARCRAFT LOGS: only the deterministic wcl-fetch/evidence.json and
+            updates.json are inputs. The collector already merged supported per-encounter
+            leaderboards; never edit/recompute/refetch any WCL metric row. Account for
+            all four requirements: wcl-leaderboard-raid/mplus from brackets[key] and
+            landed[key], wcl-live-raid/mplus from legacy[key] (still unreachable exact
+            aggregates). No leaderboards under legacy median names, no rdps outage
+            diagnosis (that enum is FFXIV-only), no closed-PTR updates or HTML/proxy
+            workarounds. Run node src/check-wcl-metrics.mjs --manifest data/run-manifest.json.
+            Same for YouTube transcripts: distill only the pre-fetched transcript-fetch/
+            files, maintain the queue honestly, and never fetch transcripts yourself.
+
+            ARCHON: read source-health/evidence.json for this run's public-route checks.
+            Never bypass a verification challenge or turn a successful HTTP response into
+            fresh data without parsing/era verification. Retain last verified S2 letters
+            with their original dates; they still contribute to consensus during outages.
+            Read encounter-tiers.json's actual season/date rather than copying old run prose.
+
+            STABLE METRICS: use only the deterministic metrics-fetch/evidence.json
+            and updates.json for Murlok/Mythicstats; apply the prepared updates,
+            preserve unchanged/failed observations and their source dates, and run
+            node src/check-stable-metrics.mjs. Do not reparse these sites yourself.
+
+            OFFICIAL NOTES: reconcile official-notes/evidence.json and pending.json
+            into data/official-notes.json per ptr-watch. Resolve each changed class
+            section with a verifiable applied reference or an irrelevant reason;
+            unresolved sections block publication. Keep 12.1.5 notes in the separate
+            preview lane only, with PHASES and the frozen forecasts unchanged.
+            Run node src/check-official-notes.mjs before finishing.
 
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one
             honest row per required source, each with previousAsOf/newAsOf copied from the real
@@ -360,6 +428,7 @@ jobs:
         if: always() && !cancelled()
         env:
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
+          VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
         run: |
           set -euo pipefail
           if git diff --quiet -- data/run-manifest.json; then
@@ -369,12 +438,15 @@ jobs:
           npm test
           npm run build
           node src/check-refresh.mjs --manifest
+          node src/check-wcl-metrics.mjs --manifest data/run-manifest.json
+          node src/check-stable-metrics.mjs --manifest data/run-manifest.json
+          node src/check-official-notes.mjs
           # WCL credential/config rot is invisible to the agents (they never hold the
           # secrets) — surface it deterministically as a red refresh job.
           verdict="$(node -e 'console.log(JSON.parse(require("fs").readFileSync("wcl-fetch/evidence.json","utf8")).verdict ?? "")' 2>/dev/null || echo unreadable)"
           case "$verdict" in
-            no-credentials|oauth-failed|unreadable)
-              echo "::error::WCL fetch step could not authenticate (verdict: $verdict) — check WCL_CLIENT_ID/WCL_CLIENT_SECRET"
+            no-credentials|oauth-failed|merge-failed|unreadable)
+              echo "::error::WCL deterministic collection failed (verdict: $verdict) — inspect its receipt; authentication failures require checking WCL_CLIENT_ID/WCL_CLIENT_SECRET"
               exit 1;;
           esac
 
@@ -442,7 +514,7 @@ jobs:
           # guarantee a dist/index.html conflict on push. The artifact still supplies
           # data/, and Gate 2 rebuilds dist/ from the freshest code either way.
           ref: master
-          fetch-depth: 0 # movement baselines + row-drop baseline + race rebase
+          fetch-depth: 0 # movement baselines + row-drop baseline + refresh-base ancestry check
 
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
@@ -454,6 +526,11 @@ jobs:
           git config user.email "120138825+riles22@users.noreply.github.com"
 
       # Overlays the agents' data/ + skill logs onto the fresh checkout.
+      - name: Refuse stale refresh output before overlay
+        env:
+          REFRESH_BASE_SHA: ${{ github.sha }}
+        run: node src/check-refresh-base.mjs
+
       - name: Download refresh output
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
@@ -478,6 +555,19 @@ jobs:
         with:
           name: published-evidence
           path: published-evidence
+
+      # Download these AFTER untrusted refresh output, from fixed pre-agent producers.
+      - name: Download trusted stable metric receipts
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: stable-metrics
+          path: metrics-fetch
+
+      - name: Download trusted official note receipts
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: official-notes
+          path: official-notes
 
       # Gate 0 (2026-07-18 portfolio audit): the refresh artifact may deliver VALUES,
       # never the rules that judge them. Before this guard, the agent-overlaid working
@@ -576,25 +666,9 @@ jobs:
           # so the old file's leading lines were not its newest: newest-120 retention fell to 1%
           # for refresh-tiers and 16% for ptr-watch, destroying the separation the whole idea
           # depended on. Measured, not argued.
-          node -e '
-            const { execSync } = require("child_process");
-            const fs = require("fs");
-            const files = execSync("git diff --name-only HEAD -- .claude/skills/", { encoding: "utf8" })
-              .split("\n").map(s => s.trim()).filter(f => f.endsWith("log.md"));
-            for (const file of files) {
-              let head;
-              try { head = execSync(`git show HEAD:${file}`, { encoding: "utf8" }); }
-              catch { continue; } // new log file: nothing to compare against
-              const lines = s => new Set(s.replace(/\r/g, "").split("\n").filter(l => l.trim()));
-              const was = lines(head), now = lines(fs.readFileSync(file, "utf8"));
-              if (!was.size) continue;
-              let kept = 0; for (const l of was) if (now.has(l)) kept++;
-              const pct = Math.round((kept / was.size) * 100);
-              if (pct < 20) {
-                console.log(`::warning::${file} retained only ${pct}% of its previous lines — even a full prune keeps ~42%, so this looks like a rewrite; check the diff before trusting this run precedent`);
-              }
-            }
-          '
+          # Filename admission is strict even though content churn only warns. The
+          # helper passes literal argv to Git and admits only HEAD's existing logs.
+          node src/check-skill-logs.mjs
           # Gate 0 diffs files it knows about; anything the artifact ADDS under data/ was
           # invisible to it and would be committed unreviewed (audit 2026-07-24, S6).
           # history/ is reset just below, so nothing legitimate trips this.
@@ -641,8 +715,22 @@ jobs:
       - name: Show what the refresh changed
         run: git status --porcelain && git --no-pager diff --stat || true
 
+      # Local consistency only: preserves original weapon/armor/fallback source dates.
+      # Runs in the trusted publish stage, never accepts gearing files from an agent.
+      - name: Synchronize gearing capabilities from verified local inputs
+        run: |
+          node gearing/src/harvest-specs.mjs
+          node gearing/src/harvest-specs.mjs --check
+          npm run gearing:build
+
       - name: "Gate 1: validate + unit tests"
         run: npm test
+
+      - name: Verify collected metrics and complete official note intake
+        run: |
+          node src/check-wcl-metrics.mjs --manifest data/run-manifest.json
+          node src/check-stable-metrics.mjs --manifest data/run-manifest.json
+          node src/check-official-notes.mjs
 
       - name: "Gate 2: build"
         run: npm run build
@@ -697,7 +785,8 @@ jobs:
         id: commit
         run: |
           set -euo pipefail
-          git add data/ dist/ ".claude/skills/*/log.md"
+          node src/check-skill-logs.mjs --stage
+          git add -- gearing/data/specs.json gearing/wow-s2-gearing.html
           if git diff --cached --quiet; then
             echo "Nothing to commit"
             echo "pushed=false" >> "$GITHUB_OUTPUT"
@@ -713,39 +802,10 @@ jobs:
           SUMMARY="$(node -e 'const m=JSON.parse(require("fs").readFileSync("data/run-manifest.json","utf8")); console.log(String(m.summary??"refresh").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim().slice(0,180))')"
           git commit -m "Nightly refresh $(date -u +%F): ${SUMMARY}" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
           if ! git push origin master; then
-            # Push race: master moved between checkout and push. The old silent
-            # `|| { git pull --rebase && git push; }` fallback LOST the 2026-07-17
-            # 08:34 run's data — bash -e is suppressed inside a `||` group, so the
-            # conflicted rebase (both sides had rebuilt dist/index.html) left the
-            # step green with nothing pushed. Handle the race explicitly, and fail
-            # RED when it cannot be resolved deterministically.
-            git fetch origin master
-            if ! git rebase origin/master; then
-              conflicts="$(git diff --name-only --diff-filter=U)"
-              if [ "$conflicts" = "dist/index.html" ]; then
-                # The one expected conflict: dist/ is generated by both sides.
-                # Regenerate it on the merged tree (master's src/ + this run's data/).
-                # Stage ALL of dist/, not just index.html: one `npm run build` also rewrites
-                # dist/gearing.html and, from the flip on, dist/<season>.html. Staging a single
-                # file left the others as unstaged modifications that the push silently dropped,
-                # and it disagreed with the clean-rebase branch below, which already stages the
-                # whole directory. The conflict set was checked to be exactly dist/index.html
-                # above, so nothing unexpected can be swept in here. (audit 2026-08-14)
-                npm run build
-                git add dist/
-                GIT_EDITOR=true git rebase --continue
-              else
-                git rebase --abort || true
-                echo "::error::Publish push race with conflicts beyond generated dist/ (${conflicts}) — re-run the workflow to redo the night on current master"
-                exit 1
-              fi
-            else
-              # Clean rebase — master may still carry newer src/, so rebuild dist on it.
-              npm run build
-              git add dist/
-              git diff --cached --quiet || git commit --amend --no-edit
-            fi
-            git push origin master
+            # A manual update can change source code or gearing inputs after our gates.
+            # Replaying only the HTML build after a rebase would publish an untested tree.
+            echo "::error::Publish push rejected; re-run the full refresh against current master. No force push or partial revalidation."
+            exit 1
           fi
           echo "pushed=true" >> "$GITHUB_OUTPUT"
 
@@ -819,8 +879,8 @@ jobs:
           {
             echo "### ❌ Nightly publish failed"
             echo
-            echo "The refresh agent finished, but the publish job did not ship. Nothing was"
-            echo "committed or deployed — the site still shows the last good run."
+            echo "The nightly publish job failed. The full log records whether a commit"
+            echo "or deployment completed before the failure."
             echo
             echo "[Full job log]($RUN_URL)"
             echo
@@ -838,6 +898,15 @@ jobs:
             echo
             echo "--- Gate 3 (refresh contract) ---"
             node src/check-refresh.mjs --manifest --wcl-evidence=wcl-fetch/evidence.json 2>&1 | tail -30 || true
+            echo
+            echo "--- Supported WCL collection ---"
+            node src/check-wcl-metrics.mjs --manifest data/run-manifest.json 2>&1 | tail -20 || true
+            echo
+            echo "--- Deterministic numeric collection ---"
+            node src/check-stable-metrics.mjs --manifest data/run-manifest.json 2>&1 | tail -20 || true
+            echo
+            echo "--- Official-note revision intake ---"
+            node src/check-official-notes.mjs 2>&1 | tail -20 || true
             echo '```'
           } > "$RUNNER_TEMP/failure.md"
           num="$(gh issue list --state open --search "in:title \"Nightly digest\"" --json number --jq '.[0].number // empty')" || num=""

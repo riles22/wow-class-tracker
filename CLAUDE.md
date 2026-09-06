@@ -8,6 +8,19 @@ self-contained artifact — `dist/index.html`** — a personal project. It's pub
 public GitHub Pages site (https://riles22.github.io/wow-class-tracker/) that auto-deploys
 on push to `master`; the file also still opens directly in a browser.
 
+This file and `.claude/skills/*/SKILL.md` are the canonical operating instructions.
+`AGENTS.md` and the six tracked `.agents` skill adapters link here instead of
+maintaining separate procedures. `npm run instructions:check` detects adapter
+drift before both test commands; regenerate after discovery metadata changes with
+`npm run instructions:sync`. Local credentials and scratch remain ignored.
+
+**Current preview policy (2026-09-05):** 12.1.5 has a separate notes-only preview
+and official-note revision ledger in `data/official-notes.json`. It is not a new
+forecast cycle: `PHASES.ptr` stays null, live S2 rankings and the frozen 12.1 forecast
+keep their existing inputs, and archived PTR observations retain their old scope.
+Read ptr-watch for collection and per-section resolution; an older paragraph about
+waiting for 12.2 does not supersede this approved 12.1.5 notes lane.
+
 ## Commands
 
 - `npm test` — schema validation + unit tests + build smoke test
@@ -744,10 +757,12 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   its OWN copy of `set2/set4/asOf` and renders it as fact, and nothing compared the two, so they
   drifted **five times** — most recently publishing "Genesis duration increased by 4 seconds" on
   one page of the site while the other said 8. The daily `--age` heartbeat was the sole detector
-  and the nightly *structurally cannot* clear it (publish stages `data/`, `dist/` and skill logs,
-  never `gearing/`), so every occurrence waited for a human local run. `validateData` now compares
-  `gearing/data/specs.json` against `data/specs.json` and names the fix
-  (`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`). This is the root validator
+  and the nightly originally could not clear it, so every occurrence waited for a human local
+  run. `validateData` now compares
+  `gearing/data/specs.json` against `data/specs.json`. Resynchronize with
+  `node gearing/src/harvest-specs.mjs && node gearing/src/harvest-specs.mjs --check && npm run gearing:build`.
+  **Since 2026-09-05 the trusted nightly publish stage runs that local synchronization before
+  Gate 1**, then explicitly stages the gearing data and artifact. This is the root validator
   reaching INTO `gearing/`, which it otherwise never does — read-only, one-directional, an absent
   subproject skips, and only specs present in BOTH are compared so a lagging roster is not an
   error. Consequence to know: **bumping a tracker `tierSet` now requires syncing the mirror in the
@@ -974,50 +989,36 @@ the live season), **TBD is written as explicit `null`** (never omitted, never gu
 and the page's own `published` date rides alongside `snapshot`.
 
 ### Metrics (Warcraft Logs / Murlok / Archon numbers / SimC / Mythicstats / Bloodmallet / Robydoby)
-1. WCL: **zone 53 = LIVE S2 raid** (partition 1, Mythic difficulty **5** size 20, 9
-   encounters) and **zone 55 = LIVE S2 M+** (partition 1) — currently NO fetch path
-   (transport outage; the wcl-live-* heartbeat red is owner-accepted 2026-08-18, see the
-   contract rows). Retired-cycle map: zone 46 = S1 raid (Mythic = difficulty **5**,
-   size 20, partition 3 = 12.0.7);
-   zone 47 = M+ S1 (difficulty **10**, size 5, partition 1); zone **54 is the 12.1 PTR raid**;
-   zone **56 is the 12.1 PTR M+** ("Mythic+ Season 2 (PTR)", same recipe as zone 47 →
-   metrics "Median rDPS/HPS (12.1 PTR M+ testing[, tank])", see the ptr-watch skill);
-   zone **52 is the Dummy Dome** (fixed-target-count PTR dummies → `spec.ptrDummy`, see
-   the ptr-watch skill); zone **57 is Tidebound Grotto** — probed exhaustively 2026-07-28 and
-   re-confirmed 2026-08-14 as having **0 encounters**: WCL has never aggregated it, so every
-   statistics table returns "No statistics have been collected…". Empty is not an error:
-   ingest nothing and leave the stored rows and snapshot alone. Reserved metric names and the
-   verified recipe are in the ptr-watch skill, so a run auto-ingests the moment tables
-   populate — all PTR data era-tagged `"ptr"`.
-   **The SEASON-2 LIVE zones, enumerated against the API 2026-08-14** (they exist but read
-   `frozen` until the content opens): raid = zone **53** "The Venomous Abyss", partition
-   **1 = "12.1"**, Mythic difficulty 5 / size 20, **9 encounters**; M+ = zone **55** "Mythic+
-   Season 2", partition **1 = "Season 2"**, difficulty 10 / size 5. **Live and PTR zones share
-   a NAME** — 53/54 are both "The Venomous Abyss", 55/56 both "Mythic+ Season 2" — so tell
-   them apart by the partition LABEL (`12.1`/`Season 2` vs `PTR`) and the encounter count
-   (53 has 9, PTR 54 has 8), never by the id pattern. Partition IDS RESTART PER ZONE: both
-   live S2 zones use partition `1`, so the "partition 3 = 12.0.7" model above is a fact about
-   zone 46 only. **And zone 46's own default partition has already moved to `4 = 12.1`**, so a
-   zone-46 fetch that omits the partition now returns 12.1 data under a 12.0.7 label — the
-   recipes pin 3, keep it that way. Get ids from `node src/wcl-probe.mjs`, never a pattern,
-   and note the probe must enumerate through `worldData.expansions { zones }`: the flat
-   `worldData.zones` query returns 42 of the 66 zones and omits 53 and 55 specifically.
-   Statistics-table
-   endpoint needs `X-Requested-With: XMLHttpRequest` + browser UA + Referer; response is
-   an HTML fragment with unclosed `<td>` — parse leniently. **Fetch each cut fresh every
-   run** — the automation no longer gates fetches on staleness or a once-daily cap (policy
-   2026-07-08: pull everything every run). The sanctioned long-term path is still their
-   free v2 GraphQL API (OAuth client); keep the mechanical retry/backoff so fetches
-   succeed.
-   ⚠️ **The HTML statistics transport is currently DEAD, and not just from CI** (measured
-   2026-08-14 from Riley's residential IP): every statistics-table request returns **HTTP 403
-   with a Cloudflare challenge** — zones 46, 52 and 54 alike, with the documented headers.
-   The residential-IP workaround that justified local runs no longer applies to THIS source.
-   GraphQL is healthy on the same credentials (OAuth fine, 3600 points/hour, `dps`/`default`
-   return data), so the standing split holds: the rDPS-family series stay frozen and honest
-   rather than being substituted from the `dps` family, and zone 54's cross-boss normalized
-   score still has no API analogue at all. Do not read a 403 as "unreachable, try later"
-   without checking whether it is the challenge — that is a transport change, not an outage.
+1. WCL: the deterministic pre-agent `src/fetch-wcl.mjs` now collects supported WoW
+   `dps`/`hps` via `src/wcl-live.mjs`. Read `wcl-fetch/evidence.json` and `updates.json`;
+   only the credentialed collector may fetch or derive these values. It merges separate
+   **Leaderboard median DPS/HPS (S2 Mythic/M+10: encounter, top 100)** rows with sample
+   provenance. Run `node src/check-wcl-metrics.mjs` before finishing; publication checks
+   against the independent pre-agent artifact. These numeric series never feed letters.
+   The fixed recipe covers 8 raid bosses (zone 53, partition 1, Mythic difficulty 5,
+   size 20; excludes world boss Nymrissa 3379) and 8 dungeons (zone 55, partition 1,
+   difficulty 10, size 5, exactly +10). WCL bracket **9** selects +10; bracket 10 selects
+   +11. Validate the source bracket metadata AND returned key levels every run.
+   It reads page 1, up to 100 ranked ENTRIES per spec per encounter, with at least 10
+   required. Entries may repeat characters. Keep each encounter separate; no pooled
+   raid median, no unique-player claim, no all-population percentile, no recent-week
+   claim. `asOf` is the newest included log date; `sample.observedAt` is the collection
+   time and the visible range shows the oldest/newest included log. DPS means WCL-ranked
+   DPS (including the provider's attribution rules), never inferred raw DPS or rDPS.
+   **Correction 2026-09-05:** the official API schema defines `rdps` as FFXIV-only.
+   Earlier 'WCL rDPS outage' diagnoses were incorrect. OAuth/GraphQL WoW dps/hps work.
+   Exact aggregate population medians still have no verified sanctioned endpoint, and
+   public statistics pages return verification challenges. Keep `wcl-live-raid/mplus`
+   honestly unreachable and their old values/dates unchanged. The NEW requirements
+   `wcl-leaderboard-raid/mplus` report the supported series independently, based on the
+   collector's bracket status and landed rows. Never use a new leaderboard receipt to
+   green the old aggregate requirements. No challenge bypasses or proxy scraping.
+   Zones 46/47 are S1 history; zones 52/54/56 are the closed PTR cycle. Their stored
+   names and values are retained as historical receipts, not refreshed or reinterpreted.
+   The old PTR 'raw DPS/player' labels are historical terminology, not a verified
+   description of current WoW rankings. `RAW_RECIPES` stays empty. `wcl-probe.mjs` is a
+   read-only supported-API diagnostic, not a data refresh. New cycle/zone configuration
+   needs a reviewed recipe change; never infer identity from shared names or ID patterns.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm run test:quiet && npm run build`.
@@ -1264,16 +1265,21 @@ gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own
           harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
           gearing/README.md). Imported 2026-08-04 from the standalone project; audited
           in docs/s2-transition-scope.md (Decision 4). The tracker build copies its
-          artifact to dist/gearing.html (copy-if-present) and the CTA row links to it.
-          Harvests are MANUAL (Wowhead unreachable from CI) — data freshness is a
-          local-run duty. Its tests run under the root `npm test` (node --test discovers
-          them). Read-only coupling: its harvest-specs reads the tracker's specs.json;
-          nothing in gearing/ writes outside gearing/, and the nightly never touches it.
+          artifact to dist/gearing.html (copy-if-present); the shared site tabs link to it.
+          Since 2026-09-05, gearing-refresh.yml refreshes Icy Veins, Wowhead and Method
+          guides weekly (Tuesday 08:37 UTC) and on manual dispatch. Loot/rule-source
+          harvests remain manual. Its tests run under the root `npm test` (node --test
+          discovers them). Read-only input coupling: harvest-specs derives capabilities
+          from the tracker and reviewed local armor, weapon and fallback inputs; nothing
+          in gearing/ writes outside gearing/. Nightly publish synchronizes and rebuilds
+          the gearing mirror. structuralSync.checkedAt records local consistency only;
+          source evidence dates and the historical 12.0.7 fallback review date stay intact.
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
           workflows/nightly.yml + workflows/dispatch-nightly.yml (the refresh + its
-          auto-kick) · workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
+          auto-kick) · workflows/gearing-refresh.yml (weekly verified guide refresh) ·
+          workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
           yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate
           contract, scales, registries, gatekeeper code)
@@ -1296,13 +1302,27 @@ isolated stages since the 2026-07-14 security audit (tightened by the same-day
 re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
 `WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (step-scoped env) — runs `src/fetch-wcl.mjs` and
 writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
-starts. A second deterministic stage (`src/fetch-transcripts.mjs`, step-scoped
+starts. Since 2026-09-05, `src/fetch-source-health.mjs` also probes the two ordinary
+public Archon DPS routes and writes `source-health/evidence.json` (separate artifact).
+The Murlok/Mythicstats collectors (`src/fetch-stable-metrics.mjs`) and official-note
+collector (`src/fetch-official-notes.mjs`) likewise produce separate pre-agent
+artifacts in `metrics-fetch/` and `official-notes/`. Agents consume those receipts
+instead of inventing parsers or ignoring edited sections. Publish downloads the
+trusted copies after the agent output, then runs `check-stable-metrics.mjs` and
+`check-official-notes.mjs`: verified values must match, failed sources must remain
+unchanged, and every changed class section must have a valid disposition. An
+unresolved section blocks publication. Official-note verification dates measure
+the intake check, never a new date for the underlying tuning facts.
+The prompts read this availability evidence before attempting the normal refresh;
+a reachable payload still needs normal season, coverage and source-date checks, and
+a blocked page never advances a stored data date. The transcript stage
+(`src/fetch-transcripts.mjs`, step-scoped
 OPTIONAL `TRANSCRIPT_API_KEY`) drains the agent-maintained
 `data/pending-transcripts.json` queue through the Supadata captions API
 (`mode=native` — YouTube's own auto-captions; offsets in ms) into
 `transcript-fetch/` for the agents to distill; a missing key is a clean
 "no-credentials" skip (datacenter IPs can't reach YouTube directly — 2026-07
-bot-wall, android-client workaround failed 2026-07-17). A third deterministic stage
+bot-wall, android-client workaround failed 2026-07-17). The published-date stage
 (`src/fetch-published.mjs`, no credentials) records what each published-bearing
 registry page says about its own update date into `published-evidence/evidence.json`
 (artifact, pre-agent) — the publish gate cross-checks stored `published` values
@@ -1329,7 +1349,12 @@ change to **`nightly.yml` or `dispatch-nightly.yml` specifically** lands on mast
 trigger it), via `gh workflow run` as github-actions[bot] —
 `allowed_bots` on the agent steps permits that actor.) A `workflow_dispatch` input
 `agent_model` overrides both agents' model for a single run (default
-`claude-opus-5`) — one-off model trials without editing the workflow. Publish (deterministic, no AI, holds the write token) gates on a
+`claude-opus-5`) — one-off model trials without editing the workflow. Publish (deterministic,
+no AI, holds the write token) first runs `src/check-refresh-base.mjs` against the immutable
+workflow `${{ github.sha }}` BEFORE downloading refresh output. It requires that base to
+be an ancestor of current master and rejects newer `data/` or skill-log edits, so an older
+artifact cannot overwrite them; code-only advances may proceed through the full rebuild.
+It then gates on a
 boundary guard ("Gate 0", 2026-07-18 portfolio audit: the artifact may not alter the
 gate contract `required-sources.json`, `scales.json`, or registry structure in
 `sources.json`/`community.json` beyond their agent-updatable fields — those fail the
@@ -1339,16 +1364,16 @@ baselines always come from committed history) → **`node src/freeze-season.mjs`
 deterministic season freeze: any outlet whose pages flipped season tonight has its final
 live-season letters lifted from git history, so the consensus keeps its composition
 instead of publishing a recomposition as spec movement — needs publish's `fetch-depth: 0`,
-which is why it cannot run agent-side) → `npm test` →
+which is why it cannot run agent-side) → deterministic gearing capability sync,
+`harvest-specs.mjs --check` and `npm run gearing:build` → `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input), then snapshots, stages
 explicit paths, commits (title = the manifest summary, sanitized), pushes, and
 dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). Publish
-checks out CURRENT master (not the trigger sha), and a push race rebases +
-rebuilds the generated dist/ deterministically — any other conflict fails RED
-instead of silently dropping the night (2026-07-17 fix: bash `-e` is suppressed
-inside a `|| { … }` fallback group, which let a conflicted rebase pass green).
+checks out CURRENT master (not the trigger sha), subject to the refresh-base guard above.
+**A rejected push now fails RED and requires a full refresh against current master**
+(2026-09-05): no automatic rebase or partial rebuild may publish an untested merged tree.
 After a successful push, publish runs `src/digest.mjs HEAD^ HEAD` (deterministic
 buildPayload diff: tier/projection/source moves, creator-video activity from the
 pending-transcripts queue diff (distilled / verified-skipped / queued / waiting),
@@ -1369,3 +1394,23 @@ residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
 old local scheduled task and claude.ai cloud routine are retired (docs/cloud-routine.md
 records why); the local task can still be run manually for transcript catch-up.
+
+**Weekly guide publishing** (`gearing-refresh.yml`, 2026-09-05) shares the nightly
+publisher lock. Each of the three active guide harvesters runs independently with
+`--force`; failed or incomplete source verification preserves that source's published
+file. `src/check-gearing-guides.mjs` checks source identity, per-spec verification,
+dates and unexpected coverage losses before local capability sync, gearing build,
+`npm test` and the root build. Only the three guide files, capability mirror and
+generated artifacts are staged. A push race fails rather than rebasing; a successful
+push dispatches deployment and browser checks. The final step still fails the run if
+any provider failed, even when successfully verified providers were published. The
+freshness heartbeat continues to age-check current guide evidence; the historical
+12.0.7 stat fallback is checked for preserved contents and provenance rather than
+being presented as a periodically refreshed live feed.
+
+**Browser and release verification (2026-09-05):** the independent CI browser job
+runs the tracker and gearing invariants in Chromium, Firefox and WebKit. The Pages
+workflow keeps browsers outside publication and verifies all three public HTML
+pages after deployment against the normalized hashes from that build's separate
+SHA-bound artifact. A stale or mismatched page fails the deploy workflow after
+bounded propagation retries; a successful upload alone is not verification.

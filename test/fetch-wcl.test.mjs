@@ -3,14 +3,17 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { verdictFor, spacedName, medianOf, buildDummyRawRows, buildPooledRawRows, RAW_RECIPES } from "../src/fetch-wcl.mjs";
+import { verdictFor, spacedName, medianOf, buildDummyRawRows, buildPooledRawRows, RAW_RECIPES,
+  oauthToken, gql } from "../src/fetch-wcl.mjs";
+import { checkManifest } from "../src/check-refresh.mjs";
 
+const noPause = async () => {};
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 /* The deterministic WCL fetch stage's verdict mapping — the publish gate and the
    nightly agent both key off these verdicts, so the branches are pinned here.
-   (Transport itself is network-bound and exercised by the dispatch-only probe
-   workflow, not unit tests.) */
+   Transport deadlines/retries and diagnostic decisions are exercised with injected
+   responses below; live upstream health is never a unit-test dependency. */
 
 test("verdictFor: missing credentials", () => {
   const r = verdictFor({ hasCreds: false, oauth: null, transportOk: false, probe: null });
@@ -35,25 +38,74 @@ test("verdictFor: transport failure after retry", () => {
   assert.equal(r.verdict, "network-failed");
 });
 
-test("verdictFor: the standing rdps-family 500 maps to rdps-broken with the upstream error named", () => {
-  const r = verdictFor({ hasCreds: true, oauth: { ok: true }, transportOk: true,
-    probe: { encounterId: 3176, httpStatus: 200, errors: ["Internal server error"], rankings: 0 } });
-  assert.equal(r.verdict, "rdps-broken");
-  assert.match(r.detail, /3176/);
-  assert.match(r.detail, /Internal server error/);
+test("supported WoW collection verdicts distinguish complete and partial collection", () => {
+  const common = { hasCreds: true, oauth: { ok: true }, transportOk: true };
+  assert.equal(verdictFor({ ...common, brackets: { raid: { status: "success", rows: 200 } } }).verdict, "success");
+  assert.equal(verdictFor({ ...common, brackets: { raid: { status: "partial", rows: 20 } } }).verdict, "partial");
+  assert.equal(verdictFor(common).verdict, "network-failed");
+  assert.deepEqual(RAW_RECIPES, [], "closed PTR recipes stay retired");
 });
 
-test("verdictFor: working rdps maps to rdps-restored (owner decision, still nothing landed)", () => {
-  const r = verdictFor({ hasCreds: true, oauth: { ok: true }, transportOk: true,
-    probe: { encounterId: 3176, httpStatus: 200, errors: [], rankings: 57 } });
-  assert.equal(r.verdict, "rdps-restored");
-  assert.match(r.detail, /owner decision/);
+test("WCL transport: transient responses retry once with deadlines; API errors and credential rejections do not retry", async () => {
+  let calls = 0;
+  const pauses = [];
+  const fetchImpl = async (_url, options) => {
+    calls++;
+    assert.ok(options.signal instanceof AbortSignal);
+    return new Response(calls === 1 ? "busy" : '{"data":{"ok":true}}', { status: calls === 1 ? 503 : 200 });
+  };
+  const r = await gql("not-a-real-token", "{query}", { fetchImpl, pause: async ms => pauses.push(ms) });
+  assert.equal(r.status, 200);
+  assert.equal(r.attempts, 2);
+  assert.deepEqual(pauses, [2000]);
+  calls = 0;
+  const graphqlError = await gql("not-a-real-token", "{query}", { fetchImpl: async () => {
+    calls++;
+    return new Response('{"errors":[{"message":"Internal server error"}]}');
+  }, pause: noPause });
+  assert.equal(calls, 1);
+  assert.equal(graphqlError.json.errors.length, 1);
+  calls = 0;
+  const denied = await oauthToken("id", "secret", { fetchImpl: async () => {
+    calls++;
+    return new Response("denied", { status: 401 });
+  }, pause: noPause });
+  assert.equal(calls, 1);
+  assert.equal(denied.ok, false);
+  assert.equal(denied.status, 401);
+  assert.equal(verdictFor({ hasCreds: true, oauth: denied }).verdict, "oauth-failed");
 });
 
-test("verdictFor: no errors and no rankings is inconclusive, treated as transport failure", () => {
-  const r = verdictFor({ hasCreds: true, oauth: { ok: true }, transportOk: true,
-    probe: { encounterId: 3176, httpStatus: 200, errors: [], rankings: 0 } });
-  assert.equal(r.verdict, "network-failed");
+test("WCL transport: exhausted network failures remain status zero; missing OAuth tokens never count as success", async () => {
+  let calls = 0;
+  const options = { fetchImpl: async () => { calls++; throw new Error("request deadline exceeded"); }, pause: noPause };
+  const oauth = await oauthToken("id", "secret", options);
+  assert.equal(calls, 2);
+  assert.equal(oauth.ok, false);
+  assert.equal(oauth.status, 0);
+  assert.equal(verdictFor({ hasCreds: true, oauth }).verdict, "network-failed");
+  calls = 0;
+  const response = await gql("token", "{query}", options);
+  assert.equal(calls, 2);
+  assert.equal(response.status, 0);
+  assert.equal(response.json, null);
+  const noToken = await oauthToken("id", "secret", { fetchImpl: async () => new Response("{}"), pause: noPause });
+  assert.equal(noToken.ok, false);
+});
+
+test("WCL transport: the request deadline actually aborts a stalled response and stops after one retry", async () => {
+  let calls = 0;
+  const r = await gql("token", "{query}", { timeoutMs: 5, pause: noPause,
+    fetchImpl: async (_url, { signal }) => {
+      calls++;
+      return { status: 200, ok: true, text: () => new Promise((_resolve, reject) => {
+        const timer = setTimeout(() => reject(new Error("deadline failed to abort body")), 1000);
+        signal.addEventListener("abort", () => { clearTimeout(timer); reject(signal.reason); }, { once: true });
+      }) };
+    } });
+  assert.equal(calls, 2);
+  assert.equal(r.status, 0);
+  assert.match(r.textHead, /timeout/i);
 });
 
 /* --- zone-52 raw-DPS median recipe (frozen 2026-07-17) ------------------------------ */

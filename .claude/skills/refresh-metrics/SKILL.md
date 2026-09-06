@@ -19,7 +19,7 @@ wcl-live-raid and wcl-live-mplus) from it; never fetch warcraftlogs.com
 yourself there (the publish gate cross-checks a pre-agent copy of the evidence, so a
 fabricated WCL "success" fails the publish). Everything below applies to LOCAL runs.
 
-Local credentials come from either source, checked in this order:
+Local credentials come from these sources, checked in this order:
 1. **Environment variables** `WCL_CLIENT_ID` + `WCL_CLIENT_SECRET` (also what
    `src/fetch-wcl.mjs` reads — you can run it locally to reproduce the CI evidence).
 2. **`.claude/skills/refresh-metrics/config.json`** (see `config.json.example`) — the
@@ -31,32 +31,43 @@ Local credentials come from either source, checked in this order:
    token POST fails with a bare **401** that looks exactly like revoked credentials; that
    misread cost a local run on 2026-08-13 and was logged as a doc nit on 08-08 before
    this line was corrected.
+3. **`.agents/skills/refresh-metrics/config.json`** — the ignored machine-local legacy
+   adapter location, used only if the environment and canonical `.claude` config are
+   absent. It has the same `wclClientId` / `wclClientSecret` keys. Preserve this local
+   credential file when regenerating skill adapters; never copy it into tracked skills.
 
-If either is present, use the sanctioned v2 GraphQL API instead of HTML scraping: POST
+If credentials are present, use the sanctioned v2 GraphQL API instead of HTML scraping: POST
 client-credentials to `https://www.warcraftlogs.com/oauth/token`, then query
 `https://www.warcraftlogs.com/api/v2/client` (zone rankings/statistics by encounter,
-difficulty, metric). If NEITHER is present, use the HTML fallback below and remind the
+difficulty, metric). If none are present, use the HTML fallback below and remind the
 user ONCE per session that registering a free client at warcraftlogs.com/api/clients/
 makes this sanctioned and more reliable.
 Never commit config.json or echo the secret (env or file) into logs, commits, or reports.
 
 ## Sources & recipes
 
-- **Warcraft Logs** (live S2 since 2026-08-18: raid **zone 53** "The Venomous Abyss"
-  partition 1, Mythic difficulty **5** size 20, 9 encounters; M+ **zone 55** "Mythic+
-  Season 2" partition 1, difficulty 10 size 5). ⚠️ Three traps re-learned at the flip:
-  (a) live and PTR zones SHARE NAMES — 53/54 are both "The Venomous Abyss", 55/56 both
-  "Mythic+ Season 2"; tell them apart by partition label and encounter count (53 has 9,
-  PTR 54 had 8), never the id pattern. (b) Partition ids restart per zone — both live S2
-  zones use partition 1. (c) Zone 46/47 are the RETIRED S1 zones; the stored live metric
-  NAMES are season-agnostic, so a zone-46/47 fetch merged under them would land 12.0.7
-  medians as the live S2 series and green the staleness gates on wrong-season data.
-  **Any zone-46/47 fetch is an S1 historical fetch and must never merge under the live
-  metric names.** Statistics-table endpoint
-  documented in CLAUDE.md → "Metrics" workflow. Needs `X-Requested-With: XMLHttpRequest`
-  + browser UA + Referer headers; response is an HTML fragment with UNCLOSED `<td>` tags
-  — parse with regex, not a strict parser. Metric names in use:
-  "Median rDPS (Mythic, all bosses)" / "Median HPS (…)" / "…(M+, all dungeons)".
+- **Warcraft Logs**: `node src/fetch-wcl.mjs` performs the supported, bounded WoW
+  leaderboard collection and applies it before the nightly agents run. Locally map
+  credentials as above without printing them. `src/wcl-live.mjs` pins the S2 identity,
+  roster, encounters, page cap, minimum sample, and exact +10 bracket mapping. Read
+  `wcl-fetch/evidence.json` plus `updates.json`; never recompute or edit these metrics
+  agent-side. Run `node src/check-wcl-metrics.mjs` after any merge.
+  New metric names start **Leaderboard median DPS/HPS (S2 Mythic/M+10: encounter,
+  top 100)**. They are per-encounter first-page medians of up to100 ranked entries
+  (minimum10), not population medians or unique-player medians. Entries may repeat
+  characters. The date range spans the partition's included logs, not a rolling week;
+  `asOf` is the newest log date and `sample.observedAt` is the check instant. Empty or
+  sparse cuts remain missing/retain prior observations. No pooling across encounters.
+  Raid: zone53, partition1, difficulty5, size20, eight pinned raid bosses excluding
+  Nymrissa3379. M+: zone55, partition1, difficulty10, size5, **bracket9 = key+10**;
+  validate `brackets.min=2,bucket=1` and each returned `hardModeLevel=bracketData=10`.
+  Five spec aliases per request, inter-request pause, one bounded transport retry,
+  hourly-budget checks, three consecutive failures stop, and12-minute total budget.
+  Success for `wcl-leaderboard-raid/mplus` requires the collector's successful bracket
+  status and matching landed rows; exact trusted updates and retained rows are checked
+  independently on publication. The old `wcl-live-raid/mplus` requirements remain
+  unreachable until a genuine aggregate endpoint is validated. New leaderboard data
+  cannot refresh their old medians. See [the reviewed recipe](../../../docs/wcl-supported-collection.md).
 - **Archon numbers** (same `__NEXT_DATA__` JSON as tiers): "95th pct DPS (Mythic)",
   "95th pct HPS (Mythic)", "95th pct DPS (Heroic)", "95th pct HPS (Heroic)",
   "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
@@ -118,16 +129,35 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   so those letters have no visible parse basis at all.
   The correct behaviour is the Bloodmallet/WCL precedent — leave the stored aggregate standing,
   merge nothing, and let the staleness red be the honest signal that upstream has not rebuilt.
+- **Murlok and Mythicstats now have deterministic collectors (2026-09-05).** Nightly
+  CI runs `node src/fetch-stable-metrics.mjs` before the agent and uploads a separate
+  trusted artifact containing `metrics-fetch/evidence.json` plus `updates.json`.
+  LOCAL runs execute that same command first. Review the receipts, then merge ONLY
+  `node src/apply-metrics.mjs metrics-fetch/updates.json`; do not reimplement either
+  parser in an agent or hand-write rows. `node src/check-stable-metrics.mjs` checks the
+  merged data against the trusted receipts and Git HEAD. A failed/partial provider
+  must stay unchanged; successful rows must match exactly. The source receipts'
+  `status: success` means the complete parse succeeded, not that its source date is
+  today's date: the existing manifest freshness rules still decide success/partial.
+  The parser fixtures and regression tests live under `test/fixtures/stable-metrics`
+  and `test/stable-metrics.test.mjs`; changed upstream markup needs a reviewed parser
+  fix plus fixtures, never an ad-hoc bypass of the receipt checker.
 - **Murlok** meta pages (plain GET; **r.jina.ai does NOT work on murlok**):
-  "Top-50 avg M+ rating (ceiling)" — it is the avg rating of each spec's own top-50
-  players, NOT popularity; keep the "(ceiling)" in the name.
+  "Top-50 avg M+ rating (ceiling)" is the avg rating of each spec's own top-50
+  players, NOT popularity; keep "(ceiling)" in the name. The script validates all
+  **27 DPS / 7 healer / 6 tank** rows, contiguous ranks, matching href/labels, and
+  current-season page titles. Attribute order is irrelevant: the top-ranked link may
+  put `href` before `class`. `asOf` is the source's **`<time datetime>` date**;
+  rendered "Updated N hours ago" can be stale. Same-date value changes are merged
+  with that unchanged source date, without assigning a sample size the page omits.
 - **Mythicstats** (mythicstats.com): per-spec representation % in the top 2000 keys per
   weekly period — metric name "Top-2000 keys representation", unit "%". **Server-rendered:
   fetch `https://mythicstats.com/period/latest` directly — r.jina.ai is Cloudflare-403 on
   this host** (the old "JS-heavy, fetch via r.jina.ai" line here was stale), and the site
-  root has no data table. Note the period id in the refresh log. If `/period/latest` 302s to
-  a period that 404s (a 7.5 KB error body), that is a half-landed weekly roll, not an outage
-  — ingest the newest period that HAS data and record which.
+  root has no data table. Note the period id in the refresh log. If `/period/latest`
+  redirects to a period that 404s, the deterministic collector records **pending** and
+  preserves the entire prior series until the next retry. An older period must not be
+  given today's date to make that half-landed weekly roll look fresh.
   · **Bound the parse to the "Spec representation in top keys" section**, ending at the next
     `## ` heading or the enclosing `<section>`. Scanning the whole page for the spec-image
     pattern yields **59** rows, because the "Classes and specs" block and the per-dungeon
@@ -142,6 +172,13 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     rows silently drop, and allow `\s*` around the number: a whitespace-strict regex returns
     **0 specs** and would zero the roster. The bar's `height: NN.NNNN%` style PRECEDES the
     value, so a "first percentage in the block" regex reads the bar height instead.
+  · **Dates and genuine absences:** current pages publish no update timestamp. The
+    receipt records `sourceAsOf: null` and `dateBasis: observed-undated-source` rather
+    than inventing a publication date. Changed/new observations use the fetch date;
+    identical values keep their existing `asOf`. If a source-owned update timestamp
+    or Last-Modified date becomes available, it is preserved. Missing chart specs get no fabricated zero:
+    an existing zero is left with its original date, while an omitted nonzero stored
+    share holds the provider for review so it cannot add phantom share to the new cut.
 - **Robydoby PTR raid sheets** (community Google Sheets, no auth — public CSV export;
   registered 2026-07-23, owner-approved): per-boss tabs of curated WCL zone-54
   testing parses with per-spec 90/95/99th-pct raw DPS. Fetch
@@ -222,19 +259,26 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   - The raid endpoint (`/rankings/midnight/raid/all-bosses/5.json`) is live, but its
     `lowerBound` is **DPS throughput** (~180k), a different quantity on a different scale —
     do not merge it under the M+ rating name.
-- **SimulationCraft nightly** (`SimC nightly Patchwerk DPS`, 26 DPS specs):
-  - **Transport:** prefer the plain-text `MID1_Raid.txt` `DPS Ranking:` block (~1.5 MB) when
+- **SimulationCraft nightly** (`SimC nightly Patchwerk DPS`; **23** DPS specs since the 2026-09-03
+  wholesale MID2 adoption — Balance, Feral, Augmentation and Devastation have no MID2 profile
+  upstream yet and were DROPPED, not held; each joins the pool on the night it appears):
+  - **The report NAME follows the sim tier.** `MID1_Raid` through Season 1; **`MID2_Raid`** since
+    the 2026-09-03 adoption (Riley, value_move_ack in a reviewed local run). `MID1_Raid.txt` has
+    been a 272-byte in-progress stub carrying the SAME build header as MID2 since 2026-09-01 — it
+    is not a fallback and must not be read as one.
+  - **Transport:** prefer the plain-text `MID2_Raid.txt` `DPS Ranking:` block (~1.4 MB) when
     it HAS one — it is sometimes a live in-progress log of a newer run with no ranking block,
-    in which case parse `MID1_Raid.html`. In the HTML take the `"data":[…]` array **enclosing
-    the FIRST big-value `"name":"MID1_…","y":…` hit**; a fixed byte window after `"series"`, or
+    in which case parse `MID2_Raid.html`. In the HTML take the `"data":[…]` array **enclosing
+    the FIRST big-value `"name":"MID2_…","y":…` hit**; a fixed byte window after `"series"`, or
     a max across all blocks, reads the later burst/DTPS charts — ~2.2–2.5× inflated (Frost DK
     137,711 → 296,861), which cost a merge-and-revert on 2026-07-26 and was caught only by a
-    pre-merge diff. Skip the leading `Raid` aggregate row; 49 profiles → best hero-variant per
-    DPS spec = **26** (tanks/healers excluded, Augmentation absent by design).
-  - **Map profile names by LONGEST-PREFIX, and allow a hyphen.** `MID1_Death_Knight_Frost_Rider`
-    has underscores in both class and spec, so a `MID1_(w+)_(w+)_(w+)` regex maps nothing at
+    pre-merge diff. Skip the leading `Raid` aggregate row; 43 profiles (2026-09-03) → best
+    hero-variant per DPS spec = **23** (tanks/healers excluded; Augmentation absent by design,
+    Balance/Feral/Devastation absent upstream as of the adoption).
+  - **Map profile names by LONGEST-PREFIX, and allow a hyphen.** `MID2_Death_Knight_Frost_Rider`
+    has underscores in both class and spec, so a `MID2_(w+)_(w+)_(w+)` regex maps nothing at
     all — a silent zero-row parse on a healthy fetch. A name class without `-` drops
-    `MID1_Demon_Hunter_Havoc_Fel-Scarred` entirely and reads Devourer off its lesser build
+    `MID2_Demon_Hunter_Havoc_Fel-Scarred` entirely and reads Devourer off its lesser build
     (115175 instead of 118341), which looks exactly like a real sim move.
   - **Era-verify off the header build string, not the visible version.** The "12.3.0" on the
     HTML report is the **Highcharts JS** version, not the WoW build; the real header reads e.g.
@@ -280,6 +324,13 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     purely for not having been re-simmed. **Adopt a new tier wholesale across every spec of
     the source, or not at all** — a partial upstream roster means you merge nothing and record
     the row `partial`.
+    **DONE 2026-09-03: MID2 adopted wholesale** in a reviewed local run with the human
+    `value_move_ack` — 23 charts merged (all `tier = MID2`, ptr `"0"`, per-chart timestamps
+    09-02/09-03), and the three MID1-only stored profiles (Balance, Feral, Devastation) DROPPED
+    so the pool stays uniform (26 -> 23). The stored pool IS MID2 now: a normal night merges
+    whatever charts are current (their tier matches), records the specs still returning the
+    error body, and needs no ack; a returning spec joins on its night. The row floor (15) and
+    row-drop gate (25%) still bound every merge.
   - Why this is written down (2026-08-08): for a month every run stamped `asOf` with the RUN
     date while the sim values sat byte-identical. That defeats the staleness alarm *precisely* —
     `required-sources.json` measures bloodmallet via `date.type "fightProfiles"`, i.e. off
@@ -299,8 +350,10 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     four fight styles and four chart types, while control specs succeeded interleaved in the
     same minutes — the endpoint was demonstrably healthy throughout. Retry before concluding
     absence; then record the persistent set in the manifest row rather than re-litigating it
-    every night. Either way the answer is the same: **merge nothing**, because the tier gate
-    forbids a partial pool and the row-drop floor (19 of 26) forbids adopting only what exists.
+    every night. While the stored pool was MID1 the answer was the same either way — **merge
+    nothing** — because the tier gate forbade a partial MID2 pool. Since the 2026-09-03 wholesale
+    adoption the pool is MID2, so the erroring specs are simply absent that night and the charts
+    that exist merge; only the row floor (15) and row-drop gate (25%) still bound the merge.
 
 ## Gotchas
 
@@ -324,56 +377,19 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   Referer. The sanctioned path is a free v2 GraphQL client (warcraftlogs.com/api/v2/client)
   — the runner uses it (datacenter IPs get Cloudflare-blocked on the HTML endpoint); the
   HTML endpoint works from a residential IP for local runs.
-- **WCL v2 API status (2026-07-14, probe-verified — read before re-deriving ANY of it):**
-  - **Transport is SOLVED from datacenter runners.** Recipe: browser `User-Agent` on the
-    `POST /oauth/token` call; `Origin: https://www.warcraftlogs.com` +
-    `Referer: https://www.warcraftlogs.com/` + a `sec-ch-ua` header on the
-    `/api/v2/client` POST. Without these, Cloudflare silently empty-bodies the token
-    call and 403-challenges the GraphQL call. Reference implementation: `src/wcl-probe.mjs`.
-  - **The blocker is WCL-side, not ours:** `characterRankings` throws a bare
-    "Internal server error" for the entire redistributed-credit metric family
-    (`rdps`/`ndps`/`cdps`/`bossrdps`) on EVERY encounter — (then-live S1) zone 46 and PTR zone 52
-    alike — while `dps`/`hps`/`wdps`/`default` work. Bisected argument-by-argument
-    (className/specName/difficulty/partition all fine) and reproduced deterministically.
-  - **`metric: default` is NOT a workaround:** probe-verified byte-identical to plain
-    `dps` (joined by character name, 0.00% delta on live and dummy encounters). Do not
-    substitute `dps`-family numbers under the rDPS-labeled series (honest source
-    typing), and do not rebuild statistics-table medians from rankings pages — the
-    leaderboard is a paginated top-parses list (`count` is page-local), not the parse
-    population, and zone 54's cross-boss normalized score has no API analogue at all.
-  - **Third-party scrape proxies are a dead end (probe-verified 2026-07-21):** a
-    Supadata `/v1/web/scrape` probe (owner-requested) DOES clear Cloudflare, but the
-    statistics-table fragment answers non-XHR scrapers with WCL's explicit refusal
-    ("Use the API at /v1/docs instead of scraping HTML."), and the rendered
-    statistics PAGE returns only navigation chrome — the table loads via XHR after
-    render, so no values come through (bigNumbers=0). The refusal message also
-    settles the etiquette question: WCL's stated policy is API-only, and the API is
-    exactly what's broken. Do not retry other scrape proxies; wait for the rdps fix.
-  - **Standing behavior until WCL fixes it:** ONE cheap retry per run (a single
-    `metric: rdps` query on a known-good encounter, e.g. 3176); if still 500, record
-    the WCL manifest rows named in required-sources.json (currently wcl-live-raid and
-    wcl-live-mplus) as `unreachable` with this reason and leave data
-    unchanged. On the nightly runner this check IS `src/fetch-wcl.mjs` (the
-    deterministic pre-agent step — read its `wcl-fetch/evidence.json` instead of
-    re-running anything); locally you can run the same script or the query by hand.
-    The dispatch-only workflow **"WCL API probe (diagnostic)"**
-    (`.github/workflows/wcl-probe.yml`) re-checks the whole picture in ~20s. If rdps
-    starts working: zone 52 (single encounter per target count, small population) is
-    the first candidate for an API-median recipe — validate full-population coverage
-    by paginating to the end and comparing counts before trusting any median, and
-    freeze the recipe into `src/fetch-wcl.mjs` (owner decision), never into the
-    nightly agent.
-  - **Frozen recipe #1 (owner-approved 2026-07-17): zone-52 RAW-DPS medians.**
-    `src/fetch-wcl.mjs` paginates each DPS dummy's full `metric: dps` leaderboard
-    (complete pagination or that encounter contributes nothing — rankings are
-    best-parse-per-player sorted best-first, so a partial median is biased high) and
-    merges per-spec medians via apply-metrics as
-    `"Median raw DPS (12.1 PTR Dummy Dome, NT)"` (bracket raid, era ptr, n = ranked
-    players). This is a DIFFERENT statistic from both `spec.ptrDummy` (median rDPS —
-    still frozen until WCL fixes the API) and the statistics table's per-parse
-    medians — raw DPS is never dressed up as rDPS (Aug Evoker is why), and agents
-    never re-fetch or edit these rows (manifest key `wcl-dummy-raw`, success only via
-    `evidence.landed`).
+- **WCL API correction (2026-09-05):** the official schema defines `rdps`, `ndps`
+  and `cdps` as **FFXIV-only**. Their rejection was incorrectly diagnosed as a WoW
+  outage in older logs and instructions. Supported WoW `dps`/`hps` work with existing
+  credentials. Do not probe unsupported enums to diagnose WoW health. `dps` means
+  WCL-ranked DPS; neither a `default` match nor successful Augmentation rows establish
+  raw damage or exact equivalence to an old statistics table.
+  The new reviewed leaderboard series above is the regular sanctioned API route.
+  Exact per-parse population medians and Archon aggregates still lack a verified
+  public API/export route; a listed GraphQL type does not imply a Query entrypoint.
+  Ordinary statistics pages return verification challenges. Never use proxies, replay
+  challenge cookies, scrape restricted fragments, or relabel another source to fill gaps.
+  Archived PTR raw-DPS recipe names are preserved as historical identifiers only.
+  `RAW_RECIPES=[]`; never rerun or reinterpret closed-zone data in a live refresh.
 - **Zone 54 is the 12.1 PTR raid** (Venomous Abyss), zone 56 M+ S2 PTR — PTR-quality
   data. **Zone 52 is "Dummy Dome"** — a target-dummy sim harness (Sinister Single 1T /
   Diabolical Duo 2T / Terrible Trio 3T / Fearsome Five 5T / Hazardous Healer), NOT a raid;
@@ -424,10 +440,9 @@ in run-log prose until the log outgrew the Read tool and had to be pruned.
   was only ever true through curl. Since 2026-08-10 curl itself 302s to `/human-challenge`, so
   treat this as the recipe to resume from if the endpoint reopens, not a promise that it works
   today.
-- **"rdps-broken" is a statement about the GraphQL API, not about rDPS data.** The v2
-  `characterRankings(metric: rdps)` 500 and the HTML statistics table serving rDPS fine are
-  independent facts — an evidence-file verdict of `rdps-broken` must not stop an HTML fetch, and
-  a successful HTML fetch must not be read as the API being fixed.
+- **Historical diagnostic correction:** the retired `rdps-broken` verdict cannot
+  establish a WoW outage: the API enum is FFXIV-only. Use the supported deterministic
+  collector above; do not resume restricted HTML extraction from older run recipes.
 - **`dpstype=dps` and `dpstype=rdps` return byte-identical tables for the zone-46 healer-DPS
   cut** (verified 2026-08-01), so "Median DPS (Mythic, healer)" carries no methodology ambiguity
   — do not rename it and do not re-derive the question.

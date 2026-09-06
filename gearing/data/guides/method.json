@@ -3,11 +3,11 @@
   "source": "Method",
   "sourceId": "method",
   "dated": true,
-  "harvestedAt": "2026-08-31",
+  "harvestedAt": "2026-09-05",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.method.gg/guides/blood-death-knight/gearing",
-      "published": "2026-08-25",
+      "published": "2026-09-04",
       "priorities": [
         {
           "label": "General",
@@ -400,7 +400,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.method.gg/guides/frost-death-knight/gearing",
@@ -1059,7 +1060,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.method.gg/guides/unholy-death-knight/gearing",
@@ -1707,7 +1709,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/havoc-demon-hunter/gearing",
@@ -2397,7 +2400,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Devourer Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/devourer-demon-hunter/gearing",
@@ -3118,7 +3122,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/vengeance-demon-hunter/gearing",
@@ -3791,7 +3796,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Balance Druid": {
       "guideUrl": "https://www.method.gg/guides/balance-druid/gearing",
@@ -4440,11 +4446,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Feral Druid": {
       "guideUrl": "https://www.method.gg/guides/feral-druid/gearing",
-      "published": "2026-08-30",
+      "published": "2026-09-04",
       "priorities": [],
       "bis": [
         {
@@ -4600,15 +4607,6 @@
             ]
           },
           {
-            "slot": "Main Hand",
-            "candidates": [
-              {
-                "id": "273072",
-                "name": "Enchant Weapon - Rite Of The Hash'ey"
-              }
-            ]
-          },
-          {
             "slot": "Head",
             "candidates": [
               {
@@ -4729,11 +4727,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Guardian Druid": {
       "guideUrl": "https://www.method.gg/guides/guardian-druid/gearing",
-      "published": "2026-08-15",
+      "published": "2026-09-03",
       "priorities": [],
       "bis": [
         {
@@ -5209,12 +5208,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250228",
-          "itemName": "Resonant Bellowstone",
-          "sourceText": "Murder Row",
+          "itemId": "250245",
+          "itemName": "Tumor Of The Swarm",
+          "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -5367,7 +5366,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Restoration Druid": {
       "guideUrl": "https://www.method.gg/guides/restoration-druid/gearing",
@@ -5727,7 +5727,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.method.gg/guides/augmentation-evoker/gearing",
@@ -6402,7 +6403,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.method.gg/guides/devastation-evoker/gearing",
@@ -7070,7 +7072,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.method.gg/guides/preservation-evoker/gearing",
@@ -7845,11 +7848,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.method.gg/guides/beast-mastery-hunter/gearing",
-      "published": "2026-08-23",
+      "published": "2026-09-05",
       "priorities": [
         {
           "label": "General",
@@ -8019,11 +8023,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270165",
-          "itemName": "Keeper's Seething Core",
-          "sourceText": "Entombed Sentinels",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'Tek",
           "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -8187,11 +8191,11 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270165",
-          "itemName": "Keeper's Seething Core",
-          "sourceText": "Entombed Sentinels",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'Tek",
           "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -8430,15 +8434,6 @@
               }
             ],
             "note": ":"
-          },
-          {
-            "slot": "Main Hand",
-            "candidates": [
-              {
-                "id": "244029",
-                "name": "Enchant Weapon - Acuity of the Ren'dorei"
-              }
-            ]
           }
         ],
         "gems": {
@@ -8469,12 +8464,12 @@
           ],
           "combatPotion": [
             {
-              "id": "241288",
-              "name": "Potion of Recklessness"
+              "id": "271887",
+              "name": "Liquid Luster"
             },
             {
-              "id": "241308",
-              "name": "Light's Potential"
+              "id": "241288",
+              "name": "Potion of Recklessness"
             }
           ],
           "food": [
@@ -8498,11 +8493,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.method.gg/guides/marksmanship-hunter/gearing",
-      "published": "2026-08-23",
+      "published": "2026-09-05",
       "priorities": [
         {
           "label": "General",
@@ -8658,11 +8654,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "The Coiled Altar",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'Tek",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -8827,11 +8823,11 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "The Coiled Altar",
+          "itemId": "270168",
+          "itemName": "Font of Venomous Rage",
+          "sourceText": "Ula'Tek",
           "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -9138,11 +9134,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Survival Hunter": {
       "guideUrl": "https://www.method.gg/guides/survival-hunter/gearing",
-      "published": "2026-08-12",
+      "published": "2026-09-03",
       "priorities": [
         {
           "label": "General",
@@ -9175,8 +9172,8 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "251220",
-          "itemName": "Voidscarred Crown",
+          "itemId": "271492",
+          "itemName": "Skulking Viper's Weeping Fangs",
           "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
@@ -9197,11 +9194,11 @@
         {
           "list": "overall",
           "slot": "Shoulder",
-          "itemId": "268231",
-          "itemName": "Soulslither Spaulders",
-          "sourceText": "The Venomous Abyss",
+          "itemId": "271490",
+          "itemName": "Jaws Of The Skulking Viper",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": null,
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -9220,24 +9217,23 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "268223",
-          "itemName": "Ophidian Fangmail",
-          "sourceText": "The Colled Altar",
+          "itemId": "271876",
+          "itemName": "Awoken Dreadfang Cuirass",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": "Vexhul",
-          "sourceTextUnmatched": true
+          "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Wrist",
-          "itemId": "273775",
-          "itemName": "Hydra Scale Wristguards",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
+          "itemId": "244584",
+          "itemName": "Farstrider's Plated Bracers",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Altar of Fangs",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -9254,11 +9250,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -9277,34 +9273,34 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268258",
-          "itemName": "Boots Of The Reckless Wayfarer",
-          "sourceText": "The Lost Explorers",
+          "itemId": "268233",
+          "itemName": "Ferocious Scaleboots",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
+          "dungeon": "Altar of Fangs",
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "252258",
+          "itemName": "Sickening Signet Of Atroxus",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -9312,46 +9308,45 @@
           "slot": "Trinket",
           "itemId": "270175",
           "itemName": "Voracious Heart Of Ula'tek",
-          "sourceText": "Ula tek",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": "Ula'tek",
-          "sourceTextUnmatched": true
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
-          "slot": "Main Hand",
-          "itemId": "268213",
-          "itemName": "Maze-Roa, Warlord's Fury",
-          "sourceText": "Coiled Altar",
+          "slot": "Trinket",
+          "itemId": "270173",
+          "itemName": "Zul'jin's Guillotine Technique",
+          "sourceText": "The Colled Altar",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
+          "slot": "Main Hand",
+          "itemId": "268215",
+          "itemName": "Abyssal Broodfiend's Bardiche",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268230",
-          "itemName": "Crown Of The Eternal Fang",
-          "sourceText": "Nek Zali the Soulcoller",
+          "itemId": "271492",
+          "itemName": "Skulking Viper's Weeping Fangs",
+          "sourceText": "Twin Fangs",
           "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "boss": "The Twin Fangs",
           "dungeon": null,
-          "droppedBy": null,
-          "sourceTextUnmatched": true
+          "droppedBy": null
         },
         {
           "list": "raid",
@@ -9391,21 +9386,21 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "268223",
-          "itemName": "Ophidian Fangmail",
-          "sourceText": "The Twin Fangs",
+          "itemId": "271495",
+          "itemName": "Skulking Viper's Scuteplate",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Wrist",
-          "itemId": "268217",
-          "itemName": "Rising Tide Wristguards",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "244584",
+          "itemName": "Farstrider's Plated Bracers",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
           "boss": null,
           "dungeon": null,
           "droppedBy": null
@@ -9413,8 +9408,8 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips Of Swirling Fury",
+          "itemId": "271493",
+          "itemName": "Skulking Viper's Hidepiercers",
           "sourceText": "Nymrissa Wavecaller",
           "sourceKind": "world",
           "boss": null,
@@ -9424,11 +9419,11 @@
         {
           "list": "raid",
           "slot": "Waist",
-          "itemId": "268254",
-          "itemName": "Serpentine Mixing Belt",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -9457,11 +9452,11 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Szorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "268266",
+          "itemName": "Alluring Bubbleband",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -9512,12 +9507,12 @@
         {
           "list": "mplus",
           "slot": "Head",
-          "itemId": "251220",
-          "itemName": "Voidscarred Crown",
-          "sourceText": "Voidscar Arena",
+          "itemId": "271492",
+          "itemName": "Skulking Viper's Weeping Fangs",
+          "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -9534,96 +9529,19 @@
         {
           "list": "mplus",
           "slot": "Shoulder",
-          "itemId": "251131",
-          "itemName": "Jangling Felpaulets",
-          "sourceText": "Murder Row",
+          "itemId": "271490",
+          "itemName": "Jaws Of The Skulking Viper",
+          "sourceText": "King's Rest",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
           "list": "mplus",
           "slot": "Back",
-          "itemId": "251132",
-          "itemName": "Speakeasy Shroud",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Chest",
-          "itemId": "239034",
-          "itemName": "Corrupted Hexxer's Vestments",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Wrist",
-          "itemId": "273775",
-          "itemName": "Hydra Scale Wristguards",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Altar of Fangs",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Hands",
-          "itemId": "160213",
-          "itemName": "Sepulchral Construct's Gloves",
-          "sourceText": "Kings Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Waist",
-          "itemId": "251155",
-          "itemName": "Tribal Defender's Cord",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
-        },
-        {
-          "list": "mplus",
-          "slot": "Legs",
-          "itemId": "193759",
-          "itemName": "Egg Tender's Leggings",
-          "sourceText": "Ruby Life Pools",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Ruby Life Pools",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Feet",
-          "itemId": "159371",
-          "itemName": "Boots Of The Headlong Conqueror",
-          "sourceText": "Kings Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
-        },
-        {
-          "list": "mplus",
-          "slot": "Finger",
-          "itemId": "251194",
-          "itemName": "Lightwarden's Bind",
+          "itemId": "251190",
+          "itemName": "Bloodthorn Burnous",
           "sourceText": "The Blinding Vale",
           "sourceKind": "dungeon",
           "boss": null,
@@ -9632,9 +9550,53 @@
         },
         {
           "list": "mplus",
-          "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
+          "slot": "Chest",
+          "itemId": "271495",
+          "itemName": "Skulking Viper's Scuteplate",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Voidscar Arena",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Wrist",
+          "itemId": "244584",
+          "itemName": "Farstrider's Plated Bracers",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Hands",
+          "itemId": "271493",
+          "itemName": "Skulking Viper's Hidepiercers",
+          "sourceText": "King's Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Waist",
+          "itemId": "244581",
+          "itemName": "Farstrider's Trophy Belt",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Legs",
+          "itemId": "271491",
+          "itemName": "Skulking Viper's Coiled Legwraps",
           "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
@@ -9643,13 +9605,46 @@
         },
         {
           "list": "mplus",
-          "slot": "Trinket",
-          "itemId": "273796",
-          "itemName": "Vile Vial Of Volatile Venom",
-          "sourceText": "Altar of Fangs",
+          "slot": "Feet",
+          "itemId": "159388",
+          "itemName": "Sabatons Of Coruscating Energy",
+          "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Altar of Fangs",
+          "dungeon": "Temple of Sethraliss",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Finger",
+          "itemId": "252258",
+          "itemName": "Sickening Signet Of Atroxus",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Voidscar Arena",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Finger",
+          "itemId": "251136",
+          "itemName": "Signet Of Snarling Servitude",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Trinket",
+          "itemId": "250215",
+          "itemName": "Freightrunner's Flask",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -9666,8 +9661,19 @@
         {
           "list": "mplus",
           "slot": "Main Hand",
-          "itemId": "273783",
-          "itemName": "Toxin-Coated Warstaff",
+          "itemId": "275070",
+          "itemName": "Sharpened Lightwood Slasher",
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Altar of Fangs",
+          "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Off Hand",
+          "itemId": "275070",
+          "itemName": "Sharpened Lightwood Slasher",
           "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
@@ -9798,24 +9804,25 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Arcane Mage": {
       "guideUrl": "https://www.method.gg/guides/arcane-mage/gearing",
-      "published": "2026-08-28",
+      "published": "2026-09-05",
       "priorities": [
         {
           "label": "General",
           "primary": "Intellect",
           "secondaries": [
             "Haste",
+            "Vers",
             "Crit",
-            "Mast",
-            "Vers"
+            "Mast"
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Intellect > Haste > Critical Strike > Mastery = Versatility"
+          "raw": "Intellect > Haste > Versatility > Critical Strike > Mastery"
         }
       ],
       "bis": [
@@ -9899,11 +9906,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "239664",
-          "itemName": "Arcanoweave Cord",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268257",
+          "itemName": "Caustic Chain-Wrapped Sash",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -9988,12 +9995,12 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "159667",
-          "itemName": "Vessel Of Last Rites",
-          "sourceText": "King's Rest",
-          "sourceKind": "dungeon",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -10076,11 +10083,11 @@
         {
           "list": "raid",
           "slot": "Waist",
-          "itemId": "239664",
-          "itemName": "Arcanoweave Cord",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268257",
+          "itemName": "Caustic Chain-Wrapped Sash",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -10164,11 +10171,11 @@
         {
           "list": "raid",
           "slot": "Off Hand",
-          "itemId": "268197",
-          "itemName": "Spine Of The Hissing Abyss",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -10252,12 +10259,12 @@
         {
           "list": "mplus",
           "slot": "Waist",
-          "itemId": "239664",
-          "itemName": "Arcanoweave Cord",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
+          "itemId": "251222",
+          "itemName": "Ethereal Netherwrap",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -10341,12 +10348,12 @@
         {
           "list": "mplus",
           "slot": "Off Hand",
-          "itemId": "159667",
-          "itemName": "Vessel Of Last Rites",
-          "sourceText": "King's Rest",
-          "sourceKind": "dungeon",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null
         }
       ],
@@ -10410,8 +10417,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244029",
-                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
+                "id": "273072",
+                "name": "Enchant Weapon - Rite Of The Hash'ey"
               }
             ]
           }
@@ -10458,8 +10465,8 @@
           ],
           "healthPotion": [
             {
-              "id": "241304",
-              "name": "Silvermoon Health Potion"
+              "id": "271884",
+              "name": "Concentrated Silvermoon Health Potion"
             }
           ],
           "food": [
@@ -10481,7 +10488,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Fire Mage": {
       "guideUrl": "https://www.method.gg/guides/fire-mage/gearing",
@@ -10790,7 +10798,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Frost Mage": {
       "guideUrl": "https://www.method.gg/guides/frost-mage/gearing",
@@ -11449,7 +11458,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.method.gg/guides/brewmaster-monk/gearing",
@@ -12096,7 +12106,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.method.gg/guides/mistweaver-monk/gearing",
@@ -12739,7 +12750,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.method.gg/guides/windwalker-monk/gearing",
@@ -13384,7 +13396,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Holy Paladin": {
       "guideUrl": "https://www.method.gg/guides/holy-paladin/gearing",
@@ -14067,11 +14080,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Protection Paladin": {
       "guideUrl": "https://www.method.gg/guides/protection-paladin/gearing",
-      "published": "2026-08-15",
+      "published": "2026-09-03",
       "priorities": [],
       "bis": [
         {
@@ -14572,12 +14586,12 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250228",
-          "itemName": "Resonant Bellowstone",
-          "sourceText": "Murder Row",
+          "itemId": "250245",
+          "itemName": "Tumor Of The Swarm",
+          "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -14737,7 +14751,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.method.gg/guides/retribution-paladin/gearing",
@@ -15303,7 +15318,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Discipline Priest": {
       "guideUrl": "https://www.method.gg/guides/discipline-priest/gearing",
@@ -15957,7 +15973,8 @@
           ],
           "note": "Unique Gem: Telluric Eversong Diamond . The extra mana can come in handy on longer fights. After that you should follow your stat weights but here are some options: Flawless Deadly Peridot Flawless Masterful Peridot Flawless Quick Amethyst Flawless Quick Garnet"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Holy Priest": {
       "guideUrl": "https://www.method.gg/guides/holy-priest/gearing",
@@ -16596,7 +16613,8 @@
           ],
           "note": "Unique Gem: Telluric Eversong Diamond . The extra mana can come in handy on longer fights. After that you follow your stat weights: Raiding : Flawless Masterful Garnet / Flawless Deadly Amethyst M+ : Flawless Deadly Peridot / Flawless Versatile Peridot"
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Shadow Priest": {
       "guideUrl": "https://www.method.gg/guides/shadow-priest/gearing",
@@ -16924,7 +16942,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.method.gg/guides/assassination-rogue/gearing",
@@ -17503,7 +17522,8 @@
           ],
           "note": "Always use the Indecipherable Eversong Diamond in one slot. Fill the rest of the slots with Haste or Crit."
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.method.gg/guides/outlaw-rogue/gearing",
@@ -18180,7 +18200,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.method.gg/guides/subtlety-rogue/gearing",
@@ -18490,11 +18511,12 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.method.gg/guides/elemental-shaman/gearing",
-      "published": "2026-08-23",
+      "published": "2026-09-01",
       "priorities": [
         {
           "label": "General",
@@ -19094,6 +19116,15 @@
                 "name": "Enchant Chest - Mark Of The Worldsoul"
               }
             ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "273072",
+                "name": "Enchant Weapon - Rite Of The Hash'ey"
+              }
+            ]
           }
         ],
         "gems": {
@@ -19131,7 +19162,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.method.gg/guides/enhancement-shaman/gearing",
@@ -19822,7 +19854,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.method.gg/guides/restoration-shaman/gearing",
@@ -20508,7 +20541,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.method.gg/guides/affliction-warlock/gearing",
@@ -21194,7 +21228,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.method.gg/guides/demonology-warlock/gearing",
@@ -21502,7 +21537,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.method.gg/guides/destruction-warlock/gearing",
@@ -22172,7 +22208,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Arms Warrior": {
       "guideUrl": "https://www.method.gg/guides/arms-warrior/gearing",
@@ -22726,7 +22763,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Fury Warrior": {
       "guideUrl": "https://www.method.gg/guides/fury-warrior/gearing",
@@ -23313,7 +23351,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     },
     "Protection Warrior": {
       "guideUrl": "https://www.method.gg/guides/protection-warrior/gearing",
@@ -24016,7 +24055,8 @@
             }
           ]
         }
-      }
+      },
+      "verifiedAt": "2026-09-05"
     }
   },
   "coverage": {

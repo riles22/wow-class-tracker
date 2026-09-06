@@ -1,6 +1,14 @@
 {
-  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run — src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness — visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) — one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot — before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added — 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night. Re-based 10 -> 7 at the 2026-08-18 S2 flip (owner-acked in the flip review): the contract shrank 26 -> 19 requirements and four of the previous night's 11 successes (icyveins-ptr + the three deterministic PTR raw-WCL rows) left with it, so 10 of 19 would red every transition night on sources sitting at their honest season-boundary freeze. 7 is the proportional re-base (10/26 of 19); healthy pre-flip runs sat at 17-19 of 25 — RECALIBRATE upward once S2 upstreams (Archon numerics, Murlok, Mythicstats, WCL live) are flowing and a healthy S2 run count has been observed. | minSuccessfulSources LOWERED 7->5 for the S2 transition window (Riley, 2026-08-19): the 08-18 dispatch nightly failed the floor HONESTLY at 5 — Archon frozen mid-S2-rebuild, WoWMeta frozen upstream, wcl-live x2 in their owner-accepted standing red. RESTORE TO 7 by ~2026-09-01 once sources rebuild for S2; a below-5 night is still a real failure.",
+  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run — src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness — visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) — one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot — before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added — 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night. Re-based 10 -> 7 at the 2026-08-18 S2 flip (owner-acked in the flip review): the contract shrank 26 -> 19 requirements and four of the previous night's 11 successes (icyveins-ptr + the three deterministic PTR raw-WCL rows) left with it, so 10 of 19 would red every transition night on sources sitting at their honest season-boundary freeze. 7 is the proportional re-base (10/26 of 19); healthy pre-flip runs sat at 17-19 of 25 — RECALIBRATE upward once S2 upstreams (Archon numerics, Murlok, Mythicstats, WCL live) are flowing and a healthy S2 run count has been observed. | minSuccessfulSources LOWERED 7->5 for the S2 transition window (Riley, 2026-08-19): the 08-18 dispatch nightly failed the floor HONESTLY at 5 — Archon frozen mid-S2-rebuild, WoWMeta frozen upstream, wcl-live x2 in their owner-accepted standing red. RESTORE TO 7 by ~2026-09-01 once sources rebuild for S2; a below-5 night is still a real failure. | RESTORE DATE EXTENDED to ~2026-10-01 (Riley, 2026-09-03, reviewed edit — FLOOR_RESTORE_DUE in src/check-refresh.mjs moved with it): the nine nightlies 2026-08-26..09-03 landed 5-7 successes of 21 (two at exactly 5) with 13 requirements structurally unable to succeed (archon-* x9 behind the human-verification wall, wcl-live x2 on the upstream rDPS 500, both sim rows held pre-adoption); restoring 7 would have redded six of nine nights for no new fact. The same-day wholesale MID2 sim adoption lifts the reachable ceiling by two. Restore to 7 when Archon returns or by the new date.",
   "maxRunAgeHours": 28,
+  "officialNotes": {
+    "comment": "Separate deterministic intake receipts, checked by check-official-notes against the pre-agent artifact. These are verification instants, not tuning dates. Every edited class section needs an applied reference or explicit irrelevant reason; unresolved sections fail publication. A missed or unreachable source is also visible here after 48 hours, independent of the run-manifest's other sources.",
+    "maxAgeHours": 48,
+    "sources": [
+      "live-hotfixes",
+      "ptr-preview"
+    ]
+  },
   "minSuccessfulSources": 5,
   "maxRowDropPct": 0.25,
   "maxValueMovePct": 0.6,
@@ -11,7 +19,7 @@
     "maxTotalMoves": 25
   },
   "gearing": {
-    "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. Deliberately a SIBLING of requirements[] rather than an entry in it: requirements[] is consumed by checkManifest as well as checkFreshness, so a row there would make the nightly publish gate demand a run-manifest entry for a subproject the nightly cannot refresh — gearing harvests are MANUAL because Wowhead is unreachable from CI. A sibling key is read only by the loop that iterates it, which is a structural guarantee rather than a convention. It is also deliberately NOT in gearing/src/validate-data.mjs, so npm test (nightly Gate 1) can never go red on a date the nightly has no way to fix. Thresholds are loose on purpose: there is no observed re-harvest cadence to calibrate against (zero re-harvests since the 2026-08-04 import), so the job here is to make rot visible, not to nag about lag. The check that actually earns its keep is tierSetSync, which measures WRONGNESS rather than age — it fires when the page is publishing tier-set text the tracker has already corrected, which is exactly the Preservation Evoker failure of 2026-08-08. Brings forward the freshness contract row listed as Phase C in docs/s2-transition-scope.md.",
+    "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. A sibling of requirements[] so the tracker run-manifest does not claim external gearing harvests. Current guide sources are refreshed by the separate weekly gearing-refresh workflow; failed providers retain their published bytes and verification dates. The nightly deterministic publish stage checks and synchronizes local capabilities before Gate 1. Owner-approved 2026-09-05: gearing-specs measures a local structuralSync receipt, validated against full output and current input digests; it does not re-date external loot, weapon or rule evidence. The 12.0.7 stat baseline is historical fallback, no longer a live age-gated feed; checkSpecSync validates its retained contents and provenance, while current stat priorities remain age-gated under all three guide sources. Age thresholds belong to the heartbeat, not the date-independent data validator. tierSetSync detects stale duplicated facts even when their dates are young. Existing external-feed age thresholds are unchanged.",
     "datasets": [
       {
         "key": "gearing-raid",
@@ -46,8 +54,9 @@
       {
         "key": "gearing-specs",
         "file": "specs.json",
-        "dateField": "harvestedAt",
-        "maxAgeDays": 30
+        "dateField": "structuralSync.checkedAt",
+        "maxAgeDays": 30,
+        "comment": "Local consistency receipt only: checkSpecSync must first verify the full output and current input digests. External evidence dates are retained separately; this date does not reverify game facts."
       },
       {
         "key": "gearing-icons",
@@ -58,12 +67,6 @@
       {
         "key": "gearing-catalyst-rules",
         "file": "catalyst-rules.json",
-        "dateField": "reviewedAt",
-        "maxAgeDays": 45
-      },
-      {
-        "key": "gearing-stat-baseline",
-        "file": "stat-priority-baseline.json",
         "dateField": "reviewedAt",
         "maxAgeDays": 45
       },
@@ -85,7 +88,8 @@
         "dateField": "harvestedAt",
         "maxAgeDays": 30
       }
-    ]
+    ],
+    "structuralSync": true
   },
   "requirements": [
     {
@@ -140,7 +144,7 @@
     },
     {
       "key": "archon-tiers",
-      "label": "Archon tier lists (raid throughput + M+ score, all roles) ARCHON WALL (opened 2026-08-25/26, held three consecutive nights as of 2026-08-27): every archon.gg application route is behind a site-wide human-verification interstitial, so all nine archon-* rows are expected to go red together. Three measured facts that a future reader needs. (1) It is NOT IP-scoped — re-tested from a residential IP on 2026-08-27, the wall held, so the datacenter-IP hypothesis is dead. (2) ITS SHAPE CHANGED FROM 403 TO 200: pages now return HTTP 200 carrying a ~2.5 KB \"Human Verification\" body with __NEXT_DATA__ count 0, so a status-only transport check would record SUCCESS and stamp a fresh snapshot over unchanged letters — assert on __NEXT_DATA__ presence, never on the status code. (3) There is no sanctioned machine lane: Archon is an RPGLogs property and publishes no Archon API (the \"API Documentation\" it links is Warcraft Logs’ own), and the Next.js data route /_next/data/<buildId>/... returns 403 {\"error\":\"Human verification required\"} — a content-type-aware, application-level refusal, i.e. deliberate rather than a default Cloudflare toggle. DO NOT attempt to solve, replay or automate past the check, and do NOT backfill these values from Warcraft Logs: Archon’s letters are Archon’s own tiering and its numbers are Archon’s own percentile cuts, so publishing ours under the archon source id would fabricate the source (hard rule 3). The honest behaviour is the one already built — consensusFor drops to Icy Veins + Method + Wowhead and the toolbar reports \"consensus of 3\". Clears if the wall lifts or an access agreement is reached.",
+      "label": "Archon tier lists (raid throughput + M+ score, all roles) ARCHON WALL (opened 2026-08-25/26, held three consecutive nights as of 2026-08-27): every archon.gg application route is behind a site-wide human-verification interstitial, so all nine archon-* rows are expected to go red together. Three measured facts that a future reader needs. (1) It is NOT IP-scoped — re-tested from a residential IP on 2026-08-27, the wall held, so the datacenter-IP hypothesis is dead. (2) ITS SHAPE CHANGED FROM 403 TO 200: pages now return HTTP 200 carrying a ~2.5 KB \"Human Verification\" body with __NEXT_DATA__ count 0, so a status-only transport check would record SUCCESS and stamp a fresh snapshot over unchanged letters — assert on __NEXT_DATA__ presence, never on the status code. (3) There is no sanctioned machine lane: Archon is an RPGLogs property and publishes no Archon API (the \"API Documentation\" it links is Warcraft Logs’ own), and the Next.js data route /_next/data/<buildId>/... returns 403 {\"error\":\"Human verification required\"} — a content-type-aware, application-level refusal, i.e. deliberate rather than a default Cloudflare toggle. DO NOT attempt to solve, replay or automate past the check, and do NOT backfill these values from Warcraft Logs: Archon’s letters are Archon’s own tiering and its numbers are Archon’s own percentile cuts, so publishing ours under the archon source id would fabricate the source (hard rule 3). OWNER-CONFIRMED RETENTION POLICY (2026-09-05): retain the last verified in-season Archon letters during this outage. Freshness alerts do not expire a source or change consensus membership. The current four-source consensus still includes Archon; the UI names its retained verification date. Keep snapshot dates unchanged until actual source data is verified. Earlier three-source claims in run notes were incorrect. Clears if the wall lifts or an access agreement is reached.",
       "maxAgeDays": 4,
       "date": {
         "type": "pages",
@@ -296,7 +300,7 @@
     },
     {
       "key": "wcl-live-raid",
-      "label": "Warcraft Logs live raid medians (zone 53 The Venomous Abyss, Mythic — S2; re-pointed at the 2026-08-18 flip, zone 46 was S1). OWNER-ACCEPTED STANDING RED (2026-08-18): no S2 fetch path exists while the HTML statistics transport is Cloudflare-blocked and the GraphQL rdps family errors — the red IS the honest staleness signal (Bloodmallet precedent); do not ack it away, it clears when a zone-53 recipe lands",
+      "label": "Warcraft Logs exact live raid population medians: no verified sanctioned aggregate endpoint. Stored S1 observations remain dated and unchanged. WoW dps/hps API access works; rdps is FFXIV-only, not an outage diagnostic. New per-encounter leaderboard samples are a separate requirement and cannot clear this missing aggregate.",
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
@@ -313,7 +317,7 @@
     },
     {
       "key": "wcl-live-mplus",
-      "label": "Warcraft Logs live M+ medians (zone 55 Mythic+ Season 2 — S2; re-pointed at the 2026-08-18 flip, zone 47 was S1). OWNER-ACCEPTED STANDING RED (2026-08-18): same transport outage as wcl-live-raid — the red is chosen, not missed; clears when a zone-55 recipe lands",
+      "label": "Warcraft Logs exact live M+ population medians: no verified sanctioned aggregate endpoint. Retained S1 values are historical. New +10 leaderboard samples are separately measured, not replacement population medians.",
       "maxAgeDays": 10,
       "evidence": "wcl",
       "date": {
@@ -346,7 +350,7 @@
     },
     {
       "key": "bloodmallet",
-      "label": "Bloodmallet target-count sims / fight profiles. OWNER-ACCEPTED STANDING RED (2026-08-28, Riley): a DELIBERATE HOLD, not a fetch failure and no longer \"upstream has not re-simmed\" — the reason changed on 2026-08-27. All 27 DPS charts are requested each run at talent_target_scaling/castingpatchwerk with retries; 19 return real payloads carrying simc_settings.tier = MID2 (read off the chart, never hard-coded; chart timestamp 2026-08-26) against 26 stored MID1 profiles at 2026-07-08/07-15, and 8 still return the 76-byte error body (Havoc, Balance, Feral, Augmentation, Devastation, Retribution, Arms, Fury). Merging is blocked three independent ways, any one sufficient: SIM_TIER_REQUIRED plus the tier-uniformity invariant forbid a pool holding both MID1 and MID2; MID2 measures ~1.79x MID1 with a spec- and target-count-dependent ratio, so the pool is not comparable on the scale-invariant percentile axis fightLabels computes, and merging the 19 alone would hand the strong labels to whichever specs happened to be re-simmed; and adopting only the 19 drops 26 -> 19 rows, past maxRowDropPct 0.25. fightProfile.asOf stays each chart’s OWN timestamp rather than the run date, so the coverage date correctly does not move and the staleness IS the honest signal. Do not ack it away and do not raise maxAgeDays; it clears when the remaining 8 specs re-sim and MID2 is adopted WHOLESALE via the human value_move_ack (64 of 156 sim rows move >60%). Bloodmallet and simulationcraft are blocked on substantially the same specs and are expected to clear together.",
+      "label": "Bloodmallet target-count sims / fight profiles. MID2 ADOPTED WHOLESALE 2026-09-03 (Riley, value_move_ack given in a reviewed local run) — the 2026-08-28 OWNER-ACCEPTED STANDING RED is CLOSED. What landed: 23 of 27 DPS charts carried simc_settings.tier = MID2 (read off each chart) and merged as the whole pool; the three stored MID1 profiles with no MID2 chart (Balance, Feral, Devastation — Augmentation never had one) were DROPPED rather than held so the pool stays tier-uniform (26 -> 23 rows, 11.5%, inside maxRowDropPct). 121 of 138 overlapping target rows moved >60% (MID2/MID1 min 1.152, median 1.908, max 2.872) — the season sim scale, not a parse fault; the value gate fired exactly as designed and was acked once. Standing rules unchanged: read the tier off every chart and never hard-code it; asOf is each chart’s OWN timestamp (the coverage date only moves when upstream re-sims, so a quiet upstream reads partial and the red is honest); a mixed-tier pool never merges; the 76-byte error body is retried before it is recorded. A missing spec that re-sims upstream simply joins the pool on its night — no ack needed while its tier matches.",
       "maxAgeDays": 5,
       "date": {
         "type": "fightProfiles",
@@ -360,7 +364,7 @@
     },
     {
       "key": "simulationcraft",
-      "label": "SimC nightly MID1 raid report. OWNER-ACCEPTED STANDING RED (2026-08-21, Riley; reason RESTATED 2026-08-28 — the original PTR-vs-Live objection is SUPERSEDED and was measurably false by 08-27, so do not read it as current). MID2_Raid is now LIVE, not PTR: its header reads 12.1.0.69497 Live (hotfix 2026-08-26/69497, git build HEAD 32146c2cc6) and it is a COMPLETE run (text and html reports emitted) carrying a real \"DPS Ranking:\" block of 38 profiles — while MID1 has itself become the 12.0.7 artefact (12.0.7.68974 Live, hotfix 2026-08-06), so holding MID1 is now holding an OLD-PATCH report rather than a stale 12.1 one. What blocks adoption is COVERAGE: the 38 profiles map to only 19 of the 27 DPS specs (absent: Devourer DH, Balance, Feral, Augmentation, Devastation, Retribution, Arms, Fury), so wholesale adoption drops 26 -> 19 stored rows (27%, past maxRowDropPct 0.25), and merging only the 19 would leave seven 12.0.7 values standing under the same season-agnostic name \"SimC nightly Patchwerk DPS\" whose ranks are pooled across the family. Adoption must be WHOLESALE and needs the human value_move_ack (MID2 runs ~2x MID1 on the overlap; the gate genuinely fires). Do not ack it away and do not raise maxAgeDays; it clears when upstream covers all 27 specs. Note this red will NOT clear by itself even if MID2 completes, because the MID1 fallback is no longer a stable anchor.",
+      "label": "SimC nightly MID2 raid report (MID2_Raid.txt / .html — the report name follows the sim tier; MID1_Raid has been a 272-byte in-progress stub carrying the SAME build header since 2026-09-01 and is not a fallback). ADOPTED WHOLESALE 2026-09-03 (Riley, value_move_ack given in a reviewed local run) — the 2026-08-21 / 08-28 OWNER-ACCEPTED STANDING RED is CLOSED. What landed: header 12.1.0.69587 Live (hotfix 2026-09-02/69587, git build HEAD f5b50a3f97), 43 profiles mapping by longest-prefix (hyphen allowed) to 23 of 27 DPS specs; the three stored MID1 rows with no MID2 profile (Balance, Feral, Devastation) were DROPPED so the season-agnostic ’SimC nightly Patchwerk DPS’ rank pool stays on one side of PHASES.liveSince (26 -> 23 rows, 11.5%); all 23 overlap rows moved >60% (MID2 ~1.8-2.4x MID1). Augmentation absent by design (unsimmable support spec). Upstream re-sims daily (a new HEAD hash most nights), so a fresh row is the normal night and an unchanged hash is the honest explanation for an unchanged parse. Row floor 15 and maxRowDropPct still apply to every night’s merge.",
       "maxAgeDays": 10,
       "date": {
         "type": "metrics",
@@ -403,6 +407,40 @@
       "maxAgeDays": null,
       "date": null,
       "rows": null
+    },
+    {
+      "key": "wcl-leaderboard-raid",
+      "label": "Warcraft Logs Mythic raid per-encounter top-100-entry medians. Freshness measures verified collection time; each sample retains its included log dates separately. Empty or fewer-than-10 cuts remain absent; failed cuts retain previous observations.",
+      "maxAgeDays": 2,
+      "evidence": "wcl",
+      "date": {
+        "type": "leaderboardChecks",
+        "source": "warcraftlogs",
+        "namePattern": "^Leaderboard median .*\\(S2 Mythic:"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "warcraftlogs",
+        "namePattern": "^Leaderboard median .*\\(S2 Mythic:",
+        "min": 200
+      }
+    },
+    {
+      "key": "wcl-leaderboard-mplus",
+      "label": "Warcraft Logs exactly +10 M+ per-encounter top-100-entry medians. Freshness measures verified collection time; each sample retains its included log dates separately. Empty or fewer-than-10 cuts remain absent; failed cuts retain previous observations.",
+      "maxAgeDays": 2,
+      "evidence": "wcl",
+      "date": {
+        "type": "leaderboardChecks",
+        "source": "warcraftlogs",
+        "namePattern": "^Leaderboard median .*\\(S2 M\\+10:"
+      },
+      "rows": {
+        "type": "metrics",
+        "source": "warcraftlogs",
+        "namePattern": "^Leaderboard median .*\\(S2 M\\+10:",
+        "min": 280
+      }
     }
   ]
 }

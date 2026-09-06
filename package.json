@@ -5,6 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "instructions:sync": "node src/sync-agent-instructions.mjs --write",
+    "instructions:check": "node src/sync-agent-instructions.mjs --check",
+    "pretest": "npm run instructions:check",
+    "pretest:quiet": "npm run instructions:check",
     "prebuild": "node src/apply-community-overrides.mjs",
     "build": "node src/build.mjs",
     "check": "npm test && npm run build",

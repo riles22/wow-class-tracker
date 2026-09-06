@@ -69,18 +69,21 @@ test("ptrdummy merge replaces spec.ptrDummy wholesale with defaults applied", as
 });
 
 test("profiles merge replaces fightProfile; survivability and playstyle merge their shapes", async () => {
+  // `tier` is required for bloodmallet since 2026-08-20 (validate.mjs SIM_TIER_REQUIRED), and
+  // the row must match the tier the stored pool ALREADY carries or the uniformity guard
+  // rejects the merge — so read it off the fixture data rather than hard-coding it (a literal
+  // "MID1" reddened this test the day the pool moved to MID2, 2026-09-03). It also pins the
+  // passthrough at apply-metrics.mjs:49, which was implemented but untested — the same
+  // invisibility that let a whole harvest omit the field.
+  const poolTier = (await readSpecs()).find(s => s.fightProfile?.source === "bloodmallet")?.fightProfile.tier ?? "MID1";
   await applyMetrics(await input({
-    // `tier` is required for bloodmallet since 2026-08-20 (validate.mjs SIM_TIER_REQUIRED),
-    // and MID1 keeps this row uniform with the rest of the stored pool. It also pins the
-    // passthrough at apply-metrics.mjs:49, which was implemented but untested — the same
-    // invisibility that let a whole harvest omit the field.
-    profiles: [{ class: "Rogue", spec: "Outlaw", source: "bloodmallet", asOf: "2026-07-06", tier: "MID1", targets: { "1": 1, "3": 2, "8": 3 } }],
+    profiles: [{ class: "Rogue", spec: "Outlaw", source: "bloodmallet", asOf: "2026-07-06", tier: poolTier, targets: { "1": 1, "3": 2, "8": 3 } }],
     survivability: [{ class: "Rogue", spec: "Outlaw", tier: "B", asOf: "2026-07-06" }],
     complexity: [{ class: "Rogue", spec: "Outlaw", complexity: 3 }]
   }), root);
   const outlaw = (await readSpecs()).find(s => s.class === "Rogue" && s.spec === "Outlaw");
   assert.deepEqual(outlaw.fightProfile.targets, { "1": 1, "3": 2, "8": 3 });
-  assert.equal(outlaw.fightProfile.tier, "MID1", "the chart's own sim tier must survive the merge");
+  assert.equal(outlaw.fightProfile.tier, poolTier, "the chart's own sim tier must survive the merge");
   assert.equal(outlaw.survivability.tier, "B");
   assert.equal(outlaw.survivability.source, "archon"); // default
   assert.equal(outlaw.playstyle.complexity, 3);

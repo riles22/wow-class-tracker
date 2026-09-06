@@ -367,7 +367,7 @@ async function harvestSpec(spec) {
   if (enh) record.enhancements = enh;
   else record.notes = [enhHtml
     ? "enhancements page fetched but nothing parsed — recipe drift? gems/enchants/consumables not harvested"
-    : "enhancements page absent (404/unreachable) — gems/enchants/consumables not harvested"];
+    : "enhancements page absent (HTTP 404) — gems/enchants/consumables not harvested"];
   return record;
 }
 

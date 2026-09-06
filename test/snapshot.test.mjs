@@ -11,6 +11,7 @@ import { mkdtemp, mkdir, readFile, writeFile, cp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { execFileSync } from "node:child_process";
 import { snapshot } from "../src/snapshot.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -88,7 +89,44 @@ test("re-freezing the same date is idempotent when nothing changed", async () =>
     const a = await snapshot(dir, "2026-08-11", { frozen: true });
     const first = await readFile(a.frozenPath, "utf8");
     await snapshot(dir, "2026-08-11", { frozen: true });   // must not throw
-    assert.equal(await readFile(a.frozenPath, "utf8"), first, "an unchanged re-freeze rewrites identical bytes");
+    assert.equal(await readFile(a.frozenPath, "utf8"), first, "an unchanged re-freeze preserves identical bytes");
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test("an equivalent re-freeze preserves original provenance after unrelated Git and data changes", async () => {
+  const dir = await sandbox();
+  try {
+    const git = args => execFileSync("git", args, { cwd: dir, encoding: "utf8", stdio: "pipe" });
+    const commit = message => git(["-c", "user.name=Snapshot test", "-c", "user.email=snapshot@example.invalid",
+      "-c", "commit.gpgsign=false", "commit", "--allow-empty", "--no-verify", "-m", message]);
+    git(["init", "--quiet"]);
+    commit("original declaration");
+    const result = await snapshot(dir, "2026-08-11", { frozen: true });
+    const first = await readFile(result.frozenPath, "utf8");
+    const original = JSON.parse(first);
+    assert.equal(original.gitSha, git(["rev-parse", "HEAD"]).trim());
+
+    // Neither a new commit nor an operational receipt changes the declared forecast.
+    commit("unrelated follow-up");
+    assert.notEqual(git(["rev-parse", "HEAD"]).trim(), original.gitSha);
+    await writeFile(path.join(dir, "data", "retry-receipt.json"), '{"attempt":2}\n');
+    await snapshot(dir, "2026-08-11", { frozen: true });
+    assert.equal(await readFile(result.frozenPath, "utf8"), first,
+      "same forecast must keep original Git/data/source-date provenance byte for byte");
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test("a damaged existing frozen artifact refuses the retry without touching either file", async () => {
+  const dir = await sandbox();
+  try {
+    const result = await snapshot(dir, "2026-08-11", { frozen: true });
+    const historyBefore = await readFile(result.outPath, "utf8");
+    const damaged = '{"kind":"frozen-forecast",';
+    await writeFile(result.frozenPath, damaged);
+    await assert.rejects(() => snapshot(dir, "2026-08-11", { frozen: true }), SyntaxError);
+    assert.equal(await readFile(result.outPath, "utf8"), historyBefore);
+    assert.equal(await readFile(result.frozenPath, "utf8"), damaged,
+      "an unreadable declaration needs deliberate recovery, never automatic replacement");
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 

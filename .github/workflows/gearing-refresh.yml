@@ -1,0 +1,100 @@
+name: Weekly gearing guide refresh
+
+on:
+  schedule:
+    - cron: "37 8 * * 2" # Tuesday 08:37 UTC; source dates stay independent of run time.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Share the publisher lock with the tracker nightly. Manual push races fail visibly.
+concurrency:
+  group: nightly-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: master
+          fetch-depth: 1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Refresh Icy Veins guides
+        id: icyveins
+        continue-on-error: true
+        timeout-minutes: 12
+        run: node gearing/src/harvest-guide-icyveins.mjs --force
+      - name: Refresh Wowhead guides
+        id: wowhead
+        continue-on-error: true
+        timeout-minutes: 12
+        run: node gearing/src/harvest-guide-wowhead.mjs --force
+      - name: Refresh Method guides
+        id: method
+        continue-on-error: true
+        timeout-minutes: 12
+        run: node gearing/src/harvest-guide-method.mjs --force
+      - name: Save incomplete verification for diagnosis
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: gearing-guide-staging
+          path: gearing/.guide-work/
+          include-hidden-files: true
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Check source identity, verification and unexpected losses
+        run: node src/check-gearing-guides.mjs
+      - name: Synchronize local capabilities and build gearing
+        run: |
+          node gearing/src/harvest-specs.mjs
+          node gearing/src/harvest-specs.mjs --check
+          npm run gearing:build
+      - name: Validate and build both pages
+        run: |
+          npm test
+          npm run build
+          git diff --check
+      - name: Publish validated successful sources
+        id: publish
+        run: |
+          set -euo pipefail
+          git config user.name "Riley"
+          git config user.email "120138825+riles22@users.noreply.github.com"
+          git add -- gearing/data/guides/icyveins.json gearing/data/guides/wowhead.json gearing/data/guides/method.json gearing/data/specs.json gearing/wow-s2-gearing.html dist/
+          if git diff --cached --quiet; then
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Refresh verified gearing guides $(date -u +%F)"
+          # A concurrent manual source edit must be reviewed, never overwritten/rebased blindly.
+          git push origin HEAD:master
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy and run browser checks for the published commit
+        if: steps.publish.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run deploy.yml --ref master
+          gh workflow run ci.yml --ref master
+      - name: Surface incomplete source refreshes
+        if: always()
+        env:
+          IV: ${{ steps.icyveins.outcome }}
+          WH: ${{ steps.wowhead.outcome }}
+          METHOD: ${{ steps.method.outcome }}
+        run: |
+          printf 'Icy Veins: %s\nWowhead: %s\nMethod: %s\n' "$IV" "$WH" "$METHOD" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$IV" != success ] || [ "$WH" != success ] || [ "$METHOD" != success ]; then
+            echo "::error::Some guides could not be verified; their published source remains unchanged. Review the staging artifact."
+            exit 1
+          fi

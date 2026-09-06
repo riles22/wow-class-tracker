@@ -1,7 +1,37 @@
 {
-  "source": "WoW Class Tracker data/specs.json (class, spec, role, tier set) + Icy Veins stat-priority pages",
+  "source": "Local tracker roster and tier sets + reviewed tier-token armor and weapon capabilities",
   "harvestedAt": "2026-08-02",
-  "caveat": "Stat priorities on this page come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the legacy Icy Veins 12.0.7 fallback, used only when the guide layer lacks a build.",
+  "caveat": "Current stat priorities come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the reviewed 12.0.7 fallback, used only when the guide layer lacks a build. Structural sync checks local inputs; it does not reverify external game facts.",
+  "structuralSync": {
+    "schemaVersion": 1,
+    "checkedAt": "2026-09-06",
+    "sources": {
+      "tracker": {
+        "path": "data/specs.json",
+        "digest": "d7f0e9bf3f41a41c01710973e73aa442161d4aa9102ffc821989218c177494b5",
+        "scope": "class, spec, role, tierSet; each tier set retains its own source and asOf"
+      },
+      "armor": {
+        "path": "gearing/data/raid-items.json",
+        "digest": "fed92aef334620d9edb4cb7a43f0a41d7d34116e5833d8f74b2d5fb1993d212d",
+        "asOf": "2026-08-18",
+        "scope": "tier-token item id, name and class lists"
+      },
+      "weapons": {
+        "path": "gearing/data/weapon-proficiency.json",
+        "digest": "df38ec6a9f07208317ccc1b6cfee34a81c5cc6194434b59736c6ef1d797382bc",
+        "asOf": "2026-08-02",
+        "scope": "12.1-live"
+      }
+    }
+  },
+  "legacyPriority": {
+    "patch": "12.0.7",
+    "reviewedAt": "2026-08-02",
+    "baselineDigest": "c648d123976e8012b76714246872ca6222d5d984a41c45c9e91798dae48da569",
+    "overridesDigest": "133bd383e65174c3e4550297968e02b859f60559d06edce5460749fe4288d02b",
+    "provenance": "Reviewed snapshot of all 40 generated specialization stat priorities in data/specs.json, preserving the exact primary stat, ordered secondary stats, and source URL used by the project on 2026-08-02."
+  },
   "weaponProficiencyProvenance": "Compiled from Blizzard's official class pages and official Midnight patch notes. Class pages establish class-wide proficiencies and preferred weapons; specLoadouts adds the hand, core-ability, and patch restrictions needed for item eligibility. See officialSources and each spec's sourceUrls.",
   "armorByClass": {
     "Priest": "Cloth",
@@ -849,10 +879,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/restoration-druid-pve-healing-stat-priority",
       "tierSet": {
-        "set2": "Rejuvenation has a 15% chance and Nature's Swiftness has a 100% chance to grant Genesis, causing all your heal over time effects to heal for 15% more for 8 seconds. Multiple applications may overlap.",
+        "set2": "Rejuvenation has a 15% chance to grant Genesis. Genesis increases healing from all your heal over time effects by 15% for 8 seconds, and multiple applications can overlap.",
         "set4": "Nature's Swiftness, Tranquility, and Incarnation: Tree of Life or Convoke the Spirits have a 100% chance to grant Genesis, and its duration is increased by 8 seconds.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-25/2339812",
-        "asOf": "2026-08-22"
+        "source": "https://www.wowhead.com/item=271528",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -1397,9 +1427,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/arcane-mage-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Arcane Missiles fires 1 additional missile and deals 5% increased damage.",
-        "set4": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 40%. (2026-08-15 tuning: the per-stack bonus was reduced from 5% to 3%; the notes did not restate the cap, so it is carried forward unchanged.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
-        "asOf": "2026-08-15"
+        "set4": "Each Arcane Missiles wave increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 24%.",
+        "source": "https://www.wowhead.com/item=271564",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -1480,10 +1510,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/fire-mage-pve-dps-stat-priority",
       "tierSet": {
-        "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike.",
-        "set4": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 20%.",
-        "source": "https://www.wowhead.com/news/all-midnight-season-2-tier-set-bonuses-more-complex-tier-set-bonuses-381911",
-        "asOf": "2026-07-14"
+        "set2": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike. (2026-08-31 hotfix: fixed so the guaranteed critical strike from Pyroclasm correctly grants Hot Streak — a bug fix to make the printed bonus behave as written; no value changed.)",
+        "set4": "Pyroclasm reduces Flamestrike and Pyroblast cast time by 20%, and its damage bonus increases by 25%.",
+        "source": "https://www.wowhead.com/item=271564",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -2311,10 +2341,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/holy-priest-pve-healing-stat-priority",
       "tierSet": {
-        "set2": "Each target affected by your Renew increases your Critical Strike chance by 2%, up to 6%.",
+        "set2": "Each target affected by your Renew increases your Critical Strike chance by 2%, up to 6%. (2026-09-03 hotfix: fixed so the 2-set reliably grants Renewed Vigor from Renew — a bug fix to make the printed bonus behave as written; no value changed.)",
         "set4": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
-        "asOf": "2026-06-30"
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-3/2336376",
+        "asOf": "2026-09-03"
       }
     },
     {
@@ -2798,9 +2828,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/enhancement-shaman-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 seconds for 6 seconds. Fire Nova deals 200% increased damage to the primary target of your Voltaic Blaze.",
-        "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks).",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/10",
-        "asOf": "2026-07-08"
+        "set4": "Fire Nova reduces the cooldown of Crash Lightning by 2 seconds and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times (07-08: the Short Circuit aura now also boosts the Crash Lightning weapon-enhancement effect, averaged across stacks). (2026-09-04 hotfix: corrected the 4-set's increase to Crash Lightning's upfront damage.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376/1",
+        "asOf": "2026-09-04"
       }
     },
     {
@@ -2965,10 +2995,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/affliction-warlock-pve-dps-stat-priority",
       "tierSet": {
-        "set2": "Agony damage increased by 15%. Corruption damage increased by 25%. Seed of Corruption applies Unstable Affliction at 20% effectiveness to your target.",
-        "set4": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%. (2026-08-20 hotfix: a bug where the Unstable Affliction granted by the Venomous Abyss 4-piece would not grant a stack of Wither was corrected; the bonus wording itself is unchanged.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-august-20/2336376",
-        "asOf": "2026-08-20"
+        "set2": "Agony deals 15% more damage, and Corruption or its Wither replacement deals 25% more damage.",
+        "set4": "Each active Unstable Affliction increases spell and ability damage by 2%, up to 6%. Seed of Corruption also applies Unstable Affliction to its target at 20% effectiveness. (2026-08-20 hotfix: corrected the set-granted Unstable Affliction failing to grant a Wither stack.)",
+        "source": "https://www.wowhead.com/item=271546",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -3050,9 +3080,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/demonology-warlock-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Wild Imp damage increased by 10%. Implosion damage increased by 20%.",
-        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets. (2026-07-31 build: a tooltip fix — the bonus had displayed 150% / 125%, which is what was recorded here; the intended values were 250% / 225%. The effect itself did not change. 2026-08-15 tuning: raised to 350% / 315% — note that post attributes this Implode effect to the 2-SET bonus, while the 06-18 datamine and the 07-31 notes placed it here on the 4-set; the values are updated where the effect is stored rather than moved on Blizzard’s say-so alone.)",
-        "source": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820",
-        "asOf": "2026-08-15"
+        "set4": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets. (Verified 2026-09-05 against the current item tooltip, which assigns this effect to the 4-piece bonus. Blizzard's August 18 tuning prose labels the same effect as 2-piece.)",
+        "source": "https://www.wowhead.com/item=271546",
+        "asOf": "2026-09-05"
       }
     },
     {
@@ -3333,6 +3363,5 @@
         "asOf": "2026-07-08"
       }
     }
-  ],
-  "trackerFieldsSyncedAt": "2026-08-29"
+  ]
 }

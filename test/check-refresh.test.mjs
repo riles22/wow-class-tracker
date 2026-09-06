@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays } from "../src/check-refresh.mjs";
+import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE } from "../src/check-refresh.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
    probe-less feed requirement — enough to exercise every gate rule without the repo's
@@ -302,7 +302,20 @@ const evConfig = {
 };
 const evManifest = rows => ({ run: "2026-07-14", startedAt: "2026-07-14T10:41:00Z", summary: "t",
   sources: rows.map(r => ({ previousAsOf: "2026-07-09", newAsOf: "2026-07-14", ...r })) });
-const evidenceOf = extra => ({ attemptedAt: "2026-07-14T10:39:00Z", verdict: "rdps-broken", detail: "rdps 500s", landed: {}, ...extra });
+const evidenceOf = extra => ({ attemptedAt: "2026-07-14T10:39:00Z", verdict: "partial", detail: "No verified aggregate endpoint", landed: {}, ...extra });
+
+test("leaderboard collection coverage cannot be vouched for by one fresh cut or legacy asOf dates", () => {
+  const req = { key: "leaderboards", date: { type: "leaderboardChecks", source: "warcraftlogs", namePattern: ".*" }, rows: { min: 2 } };
+  const data = { specs: [{ metrics: [
+    { source: "warcraftlogs", name: "legacy", asOf: "2026-09-05" },
+    { source: "warcraftlogs", name: "cut1", asOf: "2026-08-20", sample: { kind: "leaderboard-entries", observedAt: "2026-09-05T18:00:00.000Z" } },
+    { source: "warcraftlogs", name: "cut2", asOf: "2026-09-04", sample: { kind: "leaderboard-entries", observedAt: "2026-09-02T18:00:00.000Z" } },
+  ] }] };
+  assert.equal(probeDate(req, data), "2026-09-02");
+  data.specs[0].metrics[2].sample.observedAt = "2026-09-05T18:00:00.000Z";
+  assert.equal(probeDate(req, data), "2026-09-05");
+  assert.equal(data.specs[0].metrics[1].asOf, "2026-08-20", "collection does not relabel the included log date");
+});
 
 test("evidence-gated success needs the deterministic fetch to have landed rows", () => {
   const m = evManifest([{ source: "wclx", result: "success" }]);
@@ -310,13 +323,13 @@ test("evidence-gated success needs the deterministic fetch to have landed rows",
   assert.ok(blocked.errors.some(e => e.includes('"wclx" claims success') && e.includes("landed no data")));
 
   const landed = checkManifest(evConfig, m, freshData(), "2026-07-14",
-    evidenceOf({ verdict: "rdps-restored", landed: { wclx: { rows: 12 } } }));
+    evidenceOf({ verdict: "success", landed: { wclx: { rows: 12 } } }));
   assert.deepEqual(landed.errors, []);
-  assert.ok(landed.notes.some(n => n.includes("rDPS metric family works again")));
+  assert.ok(!landed.notes.some(n => /rDPS.*works again/.test(n)));
 });
 
-test("an honest unreachable row is consistent with broken-upstream evidence; local runs without evidence keep the date teeth only", () => {
-  const honest = evManifest([{ source: "wclx", result: "unreachable", detail: "rdps family 500s upstream (evidence verdict rdps-broken)" }]);
+test("an honest unreachable row is consistent with unavailable aggregate evidence; local runs without evidence keep the date teeth only", () => {
+  const honest = evManifest([{ source: "wclx", result: "unreachable", detail: "No verified aggregate endpoint" }]);
   const r = checkManifest(evConfig, honest, freshData(), "2026-07-14", evidenceOf({}));
   assert.deepEqual(r.errors, []);
   assert.ok(r.degraded.some(d => d.startsWith("wclx: unreachable")));
@@ -405,7 +418,7 @@ test("gearing freshness is heartbeat-only and reports absence rather than passin
   // Drift fires regardless of age — this is the Preservation Evoker shape.
   const drift = checkFreshness(cfg, goodManifest(), data, "2026-08-14",
     { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 2 });
-  assert.ok(drift.violations.some(v => v.includes("gearing-tierset-sync") && v.includes("sync-tracker-fields")),
+  assert.ok(drift.violations.some(v => v.includes("gearing-tierset-sync") && v.includes("harvest-specs")),
     JSON.stringify(drift.violations));
 
   // And it stays out of requirements[], so checkManifest can never demand a gearing row.
@@ -420,6 +433,20 @@ test("freshness heartbeat uses startedAt at full-timestamp precision — 36h mea
 
   const ok = checkFreshness(config, m, freshData(), "2026-07-15T10:00:00Z"); // 32h
   assert.deepEqual(ok.violations, []);
+});
+
+test("gearing structural receipts never hide drift or claim future verification", () => {
+  const cfg = { ...config, gearing: { structuralSync: true, datasets: [
+    { key: "gearing-specs", file: "specs.json", dateField: "structuralSync.checkedAt", maxAgeDays: 30 }
+  ] } };
+  const state = { present: true, dates: { "specs.json": "2026-08-14" }, tierSetDrift: 0 };
+  assert.ok(!checkFreshness(cfg, goodManifest(), freshData(), "2026-08-14", state).fingerprint.includes("gearing"));
+  const drift = checkFreshness(cfg, goodManifest(), freshData(), "2026-08-14",
+    {...state, structuralSyncError:"recorded provenance differs from current inputs"});
+  assert.ok(drift.fingerprint.includes("gearing-specs-sync"));
+  assert.ok(drift.violations.some(v=>v.includes("recorded provenance differs")));
+  const future = checkFreshness(cfg, goodManifest(), freshData(), "2026-08-13", state);
+  assert.ok(future.violations.some(v=>v.includes("check date is in the future")));
 });
 
 test("a newer history snapshot counts as proof of life (local refreshes count), date-grained", () => {
@@ -648,8 +675,10 @@ test("age gate: a below-full floor is nagged past its restore date, and only the
   const before = checkFreshness(lowered, goodManifest(), freshData(), "2026-08-25");
   assert.ok(!before.violations.some(v => v.includes("minSuccessfulSources")), before.violations.join("\n"));
   assert.ok(!before.fingerprint.includes("min-sources-floor"));
-  // Past it: red until restored.
-  const after = checkFreshness(lowered, goodManifest(), freshData(), "2026-09-02");
+  // Past it: red until restored. The date is read off the module so a reviewed extension
+  // of the window (2026-09-03: 09-01 -> 10-01) moves this pin with it instead of reddening it.
+  const dayAfter = new Date(Date.parse(FLOOR_RESTORE_DUE) + 86400000).toISOString().slice(0, 10);
+  const after = checkFreshness(lowered, goodManifest(), freshData(), dayAfter);
   assert.ok(after.violations.some(v => v.includes("minSuccessfulSources is still 5")), after.violations.join("\n"));
   assert.ok(after.fingerprint.includes("min-sources-floor"));
   // Restored (or absent — the fixture default): quiet at any date, forever.

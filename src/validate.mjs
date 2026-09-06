@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
 import { specBuildChanges } from "./render.mjs";
+import { validateOfficialNotes } from "./official-notes.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
 const BRACKETS = new Set(["raid", "mplus"]);
@@ -110,13 +111,14 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast, gearingSpecs }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast, gearingSpecs, officialNotes }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
   // stamp "tomorrow" relative to a validator still on the previous local day.
   const today = opts.now ?? new Date().toISOString().slice(0, 10);
   const maxDate = new Date(new Date(today + "T00:00:00Z").getTime() + 86400000).toISOString().slice(0, 10);
+  errors.push(...validateOfficialNotes(officialNotes, { specs, ptrBuilds, now: Date.parse(maxDate + "T23:59:59Z") }));
   const isoOk = (v, what) => {
     if (v == null) return;
     if (!ISO_DATE.test(v)) { errors.push(`${what} must be YYYY-MM-DD, got "${v}"`); return; }
@@ -324,6 +326,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
 
     const metricKeys = new Set();
     for (const metric of spec.metrics ?? []) {
+      if (metric.source === "warcraftlogs" && (Object.hasOwn(metric, "class") || Object.hasOwn(metric, "spec"))) errors.push(`specs.json: ${key} WCL metric cannot override its enclosing class/spec identity`);
       if (!allSources.has(metric.source)) errors.push(`specs.json: ${key} metric from unknown source "${metric.source}"`);
       if (!BRACKETS.has(metric.bracket)) errors.push(`specs.json: ${key} metric has invalid bracket "${metric.bracket}"`);
       if (typeof metric.name !== "string" || !metric.name) errors.push(`specs.json: ${key} metric missing name`);
@@ -331,15 +334,15 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!Number.isFinite(metric.value) || metric.value < 0) errors.push(`specs.json: ${key} metric "${metric.name}" value must be a finite non-negative number`);
       if (metric.era != null && !["live", "ptr"].includes(metric.era)) errors.push(`specs.json: ${key} metric "${metric.name}" era must be "live" or "ptr"`);
       // Era gating (hard rule 3) must agree with the display-name convention both ways:
-      // a "12.1 PTR"-named series may not claim live, and an era:"ptr" series must say PTR in its name.
-      if (PHASES.ptr && metric.name?.includes(PHASES.ptr.marker) && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is named ${PHASES.ptr.marker} but tagged era "live"`);
+      // a PTR-named series may not claim live, including retired cycles after their marker closes.
+      if (/\bPTR\b/.test(metric.name ?? "") && metric.era === "live") errors.push(`specs.json: ${key} metric "${metric.name}" is PTR-named but tagged era "live" — PTR rows must be tagged era: "ptr"`);
       if (metric.era === "ptr" && !/PTR/.test(metric.name ?? "")) errors.push(`specs.json: ${key} metric "${metric.name}" is era "ptr" but its name carries no PTR label`);
       /* A PTR-NAMED row must be era-EXPLICIT, not inference-reliant (2026-08-12). metricEra's
          fallback infers "ptr" from the name via PHASES.ptr.marker — and PHASES.ptr goes NULL
          at the phase flip, at which point every inference-reliant row silently leaks into the
          live view while its explicitly-tagged siblings stay gated (measured: 5 of 12 PTR
-         metric families rode the inference). The marker guard above dies with PHASES.ptr for
-         the same reason, so this rule matches the NAME, which survives the flip. */
+         metric families rode the inference). Both name guards survive a closed cycle or a
+         newly opened one, so retired PTR rows cannot leak into the live view. */
       if (/\bPTR\b/.test(metric.name ?? "") && metric.era == null) errors.push(`specs.json: ${key} metric "${metric.name}" is PTR-named but carries no explicit era — name inference dies at the phase flip, so PTR rows must be tagged era: "ptr" (apply-metrics preserves it)`);
       /* asOf is REQUIRED, not optional (audit 2026-08-14). check-refresh dates a metric family
          by its min-th-freshest row precisely so one fresh row cannot vouch for a stale cut —
@@ -351,6 +354,22 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
          already carries a date. Same shape as the mandatory ptr.source rule. */
       if (metric.asOf == null) errors.push(`specs.json: ${key} metric "${metric.name}" needs an asOf date — the coverage gate dates a family by its min-th-freshest row, and an undated row cannot be counted as stale`);
       isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
+      if (metric.sample != null || /^Leaderboard median /.test(metric.name ?? "")) {
+        const sample = metric.sample;
+        const validInstant = v => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(v) && Number.isFinite(Date.parse(v));
+        if (metric.source !== "warcraftlogs" || !/^Leaderboard median (DPS|HPS) \(S2 (Mythic|M\+10): .+, top 100\)$/.test(metric.name ?? "")
+          || sample?.kind !== "leaderboard-entries" || sample.cap !== 100 || !["dps", "hps"].includes(sample.metric)
+          || metric.unit !== sample.metric.toUpperCase() || (sample.metric === "hps") !== (spec.role === "Healer")
+          || !Number.isInteger(metric.n) || metric.n < 10 || metric.n > 100 || metric.era !== "live"
+          || !validInstant(sample.observedAt) || !validInstant(sample.oldestRun) || !validInstant(sample.newestRun)
+          || sample.oldestRun > sample.newestRun || sample.newestRun > sample.observedAt
+          || metric.asOf !== sample.newestRun.slice(0, 10) || typeof sample.hasMorePages !== "boolean"
+          || sample.partition !== 1 || !Number.isInteger(sample.encounterId) || sample.encounterId <= 0
+          || (metric.bracket === "raid" ? sample.zoneId !== 53 || sample.difficulty !== 5 || sample.size !== 20 || sample.keystoneLevel != null
+            : sample.zoneId !== 55 || sample.difficulty !== 10 || sample.size !== 5 || sample.keystoneLevel !== 10)) {
+          errors.push(`specs.json: ${key} metric "${metric.name}" has invalid WCL leaderboard sample provenance`);
+        }
+      }
       const mkey = `${metric.source}|${metric.bracket}|${metric.name}`;
       if (metricKeys.has(mkey)) errors.push(`specs.json: ${key} duplicate metric (${mkey}) — the upsert key must be unique per spec`);
       metricKeys.add(mkey);
@@ -796,9 +815,9 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
      copy of set2/set4/asOf that renders as fact in gearing's Catalyst plan. Nothing checked
      the two against each other, so the copies drifted FIVE times — most recently publishing
      "Genesis duration increased by 4 seconds" on one page of the site while the other said 8.
-     The daily `check-refresh --age` heartbeat was the only detector, and the nightly cannot
-     act on it: publish stages data/, dist/ and skill logs, never gearing/. So the drift could
-     only ever be cleared by a human local run, and stayed live until one happened.
+     The daily `check-refresh --age` heartbeat was originally the only detector, and drift
+     waited for a human local run. Since 2026-09-05, nightly publish deterministically syncs
+     and builds gearing before Gate 1, then stages those derived files explicitly.
      This is the root validator reaching INTO gearing/, which it otherwise never does — a
      deliberate, read-only coupling the owner accepted to stop the recurrence. It stays
      one-directional: nothing here writes, and an absent gearing/ simply skips.
@@ -810,7 +829,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       if (!mirror?.tierSet || !spec.tierSet) continue;
       for (const field of ["set2", "set4", "asOf"]) {
         if ((spec.tierSet[field] ?? null) !== (mirror.tierSet[field] ?? null)) {
-          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/sync-tracker-fields.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
+          errors.push(`gearing/data/specs.json: ${spec.spec} ${spec.class} tierSet.${field} does not match data/specs.json — run \`node gearing/src/harvest-specs.mjs && npm run gearing:build\` (the two pages must not state different set bonuses)`);
         }
       }
     }
@@ -1033,6 +1052,13 @@ export async function loadData(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
+  // This ledger is presentation/provenance only; it never opens a forecast cycle.
+  let officialNotes = null;
+  try {
+    officialNotes = await read("official-notes.json");
+  } catch (error) {
+    if (error?.code !== "ENOENT") throw error;
+  }
   // Frozen final-season letters (data/season-final.json). Optional — absent means no
   // outlet has moved ahead of the live season yet, which reproduces the pre-2026-08-09
   // consensus exactly. Corrupt JSON must error rather than silently un-freeze a source,
@@ -1075,7 +1101,7 @@ export async function loadData(root) {
   }
   return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
            historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts,
-           seasonFinal, frozenForecast, gearingSpecs };
+           seasonFinal, frozenForecast, gearingSpecs, officialNotes };
 }
 
 /* SEASON-AHEAD BUT NEVER RE-MERGED — a WARNING, deliberately not an error (audit 2026-08-14).
