@@ -877,7 +877,7 @@ jobs:
         if: steps.commit.outputs.pushed == 'true' && steps.commit.outputs.deploy == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run deploy.yml --ref master
+        run: gh workflow run deploy.yml --ref master -f commit_sha="$(git rev-parse HEAD)"
 
       # Same reason, different gap: the 26 UI invariants in test/ui-invariants.test.mjs are
       # the only tests that execute template.html's client JS, and they need Playwright,
@@ -893,7 +893,7 @@ jobs:
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run ci.yml --ref master
+        run: gh workflow run ci.yml --ref master -f commit_sha="$(git rev-parse HEAD)"
 
       # Owner-facing change digest (owner-requested 2026-07-17): deterministic diff
       # of the just-pushed commit vs its parent (same derivation the site uses),
