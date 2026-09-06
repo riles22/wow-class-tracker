@@ -2,18 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "1fOYXu1WUEA",
-      "creator": "Shadarek",
-      "title": "Devourer Demon Hunter 12.1.5 Changes are IMPORTANT",
+      "id": "7XywFJ3u0YM",
+      "creator": "Jedith",
+      "title": "BANG! Collapsing Star Problem Has Been SOLVED!...Sort of.",
       "published": "2026-09-03",
-      "queuedAt": "2026-09-05"
+      "queuedAt": "2026-09-06"
     },
     {
-      "id": "JMVnCyVzlNM",
-      "creator": "Nintern",
-      "title": "GO BACK! | 12.1.5 PTR Devourer Patch Notes",
-      "published": "2026-09-03",
-      "queuedAt": "2026-09-05"
+      "id": "AeSgidbZVYU",
+      "creator": "Dorki",
+      "title": "OFFICIAL UPDATED SEASON 2 M+ TIER LIST | Midnight 12.1",
+      "published": "2026-09-05",
+      "queuedAt": "2026-09-06"
     }
   ],
   "skipped": [
