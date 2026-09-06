@@ -16,6 +16,39 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-06 (local, scheduled) — Archon walled a SEVENTEENTH night, re-probed from a residential IP; 0 letters touched
+
+- **Scope: residential-only catch-up.** The CI nightly landed `7a6cea3` at 13:50Z with Icy Veins,
+  Method and Wowhead all `success` and 0 letters moved, so those three were deliberately NOT
+  re-fetched here — independently regenerating what CI already produced is what makes a local push
+  unmergeable. Archon was the only tier-side job worth a residential retry.
+- **All ELEVEN distinct registered archon.gg URLs re-probed from Riley's residential IP** with the
+  full browser header set (UA, Accept, Accept-Language, Sec-Fetch-\*, Sec-CH-UA\*,
+  Upgrade-Insecure-Requests). Every one returned **HTTP 200** with a **2,498–2,519 byte** body,
+  `<title>Human Verification</title>`, and `__NEXT_DATA__` count **0**. That is the 200-shaped wall
+  the 08-31 local run first recorded — not the 403 Cloudflare "Just a moment..." managed challenge
+  the CI runner drew from the same URLs four hours earlier the same day. The two forms still coexist
+  and are still IP-dependent, and the assertion that matters (`__NEXT_DATA__` presence) is **0** from
+  both, which is why it is the assertion.
+- ⚠️ **A 200 is not reachability.** Restated because this is the seventeenth consecutive
+  demonstration: a status-code check would have read all eleven of today's responses as a recovery
+  and then merged an empty parse.
+- **Not bypassed, and it must not be.** No challenge was solved, replayed or automated past; no
+  proxy, no `_next/data` route, no cached-render service, no Warcraft Logs backfill (hard rule 3).
+- **Nothing merged, nothing stamped.** `data/specs.json`, `data/sources.json` and
+  `data/encounter-tiers.json` are byte-identical to HEAD. All 11 archon page snapshots stay at
+  2026-08-25 / 2026-08-18; the 80 stored archon letters and its six numeric series stand at their
+  2026-08-24/25 dates. Per the owner-confirmed retention policy (2026-09-05) those letters remain in
+  the consensus, so the live consensus is still **four** sources — an outage does not remove a source.
+- **`node src/freeze-season.mjs`: nothing to freeze.** No `seasonVerified` moved this run because
+  nothing was re-verified; it printed "8 source/bracket pairs still describe the live season" and did
+  not rewrite the archive.
+- **Manifest deliberately NOT rewritten** (partial run, per local-run SKILL.md step 3). Unusually,
+  `check-refresh --manifest` still **passed** rather than failing on the expected `startedAt … is Nh
+  old` line: the nightly's own `startedAt` (13:50Z) was ~4.3h old at gate time, inside the ≤12h
+  bound. The degraded set it printed is entirely the standing one — 9 archon rows, the wowmeta
+  standing red, the two wcl-live aggregates, murlok's source-date lag.
+
 ## 2026-09-06 (nightly) — 240/240 rows re-parsed, ZERO letters moved; Archon walled night 16
 
 - **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 240 rows, 0 unmatched, 0 letters moved.** Per-page
@@ -810,21 +843,3 @@ Snapshots advanced to 2026-08-26 for the three verified sources (14 page entries
 where they were, because nothing was fetched.
 
 
-## 2026-08-25 (local, evening) — ARCHON'S RAID LETTER BASIS MOVES TO HEROIC (owner decision); 26 of 40 letters re-rated, CONSENSUS_VERSION 5 → 6
-
-- **This is a BASIS change, not spec movement, and the version bump is what says so.**
-  Riley switched `ratings.raid.archon` from the Mythic throughput list to the HEROIC one
-  while Mythic is sparse: Heroic carries ~170x the parses (470k vs ~2,950 DPS), covers all
-  27 DPS specs — closing the Fire Mage null with a real letter (B, 1,215 parses) — and has
-  zero rows under the rank floor, where Mythic had six specs under 10 parses and rank
-  agreement with Heroic of only rho 0.54–0.71 (Frost Mage: Mythic #1 on n=5, Heroic #20
-  on 14k+). 26 letters moved on landing; the v6 bump makes `pickBaseline` refuse the
-  cross-version comparison, so the strip reads "baseline established" instead of arrows.
-- **The registry is the authority on which pages feed letters**: the three main raid pages
-  now point at `.../raid/heroic/all-bosses` (seasonVerified s2 — the pages self-describe
-  12.1/The Venomous Abyss with the nine S2 bosses). The Mythic pages stayed registered as
-  labeled `ancillary: true` entries — they feed the "(Mythic)" numeric families and
-  survivability, never letters. Same __NEXT_DATA__ parse either way.
-- **Switch-back trigger, recorded in the archon methodology text**: Mythic 27/27 DPS with
-  healthy samples → reviewed registry edit back to the Mythic URLs + its own
-  CONSENSUS_VERSION bump. Do not switch back silently mid-run.
