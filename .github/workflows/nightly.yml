@@ -58,6 +58,16 @@ on:
           claude-fable-5 or claude-sonnet-5). Scheduled runs always use the default.
         required: false
         default: "claude-opus-5"
+      transcript_state_initialize:
+        description: "First installation only: initialize transcript usage state if no prior artifact exists. Never use to reset known request history."
+        type: boolean
+        required: false
+        default: false
+      transcript_retry_ids:
+        description: "Reviewed YouTube IDs to retry after uncertain requests (comma-separated). May consume requests again; usage history is preserved."
+        type: string
+        required: false
+        default: ""
 
 concurrency:
   group: nightly-refresh
@@ -69,6 +79,7 @@ jobs:
     timeout-minutes: 110   # 90 left the recovery path ~6 min of headroom (audit A7)
     permissions:
       contents: read # the agent job holds NO write scopes — publication happens in `publish`
+      actions: read # restore the last pre-agent transcript usage/cache artifact
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -143,10 +154,59 @@ jobs:
       # agent-maintained data/pending-transcripts.json queue into transcript-fetch/
       # for the agents to distill. A missing secret is a CLEAN skip (verdict
       # no-credentials) — the lane activates the run after the owner adds the secret.
+      - name: Locate durable transcript usage and retry state
+        id: transcript_state
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TRANSCRIPT_STATE_ALLOW_INITIALIZE: ${{ inputs.transcript_state_initialize == true }}
+        run: node src/restore-transcript-state.mjs
+
+      - name: Restore last transcript reservation or completed state
+        if: steps.transcript_state.outputs.found == 'true'
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ steps.transcript_state.outputs.artifact_id }}
+          run-id: ${{ steps.transcript_state.outputs.run_id }}
+          github-token: ${{ github.token }}
+          path: transcript-fetch/
+
+      - name: Reserve the bounded transcript request batch
+        env:
+          TRANSCRIPT_STATE_INITIALIZE: ${{ steps.transcript_state.outputs.initialize }}
+          TRANSCRIPT_REQUEST_BUDGET: ${{ vars.TRANSCRIPT_REQUEST_BUDGET }}
+          TRANSCRIPT_RETRY_IDS: ${{ inputs.transcript_retry_ids }}
+        run: node src/fetch-transcripts.mjs --prepare
+
+      - name: Save transcript reservation before requests
+        id: transcript_reserved
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: transcript-state-reserved
+          path: |
+            transcript-fetch/state.json
+            transcript-fetch/plan.json
+            transcript-fetch/summary.json
+          retention-days: 90
+          if-no-files-found: error
+          overwrite: true
+
       - name: Deterministic transcript fetch (only step with the transcript API key)
         env:
           TRANSCRIPT_API_KEY: ${{ secrets.TRANSCRIPT_API_KEY }}
-        run: node src/fetch-transcripts.mjs
+        run: node src/fetch-transcripts.mjs --fetch
+
+      - name: Save transcript outcomes before the agents run
+        if: always() && steps.transcript_reserved.outcome == 'success'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: transcript-state-complete
+          path: |
+            transcript-fetch/state.json
+            transcript-fetch/plan.json
+            transcript-fetch/summary.json
+          retention-days: 90
+          if-no-files-found: error
+          overwrite: true
 
       # Deterministic published-date evidence (docs/published-gate-scope.md): reads each
       # published-bearing registry page and records what the page says about its OWN
@@ -235,6 +295,8 @@ jobs:
             as unreachable: no verified exact aggregate endpoint exists. New series
             cannot green the historical aggregate requirements. rdps is FFXIV-only;
             its failure is not a WoW outage. Closed PTR52/54/56 rows remain untouched.
+            data/wcl-coverage.json is a sanitized deterministic receipt. Do not edit it;
+            the independent gate checks it against the trusted collection artifact.
             Run node src/check-wcl-metrics.mjs --manifest data/run-manifest.json.
             Publication verifies exact canonical rows against the separate trusted
             pre-agent artifact. Surface no-credentials/oauth-failed/merge-failed.

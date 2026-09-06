@@ -449,6 +449,24 @@ test("gearing structural receipts never hide drift or claim future verification"
   assert.ok(future.violations.some(v=>v.includes("check date is in the future")));
 });
 
+test("weekly source verification alerts on missed runs, changed facts, errors and future receipts", () => {
+  const cfg = { ...config, gearing: { datasets: [
+    { key: "gearing-tier", file: "tier-items.json", dateField: "harvestedAt", maxAgeDays: 30 }
+  ], verification: { maxAgeDays: 9, groups: ["tierBonuses"] } } };
+  const state = { present: true, dates: { "tier-items.json": "2026-08-10" },
+    verification: { groups: { tierBonuses: { status: "verified", reason: "Matches reviewed source", lastVerifiedAt: "2026-08-14T12:00:00.000Z" } } } };
+  assert.ok(!checkFreshness(cfg, goodManifest(), freshData(), "2026-08-15", state).fingerprint.includes("gearing"));
+  for (const stamp of ["2026-08-01T12:00:00.000Z", "2026-08-16T12:00:00.000Z", "invalid", null]) {
+    const changed = structuredClone(state); changed.verification.groups.tierBonuses.lastVerifiedAt = stamp;
+    assert.ok(checkFreshness(cfg, goodManifest(), freshData(), "2026-08-15", changed).fingerprint.includes("gearing-verify-tierBonuses"));
+  }
+  for (const changed of [
+    { ...state, verification: null },
+    { ...state, verificationError: "Published facts changed" },
+    { ...state, verification: { groups: { tierBonuses: { ...state.verification.groups.tierBonuses, status: "review-required" } } } },
+  ]) assert.ok(checkFreshness(cfg, goodManifest(), freshData(), "2026-08-15", changed).fingerprint.includes("gearing-verify-tierBonuses"));
+});
+
 test("a newer history snapshot counts as proof of life (local refreshes count), date-grained", () => {
   const data = { ...freshData(), historySnapshots: [{ date: "2026-07-15" }] };
   const r = checkFreshness(config, null, data, "2026-07-15T23:00:00Z");

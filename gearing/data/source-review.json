@@ -1,0 +1,736 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-09-06T19:13:04.118Z",
+  "note": "Reviewed 80 current bonus tooltips against Aug18 archived item text: ten changed bonuses are already reflected in curated tracker facts, including the explicit Demonology official-note conflict and dated Retribution coefficients. Catalyst guide, currency3465 and achievement62872 corroborate the stored eligibility, cadence, cap and criteria; preview-dependent sockets and reward-level tables remain outside this verification.",
+  "tierBonuses": {
+    "inputDigest": "ed39ec19eafb5953d373231ceceffa088bc57b18947bc8b70da3de194094926d",
+    "digest": "579bf9bac02759808af7a84d530db7dfc2fae8b4d2146f90409d1b6bbb68f85c",
+    "verifiedAt": "2026-09-06T19:08:18.060Z",
+    "sources": [
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271474?locale=0",
+        "value": [
+          {
+            "class": "Death Knight",
+            "spec": "Blood",
+            "pieces": 2,
+            "specId": "250",
+            "spell": "1296650",
+            "text": "When you Death Strike, gain a stack of Blood Debt, increasing Strength by 0.5%, up to 5.0%. When Blood Debt reaches 10 stacks, your next Marrowrend consumes it granting 10% Strength for 10 sec. (250ms cooldown)"
+          },
+          {
+            "class": "Death Knight",
+            "spec": "Blood",
+            "pieces": 4,
+            "specId": "250",
+            "spell": "1296651",
+            "text": "When consuming Blood Debt, your next Marrowrend generates 3 additional Boneshield and deals (900% of Attack Power) Shadow damage to your target and (600% of Attack Power) to nearby enemies."
+          },
+          {
+            "class": "Death Knight",
+            "spec": "Frost",
+            "pieces": 2,
+            "specId": "251",
+            "spell": "1296652",
+            "text": "Each time Remorseless Winter damages at least 1 enemy, gain Freezing Tempest which grants 1% attack speed and 2% increased Icy Death Torrent damage for 5 sec, stacking. (100ms cooldown)"
+          },
+          {
+            "class": "Death Knight",
+            "spec": "Frost",
+            "pieces": 4,
+            "specId": "251",
+            "spell": "1296653",
+            "text": "Remorseless Winter deals damage 25% more frequently, and Freezing Tempest lasts 5 sec longer."
+          },
+          {
+            "class": "Death Knight",
+            "spec": "Unholy",
+            "pieces": 2,
+            "specId": "252",
+            "spell": "1296654",
+            "text": "Your Magus of the Dead and Lord of the Dead cast a more powerful Necrotic Bolt instead of Frostbolt, and Withering Grasp instead of Shadow Bolt."
+          },
+          {
+            "class": "Death Knight",
+            "spec": "Unholy",
+            "pieces": 4,
+            "specId": "252",
+            "spell": "1296655",
+            "text": "Necrotic Bolt's damage is increased by 130%, and Withering Grasp's damage is increased by 130%, against enemies below 35% health."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271537?locale=0",
+        "value": [
+          {
+            "class": "Demon Hunter",
+            "spec": "Devourer",
+            "pieces": 2,
+            "specId": "1480",
+            "spell": "1296615",
+            "text": "Harvesting 4 or more Soul Fragments with Reap has a 20% chance to cause your next Consume to be instant cast and explode in a Soulburst, dealing (600% of Spell Power) Cosmic damage to nearby enemies."
+          },
+          {
+            "class": "Demon Hunter",
+            "spec": "Devourer",
+            "pieces": 4,
+            "specId": "1480",
+            "spell": "1296616",
+            "text": "Soulburst generates 2 Soul Fragments and grants Moment of Craving. Reap deals 10% increased damage."
+          },
+          {
+            "class": "Demon Hunter",
+            "spec": "Havoc",
+            "pieces": 2,
+            "specId": "577",
+            "spell": "1296611",
+            "text": "Blade Dance, Chaos Strike, and Essence Break have 12% increased damage."
+          },
+          {
+            "class": "Demon Hunter",
+            "spec": "Havoc",
+            "pieces": 4,
+            "specId": "577",
+            "spell": "1296612",
+            "text": "Essence Break now applies and benefits from the effects of Cycle of Hatred, has 35% increased initial strike damage, and has 2.0 sec increased duration."
+          },
+          {
+            "class": "Demon Hunter",
+            "spec": "Vengeance",
+            "pieces": 2,
+            "specId": "581",
+            "spell": "1296613",
+            "text": "Sigil of Flame's damage over time is increased by 50%. Soul Cleave increases the duration of Sigil of Flame on your primary target by 2.0 sec."
+          },
+          {
+            "class": "Demon Hunter",
+            "spec": "Vengeance",
+            "pieces": 4,
+            "specId": "581",
+            "spell": "1296614",
+            "text": "Immolation Aura and Sigil of Spite have 100% increased damage against targets affected by your Sigil of Flame."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271528?locale=0",
+        "value": [
+          {
+            "class": "Druid",
+            "spec": "Balance",
+            "pieces": 2,
+            "specId": "102",
+            "spell": "1296603",
+            "text": "Starsurge damage increased by 20%. Starfall also deals (30.4% of Spell Power) Astral damage instantly to all valid enemies in range when cast."
+          },
+          {
+            "class": "Druid",
+            "spec": "Balance",
+            "pieces": 4,
+            "specId": "102",
+            "spell": "1296604",
+            "text": "Your damage is increased by 10% while in any Eclipse. This bonus wanes to 2% at the midpoint of the Eclipse, then waxes back to 10% at the end. (100ms cooldown)"
+          },
+          {
+            "class": "Druid",
+            "spec": "Feral",
+            "pieces": 2,
+            "specId": "103",
+            "spell": "1296605",
+            "text": "When [ Incarnation: Avatar of Ashamane / Berserk] ends, you deal 10% increased damage for [ Incarnation: Avatar of Ashamane : 0.75 ] sec for each combo point spent during [ Incarnation: Avatar of Ashamane / Berserk]. (100ms cooldown)"
+          },
+          {
+            "class": "Druid",
+            "spec": "Feral",
+            "pieces": 4,
+            "specId": "103",
+            "spell": "1296606",
+            "text": "[ Incarnation: Avatar of Ashamane / Berserk] lasts 10 sec longer."
+          },
+          {
+            "class": "Druid",
+            "spec": "Guardian",
+            "pieces": 2,
+            "specId": "104",
+            "spell": "1296607",
+            "text": "Thrash has a 20% chance to make your next Mangle deal 100% increased damage."
+          },
+          {
+            "class": "Druid",
+            "spec": "Guardian",
+            "pieces": 4,
+            "specId": "104",
+            "spell": "1296608",
+            "text": "Thrash calls up 3 thorns, each impaling a target for (54% of Attack Power) Nature damage and dealing (27% of Attack Power) additional Nature damage to up to 5 nearby enemies, and extends the duration of [ Incarnation: Guardian of Ursoc / Berserk] by 0.5 sec, up to 5.0 sec."
+          },
+          {
+            "class": "Druid",
+            "spec": "Restoration",
+            "pieces": 2,
+            "specId": "105",
+            "spell": "1296609",
+            "text": "Rejuvenation has a 15% chance to grant Genesis, causing all your heal over time effects to heal for 15% more for 8 sec. Multiple applications may overlap. (Proc chance: 15%, 100ms cooldown)"
+          },
+          {
+            "class": "Druid",
+            "spec": "Restoration",
+            "pieces": 4,
+            "specId": "105",
+            "spell": "1296610",
+            "text": "Nature's Swiftness, Tranquility, and [ Incarnation: Tree of Life / Convoke the Spirits] have a 100% chance to grant Genesis, and Genesis duration is increased by 8 sec."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271501?locale=0",
+        "value": [
+          {
+            "class": "Evoker",
+            "spec": "Augmentation",
+            "pieces": 2,
+            "specId": "1473",
+            "spell": "1296637",
+            "text": "Upheaval's cooldown is reduced by 10 sec."
+          },
+          {
+            "class": "Evoker",
+            "spec": "Augmentation",
+            "pieces": 4,
+            "specId": "1473",
+            "spell": "1296638",
+            "text": "Upheaval magnifies your Fate Mirror effects for 8 sec, increasing the amount of damage echoed to 45%."
+          },
+          {
+            "class": "Evoker",
+            "spec": "Devastation",
+            "pieces": 2,
+            "specId": "1467",
+            "spell": "1296639",
+            "text": "Shattering Star's damage is increased by 50%, and it always casts as if you had reached maximum empower level."
+          },
+          {
+            "class": "Evoker",
+            "spec": "Devastation",
+            "pieces": 4,
+            "specId": "1467",
+            "spell": "1296640",
+            "text": "Causality reduces the remaining cooldown of your empower spells by an additional 0.1 sec each time the effect occurs. Eternity Surge deals 10% increased damage."
+          },
+          {
+            "class": "Evoker",
+            "spec": "Preservation",
+            "pieces": 2,
+            "specId": "1468",
+            "spell": "1296641",
+            "text": "Consuming Essence Burst sends forth a Living Flame at your target at 100% effectiveness, or a nearby injured target if they are full health."
+          },
+          {
+            "class": "Evoker",
+            "spec": "Preservation",
+            "pieces": 4,
+            "specId": "1468",
+            "spell": "1296642",
+            "text": "Green spells restore 5% more health, and Verdant Embrace has a 100% chance to grant Essence Burst."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271492?locale=0",
+        "value": [
+          {
+            "class": "Hunter",
+            "spec": "Beast Mastery",
+            "pieces": 2,
+            "specId": "253",
+            "spell": "1296631",
+            "text": "Barbed Shot causes your pets to stomp one additional time at 50% effectiveness."
+          },
+          {
+            "class": "Hunter",
+            "spec": "Beast Mastery",
+            "pieces": 4,
+            "specId": "253",
+            "spell": "1296632",
+            "text": "Stomp causes your next Cobra Shot to either benefit from Beast Cleave at 30% effectiveness, or strike your primary target for 20% additional damage, stacking up to 4 times."
+          },
+          {
+            "class": "Hunter",
+            "spec": "Marksmanship",
+            "pieces": 2,
+            "specId": "254",
+            "spell": "1296633",
+            "text": "Explosive Shot lasts 1.0 sec longer and deals 5% increased damage."
+          },
+          {
+            "class": "Hunter",
+            "spec": "Marksmanship",
+            "pieces": 4,
+            "specId": "254",
+            "spell": "1296634",
+            "text": "Aimed Shot and Rapid Fire damage increased by 5%. Each time Explosive Shot causes a burst of damage, the cooldown of Aimed Shot and Rapid Fire is reduced by 0.5 sec."
+          },
+          {
+            "class": "Hunter",
+            "spec": "Survival",
+            "pieces": 2,
+            "specId": "255",
+            "spell": "1296636",
+            "text": "Mongoose Fury also increases the damage of Wildfire Bomb by 10%"
+          },
+          {
+            "class": "Hunter",
+            "spec": "Survival",
+            "pieces": 4,
+            "specId": "255",
+            "spell": "1296635",
+            "text": "Each blast of Boomstick extends the duration of Mongoose Fury by 1.0 sec. Mongoose Fury effects are increased by 10%."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271564?locale=0",
+        "value": [
+          {
+            "class": "Mage",
+            "spec": "Arcane",
+            "pieces": 2,
+            "specId": "62",
+            "spell": "1296581",
+            "text": "Arcane Missiles fires 1 additional Missile and deals 5% increased damage."
+          },
+          {
+            "class": "Mage",
+            "spec": "Arcane",
+            "pieces": 4,
+            "specId": "62",
+            "spell": "1296582",
+            "text": "Each wave of Arcane Missiles increases the damage of your next Arcane Blast, Arcane Pulse, or Prismatic Bolt by 3%, up to 24%."
+          },
+          {
+            "class": "Mage",
+            "spec": "Fire",
+            "pieces": 2,
+            "specId": "63",
+            "spell": "1296583",
+            "text": "Pyroclasm causes Flamestrike and Pyroblast to always critically strike."
+          },
+          {
+            "class": "Mage",
+            "spec": "Fire",
+            "pieces": 4,
+            "specId": "63",
+            "spell": "1296584",
+            "text": "Pyroclasm reduces the cast time of Flamestrike and Pyroblast by 20% and its damage bonus is increased by 25%."
+          },
+          {
+            "class": "Mage",
+            "spec": "Frost",
+            "pieces": 2,
+            "specId": "64",
+            "spell": "1296585",
+            "text": "Each stack of Freezing Shattered has a 4% chance to generate an Icicle. Glacial Spike damage increased by 20%."
+          },
+          {
+            "class": "Mage",
+            "spec": "Frost",
+            "pieces": 4,
+            "specId": "64",
+            "spell": "1296586",
+            "text": "Casting Glacial Spike has a chance to rapidly generate 5 Icicles over 1 sec. Shatter damage increased by 5%."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271519?locale=0",
+        "value": [
+          {
+            "class": "Monk",
+            "spec": "Brewmaster",
+            "pieces": 2,
+            "specId": "268",
+            "spell": "1296617",
+            "text": "Breath of Fire ignites your next Keg Smash, causing it to explode on contact, dealing (50% of Attack Power) additional Flamestrike damage to its primary target and reduced damage to additional targets."
+          },
+          {
+            "class": "Monk",
+            "spec": "Brewmaster",
+            "pieces": 4,
+            "specId": "268",
+            "spell": "1296618",
+            "text": "Ignited Keg Smashes cause enemies struck to take 8% increased damage from your Physical abilities, and leave a patch of flames on the ground, dealing (25% of Attack Power) Fire damage each second for 5 sec."
+          },
+          {
+            "class": "Monk",
+            "spec": "Mistweaver",
+            "pieces": 2,
+            "specId": "270",
+            "spell": "1296619",
+            "text": "Rising Sun Kick deals 30% increased damage and Rushing Wind Kick's healing is increased by 100%."
+          },
+          {
+            "class": "Monk",
+            "spec": "Mistweaver",
+            "pieces": 4,
+            "specId": "270",
+            "spell": "1296620",
+            "text": "Rising Sun Kick and Rushing Wind Kick have a chance to cause their next cast to ignore their cooldown and reduce their mana cost by 100%. (250ms cooldown)"
+          },
+          {
+            "class": "Monk",
+            "spec": "Windwalker",
+            "pieces": 2,
+            "specId": "269",
+            "spell": "1296621",
+            "text": "Fists of Fury strikes an additional time at the start of its channel at 50% effectiveness."
+          },
+          {
+            "class": "Monk",
+            "spec": "Windwalker",
+            "pieces": 4,
+            "specId": "269",
+            "spell": "1296624",
+            "text": "Fists of Fury increases the damage of your next Rising Sun Kick by 10% or Spinning Crane Kick by 20% each time it strikes, stacking up to 6 times. (100ms cooldown)"
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271465?locale=0",
+        "value": [
+          {
+            "class": "Paladin",
+            "spec": "Holy",
+            "pieces": 2,
+            "specId": "65",
+            "spell": "1296656",
+            "text": "Infusion of Light increases the healing of Flash of Light by an additional 100% and the absorb from Greater Judgment by an additional 100%."
+          },
+          {
+            "class": "Paladin",
+            "spec": "Holy",
+            "pieces": 4,
+            "specId": "65",
+            "spell": "1296657",
+            "text": "Judgment now has a 20% chance to grant Infusion of Light. Holy Light now has a 100% chance to grant Infusion of Light, but its mana cost is increased by 50%."
+          },
+          {
+            "class": "Paladin",
+            "spec": "Protection",
+            "pieces": 2,
+            "specId": "66",
+            "spell": "1296658",
+            "text": "Consecration is 30% larger and enemies within your Consecration are illuminated, increasing the chance for your abilities to critically strike them by 5%."
+          },
+          {
+            "class": "Paladin",
+            "spec": "Protection",
+            "pieces": 4,
+            "specId": "66",
+            "spell": "1296659",
+            "text": "Enemies struck by Judgment or [ Blessed Hammer ] [ Hammer of the Righteous / Crusader Strike ] take 20% additional Holy damage. If they are struck by a critical strike the additional damage is increased by 100%."
+          },
+          {
+            "class": "Paladin",
+            "spec": "Retribution",
+            "pieces": 2,
+            "specId": "70",
+            "spell": "1296660",
+            "text": "Divine Purpose has an additional 10% chance to activate, and consuming it grants Divine Power, increasing Holy damage done by 10% for 12 sec."
+          },
+          {
+            "class": "Paladin",
+            "spec": "Retribution",
+            "pieces": 4,
+            "specId": "70",
+            "spell": "1296661",
+            "text": "Consuming Divine Purpose grants Divine Arbiter, empowering your other Holy Power spenders to unleash an arbiter of light at their primary target, dealing (1012.5% of Attack Power) Holy damage and (472.5% of Attack Power) Holy damage to enemies within 8 yds. Cannot occur while Divine Arbiter is active."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271555?locale=0",
+        "value": [
+          {
+            "class": "Priest",
+            "spec": "Discipline",
+            "pieces": 2,
+            "specId": "256",
+            "spell": "1296577",
+            "text": "Penance damage and healing increased by 20%. Casting Penance reduces the cooldown of Mind Blast by 2.0 sec."
+          },
+          {
+            "class": "Priest",
+            "spec": "Discipline",
+            "pieces": 4,
+            "specId": "256",
+            "spell": "1296578",
+            "text": "After casting Mind Blast, your next Power Word: Shield or Void Shield absorbs 25% more damage."
+          },
+          {
+            "class": "Priest",
+            "spec": "Holy",
+            "pieces": 2,
+            "specId": "257",
+            "spell": "1296575",
+            "text": "Each target affected by your Renew increases the critical strike chance of your spells and abilities by 2%, up to 6%."
+          },
+          {
+            "class": "Priest",
+            "spec": "Holy",
+            "pieces": 4,
+            "specId": "257",
+            "spell": "1296576",
+            "text": "Renew healing increased by 10%. Light's Resurgence now has a 100% chance to leave a Renew on the first target Prayer of Mending heals."
+          },
+          {
+            "class": "Priest",
+            "spec": "Shadow",
+            "pieces": 2,
+            "specId": "258",
+            "spell": "1296579",
+            "text": "Tentacle Slam's cooldown is reduced by 3 sec and its damage is increased by 100%."
+          },
+          {
+            "class": "Priest",
+            "spec": "Shadow",
+            "pieces": 4,
+            "specId": "258",
+            "spell": "1296580",
+            "text": "Tentacle Slam has a 100% chance to grant a free use of Void Volley at 100% effectiveness."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271510?locale=0",
+        "value": [
+          {
+            "class": "Rogue",
+            "spec": "Assassination",
+            "pieces": 2,
+            "specId": "259",
+            "spell": "1296590",
+            "text": "Envenom damage increased by 10% and it increases your damage dealt by 3%."
+          },
+          {
+            "class": "Rogue",
+            "spec": "Assassination",
+            "pieces": 4,
+            "specId": "259",
+            "spell": "1296591",
+            "text": "Deadly Poison increases your bleed damage on the target by 10%. Auto-attacks to targets with your Amplifying Poison deal 3% increased damage per stack. Wound Poison hits a second time."
+          },
+          {
+            "class": "Rogue",
+            "spec": "Outlaw",
+            "pieces": 2,
+            "specId": "260",
+            "spell": "1296588",
+            "text": "Dispatch damage increased by 15%."
+          },
+          {
+            "class": "Rogue",
+            "spec": "Outlaw",
+            "pieces": 4,
+            "specId": "260",
+            "spell": "1296589",
+            "text": "Sinister Strike and Ambush have a 20% chance to cause your next Dispatch to be free and deal damage as if you spent the maximum combo points. (100ms cooldown)"
+          },
+          {
+            "class": "Rogue",
+            "spec": "Subtlety",
+            "pieces": 2,
+            "specId": "261",
+            "spell": "1296592",
+            "text": "Backstab costs 10 less Energy and has 100% increased damage. Shuriken Storm costs 5 less Energy and has 60% increased damage."
+          },
+          {
+            "class": "Rogue",
+            "spec": "Subtlety",
+            "pieces": 4,
+            "specId": "261",
+            "spell": "1296593",
+            "text": "Lingering Shadow now also benefits Eviscerate and Black Powder at 60% effectiveness."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271483?locale=0",
+        "value": [
+          {
+            "class": "Shaman",
+            "spec": "Elemental",
+            "pieces": 2,
+            "specId": "262",
+            "spell": "1296625",
+            "text": "Earth Shock, Earthquake, and Elemental Blast damage increased by 25%."
+          },
+          {
+            "class": "Shaman",
+            "spec": "Elemental",
+            "pieces": 4,
+            "specId": "262",
+            "spell": "1296626",
+            "text": "When Stormkeeper or Ascendance fade, your next 2 Lightning Bolts , Chain Lightnings , or Lava Bursts deal 25% increased damage and cause your next Earthquake, Earth Shock, or Elemental Blast to cost 100% less Maelstrom."
+          },
+          {
+            "class": "Shaman",
+            "spec": "Enhancement",
+            "pieces": 2,
+            "specId": "263",
+            "spell": "1296627",
+            "text": "Voltaic Blaze causes your primary target to erupt in a Fire Nova every 2 sec for 6 sec. Fire Nova deals 200% increased damage to the primary target of your Voltaic Blaze."
+          },
+          {
+            "class": "Shaman",
+            "spec": "Enhancement",
+            "pieces": 4,
+            "specId": "263",
+            "spell": "1296628",
+            "text": "Fire Nova reduces the cooldown of Crash Lightning by 2.0 sec and increases the damage of your next Crash Lightning by 8%, stacking up to 5 times."
+          },
+          {
+            "class": "Shaman",
+            "spec": "Restoration",
+            "pieces": 2,
+            "specId": "264",
+            "spell": "1296629",
+            "text": "Healing Wave and Chain Heal have a chance to create a Healing Rain at the target's location for 8.0 sec."
+          },
+          {
+            "class": "Shaman",
+            "spec": "Restoration",
+            "pieces": 4,
+            "specId": "264",
+            "spell": "1296630",
+            "text": "Every 1 sec, 1 ally inside of Healing Rain gains a watery shield that absorbs 0 damage for 10 sec."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271546?locale=0",
+        "value": [
+          {
+            "class": "Warlock",
+            "spec": "Affliction",
+            "pieces": 2,
+            "specId": "265",
+            "spell": "1296568",
+            "text": "[ Wither / Corruption] damage increased by 25%. Agony damage increased by 15%."
+          },
+          {
+            "class": "Warlock",
+            "spec": "Affliction",
+            "pieces": 4,
+            "specId": "265",
+            "spell": "1296569",
+            "text": "Each active Unstable Affliction increases your damage dealt by your spells and abilities by 2%, up to 6%. Seed of Corruption applies Unstable Affliction at 20% effectiveness to your target."
+          },
+          {
+            "class": "Warlock",
+            "spec": "Demonology",
+            "pieces": 2,
+            "specId": "266",
+            "spell": "1296573",
+            "text": "Wild Imp damage increased by 10%. Implosion damage increased by 20%."
+          },
+          {
+            "class": "Warlock",
+            "spec": "Demonology",
+            "pieces": 4,
+            "specId": "266",
+            "spell": "1296574",
+            "text": "When their energy depletes, Wild Imps have a 20% chance to fling themselves at their target and Implode at 350% effectiveness to their main target and 315% effectiveness to other targets."
+          },
+          {
+            "class": "Warlock",
+            "spec": "Destruction",
+            "pieces": 2,
+            "specId": "267",
+            "spell": "1296571",
+            "text": "Incinerate damage increased by 25% and Incinerate has a 10% increased chance to evoke an Echo of Sargeras."
+          },
+          {
+            "class": "Warlock",
+            "spec": "Destruction",
+            "pieces": 4,
+            "specId": "267",
+            "spell": "1296572",
+            "text": "Targets damaged by Echo of Sargeras take 6% increased damage from your spells and abilities for 6 sec."
+          }
+        ]
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/item/271456?locale=0",
+        "value": [
+          {
+            "class": "Warrior",
+            "spec": "Arms",
+            "pieces": 2,
+            "specId": "71",
+            "spell": "1296643",
+            "text": "Mortal Strike and Execute damage increased by 10% and when you Slam a target, Slam also deals (100% of Attack Power) damage to enemies within 8 yds of it. Deals reduced damage beyond 5 targets."
+          },
+          {
+            "class": "Warrior",
+            "spec": "Arms",
+            "pieces": 4,
+            "specId": "71",
+            "spell": "1296644",
+            "text": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 20%, stacking up to 5 times. (500ms cooldown)"
+          },
+          {
+            "class": "Warrior",
+            "spec": "Fury",
+            "pieces": 2,
+            "specId": "72",
+            "spell": "1296645",
+            "text": "Raging Blow damage increased by 15%. During Recklessness Raging Blow extends the duration of Recklessness by 2 sec, up to 6 sec."
+          },
+          {
+            "class": "Warrior",
+            "spec": "Fury",
+            "pieces": 4,
+            "specId": "72",
+            "spell": "1296646",
+            "text": "Bloodthirst damage increased by 10%. During Recklessness Bloodthirst increases the critical strike bonus of Recklessness by 3%, up to 6%."
+          },
+          {
+            "class": "Warrior",
+            "spec": "Protection",
+            "pieces": 2,
+            "specId": "73",
+            "spell": "1296647",
+            "text": "Your free Revenges deal 15% additional damage and cause your next Shield Slam to deal 20% additional damage."
+          },
+          {
+            "class": "Warrior",
+            "spec": "Protection",
+            "pieces": 4,
+            "specId": "73",
+            "spell": "1296648",
+            "text": "Ravager and your free Revenges cause all targets to bleed for (304.745% of Attack Power) damage over 12 sec. Ravager's cooldown is reduced by 30 sec."
+          }
+        ]
+      }
+    ]
+  },
+  "catalystRules": {
+    "inputDigest": "7e4886a948651e13d7b09d1e4fe5dbaf8e46f243a42edd1a3f81ef3b58839b2d",
+    "digest": "6472ac55d7159f4b0e5fc2bc85d5e80fb50b79077ff1cc1697c5e2eb5315b71c",
+    "verifiedAt": "2026-09-06T19:08:18.060Z",
+    "sources": [
+      {
+        "url": "https://www.wowhead.com/guide/midnight/matrix-catalyst-crafting-tier-set",
+        "value": "The Matrix Catalyst is a powerful in-game system that converts non-tier set armor pieces into tier set armor pieces of the same type. Learn everything you need to know about the Matrix Catalyst in the Midnight expansion, including its location, how to use it, earning catalyst charges, and more. In Patch 12.1, Catalyzed Class set armor now inherits the secondary stats and any cantrip effects from the original converted item. The Matrix Catalyst Location in Midnight There are two Matrix Catalysts in . The neutral one is located near the Sanctum of Light, and the Horde one is in the Court of Blood. The map below shows the locations of the Catalysts, including waypoint coordinates for easy navigation. /way #2393 40.6 64.6 Matrix Catalyst /way #2393 70.0 83.3 Horde Matrix Catalyst Neutral Matrix Catalyst Horde Matrix Catalyst Obtaining Catalyst Charges in Midnight For the second season of Midnight, the Catalyst uses . Converting a piece of armor into Tier Set armor costs players one Venomblight Manaflux. Players earn their first Catalyst charge at the start of Midnight: Season 2, and gain an additional Catalyst charge every two weeks . While players passively earn Catalyst charges every two weeks, two achievements allow players to earn additional Catalyst charges. With every season, there's an achievement that awards an extra Catalyst charge upon completion. To earn , players must complete one of the following: Attain 1600 Rating in Rated PvP Attain 2000 Mythic+ Rating Defeat in The Venomous Abyss on Heroic or Mythic difficulty This achievement rewards a for players to spend at the Catalyst and can be earned per character. This achievement is especially useful at the start of a season for players looking to get their 4-set bonus quickly. is rewarded once a player has earned the 4-set bonus for their class. Earning the achievement allows Catalyst charges to begin dropping from additional end-game sources. Based on the tooltip for Venomblight Manaflux, Catalyst charges can be earned from the following activities: Mythic+ Dungeons Midnight Season 2 Raid Bosses Bountiful Delves Rated PvP Arenas and Battlegrounds How to Use the Matrix Catalyst in Midnight Here's how to use the Matrix Catalyst in Midnight, including armor prerequisites and navigating the Catalyst UI menu. When catalyzing armor, there are a few prerequisites that must be met: PvE armor pieces must be Veteran-track or higher. Honor, Conquest, and War Mode PvP gear can also be catalyzed. You must have at least one Catalyst charge available. The armor piece cannot be profession-crafted armor. Right-click on the Matrix Catalyst to open up the Catalyst interface. Drag any eligible armor piece from your bags into the green \"+\" or click the green \"+\" to see all your armor eligible for catalyzing. The Matrix Catalyst will show the new piece of armor in the right-side box. To proceed forward, click the red \"Transform\" button at the bottom right. A final confirmation will pop up asking if you want to proceed. Click \"Transform\" again, and you will receive your new piece of tier set armor. Note: Catalyzed armor will keep the secondary stats, tertiary stats, and cantrip effects of the original armor. Steps 1-3 listed above are done through this Catalyst UI menu. A final confirmation pops up to ensure you want to catalyze the selected piece of armor. Tier Set Armor Slots in Midnight When catalyzing armor, five armor slots contribute to your class set armor bonuses. With other armor slots, these armor pieces can still be transformed into other armor, but will not contribute towards tier set bonuses. Instead, the transformed armor will take the appearance of the Tier Set armor. In other words, catalyzing armor in these slots is mainly for transmog and cosmetic purposes. Eligible Tier Set Armor Slots Cosmetic Tier Set Armor Slots Helm Shoulder Hands Chest Legs Bracers Belts Boots Cloaks For a more extensive look at the tier set bonuses and appearances for Midnight: Season 2, check out our specialized guide below. Midnight Tier Sets: Season 2"
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/currency/3465?locale=0",
+        "value": "Venomblight Manaflux Charge the Catalyst with Venomblight Manaflux to imbue armor with incredible power. The resulting armor will inherit the secondary stats of the original equipment. Slowly accumulates every two weeks. Also earnable from the following activities after unlocking the Season 2 Catalyst Unbound Feat of Strength: - Mythic Keystone Dungeons - Midnight Season 2 Raid Bosses - Bountiful Delves - Rated PvP Arenas and Battlegrounds Total cap: 8"
+      },
+      {
+        "url": "https://nether.wowhead.com/tooltip/achievement/62872?locale=0",
+        "value": "Midnight Season 2: Serpent Scion Accomplished one of the following feats during Season 2 of Midnight on your current character: - 1600+ Rated PVP rating - Attained 2000+ Mythic Plus rating - Defeated Ula'tek in the Venomous Abyss on Heroic or Mythic difficulty Reward: Crystallized Venomblight Manaflux"
+      }
+    ]
+  }
+}

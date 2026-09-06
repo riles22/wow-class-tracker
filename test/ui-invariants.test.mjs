@@ -839,19 +839,112 @@ ui("Compare all shows each source's OWN letters and each role's OWN ranks", asyn
   assert.ok(checked > 100, `expected many tier cells verified, saw ${checked}`);
 
   // A rank shown against a spec must be that spec's rank in the family matching its ROLE.
-  const wcl = { DPS: "Median rDPS (Mythic, all bosses)", Tank: "Median rDPS (Mythic, all bosses, tank)",
-                Healer: "Median HPS (Mythic, all bosses)" };
+  const encounterId = await page.inputValue("#all-encounter");
   let rk = 0;
   for (const row of seen) {
     const shown = row.ranks["m:wcl"];
-    if (!shown || shown === "—" || shown === "·") continue;
+    if (!shown || !shown.match(/#\d+/)) continue;
     const spec = data.specs.find(s => s.spec === row.spec && s.class === row.cls);
-    const m = spec.metrics.find(x => x.bracket === "raid" && x.name === wcl[spec.role]);
-    assert.equal(shown.replace("#", ""), String(m.rank),
+    const m = spec.metrics.find(x => x.bracket === "raid" && x.sample?.kind === "leaderboard-entries" && String(x.sample.encounterId) === encounterId);
+    assert.equal(shown.match(/#(\d+)/)[1], String(m.rank),
       `${row.cls} ${row.spec}: WCL rank must come from the ${spec.role} family`);
     rk++;
   }
   assert.ok(rk > 20, `expected many rank cells verified, saw ${rk}`);
+});
+
+ui("current WCL comparisons select one encounter and keep historical aggregates optional", async page => {
+  const data=payload(), inventory=data.wclCoverage.encounters;
+  for(const width of [1440,390]){
+    await page.setViewportSize({width,height:1000});
+    await page.evaluate(()=>document.getElementById("allbtn").click());
+    assert.equal(await page.locator('#all-encounter option').count(),inventory.raid.length);
+    assert.equal(await page.locator('th[data-k="m:archivewcl"]').count(),0,"historical WCL is opt-in");
+    await page.click('#all-bkt [data-bkt="mplus"]');
+    assert.equal(await page.locator('#all-encounter option').count(),inventory.mplus.length);
+    const selected=inventory.mplus.at(-1);
+    await page.selectOption('#all-encounter',String(selected.id));
+    const cells=await page.$$eval('table.alltab tbody tr',rows=>{
+      const col=[...document.querySelectorAll('table.alltab thead tr:first-child th')].findIndex(h=>h.dataset.k==='m:wcl');
+      return rows.map(row=>({cls:row.dataset.cls,spec:row.dataset.spec,text:row.children[col].textContent}));
+    });
+    for(const cell of cells){
+      const spec=data.specs.find(s=>s.class===cell.cls && s.spec===cell.spec);
+      const metric=spec.metrics.find(m=>m.bracket==='mplus' && m.sample?.kind==='leaderboard-entries' && m.sample.encounterId===selected.id);
+      if(metric?.rank) assert.equal(cell.text.match(/#(\d+)/)?.[1],String(metric.rank));
+      assert.match(cell.text,/Checked .*UTC/);
+      if(metric) assert.match(cell.text,/Latest log .*UTC/);
+    }
+    assert.ok(new URLSearchParams((await page.evaluate(()=>location.hash)).slice(1)).get('ae')===String(selected.id),"selected encounter travels in the link");
+    const bounds=await page.locator('#all-encounter').boundingBox();
+    assert.ok(bounds.x>=0 && bounds.x+bounds.width<=width+1,`${width}px: encounter selector must fit on screen`);
+    await page.check('#all-archive');
+    assert.match(await page.locator('th[data-k="m:archivewcl"]').textContent(),/Historical/);
+    await page.uncheck('#all-archive');
+    await page.click('#all-bkt [data-bkt="raid"]');
+    await page.click('#all-close');
+  }
+  await page.evaluate(()=>{const pair=SPECS.filter(s=>s.role==='DPS').slice(0,2); pair.forEach(s=>toggleCompare(`${s.class}|${s.spec}`));});
+  await page.click('#cmp-go');
+  assert.equal(await page.locator('#cmp-raid option').count(),inventory.raid.length);
+  assert.equal(await page.locator('#cmp-mplus option').count(),inventory.mplus.length);
+  assert.equal(await page.locator('.cmp-table').getByText('Historical WCL raid aggregate',{exact:true}).count(),0);
+  await page.selectOption('#cmp-mplus',String(inventory.mplus.at(-1).id));
+  const compare=await page.locator('.cmp-table').textContent();
+  assert.match(compare,/leaderboard entries/);
+  assert.match(compare,/Latest log/);
+  assert.doesNotMatch(compare,/Live raid median|Live M\+ median/);
+  await page.check('#cmp-archive');
+  assert.equal(await page.locator('.cmp-table').getByText('Historical WCL raid aggregate',{exact:true}).count(),1);
+});
+
+ui("WCL coverage distinguishes insufficient logs, failed collection, and retained measurements", async page => {
+  const data=payload();
+  await page.click('#allbtn');
+  const sparse=data.wclCoverage.cuts.find(c=>c.status==='insufficient' && c.bracket==='raid');
+  assert.ok(sparse,'fixture has a verified sparse raid cut');
+  await page.selectOption('#all-encounter',String(sparse.encounterId));
+  assert.match(await page.locator('#all-ov .wcl-coverage:not(.wcl-legend) summary').textContent(),/insufficient logs/);
+  const success=data.wclCoverage.cuts.find(c=>c.status==='success' && c.bracket==='raid');
+  await page.evaluate(cut=>{
+    const current=DATA.wclCoverage.cuts.find(c=>c.class===cut.class && c.spec===cut.spec && c.bracket===cut.bracket && c.encounterId===cut.encounterId);
+    current.status='failed'; current.checkedAt=null; delete current.entries;
+  },success);
+  await page.selectOption('#all-encounter',String(success.encounterId));
+  const cell=await page.evaluate(cut=>{
+    const row=[...document.querySelectorAll('table.alltab tbody tr')].find(r=>r.dataset.cls===cut.class && r.dataset.spec===cut.spec);
+    const col=[...document.querySelectorAll('table.alltab thead tr:first-child th')].findIndex(h=>h.dataset.k==='m:wcl');
+    return row.children[col].textContent;
+  },success);
+  assert.match(cell,/Collection failed · historical data retained/);
+  assert.match(cell,/#\d+/,'the last verified sample remains visible');
+  assert.match(cell,/Last sample checked .*Latest log/,'a failed collection keeps the old sample check date explicitly labeled');
+  await page.evaluate(cut=>WCL_CUTS.delete(`${cut.class}|${cut.spec}|${cut.bracket}|${cut.encounterId}`),success);
+  await page.selectOption('#all-encounter',String(success.encounterId));
+  assert.match(await page.locator('#all-ov .wcl-coverage:not(.wcl-legend) summary').textContent(),/collection status unavailable/,
+    'a missing receipt never implies a verified current sample');
+});
+
+ui("the Ladder defaults to current WCL and keeps empty encounters selectable", async page => {
+  const data=payload();
+  await page.click('#ladderbtn');
+  assert.match(await page.locator('.lgrp .fopt[aria-pressed="true"]').getAttribute('data-key'),/Leaderboard/);
+  for(const bracket of ['raid','mplus']){
+    await page.click(`#ladder-bkt [data-bkt="${bracket}"]`);
+    const group=page.locator('.lgrp').filter({has:page.locator('.d-h').filter({hasText:'Current WCL'})});
+    assert.equal(await group.locator('button').count(),data.wclCoverage.encounters[bracket].length);
+    for(const encounter of data.wclCoverage.encounters[bracket]){
+      assert.equal(await group.getByRole('button',{name:`${encounter.name} · DPS`,exact:true}).count(),1);
+    }
+  }
+  const empty=data.wclCoverage.encounters.raid.find(encounter=>!data.specs.some(s=>s.role==='DPS' && s.metrics.some(m=>m.bracket==='raid' && m.sample?.encounterId===encounter.id)));
+  if(empty){
+    await page.click('#ladder-bkt [data-bkt="raid"]');
+    await page.getByRole('button',{name:`${empty.name} · DPS`,exact:true}).click();
+    assert.equal(await page.locator('#ladder-chart .ladderrow').count(),0);
+    assert.match(await page.locator('#ladder-chart').textContent(),/insufficient logs/);
+    assert.match(await page.locator('#ladder-chart').textContent(),/No usable leaderboard samples/);
+  }
 });
 
 ui("Compare all distinguishes 'no such measurement' from 'not fetched', and era-gates", async page => {

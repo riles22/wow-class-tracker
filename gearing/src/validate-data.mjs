@@ -27,8 +27,9 @@ const CATALYST_SOURCES = {
   serpentScionAchievement: "https://www.wowhead.com/achievement=62872/midnight-season-2-serpent-scion",
 };
 const TIER_OVERVIEW = "https://www.wowhead.com/guide/midnight/season-2-tier-set-bonus-appearance-overview";
-// Re-approved 2026-08-18: launch re-harvest (live tier ids, 316 items, Nymrissa delta).
-const CATALYST_ALLOCATION_DIGEST = "19f09c04e2b87b083661ad1e5546eb6617e350f61afd658db92b2b307a2c895a";
+// Re-reviewed 2026-09-06: nine current fingerprints, including three changed stat
+// allocations; all 316 IDs retained. docs/gearing-source-reconciliation-2026-09-06.md.
+const CATALYST_ALLOCATION_DIGEST = "4cbf37ffd4e7372a4a0af8747a6ebeb67e3c8f292cd7ea31961f7af991bb1652";
 const ITEM_PRIMARIES = new Set(["Agi", "Int", "Str", "Agi/Int", "Agi/Str", "Str/Int", "Any"]);
 const ARMOR_PRIMARY = { Cloth: "Int", Leather: "Agi/Int", Mail: "Agi/Int", Plate: "Str/Int" };
 const ARMOR_BY_CLASS = {

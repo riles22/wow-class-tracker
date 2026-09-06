@@ -19,6 +19,11 @@
     "maxTotalMoves": 25
   },
   "gearing": {
+    "verification": {
+      "maxAgeDays": 9,
+      "groups": ["tierBonuses", "catalystRules", "raid", "dungeons", "tier", "allocations"],
+      "comment": "Weekly independent source verification, bound to scoped published facts. Does not renew unverified reward ladders or replace the retained dataset dates below. Changed, unreachable, missing, or outdated verification remains visible."
+    },
     "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. A sibling of requirements[] so the tracker run-manifest does not claim external gearing harvests. Current guide sources are refreshed by the separate weekly gearing-refresh workflow; failed providers retain their published bytes and verification dates. The nightly deterministic publish stage checks and synchronizes local capabilities before Gate 1. Owner-approved 2026-09-05: gearing-specs measures a local structuralSync receipt, validated against full output and current input digests; it does not re-date external loot, weapon or rule evidence. The 12.0.7 stat baseline is historical fallback, no longer a live age-gated feed; checkSpecSync validates its retained contents and provenance, while current stat priorities remain age-gated under all three guide sources. Age thresholds belong to the heartbeat, not the date-independent data validator. tierSetSync detects stale duplicated facts even when their dates are young. Existing external-feed age thresholds are unchanged.",
     "datasets": [
       {

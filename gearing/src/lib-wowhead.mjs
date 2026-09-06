@@ -5,6 +5,10 @@
 
 export const TOOLTIP = (id) => `https://nether.wowhead.com/tooltip/item/${id}?locale=0`;
 
+import { createHash } from "node:crypto";
+import { mkdir, writeFile } from "node:fs/promises";
+import { join } from "node:path";
+
 const UA = { "user-agent": "Mozilla/5.0 (wow-s2-gearing harvester)" };
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -20,11 +24,22 @@ function primaryLabel(stats) {
   return values.length === 3 ? "Any" : values.join("/") || null;
 }
 
-export async function getText(url, tries = 3) {
+export async function getText(url, tries = 3, { timeoutMs = 20_000 } = {}) {
   for (let i = 0; i < tries; i++) {
     try {
-      const r = await fetch(url, { headers: UA });
-      if (r.ok) return await r.text();
+      const r = await fetch(url, { headers: UA, signal: AbortSignal.timeout(timeoutMs) });
+      if (r.ok) {
+        const text = await r.text();
+        if (process.env.WOW_GEARING_EVIDENCE_DIR) {
+          const dir = process.env.WOW_GEARING_EVIDENCE_DIR;
+          await mkdir(dir, { recursive: true });
+          const sha256 = createHash("sha256").update(text).digest("hex");
+          const key = createHash("sha256").update(url).digest("hex");
+          await writeFile(join(dir, `${key}.json`), JSON.stringify({ url,
+            observedAt: new Date().toISOString(), sha256, body: text }));
+        }
+        return text;
+      }
       if (r.status === 404) return null;
     } catch { /* retry */ }
     await sleep(400 * (i + 1));

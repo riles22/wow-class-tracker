@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { checkWclMetrics, storedWclRows, wclDigest } from "../src/check-wcl-metrics.mjs";
 import { LIVE_LEADERBOARDS, expectedMetricName } from "../src/wcl-live.mjs";
 import { PHASES } from "../src/normalize.mjs";
+import { createWclCoverage } from "../src/wcl-coverage.mjs";
 import { loadData, validateData } from "../src/validate.mjs";
 
 const roster = JSON.parse(await readFile(new URL("../data/specs.json", import.meta.url), "utf8"))
@@ -66,6 +67,13 @@ function omitFirst(f, status = "unreachable") {
   return removed;
 }
 const reject = (f, pattern) => assert.match(checkWclMetrics(f).join("\n"), pattern);
+
+test("WCL gate binds the public coverage summary to the independent receipt", () => {
+  const f = fixture(); f.coverage = createWclCoverage(f.evidence, f.baseline);
+  assert.deepEqual(checkWclMetrics(f), []);
+  f.coverage.cuts[0].status = "failed";
+  reject(f, /Public WCL coverage differs/);
+});
 
 test("WCL gate accepts exact trusted updates and retains the legacy archive without mutating inputs", () => {
   const f = fixture(), before = JSON.stringify(f);

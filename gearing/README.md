@@ -9,8 +9,11 @@ dependencies. External harvests and local structural sync are separate operation
 neither a successful build nor a local sync renews external evidence dates.
 The tracker nightly synchronizes local spec capabilities and rebuilds this page.
 `.github/workflows/gearing-refresh.yml` refreshes the three guide providers weekly
-(Tuesday 08:37 UTC) and on manual dispatch. Loot/rule-source harvests remain manual
-and retain their independent freshness checks.
+(Tuesday 08:37 UTC) and on manual dispatch. `.github/workflows/gearing-verify.yml`
+independently checks tier-bonus tooltips, Catalyst sources, loot, tier items and stat
+allocations every Thursday at 08:37 UTC. These checks publish dated status without
+changing game facts or their original evidence dates. Changed sources require review;
+reward-level tables retain their separate manual review requirement.
 
 **"Offline" is load-bearing, and fonts are the easy way to break it.** The page shares the
 Spec Tracker's masthead vocabulary (2026-08-05), including its Cinzel/Inter/JetBrains Mono
@@ -57,6 +60,7 @@ node src/harvest-sheet.mjs       # Norumu sheet — CAUTION: data/sheet-rewards.
                                  # this harvester as-is would regress that update. Rework in Phase B.
 node src/harvest-icons.mjs       # item icons, inlined base64
 node src/harvest-catalyst-allocations.mjs
+node src/verify-sources.mjs --out <scratch-directory> # source observations + verification report
 node src/validate-data.mjs       # cross-source validation gates
 node src/build.mjs               # -> wow-s2-gearing.html (fully offline)
 node --test test/project.test.mjs
@@ -150,3 +154,43 @@ root after tracker/loot refreshes and before gearing validation/build. Stage its
 the age of `structuralSync.checkedAt`; the check re-derives the output and refuses
 stale/tampered receipts. Keep independent age checks on external guide/item sources.
 Do not change an old evidence date just to make the structural job green.
+
+## Independent source verification
+
+`verify-sources.mjs` fetches one class-set item tooltip per class and requires both
+bonuses for every one of the 40 specs. It also checks the scoped Catalyst guide body,
+currency 3465 and achievement 62872 tooltips. Source text is compared with the explicitly
+reviewed `data/source-review.json` baseline, bound to the current curated facts. A source
+edit or a curated fact edit requires another review. This does not resolve source
+conflicts automatically: the Demonology tooltip/Blizzard discrepancy and preview-only
+socket caveat remain visible.
+
+Raid, dungeon, tier and allocation harvesters run against copied data in scratch, with
+their existing completeness, ownership, parser and item-set safeguards. Requests have
+20-second deadlines (10 seconds for independent bonus/rule probes); each harvester has
+a five-minute deadline. Raw successful responses,
+SHA-256 hashes, observed timestamps, staged outputs and logs are preserved in the workflow
+artifact for 90 days. The compared item scope excludes raw set-bonus HTML (checked
+separately) and hard-coded reward-level ladders. No harvester acceptance override is used.
+
+`data/source-verification.json` is the compact published report. The gearing page and
+heartbeat must pass it through `currentVerification()` before displaying a verified
+state: malformed or future-dated receipts fail closed, and changed canonical hashes or
+review baselines invalidate previous successes. Existing harvest and review dates stay
+unchanged. The weekly workflow publishes complete reports even when some sources fail,
+then finishes red to request attention; failed collection never promotes staged game data.
+
+To review a change, inspect `observations.json`, the raw response receipts and staged
+loot differences in the artifact. Reconcile the source against official notes and the
+existing caveats before changing facts. For tier/Catalyst sources, after that review run:
+
+```
+node gearing/src/verify-sources.mjs --accept-reviewed <scratch-directory> --note "What was compared and how discrepancies were resolved"
+```
+
+This command refuses an incomplete collection or facts edited since collection. Recollect
+after any approved fact edits, accept the reviewed evidence, and run the full verifier
+again to obtain a fresh bound report. `--skip-loot` is useful during this review but is
+deliberately incomplete and cannot produce an all-verified report. Reward-level chart
+changes still need their own source review; do not rerun `harvest-sheet.mjs` over the
+owner-supplied launch chart.

@@ -590,6 +590,16 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
         violations.push(`gearing-specs-sync: ${gearing.structuralSyncError}`);
         keys.push("gearing-specs-sync");
       }
+      for (const name of config.gearing.verification?.groups ?? []) {
+        const item = gearing.verification?.groups?.[name], stamp = item?.lastVerifiedAt;
+        const hours = stamp && Number.isFinite(Date.parse(stamp)) ? (nowMs - Date.parse(stamp)) / 3600000 : null;
+        const limit = config.gearing.verification.maxAgeDays;
+        report.push(`gearing-verify-${name}: ${item?.status ?? "missing"}, last verified ${stamp ?? "never"}`);
+        if (gearing.verificationError || item?.status !== "verified" || hours == null || hours < 0 || hours > limit * 24) {
+          keys.push(`gearing-verify-${name}`);
+          violations.push(`gearing-verify-${name}: ${gearing.verificationError ?? item?.reason ?? "missing verification"}; weekly verification must succeed within ${limit} days`);
+        }
+      }
       /* The check that actually earns its keep. Age only says a harvest is old; THIS says the
          page is publishing something the tracker has already corrected — which is what
          happened with a superseded Preservation Evoker set bonus. Cheap, exact, no clock. */
@@ -699,7 +709,15 @@ if (isMain) {
         structuralSyncError = error.message;
       }
     }
-    return { present, dates, tierSetDrift, structuralSyncError };
+    let verification = null, verificationError = null;
+    if (present && config.gearing.verification) {
+      try {
+        const { currentVerification } = await import("../gearing/src/verify-sources.mjs");
+        const doc = JSON.parse(await readFile(path.join(root, "gearing/data/source-verification.json"), "utf8"));
+        verification = await currentVerification(doc, path.join(root, "gearing"));
+      } catch (error) { verificationError = error.message; }
+    }
+    return { present, dates, tierSetDrift, structuralSyncError, verification, verificationError };
   };
 
   let failures = [];

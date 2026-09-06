@@ -982,11 +982,21 @@ try {
   .all-none{color:var(--ink-faint); font-family:var(--mono)}
   .all-rk{font-family:var(--mono); font-size:11px; text-align:center}
   .all-rk b{color:var(--accent-2); font-weight:700}
+  .all-current{min-width:170px}
+  .all-current > .mnote{white-space:normal; max-width:190px; font-size:10px}
+  @media(max-width:600px){ table.alltab .all-role{display:block; margin:2px 0} }
   .all-ours{background:rgba(120,160,255,.07)}
   table.alltab th.all-ours{background:var(--bg-2)}
   .all-fs{background:var(--bg-2); border:1px solid var(--edge-2); border-radius:5px; color:var(--ink);
     font-family:var(--mono); font-size:10px; padding:2px 3px; width:100%; min-width:46px}
   .all-sortmk{color:var(--accent-2); font-size:9px}
+  .wcl-controls{display:flex; flex-wrap:wrap; align-items:end; gap:10px; margin:12px 0}
+  .wcl-controls label{display:flex; flex-direction:column; gap:4px; color:var(--ink-dim); font-size:12px; max-width:100%}
+  .wcl-controls select{max-width:100%; min-height:38px; padding:6px 8px; background:var(--bg-3); border:1px solid var(--edge-2); border-radius:6px; color:var(--ink); font:inherit}
+  .wcl-status{display:block; font-size:11px; line-height:1.5; color:var(--v-mix); white-space:normal}
+  .wcl-coverage{font-size:12px; color:var(--ink-dim); margin:10px 0; line-height:1.6}
+  .wcl-coverage summary{cursor:pointer; min-height:30px}
+  .wcl-gaps{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:5px 14px; margin:8px 0; padding:0; list-style:none}
   @media(max-width:900px){ .all-panel{margin:0; border-radius:0; min-height:100vh} .all-wrap{max-height:none} }
 
   /* The Ladder — ranked bar charts (overlay reuses the Spec Finder shell) */
@@ -1820,6 +1830,45 @@ function sourceBreakdownHTML(s){
 function leaderboardExplanation(){
   return "Leaderboard medians describe a capped top sample, not the player population. Entries may repeat players. Tank DPS does not measure defense; HPS does not measure overall healer strength. These numbers never become letter grades.";
 }
+// Inventory comes from the pinned collector recipe, including encounters with no
+// usable logs. Status is an observed collection result, never inferred from absence.
+function wclEncounters(bracket){ return DATA.wclCoverage?.encounters?.[bracket] || []; }
+function wclMetric(s, bracket, encounterId){
+  return (s.metrics||[]).find(m=>m.source==="warcraftlogs" && m.bracket===bracket
+    && m.sample?.kind==="leaderboard-entries" && String(m.sample.encounterId)===String(encounterId));
+}
+const WCL_CUTS = new Map((DATA.wclCoverage?.cuts || []).map(c=>[`${c.class}|${c.spec}|${c.bracket}|${c.encounterId}`,c]));
+function wclCut(s, bracket, encounterId){
+  return WCL_CUTS.get(`${s.class}|${s.spec}|${bracket}|${encounterId}`);
+}
+function wclState(s, bracket, encounterId){
+  const metric=wclMetric(s,bracket,encounterId), cut=wclCut(s,bracket,encounterId);
+  const status=cut?.status;
+  const message=status==="insufficient" ? "Insufficient logs" : status==="failed" ? "Collection failed"
+    : !cut ? "Collection status unavailable" : !metric ? "Awaiting collection" : "";
+  return { metric, cut, message, retained:!!metric && status!=="success" };
+}
+function wclStatusText(info){
+  return [info.message, info.retained?"historical data retained":""].filter(Boolean).join(" · ");
+}
+function wclDatesHTML(m, cut){
+  const checked=cut?.checkedAt || m?.sample?.observedAt;
+  const label=cut?.checkedAt?"Checked":"Last sample checked";
+  return `<span class="mnote" style="display:block">${checked?`${label} ${esc(String(checked).slice(0,10))} UTC`:"Collection date unavailable"}${m?.sample?.newestRun?`<br>Latest log ${esc(m.sample.newestRun.slice(0,10))} UTC`:""}</span>`;
+}
+function wclOptions(bracket, selected){
+  return wclEncounters(bracket).map(e=>`<option value="${esc(e.id)}"${String(e.id)===String(selected)?" selected":""}>${esc(e.name)}</option>`).join("");
+}
+function wclCoverageHTML(bracket, encounterId, role="All"){
+  const specs=SPECS.filter(s=>role==="All" || s.role===role);
+  const rows=specs.map(s=>({s, ...wclState(s,bracket,encounterId)}));
+  const current=rows.filter(r=>r.metric && !r.retained).length;
+  const gaps=rows.filter(r=>!r.metric || r.retained);
+  const gapCounts=["Insufficient logs","Collection failed","Awaiting collection","Collection status unavailable"].map(label=>{const n=gaps.filter(r=>r.message===label).length; return n?`${n} ${label.toLowerCase()}`:"";}).filter(Boolean);
+  const dates=rows.map(r=>r.cut?.checkedAt).filter(Boolean).sort();
+  const attempted=DATA.wclCoverage?.checkedAt;
+  return `<details class="wcl-coverage"><summary>${current}/${specs.length} ${esc(role==="All"?"specs":role+" specs")} with verified usable samples${gapCounts.length?` · ${esc(gapCounts.join(" · "))}`:""}${dates.length?` · checked ${esc(dates[0].slice(0,10))}${dates.at(-1).slice(0,10)!==dates[0].slice(0,10)?`–${esc(dates.at(-1).slice(0,10))}`:""} UTC`:attempted?` · last collection attempt ${esc(attempted.slice(0,10))} UTC`:""}</summary><p>${leaderboardExplanation()} Raid uses Mythic bosses; M+ uses exactly +10, with mixed affixes and dates.</p>${gaps.length?`<ul class="wcl-gaps">${gaps.map(r=>`<li><b>${esc(r.s.spec)} ${esc(r.s.class)}</b><span class="wcl-status">${esc(wclStatusText(r))}${r.cut?.entries!=null?` (n=${esc(r.cut.entries)})`:""}</span>${wclDatesHTML(r.metric,r.cut)}</li>`).join("")}</ul>`:""}</details>`;
+}
 function leaderboardSampleHTML(m){
   const sample = m.sample;
   if(sample?.kind !== "leaderboard-entries") return "";
@@ -1860,10 +1909,12 @@ function metricsHTML(s){
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
   const live = m => metricEra(m)==="live", ptr = m => metricEra(m)==="ptr";
+  const historicalWcl = m=>live(m) && m.source==="warcraftlogs" && m.sample?.kind!=="leaderboard-entries";
   return `<div class="metrics">
     ${list.some(m=>m.sample?.kind === "leaderboard-entries")?`<p class="mnote">${leaderboardExplanation()}</p>`:""}
-    ${section(`Current numbers · Raid (${PHASE.liveLabel})`, list.filter(m=>m.bracket==="raid" && live(m)))}
-    ${section(`Current numbers · M+ (${PHASE.liveLabel})`, list.filter(m=>m.bracket==="mplus" && live(m)))}
+    ${section(`Current numbers · Raid (${PHASE.liveLabel})`, list.filter(m=>m.bracket==="raid" && live(m) && !historicalWcl(m)))}
+    ${section(`Current numbers · M+ (${PHASE.liveLabel})`, list.filter(m=>m.bracket==="mplus" && live(m) && !historicalWcl(m)))}
+    ${section("Historical WCL aggregates · retained archive",list.filter(historicalWcl))}
     ${section("PTR numbers · Raid (12.1 testing)", list.filter(m=>m.bracket==="raid" && ptr(m)))}
     ${section("PTR numbers · M+ (12.1 testing)", list.filter(m=>m.bracket==="mplus" && ptr(m)))}
   </div>`;
@@ -3204,13 +3255,14 @@ function closeCompare(){
 cmpOv.addEventListener("click", e=>{ if(e.target === cmpOv) closeCompare(); });
 cmpOv.addEventListener("keydown", e=>{
   if(e.key !== "Tab" || !cmpOv.classList.contains("open")) return; // focus trap
-  const f = [...cmpOv.querySelectorAll('button, input, [tabindex="0"]')]; if(!f.length) return;
+  const f = [...cmpOv.querySelectorAll('button, input, select, [tabindex="0"]')]; if(!f.length) return;
   const first = f[0], last = f[f.length-1];
   if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
   else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
 });
 document.addEventListener("keydown", e=>{ if(e.key === "Escape" && cmpOv.classList.contains("open")) closeCompare(); });
-function cmpLiveMedian(s, b){
+const CMP_WCL={raid:"",mplus:"",archive:false};
+function cmpHistoricalMedian(s, b){
   const rx = s.role === "Healer" ? /Median HPS/ : s.role === "Tank" ? /Median rDPS.*tank/ : /Median rDPS(?!.*tank)/;
   const m = (s.metrics||[]).find(m => m.bracket === b && metricEra(m) === "live" && rx.test(m.name));
   if(!m) return "—";
@@ -3223,9 +3275,15 @@ function cmpLiveMedian(s, b){
     + `${m.asOf?` <span class="mnote${stale?" asof-stale":""}"${stale?` title="frozen — last refreshed ${esc(m.asOf)}"`:""}>· ${esc(m.asOf)}</span>`:""}`
     + seasonChip(m.asOf);
 }
-function openCompare(){
+function cmpLeaderboard(s,b){
+  const info=wclState(s,b,CMP_WCL[b]), m=info.metric;
+  const status=wclStatusText(info);
+  return `${m?`<b>${Math.round(m.value).toLocaleString("en-US")}</b> ${esc(m.unit||"")}${m.rank?` <span class="mnote">#${m.rank}/${m.of} ${esc(s.role)}</span>`:""}<span class="mnote" style="display:block">n=${esc(m.n)} leaderboard entries</span>`:""}${status?`<span class="wcl-status">${esc(status)}${info.cut?.entries!=null?` (n=${esc(info.cut.entries)})`:""}</span>`:""}${wclDatesHTML(m,info.cut)}`;
+}
+function openCompare(focusId){
   const list = [...COMPARE].map(k => SPECS.find(s => `${s.class}|${s.spec}` === k)).filter(Boolean);
   if(list.length < 2) return;
+  for(const b of ["raid","mplus"]) if(!wclEncounters(b).some(e=>String(e.id)===String(CMP_WCL[b]))) CMP_WCL[b]=wclEncounters(b)[0]?.id || "";
   const tierCell = (s,b)=>{ const c = s.consensus?.[b]; return c ? `<span class="tier" data-t="${esc(c.tier)}">${esc(c.tier)}</span> <span class="mnote">${consensusDisplayScore(c)}/100</span>` : "—"; };
   const projCell = (s,b)=>{ const p = s.projection?.[b]; return p ? `<span class="tier" data-t="${esc(p.tier)}">${esc(p.tier)}</span> <span class="mnote">${p.score}/100 · confidence ${esc(p.confidence)}</span>` : "—"; };
   const crossRole = new Set(list.map(s=>s.role)).size > 1;
@@ -3242,8 +3300,10 @@ function openCompare(){
       [`Ours: 12.1 · Raid${FROZEN_FC?` <span class="mnote">frozen ${esc(FROZEN_FC.date)}</span>`:""}`, s=>projCell(s,"raid")],
       [`Ours: 12.1 · M+${FROZEN_FC?` <span class="mnote">frozen ${esc(FROZEN_FC.date)}</span>`:""}`, s=>projCell(s,"mplus")]
     ] : []),
-    ["Live raid median", s=>cmpLiveMedian(s,"raid")],
-    ["Live M+ median", s=>cmpLiveMedian(s,"mplus")],
+    ["WCL Mythic boss · top sample", s=>cmpLeaderboard(s,"raid")],
+    ["WCL M+10 dungeon · top sample", s=>cmpLeaderboard(s,"mplus")],
+    ...(CMP_WCL.archive ? [["Historical WCL raid aggregate", s=>cmpHistoricalMedian(s,"raid")],
+      ["Historical WCL M+ aggregate", s=>cmpHistoricalMedian(s,"mplus")]] : []),
     // Zone-54 PTR raid testing covers ALL roles (unlike the DPS-only Dummy Dome) — give
     // healers/tanks a measured PTR row too, not just a gap (L13).
     ...(state.era !== "live" ? [["PTR raid testing", s=>{ const m=(s.metrics||[]).find(m=>m.name===PTRNAMES.raidTestingScore.DPS);
@@ -3264,14 +3324,18 @@ function openCompare(){
   cmpOv.innerHTML = `<div class="finder-panel" role="dialog" aria-modal="true" aria-label="Compare specs">
     <div class="finder-head"><div><h2>⚖ Compare</h2><p>Side by side, same rules as everywhere else — measured numbers stay numbers, and the 12.1 forecast stays labeled as ours.</p></div>
     <button class="finder-x" id="cmp-close" aria-label="Close">✕</button></div>
-    ${crossRole?`<p class="mnote cmp-crossrole"><b>Cross-role compare</b> — every number and rank below is <b>within each spec's own role</b> (a healer's HPS against healers, a tank's rDPS against tanks). The columns are not comparable to each other; read each one down, not across.</p>`:""}
+    ${crossRole?`<p class="mnote cmp-crossrole"><b>Cross-role compare</b> — every number and rank below is <b>within each spec's own role</b> (a healer's HPS against healers, a tank's DPS against tanks). The columns are not comparable to each other; read each one down, not across.</p>`:""}
+    <div class="wcl-controls"><label>Mythic raid boss<select id="cmp-raid">${wclOptions("raid",CMP_WCL.raid)}</select></label><label>M+10 dungeon<select id="cmp-mplus">${wclOptions("mplus",CMP_WCL.mplus)}</select></label><label><span><input id="cmp-archive" type="checkbox"${CMP_WCL.archive?" checked":""}> Show historical WCL aggregates</span></label></div>
+    <p class="mnote">${leaderboardExplanation()} Each selection is one encounter, with mixed log dates; M+ uses exactly +10 with mixed affixes.</p>
     <div style="overflow-x:auto"><table class="cmp-table"><thead><tr><th></th>${list.map(s=>`<th style="color:${CLASS_COLOR[s.class]||'#888'}">${esc(s.spec)}<br><span class="mnote">${esc(s.class)}</span></th>`).join("")}</tr></thead>
     <tbody>${rows.map(([label,fn])=>`<tr><td>${label}</td>${list.map(s=>`<td>${fn(s)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
   </div>`;
   cmpOv.querySelector("#cmp-close").onclick = closeCompare;
-  cmpOpener = document.activeElement;
+  for(const b of ["raid","mplus"]) cmpOv.querySelector("#cmp-"+b).onchange=e=>{CMP_WCL[b]=e.target.value; openCompare("cmp-"+b);};
+  cmpOv.querySelector("#cmp-archive").onchange=e=>{CMP_WCL.archive=e.target.checked; openCompare("cmp-archive");};
+  if(!cmpOv.classList.contains("open")) cmpOpener = document.activeElement;
   cmpOv.classList.add("open"); replayEntrance(cmpOv); document.body.style.overflow = "hidden";
-  setTimeout(()=>cmpOv.querySelector("#cmp-close").focus(), 0);
+  setTimeout(()=>cmpOv.querySelector(typeof focusId==="string"?"#"+focusId:"#cmp-close").focus(), 0);
 }
 
 /* ---------- the legend sheet ----------
@@ -3594,9 +3658,21 @@ function openSpecFromOverlay(cls, spec){
   for(const s of SPECS) for(const m of (s.metrics||[])){
     const key = `${s.role}|${m.bracket}|${m.name}`;
     let e = catalog.get(key);
-    if(!e){ e = { key, role:s.role, bracket:m.bracket, name:m.name, source:m.source, unit:m.unit||"", era:metricEra(m), sampleKind:m.sample?.kind, rows:[] }; catalog.set(key, e); }
-    e.rows.push({ spec:s.spec, cls:s.class, value:m.value, rank:m.rank, of:m.of, n:m.n, asOf:m.asOf, rankDelta:m.rankDelta, thin:!!m.thin });
+    if(!e){ e = { key, role:s.role, bracket:m.bracket, name:m.name, source:m.source, unit:m.unit||"", era:metricEra(m), sampleKind:m.sample?.kind, encounterId:m.sample?.encounterId, rows:[] }; catalog.set(key, e); }
+    e.rows.push({ spec:s.spec, cls:s.class, value:m.value, rank:m.rank, of:m.of, n:m.n, asOf:m.asOf, observedAt:m.sample?.observedAt, newestRun:m.sample?.newestRun, rankDelta:m.rankDelta, thin:!!m.thin });
   }
+  // Keep an empty encounter selectable: disappearing bosses hide the difference
+  // between insufficient logs and a collection problem.
+  for(const bracket of ["raid","mplus"]) for(const role of ["DPS","Healer","Tank"])
+    for(const encounter of wclEncounters(bracket)){
+      let entry=[...catalog.values()].find(e=>e.role===role && e.bracket===bracket && e.sampleKind==="leaderboard-entries" && String(e.encounterId)===String(encounter.id));
+      if(!entry){
+        const key=`${role}|${bracket}|wcl-encounter-${encounter.id}`;
+        entry={key,role,bracket,name:`${encounter.name} · leaderboard median`,source:"warcraftlogs",unit:role==="Healer"?"HPS":"DPS",era:"live",sampleKind:"leaderboard-entries",encounterId:encounter.id,rows:[]};
+        catalog.set(key,entry);
+      }
+      entry.encounterName=encounter.name;
+    }
   // Dummy Dome composite — a genuine build-computed 0–100 ranked score → a ladder series.
   {
     const rows = SPECS.filter(s=>s.ptrDummy && typeof s.ptrDummy.score==="number")
@@ -3630,15 +3706,15 @@ function openSpecFromOverlay(cls, spec){
   }
 
   const familyOf = e => e.era==="ptr" ? "PTR"
-    : e.source==="warcraftlogs" ? "Logs"
+    : e.source==="warcraftlogs" ? (e.sampleKind==="leaderboard-entries"?"Logs":"Archive")
     : (e.source==="bloodmallet"||e.source==="simulationcraft") ? "Sims" : "Adoption";
-  const FAMS = [["Logs","Logs · Warcraft Logs medians"],["Sims","Sims · Bloodmallet / SimC (theoretical)"],
+  const FAMS = [["Logs","Current WCL · one encounter, up to 100 leaderboard entries per spec"],["Archive","Historical WCL aggregates"],["Sims","Sims · Bloodmallet / SimC (theoretical)"],
     ["Adoption","Adoption & ceiling · Archon / Murlok / Mythicstats"],["PTR","PTR · directional (12.1)"]];
   const SRCTAG = {warcraftlogs:"WCL",archon:"Archon",murlok:"Murlok",mythicstats:"Mythicstats",bloodmallet:"sim",simulationcraft:"SimC"};
   const cleanName = n => n.replace(/, all bosses/g,"").replace(/, all dungeons/g,"")
     .replace(/ \(95th pct\)/g," 95th").replace(/ \(normalized\)/g,"").replace(/, tank\)/g,")").replace(/, healer\)/g,")")
     .replace(/12\.1 PTR Dummy Dome, /g,"Dummy "); // family header already says PTR — chips read "…(Dummy 1T)"
-  const chipLabel = e => `${cleanName(e.name)} · ${SRCTAG[e.source]||e.source}`;
+  const chipLabel = e => e.encounterName ? `${e.encounterName} · ${e.unit}` : `${familyOf(e)==="Archive"?"Historical · ":""}${cleanName(e.name)} · ${SRCTAG[e.source]||e.source}`;
   const fmt = v => (Number.isInteger(v)?v:Math.round(v)).toLocaleString("en-US");
 
   const L = { bracket:"raid", role:"DPS", seriesKey:"", query:"" };
@@ -3668,7 +3744,10 @@ function openSpecFromOverlay(cls, spec){
     const asOf = dates[0] || null;
     const latest = DATA.dataHealth?.latest || null;
     const stale = asOf && latest && (Date.parse(latest) - Date.parse(asOf))/86400000 > 7;
-    const dateHTML = asOf
+    const sampleDates=e.rows.map(r=>r.newestRun).filter(Boolean).sort();
+    const dateHTML = e.sampleKind==="leaderboard-entries"
+      ? `<span class="mnote">${sampleDates.length?`Latest included logs ${esc(sampleDates[0].slice(0,10))}–${esc(sampleDates.at(-1).slice(0,10))} UTC`:"No usable sample for this selection"}</span>`
+      : asOf
       ? (stale
         ? `<b class="ladder-stale" title="This cut has not refreshed since ${esc(asOf)} — see the data-health note on the main page">frozen at ${esc(asOf)}</b>`
         : `<span class="mnote">${esc(asOf)}</span>`)
@@ -3684,11 +3763,12 @@ function openSpecFromOverlay(cls, spec){
       : seasons.length > 1
         ? `<span class="seasontag old" title="${esc(`This series spans the Season 2 boundary (${PHASE.liveSince}) — rows range from ${dates[0]} to ${dates[dates.length-1]}`)}">mixed seasons</span>`
         : "";
-    return `<div class="ladder-cap">${[...pre, base, dateHTML, ...(seasonHTML?[seasonHTML]:[])].join(" &nbsp;·&nbsp; ")}</div>`;
+    return `<div class="ladder-cap">${[...pre, base, dateHTML, ...(seasonHTML?[seasonHTML]:[])].join(" &nbsp;·&nbsp; ")}</div>${e.sampleKind==="leaderboard-entries"?wclCoverageHTML(e.bracket,e.encounterId,e.role):""}`;
   }
 
   function drawLadder(e){
     const rows = e.rows.filter(r=>typeof r.value==="number").slice().sort((a,b)=>(a.rank||9e9)-(b.rank||9e9) || b.value-a.value);
+    if(!rows.length) return `<p class="mnote">No usable leaderboard samples. Open coverage details above for each spec’s collection status.</p>`;
     const N = rows.length, max = Math.max(...rows.map(r=>r.value), 1);
     const srt = rows.map(r=>r.value).slice().sort((a,b)=>a-b), median = srt[Math.floor(srt.length/2)] || 0;
     // Geometry follows the CONTAINER, not a fixed 1000-unit canvas. The old layout put
@@ -3756,7 +3836,7 @@ function openSpecFromOverlay(cls, spec){
     let entries = pool();
     if(!entries.length){ L.bracket = L.bracket==="raid"?"mplus":"raid"; entries = pool(); }
     const famIdx = e => FAMS.findIndex(f=>f[0]===familyOf(e));
-    entries.sort((a,b)=> famIdx(a)-famIdx(b)); // group order (Logs first) so the default series is a log median
+    entries.sort((a,b)=> famIdx(a)-famIdx(b)); // current supported WCL samples before historical aggregates
     let cur = catalog.get(L.seriesKey);
     if(!cur || !entries.includes(cur)){ cur = entries[0]; L.seriesKey = cur?cur.key:""; }
     const groups = FAMS.map(([fam,flabel])=>{
@@ -3842,7 +3922,7 @@ function openSpecFromOverlay(cls, spec){
    resolves to rDPS, rDPS-tank or HPS by the row's role and shows that rank. No rank is
    ever compared across a role boundary, because none of them ever crossed one. */
 (function(){
-  const A = { bracket:"raid", sortKey:"consensus", sortDir:-1, q:"", role:"All", filt:{} };
+  const A = { bracket:"raid", sortKey:"consensus", sortDir:-1, q:"", role:"All", filt:{}, encounters:{raid:"",mplus:""}, archive:false };
   let opener = null;
   // tierEl() keeps its own copy function-scoped; this view needs the same glyphs for the
   // projection column's confidence dots.
@@ -3863,7 +3943,7 @@ function openSpecFromOverlay(cls, spec){
      rankable raid PTR column (26/26 DPS + 7/7 healers). */
   const COLS = {
     raid: [
-      { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, Mythic raid — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
+      { key:"archivewcl", label:"Historical WCL aggregate", era:"live", archive:true, tip:"Historical Warcraft Logs aggregate, Mythic raid — preserved source labels and within-role ranks. No verified equivalent current aggregate.",
         names:{ DPS:"Median rDPS (Mythic, all bosses)", Tank:"Median rDPS (Mythic, all bosses, tank)", Healer:"Median HPS (Mythic, all bosses)" } },
       { key:"archon", label:"Archon (M)", era:"live", tip:"Archon 95th-percentile THROUGHPUT, Mythic raid (not popularity). Sparse early-season — see Archon (H) for the dense series. Rank within role.",
         /* Tank reads the same DPS family as DPS specs — Archon's tank rankings page IS tank
@@ -3894,7 +3974,7 @@ function openSpecFromOverlay(cls, spec){
         names:PTRNAMES.dummy5T }
     ],
     mplus: [
-      { key:"wcl", label:"WCL median", era:"live", tip:"Warcraft Logs median, M+ all dungeons — rDPS for DPS, tank rDPS for tanks, HPS for healers. Rank within role.",
+      { key:"archivewcl", label:"Historical WCL aggregate", era:"live", archive:true, tip:"Historical Warcraft Logs aggregate, M+ all dungeons — preserved source labels and within-role ranks. No verified equivalent current aggregate.",
         names:{ DPS:"Median rDPS (M+, all dungeons)", Tank:"Median rDPS (M+, all dungeons, tank)", Healer:"Median HPS (M+, all dungeons)" } },
       { key:"archon", label:"Archon score", era:"live", tip:"Archon M+ SCORE tier basis, 95th percentile. Rank within role.",
         names:{ DPS:"M+ score (95th pct)", Tank:"M+ score (95th pct)", Healer:"M+ score (95th pct)" } },
@@ -3916,7 +3996,12 @@ function openSpecFromOverlay(cls, spec){
   const tierCols = () => TIER_SOURCES
     .filter(src => (src.pages||[]).some(p => p.bracket === A.bracket))
     .filter(src => eraOk(isPtrSource(src.id) ? "ptr" : "live"));
-  const metricCols = () => COLS[A.bracket].filter(c => eraOk(c.era));
+  function metricCols(){
+    const id=A.encounters[A.bracket];
+    const names=Object.fromEntries(["DPS","Healer","Tank"].map(role=>[role,SPECS.filter(s=>s.role===role).map(s=>wclMetric(s,A.bracket,id)?.name).find(Boolean)]));
+    return [{key:"wcl",label:"WCL top sample",era:"live",current:true,names,encounterId:id,tip:"Selected encounter only: median of up to 100 leaderboard entries per spec; DPS for damage/tank roles, HPS for healers. Rank within role; never a population median."},
+      ...COLS[A.bracket]].filter(c=>eraOk(c.era) && (!c.archive || A.archive));
+  }
   const showProjection = () => eraOk("ptr") || !!FROZEN_FC;
 
   /* ---- season provenance per COLUMN (2026-08-20) ----------------------------------
@@ -3928,6 +4013,7 @@ function openSpecFromOverlay(cls, spec){
      would be 400 chips saying the same thing. A column that genuinely SPANS the flip is
      the one case that must not claim either side, so it says "mixed". */
   function metricColSeason(col){
+    if(col.current){const season=DATA.wclCoverage?.season,name=seasonNameOf(season); return name?{season,name,current:season===PHASE.liveSeason}:null;}
     if(col.dummy) return null;                       // PTR-era composite, hidden between cycles
     const names = new Set(Object.values(col.names || {}).filter(Boolean));
     if(!names.size) return null;
@@ -3982,6 +4068,14 @@ function openSpecFromOverlay(cls, spec){
       const d = s.ptrDummy;
       if(!d || d.rank == null) return { rank:null, score:null, tip:"Dummy Dome: no composite — unlogged, or its logged cuts are below the coverage/sample floors" };
       return { rank:d.rank, of:d.of ?? null, score:-d.rank, tip:"Dummy Dome composite "+d.score+"/100 — rank #"+d.rank+(d.of?" of "+d.of:"") };
+    }
+    if(col.current){
+      const info=wclState(s,A.bracket,col.encounterId),m=info.metric;
+      const status=wclStatusText(info);
+      const detail=(status?`<span class="wcl-status">${esc(status)}${info.cut?.entries!=null?` (n=${esc(info.cut.entries)})`:""}</span>`:"")+wclDatesHTML(m,info.cut);
+      return m?{rank:m.rank,of:m.of,score:m.rank?-m.rank:null,thin:!!m.thin,n:m.n,detail,
+        tip:`${m.name} — ${m.value.toLocaleString("en-US")} ${m.unit}; n=${m.n} leaderboard entries; rank within ${s.role}`}
+        : {rank:null,score:null,detail,tip:status};
     }
     const name = col.names[s.role];
     if(!name) return { rank:null, score:null, na:true, tip:col.label+" is not measured for a "+s.role.toLowerCase() };
@@ -4058,6 +4152,9 @@ function openSpecFromOverlay(cls, spec){
       + (c.conf ? '<span class="conf" data-c="'+esc(c.conf)+'" title="Evidence strength: '+esc(c.conf)+'">'+(CONF_GLYPH[c.conf]||"")+'</span>' : '');
   }
   function rankHtml(c){
+    if(c.detail){
+      return `${c.rank!=null?`<span title="${esc(c.tip)}"><b>#${c.rank}</b>${c.thin?'<span class="thin-n" aria-label="thin sample">†</span>':""}</span><span class="mnote"> · n=${esc(c.n)}</span>`:""}${c.detail}`;
+    }
     if(c.rank == null && c.val != null)
       return '<span class="all-val" title="'+esc(c.tip)+'">'+esc(c.val)+'</span>';
     if(c.rank == null && c.belowFloor)
@@ -4073,6 +4170,7 @@ function openSpecFromOverlay(cls, spec){
   const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="all-ov"; document.body.appendChild(ov);
 
   function render(){
+    if(!wclEncounters(A.bracket).some(e=>String(e.id)===String(A.encounters[A.bracket]))) A.encounters[A.bracket]=wclEncounters(A.bracket)[0]?.id || "";
     const tcs = tierCols(), mcs = metricCols(), proj = showProjection();
     const list = rows();
     const mk = k => A.sortKey === k ? '<span class="all-sortmk">'+(A.sortDir<0?"▼":"▲")+'</span>' : '';
@@ -4084,41 +4182,50 @@ function openSpecFromOverlay(cls, spec){
     const tierSel = key => '<select class="all-fs" data-f="'+esc(key)+'" aria-label="Minimum tier"><option value="">all</option>'
       + tierOpts.map(o=>'<option value="'+o.v+'"'+(String(A.filt[key])===String(o.v)?" selected":"")+'>≥'+esc(o.t)+'</option>').join("") + '</select>';
     const rankSel = key => '<input class="all-fs" type="number" min="1" placeholder="≤#" data-f="'+esc(key)+'" aria-label="Maximum rank" value="'+esc(A.filt[key] ?? "")+'">';
+    const currentMcs=mcs.filter(c=>c.current),otherMcs=mcs.filter(c=>!c.current);
+    const metricHead=c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+colChip(metricColSeason(c),c.label)+'</th>';
+    const metricBody=(s,c)=>'<td class="all-rk'+(c.current?' all-current':'')+'">'+rankHtml(rankCell(s,c))+'</td>';
 
     const head = '<tr>'
       + '<th class="nm" data-k="consensus">Spec</th>'
+      + currentMcs.map(metricHead).join("")
       + tcs.map(c=>'<th data-k="'+esc(c.id)+'" title="'+esc(c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""))+'">'+esc(c.shortName||c.name)+mk(c.id)+colChip(tierColSeason(c), c.name+"'s "+(A.bracket==="raid"?"raid":"M+")+" list")+'</th>').join("")
       + '<th data-k="consensus" title="Mean of the live-era tier lists, on a shared 0–100 axis">Consensus'+mk("consensus")+'</th>'
       + (proj ? '<th class="all-ours" data-k="projection" title="Our own 12.1 forecast — a projection, never a source'+(FROZEN_FC?' — FROZEN pre-launch record, declared '+esc(FROZEN_FC.date):'')+'">Ours: 12.1 ✦'+(FROZEN_FC?'<br><span class="mnote">frozen '+esc(FROZEN_FC.date)+'</span>':'')+mk("projection")+'</th>' : '')
-      + mcs.map(c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+colChip(metricColSeason(c), c.label)+'</th>').join("")
+      + otherMcs.map(metricHead).join("")
       + '</tr><tr class="filt"><th class="nm"><input class="all-fs" id="all-q" type="search" placeholder="filter specs…" value="'+esc(A.q)+'" aria-label="Filter specs by name"></th>'
+      + currentMcs.map(c=>'<th>'+rankSel("m:"+c.key)+'</th>').join("")
       + tcs.map(c=>'<th>'+tierSel(c.id)+'</th>').join("")
       + '<th>'+tierSel("consensus")+'</th>'
       + (proj ? '<th class="all-ours">'+tierSel("projection")+'</th>' : '')
-      + mcs.map(c=>'<th>'+rankSel("m:"+c.key)+'</th>').join("")
+      + otherMcs.map(c=>'<th>'+rankSel("m:"+c.key)+'</th>').join("")
       + '</tr>';
 
     const body = list.map(s => '<tr data-cls="'+esc(s.class)+'" data-spec="'+esc(s.spec)+'">'
       + '<td class="nm"><span style="color:'+(CLASS_COLOR[s.class]||"#888")+'">'+esc(s.spec)+'</span> '
         + '<span class="all-role">'+esc(s.class)+' · '+esc(s.role)+'</span></td>'
+      + currentMcs.map(c=>metricBody(s,c)).join("")
       + tcs.map(c=>'<td style="text-align:center">'+tierHtml(tierCell(s,c))+'</td>').join("")
       + '<td style="text-align:center">'+tierHtml(consCell(s))+'</td>'
       + (proj ? '<td class="all-ours" style="text-align:center">'+tierHtml(projCell(s))+'</td>' : '')
-      + mcs.map(c=>'<td class="all-rk">'+rankHtml(rankCell(s,c))+'</td>').join("")
+      + otherMcs.map(c=>metricBody(s,c)).join("")
       + '</tr>').join("");
 
     const bkt = ["raid","mplus"].map(b=>'<button data-bkt="'+b+'" aria-pressed="'+(b===A.bracket)+'">'+(b==="raid"?"Raid":"M+")+'</button>').join("");
     const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
 
     ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
-      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Every spec against every rating and rank, on one screen. Click a column to sort, use the row under it to filter, click a spec to open its card. Letters are tier ratings — each source’s own, their computed consensus, and our 12.1 forecast; <b>#numbers are measured ranks within that spec’s role</b> and are never turned into grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means it exists but has not landed; <b class="thin-n">n=…</b> means it DID land but on too few logs to rank (under 10); <b class="thin-n">†</b> marks a rank built on fewer than 100 logged parses — real, but thin enough that it should not be read like the dense cuts beside it. Under each column header is <b>the season that column actually measures</b> — <span class="seasontag old">Season 1</span> in gold means the source has not been re-cut since Season 2 opened, so those numbers describe last season however recently they were fetched.</p></div>'
+      + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Select an encounter to compare current WCL samples. Click a column to sort, filter below it, or click a spec for its full card. Ranks stay within each spec’s role.</p></div>'
       + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
+      + '<details class="wcl-coverage wcl-legend"><summary>How to read comparisons</summary><p>Letters are each source’s tier ratings, their computed consensus, and our labeled forecast. Measured ranks never become grades. <b>·</b> means no such measurement exists for that role; <b>—</b> means none has landed; <b>n=…</b> without a rank means fewer than 10 logs; <b>†</b> marks fewer than 100 parses or leaderboard entries. WCL coverage states insufficient logs and collection failures explicitly. Season labels describe the measurements: historical aggregates retain their original season and dates.</p></details>'
       + '<div class="all-hd"><div class="seg" role="group" aria-label="Bracket" id="all-bkt">'+bkt+'</div>'
       + '<div class="seg" role="group" aria-label="Role" id="all-role">'+roles+'</div>'
       + '<span class="all-count">'+list.length+' of '+SPECS.length+' specs'
         + ((A.sortKey.startsWith("m:") && A.role === "All")
            ? ' · ranks are within-role, so each role has its own #1 — pick a role to read one ladder'
            : '')+'</span></div>'
+      + '<div class="wcl-controls"><label>'+ (A.bracket==="raid"?"Mythic raid boss":"M+10 dungeon")+'<select id="all-encounter">'+wclOptions(A.bracket,A.encounters[A.bracket])+'</select></label><label><span><input id="all-archive" type="checkbox"'+(A.archive?" checked":"")+'> Show historical WCL aggregates</span></label></div>'
+      + wclCoverageHTML(A.bracket,A.encounters[A.bracket],A.role)
       + '<div class="all-wrap"><table class="alltab"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div></div>';
 
     // The filter row's sticky offset must equal the REAL first-header-row height — a
@@ -4127,6 +4234,8 @@ function openSpecFromOverlay(cls, spec){
     const h1 = ov.querySelector("table.alltab thead tr:first-child");
     if(h1) ov.querySelector("table.alltab").style.setProperty("--all-h1", h1.offsetHeight + "px");
     ov.querySelector("#all-close").onclick = close;
+    ov.querySelector("#all-encounter").onchange=e=>{A.encounters[A.bracket]=e.target.value; render(); ov.querySelector("#all-encounter").focus();};
+    ov.querySelector("#all-archive").onchange=e=>{A.archive=e.target.checked; if(!A.archive && A.sortKey==="m:archivewcl") A.sortKey="consensus"; delete A.filt["m:archivewcl"]; render(); ov.querySelector("#all-archive").focus();};
     ov.querySelectorAll("#all-bkt button").forEach(b=>b.onclick=()=>{ A.bracket=b.dataset.bkt; A.filt={}; render(); });
     ov.querySelectorAll("#all-role button").forEach(b=>b.onclick=()=>{ A.role=b.dataset.ar; render(); });
     ov.querySelectorAll("thead th[data-k]").forEach(th=>th.onclick=()=>{
@@ -4167,6 +4276,8 @@ function openSpecFromOverlay(cls, spec){
     params: ()=>({
       ab: A.bracket !== "raid" ? A.bracket : null,
       ar: A.role !== "All" ? A.role : null,
+      ae: A.encounters[A.bracket] || null,
+      ah: A.archive ? "1" : null,
       ak: A.sortKey !== "consensus" ? A.sortKey : null,
       ad: A.sortDir !== -1 ? "1" : null
     }),
@@ -4174,10 +4285,12 @@ function openSpecFromOverlay(cls, spec){
       if(p){
         if(["raid","mplus"].includes(p.get("ab"))) A.bracket = p.get("ab");
         if(["All","DPS","Healer","Tank"].includes(p.get("ar"))) A.role = p.get("ar");
+        if(wclEncounters(A.bracket).some(e=>String(e.id)===p.get("ae"))) A.encounters[A.bracket]=p.get("ae");
+        A.archive=p.get("ah")==="1";
         const ak = p.get("ak");
         // A sort key must resolve to a real column in the restored bracket, else the
         // default — a link must never restore a sort the table cannot draw.
-        if(ak && (ak === "consensus" || ak === "projection"
+        if(ak && (ak === "consensus" || ak === "projection" || ak === "m:wcl"
             || TIER_SOURCES.some(x => x.id === ak)
             || (ak.startsWith("m:") && COLS[A.bracket].some(c => "m:"+c.key === ak)))) A.sortKey = ak;
         if(p.get("ad") === "1") A.sortDir = 1;

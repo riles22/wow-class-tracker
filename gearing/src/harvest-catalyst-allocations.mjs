@@ -11,9 +11,10 @@ import { fileURLToPath } from "node:url";
 import { getText, parseItem, TOOLTIP } from "./lib-wowhead.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DATA_PATH = join(ROOT, "data", "catalyst-stat-allocations.json");
+const DATA_ROOT = process.env.WOW_GEARING_DATA_DIR || join(ROOT, "data");
+const DATA_PATH = join(DATA_ROOT, "catalyst-stat-allocations.json");
 const ACCEPT_CHANGES = process.env.WOW_ACCEPT_CATALYST_ALLOCATION_CHANGES === "1";
-const read = async (name) => JSON.parse(await readFile(join(ROOT, "data", name), "utf8"));
+const read = async (name) => JSON.parse(await readFile(join(DATA_ROOT, name), "utf8"));
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const TIER_SLOTS = new Set(["Head", "Shoulder", "Chest", "Hands", "Legs"]);
 const ARMOR_TYPES = new Set(["Cloth", "Leather", "Mail", "Plate"]);
@@ -112,6 +113,11 @@ const removed = [...before].filter((id) => !after.has(id));
 const added = [...after].filter((id) => !before.has(id));
 const changed = [...after].filter((id) => before.has(id)
   && JSON.stringify(previous.items[id]) !== JSON.stringify(items[id]));
+if (process.env.WOW_GEARING_PROPOSAL_DIR) {
+  await mkdir(process.env.WOW_GEARING_PROPOSAL_DIR, { recursive: true });
+  await writeFile(join(process.env.WOW_GEARING_PROPOSAL_DIR, "allocation-proposal.json"),
+    JSON.stringify({ removed, added, changed, items }, null, 2));
+}
 if ((removed.length || added.length || changed.length) && previous && !ACCEPT_CHANGES)
   throw new Error("refusing to overwrite allocations: reviewed Catalyst fingerprint changed; audit and rerun with "
     + `WOW_ACCEPT_CATALYST_ALLOCATION_CHANGES=1 if intentional\nremoved=[${removed}] added=[${added}] changed=[${changed}]`);

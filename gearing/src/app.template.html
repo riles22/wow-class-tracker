@@ -2114,16 +2114,31 @@ function renderFooter() {
         ? 'all sources verified through <b>' + esc(guideDates[0]) + '</b> (oldest source)'
         : 'source verification is incomplete') + '.</p>'
     : '';
+  const sourceCheck = DB.sourceVerification;
+  const verificationLabels = {tierBonuses:'Tier-set tooltips', catalystRules:'Catalyst sources',
+    raid:'Raid loot', dungeons:'Dungeon loot', tier:'Tier items', allocations:'Stat allocations',
+    rewardLadders:'Reward level tables'};
+  const verification = sourceCheck
+    ? '<p class="footfresh">Independent source checks: <b>' + esc(sourceCheck.observedAt.slice(0, 10))
+      + '</b>. ' + Object.entries(sourceCheck.groups).map(([key, group]) =>
+        esc(verificationLabels[key] || key) + ': <b>' + esc(group.status.replaceAll('-', ' ')) + '</b>')
+        .join('; ') + '. <a href="https://github.com/riles22/wow-class-tracker/actions/workflows/gearing-verify.yml" target="_blank" rel="noopener noreferrer">Verification history and evidence</a>.</p>'
+    : '';
   $('#foot').innerHTML = '<p class="footfam">Part of <a href="index.html"><b>Spec Tracker</b></a> — tier consensus, rankings and the 12.1 forecast for every spec. Made by <a href="https://github.com/riles22" target="_blank" rel="noopener noreferrer"><b>riles22</b></a>.</p>'
     + guideFreshness
+    + verification
     + freshness
     + scoring
     + '<b>The stat-fit number compares equal-item-level secondary-stat fit; it is not an item simulation.</b>'
     + '<details class="disclosure"><summary>Data sources and technical notes</summary><div class="disclosure-body">'
+    + (sourceCheck ? Object.entries(sourceCheck.groups).map(([key, group]) =>
+        esc(verificationLabels[key] || key) + ': ' + esc(group.reason)
+          + (group.lastVerifiedAt ? '; last verified ' + esc(group.lastVerifiedAt.slice(0, 10)) : '')
+          + '.<br>').join('') + esc(sourceCheck.caveat) + '<br>' : '')
     + 'Item data: ' + esc(RAID.source) + ', harvested ' + esc(RAID.harvestedAt) + '.<br>'
     + 'Dungeon data: ' + esc(DUNG.source) + ', harvested ' + esc(DUNG.harvestedAt) + '.<br>'
     + 'Direct tier data: ' + esc(TIER.source) + ', harvested ' + esc(TIER.harvestedAt) + '.<br>'
-    + 'Catalyst policy: Blizzard 12.1 development notes, reviewed ' + esc(CATALYST.reviewedAt) + '.<br>'
+    + 'Catalyst policy: recorded review ' + esc(CATALYST.reviewedAt) + '; independent current source checks are listed above. Preview-dependent behavior remains caveated.<br>'
     + (SPECS.structuralSync
       ? 'Spec capabilities: local inputs checked ' + esc(SPECS.structuralSync.checkedAt)
         + '; armor evidence ' + esc(SPECS.structuralSync.sources.armor.asOf || 'undated')
@@ -2140,9 +2155,7 @@ function renderFooter() {
     + esc(RAID.caveat) + '</b> ' + esc(SPECS.caveat) + '<br>'
     + '<b>Weapon loadouts are explicit, mutually exclusive configurations</b> curated from official Blizzard class pages and patch notes. '
     + 'Allowed types and direct official source links are shown inside each weapon card.<br>'
-    + 'Rebuild with <code>node src/harvest-raid.mjs &amp;&amp; node src/harvest-dungeons.mjs &amp;&amp; node src/harvest-tier.mjs &amp;&amp; '
-    + 'node src/harvest-catalyst-allocations.mjs &amp;&amp; node src/harvest-specs.mjs &amp;&amp; '
-    + 'node src/harvest-sheet.mjs &amp;&amp; node src/build.mjs</code>.</div></details>';
+    + 'Current item sources are checked weekly. Source changes are reviewed before the recorded game data is updated.</div></details>';
 }
 
 /* ---- Enhancements tab (Riley, 2026-08-18) --------------------------------------

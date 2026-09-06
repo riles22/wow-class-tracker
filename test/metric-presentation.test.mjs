@@ -5,8 +5,8 @@ import { readFile } from "node:fs/promises";
 const template = await readFile(new URL("../src/template.html", import.meta.url), "utf8");
 const functions = template.slice(template.indexOf("function leaderboardExplanation()"), template.indexOf("function profileHTML(s)"));
 const esc = text => String(text).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-const render = new Function("SOURCES", "META", "PHASE", "esc", "eraOk", "metricEra", "seasonChip", `${functions}; return metricsHTML;`)(
-  [{ id: "warcraftlogs", name: "Warcraft Logs" }], {}, { liveLabel: "live patch" }, esc, () => true, m => m.era ?? "live", () => "");
+const render = new Function("SOURCES", "META", "PHASE", "esc", "eraOk", "metricEra", "seasonChip", "DATA", `${functions}; return metricsHTML;`)(
+  [{ id: "warcraftlogs", name: "Warcraft Logs" }], {}, { liveLabel: "live patch" }, esc, () => true, m => m.era ?? "live", () => "", { wclCoverage: null });
 const metric = (extra = {}) => ({ source: "warcraftlogs", bracket: "raid", name: "Leaderboard median DPS (S2 Mythic: example, top 100)", value: 120,
   unit: "DPS", n: 17, asOf: "2026-08-20", sample: { kind: "leaderboard-entries", cap: 100, partition: 2,
     oldestRun: "2026-08-19T03:00:00Z", newestRun: "2026-08-20T04:00:00Z", observedAt: "2026-09-05T10:00:00Z",

@@ -1428,12 +1428,12 @@
       "sockets": [],
       "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
-      "effect": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 34183 and expelling 10842 Fire damage split between nearby enemies. (1s cooldown)",
+      "effect": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 61462 and expelling 16277 Fire damage split between nearby enemies. (1s cooldown)",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 34183 and expelling 10842 Fire damage split between nearby enemies. (1s cooldown)"
+          "text": "Your helpful spells and abilities have a high chance to create a Burning Ember on an ally. The ember flares up after 1 sec, cauterizing wounds to heal for 61462 and expelling 16277 Fire damage split between nearby enemies. (1s cooldown)"
         }
       ],
       "allocations": {
@@ -6332,10 +6332,16 @@
       "slot": "Neck",
       "type": null,
       "secondaries": [
-        "Crit"
+        "Crit",
+        "Haste",
+        "Vers",
+        "Mast"
       ],
       "dataRatings": {
-        "Crit": 428
+        "Crit": 107,
+        "Haste": 107,
+        "Vers": 107,
+        "Mast": 107
       },
       "tertiaries": [],
       "tertiaryRatings": {},
@@ -6353,11 +6359,14 @@
         },
         {
           "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec."
+          "text": "Your spells and abilities have a chance to increase a random secondary stat by 434 but reduce your other secondary stats by 73 for 12 sec."
         }
       ],
       "allocations": {
-        "Crit": 7000
+        "Crit": 1750,
+        "Haste": 1750,
+        "Vers": 1750,
+        "Mast": 1750
       }
     },
     "270168": {
@@ -6379,12 +6388,12 @@
       "sockets": [],
       "dataIlvl": 344,
       "dataTrack": null,
-      "effect": "Channel a torrent of venomous rage over 2 sec, dealing 906988 Nature damage to your target and splattering all nearby enemies for 159616 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)",
+      "effect": "Channel a torrent of venomous rage over 2 sec, dealing 1088387 Nature damage to your target and splattering all nearby enemies for 191540 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)",
       "effectKind": "Use",
       "effects": [
         {
           "kind": "Use",
-          "text": "Channel a torrent of venomous rage over 2 sec, dealing 906988 Nature damage to your target and splattering all nearby enemies for 159616 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)"
+          "text": "Channel a torrent of venomous rage over 2 sec, dealing 1088387 Nature damage to your target and splattering all nearby enemies for 191540 Nature damage. Damage reduced beyond 8 targets. (4 Min Cooldown)"
         }
       ],
       "allocations": {
@@ -6410,16 +6419,16 @@
       "sockets": [],
       "dataIlvl": 344,
       "dataTrack": null,
-      "effect": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 5 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)",
+      "effect": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 3 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 5 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)"
+          "text": "Your spells afflict you with Hex Lord's Doom, draining your Intellect by 3 up to 30 times. This effect may occur once every 6 sec. (6s cooldown)"
         },
         {
           "kind": "Use",
-          "text": "Consume the power of Hex Lord's Doom, increasing your Intellect by 34 per stack for 30 sec. (30 Sec Cooldown)"
+          "text": "Consume the power of Hex Lord's Doom, increasing your Intellect by 39 per stack for 30 sec. (30 Sec Cooldown)"
         }
       ],
       "allocations": {
@@ -6445,12 +6454,12 @@
       "sockets": [],
       "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
-      "effect": "Your healing has a high chance to infuse the target with Preternatural Antivenom for 30 sec, healing your ally for 75% of any damage they take until 141608 health has been restored.",
+      "effect": "Your healing has a high chance to infuse the target with Preternatural Antivenom for 30 sec, healing your ally for 75% of any damage they take until 184090 health has been restored.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Your healing has a high chance to infuse the target with Preternatural Antivenom for 30 sec, healing your ally for 75% of any damage they take until 141608 health has been restored."
+          "text": "Your healing has a high chance to infuse the target with Preternatural Antivenom for 30 sec, healing your ally for 75% of any damage they take until 184090 health has been restored."
         }
       ],
       "allocations": {
@@ -6476,12 +6485,12 @@
       "sockets": [],
       "dataIlvl": 334,
       "dataTrack": "Myth 6/6",
-      "effect": "Dodging, parrying, or blocking has a high chance to call bolstering winds, increasing your Strength or Agility by 521 and Speed by 142 for 12 sec. If you have not dodged, parried, or blocked for 15 sec, this effect is triggered immediately. May only occur once per 1 min.",
+      "effect": "Dodging, parrying, or blocking has a high chance to call bolstering winds, increasing your Strength or Agility by 547 and Speed by 142 for 12 sec. If you have not dodged, parried, or blocked for 15 sec, this effect is triggered immediately. May only occur once per 1 min.",
       "effectKind": "Equip",
       "effects": [
         {
           "kind": "Equip",
-          "text": "Dodging, parrying, or blocking has a high chance to call bolstering winds, increasing your Strength or Agility by 521 and Speed by 142 for 12 sec. If you have not dodged, parried, or blocked for 15 sec, this effect is triggered immediately. May only occur once per 1 min."
+          "text": "Dodging, parrying, or blocking has a high chance to call bolstering winds, increasing your Strength or Agility by 547 and Speed by 142 for 12 sec. If you have not dodged, parried, or blocked for 15 sec, this effect is triggered immediately. May only occur once per 1 min."
         }
       ],
       "allocations": {
@@ -6585,7 +6594,7 @@
       "sourceKey": "8",
       "tierClass": null,
       "name": "Zatha'tek, Breath of Corruption",
-      "slot": "Main Hand",
+      "slot": "One-Hand",
       "type": "Dagger",
       "secondaries": [
         "Crit"
@@ -8624,37 +8633,6 @@
       "slot": "Chest",
       "type": "Mail",
       "secondaries": [
-        "Crit"
-      ],
-      "dataRatings": {
-        "Crit": 209
-      },
-      "tertiaries": [],
-      "tertiaryRatings": {},
-      "sockets": [],
-      "dataIlvl": 344,
-      "dataTrack": null,
-      "effect": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec.",
-      "effectKind": "Equip",
-      "effects": [
-        {
-          "kind": "Equip",
-          "text": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec."
-        }
-      ],
-      "allocations": {
-        "Crit": 7000
-      }
-    },
-    "271878": {
-      "category": "base",
-      "sourceKind": "raid",
-      "sourceKey": "8",
-      "tierClass": null,
-      "name": "Chausses of Unbound Rancor",
-      "slot": "Legs",
-      "type": "Plate",
-      "secondaries": [
         "Mast"
       ],
       "dataRatings": {
@@ -8675,6 +8653,37 @@
       ],
       "allocations": {
         "Mast": 7000
+      }
+    },
+    "271878": {
+      "category": "base",
+      "sourceKind": "raid",
+      "sourceKey": "8",
+      "tierClass": null,
+      "name": "Chausses of Unbound Rancor",
+      "slot": "Legs",
+      "type": "Plate",
+      "secondaries": [
+        "Crit"
+      ],
+      "dataRatings": {
+        "Crit": 209
+      },
+      "tertiaries": [],
+      "tertiaryRatings": {},
+      "sockets": [],
+      "dataIlvl": 344,
+      "dataTrack": null,
+      "effect": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec.",
+      "effectKind": "Equip",
+      "effects": [
+        {
+          "kind": "Equip",
+          "text": "Your spells and abilities have a chance to increase your Critical Strike by 378, but reduce your other secondary stats by 63 for 12 sec."
+        }
+      ],
+      "allocations": {
+        "Crit": 7000
       }
     },
     "273773": {

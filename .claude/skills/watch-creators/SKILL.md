@@ -70,15 +70,22 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
      a durable record that costs one fetch once, whereas a title guess costs the take
      forever.
    · **NIGHTLY (Supadata): KEEP the keyword filter** — class/spec/Midnight/12.1/Season.
-     The free tier is **100 requests per MONTH** (`PER_RUN_CAP = 25` per run is only the
-     per-run guard), so an unfiltered nightly would burn the monthly budget in two runs.
-     Breadth belongs in local runs, which have no quota.
+     Provider requests are metered and `PER_RUN_CAP = 25` is the per-run guard.
+     Durable usage tracking and an optional configured rolling allowance govern
+     the nightly; do not assume a current subscription from older free-plan prose.
+     Breadth belongs in local runs, which do not spend this API allowance.
 2. **Transcript** (videos ≥2–6h old — auto-captions lag upload). Sources in order:
    (a) **Nightly runner:** `transcript-fetch/<videoId>.json` — pre-fetched by the
    deterministic step (`src/fetch-transcripts.mjs`, Supadata captions API,
    `mode=native` = YouTube's own auto-captions; `chunks[].offset` is
    **milliseconds**). Check `transcript-fetch/summary.json` first; NEVER call the
    API or YouTube yourself in a nightly run.
+   `cached:<count>` means a prior successful fetch is reused, with its original
+   date. `retry-wait`, `provider-cooldown`, `budget-deferred`, or `review-required`
+   leave the video pending; record the summary's reason/date without resetting
+   state or fetching a replacement. `state.json` and `plan.json` are operational
+   inputs for deterministic steps, not distillation sources. See
+   `docs/transcript-operations.md` for the owner-operated recovery path.
    (b) **Local/residential runs:**
    `yt-dlp --no-update --extractor-args "youtube:player_client=android" --skip-download --write-auto-subs --sub-langs en --sub-format json3 --sleep-requests 1.5 -o "<scratchpad>/%(id)s.%(ext)s" <url>`
    Flatten json3 events to text, PRESERVING per-event `tStartMs`.
@@ -114,12 +121,12 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    Pace `--sleep-requests 3`+ and stop on the first error of any kind.
    (c) **Neither available** → queue it in `data/pending-transcripts.json`
    (`{id, creator, title, published, queuedAt}` — the machine queue the deterministic
-   step drains, 25 fetches/run inside the free-tier budget); log.md keeps the
+   step drains, at most 25 requests/run plus its configured allowance); log.md keeps the
    human-readable trail. Remove a video from the queue ONLY once distilled or
    transcript-verified-skipped.
    **The QUEUE stays keyword-filtered even on a local run.** The unfiltered sweep above
    applies to what you fetch YOURSELF with yt-dlp, which is free. Anything you hand to the
-   queue is drained by Supadata against a 100-request MONTHLY budget, so queueing every
+   queue is drained by Supadata using metered requests, so queueing every
    title-irrelevant video a local run happened to fail on would spend the nightly's quota
    on exactly the content the nightly filter exists to avoid. Locally: fetch broadly, queue
    narrowly — if yt-dlp fails on a video whose title carries no class/spec/12.1/Season

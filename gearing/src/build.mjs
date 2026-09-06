@@ -11,6 +11,8 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateData } from "./validate-data.mjs";
 import { buildGuidePayload } from "./lib-guides.mjs";
+import { currentVerification } from "./verify-sources.mjs";
+import { jsonForHtml } from "./lib-html.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const readData = async (f) => JSON.parse(await readFile(join(ROOT, "data", f), "utf8"));
@@ -26,6 +28,9 @@ const itemEligibility = await readData("item-eligibility-overrides.json");
 const tier = await readData("tier-items.json");
 const catalyst = await readData("catalyst-rules.json");
 const catalystAllocations = await readData("catalyst-stat-allocations.json");
+let sourceVerification = null;
+try { sourceVerification = await currentVerification(await readData("source-verification.json")); }
+catch (error) { if (error.code !== "ENOENT") throw error; }
 const guides = {};
 for (const id of ["icyveins", "wowhead", "method"]) guides[id] = await readData(`guides/${id}.json`);
 let icons = { icons: {} };
@@ -50,10 +55,9 @@ for (const set of tier.sets) for (const it of set.items) if (it.slot) itemSlots.
 const guidePayload = buildGuidePayload(guides, specs.specs, { itemSlots,
   sourceNames: { icyveins: "Icy Veins", wowhead: "Wowhead", method: "Method" } });
 
-// </script> inside the JSON would close the host <script> tag early
-const blob = JSON.stringify({ raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
-  catalystAllocations, guides: guidePayload, icons: icons.icons })
-  .replace(/<\/script>/gi, "<\\/script>");
+// Source tooltips and failed-response excerpts are data, never HTML markup.
+const blob = jsonForHtml({ raid, specs, dungeons, sheet, itemEligibility, tier, catalyst,
+  catalystAllocations, sourceVerification, guides: guidePayload, icons: icons.icons });
 
 if (!template.includes("__DATA__")) throw new Error("template is missing the __DATA__ placeholder");
 let out = template.replace("__DATA__", blob);
