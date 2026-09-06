@@ -99,6 +99,54 @@ test("CI covers all browsers while Pages verification consumes the same run's tr
   assert.match(deploy, /verify:\s+needs: \[build, deploy\]/);
   assert.equal((deploy.match(/name: deployment-expected-\$\{\{ github.run_id \}\}/g) || []).length, 2);
   assert.ok(deploy.indexOf("--create --dist dist") < deploy.indexOf("Upload the built site"));
-  assert.match(deploy, /--sha "\$GITHUB_SHA" --url "\$PAGE_URL"/);
+  assert.match(deploy, /--sha "\$DEPLOY_SHA" --url "\$PAGE_URL"/);
   assert.doesNotMatch(deploy, /npm install|playwright install|run-id:/);
+});
+
+test("publisher dispatches bind checkout and page verification to the published commit despite an older event SHA", () => {
+  const deploy = readFileSync(new URL("../.github/workflows/deploy.yml", import.meta.url), "utf8");
+  const ci = readFileSync(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
+  assert.match(deploy, /workflow_dispatch:\s+inputs:\s+commit_sha:/);
+  assert.match(deploy, /DEPLOY_SHA: \$\{\{ inputs\.commit_sha \|\| github\.sha \}\}/);
+  for (const name of ["nightly", "gearing-refresh", "gearing-verify"]) {
+    const workflow = readFileSync(new URL(`../.github/workflows/${name}.yml`, import.meta.url), "utf8");
+    assert.match(workflow, /gh workflow run deploy\.yml --ref master -f commit_sha="\$\(git rev-parse HEAD\)"/,
+      `${name} must dispatch the commit it just pushed`);
+    assert.match(workflow, /gh workflow run ci\.yml --ref master -f commit_sha="\$\(git rev-parse HEAD\)"/,
+      `${name} browser checks must run against the commit it just pushed`);
+  }
+  const build = deploy.slice(deploy.indexOf("  build:"), deploy.indexOf("  deploy:"));
+  const verify = deploy.slice(deploy.indexOf("  verify:"));
+  for (const job of [build, verify]) {
+    assert.ok(job.indexOf("name: Validate deployment commit") < job.indexOf("uses: actions/checkout@"),
+      "untrusted dispatch input must be validated before checkout");
+    assert.match(job, /ref: \$\{\{ env\.DEPLOY_SHA \}\}/);
+    assert.match(job, /git rev-parse HEAD/);
+    assert.match(job, /test [^\n]+ = "\$DEPLOY_SHA"/);
+    assert.doesNotMatch(job, /--sha "\$GITHUB_SHA"/);
+  }
+  assert.match(build, /--create[^\n]+--sha "\$DEPLOY_SHA"/);
+  assert.match(verify, /--manifest[^\n]+--sha "\$DEPLOY_SHA"/);
+  assert.match(verify, /Verified public deployment commit/);
+  const validators = [...deploy.matchAll(/\[\[ "\$DEPLOY_SHA" =~ (\S+) \]\]/g)].map((match) => new RegExp(match[1]));
+  assert.equal(validators.length, 2);
+  for (const validator of validators) {
+    assert.ok(validator.test("b".repeat(40)));
+    for (const bad of ["master", "refs/heads/master", "a".repeat(39), "a".repeat(41), "a".repeat(40) + "; echo bad"])
+      assert.equal(validator.test(bad), false);
+  }
+  assert.match(ci, /workflow_dispatch:\s+inputs:\s+commit_sha:/);
+  assert.match(ci, /CI_SHA: \$\{\{ inputs\.commit_sha \|\| github\.sha \}\}/);
+  const ciTest = ci.slice(ci.indexOf("  test:"), ci.indexOf("  ui-invariants:"));
+  const ciBrowser = ci.slice(ci.indexOf("  ui-invariants:"));
+  for (const job of [ciTest, ciBrowser]) {
+    assert.ok(job.indexOf("name: Validate test commit") < job.indexOf("uses: actions/checkout@"));
+    assert.match(job, /ref: \$\{\{ env\.CI_SHA \}\}/);
+    assert.match(job, /test "\$ACTUAL_SHA" = "\$CI_SHA"/);
+    assert.match(job, /Workflow trigger commit/);
+    const pattern = /\[\[ "\$CI_SHA" =~ (\S+) \]\]/.exec(job)?.[1];
+    assert.ok(pattern);
+    assert.equal(new RegExp(pattern).test("master"), false);
+    assert.equal(new RegExp(pattern).test("b".repeat(40)), true);
+  }
 });
