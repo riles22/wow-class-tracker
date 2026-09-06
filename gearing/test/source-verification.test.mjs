@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, writeFile, rm, copyFile } from "node:fs/promi
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { catalystGuide, compareEvidence, currentVerification, digest, itemScope, tierBonuses,
-  validateReport } from "../src/verify-sources.mjs";
+  validateReport, verifySources } from "../src/verify-sources.mjs";
 import { getText } from "../src/lib-wowhead.mjs";
 import { jsonForHtml } from "../src/lib-html.mjs";
 
@@ -74,6 +74,7 @@ test("report validation fails closed on future dates, missing coverage, forged s
     (r) => { r.groups.catalystRules.sources[0].url = "https://attacker.example/foo"; },
     (r) => { r.groups.raid.lastVerifiedAt = "2026-09-07T00:00:00.000Z"; },
     (r) => { r.groups.raid.sourceDigest = null; },
+    (r) => { r.groups.raid.status = "unreachable"; },
   ];
   for (const change of changes) { const r = report(); change(r); assert.throws(() => validateReport(r)); }
 });
@@ -120,4 +121,62 @@ test("embedded failed-source excerpts and tooltip HTML cannot close the JSON scr
   const encoded = jsonForHtml(input);
   assert.doesNotMatch(encoded, /</);
   assert.deepEqual(JSON.parse(encoded), input);
+});
+
+test("failed collections retain the last bound success across retries and preserve malformed raw responses", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "gearing-failed-verification-")), root = join(dir, "gearing");
+  try {
+    await mkdir(join(root, "data"), { recursive: true }); await mkdir(join(dir, "data"));
+    await copyFile(new URL("../../data/specs.json", import.meta.url), join(dir, "data", "specs.json"));
+    const files = { raid: "raid-items.json", dungeons: "dungeon-items.json", tier: "tier-items.json",
+      allocations: "catalyst-stat-allocations.json" };
+    for (const file of [...Object.values(files), "catalyst-rules.json"])
+      await copyFile(new URL(`../data/${file}`, import.meta.url), join(root, "data", file));
+    const baseline = await read("../data/source-review.json"), prior = report();
+    const tracker = await read("../../data/specs.json"), catalyst = await read("../data/catalyst-rules.json");
+    baseline.tierBonuses.inputDigest = digest(tracker.map(({ class: cls, spec, tierSet }) => ({ class: cls, spec, tierSet })));
+    baseline.catalystRules.inputDigest = digest(catalyst);
+    for (const kind of ["tierBonuses", "catalystRules"]) Object.assign(prior.groups[kind], {
+      inputDigest: baseline[kind].inputDigest, sourceDigest: baseline[kind].digest,
+      sources: baseline[kind].sources.map(({ url }) => ({ url, observedAt: stamp, sha256: "a".repeat(64) })),
+    });
+    for (const [kind, file] of Object.entries(files)) prior.groups[kind].inputDigest
+      = prior.groups[kind].sourceDigest = digest(itemScope(kind, await read(`../data/${file}`)));
+    prior.baselineDigest = digest(baseline);
+    await writeFile(join(root, "data", "source-review.json"), JSON.stringify(baseline));
+    const published = join(root, "data", "source-verification.json");
+    await writeFile(published, JSON.stringify(prior));
+    assert.ok(Object.values((await currentVerification(prior, root)).groups)
+      .filter((group) => group.status === "verified").length === 6);
+    const malformed = '<html>Provider error </script ><p>source changed</p></html>';
+    const options = { root, fetchText: async () => malformed,
+      runHarvester: async () => { throw new Error("fixture source unavailable"); } };
+    const first = await verifySources({ ...options, outDir: join(dir, "first") });
+    for (const kind of Object.keys(prior.groups).filter((key) => key !== "rewardLadders")) {
+      assert.notEqual(first.report.groups[kind].status, "verified");
+      assert.equal(first.report.groups[kind].lastVerifiedAt, stamp);
+      assert.equal(first.report.groups[kind].lastSuccessfulVerification.lastVerifiedAt, stamp);
+    }
+    const tier = await read("../data/tier-items.json");
+    const sourceUrl = `https://nether.wowhead.com/tooltip/item/${tier.sets[0].items.find((item) => item.slot === "Head").id}?locale=0`;
+    const raw = JSON.parse(await readFile(join(first.outDir, `${digest(sourceUrl)}.json`), "utf8"));
+    assert.equal(raw.url, sourceUrl); assert.equal(raw.body, malformed);
+    assert.equal(raw.sha256, (await import("node:crypto")).createHash("sha256").update(malformed).digest("hex"));
+    await writeFile(published, JSON.stringify(first.report));
+    const second = await verifySources({ ...options, outDir: join(dir, "second") });
+    assert.equal(second.report.groups.raid.lastVerifiedAt, stamp, "a repeated failure must retain the actual last success");
+    assert.equal(second.report.groups.tierBonuses.lastVerifiedAt, stamp);
+    await writeFile(published, JSON.stringify(second.report));
+    const raid = await read("../data/raid-items.json"); raid.bosses[0].items[0].name += " changed";
+    await writeFile(join(root, "data", files.raid), JSON.stringify(raid));
+    const third = await verifySources({ ...options, outDir: join(dir, "third") });
+    assert.equal(third.report.groups.raid.lastVerifiedAt, null, "changed item facts cannot inherit historical verification");
+    assert.equal(third.report.groups.tierBonuses.lastVerifiedAt, stamp);
+    await writeFile(published, JSON.stringify(third.report));
+    baseline.note += " changed review";
+    await writeFile(join(root, "data", "source-review.json"), JSON.stringify(baseline));
+    const fourth = await verifySources({ ...options, outDir: join(dir, "fourth") });
+    assert.equal(fourth.report.groups.tierBonuses.lastVerifiedAt, null, "changed review baseline invalidates prior history");
+    assert.equal(fourth.report.groups.dungeons.lastVerifiedAt, null);
+  } finally { await rm(dir, { recursive: true, force: true }); }
 });

@@ -79,7 +79,8 @@ async function inputDigests(root) {
     catalystRules: digest(catalyst) };
 }
 
-export async function verifySources({ root = ROOT, outDir, skipLoot = false } = {}) {
+export async function verifySources({ root = ROOT, outDir, skipLoot = false,
+  fetchText = getText, runHarvester = run } = {}) {
   outDir ||= await mkdtemp(join(tmpdir(), "wow-gearing-verification-"));
   await mkdir(outDir, { recursive: true });
   const data = join(root, "data"), staged = join(outDir, "staged");
@@ -91,16 +92,31 @@ export async function verifySources({ root = ROOT, outDir, skipLoot = false } = 
   let baseline = {};
   try { baseline = await json(join(data, "source-review.json")); }
   catch (error) { if (error.code !== "ENOENT") throw error; }
+  let prior = null;
+  try { prior = await currentVerification(await json(join(data, "source-verification.json")), root); }
+  catch { /* An absent or invalid prior receipt cannot provide historical verification. */ }
+  function lastSuccessful(name) {
+    const group = prior?.groups[name];
+    if (!group?.lastVerifiedAt) return null;
+    if (group.status !== "verified") return group.lastSuccessfulVerification ?? null;
+    const { lastVerifiedAt, inputDigest, sourceDigest, sources } = group;
+    return { lastVerifiedAt, inputDigest, sourceDigest, ...(sources ? { sources } : {}),
+      baselineDigest: prior.baselineDigest };
+  }
+  const historical = (name) => {
+    const last = lastSuccessful(name);
+    return { lastVerifiedAt: last?.lastVerifiedAt ?? null,
+      ...(last ? { lastSuccessfulVerification: last } : {}) };
+  };
   await writeFile(join(outDir, "reviewed-baseline.json"), JSON.stringify(baseline, null, 2));
   const observedAt = new Date().toISOString(), groups = {}, evidence = {};
   async function fetchEvidence(url, parse) {
-    const body = await getText(url, 2, { timeoutMs: 10_000 });
+    const body = await fetchText(url, 2, { timeoutMs: 10_000 });
     if (!body) throw new Error(`Source unavailable: ${url}`);
-    const value = parse(body);
     const receipt = { url, observedAt: new Date().toISOString(), sha256:
-      createHash("sha256").update(body).digest("hex"), value };
+      createHash("sha256").update(body).digest("hex") };
     await writeFile(join(outDir, `${digest(url)}.json`), JSON.stringify({ ...receipt, body }, null, 2));
-    return receipt;
+    return { ...receipt, value: parse(body) };
   }
   async function check(name, collect) {
     try {
@@ -108,11 +124,14 @@ export async function verifySources({ root = ROOT, outDir, skipLoot = false } = 
       const value = evidence[name].map(({ url, value }) => ({ url, value }));
       groups[name] = { ...compareEvidence(value, baseline[name], inputs[name]),
         inputDigest: inputs[name], sourceDigest: digest(value), sources: evidence[name].map(({ value, ...r }) => r),
-        lastVerifiedAt: baseline[name]?.verifiedAt ?? null };
-      if (groups[name].status === "verified") groups[name].lastVerifiedAt = observedAt;
+        ...historical(name) };
+      if (groups[name].status === "verified") {
+        groups[name].lastVerifiedAt = observedAt;
+        delete groups[name].lastSuccessfulVerification;
+      }
     } catch (error) {
       groups[name] = { status: "unreachable", reason: error.message,
-        lastVerifiedAt: baseline[name]?.verifiedAt ?? null };
+        ...historical(name) };
     }
   }
   await check("tierBonuses", async () => {
@@ -157,7 +176,7 @@ export async function verifySources({ root = ROOT, outDir, skipLoot = false } = 
         WOW_GEARING_EVIDENCE_DIR: join(outDir, "loot-evidence"),
         WOW_GEARING_PROPOSAL_DIR: outDir,
         WOW_ACCEPT_LOOT_CHANGES: "", WOW_ACCEPT_TIER_CHANGES: "", WOW_ACCEPT_CATALYST_ALLOCATION_CHANGES: "" };
-      const result = await run(process.execPath, [join(root, "src", script)], {
+      const result = await runHarvester(process.execPath, [join(root, "src", script)], {
         env, timeout: 5 * 60_000, maxBuffer: 2_000_000, windowsHide: true,
       });
       await writeFile(join(outDir, `${kind}.log`), result.stdout + result.stderr);
@@ -165,12 +184,12 @@ export async function verifySources({ root = ROOT, outDir, skipLoot = false } = 
       const inputDigest = digest(itemScope(kind, before)), sourceDigest = digest(itemScope(kind, after));
       groups[kind] = { status: inputDigest === sourceDigest ? "verified" : "review-required",
         reason: inputDigest === sourceDigest ? "Loot membership and parsed item fields match" : "Item fields changed; review staged data",
-        inputDigest, sourceDigest, lastVerifiedAt: inputDigest === sourceDigest ? observedAt : null,
+        inputDigest, sourceDigest, ...(inputDigest === sourceDigest ? { lastVerifiedAt: observedAt } : historical(kind)),
         scope: kind === "allocations" ? "Secondary-stat allocation fingerprints" : "Loot membership and item tooltip fields; excludes set-bonus prose and hard-coded item-level ladders" };
     } catch (error) {
       await writeFile(join(outDir, `${kind}.log`), String(error.stdout || "") + String(error.stderr || error.message));
       groups[kind] = { status: "unverified", reason: "Harvester rejected the source or exceeded its deadline; previous game data retained",
-        inputDigest: digest(itemScope(kind, before)), lastVerifiedAt: null };
+        inputDigest: digest(itemScope(kind, before)), ...historical(kind) };
     }
   }
   groups.rewardLadders = { status: "manual-review", reason: "Raid/M+ item-level tables and the owner-supplied reward chart require a separate source review; item fetches do not renew them" };
@@ -215,15 +234,22 @@ export async function currentVerification(report, root = ROOT) {
   for (const [kind, file] of [["raid", "raid-items.json"], ["dungeons", "dungeon-items.json"],
     ["tier", "tier-items.json"], ["allocations", "catalyst-stat-allocations.json"]])
     inputs[kind] = digest(itemScope(kind, await json(join(root, "data", file))));
-  for (const [kind, group] of Object.entries(result.groups)) {
+  const bound = (kind, group, baselineDigest) => {
     const sourceReviewed = !["tierBonuses", "catalystRules"].includes(kind)
       || (baseline[kind]?.digest === group.sourceDigest && baseline[kind]?.inputDigest === inputs[kind]
         && digest(baseline[kind].sources) === group.sourceDigest
         && digest((baseline[kind].sources || []).map((source) => source.url))
           === digest((group.sources || []).map((source) => source.url)));
-    if (group.status === "verified" && (group.inputDigest !== inputs[kind]
-      || report.baselineDigest !== digest(baseline) || !sourceReviewed
-      || group.inputDigest !== group.sourceDigest && !["tierBonuses", "catalystRules"].includes(kind))) {
+    return group.inputDigest === inputs[kind] && baselineDigest === digest(baseline) && sourceReviewed
+      && (group.inputDigest === group.sourceDigest || ["tierBonuses", "catalystRules"].includes(kind));
+  };
+  for (const [kind, group] of Object.entries(result.groups)) {
+    if (group.lastSuccessfulVerification && !bound(kind, group.lastSuccessfulVerification,
+      group.lastSuccessfulVerification.baselineDigest)) {
+      delete group.lastSuccessfulVerification;
+      if (group.status !== "verified") group.lastVerifiedAt = null;
+    }
+    if (group.status === "verified" && !bound(kind, group, report.baselineDigest)) {
       group.status = "review-required";
       group.reason = "Published facts changed after the last source verification";
       group.lastVerifiedAt = null;
@@ -247,13 +273,22 @@ export function validateReport(report, now = Date.now()) {
       throw new Error(`Invalid ${key} verification status or timestamp`);
     if (key === "rewardLadders" && group.status !== "manual-review")
       throw new Error("Reward ladders cannot be verified by item collection");
-    if (group.status === "verified") {
-      if (!hash(group.inputDigest) || !hash(group.sourceDigest) || !time(group.lastVerifiedAt))
+    if (group.status !== "verified" && group.lastVerifiedAt != null && !group.lastSuccessfulVerification)
+      throw new Error(`Missing ${key} historical verification binding`);
+    const receipts = group.status === "verified" ? [group] : [];
+    if (group.lastSuccessfulVerification) {
+      const last = group.lastSuccessfulVerification;
+      if (!hash(last.baselineDigest) || last.lastVerifiedAt !== group.lastVerifiedAt)
+        throw new Error(`Invalid ${key} historical verification binding`);
+      receipts.push(last);
+    }
+    for (const receipt of receipts) {
+      if (!hash(receipt.inputDigest) || !hash(receipt.sourceDigest) || !time(receipt.lastVerifiedAt))
         throw new Error(`Missing ${key} source verification fingerprint`);
       if (["tierBonuses", "catalystRules"].includes(key)) {
         const count = key === "tierBonuses" ? 13 : 3;
-        if (!Array.isArray(group.sources) || group.sources.length !== count || new Set(group.sources.map((s) => s.url)).size !== count
-          || group.sources.some((s) => !hash(s.sha256) || !time(s.observedAt)
+        if (!Array.isArray(receipt.sources) || receipt.sources.length !== count || new Set(receipt.sources.map((s) => s.url)).size !== count
+          || receipt.sources.some((s) => !hash(s.sha256) || !time(s.observedAt)
             || !/^https:\/\/(?:www|nether)\.wowhead\.com\//.test(s.url)))
           throw new Error(`Incomplete ${key} source receipts`);
       }
