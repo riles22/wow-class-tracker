@@ -16,6 +16,64 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-06 (nightly, SECOND run of the day) — 240/240 letters re-verified live, 0 moved; Archon walled an EIGHTEENTH night (Cloudflare, all 11 URLs)
+
+- **All three reachable tier sources fetched fresh from THIS session** — nothing carried forward from
+  the 13:50Z nightly. Direct browser-UA GET on every page, no proxy (r.jina.ai is IP-403 on
+  `wowhead.com/guide/*` and was deliberately not attempted); byte counts read off the written files,
+  never `curl`'s `size_download`, which reports the compressed length.
+  · **Icy Veins**, 6 pages, HTTP 200, 195,859–343,364 bytes. `<style>` stripped BEFORE parsing (the
+    tier-list CSS ships inline), exactly one `<table class="tier-list">` asserted per page, letter
+    from each row's first `<td>`, spec from each `tier-list-entry`'s FIRST `alt=` looked up WHOLE
+    against the roster. **raid 27/7/6 = 40, M+ 27/7/6 = 40, 80 rows, 0 unmatched.**
+  · **Method**, 2 pages, HTTP 200, 158,880 and 165,531 bytes. `<style>` stripped first — the CSS block
+    names `.tier__tier`/`.tier__icon`, so an unstripped search finds the stylesheet and not the list.
+    Three `tierlist pw-item` containers on the raid page and **five** on M+; the roster match rejected
+    the extras by itself, including the 9-entry dungeon-difficulty block (King's Rest, Ruby Life
+    Pools, …) — never by position. **40 + 40 = 80 rows, 0 unmatched.**
+  · **Wowhead**, 6 pages, HTTP 200, 75,149–341,214 bytes, FULL browser header set (a UA-only request
+    is Cloudflare-403). `\/` unescaped across the whole document BEFORE searching for
+    `[tier-list=rows]`; never anchored on `WH.markup.printHtml(`, which is what produced the past
+    zero-row incidents. Exactly one tier-list block per page. Labels matched with tolerant
+    whitespace and specs read off the `[spec-badge=<spec>-<class>]` kebab slug. **27/7/6 and 27/7/6 =
+    80 rows, 0 unmatched.**
+- **Pre-merge diff: 240 of 240 letters identical — moved 0 / same 240 / new 0 / absent 0.** Nothing
+  was merged because there was nothing to merge; `apply-ratings.mjs` was not run.
+- **Page self-dates re-read live and cross-checked against this run's `published-evidence` artifact,
+  all matching stored values exactly.** Icy Veins JSON-LD `dateModified`: raid DPS 2026-08-30, raid
+  healer 2026-09-01, raid tank 2026-08-29, M+ DPS 2026-08-30, M+ healer 2026-08-30, M+ tank
+  2026-08-30. Wowhead: raid DPS/healer/tank all 2026-08-31, M+ DPS 2026-08-28, M+ healer 2026-08-26,
+  M+ tank 2026-09-01. Method publishes no JSON-LD date; its in-body "Last Updated" lines read
+  **10th August 2026** (raid) and **13th August 2026** (M+), and it carries no `published` block in
+  the contract.
+- **Era-verified from body, title and changelog — all six Icy Veins, both Method and all six Wowhead
+  pages self-identify as Midnight Season 2 / Patch 12.1**, with Season 1 discussed in the past tense.
+  Devourer present in every DPS and tank list (on Method it lives in the `alt=` attributes, so a
+  text-only Devourer grep on that page returns false — check the parsed rows, not the stripped text).
+  The Icy Veins raid-healer title still reads "(Patch 12.0.7 / Midnight)" and is again overridden by
+  its body per the body-over-title precedent: changelog "01 Sep. 2026: Updated for the end of RWF
+  Mythic progression", "11 Aug. 2026: Updated for Midnight Season 2 launch". **No `seasonVerified`
+  value changed (all 26 pages stay `s2`), so `freeze-season.mjs` had nothing to do and step 5b is a
+  no-op this run.**
+- **`snapshot` dates already read 2026-09-06** from the earlier run today and were re-verified rather
+  than rewritten — a same-day recheck confirms unchanged fresh data, it does not advance a date.
+- 🛑 **ARCHON WALL, NIGHT 18.** The pre-agent `source-health/evidence.json` (19:44:21Z) already
+  reported both probe routes `blocked` — raid `cloudflare-challenge` at HTTP 403, M+
+  `human-verification` at HTTP 200. Confirmed independently here: **all ELEVEN distinct registered
+  archon.gg URLs fetched with the full browser header set returned HTTP 403, 5,926–6,010 bytes, with
+  `<title>Just a moment...</title>` and `cf_chl` markers, and `__NEXT_DATA__` count 0 on every one.**
+  The assertion is on `__NEXT_DATA__` presence, not the status code, exactly as the contract's
+  standing note requires. No challenge was solved, replayed or automated past. **Per the
+  owner-confirmed retention policy (2026-09-05) Archon's last verified S2 letters stay in the
+  consensus with their original 2026-08-25 dates** — an outage does not remove a source, and the
+  consensus is still four sources. Not one Archon letter, snapshot or `seasonVerified` was touched.
+- `data/encounter-tiers.json` re-read rather than described from memory rather than assumed:
+  **`season: "s1"`, `asOf` 2026-08-17**, 619 tier rows (299 raid + 320 M+). It is still the
+  QUARANTINED S1 archive — the stamp does not match `PHASES.liveSeason`, so the UI keeps the whole
+  Fight selector hidden and `fight=` deep links inert, and it stays that way until an Archon S2
+  encounter rebuild can actually be fetched. Unchanged this run. (Note the `archon-encounters`
+  contract row probes the registry PAGE snapshot, 2026-08-18, not this file's `asOf`.)
+
 ## 2026-09-06 (local, scheduled) — Archon walled a SEVENTEENTH night, re-probed from a residential IP; 0 letters touched
 
 - **Scope: residential-only catch-up.** The CI nightly landed `7a6cea3` at 13:50Z with Icy Veins,

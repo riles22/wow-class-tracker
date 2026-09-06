@@ -5679,7 +5679,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
       "url": "https://youtu.be/3r_vwmTUZXs?t=408",
-      "superseded": false,
+      "superseded": true,
       "claim": "Dorki puts Blood DK alone at the top of his Mythic+ list and says it arguably deserves a tier of its own, describing it as clearly ahead of every other tank. Speaking as a Blood main, he pushes back directly on a suggestion from chat that it is not tanky at the key levels that matter, calling it extraordinarily durable right now. He offers his own history as a check against bias, saying he has ranked Death Knight among the weakest tanks on every past list he has made. Every group composition he builds in the video is anchored on Blood, and he expects it to be nerfed in a later patch — which he treats as the single change that would reshuffle the whole tank picture."
     },
     {
@@ -5691,7 +5691,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
       "url": "https://youtu.be/3r_vwmTUZXs?t=246",
-      "superseded": false,
+      "superseded": true,
       "claim": "Dorki names Guardian a meta-contender tank and the likeliest beneficiary if Blood DK is nerfed, citing decent damage and solid survivability, and leaning Guardian over the other contenders specifically because a group needs Mark of the Wild from somewhere. The composition he settles on as his favourite — and the one he calls least likely to be hit by tuning — is built on Guardian. The counterweight comes from his own argument: he rates Mark of the Wild as close to worthless in its current state and says a Druid spec would need buffing for that slot to justify itself, so his case for Guardian is prospective rather than a claim that it is strong today."
     },
     {
@@ -5703,7 +5703,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
       "url": "https://youtu.be/3r_vwmTUZXs?t=396",
-      "superseded": false,
+      "superseded": true,
       "claim": "Dorki places Vengeance in his second tier of meta-contender tanks and calls it good. He rebuts a suggestion from chat that it is squishy, his position being that Vengeance, Protection Paladin and Guardian are all about equally durable — and that none of the three is close to Blood DK. He builds no composition around it, treating it as one of three broadly interchangeable options should Blood DK be nerfed."
     },
     {
@@ -5715,7 +5715,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
       "url": "https://youtu.be/3r_vwmTUZXs?t=400",
-      "superseded": false,
+      "superseded": true,
       "claim": "Dorki lists Protection Paladin among the meta-contender tanks and calls it good, grouping it with Vengeance and Guardian as roughly equally durable. His practical read is more negative than that placement suggests: he builds no composition around it, says the only reason to bring it would be if you were giving up a Blood DK, and when he picks which contender he would actually play in that scenario he chooses Guardian instead, for the raid buff."
     },
     {
@@ -5727,7 +5727,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
       "url": "https://youtu.be/3r_vwmTUZXs?t=574",
-      "superseded": false,
+      "superseded": true,
       "claim": "Dorki rates Brewmaster itself as distinctly mid, saying its main strength is single-target damage and not much beyond that, and grouping it with Protection Warrior in the tier below his contenders. His mitigating point is about context rather than the spec: he notes Monks tanking fairly high keys, and argues that the specs pairing with Brewmaster in a physical composition — Outlaw Rogue, Arms Warrior, Restoration Shaman — are all strong this season, so a Brewmaster player has good reason not to feel badly off despite the spec being unremarkable on its own."
     },
     {
@@ -5739,7 +5739,7 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his four-tier Mythic+ tier list built live on stream in launch week (strongest / meta contenders / mid / weak), drawing on his Season 2 PTR key experience.",
       "url": "https://youtu.be/3r_vwmTUZXs?t=583",
-      "superseded": false,
+      "superseded": true,
       "claim": "Dorki puts Protection Warrior in his mid tier and is more dismissive of it than of any other tank he rates: he says the one thing it is genuinely good at is reflecting spells, and that its case is situational — worth a look only where a particular dungeon happens to reward that. He offers no composition for it and does not include it among the contenders he would turn to if Blood DK were nerfed."
     },
     {
@@ -7121,6 +7121,90 @@
       "patchContext": "12.1.5 PTR preview — NOT LIVE. His reaction to the Devourer section of the 2026-09-03 official 12.1.5 PTR development notes, recorded hours after they posted and with the developer note read out at the end; nothing here describes the live 12.1 spec, and his 2026-08-09 Season 2 guide read stands alongside it.",
       "url": "https://youtu.be/JMVnCyVzlNM?t=604",
       "claim": "He calls the Collapsing Star half great — added range while casting, no 5-second cooldown on a cancelled cast, and the Fury-drain slow capped at roughly 1.5 full casts — singling out the range as removing a common way to waste a star for players not tracking boss movement precisely. The Void-Scarred half he reads as a net nerf. Demonic Intensity's Hunt empower going to 30% only replaces the 20% it already granted through Predator's Wake, while Violent Transformation loses both its 25% Hunt damage bonus and its Hunt reset, so the Hunt — which he says already does little damage — comes out behind; Monster Rising dropping out-of-form Intellect from 15% to 10% is a straight cut to out-of-metamorphosis damage; and Collapsing Star gains only 5 points of damage from Monster Rising. His central objection is that the build the changes point at cannot be assembled: resetting the Hunt now requires casting Collapsing Star, and making Collapsing Star a real button requires all four Apex talents, but the talent carrying most of his AoE damage, Calamitous (40% extra crit damage on a spell that always crits), Soul Glutton (cycling speed, which is how Void-Scarred does damage), Devourer's Bite (the build's only single-target damage) and the Hunt itself are each load-bearing — so reaching the Apex means cutting two of the build's strongest damage sources, and he could only find the points by dropping Devourer's Bite and Calamitous. Without talent shuffling or removal he calls the melee Void-Scarred build straight up dead in the water and says he would simply swap to Annihilator, which can take those talents without losing its own damage. He agrees with the design intent and notes Void-Scarred's Collapsing Stars out-damage Annihilator's above roughly six targets, because Otherworldly Focus gives Annihilator 30% and decays 5% per extra target. He rejects the developer note's premise that players avoided Collapsing Star because casting it delayed Void metamorphosis: he says they avoid it because it does less damage than Reap, and that pressing it as Void-Scarred costs Rolling Torment — make the spell good and they will press it. He expects and hopes for further changes."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Jedith",
+      "date": "2026-09-03",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. His read of the Devourer section of the 2026-09-03 official 12.1.5 PTR development notes; he stresses the changes are about five weeks out and may still move.",
+      "url": "https://youtu.be/7XywFJ3u0YM?t=502",
+      "claim": "He splits the notes cleanly in two. The changes that touch both hero trees he calls incredible: Collapsing Star gaining range once its cast has started removes the case where a moving tank or a dying mob wastes the cast, and dropping the 5-second cooldown on a cancelled cast removes the punishment for moving out of a frontal or a puddle — with the fury-drain slowdown now capped at roughly 1.5 full casts as the anti-cheese replacement, which he accepts. He frames these as quality of life rather than damage, and expects average Annihilator performance to rise sharply because the damage lost by missed Collapsing Stars and broken Impending Apocalypse ramp was, in his view, the single biggest drag on ordinary players of that build. On Void-Scarred he is openly skeptical: Demonic Intensity now moving The Hunt's reset onto Collapsing Star, plus its 30% Hunt damage empower, Violent Transformation losing the Hunt reset and gaining a Soul Immolation reset, and Monster Rising trading 5% out-of-form Intellect for 5% more Collapsing Star damage, all point at a build he does not think the talent tree can afford — the three capstones he considers mandatory leave no points for the Apex talents, and without those Collapsing Star still hits like a wet noodle, making it a nuisance rather than a payoff. He says the direction is wrong, that the real problem was only the AFK feel of the Void-Scarred playstyle, and that theorycrafting is still under way and could prove him wrong.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "Dorki",
+      "date": "2026-09-05",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-Race-to-World-First Mythic+ tier list, built live on stream as an explicit redo of his 2026-08-19 list (S = insane damage, A = raid-buff dependent, B = nothing special, C = suck).",
+      "url": "https://youtu.be/AeSgidbZVYU?t=70",
+      "claim": "Dorki keeps Blood DK in S, naming it with Holy Paladin as one of the two specs that have proven themselves through the first weeks and pointing at how many people are playing it. He credits its huge AoE damage to San'layn. The read is softened relative to his August list in two ways he states himself: he no longer places it alone at the top, since he now rates Vengeance as just as good, and when ordering the S-tier specs by raw strength he says he would maybe drop Blood DK a little down that list — the three he says belong there for sure are Blood DK, Elemental Shaman and Demonology Warlock. When chat pushes back on the meta group he has just named, he adds a Blood DK to it.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "Dorki",
+      "date": "2026-09-05",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-Race-to-World-First Mythic+ tier list, built live on stream as an explicit redo of his 2026-08-19 list (S = insane damage, A = raid-buff dependent, B = nothing special, C = suck).",
+      "url": "https://youtu.be/AeSgidbZVYU?t=584",
+      "claim": "This is a clear promotion on his August read. Dorki says that after the buffs Vengeance landed he now thinks it is just as good as Blood DK and wants to put it in S: unkillable inside Metamorphosis, good damage, and a really good raid buff in Chaos Brand that is especially valuable to caster groups. He is specific about the one gap — Vengeance loses to Blood DK on AoE, where San'layn gives Blood a crap ton of damage — but calls Vengeance almost competitive there and equal or better on single target. He names Vengeance first in the meta composition he settles on (VDH, Holy Paladin, Elemental Shaman, Demonology Warlock, Arcane Mage), on the grounds that it supplies Chaos Brand alongside the group's other buffs.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "Dorki",
+      "date": "2026-09-05",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-Race-to-World-First Mythic+ tier list, built live on stream as an explicit redo of his 2026-08-19 list (S = insane damage, A = raid-buff dependent, B = nothing special, C = suck).",
+      "url": "https://youtu.be/AeSgidbZVYU?t=890",
+      "claim": "Guardian is the one tank Dorki does not verbally place in a tier this time, so this is a comp-viability read rather than a rating. He names bear alongside Brewmaster as the go-to tank for the physical-damage composition, says a bear group with a Restoration Shaman is perfectly viable, and rejects the premise that you would only run a Feral composition to avoid bringing a bear — 'I don't think bear is necessarily bad.' That is materially thinner than his August read, which called Guardian a meta contender and the likeliest beneficiary of a Blood DK nerf; he offers no damage or survivability assessment for it in this list.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "Dorki",
+      "date": "2026-09-05",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-Race-to-World-First Mythic+ tier list, built live on stream as an explicit redo of his 2026-08-19 list (S = insane damage, A = raid-buff dependent, B = nothing special, C = suck).",
+      "url": "https://youtu.be/AeSgidbZVYU?t=576",
+      "claim": "Dorki places Brewmaster in A, the tier he defines as raid-buff dependent, and says Brewmaster with the physical-damage composition is still the go-to — later building a 'monk's team' group around it with Arms and Assassination, and defending Windwalker's place in that group for the 5% physical buff even after chat calls Windwalker useless. That is a step up from his August read, which called Brewmaster distinctly mid with single-target damage as its only real strength. The dependency is attached to the placement rather than an afterthought: he groups Brewmaster with bear as the two tanks that composition chooses between, and the tier itself is named for needing the buffs.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Dorki",
+      "date": "2026-09-05",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-Race-to-World-First Mythic+ tier list, built live on stream as an explicit redo of his 2026-08-19 list (S = insane damage, A = raid-buff dependent, B = nothing special, C = suck).",
+      "url": "https://youtu.be/AeSgidbZVYU?t=680",
+      "claim": "Dorki reverses his own opening position on air. He starts by saying he still feels Protection Paladin is pretty good, then goes to the logs to check who is playing it, says he cannot find a single Protection Paladin before spotting two, and concludes 'prot paladin I don't think is that good.' He drops it out of the meta-contender group he had it in during August. The evidence he cites is representation in high keys rather than a throughput or survivability argument.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "Dorki",
+      "date": "2026-09-05",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his post-Race-to-World-First Mythic+ tier list, built live on stream as an explicit redo of his 2026-08-19 list (S = insane damage, A = raid-buff dependent, B = nothing special, C = suck).",
+      "url": "https://youtu.be/AeSgidbZVYU?t=693",
+      "claim": "Protection Warrior stays his lowest-rated tank and he is blunt about it — not that good, one outlier player aside, and 'pretty sure it sucks' — but he attaches an explicit honesty caveat that he has not played it enough to give it a fair shake, so this is a weaker claim than his other tank reads. He also volunteers a forward-looking counterpoint when chat raises it: the 12.1.5 notes carry big Protection Warrior changes, and with Execute becoming a powerful button he thinks they might do insane single-target damage in that patch. That is a preview expectation, not part of his live Season 2 rating.",
+      "superseded": false
     }
   ],
   "metaNotes": [

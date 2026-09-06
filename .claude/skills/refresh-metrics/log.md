@@ -16,6 +16,73 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-06 (nightly, SECOND run of the day) — every family re-fetched and diffed, 0 values moved anywhere; Archon walled night 18
+
+- **Murlok + Mythicstats: trusted collector only, merged, nothing moved.** `metrics-fetch/evidence.json`
+  (`checkedAt` 2026-09-06T19:44:23Z) reports both providers `success`. Murlok: 3 pages HTTP 200 (71,302 /
+  42,311 / 40,911 bytes), 40 rows, role counts 27/7/6, `sourceAsOf` **2026-09-02** from the page's own
+  `<time datetime>` (`dateBasis: source-time-datetime`), 0 omitted specs. Mythicstats: `/period/latest`
+  redirected to **period 1079**, 211,338 bytes, 39 rows, role counts 26/7/6, sum **99.9%** with role
+  subtotals 30.7 / 29.2 / 20 / 20 — the share column, not the `/meta` per-key-presence column — and
+  `sourceAsOf: null` / `dateBasis: observed-undated-source`, so the metric `asOf` stays the observation
+  date **2026-09-05** on unchanged values rather than being restamped today. `Mage|Fire` is the one
+  omitted spec and is recorded as such. No parser was reimplemented agent-side; only
+  `node src/apply-metrics.mjs metrics-fetch/updates.json` was run — **79 rows applied, pre-merge diff
+  moved 0 / same 79 / new 0** — and `node src/check-stable-metrics.mjs` passes.
+- **Warcraft Logs: read from the pre-agent artifacts ONLY; no warcraftlogs.com request was made from
+  this session by any means.** `wcl-fetch/evidence.json` `attemptedAt` 2026-09-06T19:42:16Z, verdict
+  **success**, transport `oauth:true graphql:true`, 654.56 of 3600 points spent, 138 queries in 123s,
+  `abortReason: null`. `wcl-leaderboard-raid` **success, 207 rows** (zone 53, partition 1, difficulty 5,
+  size 20, floor 200); `wcl-leaderboard-mplus` **success, 320 rows** (zone 55, partition 1, difficulty
+  10, size 5, floor 280). The collector had already applied its rows before the agent started — the
+  working tree arrived with 1,539 changed lines in `specs.json` — so nothing was recomputed or edited
+  here; `node src/check-wcl-metrics.mjs` passes ("historical and failed/sparse cuts retained exactly").
+  These are per-encounter top-100-ENTRY medians, not population medians and not unique-player medians.
+  `evidence.legacy` keeps **`wcl-live-raid` and `wcl-live-mplus` at `unreachable`**: exact aggregate
+  population medians still have no verified sanctioned endpoint, their S1 observations stay dated
+  2026-08-10 and untouched, and the new leaderboard series cannot green them. `rdps` is FFXIV-only and
+  its rejection is not a WoW outage. Closed PTR zone 52/54/56 rows untouched.
+- **Bloodmallet: all 27 DPS charts requested fresh, byte-identical result.** `talent_target_scaling/
+  castingpatchwerk`, HTTP 200 on every request. **23 charts returned data** — every one `simc_settings.tier
+  = MID2` (read off the chart, never hard-coded), `ptr` the STRING `"0"` compared explicitly, one uniform
+  per-chart timestamp of **2026-09-05**, target counts 1/2/3/5/8/15 complete on all 23. The same four
+  specs returned the 76-byte `{"status":"error"}` body — **Balance, Feral, Augmentation, Devastation** —
+  each retried once before being recorded absent; Augmentation is absent by design. Pre-merge diff:
+  **moved 0 / same 23 / new 0**, max target-value move 0.00%, so nothing was merged and `fightProfile.asOf`
+  stays each chart's own 2026-09-05. Pool remains tier-uniform at 23 MID2 profiles.
+- **SimulationCraft: fetched and diffed, and the report has NOT been regenerated since this morning.**
+  `MID2_Raid.txt` HTTP 200, **1,364,686 bytes** with a `DPS Ranking:` block, so the `.html` fallback was
+  not needed; `MID1_Raid` not consulted. Header build string (never the visible Highcharts version):
+  `SimulationCraft 1210-01 for World of Warcraft 12.1.0.69587 Live (hotfix 2026-09-04/69587, git build
+  HEAD ce0f19435e, no-networking)`. **The HEAD hash is UNCHANGED at `ce0f19435e`** and `Last-Modified`
+  is still `Sun, 06 Sep 2026 07:27:29 GMT` — the same artifact the 13:50Z run ingested — which is the
+  honest explanation for an unchanged parse, not a fresh sim. 44 ranking lines = the Raid aggregate
+  (skipped) + 43 profiles, mapped by LONGEST-PREFIX with a hyphen allowed, best hero-variant per spec →
+  **23 of 27 DPS specs**; the 7 unmapped names are all tank profiles (Protection Warrior, Brewmaster,
+  Protection Paladin ×2, Vengeance, Blood ×2), correctly excluded. All 23 values identical to stored, so
+  nothing was merged and `asOf` correctly stays **2026-09-06** — the date basis is the file's own
+  `Last-Modified`, not the header's `hotfix 2026-09-04`, which is the GAME build and would regress every
+  row by two days.
+- **WoWMeta: fetched and diffed, upstream still frozen — the OWNER-ACCEPTED STANDING RED holds.**
+  `manifest.json` `snapshotDate` **2026-09-01** and the rankings file's `Last-Modified`
+  **Tue, 01 Sep 2026 22:23:28 GMT** agree, so this is not the 08-04 pinned-manifest shape. The rankings
+  payload was diffed rather than trusted to the manifest: 44 blocks, whitelisting
+  `categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"` + `keyRange === undefined` (never merely
+  blacklisting "dungeon" — `melee`/`ranged` are subsets of `dps`) gives 27+7+6 = **40 rows, 0 unmatched**,
+  and **moved 0 / same 40**. Nothing merged; the 09-01 coverage date correctly did not move, which is why
+  this row is `partial` and not `success`.
+- 🛑 **ARCHON, NIGHT 18 — all six numeric requirements plus survivability unreachable together.** All
+  eleven registered archon.gg URLs returned HTTP 403 with a Cloudflare `Just a moment...` interstitial and
+  **`__NEXT_DATA__` count 0**; the pre-agent `source-health/evidence.json` independently recorded raid
+  `cloudflare-challenge` (403) and M+ `human-verification` (200). Nothing was solved, replayed or proxied,
+  and nothing was backfilled from Warcraft Logs — Archon's percentile cuts are Archon's own. Stored values
+  and their 2026-08-24/25 dates are untouched; the staleness reds are the honest signal.
+- **Robydoby not fetched: dormant by posture, not by failure.** Its two sheets are zone-54 12.1 PTR
+  percentiles from the closed cycle, it is deliberately outside `required-sources.json`, and the
+  between-cycles posture keeps the PTR lanes closed. Stored rows are historical receipts.
+- `npm run test:quiet` **546 tests / 504 pass / 0 fail / 42 skipped** (Playwright absent, so the UI
+  invariants did not run), then `npm run build` and `node src/snapshot.mjs`.
+
 ## 2026-09-06 (nightly) — SimC re-simmed overnight (23 rows, all sub-1.3% moves); every other family verified and unchanged; Archon walled night 16
 
 - **SimulationCraft — a genuinely FRESH report, the first in several nights.** `MID2_Raid.txt`

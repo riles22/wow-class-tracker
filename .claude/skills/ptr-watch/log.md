@@ -16,6 +16,48 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-06 (nightly, SECOND run of the day) — ledger re-checked at a fresh receipt, no new sections; no new live 12.1 tuning; 12.1.5 stays notes-only
+
+- **Revision ledger first, as the skill orders.** `official-notes/evidence.json` (`checkedAt`
+  2026-09-06T19:44:27Z, i.e. a receipt taken ~6h after the 13:49Z one the previous run consumed)
+  reports BOTH configured sources `success`: `live-hotfixes` topic 2336376 post 1 at **version 31**,
+  `updatedAt` 2026-09-05T01:21:46Z, body sha `443e3bd1e9…`; `ptr-preview` topic 2344395 post 1 at
+  **version 3**, `updatedAt` 2026-09-03T22:48:20Z, body sha `970dd474c2…`. Both revision numbers and
+  both body hashes are unchanged against the committed ledger.
+- **Section inventory compared whole, not by post version.** A structural diff of
+  `official-notes/pending.json` against `data/official-notes.json` reports the two files
+  **byte-identical apart from `checkedAt`** — so 0 sections added, 0 removed, 0 with a changed
+  sha256, across 99 live-hotfix sections (2 `applied`, 97 `irrelevant`) and 3 ptr-preview sections
+  (all 3 `applied`). **0 unresolved, 0 tombstones.** The ledger was rewritten with this run's
+  `checkedAt` and nothing else; `node src/check-official-notes.mjs` passes.
+- **Live 12.1 tuning lane: nothing new, four channels polled.**
+  · **Wowhead news RSS** — 200, 177,836 bytes, 40 items parsed per `<item>` block (never by tag
+    adjacency), window 2026-09-02..2026-09-06. Newest hotfix round-up is still **news=382760,
+    "September 4th Hotfixes - Ula'tek, Classes, Catalyst"**, which is already the feed's newest
+    entry. Nothing tuning-shaped on 09-05 or 09-06.
+  · **Wowhead news INDEX** (`data.news.newsData`, brace-balanced from the id attribute) — 20 posts,
+    top id 382762 at 2026-09-06 13:43. It agrees with the RSS rather than leading it this run, so
+    nothing landed mid-run.
+  · **Official dev-notes thread 2317811** — fetched by curl (not WebFetch, which truncates the
+    `post_stream`): 17 posts, `last_posted_at` **2026-07-31T23:42:09Z**. The 12.1 PTR thread is
+    closed, exactly as the between-cycles posture says; this is not a lost thread.
+  · **Blue tracker** (`data.blueTracker.default`) — 50 entries, 40 unique topics. Newest
+    class-relevant blue post is Linxy's 09-04 hotfix topic (2336376), already logged. **Topic
+    2342331 "Class Tuning Incoming – September 1" was re-fetched and re-read at version 4**
+    (post 1, `updated_at` 2026-08-31T19:44:31Z) because the tracker restamps it: its fifteen PvE
+    lines plus the class-wide Shaman/Farseer line are line-for-line what the 2026-08-28 feed entry
+    already carries, and the separate Player versus Player section remains out of scope.
+- **Nothing written to `data/ptr-builds.json` and no `tierSet` touched** — no build, no hotfix
+  round-up and no set-bonus line arrived. The tier-set upkeep gate and the
+  `specsAffected` ↔ `highlights` coverage gate both stay green untouched.
+- **12.1.5 remains NOTES ONLY.** `PHASES.ptr` is still null, no 12.1.5 material entered
+  `ptr-builds.builds` or any `spec.ptr` verdict, the frozen 12.1 forecast was not reopened, and no
+  archived 12.1 PTR metric was relabelled. The three preview sections stay in the ledger's
+  `notes[]` lane where they render as "12.1.5 PTR preview — not live".
+- **Dormant lanes skipped, as designed**: the four WCL PTR zone sweeps (54 raid / 52 Dummy Dome /
+  56 M+ / 57 Grotto). Their contract rows were removed at the flip, so they get no manifest row and
+  the stored zone-52/54/56 receipts were not touched.
+
 ## 2026-09-06 (nightly) — official ledger clean and unchanged, no new live 12.1 tuning, 12.1.5 stays notes-only
 
 - **Revision ledger first, as the skill orders.** `official-notes/evidence.json` (`checkedAt`

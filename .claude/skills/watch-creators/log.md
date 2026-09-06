@@ -16,6 +16,89 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-06 (nightly, SECOND run of the day) — 44 channels polled, both queued transcripts landed and were distilled into 7 takes; 6 Dorki tank reads superseded; 1 queued
+
+- **Discovery: all 44 distinct transcribable channels carrying a `channelId` polled via the YouTube RSS
+  endpoint, 0 feed failures**, no retries needed, `media:description` parsed on the same pass. Seen-set
+  rebuilt from the four structured lanes only (`pending-transcripts.json` `seen[]` 549 + `skipped[]` 418
+  + `videos[]` 2, plus every `youtu.be/<id>` in a take or metaNote url) = **1,240 ids**; log.md was never
+  regexed for ids. Cycle bound derived as `Math.min(...builds.map(b => b.date))` = **2026-06-18**, taken
+  as a DATE and never as `builds[0]`. **292 unseen in-cycle videos** remain — the handed-forward backlog
+  of budget and title dismissals, deliberately left UNSEEN so a later run reconsiders them.
+- **The transcript step succeeded where the 2026-09-06 local retry could not.** `transcript-fetch/
+  summary.json` verdict **ok**, source supadata, `mode=native`, offsets in ms: requested 2 / fetched 2 /
+  cached 0 — `7XywFJ3u0YM` 272 chunks, `AeSgidbZVYU` 516 chunks. The pair had been stuck since the
+  residential run hit the third-shape timedtext 429; Supadata is exempt from that IP flag, which is
+  exactly the fallback's purpose. No YouTube or transcript-API request was made from this session.
+- **Jedith, `7XywFJ3u0YM`, "BANG! Collapsing Star Problem Has Been SOLVED!...Sort of." (2026-09-03) —
+  Demon Hunter · Devourer, `mixed`, bracket `both`, deep link t=502** (his own closing summary). A
+  12.1.5 PTR PREVIEW read, labelled "NOT LIVE" in `patchContext` and carrying his own caveat that the
+  changes are five weeks out. He splits the notes: the tree-agnostic Collapsing Star changes (range
+  gained after the cast starts, no 5-second cooldown on a cancelled cast, fury-drain slowdown capped at
+  ~1.5 full casts as the anti-cheese replacement) he calls incredible and expects to lift average
+  Annihilator performance sharply, because missed Collapsing Stars and broken Impending Apocalypse ramp
+  are in his view the biggest drag on ordinary players; the **Void-Scarred** rework he thinks the talent
+  tree cannot afford, since his three mandatory capstones leave no points for the Apex talents and
+  without those Collapsing Star "hits like a wet noodle". Every figure checked against the caption track:
+  Demonic Intensity's 30% Hunt empower, Violent Transformation losing the Hunt reset (was 25% damage) and
+  gaining a Soul Immolation reset, Monster Rising 15%→10% out-of-form Intellect and 15%→20% Collapsing
+  Star damage — all match. Jedith is scoped to `["Havoc","Devourer"]`, so the attribution is in scope.
+- **Dorki, `AeSgidbZVYU`, "OFFICIAL UPDATED SEASON 2 M+ TIER LIST | Midnight 12.1" (2026-09-05) — six
+  takes, all bracket `mplus`, all superseding his 2026-08-19 reads.** He opens by saying it is time to
+  redo the list and shows the old one, so this is the same lens explicitly replaced, not a parallel read;
+  his own tier vocabulary is recorded in each `patchContext` (S = insane damage, A = raid-buff dependent,
+  B = nothing special, C = suck). Only his six registered tank specs were attributed — every DPS and
+  healer read in the video is outside his declared scope and was deliberately left undistilled.
+  · **Blood DK · `buff` · t=70** — stays S, named with Holy Paladin as a proven spec, San'layn AoE
+    credited; but no longer alone at the top and he would "maybe drop it a little down" the S ordering.
+  · **Vengeance DH · `buff` · t=584** — the run's real movement: after its buffs he now calls it just as
+    good as Blood DK and wants it in S, worse only on AoE, equal-or-better single target, Chaos Brand for
+    caster groups, and first-named in the meta comp he settles on.
+  · **Guardian Druid · `neutral` · t=890** — the honest weak spot: he never verbally places bear in a
+    tier this time. The claim says so, and records only what he did say (bear a go-to alongside
+    Brewmaster for the physical comp, "I don't think bear is necessarily bad"). Superseded anyway
+    because it is the same lens redone; the claim states it is thinner than the August read rather
+    than dressing it up.
+  · **Brewmaster Monk · `mixed` · t=576** — A, raid-buff dependent, still the go-to with the physical
+    comp; a step up from August's "distinctly mid".
+  · **Protection Paladin · `nerf` · t=680** — he reverses himself on air, checking representation and
+    dropping it out of the meta-contender group.
+  · **Protection Warrior · `nerf` · t=693** — still lowest, but with an explicit "haven't played it
+    enough to give it a fair shake" caveat that is preserved in the claim, plus his forward-looking note
+    that the 12.1.5 Execute change could make it strong later (recorded as a preview expectation, not
+    part of the live rating).
+- **A 12.1.5 preview read does NOT supersede a live Season 2 read**, per the 2026-09-05 VooDooSaurus
+  precedent — so Jedith's 2026-08-17 Devourer take stays live alongside the new preview take, and only
+  the Dorki pairs were retired (6 of them, all `bracket: "mplus"`, all dated 2026-08-19).
+- **Firewall re-verified rather than assumed.** All six registered tier-list pages were already fetched
+  this run; a grep for "Dorki" across the Icy Veins, Method and Wowhead HTML returns nothing, and the
+  Wowhead tank pages are bylined **YoDaTV** (M+) and **Dratnos** (raid). The Tactyks/Method-M+ constraint
+  does not extend to him.
+- **ASR discipline.** The captions render Blood DK as "bloody K", Protection as "prop", San'layn as
+  "sand lane", Elemental as "Ellie", Mistweaver as "Miss Weaver", Retribution as "red paladin", and
+  Void-Scarred as "void skard"/"Void's Guard"; none was written as heard — the reviewed spellings were
+  used, and Void-Scarred follows the official 12.1.5 notes rather than the archive's older variants.
+  One phrase in Dorki's monk composition ("arms, barrel, sin rogue") could not be resolved and was
+  simply left out of the claim rather than guessed.
+- **Lane hygiene (step 4a)**: both distilled ids removed from `videos[]` in the same edit; neither
+  appeared in `seen[]` or `skipped[]`, so nothing else had to be dropped and no `reason` text needed
+  restating here. `npm run validate` and `npm run audit:creators` both clean — **HIGH 0 · MED 0 ·
+  INFO 9** (8 zero-yield transcribable creators plus the standing between-cycles dormancy line).
+- **Queued 1** (nightly keyword filter KEPT — Supadata is metered and `PER_RUN_CAP` 25 is only the
+  per-run guard): `oGfnWqTcrZA` — **Sha**, "The Mythic+ Meta is Interesting..." (2026-09-06). Its
+  `media:description` is an explicit early-season meta-structure discussion naming specs that "haven't
+  been good in a long time"; Sha is scoped to Brewmaster, so only a Brewmaster read would be
+  attributable, but the video is analysis-shaped rather than a VOD. Id and author confirmed by oEmbed.
+- **Deliberately NOT queued, and left UNSEEN rather than retired** (title/budget judgments, not durable
+  facts): the whole Supatease block (PvP by construction); izen's `rb9dofIbc_A` 12.1.5 loot/delve reveal
+  and Dalaran Gaming's `6EotvC_HxVs` / `8vM24CJGaRA` 12.1.5 feature and Labyrinth explainers (content
+  coverage, not per-spec meta reads); NeekapHere's `smqnFDWL7D0`; Kalamazi's `jGeOuxbfGUo` channel
+  update; Dalaran Gaming's `5x3Ws_aFLPA` gearing PSA (item-level claims are not spec reads); and the
+  large tail of raid/key POV VODs and stream titles.
+- **`latest` advanced only for the two creators this run actually distilled** (Jedith, Dorki), each to a
+  one-line statement of what is now KNOWN — Jedith's explicitly noting the preview is not live and his
+  Season 2 read still stands — never merely the newest upload title.
+
 ## 2026-09-06 (local, scheduled) — transcript drain BLOCKED: the timedtext 429 flag is live on this IP again; 0 of 2 queued videos landed
 
 - **Why this run existed.** Tonight's nightly queued two videos it could not read from the runner:
