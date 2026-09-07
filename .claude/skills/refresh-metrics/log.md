@@ -16,6 +16,55 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-07 (nightly) — SimC re-simmed (23 rows, ±0.2%); Mythicstats period 1079 (23 shares moved); Murlok/Bloodmallet/WoWMeta byte-identical; Archon walled
+
+- **Murlok + Mythicstats via the trusted pre-agent collector only** — no second parser, neither host
+  fetched by the agent. `metrics-fetch/evidence.json` checkedAt 16:03:57Z, both `success`.
+  · **Murlok**: 3 pages HTTP 200 first attempt, 27/7/6 = 40 rows, `omittedSpecs` empty,
+    `sourceAsOf` **2026-09-02** off the pages' own `<time datetime>` (10:10Z), not the fetch date.
+    All 40 ceilings byte-identical → nothing changed. **partial** (source date 5d behind the run).
+  · **Mythicstats**: `/period/latest` → **/period/1079**, a NEW weekly period. Shape checks are the
+    thing that separates the representation share from the `/meta` per-key-presence column and they
+    pass — **sum 100.0**, roles Ranged 29.7 / Melee 30.2 / Tank 20.0 / Healer 20.1. 38 rows
+    (25/7/6); `omittedSpecs` Mage|Fire and Warlock|Affliction are both **stored zeros**, left with
+    their own dates (09-04, 09-05) rather than refreshed or re-zeroed. **23 shares moved** (Arms
+    10.9→11.8, Arcane 12.6→12.4, Demonology 5.1→4.7) taking 09-07; 15 identical rows kept 09-05.
+    Merged ONLY via `apply-metrics.mjs metrics-fetch/updates.json`; `check-stable-metrics` passes.
+    **partial**: coverage probe (min-25th-freshest of 23@09-07 / 16@09-05 / 1@09-04) reads 09-05.
+- **SimulationCraft — a real re-sim, merged.** `MID2_Raid.txt` HTTP 200, 1,364,593 bytes, and it
+  HAS a `DPS Ranking:` block this run, so the HTML fallback was not needed. Header build string is
+  the era check, not any visible version: `12.1.0.69587 Live (hotfix 2026-09-04/69587, git build
+  HEAD 8de87ce5b2)` — **the HEAD hash moved**, which is the honest explanation for the movement.
+  `MID1_Raid.txt` fetched for the record and still the 272-byte stub with the same header; not a
+  fallback. 43 profiles, `Raid` aggregate row skipped, **longest-prefix mapping with a hyphen
+  allowed** → 23 of 27 DPS specs (the 7 unmapped names are all tank profiles). All 23 moved but by
+  **0.998–1.001×** — ordinary re-sim noise, nowhere near the 0.6 value gate.
+- **Bloodmallet — fetched, diffed, nothing merged.** All 27 DPS specs requested, up to 3 attempts
+  each. 23 charts + the 76-byte `{"status":"error"}` body on **all** retries for Balance, Feral,
+  Devastation and Augmentation — the documented post-adoption roster. `simc_settings.tier` read OFF
+  each chart (all **MID2**, matching the stored pool, so a mixed-tier merge was impossible), `ptr`
+  compared to the STRING `"0"`, targets from `data[<tier>][<count>]`. Per-chart timestamps all
+  **2026-09-05** — the chart's own date. 0 values / 0 dates / 0 tiers moved. **partial**, which is
+  the designed outcome on a night upstream has not re-simmed.
+- **WoWMeta — fetched and diffed, still frozen upstream.** `manifest.json` snapshotDate 2026-09-01
+  AND the rankings file's `Last-Modified` Tue 01 Sep 22:23:28 GMT **agree**, so not the 08-04
+  pinned-manifest shape — but the payload was diffed anyway. Whitelist selection
+  (`categoryType ∈ {dps,hps,tank}` + `sortField === lowerBound` + `keyRange === undefined`) gives
+  6+27+7 = 40 rows, so melee/ranged could not double-count. All 40 `lowerBound` and all 40
+  `numberOfCharacters` byte-identical at the stored 1-dp precision. **partial**, owner-accepted.
+- **WCL: read the pre-agent evidence only; no warcraftlogs.com request from this session.**
+  `wcl-fetch/evidence.json` attemptedAt 16:01:53Z — leaderboard raid **success 210 rows** (min 200)
+  and M+ **success 320 rows** (min 280), `landed` agreeing with both; OAuth and GraphQL healthy,
+  138 queries, no abort. `legacy.wcl-live-raid/mplus` remain `unreachable` (no verified sanctioned
+  aggregate endpoint) and their 47 + 40 stored S1 rows keep their 2026-08-10 dates untouched.
+  `check-wcl-metrics --manifest` passes; `wcl-coverage.json` left exactly as the collector wrote it.
+- **Archon: all six numeric requirements unreachable, night 19.** See the refresh-tiers entry for
+  the probe; `__NEXT_DATA__` 0 on all 11 URLs. Nothing merged, nothing re-dated. The 2026-08-21
+  per-boss-survivability dead end was NOT re-run.
+- **Robydoby: nothing to do.** Tab map fetched (HTTP 200, 52,770 bytes); the newest Mythic tabs are
+  still the **24/7 M** week already stored at 2026-07-24. It is closed-12.1-PTR-cycle data and
+  outside the refresh contract by design.
+
 ## 2026-09-06 (nightly, SECOND run of the day) — every family re-fetched and diffed, 0 values moved anywhere; Archon walled night 18
 
 - **Murlok + Mythicstats: trusted collector only, merged, nothing moved.** `metrics-fetch/evidence.json`

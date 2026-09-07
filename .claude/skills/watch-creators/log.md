@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-07 (nightly) — 44/44 feeds, 0 failures; 1 transcript distilled (Sha, Brewmaster M+); 1 queued
+
+- **Discovery**: all 44 distinct transcribable channels with a `channelId` polled via the YouTube
+  RSS endpoint, **0 feed failures, no retries needed**, `media:description` parsed alongside the
+  title on the same pass. 660 feed entries.
+- **Seen-set from the four STRUCTURED lanes only** — `seen[]` 549 + `skipped[]` 418 + `videos[]` 1
+  plus every `youtu.be` id in a take or metaNote url = **1,241 ids**. `log.md` was never regexed.
+  Cycle bound `Math.min(...builds.map(b => b.date))` = **2026-06-18**, taken as a DATE.
+  **300 unseen in-cycle videos remain and are deliberately left UNSEEN** — budget, title and
+  transport dismissals, not durable facts.
+- **Transcripts: no YouTube or transcript-API request from this session.**
+  `transcript-fetch/summary.json` verdict **ok** (supadata, native, ms offsets), requested 1 /
+  fetched 1 / cached 0 → `oGfnWqTcrZA`, 364 chunks.
+- **DISTILLED — Sha / `oGfnWqTcrZA`, "The Mythic+ Meta is Interesting..." (2026-09-06)**, a
+  week-three Season 2 M+ composition read. **One take, on his ONE registered spec**: Brewmaster
+  Monk, `mixed`, `bracket: mplus`, patchContext in **LIVE** era framing (not PTR). The read: the
+  physical/hybrid meta has opened a genuine slot for Brewmaster — a marked softening of his
+  2026-08-06 "swap back to another tank" advice — while he says plainly that Blood DK is "a little
+  bit stronger", counts only **four** Brewmaster occurrences at US 20+ that are mostly the same
+  players including himself, and would not slot Brewmaster into the magic-leaning CN comp without
+  first dropping Elemental Shaman for something physical. Every figure and causal clause checked
+  against the caption track before committing; ASR mangles ("Ellie shaman", "Ellesmere", "LE
+  Shaman", "Sin Rogue") were not written as heard.
+- **Supersession**: it retires his **2026-08-06** Brewmaster **M+** take (same creator, same spec,
+  same lens). His **2026-08-21 live raid** take is a different lens and correctly stays live.
+- ⚑ **FLAG FOR RILEY, not acted on.** The same video carries substantive M+ reads on Blood DK, Arms
+  Warrior, Arcane Mage, Elemental Shaman, Feral Druid and Windwalker — all outside Sha's declared
+  `specs: ["Brewmaster"]` and all deliberately NOT distilled. Note the shape: this is a cross-class
+  meta read, which is the `generalCreators` metaNote lane, and Sha is not in it. Scope widening is
+  an owner decision.
+- **Lane hygiene**: the distilled id was removed from `videos[]` in the same edit and was in no
+  other lane. Sha's `latest` advanced to a statement of what is now KNOWN.
+- **yt-dlp hit the documented datacenter bot wall** ("Sign in to confirm you're not a bot") on a
+  single metadata probe for a borderline `#shorts` (`4qn2cENo0Rk`, MadSkillzzTV "Best 'Easy' Healer
+  in 12.1"). **Not retried**, nothing installed or upgraded. Because the sub-minute duration could
+  not be VERIFIED, that id stays unseen rather than being retired on a guess.
+- **Queued 1** under the nightly keyword filter (Supadata is metered): `jGeOuxbfGUo` — Kalamazi,
+  "Season 2 Character & Channel Update! Future Plans Etc" (2026-09-06), a post-RWF update from a
+  Warlock specialist. Deliberately NOT queued: Supatease `w7Gz-h1vDzM` (description copies the
+  title — the clip-short shape, and his lane is PvP), izen `rb9dofIbc_A` (a 12.1.5 content-feature
+  reveal, not a per-spec meta read), the YoDaTV/AutomaticJak/Musguete guides and every key/boss
+  POV VOD (guide-shaped content yields no take).
+- `npm run audit:creators`: **HIGH 0 / MED 0 / INFO 9**. Creator opinion moved no tier and no rating.
+
 ## 2026-09-06 (nightly, SECOND run of the day) — 44 channels polled, both queued transcripts landed and were distilled into 7 takes; 6 Dorki tank reads superseded; 1 queued
 
 - **Discovery: all 44 distinct transcribable channels carrying a `channelId` polled via the YouTube RSS

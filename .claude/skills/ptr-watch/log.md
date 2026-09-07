@@ -16,6 +16,39 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-07 (nightly) — official ledger clean (102 sections, 0 unresolved); no new live 12.1 tuning in any of the four channels
+
+- **Revision ledger FIRST, before the RSS/date sweep**, because a post can be edited without
+  acquiring a new date or reply. `official-notes/evidence.json` + `pending.json` checkedAt
+  2026-09-07T16:04:02Z, both configured sources `success`:
+  · **live-hotfixes** topic 2336376 post 1, **version 31**, updatedAt 2026-09-05T01:21:46Z, 99 sections
+  · **ptr-preview** topic 2344395 post 1, **version 3**, updatedAt 2026-09-03T22:48:20Z, 3 sections
+  Body hashes and **all 102 section hashes identical** to the committed ledger; `removedSections`
+  empty on both. Dispositions carried forward on identical hashes rather than re-asserted:
+  **5 applied, 97 irrelevant, 0 unresolved.** `data/official-notes.json` rewritten from the trusted
+  pending ledger — the only change is the two `checkedAt` stamps. `check-official-notes.mjs` passes.
+- **Wowhead RSS**: 40 items, 2026-09-02 → 2026-09-07, parsed per `<item>` block (never by tag
+  adjacency). Newest class-tuning item is "September 4th Hotfixes - Ula'tek, Classes, Catalyst",
+  **already logged** as the 2026-09-04 hotfix entry. Everything after it is 12.1.5 datamining,
+  Trading Post, the raid skip, TBC and BlizzCon — no live 12.1 class tuning.
+- **News INDEX polled too**, because it leads the RSS within a run. `data.news.newsData`
+  brace-balanced from the id attribute: 20 posts, newest **382771** (09-07, Trading Post
+  datamining). Nothing the RSS did not already have.
+- **Blue tracker** (`data.blueTracker.default`, same parse): 50 entries, deduped by topic. Newest
+  class-relevant blue post is Linxy's "Midnight Hotfixes - September 4" on topic **2336376** — the
+  running compilation the ledger already covers. No newer standalone class-tuning topic; the last
+  was "Class Tuning Incoming – September 1", already in the feed.
+- **Official dev-notes thread** `2317811.json`: still ends at **post 19** (Linxy, 2026-07-31). That
+  is the closed 12.1 PTR cycle, not a lost thread — the rediscovery gotcha stays suspended and no
+  thread key was touched.
+- **Nothing written to the feed.** No build/hotfix entry added, no `tierSet` touched (so the upkeep
+  gate and the gearing mirror needed no change). The 12.1.5 lane stayed NOTES ONLY: `PHASES`
+  untouched, nothing into `ptr-builds.builds` or any `spec.ptr` verdict, no forecast reopened, no
+  archived 12.1 PTR metric relabelled.
+- **Dormant lanes correctly skipped**: zone-54 raid testing, zone-52 Dummy Dome, zone-56 PTR M+ and
+  zone-57 Tidebound Grotto were not attempted and have no contract rows. Their stored values remain
+  the closed cycle's final receipts.
+
 ## 2026-09-06 (nightly, SECOND run of the day) — ledger re-checked at a fresh receipt, no new sections; no new live 12.1 tuning; 12.1.5 stays notes-only
 
 - **Revision ledger first, as the skill orders.** `official-notes/evidence.json` (`checkedAt`

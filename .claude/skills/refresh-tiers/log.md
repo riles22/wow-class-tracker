@@ -16,6 +16,47 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-07 (nightly) — 240/240 letters re-verified live, 0 moved; Archon walled a NINETEENTH night
+
+- **All three reachable tier sources fetched fresh from THIS session**, direct browser-UA GET, no
+  proxy (r.jina.ai is IP-403 on `wowhead.com/guide/*` and was deliberately not attempted). Byte
+  counts read off the written files, never `curl`'s `size_download`.
+  · **Icy Veins**, 6 pages, HTTP 200, 195,982–343,487 bytes. `<style>` stripped BEFORE parsing,
+    one `<table class="tier-list">` per page, letter from each row's first `<td>`, spec from each
+    `tier-list-entry`'s FIRST `alt=` looked up WHOLE against the roster.
+    **raid 27/7/6 = 40, M+ 27/7/6 = 40, 80 rows, 0 unmatched.**
+  · **Method**, 2 pages, HTTP 200, 158,880 and 165,531 bytes. The M+ page carried **EIGHT**
+    `.tier__tier` blocks — the spec list then a dungeon-difficulty list — separated by ROSTER
+    MATCH, never by position: blocks 0–3 are 2/13/21/4 = 40 roster specs with zero non-roster
+    entries; blocks 4–7 hold 0 roster specs (eight dungeon names + the Method logo).
+    **raid 40, M+ 40, 0 unmatched.**
+  · **Wowhead**, 6 pages, HTTP 200, 75,149–341,214 bytes with the FULL browser header set. Unescape
+    `\/`→`/` FIRST, then `[tier-list=rows] … [/tier-list]`; never anchored on
+    `WH.markup.printHtml(`. One block per page this run, no decoys. Specs off the
+    `[spec-badge=<spec>-<class>]` slug. **raid 27/7/6 = 40, M+ 27/7/6 = 40, 0 unmatched.**
+- **0 letters moved across all 240 cells** (80 per source; moved 0 / same 80 / new 0 /
+  stored-not-fetched 0 on each). `apply-ratings.mjs` was therefore never run and `specs.json`
+  was not touched by this skill; only the 14 `snapshot` dates advanced to 2026-09-07.
+- **Page self-dates re-read live, all unchanged**, and identical to this run's pre-agent
+  `published-evidence` artifact: Icy Veins raid DPS 08-30 / healer 09-01 / tank 08-29, M+ all
+  08-30; Wowhead raid all 08-31, M+ DPS 08-28 / healer 08-26 / tank 09-01. Method's own
+  "Last Updated" lines are 10th August (raid) and 13th August (M+), unchanged; method carries no
+  `published` field so nothing was written for it.
+- **Era-verified from bodies and changelogs, not substring counts.** All 14 pages self-identify as
+  Midnight Season 2 / Patch 12.1; Devourer present in both DPS and both tank lists and correctly
+  absent from the two Wowhead healer lists. The Icy Veins raid-healer page STILL titles itself
+  "(Patch 12.0.7 / Midnight)" over a Season 2 body with an 01 Sep. 2026 changelog row — body over
+  title, the blue-tracker precedent. **No `seasonVerified` value changed**, so `freeze-season.mjs`
+  had nothing to consider.
+- **Archon: night 19 of the wall.** All ELEVEN registered URLs re-probed from this session:
+  HTTP 403, 5,777–5,882 bytes, Cloudflare "Just a moment...", and the check that matters —
+  `__NEXT_DATA__` count **0** on every one. The pre-agent `source-health/evidence.json` agrees
+  from its own two routes (raid 403 cloudflare-challenge, M+ **200** human-verification), which is
+  the reminder that a status-only check would have recorded success. No challenge solved or
+  replayed, no `/_next/data/` route tried, no proxy. Letters retained per the 2026-09-05 owner
+  policy — the consensus is still four sources including Archon's retained S2 letters — and no
+  Archon snapshot date was touched.
+
 ## 2026-09-06 (nightly, SECOND run of the day) — 240/240 letters re-verified live, 0 moved; Archon walled an EIGHTEENTH night (Cloudflare, all 11 URLs)
 
 - **All three reachable tier sources fetched fresh from THIS session** — nothing carried forward from

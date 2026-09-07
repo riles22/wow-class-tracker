@@ -2,11 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "oGfnWqTcrZA",
-      "creator": "Sha",
-      "title": "The Mythic+ Meta is Interesting...",
+      "id": "jGeOuxbfGUo",
+      "creator": "Kalamazi",
+      "title": "Season 2 Character & Channel Update! Future Plans Etc",
       "published": "2026-09-06",
-      "queuedAt": "2026-09-06"
+      "queuedAt": "2026-09-07"
     }
   ],
   "skipped": [
