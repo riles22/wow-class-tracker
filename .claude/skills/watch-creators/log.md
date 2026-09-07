@@ -16,6 +16,31 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-07 (local, scheduled) — caption 429 on its SIXTEENTH day; one probe, nothing distilled; the nightly drained the queue mid-run
+
+**The residential caption lane is still down — day 16 since 2026-08-23.** Nothing distilled, no
+data file changed by this skill, `pending-transcripts.json` untouched.
+
+- **ONE probe, per SKILL.md's bound.** `oGfnWqTcrZA` (Sha, "The Mythic+ Meta is Interesting...",
+  2026-09-06) was the entire queue at bootstrap. Metadata and `--list-subs` were fetched first and
+  both were healthy — `not_live`, 672s, an `en` auto-caption track offering json3 — then the
+  documented `player_client=android` recipe at `--sleep-requests 1.5` → **HTTP 429**. Stopped there.
+- **Same third shape as every previous day, re-derived rather than assumed**: the watch page and the
+  android player API JSON both download, subtitles resolve (`Downloading subtitles: en`), format 18
+  is selected and yt-dlp writes the subtitle target path — and only the `timedtext` download 429s.
+  The datacenter bot-wall message never appeared. No cookies file was supplied, so the authenticated
+  fallback was not open to this unattended run.
+- **yt-dlp on this machine is 2026.07.04, BEHIND the `requirements.txt` pin of 2026.08.19.** Noted
+  because the nightly installs the pin and this machine does not, so local and CI are not running the
+  same extractor. It is NOT the cause here — the failure is an IP-scoped `timedtext` refusal that no
+  client version changes — and SKILL.md forbids upgrading in-run, so nothing was touched.
+- **No discovery sweep**, same reasoning as every 429 day: the nightly polled all 44 channels at
+  16:01Z and queued what it found; duplicating that from here buys nothing.
+- **The queue was drained by its designed path while this run was in progress.** The 2026-09-07
+  nightly landed at 16:01Z, distilled `oGfnWqTcrZA` into a Sha Brewmaster M+ take via Supadata (which
+  is exempt from this IP flag) and queued `jGeOuxbfGUo` (Kalamazi). That new video was NOT probed —
+  this run's one probe was already spent. **Day 16 still costs latency, not coverage.**
+
 ## 2026-09-07 (nightly) — 44/44 feeds, 0 failures; 1 transcript distilled (Sha, Brewmaster M+); 1 queued
 
 - **Discovery**: all 44 distinct transcribable channels with a `channelId` polled via the YouTube
