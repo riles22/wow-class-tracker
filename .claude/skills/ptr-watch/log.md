@@ -15,6 +15,50 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-09-08 (nightly) — official ledger clean (102 sections, 0 unresolved); no new live 12.1 tuning in any of the four channels
+
+- **Revision ledger FIRST, before the RSS/date sweep.** `official-notes/evidence.json` +
+  `pending.json` checkedAt 2026-09-08T14:47:08Z, both configured sources `success`:
+  · **live-hotfixes** topic 2336376 post 1, **version 31**, updatedAt 2026-09-05T01:21:46Z, 99 sections
+  · **ptr-preview** topic 2344395 post 1, **version 3**, updatedAt 2026-09-03T22:48:20Z, 3 sections
+  Body hashes and **all 102 section hashes identical** to the committed ledger, so every prior
+  resolution carried forward untouched — **5 applied / 97 irrelevant / 0 unresolved**, and
+  `removedSections` stayed empty on both sources. Neither post number nor version moved, which
+  is the point of hashing every section rather than trusting the newest feed date. Wrote
+  `pending.json` to `data/official-notes.json`; the ONLY diff is `checkedAt`
+  (2026-09-07T16:04:02Z → 2026-09-08T14:47:08Z), 2 insertions / 2 deletions.
+  `node src/check-official-notes.mjs --base=HEAD` passes.
+- **12.1.5 stayed NOTES ONLY.** `PHASES.ptr` is still null, nothing entered `ptr-builds.builds`
+  or any `spec.ptr` verdict, no forecast reopened, no archived 12.1 PTR metric relabelled. The
+  three preview sections still carry their attributed summaries (Devourer DH Collapsing Star /
+  Demonic Intensity / Monster Rising; Marksmanship's Blood Fletching replacing Unload;
+  Protection Warrior's Execute rework).
+- **Four channels swept, not one — all four agree there is nothing new.**
+  1. **Wowhead news RSS** `/news/rss/all`: HTTP 200, 187,755 bytes, 40 items parsed per `<item>`
+     block (never by tag adjacency). Newest LIVE 12.1 class item is still *September 4th Hotfixes
+     — Ula'tek, Classes, Catalyst* (news=382760, Fri 04 Sep 20:30 CDT), already logged as the
+     2026-09-04 entry.
+  2. **The news INDEX**, which leads the RSS within a run: `data.news.newsData` brace-balanced
+     from the id attribute (the `</div>`-terminated slice and a naive `}` search both fail here).
+     Page 1 of 1,549 agrees with the RSS exactly; newest is news=382776, 12.1.5 Labyrinth
+     rewards, 2026-09-08 09:00. **Both index and blue tracker needed the FULL browser header
+     set** — a short UA+Accept curl drew CloudFront 403 (919 bytes) on both, and the full set
+     returned 200 at 45,053 / 68,243 bytes. Re-learned this run; it is the documented rule and
+     it still bites.
+  3. **Blue tracker**: `data.blueTracker.default`, 50 entries (~30 unique topics). Newest
+     class-relevant post is Linxy *World of Warcraft: Midnight Hotfixes - 4 September* at
+     2026-09-04T20:22Z. No standalone class-tuning blue post since — the Kaivax-style channel
+     that hid six healer specs for 17 days is clear.
+  4. **Official dev-notes thread** `2317811.json`: 17 posts, highest_post_number 19, last post
+     **#19 Linxy 2026-07-31**. That is the CLOSED 12.1 PTR cycle sitting quiet exactly as
+     expected, and the thread-rediscovery gotcha stays suspended — the 12.1.5 preview has its
+     own configured source and opening a 12.2 cycle is an owner action.
+- Everything newer in the feeds is 12.1.5 datamining (Labyrinth rewards, Kith'ix loot, trading
+  post, mount models), RWF recaps, or non-class content. **No tier-set-touching highlight
+  landed**, so no `spec.tierSet` needed bumping and the gearing mirror needed no resync.
+- **Dormant lanes untouched, as designed**: zones 54 / 52 / 56 / 57 were not swept and carry no
+  contract row. Their stored rows in specs.json are the closed cycle's final receipts.
+- ptr-builds.json unchanged: 29 entries, newest 2026-09-04, oldest 2026-06-18.
 
 ## 2026-09-07 (nightly) — official ledger clean (102 sections, 0 unresolved); no new live 12.1 tuning in any of the four channels
 
@@ -770,153 +814,3 @@ rows left with the flip and must not be re-added to the manifest.
   three weeks out. Separately, Dalaran Gaming published "Talent Squish, New Modes, & Huge Patch
   Roadmap" on 08-28 — a creator LEAD about future plans that the official lanes do NOT
   corroborate tonight; the video was left unqueued and unseen rather than treated as a source.
-
-## 2026-08-29 (local run, residential) — the September 1 tuning pass lands; Archon walled night 5
-
-- **A real find, and the first tuning pass this feed has caught on announcement day.**
-  Wowhead news RSS (HTTP 200, 147 KB, 40 items, parsed per `<item>` block) surfaced
-  **news=382674 "Boomkin, Feral Druid, Mistweaver Monk Buffs - Class Tuning Coming with
-  Weekly Reset"**, published 2026-08-28 17:28 CDT. Canonical source located and read
-  directly rather than off the mirror: Discourse search resolved it to **topic 2342331,
-  "Class Tuning Incoming – September 1" (Linxy, 2026-08-28T22:27:13Z)**. Logged as
-  `kind: "build"`, `forumPostNumber: 1` of its own topic, mirror carried in `wowheadUrl`.
-- **Read at VERSION 3, and that is the whole reason to fetch the forum rather than the
-  mirror.** Post 1 was created 22:27:13Z and edited to v3 at 22:48:44Z; Wowhead published
-  at 22:28:50Z, i.e. off v1. Two stale spots in the mirror, both confirmed harmless here:
-  Discipline Priest's PvP absorb/Atonement buffs read 10/10/5% there against 15/15/10% in
-  v3 (PvP-only either way, so out of scope and not distilled), and the mirror omits the
-  "Does not apply to PvP combat." clause v3 attaches to Fire Mage's +3%. **No PvE value
-  differs between versions** — so nothing had to be re-distilled, but the check is what
-  establishes that rather than assuming it.
-- **Heading nesting kept intact, and it settled the one attribution question** exactly as
-  the 08-22 Warlock line did. "Shred damage increased by 10%." sits at list **depth 2**,
-  directly under the bare Druid heading, one level SHALLOWER than the Balance / Feral /
-  Restoration blocks at depth 3. Logged **class-wide**, not as Feral — despite Shred being
-  a cat-form ability. The post's structure is the evidence; inference is not. Depths were
-  measured by walking `<ul>`/`<li>` in the cooked HTML, not eyeballed off a flattened dump,
-  because a flattened dump renders d2 and d3 identically.
-- **PvP section deliberately not distilled** (rule 3c). Nine specs appear there and
-  NOWHERE in the Classes section — Devourer DH, Devastation and Preservation Evoker,
-  Arcane Mage, Assassination Rogue, Elemental and Enhancement Shaman, Arms and Fury
-  Warrior — which is why they are absent from `specsAffected`. Lines that merely CARRY a
-  PvP exclusion (Havoc/Balance/Feral/Windwalker "does not affect PvP combat") are ordinary
-  PvE lines and were kept.
-- **One set bonus touched → tierSet upkeep done in the same change.** "The Venomous Abyss
-  4-piece set bonus chance to activate has been increased from 20% to 25%" is Mistweaver
-  Monk's. `spec.tierSet.asOf` → 2026-08-28, `source` → this post. Note this is the **first
-  absolute activation rate the notes have ever given for this bonus**: the 2026-08-15 pass
-  could record only "+33% relative, no absolute available", so the stored parenthetical was
-  REPLACED rather than appended to, and the bonus text itself was left verbatim (the notes
-  still do not restate the full bonus, so a value swap had nothing to swap into). Gearing's
-  mirror re-synced in the same change per the two-page rule —
-  `node gearing/src/sync-tracker-fields.mjs && npm run gearing:build`, 1 field, text changed.
-- **Every line checked against `classifyHighlight` rather than assumed** — all **15 return
-  `buff`**, matching what the label claims. The two worth having verified: Discipline's
-  "Shadow Mend mana cost reduced by 20%" (resource-aware, so a cost cut reads as a buff)
-  and Vengeance's two mitigation lines in the "X% (was Y%)" idiom (decided by the values).
-  Survival's line carries a PvP-scoped *smaller* increase ("only 3% while engaged in PvP")
-  rather than a nerf clause, so it stays one-directional and votes.
-- **Effect, measured against `git show HEAD:dist/index.html` and not the working tree:**
-  14 spec drawers gained a build line, and 14 outlook tallies each gained a buff (e.g.
-  Frost DK +3/−3 → +4/−3 over 7 of 23 builds; Protection Paladin +1/−2 → +2/−2).
-  **0 outlook directions, 0 projection letters and 0 consensus letters moved** — the
-  affected specs all read `source: "verdict"`, where the dated writeup outranks the tally,
-  and the forecast lane is frozen post-flip. That is the honest result, not a null one:
-  the pass is recorded and visible, it just does not move an arrow this week.
-- **The pass is an ANNOUNCEMENT** — values apply at each region's weekly maintenance on
-  September 1, so nothing live has changed yet. Said so in the label.
-- **Archon: walled night 5**, and re-probed from a residential IP rather than assumed.
-  Site root `archon.gg/wow` and the raid throughput tier list both return **HTTP 403,
-  5.7/5.9 KB, `cf-mitigated: challenge`, `__NEXT_DATA__` absent** — the same shape as
-  nights 4 and 5, and the root probe again shows this is site-wide rather than a tier-list
-  gate. Residential blocked too, so the 08-27 finding that it is not IP-scoped still holds.
-  Nothing merged, no snapshot bumped, stored letters and encounter tiers byte-identical.
-- No 12.2 PTR announcement in any lane. The four dormant WCL PTR zone sweeps were skipped
-  and no manifest row invented for them.
-
-
-## 2026-08-28 (nightly, CI runner) — every live lane polled, 0 new builds; the August 27 round-up was already logged this morning
-
-- **Between-cycles posture unchanged.** `PHASES.ptr` is null, no 12.2 PTR announcement in any
-  lane, so the four dormant WCL PTR zone sweeps (54 / 52 / 56 / 57) were correctly skipped and
-  no manifest row was invented for them.
-- **(a) Wowhead news RSS** — HTTP 200, 148 KB, 40 items parsed per `<item>` block (never by tag
-  adjacency), window 2026-08-25 through 2026-08-28 15:16 CDT. The only class-tuning item in the
-  window is **news=382657 "Vashnik LFR Nerf - Patch 12.1 Hotfixes for August 27th"**, which is
-  ALREADY the newest entry in `data/ptr-builds.json` — landed by this morning's local run with
-  all six class lines and the three class-wide attributions (Blur, Flameshaper, Deathstalker)
-  read off the post's heading structure. Its content was re-read from `<content:encoded>`
-  tonight and matches the logged entry line for line, so nothing was added.
-- **(b) News INDEX polled as well**, because it LEADS the RSS within a run: `data.news.newsData`
-  brace-balanced from its `id` attribute, 20 posts, top id 382668 at 2026-08-28 15:16 — nothing
-  the RSS lacked, and nothing class-related after 382657.
-- **(c) Blue-tracker index** `data.blueTracker.default`, 50 entries. The newest class-relevant
-  topic is still Kaivax's 27 August hotfix (topic 2336376, posted 19:59), already this feed's
-  citation. Everything above it is the Black Temple / WoW Weekly / BCC anniversary lane plus a
-  "Raid Bonus Roll Update" (topic 2341990), none of which carries a class line.
-- **(d) The canonical running hotfix post was read DIRECTLY, not inferred from its tracker
-  timestamp**, since it is edited in place: `2336376.json`, title still "…Hotfixes - August
-  27", post 1 `updated_at` **2026-08-28T00:59:15Z** — the same edit the local run distilled —
-  and its dated section headings run August 27, 26, 25, 21, 20, 19, 18, 17, 14, 13. **There is
-  no August 28 section.** The literal string "August 28" does not appear in the post.
-- **(e) The 12.1 development-notes thread 2317811** is at post **#19**, last posted
-  2026-07-31T23:42Z: unchanged, and the closed cycle's expected silence rather than a lost
-  thread. The rediscovery gotcha stays suspended.
-- **Also checked: topic 2335871 "Season 2 Class Tuning Plans"**, now 190 posts but with Kaivax
-  present only at post #1 (unedited since 2026-08-12) — the whole tail is player replies. Its
-  roadmap still points at a pass after the first full week of live Season 2 data, so a "Class
-  Tuning Incoming" post remains plausible in the next few days; izen independently says at the
-  end of tonight's distilled video that another round of balance tuning lands at the end of
-  this week. Nothing to log until it exists.
-- **Correctly NOT logged from the same window:** "Mythic Coiled Altar Nerfed - Race to World
-  First" (news=382658) — encounter tuning, its five lines all Veil of Twilight / Malacrass /
-  Zul'jan / Spiteful Soulcoiler / Mass Dreadmarch; the Vashnik LFR and Normal difficulty
-  numbers that headline 382657's own mirror; and the two Ion Hazzikostas interviews. No
-  set-bonus text was touched anywhere, so no `spec.tierSet` needed advancing and the gearing
-  mirror needed no resync — which also means the nightly did not hit the structural bind the
-  08-26 entry documents.
-- **Writeup coverage** recomputed rather than remembered: exactly one spec has no `ptr`
-  writeup, Demonology Warlock, whose null is the deliberate "the source reported no changes"
-  case. Nothing to fill.
-
-
-## 2026-08-28 (local, scheduled) — the August 27 hotfix round-up lands: 6 class lines, 3 of them class-wide on NESTING, and a misclassified Blur line that structurally cannot vote
-
-- **One new feed entry: `2026-08-27`, `kind: "hotfix"`.** It postdates the 2026-08-27 nightly
-  (which started 20:43Z; the Wowhead mirror published 2026-08-28T01:30Z and the canonical post was
-  edited 2026-08-28T00:59:15Z), so no nightly had seen it, and today's 10:37Z nightly has not run —
-  GitHub's scheduler is badly delayed right now (yesterday's fired at 20:43Z, ten hours late).
-- **Canonical source read directly, per the 08-25/08-26 precedent:** Kaivax's running hotfix blue
-  post, us.forums topic 2336376, title rolled to "World of Warcraft: Midnight Hotfixes - August 27",
-  post 1 edited 2026-08-28T00:59:15Z. Read with `<ul>` nesting INTACT.
-- **The nesting settled THREE attributions, not one.** The flattened Wowhead mirror renders two of
-  them as "EvokerFlameshaper:" and "RogueDeathstalker:", which reads as spec scoping and is not:
-  · Blur sits under a bare **Demon Hunter** heading with no spec beneath → class-wide.
-  · Flameshaper sits under **Evoker**, one level SHALLOWER than the Preservation block → class-wide.
-  · Deathstalker sits under **Rogue**, which has no spec block at all → class-wide.
-  Flameshaper and Deathstalker are HERO talents spanning two specs each (Devastation/Preservation,
-  Assassination/Subtlety), so pinning either to one spec would be inference the post does not make.
-- **⚠ The Blur line classifies NERF and the classification is WRONG in direction.** The fix removes
-  a PvP adjustment that was leaking into PvE and explicitly restores Blur's PvE damage reduction
-  "to previous intended values" — a defensive restoration. It reaches no tally, and that is
-  STRUCTURAL rather than lucky: `outlookFor` scores only highlights beginning "<Spec> <Class> ",
-  so class-wide lines are excluded from scoring by construction while still reaching the drawer's
-  fact list via `specBuildChanges`. Confirmed empirically, not just by reading the code — outlook
-  captured for all eleven specs across the three affected classes before and after: direction,
-  source and buff/nerf tallies identical on all eleven, with the Demon Hunter specs holding at
-  Havoc +7/−1, Devourer +2/−2, Vengeance +4/−0. Only build MEMBERSHIP moved (N of 21 → N+1 of 22),
-  which is the ordinary bookkeeping of adding a build they are all named in.
-  The first draft of the entry label overclaimed this as "all eleven unchanged"; it was corrected
-  to name the membership move before commit.
-- **No set bonus is touched**, so no `spec.tierSet` bump and no gearing mirror resync — this
-  round-up does not repeat the split the 2026-08-26 entry documents.
-- **12.2 PTR: still nothing.** Swept all 40 RSS items, titles and `content:encoded` bodies, for
-  12.2 / PTR / "next patch". Two hits, both design commentary in Ion Hazzikostas interviews: the
-  Psybear one names "a plan for Patch 12.1.5, 12.2, and well beyond" as release-cadence talk, and
-  the Tettles one discusses PTR-testing philosophy in general. Neither is an announcement. The
-  between-cycles posture is unchanged and the dormant zone sweeps stayed dormant.
-- **RSS parser trap, hit and recorded:** the documented `<title>`-then-`<link>` ordering is
-  right, but a first pass that built the tag regex through a shell `node -e` string returned 40
-  items with every field EMPTY — which looks exactly like a dead feed rather than a quoting fault.
-  Moving the same regex into a `.mjs` file fixed it with no logic change. Prove the extractor on a
-  known-positive item before believing an empty result; this is the third shape of that lesson.

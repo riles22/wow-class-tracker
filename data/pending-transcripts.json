@@ -2,11 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "jGeOuxbfGUo",
-      "creator": "Kalamazi",
-      "title": "Season 2 Character & Channel Update! Future Plans Etc",
-      "published": "2026-09-06",
-      "queuedAt": "2026-09-07"
+      "id": "zf9FpCLuTeI",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?",
+      "published": "2026-09-07",
+      "queuedAt": "2026-09-08"
+    },
+    {
+      "id": "4qn2cENo0Rk",
+      "creator": "MadSkillzzTV",
+      "title": "Best \"Easy\" Healer in 12.1",
+      "published": "2026-09-07",
+      "queuedAt": "2026-09-08"
     }
   ],
   "skipped": [
@@ -2935,6 +2942,13 @@
       "title": "Havoc Demon Hunter new BiS Gear Setup and Post-Buff Sims",
       "reason": "Transcript read in full: a Havoc Demon Hunter BiS-list update, not a spec-strength read. The whole video is stat-weight consequence — Font of Venomous Rage (mastery) replacing Heart of Vultalec (crit) pushes mastery past crit, so the ring swaps to Signet of Starling from Murder Row, gems and flask have to hold crit exactly one point above mastery, and running last week's list costs about 5,000 DPS. The September 1 +4% Havoc buff is named only as one input to the sim numbers (top build up to 254k) and is never compared against another spec, and the closing line is that Font is 'a crazy good trinket for us now' at about 9% of damage. Gear-level claims per the distillation rules, so no take.",
       "verifiedAt": "2026-09-01"
+    },
+    {
+      "id": "jGeOuxbfGUo",
+      "creator": "Kalamazi",
+      "title": "Season 2 Character & Channel Update! Future Plans Etc",
+      "reason": "Transcript pre-fetched by the deterministic Supadata step (480 caption chunks, ~18k characters) and read in full: a character/channel housekeeping video with no spec-strength read anywhere in it. The first two thirds are his own gear state and Great Vault coining math (ilvl 322, crafted staff and boots, which mythic boss to coin next week, Janthrazette-plus-offhand about 2% over the crafted staff, which trinkets are landmines), which is gear-level by the distillation rules; the middle is guild progress in Just Woke Up and Blizzcon travel; the last third is channel planning and a request for video suggestions. The only two spec-adjacent lines both fail: his dungeon comments (\"Murder Row I like a lot more than I thought\", \"Altar of Fangs is insane\", \"RLP is honestly that bad\") rank DUNGEONS, not specs, and \"there is going to be some nerfs coming in demo soon\" is anticipation, which the rules exclude as a read — he says in the same breath that the 12.1.5 PTR carries no Warlock changes yet, which the official 12.1.5 ledger independently confirms (its only class sections are Devourer DH, Marksmanship Hunter and Protection Warrior). His existing Warlock takes remain the current read.",
+      "verifiedAt": "2026-09-08"
     }
   ],
   "seen": [

@@ -15,6 +15,65 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-09-08 (nightly) — 240/240 letters re-verified live, 0 moved; Archon walled a TWENTIETH night
+
+- **Three sources fetched, parsed and reconciled in full; Archon blocked.** Every page below was
+  fetched fresh in this session, and every byte count is measured off the WRITTEN FILE, never
+  curl's `size_download` (which reports the compressed length under `--compressed` — it read
+  54,945 against a real 206,114 on the first Wowhead page this run, which is exactly the trap).
+- **Icy Veins — 6/6 pages, 120 rows, 0 unmatched.** Direct browser-UA GET, HTTP 200,
+  195,863–343,032 bytes; r.jina.ai deliberately not attempted. Parsed per `<tr>` block: letter
+  from the row's first `<td>`, spec from each `tier-list-entry`'s FIRST `img alt` looked up
+  WHOLE against the roster (a positional split at the last space turns "Vengeance Demon Hunter"
+  into class "Hunter"). Counts printed BEFORE the merge — raid 27/7/6 = 40, M+ 27/7/6 = 40.
+  Note the M+ healer page genuinely lists **A+ AFTER A** in table order; verified against the
+  raw `<td>` sequence rather than assumed to be a parse fault, and it is harmless because the
+  letter comes from the label, not the position.
+- **Wowhead — 6/6 pages, 120 rows, 0 unmatched.** Full browser header set (a UA-only request is
+  Cloudflare-403). Unescaped `\/`→`/` across the whole document FIRST, then took every
+  `[tier-list=rows] … [/tier-list]` block and kept the one with the most spec badges — **never**
+  anchoring on `WH.markup.printHtml(`, which is what produced the raid-healer decoy incident.
+  Exactly 1 block per page this run, so no decoy fired. Tier labels matched with tolerant
+  whitespace (`[tier-label bg=q3]B [/tier-label]` has a trailing space inside the tag) and specs
+  resolved from the `[spec-badge=<spec>-<class>]` kebab slug, which sidesteps the two-word-class
+  problem entirely. **Empty tiers preserved as empty** — raid DPS `S` is empty, and D/F are
+  empty on five pages; that is upstream's shape, not a shortfall.
+- **Method — 2/2 pages, 80 rows, 0 unmatched.** Rejected the extra containers by **ROSTER
+  MATCH**, never by position: the raid page served 3 containers and M+ served 5, and in each
+  case exactly one matched 40 roster specs. M+'s extra block is the dungeon-difficulty list and
+  failed to map cleanly — its 8 entries are Altar of Fangs, Den of Nalorakk, King's Rest, Murder
+  Row, Ruby Life Pools, Temple of Sethraliss, The Blinding Vale, Voidscar Arena, which is also
+  free corroboration of the S2 dungeon pool.
+- **ZERO letters moved.** Pre-merge diff across all 240 fetched rows: 0 of 80 stored consensus
+  cells changed on any of the three sources. `apply-ratings.mjs` still ran over the full 240-row
+  file and rewrote nothing; only the 14 snapshot dates advanced to 2026-09-08.
+- **Era-verify — body over title, twice this run.**
+  · Icy Veins raid HEALER still titles itself *"(Patch 12.0.7 / Midnight)"* and its meta
+    description repeats it, but the body is Season 2 and its changelog reads **01 Sep. 2026
+    "Updated for the end of RWF Mythic progression"** and **11 Aug. 2026 "Updated for Midnight
+    Season 2 launch"**. S2.
+  · Method's `og:description` on BOTH pages still carries a stale *"The War Within Season 3"*
+    boilerplate, while the raid body reads "the Midnight Season 2 Raid, The Venomous Abyss" and
+    M+ reads "Method's Mythic+ Spec and Dungeon Tier List for Midnight Season 2". S2.
+  · Icy Veins raid TANK's newest changelog line is 08 Aug. 2026 "Season 2 Update" against a
+    2026-08-29 dateModified — older cadence, still S2.
+  Devourer DH present in all four DPS lists. `seasonVerified` stays `s2` on all 14 pages;
+  nothing changed, so **freeze-season had nothing to consider** and was not needed.
+- **`published` re-read live on every page that carries one**, not carried forward, and it
+  matches this run's pre-agent `published-evidence/evidence.json` exactly: Icy Veins raid DPS
+  2026-08-30 / healer 2026-09-01 / tank 2026-08-29, M+ all three 2026-08-30; Wowhead raid all
+  three 2026-08-31, M+ DPS 2026-08-28 / healer 2026-08-26 / tank 2026-09-01. Method has no
+  `published` block in the contract, so its own "Last Updated" lines (raid 10th August 2026,
+  M+ 13th August 2026) are logged here and written nowhere.
+- **Archon — walled, night 20.** Two independent observations: the pre-agent
+  `source-health/evidence.json` (14:47:01Z) records the raid route at **HTTP 403 /
+  cloudflare-challenge / 5,764 bytes** and the M+ route at **HTTP 200 / human-verification /
+  2,516 bytes**; my own browser-UA GET of the registered raid DPS page returned HTTP 403, a
+  5,849-byte *"Just a moment…"* interstitial, **`__NEXT_DATA__` count 0**. Asserted on
+  `__NEXT_DATA__` presence, not on status — the wall returns both codes now. No challenge
+  solved, replayed or automated past; nothing backfilled from Warcraft Logs. All 240 stored
+  Archon letters and the six unlabeled snapshots (2026-08-25) are byte-identical, and Archon
+  stays in the four-source consensus under the owner-confirmed 2026-09-05 retention policy.
 
 ## 2026-09-07 (nightly) — 240/240 letters re-verified live, 0 moved; Archon walled a NINETEENTH night
 
@@ -787,158 +846,3 @@ earlier run today, and a snapshot is not bumped onto data that did not move.
   bumped, `data/encounter-tiers.json` untouched and still season-gated out of the UI.
   Standing consequence unchanged: Archon is the one tier source still describing S1, so this wall
   is also holding back the consensus recomposition the anomaly gate is waiting for.
-
-
-## 2026-08-27 (local, scheduled) — Archon's wall is NOT IP-scoped: it holds from a residential IP too, and it has changed shape from 403 to 200
-
-- **The residential retry that this local run exists to make: Archon is still walled.** The nightly
-  has recorded all 9 Archon rows unreachable for three consecutive nights, and the standing
-  hypothesis for a CI-only block is a datacenter IP. Re-tested from Riley's residential IP with the
-  full browser header set: **the wall holds**, so the datacenter-IP explanation is now ruled out.
-  Nothing merged, no snapshot bumped, stored letters byte-identical.
-- **⚠ THE SHAPE CHANGED AND IT NOW LOOKS LIKE SUCCESS — read the BODY, not the status.** The nightly
-  saw **HTTP 403** with a "Just a moment..." interstitial. Tonight every registered page returns
-  **HTTP 200** carrying a 1.3–2.5 KB `<title>Human Verification</title>` page ("One Quick Check /
-  Please confirm that you are a human and not a bot"), with `__CF$cv$params` and the
-  `/cdn-cgi/challenge-platform/` precursor script. **`__NEXT_DATA__` count is 0.** A transport check
-  keyed on status alone would now record all 9 rows as SUCCESS and stamp today's snapshot over
-  unchanged letters — which is the wowmeta failure mode (a 200 is not freshness) wearing a new hat.
-  Assert on `__NEXT_DATA__` presence, never on the status code.
-- **Measured as site-wide, not page-specific:** the same interstitial on the site ROOT
-  (`archon.gg/`, 2452 b), on the raid Heroic DPS and Healer pages, and on the M+ DPS page. The root
-  is not a tier list and has no reason to be gated on its own, which is what makes "the site is
-  walled" a measurement rather than an inference about our parse.
-- **The gate was NOT solved and must not be.** It is now an explicit interactive "I am a human and
-  not a bot" button — a bot check, which this project does not defeat by policy; the honest record
-  is "unreachable". If it persists, the decision is Riley's: wait it out, or approach Archon.
-- **Standing consequence, unchanged:** Archon is the one tier source still describing S1 ("updating
-  for 12.1"), so this wall is also holding back the consensus recomposition the anomaly gate is
-  waiting for. Icy Veins / Method / Wowhead were refreshed by tonight's nightly and were NOT
-  re-fetched here — independently regenerating what CI already produced is what makes a local push
-  unmergeable.
-
-
-## 2026-08-27 (nightly) — Archon's human-verification wall holds for a second night; Wowhead moves ONE letter (Holy Priest M+ C → B) and it is corroborated by the page's own date
-
-**Three of four tier sources fetched and re-verified 80/80 each; Archon is unreachable, same wall as 08-26.**
-
-- **ARCHON — unreachable, and the wall is SITE-WIDE, not page-specific.** Every registered page
-  returns **HTTP 403 with Cloudflare's `Just a moment...` interstitial** (`challenge-platform` in
-  the body, 5.9–6.2 KB) under the full browser header set: the three Heroic raid rankings pages,
-  the M+ DPS page, and — the check that settles it — `https://www.archon.gg/wow` itself, the site
-  ROOT, which is not a tier list and has no reason to be gated on its own. r.jina.ai was tried as
-  a second transport and returns HTTP 200 carrying a 319-byte **"Human Verification / One Quick
-  Check"** page, i.e. the proxy sees the same interstitial rather than the content. Two independent
-  transports, one of them a probe of the root, is what makes "the site is walled" a measurement and
-  not an inference about our own parse. **Nothing was merged and no Archon snapshot was bumped**;
-  all nine Archon requirement rows record `unreachable`. Consequence to keep in view: Archon is the
-  only tier source that would ever be *expected* to move S1 → S2 (it has been "updating for 12.1"
-  on every bracket since the flip), so this wall is also blocking the one recomposition the anomaly
-  gate is waiting for.
-- **ICY VEINS — 80/80 re-verified, 0 letters moved, nothing merged.** Six pages by direct
-  browser-UA GET, HTTP 200, 194–341 KB. Parse bounded to the single `<table class="tier-list">`
-  block per page (block count asserted **exactly 1** on all six); the first `<td>` of each row is
-  the letter, matched whole-cell against the registered seven-band icyveins scale; each
-  `tier-list-entry`'s FIRST `img alt` is looked up WHOLE against the roster, never split at a
-  space. Counts printed and reconciled against 27+7+6=40 BEFORE any merge: raid 27/7/6, M+ 27/7/6,
-  **0 unmatched, 0 duplicates**. Upstream still publishes exactly TWO M+ DPS specs as **TBD** —
-  Windwalker Monk and Frost Death Knight — and both stay explicit `null`, rendering "—" and sitting
-  outside the consensus mean. Page self-dates re-read from JSON-LD `dateModified` and unchanged:
-  raid DPS 2026-08-23T13:09Z, raid healer 2026-08-24T00:44Z, raid tank 2026-08-08T15:00Z, M+ DPS
-  2026-08-23T15:31Z, M+ healer 2026-08-23T13:48Z, M+ tank 2026-08-23T12:46Z — identical to the
-  stored `published` values AND to the pre-agent published-evidence artifact, so the published
-  cross-check has three agreeing witnesses. Era-verified **s2 from the BODY, not the title**: the
-  raid HEALER page still titles itself "Patch 12.0.7 / Midnight" while its body opens "the various
-  healing specializations for Midnight Season 2" and discusses Season-2 Abundance — the
-  body-over-title rule, same shape as the blue-tracker patch tag.
-- **METHOD — 80/80 re-verified, 0 letters moved, nothing merged.** Raid `/guides/tier-list/raiding`
-  and M+ `/guides/tier-list/mythic-plus`, HTTP 200, 159 / 166 KB. CSS stripped before parsing (the
-  string `tierlist` occurs 25–27 times per page and all but a handful are stylesheet selectors —
-  anchoring on it without dropping `<style>` finds rules, not rows). Rows read from the
-  `tier__tier` blocks, letter from `tier__title`, spec from each entry `img alt`. **Rejection is by
-  ROSTER MATCH, never by position**: the M+ page carries 48 images, of which the 8 that fail to map
-  are exactly the eight dungeon-difficulty blocks (King's Rest, Ruby Life Pools, Voidscar Arena,
-  The Blinding Vale, Den of Nalorakk, Murder Row, Temple of Sethraliss, Altar of Fangs). 40 rows
-  each bracket, 0 unmatched. Page self-dates read from the body's "Last Updated" line: **raid 10th
-  August 2026, M+ 13th August 2026** (the M+ list is bylined Tactyks). Era-verified s2 from the
-  body: raid says "the Midnight Season 2 Raid, The Venomous Abyss"; M+ says "dungeon difficulty in
-  Midnight Season 2".
-- **WOWHEAD — 80/80 parsed, ONE letter moved: Holy Priest M+ C → B.** Six pages, HTTP 200,
-  73–339 KB. `\/` unescaped across the whole document FIRST, then the `[tier-list=rows] …
-  [/tier-list]` block located in the unescaped text — never anchored on `WH.markup.printHtml(`,
-  which is the decoy that once returned 0 rows for the raid-healer page. Exactly **1** tier-list
-  block found per page, asserted. Letters read with tolerant whitespace inside `[tier-label …]`
-  and specs from the `[spec-badge=<spec>-<class>]` kebab slug, which sidesteps the
-  two-word-class-name split entirely. 27/7/6 per bracket, 0 unmatched.
-  **The single move is corroborated rather than merely parsed:** the M+ HEALER page's own
-  `dateModified` is **2026-08-26T13:33Z** — it rebuilt yesterday, alone among the six — and it is
-  the only page whose letters changed. The other five self-date 2026-08-14 (raid DPS, raid tank)
-  and 2026-08-18 (raid healer, M+ DPS, M+ tank), all unchanged from stored and from the pre-agent
-  evidence artifact. A letter moving on the one page that re-dated, and nothing moving on the five
-  that did not, is the shape of real upstream movement; a parser drift would not respect that line.
-- **`seasonVerified` unchanged on every page** (all four sources stay `s2` / Archon `s2` untouched
-  because it was never fetched), so `node src/freeze-season.mjs` had nothing to consider and step
-  5b is a no-op this run — no outlet flipped season tonight.
-- **BYLINE FIREWALL — a NEW finding, flagged for Riley, nothing retired.** Reading each Wowhead
-  page's byline while era-verifying turned up that **four registered creators author tier-list
-  pages this tracker feeds into `consensusFor`**: Dratnos (raid DPS **and** raid tank), tettles
-  (M+ DPS), AutomaticJak (M+ healer), YoDaTV (M+ tank). The documented Tactyks/Method precedent
-  says such a creator is firewalled from the bracket they author, or one voice feeds both the
-  consensus letters and `expertRead` on the same cell. Only Tactyks has ever been recorded that
-  way. Measured exposure in the CURRENT take set: **23 live takes** sit in the bracket their author
-  writes — Dratnos 3 (2 unscoped `both` + 1 raid), tettles 4 (2 M+ + 2 unscoped), AutomaticJak 7
-  M+, YoDaTV 9 M+. Per the standing rule this is an OWNER decision — flagged, not acted on. Icy
-  Veins' three M+ pages are all bylined "Petko", who is not a registered creator, so that source
-  is clean.
-
-
-## 2026-08-26 (nightly) — ARCHON IS BEHIND A SITE-WIDE HUMAN-VERIFICATION WALL; the other three re-verified 80/80 with 0 moves
-
-**Archon: unreachable, and the shape matters so it is not misread as a parse failure.** Every request
-returns **HTTP 200 with a ~1 KB body titled "Human Verification"** — "One Quick Check … confirm that
-you are a human and not a bot" — carrying a POST form to `/human-challenge` with
-`intendedUrl`/`expiresAt`/`signature` hidden fields. There is **no `<script id="__NEXT_DATA__">` at
-all**, so the documented parse has nothing to read; a parser that anchored on `__NEXT_DATA__` and
-reported "0 rows" would be describing the wrong thing entirely.
-
-Probed enough to establish it is site-wide and not path- or header-specific: `archon.gg/`, `/wow`,
-and both a raid and an M+ tier-list URL all return the same interstitial, with a UA-only request,
-with the full browser header set (`sec-ch-ua`, `sec-fetch-*`, `Upgrade-Insecure-Requests`), and with
-a `Referer`; three further attempts spaced ~12s apart were identical. **It was NOT worked around** —
-no form POST, no proxy, no scrape service. It is an explicit anti-bot control, and the WCL precedent
-("Use the API … instead of scraping HTML") is that we respect a site's stated position rather than
-route around it. All nine archon-* manifest rows are `unreachable`; every Archon-derived value in the
-tree is byte-identical to last night's reviewed local run, no `seasonVerified` moved, so no source
-entered or left the consensus and the frozen lane was untouched.
-
-Note for whoever sees this next: last night's local run fetched Archon fine, so this is new and quite
-possibly **runner-IP reputation** rather than a policy change. A local run from a residential IP is
-the thing to try. If it persists past ~2026-08-30 the archon-* staleness reds start firing (their
-stored dates are 08-24/08-25 against `maxAgeDays` 5).
-
-**Icy Veins — 80/80, 0 moves.** Six pages by direct browser-UA GET, HTTP 200, 193-340 KB raw. Parse
-bounded to the single `<table class="tier-list">` per page (block count printed: exactly 1 each);
-first `<td>` = letter, matched WHOLE-CELL against the registered scale with `TBD` written as explicit
-`null`; each entry's FIRST `img alt` looked up whole. raid 27/7/6 + M+ 27/7/6 = **80**, 0 unmatched,
-0 dups. Still exactly two M+ DPS TBDs (Windwalker Monk, Frost DK), both carried as nulls. Page
-dateModified re-read and unchanged (raid DPS 08-23, raid healer 08-24, raid tank 08-08, all three M+
-08-23), matching stored `published` and the pre-agent evidence artifact. Era-verified **s2 from the
-body**: the raid HEALER page *still* titles itself "(Patch 12.0.7 / Midnight)" while its body carries
-21 Season-2 references to 6 Season-1 and its newest changelog row is 24 Aug 2026 — body over title.
-
-**Method — 80/80, 0 moves.** raid S 6 / A 11 / B 17 / C 6; M+ S 2 / A 13 / B 21 / C 4. The M+ page
-again carries a SECOND tierlist (8 blocks vs raid's 4) and the eight dungeon names were rejected by
-**roster match and reported as unmatched**, never by position. Era s2 in both bodies.
-⚠️ Devourer is carried only in tag ATTRIBUTES here (`data-original-title`), so a tags-stripped body
-scan reports it absent — check the raw HTML before concluding a roster gap on this source.
-
-**Wowhead — 80/80, 0 moves.** Full browser header set (UA-only is Cloudflare-403; r.jina.ai still not
-tried, IP-403 on `/guide/*`). Unescaped `\/` across the whole document FIRST, then took the
-`[tier-list=rows] … [/tier-list]` block — exactly one per page tonight, no decoy. Tolerant-whitespace
-tier labels, specs from the `[spec-badge=<spec>-<class>]` kebab slug. M+ DPS again publishes A+ (2)
-and no S. Page self-dates unchanged and matching the evidence artifact.
-
-Snapshots advanced to 2026-08-26 for the three verified sources (14 page entries); Archon's were left
-where they were, because nothing was fetched.
-
-
