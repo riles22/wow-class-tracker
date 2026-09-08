@@ -15,6 +15,33 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-09-08 (local, scheduled) — ran as a stand-in for a nightly that had not fired, then the nightly fired mid-run; DATA SUPERSEDED, one parser trap worth keeping
+
+**No tier data from this run is in the tree.** It started at 14:13Z because GitHub's schedule event
+had not delivered by then (the 09-07 nightly itself only ran at 16:01Z), did a full independent
+refresh, and committed locally — and at 14:44Z the nightly finally fired. Rather than rebase two
+independently regenerated datasets (which does not merge mechanically), the local commit was reset
+away in favour of the nightly's. Recorded because the RESULTS agreed exactly, which is a genuine
+independent check: 240/240 rows, **0 letters moved**, all 14 pages' JSON-LD `dateModified` unchanged
+from stored, `seasonVerified` s2 throughout.
+
+- ⚠️ **PARSER TRAP, and this one is new — do not slice the document at the LAST `</style>` before
+  looking for `<table class="tier-list">`.** It is a tempting shortcut because Icy Veins ships the
+  tier-list CSS inline, and it works on five of the six pages. On **raid/Healer it does not**: that
+  page carries a `</style>` at byte 215,504 while the table sits at 152,329, so the slice discards
+  the table and the page parses **0 rows at HTTP 200** while the other five parse perfectly.
+  **Nothing mechanical would have caught it** — ratings UPSERT, so the seven stored healer letters
+  would simply have stood unchanged, the stored count would never drop, and both the row floor and
+  `maxRowDropPct` would have stayed green on a page that fetched nothing. It surfaced ONLY because
+  per-page counts are printed and reconciled before any merge, which is exactly the discipline
+  SKILL.md demands and exactly the class of failure it was written for.
+  **The fix is to strip every `<style>…</style>` block and then find the table.** Worth promoting
+  into SKILL.md's parser-traps section at the next prune, alongside the Wowhead `printHtml` decoy —
+  it is the same failure wearing different clothes.
+- Archon: independently re-probed and walled, with the shape back to **HTTP 403 cloudflare-challenge**
+  on both ordinary public routes rather than the HTTP-200 human-verification body of recent days.
+  Assert on `__NEXT_DATA__` presence either way, never the status code.
+
 ## 2026-09-08 (nightly) — 240/240 letters re-verified live, 0 moved; Archon walled a TWENTIETH night
 
 - **Three sources fetched, parsed and reconciled in full; Archon blocked.** Every page below was
@@ -799,50 +826,3 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   2026-08-27 nightly (1d, against a 4d max) and independently regenerating what CI already produced
   is what makes a local push unmergeable — the more so today, with GitHub's scheduler running hours
   late and today's nightly still pending. Same call as 08-27, same reason.
-
-
-## 2026-08-27 (nightly) — three tier sources fetched, parsed and reconciled; ZERO letters moved anywhere, and Archon's wall holds for a third night
-
-**Merged: 0 rows. Nothing to merge — all 240 letters parsed identical to stored.** No
-`sources.json` edit was needed either: every page snapshot was already 2026-08-27 from the
-earlier run today, and a snapshot is not bumped onto data that did not move.
-
-- **ICY VEINS — 80/80, 0 moves.** Six pages by direct browser-UA GET, HTTP 200, 73–281 KB
-  (r.jina.ai deliberately not tried; it is IP-403 on these hosts). `<style>` stripped BEFORE
-  parsing and the `<table class="tier-list">` block count asserted **exactly 1 per page** — the
-  page ships its whole tier-list CSS inline, so an unstripped anchor finds stylesheet rules.
-  Letter from each row's first `<td>`, spec from each `.tier-list-entry`'s FIRST `img alt`
-  looked up WHOLE against the roster. Counts reconciled to 27/7/6 per bracket = 80 **before**
-  any merge: 0 unmatched, 0 duplicates, every letter inside the registered 7-band scale.
-  The two M+ DPS TBDs (Windwalker Monk, Frost Death Knight) are still upstream and stay explicit
-  nulls. Page self-dates from JSON-LD `dateModified`: raid 08-23 / 08-24 / 08-08, M+ 08-23 ×3 —
-  identical to the stored `published` values AND to the pre-agent published-evidence artifact.
-  Era-verified s2 from the BODY on all six; the raid HEALER page still titles itself
-  "Patch 12.0.7 / Midnight" while its body is Season 2 throughout — body over title, as before.
-- **METHOD — 80/80, 0 moves.** Both pages HTTP 200, 159 / 166 KB. Extra tierlists rejected by
-  ROSTER MATCH, never by position: the M+ page's nine unmatched images are the eight dungeon
-  blocks (Altar of Fangs, Den of Nalorakk, King's Rest, Murder Row, Ruby Life Pools, Temple of
-  Sethraliss, The Blinding Vale, Voidscar Arena) plus the Method logo, and the raid page's one
-  unmatched image is the logo. 40 rows per bracket, letters confined to the 4-band scale.
-  Self-dates from the body: raid **10th August 2026**, M+ **13th August 2026** (Tactyks' byline),
-  both unchanged. Era s2 from the body — "the Midnight Season 2 Raid, The Venomous Abyss" and
-  "dungeon difficulty in Midnight Season 2"; Devourer present in both.
-- **WOWHEAD — 80/80, 0 moves.** Six pages with the full browser header set, HTTP 200, 73–339 KB.
-  Backslash-slash unescaped across the WHOLE document first, then `[tier-list=rows]` located in
-  the unescaped text — never anchored on `WH.markup.printHtml(`, the decoy that once returned 0
-  rows for raid-healer. Exactly one block per page, asserted; specs from the
-  `[spec-badge=<spec>-<class>]` kebab slug. `dateModified` on all six is byte-identical to stored
-  and to the published-evidence artifact, **including M+ healer at 2026-08-26T13:33Z** — the page
-  that rebuilt yesterday and carried last night's single Holy Priest C→B move. It has not moved
-  again, which is the right shape: one page re-dates, one letter moves, then both settle.
-- ⚠️ **ARCHON — unreachable, third consecutive night, and the wall's SHAPE is now confirmed from
-  CI too.** Every registered page and the site ROOT (`archon.gg/wow`, not a tier list and with no
-  reason to be gated on its own) return **HTTP 200 carrying a ~2.5 KB "Human Verification / One
-  Quick Check" interstitial** — not the 403 of 08-25/08-26. That matches what the 08-27 local run
-  measured from a residential IP, so the wall is neither IP-scoped nor a CI artifact; it changed
-  shape, and a checker keyed on the status code alone would now read it as a successful fetch of
-  an empty page. Second transport tried: r.jina.ai returns **403** with Cloudflare's "Just a
-  moment..." challenge, i.e. the proxy is stopped one layer earlier. Nothing merged, no snapshot
-  bumped, `data/encounter-tiers.json` untouched and still season-gated out of the UI.
-  Standing consequence unchanged: Archon is the one tier source still describing S1, so this wall
-  is also holding back the consensus recomposition the anomaly gate is waiting for.

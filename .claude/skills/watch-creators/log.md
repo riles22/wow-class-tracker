@@ -15,6 +15,34 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-09-08 (local, scheduled) — caption 429 on day SEVENTEEN; full 44/44 sweep because no nightly had fired; TWO in-scope videos the nightly's title filter missed were queued
+
+Ran as a stand-in for a nightly that had not fired by 14:13Z; the nightly then fired at 14:44Z and
+published first, so this run's data was reset away — **except the queue additions below, which are
+the one thing CI did not do.**
+
+- **Caption lane still down, day 17 since 2026-08-23.** ONE probe spent per SKILL.md's bound, on the
+  then-queued `jGeOuxbfGUo` (Kalamazi). Availability confirmed healthy first (936s, `not_live`, an
+  `en` auto-caption track offering json3; `--list-subs` is never rate-limited), then the documented
+  `player_client=android` json3 fetch returned **HTTP 429** on the `timedtext` download alone while
+  the watch page and android player API both downloaded and subtitles resolved. Same third shape;
+  no bot-wall message; no cookies file available to an unattended run, so the authenticated fallback
+  was not open. **Resolved from the other side the same evening:** the nightly's Supadata lane (exempt
+  from this IP flag) drained that video and **verified-skipped** it — it really was a channel update
+  with no spec content. Day 17 again cost latency, not coverage.
+- **Discovery ran here precisely because no nightly had:** 44/44 channels via the RSS endpoint, 660
+  entries, **0 feed failures**. Seen-set from the four STRUCTURED lanes only (1,242 ids); cycle bound
+  `Math.min` over build dates = 2026-06-18, taken as a DATE. 312 unseen in-cycle videos left UNSEEN.
+- ⚑ **The two videos re-applied after the reset are the point of this entry.** Checked against the
+  nightly's own lanes before adding — neither is in `videos[]`, `skipped[]` or `seen[]`, i.e. its
+  keyword filter did not surface them, while it *did* independently queue the izen meta video I had
+  also picked. Both were verified `not_live` with ordinary durations by an info fetch first:
+  · `AUuP4Ex29X0` — **Preheat**, "Arcane is RNG. Fix your damage by fixing the odds." (568s, 09-08).
+  · `enxnA4o5aDo` — **leak**, "Quick Survival Hunter Raid Tips for Heroic Venomous Abyss" (114s, 09-07).
+  This is the **Tactyks/J-Funk pattern repeating**: a title is a bad predictor of whether a video
+  carries spec analysis, and the nightly filters on titles by necessity because Supadata is metered.
+  A local run's job is to catch what that filter drops — so queue narrowly and let the paid lane decide.
+
 ## 2026-09-08 (nightly) — 44/44 feeds, 0 failures; the one pre-fetched transcript yielded NOTHING and was verified-skipped; 2 queued
 
 - **Discovery: all 44 unique tracked channels polled inline** via the public RSS endpoint (41
@@ -949,57 +977,3 @@ data file changed by this skill, `pending-transcripts.json` untouched (3 before,
   goodwill on the one service still answering.
 - 0 takes, 0 metaNotes, 0 verified skips. `data/creator-takes.json` and
   `data/pending-transcripts.json` are both untouched.
-
-## 2026-08-30 (nightly, CI runner) — 2 bracket-split Havoc takes; 1 verified-skipped; 4 queued
-
-All **44** transcribable channels polled via the YouTube RSS endpoint, 0 failures, 15 entries
-each = **660 videos**. `media:description` parsed alongside every title. No YouTube or
-transcript-API request was made by this agent.
-
-- **Seen-set recomputed as the four-lane union** (`seen` 549 + `skipped` 415 + `videos` 3 +
-  every `youtu.be` id in a take or metaNote) = **1,216 ids**, leaving **238 unseen**, all inside
-  the cycle bound **2026-06-18** (the OLDEST `ptr-builds` date, not `builds[0]`). 196 pass the
-  nightly keyword filter.
-- **Transcript step:** `transcript-fetch/summary.json` attemptedAt 2026-08-30T14:57:53Z, verdict
-  **`ok`**, 3 requested / **2** fetched.
-- **DISTILLED — Shadarek, `s508k-L7ims` "Havoc BUFFED AGAIN! | Sep 1st Class Tuning"**
-  (170 chunks, ~6m12s, published 2026-08-28). A scripted, self-anchored read that splits by
-  bracket, so **two takes**:
-  · **Havoc / raid — buff.** The flat 4% aura buff on a spec he already called "pretty okay",
-    plus a trinket correction he published the same day: **Font of Venomous Rage** was
-    under-simming because SimC modelled the tooltip's four ticks when it actually ticks five —
-    base tick 217,676 → 272,096, his average crit ~630k → 787k, roughly 25% missing. He now
-    rates it his best on-use over Heart of Ula'tek (drops from Ula'tek, timers matching that
-    fight's ~2:15 / 4:45 / 9:30 burns, cleaves; his own casts 2M and 4.7M, ~1.7M DPS in that
-    window), amplifiable inside Inertia and potion windows. Conclusion: "incredibly good spot",
-    "very well off in raid for the season".
-  · **Havoc / M+ — buff.** Havoc "seems pretty good right now" and the extra 4% "will go a long
-    way"; the buff roughly pays for dropping Glaive Tempest for Isolated Prey (≈4% overall lost
-    against ≈10% single target gained), which he calls a newly available option.
-  His **2026-08-22 whole-spec "both" take was superseded** by the pair — the Obli 08-23/08-28
-  precedent for a bracket-split replacing a `both` read.
-  **Devourer got NO take**: the only mention is that Havoc/Devourer stats now roll into
-  Vengeance, a gear remark and not a read. The eleven other specs he names (Frost DK, Feral,
-  Balance, Resto Druid, BM, Survival, Fire, Frost Mage, Mistweaver, Windwalker, Prot Paladin)
-  are him reading the tuning notes aloud, outside his registered scope — including the Frost
-  Mage "getting laid on Twin Fang on Mythic World First" line, which is a fight artifact twice
-  over. `latest` advanced to state what was distilled.
-- **VERIFIED-SKIPPED — Critcake, `UfjdyqXGbeM`** (255 chunks, ~26m): a commentated pug key run of
-  the same shape as `if8kxRXBzSA`, skipped 08-28. His scripted intro is 4-set/gear housekeeping
-  ("the spec still works even though I don't have ideal stats"); the rest is callouts, banter and
-  chat answers. Three strength-adjacent lines tested and all failed — "I like the feel of Fury
-  four piece … feels good" is feel not placement; "I felt like I would have done better as
-  slayer" sits after a speaker-change marker; and the one genuinely comparative line, *"is arms
-  and fury damage comparable. Yes,"* / *"keys."*, straddles a speaker boundary and cannot be
-  attributed from the caption track. His 08-26 Fury M+ take stands as the current read. If he
-  restates the Arms/Fury 4-set comparison in a scripted video, distil it then.
-- **`pdYpGLyZ7VM`** (LBNinja7, "Healers Buffed AGAIN!! | 12.1 Tuning") came back `unavailable`
-  from Supadata and **stays queued**.
-- **QUEUED 4**, deliberately narrow against the **100-request MONTHLY** budget rather than the
-  25-per-run cap: Kalamazi `z_dKoGx_FIk` (Warlock sims, all three specs), izen `bDElWkJxvtY`
-  (general → metaNotes lane, Sept 1 tuning), YoDaTV `xYXkZA1L490` (M+ patch notes + tier-list
-  update, tank-scoped — the coverage-poor role), Whispyr `1qclgMKPdz4` (Assassination, "Fatebound
-  is BACK"). Shadarek's `DJCr5_KFzcM` "new BiS Gear Setup and Post-Buff Sims" was deliberately
-  NOT queued — gear-shaped, same creator+spec distilled tonight.
-- The remaining ~192 keyword-passing candidates are a **BUDGET cut** and were left **UNSEEN** so
-  the next run reconsiders them. **Nothing was added to `seen[]` tonight.**
