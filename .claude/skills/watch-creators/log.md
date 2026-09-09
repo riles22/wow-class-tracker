@@ -15,6 +15,50 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-09-09 (local, scheduled) — caption 429 on day EIGHTEEN; full 44/44 sweep (no nightly landed again); queue 4 → 7, nothing distilled
+
+- **The anonymous caption lane is still dead, day EIGHTEEN.** One probe only, on the oldest
+  queued video (`zf9FpCLuTeI`, izen): the webpage and the android player API both resolved
+  200 and the subtitle track was found, then `timedtext` returned
+  **`ERROR: Unable to download video subtitles for 'en': HTTP Error 429`**. That is the
+  documented IP-scoped abuse flag on the caption endpoint, not a per-video or extractor
+  problem — the metadata path is healthy, only captions are refused. **Deliberately did not
+  retry or walk the queue**: hammering a rate-limited endpoint is how the flag gets extended,
+  and one probe is enough to establish the state.
+- **The authenticated bridge was NOT available**, same as every unattended run since 08-24.
+  It needs Riley to supply a `cookies.txt` (or to drive the logged-in browser), and
+  `--cookies-from-browser chrome` remains dead on this machine (App-Bound Encryption /
+  DPAPI). An unattended run cannot open that lane, so nothing was distilled.
+- **Full 44/44 discovery sweep, 0 feed failures** — worth doing because no nightly landed
+  today either (its refresh job ran, but publish failed at Gate 1, so its discovery was
+  discarded). Seen-set built from the four STRUCTURED lanes as specified (seen[] + skipped[]
+  + videos[] + every `youtu.be/<id>` in creator-takes.json) = **1,246 ids**; never regexed
+  from this file. 316 unseen videos published on/after the S2 launch bound (2026-08-18).
+- **Queued 3 of those 316, narrowly** (queue 4 → **7**; the nightly's Supadata cap is 25/run,
+  so this is well inside budget). The 313 left alone are overwhelmingly livestream VODs
+  ("Raid Night!", "Reclear Night!", "keys", "on twitch") — no analytical signal, and long
+  `was_live` VODs have no caption route at all. Queued, with the scope check done first
+  against `community.json` rather than assumed from the class the entry sits under:
+  · `QtsKpXY7NQE` **LBNinja7 — "Mistweaver Is Broken & NEEDS Fixing in 12.1.5"** (09-09).
+    Squarely in scope: LBNinja7 carries an explicit `Monk|Mistweaver` entry, and the title
+    is a spec-level balance claim about the 12.1.5 preview.
+  · `m7lbOASbT4s` **Obli — "Does Midnight Season 2 miss the mark?"** (09-09). Scoped
+    `Death Knight|Frost,Unholy`. Queued because the title carries **no class, spec or patch
+    keyword** — precisely the shape a title filter drops, and it is a season-level assessment
+    from a Method creator.
+  · `1z2CQXNWFLM` **AutomaticJak — "Healing Heroic Ula'tek Guide"** (09-08). Scoped across
+    five healer specs. Queued for the same reason: a "guide" title is the documented blind
+    spot (the Tactyks/J-Funk lesson — a guide author's guide routinely carries spec analysis).
+- **Explicitly NOT queued**, so a later run does not re-litigate them: Tettles "I Got
+  Benched...." (09-08 — no signal at all, and Tettles is scoped Balance/Augmentation);
+  Supatease "RESET DAY Time to See Which Classes Are BETTER" (09-09 — stream-shaped title
+  despite Supatease being a class-roundup creator; would spend a metered request on a
+  coin-flip). Neither was written to `seen[]` — they were not transcript-verified, so under
+  the precedence ladder they stay simply undiscovered and remain eligible next run.
+- **Nothing distilled ⇒ no takes, no metaNotes, no `skipped[]` entries.** A verified skip
+  requires having READ the transcript; with captions 429 there is nothing to verify against,
+  and inventing one would be exactly the durable-record corruption that lane exists to prevent.
+
 ## 2026-09-08 (local, scheduled) — caption 429 on day SEVENTEEN; full 44/44 sweep because no nightly had fired; TWO in-scope videos the nightly's title filter missed were queued
 
 Ran as a stand-in for a nightly that had not fired by 14:13Z; the nightly then fired at 14:44Z and

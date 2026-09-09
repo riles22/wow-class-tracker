@@ -15,6 +15,38 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+## 2026-09-09 (local, scheduled) — ledger re-checked at a fresh receipt (102 sections, 0 unresolved, nothing moved upstream); no new live 12.1 tuning; no 12.2
+
+- **Ran the trusted collector locally** because no nightly output landed today (see below):
+  `node src/fetch-official-notes.mjs` → both sources `success`, checkedAt
+  2026-09-09T14:14:40.941Z. live-hotfixes 99 class sections, ptr-preview 3.
+- **Upstream has NOT moved.** Compared field-by-field against the committed ledger: post
+  identity is IDENTICAL on both sources — live-hotfixes topic 2336376 post 1 still
+  **version 31** (updated 2026-09-05T01:21:46Z, bodySha256 `443e3bd1e9d2…`), ptr-preview
+  topic 2344395 post 1 still **version 3** (2026-09-03T22:48:20Z, `970dd474c20f…`). Section
+  inventory diffed by (id + sha256): **0 sections only in the committed ledger, 0 only in the
+  fresh receipt**. Dispositions carried forward untouched — live-hotfixes 2 applied / 97
+  irrelevant, ptr-preview 3 applied, **0 unresolved, 0 removedSections**.
+- **So the only edit was the intake stamp**, both `checkedAt` fields 09-08T14:47:08.969Z →
+  09-09T14:14:40.941Z; `git diff --numstat` = 2 insertions, 2 deletions, and the built
+  artifact moved by exactly the one rendered date (+ its CSP hash). This is the intake
+  check advancing, NOT a new date for any tuning fact — CLAUDE.md's rule, held literally.
+  `check-official-notes.mjs` went from "ledger does not match trusted current source
+  revision/section inventory" (its only failing condition here is `checkedAt` inequality)
+  to green.
+- **RSS sweep: 40 items, no new live 12.1 tuning.** The newest tuning-shaped items are still
+  "September 4th Hotfixes — Ula'tek, Classes, Catalyst" (published 09-05) and "…Hotfixes for
+  September 3" (09-04), both already logged — `data/ptr-builds.json` newest entries are the
+  09-04 and 09-03 `kind: "hotfix"` round-ups. Nothing since.
+- **No 12.2 anywhere.** Every PTR-category item in the feed is 12.1.5 (Kith'ix raid testing
+  schedule, Labyrinth rewards, trading-post/transmog datamining, maps, renown). The one
+  class-relevant 12.1.5 item, "Class Changes for Devourer DH — 12.1.5 PTR Development Notes"
+  (09-03), is exactly the ptr-preview post already distilled into the three applied sections
+  (Demon Hunter|Devourer, Hunter|Marksmanship, Warrior|Protection). 12.1.5 stays notes-only:
+  `PHASES.ptr` untouched, frozen forecast untouched.
+- **Dormant lanes skipped as specified** — the four PTR WCL zone sweeps (54/52/56/57) were not
+  attempted and need no manifest excuse; their contract rows went at the flip.
+
 ## 2026-09-08 (nightly) — official ledger clean (102 sections, 0 unresolved); no new live 12.1 tuning in any of the four channels
 
 - **Revision ledger FIRST, before the RSS/date sweep.** `official-notes/evidence.json` +
