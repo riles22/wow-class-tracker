@@ -25,10 +25,10 @@ test("the report grades all artifact cells at the fixed settled checkpoint, with
   assert.deepEqual(first.baseline, gradeSnapshot(carryForward(originalSnapshot), first.actual, fixture.scales, options),
     "carry-forward must reproduce the prior recorded at freeze");
   const html = renderForecastReport(report);
-  assert.ok(html.indexOf("Coverage:") < html.indexOf("% exact letters"), "coverage precedes accuracy");
+  assert.ok(html.includes(`Our forecast: <b>${first.scorecard.right} of ${first.scorecard.total} right</b>`), "headline uses the reader's main-letter counts");
   const allCells = /<caption>All forecast cells at \+14 days<\/caption>[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/.exec(html)?.[1];
   assert.equal([...allCells.matchAll(/<tr>/g)].length, 80, "all declared cells appear in the full report");
-  assert.match(html, /publisher tier-list consensus/);
+  assert.ok(html.includes(`Actual = the settled ranking from the tracked sites on ${first.actual.date}`));
   assert.match(html, /DISCLOSURE:/);
   assert.doesNotMatch(html, /NOT COMPARABLE:/);
 });
@@ -124,6 +124,8 @@ test("incomparable or empty grades never produce a publishable accuracy summary"
   assert.match(incomparableHTML, /Original data SHA-256/);
   assert.doesNotMatch(incomparableHTML, /% exact|% within one band|Mean absolute error|signed bias|Spearman|NDCG|predicted S\/A\+|<td>[+-]?\d+ bands<\/td>/,
     "incomparable outcomes must not publish accuracy, ranking, recall, or grade differences");
+  assert.ok(!/<span class="answer answer-(?:right|too-high|too-low)">/.test(incomparableHTML),
+    "the simplified breakdown must also withhold unchecked right/wrong labels");
   assert.equal([...incomparableHTML.matchAll(/<td[^>]*>Not comparable<\/td>/g)].length, 80,
     "retain every raw forecast/outcome pair while withholding its grade");
   settled.consensusVersion = data.frozenForecast.consensusVersion; // restore comparability for the empty-outcome case
@@ -175,16 +177,19 @@ test("a later checkpoint uses its own attached publisher receipts when present",
     .every(c => c.holdout.status === "ready"));
 });
 
-test("both checkpoint summaries precede detail tables and accuracy immediately follows coverage", () => {
+test("both checkpoint summaries lead with plain counts and precede detail tables", () => {
   const html = renderForecastReport(createForecastReport(fixture));
   const summaries = html.slice(html.indexOf('<div class="checkpoint-summaries">'), html.indexOf('<section class="checkpoint-details">'));
   assert.match(summaries, /id="checkpoint-14"/);
   assert.match(summaries, /id="checkpoint-28"/);
-  assert.match(summaries, /class="coverage"[\s\S]*?<\/p>\s*<p class="result">/);
+  assert.match(summaries, /class="result"[\s\S]*?of \d+ right[\s\S]*?class="coverage"/);
+  assert.doesNotMatch(summaries, /exact letters|within one band|Spearman|NDCG/);
   assert.doesNotMatch(summaries, /<table|consensusVersion|Original Git SHA/);
   assert.match(html, /class="cellcards"|class="tablewrap cellcards"/);
   assert.match(html, /data-label="Forecast"/);
   assert.match(html, /data-label="Settled"/);
+  assert.match(html, /data-label="Predicted"/);
+  assert.match(html, /data-label="Actual"/);
   assert.match(html, /Grading method 2/);
   assert.match(html, /overlap may be fractional/);
 });
@@ -234,7 +239,7 @@ test("source and creator reports retain separate cutoffs, scope, provenance and 
   const html = renderForecastReport(report);
   assert.match(html, /Older-season site benchmarks/);
   assert.match(html, /Later pre-launch site lists/);
-  assert.match(html, /Dated creator panels/);
+  assert.match(html, /Creator results/);
   assert.match(html, /Unknown/);
   assert.match(html, /historical record is identified by its commit and file hash/);
   assert.match(html, /Order only/);
@@ -249,4 +254,18 @@ test("source and creator reports retain separate cutoffs, scope, provenance and 
   const rendered = renderForecastReport(hostile);
   assert.doesNotMatch(rendered, /href="(?:javascript:|data:)|<img\b|<script\b/);
   assert.match(rendered, /&lt;img/);
+});
+
+test("numbered prediction results display tied outcomes plainly and explain unscored rows", () => {
+  const report = createForecastReport(fixture);
+  const cohort = report.checkpoints[0].sourcePredictions.cohorts.find(c => c.kind === "creator");
+  cohort.scorecard = { mode: "rank", right: 0, total: 0, unscored: 1,
+    scopeLabel: "Ranks among three Warlock specs.", rows: [{ spec: "Warlock Affliction", bracket: "mplus",
+      predicted: 1, actual: "Tied 1–2", actualTied: true, status: "not-scored", reason: "The actual outcome is tied." }] };
+  const html = renderForecastReport(report);
+  assert.ok(html.includes('data-label="Predicted"><b>#1</b>'));
+  assert.ok(html.includes('data-label="Actual"><b>Tied 1–2</b>'));
+  assert.ok(!html.includes("#Tied"));
+  assert.ok(html.includes('answer-not-scored">Not scored</span><small class="row-note">The actual outcome is tied.'));
+  assert.ok(html.includes("Ranks among three Warlock specs. #1 is best."));
 });

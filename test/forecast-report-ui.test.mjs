@@ -54,7 +54,7 @@ ui("forecast report shows both summaries and the grade before detailed evidence"
       width: document.documentElement.scrollWidth, viewport: innerWidth };
   });
   assert.ok(layout.result < 900, "headline grade fits in the first desktop viewport");
-  assert.ok(layout.result > layout.coverage);
+  assert.ok(layout.result < layout.coverage, "plain count is the headline, with coverage immediately after");
   assert.ok(layout.pending < layout.details, "+28 summary is not buried under 80 rows");
   assert.equal(layout.width, layout.viewport);
   assert.equal(await page.locator(".cells-detail").first().evaluate(e => e.open), false);
@@ -74,12 +74,62 @@ ui("forecast report mobile rows retain spec, forecast, outcome and difference to
     });
     assert.equal(measurement.documentWidth, width);
     assert.ok(measurement.scrollWidth <= measurement.regionWidth + 1, "per-spec evidence needs no horizontal scrolling");
-    assert.equal(measurement.cells.length, 9);
-    for (const label of ["Spec", "Forecast", "Settled", "Difference / status"]) {
+    assert.equal(measurement.cells.length, 5);
+    for (const label of ["Spec", "Predicted", "Actual", "Result"]) {
       const cell = measurement.cells.find(c => c.label === label);
       assert.ok(cell && cell.text.trim());
       assert.ok(cell.left >= 0 && cell.right <= width, `${label} remains on screen at ${width}px`);
     }
+  }
+});
+
+ui("creator counts are visible and one keyboard action opens predicted versus actual rows", async page => {
+  const creators = page.locator('.source-group[data-group="creator"]').first();
+  assert.equal(await creators.evaluate(e => e.open), true);
+  assert.equal(await page.locator(".source-group").first().getAttribute("data-group"), "creator");
+  const cohorts = report.checkpoints.find(c => c.sourcePredictions?.status === "ready").sourcePredictions.cohorts.filter(c => c.kind === "creator");
+  const cards = creators.locator(":scope > .source-cohort");
+  assert.equal(await cards.count(), cohorts.length);
+  for (let i = 0; i < cohorts.length; i++) {
+    const card = cards.nth(i), data = cohorts[i].scorecard;
+    const summary = card.locator(":scope > summary");
+    assert.equal(await card.evaluate(e => e.open), false);
+    assert.ok((await summary.innerText()).includes(`${data.right} of ${data.total} ${data.mode === "rank" ? "places right" : "right"}`));
+    await summary.focus();
+    await page.keyboard.press("Enter");
+    const table = card.locator(":scope > .cellcards");
+    assert.equal(await table.isVisible(), true, "the comparison is available after one action");
+    assert.equal(await table.locator("tbody tr").count(), data.rows.filter(r => r.predicted != null).length);
+    assert.deepEqual(await table.locator("thead th").allTextContents(), ["Spec", "Content", "Predicted", "Actual", "Result"]);
+    const methods = card.locator(":scope > .source-methods");
+    assert.equal(await methods.evaluate(e => e.open), false, "metrics and receipts do not interrupt the simple comparison");
+    await summary.focus();
+    await page.keyboard.press("Enter");
+  }
+  for (const group of ["older-season", "later-prelaunch"]) {
+    assert.equal(await page.locator(`.source-group[data-group="${group}"]`).first().evaluate(e => e.open), false);
+  }
+});
+
+ui("creator comparisons retain their counts and all five fields on small phones", async page => {
+  const creators = page.locator('.source-group[data-group="creator"]').first();
+  for (const width of [320, 375]) {
+    await page.setViewportSize({ width, height: 812 });
+    const cards = creators.locator(":scope > .source-cohort");
+    for (let i = 0; i < await cards.count(); i++) {
+      const card = cards.nth(i);
+      await card.evaluate(e => { e.open = true; });
+      const measurement = await card.locator(":scope > .cellcards").evaluate(el => ({
+        width: el.clientWidth, scroll: el.scrollWidth,
+        labels: [...el.querySelector("tbody tr").children].map(td => ({ label: td.dataset.label,
+          left: td.getBoundingClientRect().left, right: td.getBoundingClientRect().right }))
+      }));
+      assert.ok(measurement.scroll <= measurement.width + 1, "a creator's full comparison needs no sideways scroll");
+      assert.equal(measurement.labels.length, 5);
+      assert.ok(measurement.labels.every(cell => cell.left >= 0 && cell.right <= width));
+      await card.evaluate(e => { e.open = false; });
+    }
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
   }
 });
 

@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { gradeSnapshot, rankingFor, GRADING_VERSION } from './report-card.mjs';
 import { PHASES, scoreFor, consensusTier, consensusFor, frozenLettersFor } from './normalize.mjs';
 import { creatorPredictionUrlAllowed, creatorPredictionResource } from './creator-predictions.mjs';
+import { createPredictionScorecard } from './prediction-scorecard.mjs';
 
 const BRACKETS = ['raid', 'mplus'];
 const ROLES = ['DPS', 'Healer', 'Tank'];
@@ -338,6 +339,7 @@ export function createSourcePredictionReport({ ledger, checkpoint, forecast, sca
     ];
     const { nativeScale, nativeOrder, rows: rawRows, ...meta } = cohort;
     return { ...meta, nativeScale: nativeScale ?? null, nativeOrder: nativeOrder ?? null,
+      scorecard: createPredictionScorecard({ cohort, actual: checkpoint, roster }),
       ...full, fullConsensus: { source: full.source, ours: full.ours, baseline: full.baseline }, holdout,
       rawRows, warnings };
   });

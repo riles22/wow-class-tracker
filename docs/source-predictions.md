@@ -8,12 +8,23 @@ measure objective spec strength or change any live ranking or model weight.
 
 - Same-cutoff Season 2 publisher lists, previous-season carry-forward lists, later
   prelaunch publisher lists, and individual creator panels are separate cohorts.
-- Each source is compared with the model and the carry-forward prior on the same covered
+- Advanced comparisons compare each source with the model and prior on the same covered
   spec/bracket cells. Missing placements, missing outcomes and missing baseline cells have
   explicit counts and exclusions. Roles are ranked separately.
-- Publishers retain the native scales saved with their historical lists. Creators receive
-  ordering comparisons only; their letters are never assigned invented numerical distances
-  or converted to the tracker's consensus bands.
+- The primary view answers **how many were right** and shows each original prediction
+  beside the dated outcome. Riley chose main-letter matching: A−, A and A+ all count as A,
+  and S+ counts as S. This applies consistently to the model, sites and creator tier lists.
+  The displayed original labels are never rewritten. This is a coarse label match, not a
+  calibration of what each author meant by a tier. A source's simple count does not depend
+  on whether our own model or prior forecast is available for the same spec.
+- Numeric predictions are checked as places within their recorded comparison group.
+  Kalamazi's panel ranks the three Warlock specs; it is not a three-tier list. Outcomes
+  tied across a predicted place cannot be judged as an exact place and remain unscored.
+  Missing or conditional predictions and missing outcomes are also unscored, never wrong.
+- Advanced publisher comparisons retain their historical numeric scales. Creator ordering
+  still uses the native order; creator letters are never assigned invented numerical
+  distances or converted to the tracker's consensus bands. Advanced normalized exact-tier
+  percentages are a different measure from the primary main-letter count.
 - Publisher holdouts remove that publisher from the outcome and compare all three predictors
   against the resulting answer key. Holdouts from different publishers have different answer
   keys. Creator authorship within publishers is not independently recorded, so no creator
@@ -38,6 +49,11 @@ The eight creator panels represent particular published videos. Some statements 
 been superseded by the freeze, some cover a single class, and some concern world-first raid
 or very high keys. Their dates, evidence and scope remain visible. They are not a composite
 claim about any creator's final launch view.
+
+For the September 1 outcome, the simple creator counts are Zorthas 16/29, AutomaticJak
+Mythic+ 3/5 and raid 1/5, YoDaTV 4/6, LBNinja7 2/3, MadSkillzzTV 2/5, Bansherz 1/3,
+and Kalamazi 1/3 exact places among the three Warlocks. These are 56 tier predictions
+and 3 rank predictions. Each card's total can be checked directly against its result rows.
 
 ## Future creator capture
 

@@ -342,6 +342,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   define the accounting-only `data/creator-predictions.json` intake and raw receipts saved
   by future snapshots/freezes. Never rewrite old forecasts, histories or source ledgers to
   add newer information. `test/forecast-report-ui.test.mjs` runs in the three-browser CI matrix.
+- **Plain forecast results (owner choice, 2026-09-08):** lead with “X of Y right” and
+  show Spec / Content / Predicted / Actual / Result directly when a source is opened.
+  The owner selected main-letter matching (A−/A/A+ count as A; S+ counts as S), while
+  every source's original label remains visible. Numeric creator predictions remain
+  ranks within their recorded group, with ambiguous ties unscored. Keep statistics,
+  publisher holdouts and technical receipts below the breakdown in closed disclosures.
+  This reader-facing count is separate from the original exact-tier grading metrics;
+  it never changes frozen data, native source scales or model weights.
 - **`SNAPSHOT_PHASE` (`render.mjs`) — the 12.1 flip is DONE** (2026-08-18: `"12.1-ptr"`
   → `"12.1-live"`, and the gate below self-silenced as designed; this bullet is the
   playbook for the NEXT cycle's flip). **Gated since 2026-08-02**: `check-refresh --age`

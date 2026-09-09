@@ -2,6 +2,7 @@
    the forecast and its carry-forward prior; settled history supplies only the outcome. */
 import { gradeSnapshot, launchPair, SETTLE_DAYS, carryForward, reportWarnings } from "./report-card.mjs";
 import { createSourcePredictionReport, ledgerFromArtifact } from "./source-predictions.mjs";
+import { createPredictionScorecard } from "./prediction-scorecard.mjs";
 
 const BRACKETS = ["raid", "mplus"];
 const esc = value => String(value ?? "—").replaceAll("&", "&amp;").replaceAll("<", "&lt;")
@@ -78,9 +79,21 @@ export function createForecastReport({ frozenForecast: artifact, historySnapshot
     const gradingScales = pair.actual.sourceReceipts?.scales
       ?? sourcePredictions?.outcomes?.find(o => o.date === pair.actual.date)?.sourceReceipts?.scales
       ?? artifact.sourceReceipts?.scales ?? scales;
+    const grade = gradeSnapshot(forecast, pair.actual, gradingScales, options);
+    const baseline = gradeSnapshot(carryForward(forecast), pair.actual, gradingScales, options);
+    const roster = Object.entries(artifact.cells).map(([key, cell]) => ({ key, role: cell.role }));
+    const scorecard = (prior = false) => {
+      const card = createPredictionScorecard({ actual: pair.actual, roster,
+        cohort: { scope: { brackets: BRACKETS, roles: ['DPS', 'Healer', 'Tank'] },
+          rows: Object.entries(forecast.specs).flatMap(([key, cell]) => BRACKETS.map(bracket => ({ key, bracket,
+            tier: prior ? cell.consensus?.[bracket] ?? null : cell.projection?.[bracket]?.tier ?? null }))) } });
+      if ((prior ? baseline : grade).consensusVersion.comparable) return card;
+      return { ...card, mode: 'unavailable', right: 0, wrong: 0, total: 0, unscored: card.rows.length,
+        rows: card.rows.map(row => ({ ...row, status: 'not-scored', reason: 'The saved forecast and outcome are not comparable.' })) };
+    };
     return { settleDays, launchDate: pair.launchDate, settleBy: pair.settleBy, actual: pair.actual,
-      grade: gradeSnapshot(forecast, pair.actual, gradingScales, options),
-      baseline: gradeSnapshot(carryForward(forecast), pair.actual, gradingScales, options),
+      scorecard: scorecard(), baselineScorecard: scorecard(true),
+      grade, baseline,
       sourcePredictions: createSourcePredictionReport({ ledger: sourcePredictions ?? ledgerFromArtifact(artifact, { launchDate: pair.launchDate }), checkpoint: pair.actual,
         forecast, scales, specs: roles }) };
   });
@@ -103,24 +116,49 @@ const fraction = value => value == null ? "—" : esc(Number.isFinite(value) ? M
 const topOverlap = metric => !metric?.topK ? "—" : metric.topK.informative === false
   ? "— (whole group)" : `${fraction(metric.topK.overlap)}/${esc(metric.topK.of)}`;
 
+const scorecardCount = card => !card || card.mode === "unavailable" || !card.total
+  ? "Not scored" : `${esc(card.right)} of ${esc(card.total)} ${card.mode === "rank" ? "places right" : "right"}`;
+
+function scorecardTableHTML(card, caption) {
+  if (!card?.rows?.length) return `<p>No saved prediction and outcome pairs are available to check.</p>`;
+  const statuses = { right: "Right", "too-high": "Too high", "too-low": "Too low", "not-scored": "Not scored" };
+  const value = (v, tied) => v == null ? "—" : card.mode === "rank"
+    ? `<b>${typeof v === "number" ? "#" : ""}${esc(v)}</b>${tied && typeof v === "number" ? ' <span class="muted">(tied)</span>' : ""}` : tier(v);
+  return table(caption, ["Spec", "Content", "Predicted", "Actual", "Result"], card.rows.filter(r => r.predicted != null).map(r => row([
+    esc(r.spec ?? r.key?.replace("|", " ")), esc(bracketName(r.bracket)),
+    value(r.predicted, false), value(r.actual, r.actualTied),
+    `<span class="answer answer-${esc(r.status)}">${esc(statuses[r.status] ?? "Not scored")}</span>${r.status === "not-scored" && r.reason ? `<small class="row-note">${esc(r.reason)}</small>` : ""}`
+  ])), { cards: true });
+}
+
+function scorecardContextHTML(card) {
+  if (!card) return `<p class="notice">Accuracy is unavailable because these predictions have no saved scorecard.</p>`;
+  const unscored = card.rows?.filter(r => r.predicted != null && r.status === "not-scored").length ?? 0;
+  const missing = card.rows?.filter(r => r.predicted == null).length ?? 0;
+  return `<p class="scorecard-context">${card.mode === "rank"
+    ? `${esc(card.scopeLabel ?? "Ranks within this panel.")} #1 is best. A place is right when the predicted and actual positions match.`
+    : "Too high means the prediction was better than the actual tier; too low means it was worse."}${unscored ? ` ${esc(unscored)} saved ${unscored === 1 ? "prediction could" : "predictions could"} not be scored.` : ""}${missing ? ` ${esc(missing)} specs had no saved prediction and are excluded from the count.` : ""}</p>`;
+}
+
 function checkpointSummaryHTML(checkpoint) {
   const heading = `<h2 id="checkpoint-${checkpoint.settleDays}">+${esc(checkpoint.settleDays)} days</h2>`;
-  if (!checkpoint.grade) return `<section class="checkpoint-summary">${heading}<p class="pending"><b>Pending.</b> ${esc(checkpoint.reason)}</p></section>`;
+  if (!checkpoint.grade) return `<section class="checkpoint-summary">${heading}<p class="pending"><b>Pending.</b> ${checkpoint.settleBy
+    ? `This check will use the first saved rankings on or after <b>${esc(checkpoint.settleBy)}</b>.`
+    : esc(checkpoint.reason)}</p></section>`;
   const { grade: g, baseline: b } = checkpoint;
   const c = g.coverage;
   const comparable = g.consensusVersion?.comparable === true;
   const baselineComparable = b?.consensusVersion?.comparable === true && b.overall;
   const accuracy = !comparable
     ? `<p class="notice"><b>Ungradeable checkpoint.</b> The frozen prior and settled outcome cannot be compared reliably. Accuracy, ordering, and band differences are withheld; the recorded cells remain available for inspection.</p>`
-    : g.overall ? `<p class="result"><b>${esc(g.overall.exactPct)}% exact letters</b> · <b>${esc(g.overall.withinOnePct)}% within one band</b></p>
-    ${baselineComparable ? `<p class="baseline"><b>Carry-forward: ${esc(b.overall.exactPct)}% exact · ${esc(b.overall.withinOnePct)}% within one band.</b> This baseline simply kept the pre-launch live tiers.</p>`
+    : g.overall ? `<p class="result">Our forecast: <b>${scorecardCount(checkpoint.scorecard)}</b></p>
+    ${baselineComparable ? `<p class="baseline">Keeping the old tiers: <b>${scorecardCount(checkpoint.baselineScorecard)}</b>.</p>`
       : `<p class="notice"><b>Carry-forward comparison unavailable.</b> The prior's source composition cannot be compared reliably with this outcome; baseline accuracy and any advantage over it are withheld.</p>`}`
     : `<p>No forecast cells could be graded at this checkpoint.</p>`;
-  return `<section class="checkpoint-summary">${heading}<p class="endpoint">Frozen ${esc(g.forecastDate)} → settled <b>${esc(g.actualDate)}</b></p>
-    <p class="coverage"><b>Coverage: ${esc(c.graded)}/${esc(c.obtainable)} ${comparable ? "gradeable" : "paired"} cells (${esc(c.coveragePct)}%).</b>
-    ${esc(c.declined)} declined · ${esc(c.ungradeable)} without an outcome · ${esc(c.rosterGap)} roster gaps.
-    ${c.sufficient ? "" : `<strong>Partial coverage${comparable ? ": this grades a subset, not the model" : ""}.</strong>`}</p>
-    ${accuracy}</section>`;
+  return `<section class="checkpoint-summary">${heading}<p class="endpoint">Predictions saved ${esc(g.forecastDate)} · checked ${esc(g.actualDate)}</p>
+    ${accuracy}<p class="coverage">${comparable ? `Checked ${esc(c.graded)} of ${esc(c.obtainable)} predictions across Raid and Mythic+.` : `Coverage: ${esc(c.graded)}/${esc(c.obtainable)} paired cells.`}
+    ${c.declined ? `${esc(c.declined)} had no prediction. ` : ""}${c.ungradeable ? `${esc(c.ungradeable)} had no outcome. ` : ""}${c.rosterGap ? `${esc(c.rosterGap)} had a roster gap. ` : ""}
+    ${c.sufficient ? "" : `<strong>Partial coverage${comparable ? ": these results cover only the checked predictions" : ""}.</strong>`}</p></section>`;
 }
 
 function checkpointDetailsHTML(checkpoint, forecast) {
@@ -154,18 +192,23 @@ function checkpointDetailsHTML(checkpoint, forecast) {
       fraction(f.projection[bracket]?.score), esc(f.projection[bracket]?.confidence), tier(f.consensus[bracket]),
       tier(a?.consensus?.[bracket]), fraction(a?.scores?.[bracket]), esc(status)]);
   }));
-  return `<section class="checkpoint-details"><h2>+${esc(checkpoint.settleDays)} days · evidence</h2>
+  return `<section class="checkpoint-details"><h2>+${esc(checkpoint.settleDays)} days · prediction breakdown</h2>
+    <p class="outcome-definition"><b>Actual = the settled ranking from the tracked sites on ${esc(g.actualDate)}.</b> This checks agreement with those sites; it does not measure every spec's in-game performance.</p>
     ${sourcePredictionsHTML(checkpoint.sourcePredictions)}
-    ${ranking}
-    <details class="cells-detail"><summary>Every declared cell · ${esc(cells.length)} forecast/outcome pairs</summary><p>Scores keep their original snapshot precision; letters were assigned before rounding.${comparable ? " A positive band difference means the settled letter is worse than the forecast." : ""} Open this section and use your browser's Find command to locate a spec.</p>
-    ${table(`All forecast cells at +${checkpoint.settleDays} days`, ["Spec", "Bracket", "Forecast", "Forecast score", "Confidence", "Carry-forward", "Settled", "Settled score", comparable ? "Difference / status" : "Status"], cells, { cards: true })}</details>
-    <details class="methods"><summary>Checkpoint methods and source composition</summary>
+    <h3>Our forecast</h3>
+    <details class="cells-detail"><summary>Our predictions · ${comparable ? scorecardCount(checkpoint.scorecard) : "Not scored"}</summary>
+    ${scorecardContextHTML(checkpoint.scorecard)}
+    ${scorecardTableHTML(checkpoint.scorecard, `Our predicted and actual results at +${checkpoint.settleDays} days`)}</details>
+    <details class="methods"><summary>How this checkpoint was checked · technical detail</summary>
     <p>Launch ${esc(checkpoint.launchDate)}; first eligible date ${esc(checkpoint.settleBy)}.
     Outcome record: <code>data/history/${esc(g.actualDate)}.json</code> (phase ${esc(g.actualPhase)}, consensus v${esc(g.consensusVersion.actual)}).</p>
     <p>Settlement means the first saved consensus at least ${esc(checkpoint.settleDays)} days after launch. It does not certify that every publisher refreshed that day. Publisher-specific outcome dates may be unrecorded in historical snapshots.</p>
     ${table("Consensus source composition", ["Bracket", "Frozen prior contributors", "Settled contributors"], compositionRows)}
     ${warningLines}
-    ${comparable && g.overall ? `<p>Mean absolute error: ${esc(g.overall.meanAbsBands)} bands; signed bias: ${esc(g.overall.biasBands)} bands. Positive bias means the forecast was too optimistic.</p>` : ""}
+    ${comparable && g.overall ? `<p>The original detailed-band method gives ${esc(g.overall.exactPct)}% exact letters and ${esc(g.overall.withinOnePct)}% within one band. These stricter results preserve plus/minus distinctions and are separate from the main-letter counts above. Mean absolute error: ${esc(g.overall.meanAbsBands)} bands; signed bias: ${esc(g.overall.biasBands)} bands. Positive bias means the forecast was too optimistic.</p>` : ""}
+    ${ranking}
+    <details class="raw-cells-detail"><summary>Original scores and forecast evidence · ${esc(cells.length)} pairs</summary><p>Scores keep their original snapshot precision; letters were assigned before rounding.${comparable ? " A positive band difference means the settled letter is worse than the forecast." : ""}</p>
+    ${table(`All forecast cells at +${checkpoint.settleDays} days`, ["Spec", "Bracket", "Forecast", "Forecast score", "Confidence", "Carry-forward", "Settled", "Settled score", comparable ? "Difference / status" : "Status"], cells, { cards: true })}</details>
     ${!baselineComparable ? `<p class="notice">Carry-forward source comparison: not comparable. Its accuracy and ordering are withheld independently of the forecast grade.</p>` : ""}
     </details>
   </section>`;
@@ -175,21 +218,21 @@ function checkpointDetailsHTML(checkpoint, forecast) {
 function sourcePredictionsHTML(report) {
   if (!report) return "";
   const groups = [
+    ["creator", "Creator results", "Open a creator's dated prediction to see every pick and its outcome. Each date stays separate, including older predictions the creator later revised."],
     ["same-cutoff", `Sites available at our ${report.forecastDate ?? "frozen"} cutoff`, "These predictions use the same information cutoff as our frozen forecast."],
     ["older-season", "Older-season site benchmarks", "These were earlier live-season rankings, not explicit predictions for the new season. They measure how well carrying an older list forward happened to work."],
-    ["later-prelaunch", "Later pre-launch site lists", "These lists had more pre-launch information than our frozen forecast. Keep this comparison separate from the same-cutoff results."],
-    ["creator", "Dated creator panels", "Only explicit, scoped ranks are compared. Creator tiers describe ordering within that panel; they are not converted into our consensus letters. Missing or unranked specs stay unknown."]
+    ["later-prelaunch", "Later pre-launch site lists", "These lists had more pre-launch information than our frozen forecast. Keep this comparison separate from the same-cutoff results."]
   ];
   const cohorts = report.cohorts ?? [];
-  return `<section class="source-predictions"><h3>Other pre-launch predictions</h3>
-    <p>Each comparison uses the same matched specs and checkpoint. Site accuracy uses the saved outlet scale and common consensus bands; creator panels measure ordering only. These small, overlapping samples do not establish a reliable winner.</p>
-    ${(report.warnings ?? []).map(w => `<p class="notice">${esc(w)}</p>`).join("")}
+  return `<section class="source-predictions"><h3>How did creators and sites do?</h3>
+    <p>A count covers only the predictions listed for that source. A creator with three picks and one with 29 picks are being checked on different amounts of evidence.</p>
     ${report.status !== "ready" ? `<p class="notice">Source comparison unavailable for this checkpoint. Historical evidence is missing; no current ranks are substituted.</p>` : ""}
     ${groups.map(([id, label, description]) => {
       const group = cohorts.filter(c => c.comparisonGroup === id || (id === "creator" && c.kind === "creator"));
-      return `<details class="source-group"><summary>${esc(label)} · ${group.length} ${id === "creator" ? "panels" : "lists"}</summary><p>${esc(description)}</p>
+      return `<details class="source-group" data-group="${esc(id)}"${["creator", "same-cutoff"].includes(id) ? " open" : ""}><summary>${esc(label)} · ${group.length} ${id === "creator" ? "dated lists" : "lists"}</summary><p>${esc(description)}</p>
         ${group.length ? group.map(sourceCohortHTML).join("\n") : `<p>No gradeable historical prediction receipts were retained for this group. Accuracy is unknown.</p>`}</details>`;
-    }).join("\n")}</section>`;
+    }).join("\n")}
+    ${(report.warnings ?? []).length ? `<details><summary>Historical evidence limits</summary>${report.warnings.map(w => `<p>${esc(w)}</p>`).join("")}</details>` : ""}</section>`;
 }
 
 function sourceLink(url, label = "Source") {
@@ -230,20 +273,23 @@ function sourceCohortHTML(cohort) {
     esc(r.nativeTier ?? r.tier ?? r.rank ?? "Unknown"), esc(r.date ?? cohort.date), esc([r.context, r.text, r.reason].filter(Boolean).join(" · ") || "—"),
     esc(cohort.kind !== "creator" ? "Not applicable" : r.supersededAtFreeze ? "Superseded at cutoff" : "Retained at cutoff"), sourceLink(r.url, "Receipt source")]));
   const holdout = cohort.holdout;
-  return `<details class="source-cohort"><summary>${esc(cohort.label)} · ${esc(cohort.date)} · ${esc(scope)} · ${esc(c.matched ?? 0)}/${esc(c.eligible ?? c.rated ?? "—")} matched</summary>
+  return `<details class="source-cohort"><summary><span class="source-title">${esc(cohort.label)} <span class="source-date">· ${esc(cohort.date)}</span></span><strong class="source-count">${scorecardCount(cohort.scorecard)}</strong><span class="source-scope">${esc(scope)}</span></summary>
+    ${scorecardTableHTML(cohort.scorecard, `${cohort.label} · predicted and actual`)}
+    ${scorecardContextHTML(cohort.scorecard)}
+    <details class="source-methods"><summary>How this was checked · sources and technical detail</summary>
     <p>Source date ${esc(cohort.date)} · cutoff ${esc(cohort.cutoffDate ?? cohort.date)}</p>
     <p>Coverage: ${esc(c.rated ?? "—")} rated; ${esc(c.matched ?? "—")} matched. Missing prediction: ${esc(c.missingPrediction ?? "—")} · missing outcome: ${esc(c.missingOutcome ?? "—")} · missing carry-forward: ${esc(c.missingBaseline ?? "—")}.</p>
     ${(cohort.warnings ?? []).map(w => `<p class="notice">${esc(w)}</p>`).join("")}
     ${holdout?.status === "ready" ? `<h4>Outcome excludes ${esc(holdout.excludedPublisher ?? cohort.publisher)}</h4><p>The source being tested is removed from the outcome consensus. All three predictions use the same remaining publisher outcome and matched cells.</p>${comparisonMetricsHTML(holdout, "Publisher-excluded comparison", cohort.kind)}`
       : `<p class="notice"><b>Publisher-excluded comparison ${holdout?.status === "not-applicable" ? "not applicable" : "unavailable"}.</b> ${esc(holdout?.reason ?? "The checkpoint lacks publisher-level historical outcome receipts. No independence claim can be made.")}</p>`}
-    <details><summary>Agreement with full publisher consensus</summary><p>This descriptive comparison may share a publisher or other input with the outcome and is not independent validation.</p>
+    <details><summary>Detailed-band and ordering measures</summary><p>These older measures use the original detailed scales and distinguish plus/minus tiers. They are separate from the simple main-letter count above. Full-consensus agreement may share a publisher or other input with the outcome and is not independent validation.</p>
       ${comparisonMetricsHTML(cohort.fullConsensus, "Full-consensus agreement", cohort.kind)}</details>
     <details><summary>Prediction provenance and exclusions</summary><p>Original outlet labels and attributed statements are retained below. Links open the source's current page; the saved historical record is identified by its commit and file hash.</p>
     <dl><dt>Historical Git SHA</dt><dd><code>${esc(cohort.gitSha)}</code></dd><dt>Historical source file</dt><dd>${esc(cohort.sourcePath)}</dd><dt>${cohort.sourceEncoding === "canonical-json" ? "Canonical JSON SHA-256" : "Source file SHA-256"}</dt><dd><code>${esc(cohort.sourceBlobSha256)}</code></dd></dl>
     ${pages ? `<ul>${pages}</ul>` : `<p>Source page receipt unavailable.</p>`}
     ${exclusions.length ? table("Excluded or missing predictions", ["Spec", "Bracket", "Reason"], exclusions) : `<p>No additional per-cell exclusions recorded.</p>`}
     ${receipts.length ? table("Dated prediction receipts", ["Spec", "Bracket", "Native rank/tier", "Date", "Context", "Supersession", "Source"], receipts, { cards: true }) : ""}</details>
-    </details>`;
+    </details></details>`;
 }
 
 function provenanceHTML(artifact) {
@@ -273,12 +319,14 @@ export function renderForecastReport(report) {
 :root{color-scheme:dark;--bg:#0c0913;--panel:#171020;--ink:#ede6f5;--muted:#b7a8c9;--gold:#e3c37b;--line:#463052}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif}main{max-width:1240px;margin:auto;padding:32px 24px 72px}a{color:var(--gold)}a:focus-visible,summary:focus-visible,.tablewrap:focus-visible{outline:2px solid var(--gold);outline-offset:4px}header{border-bottom:1px solid var(--gold);padding-bottom:24px}h1,h2,h3{line-height:1.2}h1{font:700 clamp(28px,5vw,46px)/1.15 Georgia,serif;letter-spacing:.025em;color:var(--gold);margin:16px 0}h2{font:700 26px/1.2 Georgia,serif;color:var(--gold)}h3{font-size:19px;margin-top:28px}.eyebrow{font:12px ui-monospace,monospace;letter-spacing:.18em;color:var(--muted)}section{margin-top:36px;min-width:0}p{max-width:100ch}.lede{font-size:18px}.coverage,.notice,.pending{padding:14px 18px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}.result{font-size:21px;color:var(--gold)}.tablewrap{width:100%;max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}caption{text-align:left;padding:12px;color:var(--gold);font-weight:700}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}th{background:var(--panel);color:var(--muted)}tbody tr:last-child td{border:0}.tier{color:var(--gold)}details{margin-top:20px}summary{cursor:pointer;color:var(--gold)}dl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:8px 16px}dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}code{font-size:13px}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted)}@media(max-width:600px){main{padding:22px 14px 44px}dl{grid-template-columns:1fr;gap:3px}dd{margin-bottom:10px}.coverage,.notice,.pending{padding:12px}}
 .checkpoint-summaries{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:28px}.checkpoint-summary{min-width:0}.checkpoint-summary h2{margin:0 0 14px}.endpoint{margin:0 0 14px}.checkpoint-details{border-top:1px solid var(--line);padding-top:26px}.result{margin:14px 0 8px}.baseline{margin-top:8px}summary{font-weight:650;padding:7px 0}.source-cohort{border:1px solid var(--line);border-radius:8px;padding:10px 16px}.muted{color:var(--muted)}
+.scoring-rule{max-width:84ch}.coverage{font-size:14px;margin-top:16px}.source-group>summary{font-size:20px}.source-cohort>summary{position:relative;padding-right:170px}.source-title{font-size:17px}.source-date{font-size:14px;color:var(--muted);font-weight:400}.source-count{position:absolute;right:0;top:7px;font-size:20px}.source-scope{display:block;font-size:13px;font-weight:400;color:var(--muted);margin:3px 0 0 18px}.source-methods{border-top:1px solid var(--line);padding-top:8px}.source-methods>summary{font-size:14px}.scorecard-context{font-size:14px;color:var(--muted)}.answer{font-weight:650}.answer-right{color:#a6dfbb}.answer-too-high,.answer-too-low{color:#efd29c}.answer-not-scored{color:var(--muted)}.row-note{display:block;max-width:40ch;white-space:normal;font-weight:400;color:var(--muted)}
 @media(max-width:800px){.checkpoint-summaries{grid-template-columns:1fr;gap:0}}
+@media(max-width:600px){.source-cohort>summary{padding-right:0}.source-count{position:static;display:block;margin-left:18px;font-size:19px}.source-scope{margin-top:1px}.source-date{display:block;margin-left:18px}.source-title{font-size:16px}.source-group>summary{font-size:18px}}
 @media(max-width:600px){.cellcards{overflow-x:visible}.cellcards table,.cellcards tbody,.cellcards tr,.cellcards td{display:block;width:100%;white-space:normal}.cellcards caption{display:block}.cellcards thead{display:none}.cellcards tr{padding:12px;border-top:1px solid var(--line)}.cellcards td{display:grid;grid-template-columns:minmax(115px,1fr) minmax(0,1fr);gap:12px;border:0;padding:4px 0;overflow-wrap:anywhere}.cellcards td::before{content:attr(data-label);color:var(--muted)}.cellcards td:first-child{display:block;font-weight:700;font-size:15px;color:var(--gold);padding-bottom:8px}.cellcards td:first-child::before{display:none}.cellcards td:nth-child(2){padding-bottom:8px}.source-cohort{padding:8px 12px}}
 </style></head><body><main>
 <header><a href="index.html">← Spec Tracker</a><p class="eyebrow">SPEC TRACKER / FORECAST ACCOUNTABILITY</p><h1>Forecast report card</h1>
-<p class="lede">Our ${esc(report.artifact.date)} forecast, checked at two fixed checkpoints.</p>
-<p>Accuracy means agreement with <b>publisher tier-list consensus</b>. Shared publisher blind spots and objective game performance remain ungraded.</p>
+<p class="lede">How many predictions were right, and what actually happened?</p>
+<p class="scoring-rule"><b>We count the main letter:</b> A−, A and A+ all count as A. The tables keep the original tier labels so you can see the exact prediction and outcome. Numbered picks are checked by their place instead.</p>
 <nav aria-label="Report checkpoints">${report.checkpoints.map(c => `<a href="#checkpoint-${c.settleDays}">+${c.settleDays} days${c.grade ? ` · ${esc(c.grade.actualDate)}` : " · pending"}</a>`).join(" &nbsp;·&nbsp; ")}</nav></header>
 <div class="checkpoint-summaries">${report.checkpoints.map(checkpointSummaryHTML).join("\n")}</div>
 ${report.checkpoints.map(c => checkpointDetailsHTML(c, report.forecast)).join("\n")}
