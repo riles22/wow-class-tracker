@@ -1640,7 +1640,8 @@ ui("a settled forecast report is reachable and separate from today's comparison"
   await page.waitForLoadState('domcontentloaded');
   const text = await page.locator('body').innerText();
   assert.ok(text.includes(report.actualDate));
-  assert.match(text, /carry.forward/i);
+  assert.equal(await page.locator('.baseline').isVisible(), true);
+  assert.match(await page.locator('.baseline').innerText(), /Keeping the old tiers: \d+ of \d+ right/);
   assert.equal(await page.locator('script').count(), 0);
 });
 
