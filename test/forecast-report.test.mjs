@@ -53,6 +53,10 @@ test("+14 and +28 keep separate first eligible outcomes; current state cannot re
   assert.equal(report.summary.settleDays, 28);
   assert.equal(report.summary.actualDate, day28.date);
   assert.notDeepEqual(report.checkpoints[0].grade.overall, report.checkpoints[1].grade.overall);
+  assert.equal(report.checkpoints[1].sourcePredictions.rawOutcomeAvailable, false,
+    "+28 must not reuse September 1 publisher receipts");
+  assert.ok(report.checkpoints[1].sourcePredictions.cohorts.filter(c => c.kind === "site")
+    .every(c => c.holdout.status === "unavailable"));
   const html = renderForecastReport(report);
   assert.match(html, /id="checkpoint-14"/);
   assert.match(html, /id="checkpoint-28"/);
@@ -105,6 +109,7 @@ test("report refuses a missing, changed, or differently selected freeze", () => 
 
 test("incomparable or empty grades never produce a publishable accuracy summary", () => {
   const data = structuredClone(fixture);
+  data.sourcePredictions = null; // This synthetic answer key has no matching publisher receipts.
   const realReport = createForecastReport(data);
   data.historySnapshots = data.historySnapshots.filter(s => s.date <= realReport.checkpoints[0].actual.date);
   const settled = data.historySnapshots.find(s => s.date === realReport.checkpoints[0].actual.date);
@@ -119,7 +124,7 @@ test("incomparable or empty grades never produce a publishable accuracy summary"
   assert.match(incomparableHTML, /Original data SHA-256/);
   assert.doesNotMatch(incomparableHTML, /% exact|% within one band|Mean absolute error|signed bias|Spearman|NDCG|predicted S\/A\+|<td>[+-]?\d+ bands<\/td>/,
     "incomparable outcomes must not publish accuracy, ranking, recall, or grade differences");
-  assert.equal([...incomparableHTML.matchAll(/<td>Not comparable<\/td>/g)].length, 80,
+  assert.equal([...incomparableHTML.matchAll(/<td[^>]*>Not comparable<\/td>/g)].length, 80,
     "retain every raw forecast/outcome pair while withholding its grade");
   settled.consensusVersion = data.frozenForecast.consensusVersion; // restore comparability for the empty-outcome case
   for (const cell of Object.values(settled.specs)) cell.consensus = { raid: null, mplus: null };
@@ -147,6 +152,101 @@ test("rendering is deterministic, escapes provenance, and stays entirely offline
   assert.doesNotMatch(tags, /\sonerror\s*=/i, "escaped prose must never become an event attribute");
   assert.match(html, /default-src 'none'/);
   const links = [...html.matchAll(/href="([^"]*)"/g)].map(m => m[1]);
-  assert.ok(links.every(link => link === "index.html" || /^#checkpoint-\d+$/.test(link)));
+  assert.ok(links.every(link => link === "index.html" || /^#checkpoint-\d+$/.test(link) || /^https?:\/\//.test(link)));
   assert.match(html, /\.tablewrap\{[^}]*overflow-x:auto/);
+});
+
+test("a later checkpoint uses its own attached publisher receipts when present", () => {
+  const base = structuredClone(fixture);
+  const original = createForecastReport(base);
+  const first = original.checkpoints[0];
+  base.historySnapshots = base.historySnapshots.filter(s => s.date <= first.actual.date);
+  const day28 = structuredClone(first.actual);
+  day28.date = original.checkpoints[1].settleBy;
+  const receipt = base.sourcePredictions.outcomes.find(o => o.date === first.actual.date);
+  day28.sourceReceipts = structuredClone(receipt.sourceReceipts);
+  for (const [key, spec] of Object.entries(day28.specs)) spec.sourceRatings = structuredClone(receipt.sourceRatings[key]);
+  base.historySnapshots.push(day28);
+  const report = createForecastReport(base);
+  assert.equal(report.checkpoints[0].sourcePredictions.actualDate, first.actual.date);
+  assert.equal(report.checkpoints[1].sourcePredictions.actualDate, day28.date);
+  assert.equal(report.checkpoints[1].sourcePredictions.rawOutcomeAvailable, true);
+  assert.ok(report.checkpoints[1].sourcePredictions.cohorts.filter(c => c.kind === "site")
+    .every(c => c.holdout.status === "ready"));
+});
+
+test("both checkpoint summaries precede detail tables and accuracy immediately follows coverage", () => {
+  const html = renderForecastReport(createForecastReport(fixture));
+  const summaries = html.slice(html.indexOf('<div class="checkpoint-summaries">'), html.indexOf('<section class="checkpoint-details">'));
+  assert.match(summaries, /id="checkpoint-14"/);
+  assert.match(summaries, /id="checkpoint-28"/);
+  assert.match(summaries, /class="coverage"[\s\S]*?<\/p>\s*<p class="result">/);
+  assert.doesNotMatch(summaries, /<table|consensusVersion|Original Git SHA/);
+  assert.match(html, /class="cellcards"|class="tablewrap cellcards"/);
+  assert.match(html, /data-label="Forecast"/);
+  assert.match(html, /data-label="Settled"/);
+  assert.match(html, /Grading method 2/);
+  assert.match(html, /overlap may be fractional/);
+});
+
+test("an incomparable carry-forward cannot publish baseline metrics beside a valid forecast", () => {
+  const report = createForecastReport(fixture);
+  for (const c of report.checkpoints.filter(c => c.grade)) {
+    c.baseline.consensusVersion.comparable = false;
+    c.baseline.overall.exactPct = 97.123;
+    c.baseline.overall.withinOnePct = 98.456;
+    for (const metric of Object.values(c.baseline.ranking)) metric.spearman = 0.123456;
+    c.sourcePredictions = null;
+  }
+  const html = renderForecastReport(report);
+  assert.match(html, /% exact letters/);
+  assert.match(html, /Carry-forward comparison unavailable/);
+  assert.doesNotMatch(html, /97\.123|98\.456|0\.123456/);
+});
+
+test("saved checkpoint scales keep historical grades stable after current scale changes", () => {
+  const original = createForecastReport(fixture);
+  const changed = structuredClone(fixture);
+  changed.scales.consensus.bands.reverse();
+  for (const scale of Object.values(changed.scales.scales)) {
+    for (const tier of Object.keys(scale.values)) scale.values[tier] = 100 - scale.values[tier];
+  }
+  const report = createForecastReport(changed);
+  assert.deepEqual(report.checkpoints[0].grade, original.checkpoints[0].grade);
+  assert.deepEqual(report.checkpoints[0].baseline, original.checkpoints[0].baseline);
+  assert.deepEqual(report.checkpoints[0].sourcePredictions, original.checkpoints[0].sourcePredictions);
+});
+
+test('a whole-group top-k cutoff does not hide informative NDCG ordering', () => {
+  const report = createForecastReport(fixture);
+  const metric = report.checkpoints[0].grade.ranking['raid/DPS'];
+  metric.topK.informative = false;
+  metric.ndcg = 0.432;
+  const html = renderForecastReport(report);
+  assert.match(html, /data-label="Forecast NDCG@k">0\.432<\/td>/);
+  assert.match(html, /data-label="Forecast top-k overlap">— \(whole group\)<\/td>/);
+});
+
+test("source and creator reports retain separate cutoffs, scope, provenance and safe links", () => {
+  const report = createForecastReport(fixture);
+  const first = report.checkpoints.find(c => c.sourcePredictions?.status === "ready");
+  assert.ok(first, "fixture supplies durable historical source receipts");
+  const html = renderForecastReport(report);
+  assert.match(html, /Older-season site benchmarks/);
+  assert.match(html, /Later pre-launch site lists/);
+  assert.match(html, /Dated creator panels/);
+  assert.match(html, /Unknown/);
+  assert.match(html, /historical record is identified by its commit and file hash/);
+  assert.match(html, /Order only/);
+  assert.match(html, /whole group/);
+  assert.match(html, /Superseded at cutoff/);
+  assert.match(html, /Publisher-excluded comparison/);
+  const hostile = structuredClone(report);
+  const cohort = hostile.checkpoints[0].sourcePredictions.cohorts[0];
+  cohort.pages[0].url = 'javascript:alert(1)';
+  cohort.label = '<img src=x onerror=alert(1)>';
+  cohort.rawRows[0].url = 'data:text/html,<script>alert(1)</script>';
+  const rendered = renderForecastReport(hostile);
+  assert.doesNotMatch(rendered, /href="(?:javascript:|data:)|<img\b|<script\b/);
+  assert.match(rendered, /&lt;img/);
 });

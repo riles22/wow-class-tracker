@@ -66,6 +66,10 @@ test("an ordinary snapshot writes no frozen key at all", async () => {
     assert.equal(snap.frozen, undefined);
     assert.equal(snap.date, "2026-08-11");
     assert.ok(Object.keys(snap.specs).length > 0, "a snapshot must carry spec state");
+    assert.equal(snap.sourceReceipts.schemaVersion, 1);
+    assert.ok(snap.sourceReceipts.sources.every(s => s.kind === 'tier-list'));
+    const raw = JSON.parse(await readFile(path.join(dir, 'data/specs.json'), 'utf8'));
+    for (const sp of raw) assert.deepEqual(snap.specs[`${sp.class}|${sp.spec}`].sourceRatings, sp.ratings ?? {});
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
 
@@ -78,6 +82,11 @@ test("--frozen writes the immutable artifact alongside the snapshot", async () =
     assert.equal(art.kind, "frozen-forecast");
     assert.equal(art.date, "2026-08-11");
     assert.ok(art.dataSha256, "the artifact must hash the data that produced it");
+    assert.equal(art.sourceReceipts.schemaVersion, 1);
+    assert.ok(art.targetSeason);
+    assert.deepEqual(art.creatorPredictions, []);
+    for (const [key, cell] of Object.entries(art.cells)) assert.deepEqual(cell.sourceRatings,
+      (await readSnap(dir, '2026-08-11')).specs[key].sourceRatings);
     assert.equal(Object.keys(art.cells).length, Object.keys((await readSnap(dir, "2026-08-11")).specs).length,
       "the artifact must cover every spec the snapshot does");
   } finally { await rm(dir, { recursive: true, force: true }); }
@@ -190,5 +199,60 @@ test("an ordinary re-snapshot SKIPS (exit clean) when a freeze declaration's sta
     assert.equal(res.outPath, null, "a skipped snapshot must write nothing");
     assert.equal(await readFile(path.join(dir, "data", "history", "2026-08-11.json"), "utf8"), before,
       "the declared snapshot must survive the skipped write untouched");
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test('equivalent retries preserve complete old history and artifact bytes without backfilling receipts', async () => {
+  const dir = await sandbox();
+  try {
+    const result = await snapshot(dir, '2026-08-11', { frozen: true });
+    const art = JSON.parse(await readFile(result.frozenPath, 'utf8'));
+    delete art.sourceReceipts; delete art.creatorPredictions; delete art.targetSeason;
+    for (const cell of Object.values(art.cells)) delete cell.sourceRatings;
+    const snap = await readSnap(dir, '2026-08-11');
+    delete snap.sourceReceipts;
+    for (const cell of Object.values(snap.specs)) delete cell.sourceRatings;
+    const artBefore = JSON.stringify(art), snapBefore = JSON.stringify(snap);
+    await writeFile(result.frozenPath, artBefore); await writeFile(result.outPath, snapBefore);
+    await snapshot(dir, '2026-08-11');
+    await snapshot(dir, '2026-08-11', { frozen: true });
+    assert.equal(await readFile(result.frozenPath, 'utf8'), artBefore);
+    assert.equal(await readFile(result.outPath, 'utf8'), snapBefore);
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test('new freezes reject changed raw page receipts even when letters are unchanged', async () => {
+  const dir = await sandbox();
+  try {
+    const result = await snapshot(dir, '2026-08-11', { frozen: true });
+    const artBefore = await readFile(result.frozenPath, 'utf8'), snapBefore = await readFile(result.outPath, 'utf8');
+    const file = path.join(dir, 'data/sources.json'), sources = JSON.parse(await readFile(file, 'utf8'));
+    sources.find(s => s.kind === 'tier-list').pages[0].snapshot = '2026-09-09';
+    await writeFile(file, JSON.stringify(sources));
+    await assert.rejects(() => snapshot(dir, '2026-08-11', { frozen: true }), /DIFFERENT forecast/);
+    assert.equal(await readFile(result.frozenPath, 'utf8'), artBefore);
+    assert.equal(await readFile(result.outPath, 'utf8'), snapBefore);
+  } finally { await rm(dir, { recursive: true, force: true }); }
+});
+
+test('first completed checkpoint remains byte-identical through same-day refreshes', async () => {
+  const dir = await sandbox();
+  try {
+    await cp(path.join(ROOT, 'data/forecasts'), path.join(dir, 'data/forecasts'), { recursive: true });
+    for (const date of ['2026-08-11', '2026-08-18', '2026-09-01']) await cp(
+      path.join(ROOT, `data/history/${date}.json`), path.join(dir, `data/history/${date}.json`));
+    const first = await snapshot(dir, '2026-09-15');
+    const before = await readFile(first.outPath, 'utf8');
+    const file = path.join(dir, 'data/specs.json'), specs = JSON.parse(await readFile(file, 'utf8'));
+    specs[0].ratings.mplus.wowhead = specs[0].ratings.mplus.wowhead === 'C' ? 'A' : 'C';
+    await writeFile(file, JSON.stringify(specs));
+    const retry = await snapshot(dir, '2026-09-15');
+    assert.equal(retry.preservedCheckpoint, true);
+    assert.equal(await readFile(first.outPath, 'utf8'), before);
+    await assert.rejects(() => snapshot(dir, '2026-09-15', { frozen: true }), /settled forecast checkpoint/);
+    const following = await snapshot(dir, '2026-09-16');
+    assert.notEqual((await readSnap(dir, '2026-09-16')).specs['Death Knight|Blood'].sourceRatings.mplus.wowhead,
+      JSON.parse(before).specs['Death Knight|Blood'].sourceRatings.mplus.wowhead);
+    assert.ok(following.outPath);
   } finally { await rm(dir, { recursive: true, force: true }); }
 });

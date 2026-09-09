@@ -331,6 +331,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   moves what gets graded (it reports `frozenExplicit: false` when it had to guess).
   The settled side is chosen by date, not by the flip: `SETTLE_DAYS = [14, 28]` after
   launch, because tier lists churn hard in week one.
+- **Forecast accountability (2026-09-08):** `forecast-report.html` puts both checkpoint
+  summaries before expandable methods and evidence, with labeled cell cards on phones.
+  Grading method 2 handles tied NDCG/top-k fairly and labels whole-group top-k as
+  non-informative; it does not change `PROJECTION_VERSION` or frozen predictions. The CLI
+  validates explicit dates and reserves GRADE for an explicit frozen declaration and the
+  exact first-eligible +14/+28 outcome; other pairs are exploratory DRIFT. The optional
+  immutable `data/predictions/` ledger adds historical source comparisons, publisher
+  holdouts and native-order creator panels. [Source capture and comparison rules](docs/source-predictions.md)
+  define the accounting-only `data/creator-predictions.json` intake and raw receipts saved
+  by future snapshots/freezes. Never rewrite old forecasts, histories or source ledgers to
+  add newer information. `test/forecast-report-ui.test.mjs` runs in the three-browser CI matrix.
 - **`SNAPSHOT_PHASE` (`render.mjs`) — the 12.1 flip is DONE** (2026-08-18: `"12.1-ptr"`
   → `"12.1-live"`, and the gate below self-silenced as designed; this bullet is the
   playbook for the NEXT cycle's flip). **Gated since 2026-08-02**: `check-refresh --age`

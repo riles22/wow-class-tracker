@@ -9,12 +9,29 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData } from "./validate.mjs";
 import { buildPayload, snapshotStateOf, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION, SNAPSHOT_PHASE } from "./render.mjs";
+import { PHASES } from "./normalize.mjs";
+import { captureSourceReceipts } from "./source-predictions.mjs";
+import { captureCreatorPredictions, validateCreatorPredictions } from "./creator-predictions.mjs";
+import { launchPair, loadSnapshots, SETTLE_DAYS } from "./report-card.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
+export function predictionSeason(phases = PHASES) {
+  if (!phases.ptr) return phases.liveSeason;
+  const label = String(phases.ptr.label ?? phases.ptr.marker ?? '').replace(/\s+PTR$/i, '');
+  const matches = Object.entries(phases.seasonLabels ?? {}).filter(([, value]) => value.replace(/\s+PTR$/i, '') === label);
+  if (matches.length !== 1) throw new Error('snapshot --frozen: PTR target season must resolve uniquely in PHASES.seasonLabels');
+  return matches[0][0];
+}
+
 export async function snapshot(root = ROOT, date = new Date().toISOString().slice(0, 10), { frozen = false } = {}) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw new Error(`snapshot date must be YYYY-MM-DD, got "${date}"`);
-  const payload = buildPayload(await loadData(root));
+  const data = await loadData(root);
+  const payload = buildPayload(data);
+  const creatorErrors = validateCreatorPredictions(data.creatorPredictions, { specs: data.specs, community: data.community });
+  if (creatorErrors.length) throw new Error(creatorErrors.join("; "));
+  const sourceReceipts = captureSourceReceipts(data);
+  const sourceRatings = Object.fromEntries(data.specs.map(s => [`${s.class}|${s.spec}`, structuredClone(s.ratings ?? {})]));
 
   /* CARRY AN EXISTING FREEZE DECLARATION FORWARD (2026-08-11).
      Snapshots are named by UTC date and rewritten in place, so every run on the same UTC
@@ -44,10 +61,35 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
      snapshot is tonight's baseline either way, and the moved state lands in the next UTC
      date's file. The declaration is irreplaceable; the daily state is not. */
   const outPathEarly = path.join(root, "data", "history", `${date}.json`);
-  const prior = await readFile(outPathEarly, "utf8").then(JSON.parse).catch(() => null);
+  const prior = await readFile(outPathEarly, "utf8").then(JSON.parse).catch(error => {
+    if (error.code === 'ENOENT') return null;
+    throw error;
+  });
   const nextState = snapshotStateOf(payload.specs);
-  const stateMoved = prior != null && JSON.stringify(prior.specs) !== JSON.stringify(nextState);
+  const priorState = prior && Object.fromEntries(Object.entries(prior.specs ?? {})
+    .map(([key, { sourceRatings: _receipts, ...state }]) => [key, state]));
+  const stateMoved = prior != null && JSON.stringify(priorState) !== JSON.stringify(nextState);
   const carriedFrozen = prior?.frozen === true;
+  // A completed accuracy checkpoint is a receipt, not the current day's live state.
+  // Preserve its FIRST saved outcome even if another refresh runs on the same UTC day.
+  if (prior && !carriedFrozen && data.frozenForecast) {
+    const artifact = data.frozenForecast;
+    let cycle = (await loadSnapshots(root)).filter(s => s.date >= artifact.date);
+    const firstLive = cycle.find(s => s.phase && s.phase !== artifact.phase);
+    const nextCycle = firstLive && cycle.find(s => s.date > firstLive.date && s.phase
+      && s.phase !== artifact.phase && s.phase !== firstLive.phase);
+    if (nextCycle) cycle = cycle.filter(s => s.date < nextCycle.date);
+    const selected = SETTLE_DAYS.map(settleDays => launchPair(cycle, artifact.phase, { settleDays }))
+      .find(pair => pair.frozenExplicit && pair.forecast?.date === artifact.date && pair.actual?.date === date);
+    if (selected) {
+      if (frozen) throw new Error(`snapshot --frozen: ${date}.json is a settled forecast checkpoint and cannot be redeclared`);
+      console.warn(`! ${date}.json is the completed +${selected.settleDays} forecast checkpoint — preserving its original outcome receipt`);
+      return { outPath: outPathEarly, frozenPath: null, preservedCheckpoint: true, specs: Object.keys(prior.specs).length };
+    }
+  }
+  if (carriedFrozen && stateMoved && frozen) {
+    throw new Error(`snapshot --frozen: ${date}.json already exists and describes a DIFFERENT forecast — refusing to redefine its declaration`);
+  }
   if (carriedFrozen && stateMoved && !frozen) {
     console.warn(
       `! skipped: data/history/${date}.json is the declared pre-launch forecast the report card grades, ` +
@@ -56,7 +98,8 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
     return { outPath: null, frozenPath: null, skippedFrozenDate: true, specs: Object.keys(nextState).length };
   }
   if (carriedFrozen && !frozen) {
-    console.warn(`! ${date}.json already carries frozen: true and the state is unchanged — preserving the freeze declaration`);
+    console.warn(`! ${date}.json already carries frozen: true and the state is unchanged — preserving the complete original receipt`);
+    return { outPath: outPathEarly, frozenPath: null, preservedFrozenDate: true, specs: Object.keys(nextState).length };
   }
   // snapshotStateOf is shared with the movement reader (render.mjs pickBaseline/movementFor)
   // so the stored key format can never drift from the lookup. projectionVersion pins which
@@ -80,7 +123,8 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
   const snap = { date, phase: SNAPSHOT_PHASE, projectionVersion: projVersion,
     rankVersion: RANK_VERSION, consensusVersion: CONSENSUS_VERSION,
     ...(frozen || carriedFrozen ? { frozen: true } : {}),
-    specs: nextState };
+    sourceReceipts,
+    specs: Object.fromEntries(Object.entries(nextState).map(([key, state]) => [key, { ...state, sourceRatings: sourceRatings[key] }])) };
   const dir = path.join(root, "data", "history");
   const outPath = path.join(dir, `${date}.json`);
 
@@ -104,6 +148,7 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
     for (const sp of payload.specs) {
       cells[`${sp.class}|${sp.spec}`] = {
         role: sp.role,
+        sourceRatings: sourceRatings[`${sp.class}|${sp.spec}`],
         raid: sp.projection?.raid ?? null,
         mplus: sp.projection?.mplus ?? null,
         /* The consensus this forecast was built on, cell by cell, INCLUDING which
@@ -131,6 +176,8 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
       projectionVersion: PROJECTION_VERSION, rankVersion: RANK_VERSION,
       consensusVersion: CONSENSUS_VERSION,
       gitSha: sha, dataSha256: hash.digest("hex"),
+      targetSeason: predictionSeason(),
+      sourceReceipts,
       /* Registry-level composition at freeze time: who was live, who was frozen, and what
          season each page actually described. The per-cell block above answers "what fed
          this letter"; this answers "what state was the registry in when we froze". */
@@ -155,6 +202,7 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
         .map(x => [x.id, x.pages.map(pg => pg.snapshot).sort().at(-1) ?? null])),
       cells
     };
+    artifact.creatorPredictions = captureCreatorPredictions(data.creatorPredictions, { date, season: artifact.targetSeason });
     const fDir = path.join(root, "data", "forecasts");
     frozenPath = path.join(fDir, `frozen-${date}.json`);
     frozenBody = JSON.stringify(artifact, null, 2) + "\n";
@@ -169,17 +217,22 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
        This check runs BEFORE the history file is written, further down, so a refusal is a
        genuine no-op on disk. Throwing after that write would clobber the very declaration the
        guard exists to protect — the exact failure this change set was written to repair. */
-    const substanceOf = a => JSON.stringify({
+    const substanceOf = (a, withReceipts) => JSON.stringify({
       kind: a.kind, date: a.date, phase: a.phase,
       projectionVersion: a.projectionVersion, rankVersion: a.rankVersion,
-      consensusVersion: a.consensusVersion, cells: a.cells });
+      consensusVersion: a.consensusVersion,
+      ...(withReceipts ? { targetSeason: a.targetSeason, sourceReceipts: a.sourceReceipts, creatorPredictions: a.creatorPredictions } : {}),
+      cells: Object.fromEntries(Object.entries(a.cells ?? {}).map(([key, cell]) => {
+        const { sourceRatings, ...oldCell } = cell;
+        return [key, withReceipts ? cell : oldCell];
+      })) });
     const existingBody = await readFile(frozenPath, "utf8").catch(error => {
       if (error.code === "ENOENT") return null;
       throw error;
     });
     if (existingBody != null) {
       const existing = JSON.parse(existingBody); // A damaged record is not permission to replace it.
-      if (existing == null || substanceOf(existing) !== substanceOf(artifact)) {
+      if (existing == null || substanceOf(existing, Boolean(existing.sourceReceipts)) !== substanceOf(artifact, Boolean(existing.sourceReceipts))) {
         throw new Error(
           `snapshot --frozen: data/forecasts/frozen-${date}.json already exists and describes a DIFFERENT forecast. ` +
           `That file is the immutable record the report card grades — refusing to redefine it. ` +
@@ -193,7 +246,9 @@ export async function snapshot(root = ROOT, date = new Date().toISOString().slic
   /* Both writes happen only after every guard above has passed, so a refused freeze leaves
      the disk exactly as it was. */
   await mkdir(dir, { recursive: true });
-  await writeFile(outPath, JSON.stringify(snap, null, 2) + "\n");
+  // Equivalent freeze retries preserve the original history receipt as well as the
+  // artifact, including legacy freezes that predate raw publisher capture.
+  if (!carriedFrozen) await writeFile(outPath, JSON.stringify(snap, null, 2) + "\n");
   if (frozenBody != null) {
     await mkdir(path.dirname(frozenPath), { recursive: true });
     await writeFile(frozenPath, frozenBody);
@@ -210,7 +265,7 @@ if (isMain) {
     if (result.skippedFrozenDate) {
       console.log("· no snapshot written (frozen-date collision — see the notice above); exit 0, the run is not at fault");
     } else {
-      console.log(`✓ snapshot → ${result.outPath} (${result.specs} specs)` +
+      console.log(`✓ ${result.preservedCheckpoint || result.preservedFrozenDate ? "preserved existing snapshot" : "snapshot"} → ${result.outPath} (${result.specs} specs)` +
         (frozen ? " — FROZEN: this is the forecast the report card will grade" : ""));
       if (result.frozenPath) console.log(`✓ immutable forecast artifact → ${result.frozenPath}`);
     }

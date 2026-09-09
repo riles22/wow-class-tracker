@@ -1,0 +1,31 @@
+{
+  "ok": true,
+  "commitSha": "343a878dcfeb7c4dc5b159df8e8af8e4763c7bdd",
+  "attempt": 1,
+  "pages": [
+    {
+      "path": "index.html",
+      "url": "https://riles22.github.io/wow-class-tracker/index.html?release=343a878dcfeb7c4dc5b159df8e8af8e4763c7bdd&attempt=1",
+      "status": 200,
+      "ok": true,
+      "bytes": 1954398,
+      "sha256": "b238ff3a9c0d7f2a44d6ceb5bf5c09d9040881aaaa3f4a5201f6e9cefda6799f"
+    },
+    {
+      "path": "gearing.html",
+      "url": "https://riles22.github.io/wow-class-tracker/gearing.html?release=343a878dcfeb7c4dc5b159df8e8af8e4763c7bdd&attempt=1",
+      "status": 200,
+      "ok": true,
+      "bytes": 2477533,
+      "sha256": "c2a1a168c653831109bfa5364d8b2037d6dde05fcd1b04be4a5c433bf6fd07e7"
+    },
+    {
+      "path": "forecast-report.html",
+      "url": "https://riles22.github.io/wow-class-tracker/forecast-report.html?release=343a878dcfeb7c4dc5b159df8e8af8e4763c7bdd&attempt=1",
+      "status": 200,
+      "ok": true,
+      "bytes": 35340,
+      "sha256": "5f965dfccc46b99923144bf2a4f829fe90fe181c98f8a0f3cc3e75d221dc2cce"
+    }
+  ]
+}
