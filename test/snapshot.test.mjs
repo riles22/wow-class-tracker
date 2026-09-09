@@ -227,7 +227,12 @@ test('new freezes reject changed raw page receipts even when letters are unchang
     const result = await snapshot(dir, '2026-08-11', { frozen: true });
     const artBefore = await readFile(result.frozenPath, 'utf8'), snapBefore = await readFile(result.outPath, 'utf8');
     const file = path.join(dir, 'data/sources.json'), sources = JSON.parse(await readFile(file, 'utf8'));
-    sources.find(s => s.kind === 'tier-list').pages[0].snapshot = '2026-09-09';
+    /* Toggle rather than assign a literal: the sandbox copies the REAL data/, so a hardcoded
+       date silently becomes a no-op on the day a refresh stamps that same snapshot, and the
+       freeze then correctly does not reject. That fixture rot cost the 2026-09-09 nightly its
+       publish — the receipt was genuinely unchanged, so only this mutation was wrong. */
+    const page = sources.find(s => s.kind === 'tier-list').pages[0];
+    page.snapshot = page.snapshot === '2026-09-09' ? '2026-09-10' : '2026-09-09';
     await writeFile(file, JSON.stringify(sources));
     await assert.rejects(() => snapshot(dir, '2026-08-11', { frozen: true }), /DIFFERENT forecast/);
     assert.equal(await readFile(result.frozenPath, 'utf8'), artBefore);
