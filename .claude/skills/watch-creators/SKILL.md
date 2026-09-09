@@ -162,6 +162,19 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    class-tuning-roundup video) into a spec they merely mention in passing. When a
    video reveals a creator competently covers a spec outside their listed `specs`,
    note it in the run log for a human to widen the scope — don't silently override.
+3a. **Preserve explicit predictions for later accuracy review.** When the content actually
+   publishes a tier list or rank order, also append a dated panel to the accounting-only
+   `data/creator-predictions.json` ledger. Follow [the capture schema](../../../docs/source-predictions.md).
+   Record the source's native tier order, exact spec/bracket scope, content lens, publication
+   and capture dates, attributed statement paraphrases, and timestamp/page links. A guest's
+   statement belongs to the guest; an unregistered author needs review before capture.
+   Never derive a tier from sentiment, a video title, a conditional build, or an unavailable
+   transcript. Unknown and conditional placements remain null with an exclusion reason.
+   Keep historical panels; set `supersededAtFreeze` on older replaced statements when known,
+   within the same lens. Never edit `data/predictions/` or `data/forecasts/` during a refresh.
+   These structured placements feed only the forecast accuracy report, never live ratings,
+   expert-read sentiment, consensus, or projection weights. `snapshot --frozen` captures
+   eligible panels immutably; post-cutoff captures cannot be backfilled into that freeze.
 4. Supersede — **do this EVERY time you add a take, it is not optional** (audit
    2026-07-23 found 16 creator+spec pairs carrying multiple live takes across tuning
    passes): when you distill a new take for (creator, spec), scan the existing

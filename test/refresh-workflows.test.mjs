@@ -3,6 +3,13 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8");
 
+test('forecast browser checks run in every browser job and historical receipts are immutable during refresh', () => {
+  const ci = workflow('ci');
+  assert.match(ci, /browser: \[chromium, firefox, webkit\]/);
+  assert.match(ci, /run: node --test test\/ui-invariants\.test\.mjs test\/forecast-report-ui\.test\.mjs gearing\/test\/ui-invariants\.test\.mjs/);
+  assert.match(workflow('nightly'), /git diff --quiet HEAD --[^\n]*data\/predictions\//);
+});
+
 test("nightly checks the trusted refresh base before overlay and gates gearing before publication",()=>{
   const text=workflow("nightly");
   assert.ok(text.indexOf("run: node src/check-refresh-base.mjs") < text.indexOf("- name: Download refresh output"));

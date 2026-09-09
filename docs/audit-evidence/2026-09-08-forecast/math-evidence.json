@@ -1,0 +1,2691 @@
+{
+  "generatedAt": "2026-09-09T03:01:41.591Z",
+  "artifact": {
+    "date": "2026-08-11",
+    "gitSha": "397373b300714a0ce0ed193d38be51b12e1f94b8",
+    "dataSha256": "c20edc631f835a08fafe1ef448b1649d1915d7a2c5da87e5568f61b626ff6441",
+    "projectionVersion": 13,
+    "consensusVersion": 3
+  },
+  "checkpoints": [
+    {
+      "settleDays": 14,
+      "launchDate": "2026-08-18",
+      "settleBy": "2026-09-01",
+      "actualDate": "2026-09-01",
+      "forecast": {
+        "mode": "grade",
+        "coverage": {
+          "graded": 80,
+          "obtainable": 80,
+          "coveragePct": 100,
+          "declined": 0,
+          "ungradeable": 0,
+          "rosterGap": 0,
+          "sufficient": true
+        },
+        "ranking": {
+          "raid/DPS": {
+            "n": 27,
+            "k": 5,
+            "spearman": 0.511,
+            "ndcg": 0.865,
+            "topK": {
+              "overlap": 2,
+              "of": 5,
+              "pct": 40
+            }
+          },
+          "raid/Healer": {
+            "n": 7,
+            "k": 3,
+            "spearman": 0.464,
+            "ndcg": 0.977,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          },
+          "raid/Tank": {
+            "n": 6,
+            "k": 3,
+            "spearman": 0.841,
+            "ndcg": 0.954,
+            "topK": {
+              "overlap": 3,
+              "of": 3,
+              "pct": 100
+            }
+          },
+          "raid/top-tier": {
+            "recall": 0.33,
+            "hit": 3,
+            "of": 9
+          },
+          "mplus/DPS": {
+            "n": 27,
+            "k": 5,
+            "spearman": 0.784,
+            "ndcg": 0.97,
+            "topK": {
+              "overlap": 3,
+              "of": 5,
+              "pct": 60
+            }
+          },
+          "mplus/Healer": {
+            "n": 7,
+            "k": 3,
+            "spearman": 0.703,
+            "ndcg": 0.971,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          },
+          "mplus/Tank": {
+            "n": 6,
+            "k": 3,
+            "spearman": 0.2,
+            "ndcg": 0.902,
+            "topK": {
+              "overlap": 1,
+              "of": 3,
+              "pct": 33
+            }
+          },
+          "mplus/top-tier": {
+            "recall": 0.58,
+            "hit": 7,
+            "of": 12
+          }
+        },
+        "forecastDate": "2026-08-11",
+        "actualDate": "2026-09-01",
+        "forecastPhase": "12.1-ptr",
+        "actualPhase": "12.1-live",
+        "projectionVersion": 13,
+        "consensusVersion": {
+          "forecast": 3,
+          "actual": 6,
+          "comparable": true
+        },
+        "consensusComposition": {
+          "forecast": {
+            "raid": [
+              "archon",
+              "icyveins",
+              "method",
+              "wowhead"
+            ],
+            "mplus": [
+              "archon",
+              "icyveins",
+              "method",
+              "wowhead"
+            ]
+          },
+          "actual": {
+            "raid": [
+              "archon",
+              "icyveins",
+              "method",
+              "wowhead"
+            ],
+            "mplus": [
+              "archon",
+              "icyveins",
+              "method",
+              "wowhead"
+            ]
+          },
+          "changedBrackets": []
+        },
+        "warnings": [
+          "consensusVersion moved 3 → 6 between freeze and settlement — expected at a season boundary; composition above is the authoritative comparability signal."
+        ],
+        "overall": {
+          "n": 80,
+          "exact": 33,
+          "withinOne": 71,
+          "exactPct": 41,
+          "withinOnePct": 89,
+          "meanAbsBands": 0.7,
+          "biasBands": -0.2,
+          "meanAbsScore": 10.5,
+          "biasScore": -2.3
+        },
+        "byBracket": {
+          "raid": {
+            "n": 40,
+            "exact": 16,
+            "withinOne": 35,
+            "exactPct": 40,
+            "withinOnePct": 88,
+            "meanAbsBands": 0.72,
+            "biasBands": -0.17,
+            "meanAbsScore": 11.2,
+            "biasScore": -1.4
+          },
+          "mplus": {
+            "n": 40,
+            "exact": 17,
+            "withinOne": 36,
+            "exactPct": 43,
+            "withinOnePct": 90,
+            "meanAbsBands": 0.68,
+            "biasBands": -0.23,
+            "meanAbsScore": 9.8,
+            "biasScore": -3.2
+          }
+        },
+        "byConfidence": {
+          "low": {
+            "n": 16,
+            "exact": 5,
+            "withinOne": 13,
+            "exactPct": 31,
+            "withinOnePct": 81,
+            "meanAbsBands": 0.88,
+            "biasBands": -0.13,
+            "meanAbsScore": 11.6,
+            "biasScore": -0.6
+          },
+          "high": {
+            "n": 10,
+            "exact": 5,
+            "withinOne": 9,
+            "exactPct": 50,
+            "withinOnePct": 90,
+            "meanAbsBands": 0.6,
+            "biasBands": -0.2,
+            "meanAbsScore": 10.9,
+            "biasScore": -4.5
+          },
+          "medium": {
+            "n": 54,
+            "exact": 23,
+            "withinOne": 49,
+            "exactPct": 43,
+            "withinOnePct": 91,
+            "meanAbsBands": 0.67,
+            "biasBands": -0.22,
+            "meanAbsScore": 10.1,
+            "biasScore": -2.4
+          }
+        },
+        "byRole": {
+          "Tank": {
+            "n": 12,
+            "exact": 4,
+            "withinOne": 10,
+            "exactPct": 33,
+            "withinOnePct": 83,
+            "meanAbsBands": 0.83,
+            "biasBands": -0.5,
+            "meanAbsScore": 12.1,
+            "biasScore": -6.3
+          },
+          "DPS": {
+            "n": 54,
+            "exact": 22,
+            "withinOne": 51,
+            "exactPct": 41,
+            "withinOnePct": 94,
+            "meanAbsBands": 0.65,
+            "biasBands": -0.28,
+            "meanAbsScore": 9.8,
+            "biasScore": -3.2
+          },
+          "Healer": {
+            "n": 14,
+            "exact": 7,
+            "withinOne": 10,
+            "exactPct": 50,
+            "withinOnePct": 71,
+            "meanAbsBands": 0.79,
+            "biasBands": 0.36,
+            "meanAbsScore": 11.6,
+            "biasScore": 4.4
+          }
+        },
+        "rows": [
+          {
+            "spec": "Death Knight Blood",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "A",
+            "actualTier": "S",
+            "bandsOff": -2,
+            "forecastScore": 73,
+            "actualScore": 91,
+            "confidence": "low"
+          },
+          {
+            "spec": "Death Knight Blood",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "A+",
+            "actualTier": "S",
+            "bandsOff": -1,
+            "forecastScore": 87,
+            "actualScore": 98,
+            "confidence": "high"
+          },
+          {
+            "spec": "Death Knight Frost",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 56,
+            "actualScore": 54,
+            "confidence": "low"
+          },
+          {
+            "spec": "Death Knight Frost",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 57,
+            "actualScore": 70,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Death Knight Unholy",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 61,
+            "actualScore": 49,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Death Knight Unholy",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 78,
+            "actualScore": 68,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Demon Hunter Havoc",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 66,
+            "actualScore": 43,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Demon Hunter Havoc",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 64,
+            "actualScore": 60,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Demon Hunter Devourer",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 72,
+            "actualScore": 60,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Demon Hunter Devourer",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 83,
+            "actualScore": 77,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Demon Hunter Vengeance",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 40,
+            "actualScore": 60,
+            "confidence": "low"
+          },
+          {
+            "spec": "Demon Hunter Vengeance",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 66,
+            "actualScore": 64,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Balance",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 55,
+            "actualScore": 68,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Balance",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 62,
+            "actualScore": 70,
+            "confidence": "high"
+          },
+          {
+            "spec": "Druid Feral",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 44,
+            "actualScore": 33,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Feral",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 73,
+            "actualScore": 71,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Guardian",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 78,
+            "actualScore": 70,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Guardian",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 54,
+            "actualScore": 74,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Restoration",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 73,
+            "actualScore": 60,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Druid Restoration",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "C",
+            "actualTier": "C",
+            "bandsOff": 0,
+            "forecastScore": 32,
+            "actualScore": 39,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Evoker Augmentation",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 46,
+            "actualScore": 33,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Evoker Augmentation",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "C",
+            "bandsOff": 0,
+            "forecastScore": 38,
+            "actualScore": 34,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Evoker Devastation",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 64,
+            "actualScore": 74,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Evoker Devastation",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 40,
+            "actualScore": 55,
+            "confidence": "high"
+          },
+          {
+            "spec": "Evoker Preservation",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "S",
+            "actualTier": "S",
+            "bandsOff": 0,
+            "forecastScore": 100,
+            "actualScore": 98,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Evoker Preservation",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "A+",
+            "actualTier": "B",
+            "bandsOff": 2,
+            "forecastScore": 83,
+            "actualScore": 54,
+            "confidence": "high"
+          },
+          {
+            "spec": "Hunter Beast Mastery",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 44,
+            "actualScore": 48,
+            "confidence": "low"
+          },
+          {
+            "spec": "Hunter Beast Mastery",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 60,
+            "actualScore": 64,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Hunter Marksmanship",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 68,
+            "actualScore": 70,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Hunter Marksmanship",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 67,
+            "actualScore": 55,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Hunter Survival",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 54,
+            "actualScore": 37,
+            "confidence": "low"
+          },
+          {
+            "spec": "Hunter Survival",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 47,
+            "actualScore": 60,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Mage Arcane",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "S",
+            "bandsOff": -2,
+            "forecastScore": 64,
+            "actualScore": 91,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Mage Arcane",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "S",
+            "bandsOff": -1,
+            "forecastScore": 81,
+            "actualScore": 89,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Mage Fire",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 37,
+            "actualScore": 43,
+            "confidence": "low"
+          },
+          {
+            "spec": "Mage Fire",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 36,
+            "actualScore": 49,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Mage Frost",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 51,
+            "actualScore": 48,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Mage Frost",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 40,
+            "actualScore": 39,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Monk Brewmaster",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 61,
+            "actualScore": 60,
+            "confidence": "low"
+          },
+          {
+            "spec": "Monk Brewmaster",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 40,
+            "actualScore": 62,
+            "confidence": "high"
+          },
+          {
+            "spec": "Monk Mistweaver",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 70,
+            "actualScore": 49,
+            "confidence": "low"
+          },
+          {
+            "spec": "Monk Mistweaver",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 60,
+            "actualScore": 58,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Monk Windwalker",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 64,
+            "actualScore": 54,
+            "confidence": "low"
+          },
+          {
+            "spec": "Monk Windwalker",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 85,
+            "actualScore": 77,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Paladin Holy",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 79,
+            "actualScore": 86,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Paladin Holy",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "S",
+            "actualTier": "S",
+            "bandsOff": 0,
+            "forecastScore": 93,
+            "actualScore": 98,
+            "confidence": "high"
+          },
+          {
+            "spec": "Paladin Protection",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 42,
+            "actualScore": 52,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Paladin Protection",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 57,
+            "actualScore": 66,
+            "confidence": "high"
+          },
+          {
+            "spec": "Paladin Retribution",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 41,
+            "actualScore": 47,
+            "confidence": "low"
+          },
+          {
+            "spec": "Paladin Retribution",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 55,
+            "actualScore": 66,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Priest Discipline",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "S",
+            "actualTier": "A",
+            "bandsOff": 2,
+            "forecastScore": 94,
+            "actualScore": 72,
+            "confidence": "low"
+          },
+          {
+            "spec": "Priest Discipline",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "C",
+            "bandsOff": 2,
+            "forecastScore": 62,
+            "actualScore": 39,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Priest Holy",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 54,
+            "actualScore": 77,
+            "confidence": "low"
+          },
+          {
+            "spec": "Priest Holy",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 44,
+            "actualScore": 48,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Priest Shadow",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 47,
+            "actualScore": 74,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Priest Shadow",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 47,
+            "actualScore": 55,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Rogue Assassination",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 45,
+            "actualScore": 64,
+            "confidence": "low"
+          },
+          {
+            "spec": "Rogue Assassination",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 72,
+            "actualScore": 75,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Rogue Outlaw",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 37,
+            "actualScore": 53,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Rogue Outlaw",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 73,
+            "actualScore": 84,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Rogue Subtlety",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 45,
+            "actualScore": 71,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Rogue Subtlety",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 52,
+            "actualScore": 68,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Shaman Elemental",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 56,
+            "actualScore": 64,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Shaman Elemental",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 83,
+            "actualScore": 86,
+            "confidence": "high"
+          },
+          {
+            "spec": "Shaman Enhancement",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 55,
+            "actualScore": 54,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Shaman Enhancement",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 57,
+            "actualScore": 60,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Shaman Restoration",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 69,
+            "actualScore": 70,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Shaman Restoration",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 73,
+            "actualScore": 77,
+            "confidence": "high"
+          },
+          {
+            "spec": "Warlock Affliction",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 51,
+            "actualScore": 48,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warlock Affliction",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 55,
+            "actualScore": 48,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warlock Demonology",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 64,
+            "actualScore": 54,
+            "confidence": "low"
+          },
+          {
+            "spec": "Warlock Demonology",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 49,
+            "actualScore": 80,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warlock Destruction",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 72,
+            "actualScore": 74,
+            "confidence": "low"
+          },
+          {
+            "spec": "Warlock Destruction",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 63,
+            "actualScore": 66,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warrior Arms",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "S",
+            "bandsOff": -1,
+            "forecastScore": 84,
+            "actualScore": 91,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warrior Arms",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "S",
+            "actualTier": "S",
+            "bandsOff": 0,
+            "forecastScore": 92,
+            "actualScore": 89,
+            "confidence": "high"
+          },
+          {
+            "spec": "Warrior Fury",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 57,
+            "actualScore": 52,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warrior Fury",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 39,
+            "actualScore": 55,
+            "confidence": "medium"
+          },
+          {
+            "spec": "Warrior Protection",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 72,
+            "actualScore": 67,
+            "confidence": "low"
+          },
+          {
+            "spec": "Warrior Protection",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 67,
+            "actualScore": 48,
+            "confidence": "medium"
+          }
+        ]
+      },
+      "baseline": {
+        "mode": "grade",
+        "coverage": {
+          "graded": 80,
+          "obtainable": 80,
+          "coveragePct": 100,
+          "declined": 0,
+          "ungradeable": 0,
+          "rosterGap": 0,
+          "sufficient": true
+        },
+        "ranking": {
+          "raid/DPS": {
+            "n": 27,
+            "k": 5,
+            "spearman": -0.087,
+            "ndcg": 0.668,
+            "topK": {
+              "overlap": 0,
+              "of": 5,
+              "pct": 0
+            }
+          },
+          "raid/Healer": {
+            "n": 7,
+            "k": 3,
+            "spearman": -0.198,
+            "ndcg": 0.77,
+            "topK": {
+              "overlap": 1,
+              "of": 3,
+              "pct": 33
+            }
+          },
+          "raid/Tank": {
+            "n": 6,
+            "k": 3,
+            "spearman": 0.464,
+            "ndcg": 0.837,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          },
+          "raid/top-tier": {
+            "recall": 0.11,
+            "hit": 1,
+            "of": 9
+          },
+          "mplus/DPS": {
+            "n": 27,
+            "k": 5,
+            "spearman": 0.208,
+            "ndcg": 0.79,
+            "topK": {
+              "overlap": 2,
+              "of": 5,
+              "pct": 40
+            }
+          },
+          "mplus/Healer": {
+            "n": 7,
+            "k": 3,
+            "spearman": 0.164,
+            "ndcg": 0.718,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          },
+          "mplus/Tank": {
+            "n": 6,
+            "k": 3,
+            "spearman": -0.086,
+            "ndcg": 0.817,
+            "topK": {
+              "overlap": 1,
+              "of": 3,
+              "pct": 33
+            }
+          },
+          "mplus/top-tier": {
+            "recall": 0.33,
+            "hit": 4,
+            "of": 12
+          }
+        },
+        "forecastDate": "2026-08-11",
+        "actualDate": "2026-09-01",
+        "forecastPhase": "12.1-ptr",
+        "actualPhase": "12.1-live",
+        "projectionVersion": 13,
+        "consensusVersion": {
+          "forecast": 3,
+          "actual": 6,
+          "comparable": false
+        },
+        "consensusComposition": {
+          "forecast": null,
+          "actual": {
+            "raid": [
+              "archon",
+              "icyveins",
+              "method",
+              "wowhead"
+            ],
+            "mplus": [
+              "archon",
+              "icyveins",
+              "method",
+              "wowhead"
+            ]
+          },
+          "changedBrackets": []
+        },
+        "warnings": [
+          "consensus definition changed between the frozen forecast (consensusVersion 3) and the settled actual (6), and these snapshots predate recorded compositions — the answer key and the carry-forward baseline are not on the same scale, so this grade is NOT comparable. Re-derive from data/forecasts/frozen-<date>.json before reporting any accuracy number."
+        ],
+        "overall": {
+          "n": 80,
+          "exact": 17,
+          "withinOne": 57,
+          "exactPct": 21,
+          "withinOnePct": 71,
+          "meanAbsBands": 1.21,
+          "biasBands": -0.29,
+          "meanAbsScore": 18.1,
+          "biasScore": -4
+        },
+        "byBracket": {
+          "raid": {
+            "n": 40,
+            "exact": 5,
+            "withinOne": 27,
+            "exactPct": 13,
+            "withinOnePct": 68,
+            "meanAbsBands": 1.3,
+            "biasBands": -0.3,
+            "meanAbsScore": 19.5,
+            "biasScore": -3
+          },
+          "mplus": {
+            "n": 40,
+            "exact": 12,
+            "withinOne": 30,
+            "exactPct": 30,
+            "withinOnePct": 75,
+            "meanAbsBands": 1.13,
+            "biasBands": -0.28,
+            "meanAbsScore": 16.6,
+            "biasScore": -5
+          }
+        },
+        "byConfidence": {
+          "none": {
+            "n": 80,
+            "exact": 17,
+            "withinOne": 57,
+            "exactPct": 21,
+            "withinOnePct": 71,
+            "meanAbsBands": 1.21,
+            "biasBands": -0.29,
+            "meanAbsScore": 18.1,
+            "biasScore": -4
+          }
+        },
+        "byRole": {
+          "Tank": {
+            "n": 12,
+            "exact": 3,
+            "withinOne": 9,
+            "exactPct": 25,
+            "withinOnePct": 75,
+            "meanAbsBands": 1.25,
+            "biasBands": -0.75,
+            "meanAbsScore": 20.3,
+            "biasScore": -11.1
+          },
+          "DPS": {
+            "n": 54,
+            "exact": 12,
+            "withinOne": 38,
+            "exactPct": 22,
+            "withinOnePct": 70,
+            "meanAbsBands": 1.19,
+            "biasBands": -0.22,
+            "meanAbsScore": 16.6,
+            "biasScore": -2.7
+          },
+          "Healer": {
+            "n": 14,
+            "exact": 2,
+            "withinOne": 10,
+            "exactPct": 14,
+            "withinOnePct": 71,
+            "meanAbsBands": 1.29,
+            "biasBands": -0.14,
+            "meanAbsScore": 22,
+            "biasScore": -2.7
+          }
+        },
+        "rows": [
+          {
+            "spec": "Death Knight Blood",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "S",
+            "bandsOff": -3,
+            "forecastScore": 49,
+            "actualScore": 91,
+            "confidence": null
+          },
+          {
+            "spec": "Death Knight Blood",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "C",
+            "actualTier": "S",
+            "bandsOff": -4,
+            "forecastScore": 33,
+            "actualScore": 98,
+            "confidence": null
+          },
+          {
+            "spec": "Death Knight Frost",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 52,
+            "actualScore": 54,
+            "confidence": null
+          },
+          {
+            "spec": "Death Knight Frost",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 48,
+            "actualScore": 70,
+            "confidence": null
+          },
+          {
+            "spec": "Death Knight Unholy",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 62,
+            "actualScore": 49,
+            "confidence": null
+          },
+          {
+            "spec": "Death Knight Unholy",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "S",
+            "actualTier": "A",
+            "bandsOff": 2,
+            "forecastScore": 89,
+            "actualScore": 68,
+            "confidence": null
+          },
+          {
+            "spec": "Demon Hunter Havoc",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 55,
+            "actualScore": 43,
+            "confidence": null
+          },
+          {
+            "spec": "Demon Hunter Havoc",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 58,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Demon Hunter Devourer",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 81,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Demon Hunter Devourer",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "S",
+            "actualTier": "A+",
+            "bandsOff": 1,
+            "forecastScore": 89,
+            "actualScore": 77,
+            "confidence": null
+          },
+          {
+            "spec": "Demon Hunter Vengeance",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "C",
+            "actualTier": "A",
+            "bandsOff": -2,
+            "forecastScore": 29,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Demon Hunter Vengeance",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 58,
+            "actualScore": 64,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Balance",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 57,
+            "actualScore": 68,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Balance",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 52,
+            "actualScore": 70,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Feral",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 45,
+            "actualScore": 33,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Feral",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 70,
+            "actualScore": 71,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Guardian",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 81,
+            "actualScore": 70,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Guardian",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 87,
+            "actualScore": 74,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Restoration",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 73,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Druid Restoration",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 54,
+            "actualScore": 39,
+            "confidence": null
+          },
+          {
+            "spec": "Evoker Augmentation",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "C",
+            "bandsOff": 2,
+            "forecastScore": 71,
+            "actualScore": 33,
+            "confidence": null
+          },
+          {
+            "spec": "Evoker Augmentation",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "S",
+            "actualTier": "C",
+            "bandsOff": 4,
+            "forecastScore": 89,
+            "actualScore": 34,
+            "confidence": null
+          },
+          {
+            "spec": "Evoker Devastation",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 55,
+            "actualScore": 74,
+            "confidence": null
+          },
+          {
+            "spec": "Evoker Devastation",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 39,
+            "actualScore": 55,
+            "confidence": null
+          },
+          {
+            "spec": "Evoker Preservation",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A+",
+            "actualTier": "S",
+            "bandsOff": -1,
+            "forecastScore": 86,
+            "actualScore": 98,
+            "confidence": null
+          },
+          {
+            "spec": "Evoker Preservation",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 39,
+            "actualScore": 54,
+            "confidence": null
+          },
+          {
+            "spec": "Hunter Beast Mastery",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 33,
+            "actualScore": 48,
+            "confidence": null
+          },
+          {
+            "spec": "Hunter Beast Mastery",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 58,
+            "actualScore": 64,
+            "confidence": null
+          },
+          {
+            "spec": "Hunter Marksmanship",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 81,
+            "actualScore": 70,
+            "confidence": null
+          },
+          {
+            "spec": "Hunter Marksmanship",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 51,
+            "actualScore": 55,
+            "confidence": null
+          },
+          {
+            "spec": "Hunter Survival",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "C",
+            "bandsOff": 2,
+            "forecastScore": 68,
+            "actualScore": 37,
+            "confidence": null
+          },
+          {
+            "spec": "Hunter Survival",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 70,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Mage Arcane",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "S",
+            "bandsOff": -4,
+            "forecastScore": 33,
+            "actualScore": 91,
+            "confidence": null
+          },
+          {
+            "spec": "Mage Arcane",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "S",
+            "bandsOff": -3,
+            "forecastScore": 43,
+            "actualScore": 89,
+            "confidence": null
+          },
+          {
+            "spec": "Mage Fire",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 39,
+            "actualScore": 43,
+            "confidence": null
+          },
+          {
+            "spec": "Mage Fire",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 39,
+            "actualScore": 49,
+            "confidence": null
+          },
+          {
+            "spec": "Mage Frost",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "B",
+            "bandsOff": 2,
+            "forecastScore": 81,
+            "actualScore": 48,
+            "confidence": null
+          },
+          {
+            "spec": "Mage Frost",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "C",
+            "bandsOff": 2,
+            "forecastScore": 64,
+            "actualScore": 39,
+            "confidence": null
+          },
+          {
+            "spec": "Monk Brewmaster",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 54,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Monk Brewmaster",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 74,
+            "actualScore": 62,
+            "confidence": null
+          },
+          {
+            "spec": "Monk Mistweaver",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A+",
+            "actualTier": "B",
+            "bandsOff": 2,
+            "forecastScore": 87,
+            "actualScore": 49,
+            "confidence": null
+          },
+          {
+            "spec": "Monk Mistweaver",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "S",
+            "actualTier": "B",
+            "bandsOff": 3,
+            "forecastScore": 93,
+            "actualScore": 58,
+            "confidence": null
+          },
+          {
+            "spec": "Monk Windwalker",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 70,
+            "actualScore": 54,
+            "confidence": null
+          },
+          {
+            "spec": "Monk Windwalker",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 49,
+            "actualScore": 77,
+            "confidence": null
+          },
+          {
+            "spec": "Paladin Holy",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 62,
+            "actualScore": 86,
+            "confidence": null
+          },
+          {
+            "spec": "Paladin Holy",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "S",
+            "bandsOff": -3,
+            "forecastScore": 48,
+            "actualScore": 98,
+            "confidence": null
+          },
+          {
+            "spec": "Paladin Protection",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 33,
+            "actualScore": 52,
+            "confidence": null
+          },
+          {
+            "spec": "Paladin Protection",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 52,
+            "actualScore": 66,
+            "confidence": null
+          },
+          {
+            "spec": "Paladin Retribution",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 60,
+            "actualScore": 47,
+            "confidence": null
+          },
+          {
+            "spec": "Paladin Retribution",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 68,
+            "actualScore": 66,
+            "confidence": null
+          },
+          {
+            "spec": "Priest Discipline",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 86,
+            "actualScore": 72,
+            "confidence": null
+          },
+          {
+            "spec": "Priest Discipline",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "C",
+            "bandsOff": 1,
+            "forecastScore": 54,
+            "actualScore": 39,
+            "confidence": null
+          },
+          {
+            "spec": "Priest Holy",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 48,
+            "actualScore": 77,
+            "confidence": null
+          },
+          {
+            "spec": "Priest Holy",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 33,
+            "actualScore": 48,
+            "confidence": null
+          },
+          {
+            "spec": "Priest Shadow",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 58,
+            "actualScore": 74,
+            "confidence": null
+          },
+          {
+            "spec": "Priest Shadow",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 59,
+            "actualScore": 55,
+            "confidence": null
+          },
+          {
+            "spec": "Rogue Assassination",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "A",
+            "bandsOff": -2,
+            "forecastScore": 37,
+            "actualScore": 64,
+            "confidence": null
+          },
+          {
+            "spec": "Rogue Assassination",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 60,
+            "actualScore": 75,
+            "confidence": null
+          },
+          {
+            "spec": "Rogue Outlaw",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "C",
+            "actualTier": "B",
+            "bandsOff": -1,
+            "forecastScore": 37,
+            "actualScore": 53,
+            "confidence": null
+          },
+          {
+            "spec": "Rogue Outlaw",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A+",
+            "bandsOff": -2,
+            "forecastScore": 58,
+            "actualScore": 84,
+            "confidence": null
+          },
+          {
+            "spec": "Rogue Subtlety",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 54,
+            "actualScore": 71,
+            "confidence": null
+          },
+          {
+            "spec": "Rogue Subtlety",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 66,
+            "actualScore": 68,
+            "confidence": null
+          },
+          {
+            "spec": "Shaman Elemental",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 49,
+            "actualScore": 64,
+            "confidence": null
+          },
+          {
+            "spec": "Shaman Elemental",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 74,
+            "actualScore": 86,
+            "confidence": null
+          },
+          {
+            "spec": "Shaman Enhancement",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 49,
+            "actualScore": 54,
+            "confidence": null
+          },
+          {
+            "spec": "Shaman Enhancement",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A",
+            "bandsOff": 0,
+            "forecastScore": 64,
+            "actualScore": 60,
+            "confidence": null
+          },
+          {
+            "spec": "Shaman Restoration",
+            "bracket": "raid",
+            "role": "Healer",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 42,
+            "actualScore": 70,
+            "confidence": null
+          },
+          {
+            "spec": "Shaman Restoration",
+            "bracket": "mplus",
+            "role": "Healer",
+            "forecastTier": "A+",
+            "actualTier": "A+",
+            "bandsOff": 0,
+            "forecastScore": 82,
+            "actualScore": 77,
+            "confidence": null
+          },
+          {
+            "spec": "Warlock Affliction",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 49,
+            "actualScore": 48,
+            "confidence": null
+          },
+          {
+            "spec": "Warlock Affliction",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 43,
+            "actualScore": 48,
+            "confidence": null
+          },
+          {
+            "spec": "Warlock Demonology",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A+",
+            "actualTier": "B",
+            "bandsOff": 2,
+            "forecastScore": 80,
+            "actualScore": 54,
+            "confidence": null
+          },
+          {
+            "spec": "Warlock Demonology",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 74,
+            "actualScore": 80,
+            "confidence": null
+          },
+          {
+            "spec": "Warlock Destruction",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "A+",
+            "bandsOff": -1,
+            "forecastScore": 68,
+            "actualScore": 74,
+            "confidence": null
+          },
+          {
+            "spec": "Warlock Destruction",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "A",
+            "bandsOff": -1,
+            "forecastScore": 43,
+            "actualScore": 66,
+            "confidence": null
+          },
+          {
+            "spec": "Warrior Arms",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "B",
+            "actualTier": "S",
+            "bandsOff": -3,
+            "forecastScore": 43,
+            "actualScore": 91,
+            "confidence": null
+          },
+          {
+            "spec": "Warrior Arms",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "S",
+            "bandsOff": -2,
+            "forecastScore": 69,
+            "actualScore": 89,
+            "confidence": null
+          },
+          {
+            "spec": "Warrior Fury",
+            "bracket": "raid",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 60,
+            "actualScore": 52,
+            "confidence": null
+          },
+          {
+            "spec": "Warrior Fury",
+            "bracket": "mplus",
+            "role": "DPS",
+            "forecastTier": "A",
+            "actualTier": "B",
+            "bandsOff": 1,
+            "forecastScore": 60,
+            "actualScore": 55,
+            "confidence": null
+          },
+          {
+            "spec": "Warrior Protection",
+            "bracket": "raid",
+            "role": "Tank",
+            "forecastTier": "A+",
+            "actualTier": "A",
+            "bandsOff": 1,
+            "forecastScore": 86,
+            "actualScore": 67,
+            "confidence": null
+          },
+          {
+            "spec": "Warrior Protection",
+            "bracket": "mplus",
+            "role": "Tank",
+            "forecastTier": "B",
+            "actualTier": "B",
+            "bandsOff": 0,
+            "forecastScore": 43,
+            "actualScore": 48,
+            "confidence": null
+          }
+        ]
+      }
+    },
+    {
+      "settleDays": 28,
+      "launchDate": "2026-08-18",
+      "settleBy": "2026-09-15",
+      "reason": "season not settled yet — need a snapshot on or after 2026-09-15 (launch 2026-08-18 + 28d); newest post-launch is 2026-09-08"
+    }
+  ],
+  "tieSensitivity": [
+    {
+      "label": "forecast",
+      "key": "raid/DPS",
+      "current": {
+        "n": 27,
+        "k": 5,
+        "spearman": 0.511,
+        "ndcg": 0.865,
+        "topK": {
+          "overlap": 2,
+          "of": 5,
+          "pct": 40
+        }
+      },
+      "renamed": {
+        "n": 27,
+        "k": 5,
+        "spearman": 0.511,
+        "ndcg": 0.872,
+        "topK": {
+          "overlap": 2,
+          "of": 5,
+          "pct": 40
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.865,
+        "max": 0.872
+      }
+    },
+    {
+      "label": "forecast",
+      "key": "raid/Healer",
+      "current": {
+        "n": 7,
+        "k": 3,
+        "spearman": 0.464,
+        "ndcg": 0.977,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "renamed": {
+        "n": 7,
+        "k": 3,
+        "spearman": 0.464,
+        "ndcg": 0.977,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.977,
+        "max": 0.977
+      }
+    },
+    {
+      "label": "forecast",
+      "key": "raid/Tank",
+      "current": {
+        "n": 6,
+        "k": 3,
+        "spearman": 0.841,
+        "ndcg": 0.954,
+        "topK": {
+          "overlap": 3,
+          "of": 3,
+          "pct": 100
+        }
+      },
+      "renamed": {
+        "n": 6,
+        "k": 3,
+        "spearman": 0.841,
+        "ndcg": 0.954,
+        "topK": {
+          "overlap": 3,
+          "of": 3,
+          "pct": 100
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.954,
+        "max": 0.954
+      }
+    },
+    {
+      "label": "forecast",
+      "key": "mplus/DPS",
+      "current": {
+        "n": 27,
+        "k": 5,
+        "spearman": 0.784,
+        "ndcg": 0.97,
+        "topK": {
+          "overlap": 3,
+          "of": 5,
+          "pct": 60
+        }
+      },
+      "renamed": {
+        "n": 27,
+        "k": 5,
+        "spearman": 0.784,
+        "ndcg": 0.972,
+        "topK": {
+          "overlap": 3,
+          "of": 5,
+          "pct": 60
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.97,
+        "max": 0.972
+      }
+    },
+    {
+      "label": "forecast",
+      "key": "mplus/Healer",
+      "current": {
+        "n": 7,
+        "k": 3,
+        "spearman": 0.703,
+        "ndcg": 0.971,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "renamed": {
+        "n": 7,
+        "k": 3,
+        "spearman": 0.703,
+        "ndcg": 0.971,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.971,
+        "max": 0.971
+      }
+    },
+    {
+      "label": "forecast",
+      "key": "mplus/Tank",
+      "current": {
+        "n": 6,
+        "k": 3,
+        "spearman": 0.2,
+        "ndcg": 0.902,
+        "topK": {
+          "overlap": 1,
+          "of": 3,
+          "pct": 33
+        }
+      },
+      "renamed": {
+        "n": 6,
+        "k": 3,
+        "spearman": 0.2,
+        "ndcg": 0.902,
+        "topK": {
+          "overlap": 1,
+          "of": 3,
+          "pct": 33
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.902,
+        "max": 0.902
+      }
+    },
+    {
+      "label": "carry-forward",
+      "key": "raid/DPS",
+      "current": {
+        "n": 27,
+        "k": 5,
+        "spearman": -0.087,
+        "ndcg": 0.668,
+        "topK": {
+          "overlap": 0,
+          "of": 5,
+          "pct": 0
+        }
+      },
+      "renamed": {
+        "n": 27,
+        "k": 5,
+        "spearman": -0.087,
+        "ndcg": 0.643,
+        "topK": {
+          "overlap": 0,
+          "of": 5,
+          "pct": 0
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.638,
+        "max": 0.683
+      }
+    },
+    {
+      "label": "carry-forward",
+      "key": "raid/Healer",
+      "current": {
+        "n": 7,
+        "k": 3,
+        "spearman": -0.198,
+        "ndcg": 0.77,
+        "topK": {
+          "overlap": 1,
+          "of": 3,
+          "pct": 33
+        }
+      },
+      "renamed": {
+        "n": 7,
+        "k": 3,
+        "spearman": -0.198,
+        "ndcg": 0.752,
+        "topK": {
+          "overlap": 1,
+          "of": 3,
+          "pct": 33
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.752,
+        "max": 0.77
+      }
+    },
+    {
+      "label": "carry-forward",
+      "key": "raid/Tank",
+      "current": {
+        "n": 6,
+        "k": 3,
+        "spearman": 0.464,
+        "ndcg": 0.837,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "renamed": {
+        "n": 6,
+        "k": 3,
+        "spearman": 0.464,
+        "ndcg": 0.837,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.837,
+        "max": 0.837
+      }
+    },
+    {
+      "label": "carry-forward",
+      "key": "mplus/DPS",
+      "current": {
+        "n": 27,
+        "k": 5,
+        "spearman": 0.208,
+        "ndcg": 0.79,
+        "topK": {
+          "overlap": 2,
+          "of": 5,
+          "pct": 40
+        }
+      },
+      "renamed": {
+        "n": 27,
+        "k": 5,
+        "spearman": 0.208,
+        "ndcg": 0.722,
+        "topK": {
+          "overlap": 2,
+          "of": 5,
+          "pct": 40
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.717,
+        "max": 0.803
+      }
+    },
+    {
+      "label": "carry-forward",
+      "key": "mplus/Healer",
+      "current": {
+        "n": 7,
+        "k": 3,
+        "spearman": 0.164,
+        "ndcg": 0.718,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "renamed": {
+        "n": 7,
+        "k": 3,
+        "spearman": 0.164,
+        "ndcg": 0.718,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.718,
+        "max": 0.718
+      }
+    },
+    {
+      "label": "carry-forward",
+      "key": "mplus/Tank",
+      "current": {
+        "n": 6,
+        "k": 3,
+        "spearman": -0.086,
+        "ndcg": 0.817,
+        "topK": {
+          "overlap": 1,
+          "of": 3,
+          "pct": 33
+        }
+      },
+      "renamed": {
+        "n": 6,
+        "k": 3,
+        "spearman": -0.086,
+        "ndcg": 0.817,
+        "topK": {
+          "overlap": 1,
+          "of": 3,
+          "pct": 33
+        }
+      },
+      "ndcgTieRange": {
+        "min": 0.817,
+        "max": 0.817
+      }
+    }
+  ],
+  "shortField": {
+    "raid/DPS": {
+      "n": 3,
+      "k": 5,
+      "spearman": 1,
+      "ndcg": 1,
+      "topK": {
+        "overlap": 3,
+        "of": 5,
+        "pct": 60
+      }
+    }
+  },
+  "syntheticTies": {
+    "original": {
+      "raid/Healer": {
+        "n": 4,
+        "k": 3,
+        "spearman": null,
+        "ndcg": 1,
+        "topK": {
+          "overlap": 3,
+          "of": 3,
+          "pct": 100
+        }
+      }
+    },
+    "renamed": {
+      "raid/Healer": {
+        "n": 4,
+        "k": 3,
+        "spearman": null,
+        "ndcg": 0.841,
+        "topK": {
+          "overlap": 2,
+          "of": 3,
+          "pct": 67
+        }
+      }
+    }
+  },
+  "cli": [
+    {
+      "args": [
+        "--forecast",
+        "2026-08-11",
+        "--settled",
+        "2026-08-18"
+      ],
+      "lines": [
+        "Forecast report card — mode: GRADE",
+        "  forecast 2026-08-11 (phase 12.1-ptr, projection v13) → actual 2026-08-18 (phase 12.1-live)",
+        "  ⚠ DISCLOSURE: the consensus recomposed between freeze and settlement — raid: [archon, icyveins, method, wowhead] → [icyveins, method, wowhead]; mplus: [archon, icyveins, method, wowhead] → [icyveins, method, wowhead]. The grade stands, but read coverage before accuracy: the answer key is a consensus of 3/3 where the frozen prior averaged 4/4.",
+        "  coverage   80/80 gradeable cells (100%)",
+        "  overall     35% exact ·  95% within one band · MAE 0.7 bands · bias -0.07 (-0.3 pts) · n=80"
+      ]
+    },
+    {
+      "args": [
+        "--forecast",
+        "not-a-snapshot",
+        "--settled",
+        "2026-09-01"
+      ],
+      "lines": [
+        "Forecast report card — mode: GRADE",
+        "  forecast 2026-07-01 (phase null, projection v1) → actual 2026-09-01 (phase 12.1-live)",
+        "  coverage   0/80 gradeable cells (0%) · 80 declined  ← PARTIAL: this grades a subset, not the model",
+        "  overall    —"
+      ]
+    },
+    {
+      "args": [
+        "--settled",
+        "2026-09-01"
+      ],
+      "lines": [
+        "Forecast report card — mode: GRADE",
+        "  forecast 2026-07-01 (phase null, projection v1) → actual 2026-09-01 (phase 12.1-live)",
+        "  coverage   0/80 gradeable cells (0%) · 80 declined  ← PARTIAL: this grades a subset, not the model",
+        "  overall    —"
+      ]
+    },
+    {
+      "args": [
+        "--forecast",
+        "2026-08-11",
+        "--settled",
+        "not-a-snapshot"
+      ],
+      "lines": [
+        "Forecast report card — mode: GRADE",
+        "  forecast 2026-08-11 (phase 12.1-ptr, projection v13) → actual 2026-09-08 (phase 12.1-live)",
+        "  coverage   80/80 gradeable cells (100%)",
+        "  overall     40% exact ·  89% within one band · MAE 0.71 bands · bias -0.21 (-2.4 pts) · n=80"
+      ]
+    }
+  ]
+}

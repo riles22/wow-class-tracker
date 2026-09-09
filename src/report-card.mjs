@@ -39,6 +39,9 @@ import path from "node:path";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const BRACKETS = ["raid", "mplus"];
+// Version 2 changes only grading: ties share positions rather than being ordered by
+// spec name. Forecast values, consensus bands, and model versions remain unchanged.
+export const GRADING_VERSION = 2;
 
 /* Band index, best = 0. The consensus bands are the shared axis both a projection tier and
    a consensus tier are expressed in, so "how wrong" is a difference of positions, not of
@@ -188,7 +191,7 @@ export function gradeSnapshot(forecast, actual, scales, { mode = "drift", specs 
   }
 
   return {
-    mode, coverage, ranking: rankingFor(rows),
+    mode, gradingVersion: GRADING_VERSION, coverage, ranking: rankingFor(rows),
     forecastDate: forecast.date, actualDate: actual.date,
     forecastPhase: forecast.phase ?? null, actualPhase: actual.phase ?? null,
     projectionVersion: forecast.projectionVersion ?? 1,
@@ -246,16 +249,36 @@ export function ndcgAtK(rows, k) {
   // dominate the whole number.
   if (rows.length < 2) return null;
   const kk = Math.min(k, rows.length);
-  // Deterministic spec-name tiebreak (2026-08-04 external audit): with tied scores the
-  // sort order — and therefore DCG and the top-k cut — depended on input order, so the
-  // same data could grade differently across runs. Alphabetical is arbitrary but STABLE,
-  // and it is the same arbitrary choice for forecast and actual, so ties cost or credit
-  // both sides identically.
-  const byForecast = [...rows].sort((x, y) => y.forecastScore - x.forecastScore || String(x.spec).localeCompare(String(y.spec)));
-  const byActual = [...rows].sort((x, y) => y.actualScore - x.actualScore || String(x.spec).localeCompare(String(y.spec)));
+  // A tied forecast supplies no ordering within its bucket. Average the settled gain
+  // over that ENTIRE bucket, including members below a cut through the tie, then apply
+  // the discounts for the positions it occupies. This is expected DCG over all tied
+  // permutations; neither input order nor spec names can award extra credit.
+  const byForecast = [...rows].sort((x, y) => y.forecastScore - x.forecastScore);
+  const byActual = [...rows].sort((x, y) => y.actualScore - x.actualScore);
   const dcg = list => list.slice(0, kk).reduce((s, r, i) => s + r.actualScore / Math.log2(i + 2), 0);
   const ideal = dcg(byActual);
-  return ideal ? +(dcg(byForecast) / ideal).toFixed(3) : null;
+  let expected = 0;
+  for (let i = 0; i < kk;) {
+    let end = i + 1;
+    while (end < byForecast.length && byForecast[end].forecastScore === byForecast[i].forecastScore) end++;
+    const mean = byForecast.slice(i, end).reduce((sum, row) => sum + row.actualScore, 0) / (end - i);
+    for (let position = i; position < Math.min(end, kk); position++) expected += mean / Math.log2(position + 2);
+    i = end;
+  }
+  return ideal ? +(expected / ideal).toFixed(3) : null;
+}
+
+function topMembership(rows, score, k) {
+  const ordered = [...rows].sort((a, b) => b[score] - a[score]);
+  const shares = new Map();
+  for (let i = 0; i < ordered.length;) {
+    let end = i + 1;
+    while (end < ordered.length && ordered[end][score] === ordered[i][score]) end++;
+    const share = Math.max(0, Math.min(end, k) - i) / (end - i);
+    for (let j = i; j < end; j++) shares.set(ordered[j], share);
+    i = end;
+  }
+  return shares;
 }
 
 export function rankingFor(rows) {
@@ -265,19 +288,24 @@ export function rankingFor(rows) {
     for (const role of ["DPS", "Healer", "Tank"]) {
       const sub = scored.filter(r => r.bracket === bracket && r.role === role);
       if (sub.length < 3) continue;
-      const k = role === "DPS" ? 5 : 3;
-      // Same stable tiebreak as ndcgAtK — a tie at the k boundary must not let input
-      // order decide which spec makes the top set.
-      const actualTop = new Set([...sub].sort((x, y) => y.actualScore - x.actualScore || String(x.spec).localeCompare(String(y.spec)))
-        .slice(0, k).map(r => r.spec));
-      const forecastTop = new Set([...sub].sort((x, y) => y.forecastScore - x.forecastScore || String(x.spec).localeCompare(String(y.spec)))
-        .slice(0, k).map(r => r.spec));
-      const overlap = [...forecastTop].filter(x => actualTop.has(x)).length;
+      const k = Math.min(role === "DPS" ? 5 : 3, sub.length);
+      const actualTop = topMembership(sub, "actualScore", k);
+      const forecastTop = topMembership(sub, "forecastScore", k);
+      // Boundary ties divide the remaining slots evenly. Their intersection is the
+      // smaller membership per spec: symmetric, and an identical ranking stays perfect.
+      const shares = sub.map(r => ({ spec: r.spec, forecast: forecastTop.get(r),
+        actual: actualTop.get(r), overlap: Math.min(forecastTop.get(r), actualTop.get(r)) }));
+      const overlap = shares.reduce((sum, r) => sum + r.overlap, 0);
+      const rounded = value => +value.toFixed(6);
       out[`${bracket}/${role}`] = {
         n: sub.length, k,
         spearman: spearman(sub.map(r => r.forecastScore), sub.map(r => r.actualScore)),
         ndcg: ndcgAtK(sub, k),
-        topK: { overlap, of: k, pct: Math.round(overlap / k * 100) }
+        topK: { overlap: rounded(overlap), of: k, pct: Math.round(overlap / k * 100),
+          informative: sub.length > k,
+          shares: shares.sort((a, b) => String(a.spec).localeCompare(String(b.spec))).map(r => ({
+            spec: r.spec, forecast: rounded(r.forecast), actual: rounded(r.actual), overlap: rounded(r.overlap)
+          })) }
       };
     }
     // Top-tier recall is band-based, so it can aggregate across roles without ranking
@@ -300,7 +328,7 @@ export function rankingFor(rows) {
 export function carryForward(snapshot) {
   const specs = {};
   for (const [k, v] of Object.entries(snapshot.specs ?? {})) {
-    specs[k] = { projection: Object.fromEntries(BRACKETS.map(b => [b,
+    specs[k] = { ...v, projection: Object.fromEntries(BRACKETS.map(b => [b,
       v.consensus?.[b] != null
         ? { tier: v.consensus[b], score: v.scores?.[b] ?? null }
         : null])) };
@@ -366,64 +394,97 @@ export function reportWarnings(report) {
   return (report.warnings ?? []).map(warning => `${prefix}: ${warning}`);
 }
 
+export function parseReportArgs(args) {
+  const fields = { "--forecast": "forecastDate", "--settled": "settledDate" };
+  const options = {};
+  for (let i = 0; i < args.length; i++) {
+    const flag = args[i], field = fields[flag];
+    if (!field) throw new Error(`Unknown report-card option: ${flag}`);
+    if (options[field]) throw new Error(`Duplicate report-card option: ${flag}`);
+    const date = args[++i];
+    if (!date || date.startsWith("--")) throw new Error(`${flag} requires a YYYY-MM-DD snapshot date`);
+    const timestamp = Date.parse(`${date}T00:00:00Z`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(timestamp)
+      || new Date(timestamp).toISOString().slice(0, 10) !== date) {
+      throw new Error(`Invalid snapshot date for ${flag}: ${date}`);
+    }
+    options[field] = date;
+  }
+  return options;
+}
+
+/* Manual dates select a comparison, never declare a new accuracy checkpoint. Resolve
+   omitted sides from the declared cycle; only its first eligible +14/+28 outcomes
+   earn GRADE. Everything else remains an explicitly exploratory DRIFT comparison. */
+export function selectReportPair(snapshots, { forecastDate, settledDate } = {}) {
+  const ordered = [...snapshots].sort((a, b) => a.date.localeCompare(b.date));
+  if (!ordered.length) throw new Error("No history snapshots are available");
+  const findRequested = (date, flag) => {
+    if (date == null) return null;
+    const found = ordered.find(s => s.date === date);
+    if (!found) throw new Error(`No history snapshot for ${flag} ${date}`);
+    return found;
+  };
+  const requestedForecast = findRequested(forecastDate, "--forecast");
+  const requestedActual = findRequested(settledDate, "--settled");
+  const freezes = ordered.filter(s => s.frozen === true);
+  const referenceDate = requestedForecast?.date ?? requestedActual?.date;
+  const declared = (requestedForecast?.phase
+    ? freezes.filter(s => s.phase === requestedForecast.phase).at(-1) : null)
+    ?? (referenceDate ? freezes.filter(s => s.date <= referenceDate).at(-1) : null)
+    ?? freezes.at(-1);
+  const projected = ordered.filter(s => Object.values(s.specs ?? {}).some(v =>
+    BRACKETS.some(b => v.projection?.[b]?.tier != null)));
+  const phase = declared?.phase ?? requestedForecast?.phase ?? projected.find(s => s.phase)?.phase;
+  const start = declared?.date ?? ordered.find(s => s.phase === phase)?.date ?? ordered[0].date;
+  let cycle = ordered.filter(s => s.date >= start);
+  const launch = cycle.find(s => s.phase != null && s.phase !== phase);
+  if (launch) {
+    const nextCycle = cycle.find(s => s.date > launch.date && s.phase != null
+      && s.phase !== phase && s.phase !== launch.phase);
+    if (nextCycle) cycle = cycle.filter(s => s.date < nextCycle.date);
+  }
+  const checkpoints = phase == null ? [] : SETTLE_DAYS.map(settleDays =>
+    launchPair(cycle, phase, { settleDays }));
+  let forecast = requestedForecast ?? declared ?? projected[0] ?? ordered[0];
+  const actual = requestedActual ?? checkpoints[0]?.actual ?? cycle.at(-1) ?? ordered.at(-1);
+  if (!forecastDate && !settledDate && forecast === actual) {
+    forecast = projected.filter(s => s.date < actual.date).at(-1) ?? forecast;
+  }
+  const checkpoint = checkpoints.find(c => c.frozenExplicit === true && c.actual
+    && c.forecast.date === forecast.date && c.actual.date === actual.date);
+  const mode = checkpoint ? "grade" : "drift";
+  const fixedOutcomes = checkpoints.filter(c => c.actual && c.frozenExplicit)
+    .map(c => `+${c.settleDays}: ${c.actual.date}`).join(", ");
+  const reason = checkpoint ? null : !declared
+    ? "No declared frozen forecast exists for this comparison; these are exploratory differences."
+    : !forecastDate && !settledDate && checkpoints[0]?.reason
+      ? checkpoints[0].reason
+      : `Exploratory comparison: accuracy requires the declared forecast (${declared.date}) and a fixed `
+        + `+${SETTLE_DAYS.join("/+")} checkpoint${fixedOutcomes ? ` (${fixedOutcomes})` : "; none has settled yet"}.`;
+  return { forecast, actual, mode, reason, checkpoint: checkpoint?.settleDays ?? null };
+}
+
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (isMain) {
-  const arg = k => { const i = process.argv.indexOf(k); return i > -1 ? process.argv[i + 1] : null; };
+  let options;
+  try { options = parseReportArgs(process.argv.slice(2)); }
+  catch (error) { console.error(error.message); process.exit(1); }
   const snapshots = await loadSnapshots();
   const scales = JSON.parse(await readFile(path.join(ROOT, "data", "scales.json"), "utf8"));
   const specs = JSON.parse(await readFile(path.join(ROOT, "data", "specs.json"), "utf8"));
 
-  const pair = launchPair(snapshots);
-  const fDate = arg("--forecast"), aDate = arg("--settled");
-  let forecast, actual, mode;
-  if (fDate || aDate) {
-    forecast = snapshots.find(s => s.date === fDate) ?? snapshots[0];
-    actual = snapshots.find(s => s.date === aDate) ?? snapshots.at(-1);
-    mode = (actual.phase ?? "12.1-ptr") !== "12.1-ptr" ? "grade" : "drift";
-  } else if (pair.actual) {
-    ({ forecast, actual } = pair); mode = "grade";
-  } else {
-    // launchPair now returns a REASON rather than a bare null, because "launch has not
-    // happened" and "the season has not settled" call for different waiting.
-    if (pair.reason) console.log(`\n(no grade yet: ${pair.reason})`);
-    /* DEFAULT BASELINE (2026-08-08). This used to be snapshots[0] — the OLDEST snapshot,
-       which predates the 2026-07-09 enrichment and therefore carries no projections at all.
-       A bare `npm run report-card` printed "coverage 0/80 · 80 declined": a real reading of
-       a useless pair, and indistinguishable from the tool being broken. Since this is the
-       command someone runs when they want to know whether the forecast is any good — and
-       the one they will reach for around launch — the default must be a pair that can
-       actually say something. Prefer an explicit freeze if one exists, else the earliest
-       snapshot that carries a forecast, and name the choice so it is never mistaken for
-       a declaration about which snapshot is THE frozen one. */
-    const graded = snapshots.filter(s =>
-      Object.values(s.specs ?? {}).some(v => v.projection?.raid?.tier || v.projection?.mplus?.tier));
-    const frozen = snapshots.find(s => s.frozen);
-    forecast = frozen ?? graded[0] ?? snapshots[0];
-    actual = snapshots.at(-1);
-    mode = "drift";
-    /* When the frozen snapshot IS the newest (true on freeze day itself), drift needs a
-       different baseline — and the label must follow the reassignment, or it claims the
-       FROZEN snapshot while printing another date. */
-    if (forecast === actual && graded.length > 1) forecast = graded[graded.length - 2];
-    console.log(`  baseline: ${forecast === frozen ? "the declared FROZEN snapshot" : frozen ? "second-newest forecast snapshot (the FROZEN one is today's, so it IS the current state)" : graded.length ? "earliest snapshot carrying a forecast" : "oldest snapshot (none carry a forecast — expect 0 coverage)"} — ${forecast.date}`);
-  }
+  let selected;
+  try { selected = selectReportPair(snapshots, options); }
+  catch (error) { console.error(error.message); process.exit(1); }
+  const { forecast, actual, mode } = selected;
 
   const r = gradeSnapshot(forecast, actual, scales, { mode, specs });
   console.log(`\nForecast report card — mode: ${r.mode.toUpperCase()}`);
+  console.log(`  grading method v${r.gradingVersion}: tied rankings share positions`);
   if (r.mode === "drift") {
-    // Same phase on both sides = pre-flip: the actual side is the prior-patch consensus
-    // the forecast was DESIGNED to diverge from. Phases differing = post-flip: the actual
-    // side is the live early-season consensus — an unsettled preview of the real answer
-    // key, still not a grade because week-one tier lists churn hard (2026-08-19, D2).
-    if (r.actualPhase === r.forecastPhase) {
-      console.log("  NOT an accuracy grade: the 'actual' side is still the pre-launch consensus, and");
-      console.log("  the forecast is not wrong for disagreeing with the patch it never predicted.");
-      console.log("  Read the bias line only — it says which way the model leans.");
-    } else {
-      console.log("  NOT an accuracy grade YET: the 'actual' side is the live early-season consensus —");
-      console.log("  an unsettled preview of the real answer key. Week-one tier lists churn hard;");
-      console.log("  only GRADE mode (first settled snapshot, SETTLE_DAYS after launch) scores accuracy.");
-    }
+    console.log(`  NOT an accuracy grade: ${selected.reason}`);
+    console.log("  Values below are exploratory differences, not fixed-checkpoint accuracy.");
   }
   console.log(`  forecast ${r.forecastDate} (phase ${r.forecastPhase}, projection v${r.projectionVersion}) → actual ${r.actualDate} (phase ${r.actualPhase})`);
   // Disclose composition/version changes before accuracy; reserve refusal for an incomparable pair.
@@ -435,10 +496,6 @@ if (isMain) {
     `${c.declined ? ` · ${c.declined} declined` : ""}${c.ungradeable ? ` · ${c.ungradeable} no outcome` : ""}` +
     `${c.rosterGap ? ` · ${c.rosterGap} roster gap` : ""}` +
     `${c.sufficient ? "" : "  ← PARTIAL: this grades a subset, not the model"}`);
-  if (r.mode === "grade" && pair.frozenExplicit === false) {
-    console.log("  NOTE: the freeze point was INFERRED (last pre-launch snapshot), not declared.");
-    console.log("        Mark the frozen forecast explicitly next cycle — see launchPair.");
-  }
   console.log("");
   console.log("  overall   ", fmt(r.overall));
 
@@ -456,6 +513,7 @@ if (isMain) {
       ? gradeSnapshot(carryForward(forecast), actual, scales, { mode: "grade", specs }).ranking
       : null;
     console.log("\n  ranking (within role — ordering, not letters):");
+    console.log("    NDCG averages tied positions; fractional top-k overlap shares boundary slots equally.");
     for (const [key, m] of Object.entries(rk)) {
       if (key.endsWith("/top-tier")) {
         console.log(`    ${key.padEnd(14)} S/A+ recall ${m.recall} (${m.hit}/${m.of})`);
@@ -464,9 +522,10 @@ if (isMain) {
       const b = base?.[key];
       console.log(`    ${key.padEnd(14)} spearman ${String(m.spearman).padStart(6)} · ` +
         `NDCG@${m.k} ${String(m.ndcg).padStart(5)} · top-${m.k} ${m.topK.overlap}/${m.topK.of}` +
+        (m.topK.informative ? "" : " (entire cohort; uninformative)") +
         (b ? `   vs carry-forward: ${b.spearman} / ${b.ndcg} / ${b.topK.overlap}/${b.topK.of}` : ""));
     }
-    if (r.mode !== "grade") console.log("    (baseline comparison appears in GRADE mode only — in drift the baseline is the answer key)");
+    if (r.mode !== "grade") console.log("    (baseline comparison appears only for fixed-checkpoint GRADE mode)");
   }
   for (const [k, v] of Object.entries(r.byBracket)) console.log(`  ${k.padEnd(10)}`, fmt(v));
   console.log();

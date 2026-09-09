@@ -671,9 +671,11 @@ jobs:
           # (src/freeze-season-archive.mjs, one-shot owner action; DECISION 6) — each is
           # rendered verbatim as a public archive page every build, so an agent able to
           # write one could rewrite a finished season's published record.
-          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/ data/season-archive/; then
-            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/ data/season-archive/
-            echo "::error::refresh artifact modified the gate contract, tier scales, the frozen-season archive, a frozen forecast or a season-archive record — these ship only via reviewed commits or the deterministic freeze step"
+          # data/predictions/ preserves reviewed historical publisher/creator receipts.
+          # A refresh must never rewrite the evidence underlying an accuracy report.
+          if ! git diff --quiet HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/ data/season-archive/ data/predictions/; then
+            git --no-pager diff HEAD -- data/required-sources.json data/scales.json data/season-final.json data/forecasts/ data/season-archive/ data/predictions/
+            echo "::error::refresh artifact modified the gate contract, tier scales, the frozen-season archive, a frozen forecast, a season-archive record or historical prediction receipts — these ship only via reviewed commits or the deterministic freeze step"
             exit 1
           fi
           node -e '

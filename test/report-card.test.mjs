@@ -2,9 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots, spearman, ndcgAtK, rankingFor, carryForward, reportWarnings } from "../src/report-card.mjs";
+import { gradeSnapshot, bandIndexer, launchPair, loadSnapshots, spearman, ndcgAtK, rankingFor, carryForward, reportWarnings,
+  GRADING_VERSION, parseReportArgs, selectReportPair } from "../src/report-card.mjs";
 import { readFile } from "node:fs/promises";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SCALES = { consensus: { bands: [
@@ -271,9 +272,8 @@ test("carryForward graded against its own source is perfect — that is the poin
 });
 
 test("ranking metrics are stable under input order when scores tie", () => {
-  // 2026-08-04 external audit: with tied scores the sort order — and therefore DCG and
-  // the top-k cut — depended on input order, so the same data could grade differently
-  // across runs. The spec-name tiebreak makes every ordering deterministic.
+  // Both the old deterministic tiebreak and the new shared positions must remain
+  // independent of the input array's order. Label invariance is checked separately.
   const mk = (spec, f, a) => ({ spec, role: "DPS", bracket: "raid",
     forecastScore: f, actualScore: a, forecastTier: "A", actualTier: "A" });
   const rows = [
@@ -290,4 +290,156 @@ test("ranking metrics are stable under input order when scores tie", () => {
     assert.equal(r.spearman, base.spearman);
   }
   assert.equal(ndcgAtK(rows, 3), ndcgAtK(reversed, 3));
+});
+
+test("grading v2 averages the entire forecast tie, even when the cutoff splits it", () => {
+  const rows = [100, 90, 80, 70].map((actualScore, i) => ({ spec: `healer-${i}`,
+    role: "Healer", bracket: "raid", forecastScore: 80, actualScore }));
+  const expected = +(85 * (1 + 1 / Math.log2(3) + 0.5)
+    / (100 + 90 / Math.log2(3) + 80 / 2)).toFixed(3);
+  assert.equal(ndcgAtK(rows, 3), expected,
+    "the fourth tied spec contributes to mean gain even though k is three");
+  const metric = rankingFor(rows)["raid/Healer"];
+  assert.equal(metric.topK.overlap, 2.25);
+  assert.equal(metric.topK.pct, 75);
+  assert.equal(metric.topK.informative, true);
+  assert.deepEqual(metric.topK.shares.map(r => r.forecast), [0.75, 0.75, 0.75, 0.75]);
+  const renamed = rows.map((r, i) => ({ ...r, spec: `renamed-${9 - i}` }));
+  for (const changed of [renamed, [...renamed].reverse()]) {
+    const after = rankingFor(changed)["raid/Healer"];
+    assert.equal(after.ndcg, metric.ndcg);
+    assert.equal(after.spearman, metric.spearman);
+    assert.equal(after.topK.overlap, metric.topK.overlap);
+  }
+});
+
+test("fractional top-k is symmetric, preserves perfect tied predictions, and exposes memberships", () => {
+  const rows = [90, 80, 70, 60, 50, 50].map((forecastScore, i) => ({ spec: `dps-${i}`,
+    role: "DPS", bracket: "raid", forecastScore, actualScore: [90, 80, 70, 60, 20, 50][i] }));
+  const metric = rankingFor(rows)["raid/DPS"];
+  assert.equal(metric.topK.overlap, 4.5);
+  assert.equal(metric.topK.pct, 90);
+  assert.deepEqual(metric.topK.shares.slice(4), [
+    { spec: "dps-4", forecast: 0.5, actual: 0, overlap: 0 },
+    { spec: "dps-5", forecast: 0.5, actual: 1, overlap: 0.5 }
+  ]);
+  const swapped = rankingFor(rows.map(r => ({ ...r,
+    forecastScore: r.actualScore, actualScore: r.forecastScore })))["raid/DPS"];
+  assert.equal(swapped.topK.overlap, metric.topK.overlap);
+  const self = rankingFor(rows.map(r => ({ ...r, actualScore: r.forecastScore })))["raid/DPS"];
+  assert.equal(self.topK.overlap, 5);
+  assert.equal(self.topK.pct, 100);
+  assert.equal(self.ndcg, 1);
+});
+
+test("small cohorts clamp k to the available field and mark whole-field top-k uninformative", () => {
+  for (const n of [3, 4, 5, 6]) {
+    const rows = Array.from({ length: n }, (_, i) => ({ spec: `dps-${i}`, role: "DPS",
+      bracket: "raid", forecastScore: i + 1, actualScore: i + 1 }));
+    const metric = rankingFor(rows)["raid/DPS"];
+    assert.equal(metric.k, Math.min(n, 5));
+    assert.equal(metric.topK.of, Math.min(n, 5));
+    assert.equal(metric.topK.overlap, Math.min(n, 5));
+    assert.equal(metric.topK.pct, 100);
+    assert.equal(metric.topK.informative, n > 5);
+  }
+});
+
+test("carry-forward retains provenance and grading v2 preserves the frozen letter results", async () => {
+  const snapshots = await loadSnapshots(ROOT);
+  const forecast = snapshots.find(s => s.date === "2026-08-11");
+  const actual = snapshots.find(s => s.date === "2026-09-01");
+  const scales = JSON.parse(await readFile(path.join(ROOT, "data", "scales.json"), "utf8"));
+  const specs = JSON.parse(await readFile(path.join(ROOT, "data", "specs.json"), "utf8"));
+  const original = structuredClone(forecast);
+  const baseline = carryForward(forecast);
+  for (const [key, cell] of Object.entries(forecast.specs)) {
+    assert.deepEqual(baseline.specs[key].consensusSources, cell.consensusSources);
+    assert.deepEqual(baseline.specs[key].consensus, cell.consensus);
+    assert.deepEqual(baseline.specs[key].scores, cell.scores);
+  }
+  const grade = gradeSnapshot(forecast, actual, scales, { mode: "grade", specs });
+  const prior = gradeSnapshot(baseline, actual, scales, { mode: "grade", specs });
+  assert.equal(GRADING_VERSION, 2);
+  assert.equal(grade.gradingVersion, GRADING_VERSION);
+  assert.equal(prior.gradingVersion, GRADING_VERSION);
+  assert.equal(prior.consensusVersion.comparable, true);
+  assert.deepEqual(prior.consensusComposition, grade.consensusComposition);
+  assert.deepEqual(prior.warnings, grade.warnings);
+  assert.equal(grade.coverage.graded, 80);
+  assert.equal(prior.coverage.graded, 80);
+  assert.deepEqual([grade.overall.exact, grade.overall.withinOne, grade.overall.meanAbsBands], [33, 71, 0.7]);
+  assert.deepEqual([prior.overall.exact, prior.overall.withinOne, prior.overall.meanAbsBands], [17, 57, 1.21]);
+  assert.deepEqual(forecast, original, "constructing or grading the baseline must not mutate its frozen input");
+});
+
+test("CLI options reject unknown, duplicate, missing, invalid, and unavailable dates", () => {
+  assert.deepEqual(parseReportArgs(["--settled", "2026-09-01"]), { settledDate: "2026-09-01" });
+  assert.deepEqual(parseReportArgs([]), {});
+  for (const args of [["--other"], ["--forecast"], ["--forecast", "--settled", "2026-09-01"],
+    ["--settled", "not-a-date"], ["--settled", "2026-02-30"],
+    ["--forecast", "2026-08-11", "--forecast", "2026-08-11"]]) {
+    assert.throws(() => parseReportArgs(args), /option|requires|Invalid/);
+  }
+  for (const [args, error] of [
+    [["--forecast"], /requires a YYYY-MM-DD/],
+    [["--settled", "not-a-snapshot"], /Invalid snapshot date/],
+    [["--settled", "2099-01-01"], /No history snapshot/]
+  ]) {
+    const child = spawnSync(process.execPath, [path.join(ROOT, "src", "report-card.mjs"), ...args],
+      { cwd: ROOT, encoding: "utf8" });
+    assert.equal(child.status, 1);
+    assert.match(child.stderr, error);
+    assert.doesNotMatch(child.stdout, /mode: GRADE|overall/);
+  }
+});
+
+test("CLI defaults omitted sides to the declared checkpoint and labels other dates exploratory", async () => {
+  const snapshots = await loadSnapshots(ROOT);
+  for (const options of [{}, { settledDate: "2026-09-01" }, { forecastDate: "2026-08-11" }]) {
+    const pair = selectReportPair(snapshots, options);
+    assert.equal(pair.forecast.date, "2026-08-11");
+    assert.equal(pair.actual.date, "2026-09-01");
+    assert.equal(pair.mode, "grade");
+    assert.equal(pair.checkpoint, 14);
+  }
+  for (const options of [
+    { forecastDate: "2026-08-11", settledDate: "2026-08-18" },
+    { forecastDate: "2026-08-11", settledDate: "2026-09-08" },
+    { forecastDate: "2026-08-10", settledDate: "2026-09-01" }
+  ]) {
+    const pair = selectReportPair(snapshots, options);
+    assert.equal(pair.mode, "drift");
+    assert.match(pair.reason, /Exploratory comparison/);
+  }
+  const cli = args => execFileSync(process.execPath, [path.join(ROOT, "src", "report-card.mjs"), ...args],
+    { cwd: ROOT, encoding: "utf8" });
+  assert.match(cli(["--settled", "2026-09-01"]), /forecast 2026-08-11/);
+  const early = cli(["--forecast", "2026-08-11", "--settled", "2026-08-18"]);
+  assert.match(early, /mode: DRIFT/);
+  assert.match(early, /Exploratory comparison/);
+  assert.doesNotMatch(early, /mode: GRADE/);
+});
+
+test("fixed checkpoint selection uses declared cycles, first eligible outcomes, and both settlement windows", () => {
+  const mk = (date, phase, frozen = false) => snap(date, { "Mage|Fire": {
+    projection: { raid: { tier: "A", score: 60 } } } }, { phase, frozen });
+  const history = [mk("2026-12-01", "older-live"), mk("2027-01-01", "next-ptr", true),
+    mk("2027-01-08", "next-ptr"), mk("2027-01-10", "next-live"),
+    mk("2027-01-25", "next-live"), mk("2027-01-26", "next-live"), mk("2027-02-07", "next-live")];
+  const first = selectReportPair([...history].reverse());
+  assert.equal(first.forecast.date, "2027-01-01");
+  assert.equal(first.actual.date, "2027-01-25", "first saved outcome after Jan 24, not an invented Jan 24 snapshot");
+  assert.equal(first.mode, "grade");
+  assert.equal(selectReportPair(history, { settledDate: "2027-02-07" }).checkpoint, 28);
+  assert.equal(selectReportPair(history, { settledDate: "2027-01-26" }).mode, "drift");
+  assert.equal(selectReportPair(history.map(s => ({ ...s, frozen: false }))).mode, "drift",
+    "an inferred forecast may not become a declared accuracy grade");
+  const laterCycle = [mk("2027-02-15", "future-ptr", true), mk("2027-03-01", "future-live"),
+    mk("2027-03-15", "future-live")];
+  assert.equal(selectReportPair([...history, ...laterCycle]).forecast.date, "2027-02-15");
+  assert.equal(selectReportPair([...history, ...laterCycle], { settledDate: "2027-01-25" }).mode, "grade");
+  const incomplete = [...history.filter(s => s.date < "2027-02-07"), ...laterCycle];
+  assert.equal(selectReportPair(incomplete, { forecastDate: "2027-01-01", settledDate: "2027-03-15" }).mode, "drift",
+    "a subsequent season may not supply a missing old checkpoint");
 });

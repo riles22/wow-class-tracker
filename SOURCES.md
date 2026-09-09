@@ -28,6 +28,16 @@ Nightly availability evidence uses ordinary public Archon routes and the sanctio
 API. It detects recovery but is not fresh game data; only a validated data merge may
 clear a data-age failure.
 
+### Historical prediction accuracy
+
+The [forecast report](https://riles22.github.io/wow-class-tracker/forecast-report.html)
+also scores preserved earlier site lists and dated creator panels against fixed settled
+consensus checkpoints. These records add no new independent publisher and never enter the
+live consensus or forecast weights. The report separates equal-cutoff predictions,
+older-season carry-forward benchmarks, later prelaunch lists and partial creator panels;
+publisher holdouts and explicit coverage expose the limits of each comparison.
+See [capture and methodology](docs/source-predictions.md) for immutable receipts and future intake.
+
 ### Era-gated tier lists → their own column, never the consensus
 
 A tier list whose letters describe **12.1**, not the patch we are running. Stored in

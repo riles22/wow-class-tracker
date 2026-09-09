@@ -1,0 +1,366 @@
+[
+  {
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "initial": {
+      "title": "Forecast report card — Spec Tracker",
+      "bodyWidth": 1440,
+      "docWidth": 1440,
+      "viewport": 1440,
+      "text": "← Spec Tracker\n\nSPEC TRACKER / FORECAST ACCOUNTABILITY\n\nForecast report card\n\nThe forecast declared 2026-08-11, checked at two fixed settlement checkpoints.\n\nThis measures agreement with publisher tier-list consensus, not objective game performance. Shared publisher blind spots remain ungraded. Settlement means the first saved consensus at least 14 or 28 days after launch; it does not certify that every publisher refreshed that day. Publisher-specific outcome dates are not recorded in these history snapshots.\n\n+14 days · 2026-09-01  ·  +28 days · pending\n+14 days\n\nDeclared 2026-08-11 → settled snapshot 2026-09-01. Launch 2026-08-18; first eligible date 2026-09-01.\n\nOutcome record: data/history/2026-09-01.json (phase 12.1-live, consensus v6).\n\nCoverage: 80/80 gradeable cells (100%). 0 declined · 0 without an outcome · 0 roster gaps.\n\nConsensus source composition\nBracket\tFrozen prior contributors\tSettled contributors\nRaid\tarchon, icyveins, method, wowhead\tarchon, icyveins, method, wowhead\nMythic+\tarchon, icyveins, method, wowhead\tarchon, icyveins, method, wowhead\n\nDISCLOSURE: consensusVersion moved 3 → 6 between freeze and settlement — expected at a season boundary; composition above is the authoritative comparability signal.\n\n41% exact letters · 89% within one band\n\nMean absolute error: 0.7 bands; signed bias: -0.2 bands. Positive bias means the forecast was too optimistic. Carry-forward: 21% exact, 71% within one band.\n\nOrdering within each role\n\nForecast and carry-forward use the same settled outcome. Higher is better for all ranking measures; a dash means insufficient evidence. Top-k is 5 for DPS and 3 for tanks/healers. Carry-forward copies the artifact's pre-launch live consensus.\n\nForecast versus carry-forward ordering\nBracket / role\tCells\tForecast Spearman\tCarry-forward Spearman\tForecast NDCG@k\tCarry-forward NDCG@k\tForecast top-k overlap\tCarry-forward top-k overlap\nraid/DPS\t27\t0.511\t-0.087\t0.865\t0.668\t2/5\t0/5\nraid/Healer\t7\t0.464\t-0.198\t0.977\t0.77\t2/3\t1/3\nraid/Tank\t6\t0.841\t0.464\t0.954\t0.837\t3/3\t2/3\nmplus/DPS\t27\t0.784\t0.208\t0.97\t0.79\t3/5\t2/5\nmplus/Healer\t7\t0.703\t0.164\t0.971\t0.718\t2/3\t2/3\nmplus/Tank\t6\t0.2\t-0.086\t0.902\t0.817\t1/3\t1/3\n\nRaid: 3/9 settled S/A+ cells predicted S/A+ · Mythic+: 7/12 settled S/A+ cells predicted S/A+\n\nEvery declared cell\n\nScores keep their original snapshot precision; letters were assigned before rounding. A positive band difference means the settled letter is worse than the forecast.\n\nAll forecast cells at +14 days\nSpec\tBracket\tForecast\tRecorded score\tConfidence\tCarry-forward\tSettled\tRecorded score\tDifference / status\nDeath Knight Blood\tRaid\tA\t73\tlow\tB\tS\t91\t-2 bands\nDeath Knight Blood\tMythic+\tA+\t87\thigh\tC\tS\t98\t-1 bands\nDeath Knight Frost\tRaid\tB\t56\tlow\tB\tB\t54\t0 bands\nDeath Knight Frost\tMythic+\tB\t57\tmedium\tB\tA\t70\t-1 bands\nDeath Knight Unholy\tRaid\tA\t61\tmedium\tA\tB\t49\t+1 bands\nDeath Knight Unholy\tMythic+\tA+\t78\tmedium\tS\tA\t68\t+1 bands\nDemon Hunter Devourer\tRaid\tA\t72\tmedium\tA+\tA\t60\t0 bands\nDemon Hunter Devourer\tMythic+\tA+\t83\tmedium\tS\tA+\t77\t0 bands\nDemon Hunter Havoc\tRaid\tA\t66\tmedium\tB\tB\t43\t+1 bands\nDemon Hunter Havoc\tMythic+\tA\t64\tmedium\tB\tA\t60\t0 bands\nDemon Hunter Vengeance\tRaid\tB\t40\tlow\tC\tA\t60\t-1 bands\nDemon Hunter Vengeance\tMythic+\tA\t66\tmedium\tA\tA\t64\t0 bands\nDruid Balance\tRaid\tB\t55\tmedium\tB\tA\t68\t-1 bands\nDruid Balance\tMythic+\tA\t62\thigh\tB\tA\t70\t0 bands\nDruid Feral\tRaid\tB\t44\tmedium\tB\tC\t33\t+1 bands\nDruid Feral\tMythic+\tA\t73\tmedium\tA\tA\t71\t0 bands\nDruid Guardian\tRaid\tA+\t78\tmedium\tA+\tA\t70\t+1 bands\nDruid Guardian\tMythic+\tB\t54\tmedium\tA+\tA+\t74\t-2 bands\nDruid Restoration\tRaid\tA\t73\tmedium\tA\tA\t60\t0 bands\nDruid Restoration\tMythic+\tC\t32\tmedium\tB\tC\t39\t0 bands\nEvoker Augmentation\tRaid\tB\t46\tmedium\tA\tC\t33\t+1 bands\nEvoker Augmentation\tMythic+\tC\t38\tmedium\tS\tC\t34\t0 bands\nEvoker Devastation\tRaid\tA\t64\tmedium\tB\tA+\t74\t-1 bands\nEvoker Devastation\tMythic+\tB\t40\thigh\tC\tB\t55\t0 bands\nEvoker Preservation\tRaid\tS\t100\tmedium\tA+\tS\t98\t0 bands\nEvoker Preservation\tMythic+\tA+\t83\thigh\tC\tB\t54\t+2 bands\nHunter Beast Mastery\tRaid\tB\t44\tlow\tC\tB\t48\t0 bands\nHunter Beast Mastery\tMythic+\tA\t60\tmedium\tB\tA\t64\t0 bands\nHunter Marksmanship\tRaid\tA\t68\tmedium\tA+\tA\t70\t0 bands\nHunter Marksmanship\tMythic+\tA\t67\tmedium\tB\tB\t55\t+1 bands\nHunter Survival\tRaid\tB\t54\tlow\tA\tC\t37\t+1 bands\nHunter Survival\tMythic+\tB\t47\tmedium\tA\tA\t60\t-1 bands\nMage Arcane\tRaid\tA\t64\tmedium\tC\tS\t91\t-2 bands\nMage Arcane\tMythic+\tA+\t81\tmedium\tB\tS\t89\t-1 bands\nMage Fire\tRaid\tC\t37\tlow\tC\tB\t43\t-1 bands\nMage Fire\tMythic+\tC\t36\tmedium\tC\tB\t49\t-1 bands\nMage Frost\tRaid\tB\t51\tmedium\tA+\tB\t48\t0 bands\nMage Frost\tMythic+\tB\t40\tmedium\tA\tC\t39\t+1 bands\nMonk Brewmaster\tRaid\tA\t61\tlow\tB\tA\t60\t0 bands\nMonk Brewmaster\tMythic+\tB\t40\thigh\tA+\tA\t62\t-1 bands\nMonk Mistweaver\tRaid\tA\t70\tlow\tA+\tB\t49\t+1 bands\nMonk Mistweaver\tMythic+\tA\t60\tmedium\tS\tB\t58\t+1 bands\nMonk Windwalker\tRaid\tA\t64\tlow\tA\tB\t54\t+1 bands\nMonk Windwalker\tMythic+\tA+\t85\tmedium\tB\tA+\t77\t0 bands\nPaladin Holy\tRaid\tA+\t79\tmedium\tA\tA+\t86\t0 bands\nPaladin Holy\tMythic+\tS\t93\thigh\tB\tS\t98\t0 bands\nPaladin Protection\tRaid\tB\t42\tmedium\tC\tB\t52\t0 bands\nPaladin Protection\tMythic+\tB\t57\thigh\tB\tA\t66\t-1 bands\nPaladin Retribution\tRaid\tB\t41\tlow\tA\tB\t47\t0 bands\nPaladin Retribution\tMythic+\tB\t55\tmedium\tA\tA\t66\t-1 bands\nPriest Discipline\tRaid\tS\t94\tlow\tA+\tA\t72\t+2 bands\nPriest Discipline\tMythic+\tA\t62\tmedium\tB\tC\t39\t+2 bands\nPriest Holy\tRaid\tB\t54\tlow\tB\tA+\t77\t-2 bands\nPriest Holy\tMythic+\tB\t44\tmedium\tC\tB\t48\t0 bands\nPriest Shadow\tRaid\tB\t47\tmedium\tB\tA+\t74\t-2 bands\nPriest Shadow\tMythic+\tB\t47\tmedium\tA\tB\t55\t0 bands\nRogue Assassination\tRaid\tB\t45\tlow\tC\tA\t64\t-1 bands\nRogue Assassination\tMythic+\tA\t72\tmedium\tA\tA+\t75\t-1 bands\nRogue Outlaw\tRaid\tC\t37\tmedium\tC\tB\t53\t-1 bands\nRogue Outlaw\tMythic+\tA\t73\tmedium\tB\tA+\t84\t-1 bands\nRogue Subtlety\tRaid\tB\t45\tmedium\tB\tA\t71\t-1 bands\nRogue Subtlety\tMythic+\tB\t52\tmedium\tA\tA\t68\t-1 bands\nShaman Elemental\tRaid\tB\t56\tmedium\tB\tA\t64\t-1 bands\nShaman Elemental\tMythic+\tA+\t83\thigh\tA+\tA+\t86\t0 bands\nShaman Enhancement\tRaid\tB\t55\tmedium\tB\tB\t54\t0 bands\nShaman Enhancement\tMythic+\tB\t57\tmedium\tA\tA\t60\t-1 bands\nShaman Restoration\tRaid\tA\t69\tmedium\tB\tA\t70\t0 bands\nShaman Restoration\tMythic+\tA\t73\thigh\tA+\tA+\t77\t-1 bands\nWarlock Affliction\tRaid\tB\t51\tmedium\tB\tB\t48\t0 bands\nWarlock Affliction\tMythic+\tB\t55\tmedium\tB\tB\t48\t0 bands\nWarlock Demonology\tRaid\tA\t64\tlow\tA+\tB\t54\t+1 bands\nWarlock Demonology\tMythic+\tB\t49\tmedium\tA\tA+\t80\t-2 bands\nWarlock Destruction\tRaid\tA\t72\tlow\tA\tA+\t74\t-1 bands\nWarlock Destruction\tMythic+\tA\t63\tmedium\tB\tA\t66\t0 bands\nWarrior Arms\tRaid\tA+\t84\tmedium\tB\tS\t91\t-1 bands\nWarrior Arms\tMythic+\tS\t92\thigh\tA\tS\t89\t0 bands\nWarrior Fury\tRaid\tB\t57\tmedium\tA\tB\t52\t0 bands\nWarrior Fury\tMythic+\tC\t39\tmedium\tA\tB\t55\t-1 bands\nWarrior Protection\tRaid\tA\t72\tlow\tA+\tA\t67\t0 bands\nWarrior Protection\tMythic+\tA\t67\tmedium\tB\tB\t48\t+1 bands\n+28 days\n\nPending. season not settled yet — need a snapshot on or after 2026-09-15 (launch 2026-08-18 + 28d); newest post-launch is 2026-09-08\n\nProvenance\n\nThe artifact and its explicit history declaration agree on every forecast and prior cell. Forecast values and carry-forward priors come from the immutable artifact, never a new model run.\n\nArtifact\ndata/forecasts/frozen-2026-08-11.json\nDeclared history\ndata/history/2026-08-11.json\nPhase\n12.1-ptr\nVersions\nProjection 13 · consensus 3 · rank 3\nOriginal Git SHA\n397373b300714a0ce0ed193d38be51b12e1f94b8\nOriginal data SHA-256\nc20edc631f835a08fafe1ef448b1649d1915d7a2c5da87e5568f61b626ff6441\nSource dates recorded at freeze\nPrior letters and frozen-source receipts for every cell\nEach completed checkpoint keeps its first eligible historical outcome. Later refreshes do not replace it. Return to the tracker.",
+      "links": [
+        {
+          "text": "← Spec Tracker",
+          "href": "index.html"
+        },
+        {
+          "text": "+14 days · 2026-09-01",
+          "href": "#checkpoint-14"
+        },
+        {
+          "text": "+28 days · pending",
+          "href": "#checkpoint-28"
+        },
+        {
+          "text": "Return to the tracker",
+          "href": "index.html"
+        }
+      ],
+      "tables": [
+        {
+          "label": "Consensus source composition",
+          "clientWidth": 1190,
+          "scrollWidth": 1190,
+          "top": 596.921875,
+          "rows": 2
+        },
+        {
+          "label": "Forecast versus carry-forward ordering",
+          "clientWidth": 1190,
+          "scrollWidth": 1190,
+          "top": 1139.40625,
+          "rows": 6
+        },
+        {
+          "label": "All forecast cells at +14 days",
+          "clientWidth": 1190,
+          "scrollWidth": 1190,
+          "top": 1634.71875,
+          "rows": 80
+        },
+        {
+          "label": "Registry receipts at freeze",
+          "clientWidth": 1190,
+          "scrollWidth": 1190,
+          "top": 5488.140625,
+          "rows": 17
+        },
+        {
+          "label": "Prior source receipts",
+          "clientWidth": 1190,
+          "scrollWidth": 1190,
+          "top": 5467.34375,
+          "rows": 80
+        }
+      ],
+      "scripts": 0,
+      "duplicateIds": []
+    },
+    "focus": [
+      {
+        "tag": "A",
+        "text": "← Spec Tracker",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 33
+      },
+      {
+        "tag": "A",
+        "text": "+14 days · 2026-09-01",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 306.96875
+      },
+      {
+        "tag": "A",
+        "text": "+28 days · pending",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 306.96875
+      },
+      {
+        "tag": "DIV",
+        "text": "Consensus source compositionBracketFrozen prior contributorsSettled contrib",
+        "label": "Consensus source composition",
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 596.921875
+      },
+      {
+        "tag": "DIV",
+        "text": "Forecast versus carry-forward orderingBracket / roleCellsForecast SpearmanC",
+        "label": "Forecast versus carry-forward ordering",
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 290.40625
+      },
+      {
+        "tag": "DIV",
+        "text": "All forecast cells at +14 daysSpecBracketForecastRecorded scoreConfidenceCa",
+        "label": "All forecast cells at +14 days",
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": -1.28125
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Source dates recorded at freeze",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 672.75
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Prior letters and frozen-source receipts for every cell",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 717.546875
+      },
+      {
+        "tag": "A",
+        "text": "Return to the tracker",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 804.34375
+      },
+      {
+        "tag": "BODY",
+        "text": "← Spec TrackerSPEC TRACKER / FORECAST ACCOUNTABILITYForecast report card\nTh",
+        "label": null,
+        "outline": "none",
+        "outlineWidth": "3px",
+        "top": -4709
+      }
+    ],
+    "pending": {
+      "top": 177.25,
+      "parent": "+28 days\n\nPending. season not settled yet — need a snapshot on or after 2026-09-15 (launch 2026-08-18 + 28d); newest post-launch is 2026-09-08"
+    },
+    "disclosure": {
+      "open": true,
+      "width": 1440
+    },
+    "horizontal": {
+      "left": 0,
+      "max": 0
+    },
+    "tracker": {
+      "url": "file:///C:/Users/Riley/Documents/Projects/WoW%20Class%20Tracker/dist/index.html#era=live",
+      "chip": "Settled forecast report · +14 days · 80/80 cells graded · 41% exact · 89% within one band against publisher consensus on 2026-09-01. The report includes the carry-forward comparison.",
+      "width": 1440,
+      "movers": "FORECAST VS. LIVE CONSENSUS our frozen 2026-08-11 forecast against today's live reading — current comparison; settled report below · 35 of 40 specs change tier",
+      "reportLinks": [
+        "Settled forecast report · +14 days"
+      ],
+      "roundTripTitle": "Forecast report card — Spec Tracker"
+    },
+    "errors": [],
+    "logs": [],
+    "requests": [
+      "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap",
+      "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+      "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+    ]
+  },
+  {
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "initial": {
+      "title": "Forecast report card — Spec Tracker",
+      "bodyWidth": 375,
+      "docWidth": 375,
+      "viewport": 375,
+      "text": "← Spec Tracker\n\nSPEC TRACKER / FORECAST ACCOUNTABILITY\n\nForecast report card\n\nThe forecast declared 2026-08-11, checked at two fixed settlement checkpoints.\n\nThis measures agreement with publisher tier-list consensus, not objective game performance. Shared publisher blind spots remain ungraded. Settlement means the first saved consensus at least 14 or 28 days after launch; it does not certify that every publisher refreshed that day. Publisher-specific outcome dates are not recorded in these history snapshots.\n\n+14 days · 2026-09-01  ·  +28 days · pending\n+14 days\n\nDeclared 2026-08-11 → settled snapshot 2026-09-01. Launch 2026-08-18; first eligible date 2026-09-01.\n\nOutcome record: data/history/2026-09-01.json (phase 12.1-live, consensus v6).\n\nCoverage: 80/80 gradeable cells (100%). 0 declined · 0 without an outcome · 0 roster gaps.\n\nConsensus source composition\nBracket\tFrozen prior contributors\tSettled contributors\nRaid\tarchon, icyveins, method, wowhead\tarchon, icyveins, method, wowhead\nMythic+\tarchon, icyveins, method, wowhead\tarchon, icyveins, method, wowhead\n\nDISCLOSURE: consensusVersion moved 3 → 6 between freeze and settlement — expected at a season boundary; composition above is the authoritative comparability signal.\n\n41% exact letters · 89% within one band\n\nMean absolute error: 0.7 bands; signed bias: -0.2 bands. Positive bias means the forecast was too optimistic. Carry-forward: 21% exact, 71% within one band.\n\nOrdering within each role\n\nForecast and carry-forward use the same settled outcome. Higher is better for all ranking measures; a dash means insufficient evidence. Top-k is 5 for DPS and 3 for tanks/healers. Carry-forward copies the artifact's pre-launch live consensus.\n\nForecast versus carry-forward ordering\nBracket / role\tCells\tForecast Spearman\tCarry-forward Spearman\tForecast NDCG@k\tCarry-forward NDCG@k\tForecast top-k overlap\tCarry-forward top-k overlap\nraid/DPS\t27\t0.511\t-0.087\t0.865\t0.668\t2/5\t0/5\nraid/Healer\t7\t0.464\t-0.198\t0.977\t0.77\t2/3\t1/3\nraid/Tank\t6\t0.841\t0.464\t0.954\t0.837\t3/3\t2/3\nmplus/DPS\t27\t0.784\t0.208\t0.97\t0.79\t3/5\t2/5\nmplus/Healer\t7\t0.703\t0.164\t0.971\t0.718\t2/3\t2/3\nmplus/Tank\t6\t0.2\t-0.086\t0.902\t0.817\t1/3\t1/3\n\nRaid: 3/9 settled S/A+ cells predicted S/A+ · Mythic+: 7/12 settled S/A+ cells predicted S/A+\n\nEvery declared cell\n\nScores keep their original snapshot precision; letters were assigned before rounding. A positive band difference means the settled letter is worse than the forecast.\n\nAll forecast cells at +14 days\nSpec\tBracket\tForecast\tRecorded score\tConfidence\tCarry-forward\tSettled\tRecorded score\tDifference / status\nDeath Knight Blood\tRaid\tA\t73\tlow\tB\tS\t91\t-2 bands\nDeath Knight Blood\tMythic+\tA+\t87\thigh\tC\tS\t98\t-1 bands\nDeath Knight Frost\tRaid\tB\t56\tlow\tB\tB\t54\t0 bands\nDeath Knight Frost\tMythic+\tB\t57\tmedium\tB\tA\t70\t-1 bands\nDeath Knight Unholy\tRaid\tA\t61\tmedium\tA\tB\t49\t+1 bands\nDeath Knight Unholy\tMythic+\tA+\t78\tmedium\tS\tA\t68\t+1 bands\nDemon Hunter Devourer\tRaid\tA\t72\tmedium\tA+\tA\t60\t0 bands\nDemon Hunter Devourer\tMythic+\tA+\t83\tmedium\tS\tA+\t77\t0 bands\nDemon Hunter Havoc\tRaid\tA\t66\tmedium\tB\tB\t43\t+1 bands\nDemon Hunter Havoc\tMythic+\tA\t64\tmedium\tB\tA\t60\t0 bands\nDemon Hunter Vengeance\tRaid\tB\t40\tlow\tC\tA\t60\t-1 bands\nDemon Hunter Vengeance\tMythic+\tA\t66\tmedium\tA\tA\t64\t0 bands\nDruid Balance\tRaid\tB\t55\tmedium\tB\tA\t68\t-1 bands\nDruid Balance\tMythic+\tA\t62\thigh\tB\tA\t70\t0 bands\nDruid Feral\tRaid\tB\t44\tmedium\tB\tC\t33\t+1 bands\nDruid Feral\tMythic+\tA\t73\tmedium\tA\tA\t71\t0 bands\nDruid Guardian\tRaid\tA+\t78\tmedium\tA+\tA\t70\t+1 bands\nDruid Guardian\tMythic+\tB\t54\tmedium\tA+\tA+\t74\t-2 bands\nDruid Restoration\tRaid\tA\t73\tmedium\tA\tA\t60\t0 bands\nDruid Restoration\tMythic+\tC\t32\tmedium\tB\tC\t39\t0 bands\nEvoker Augmentation\tRaid\tB\t46\tmedium\tA\tC\t33\t+1 bands\nEvoker Augmentation\tMythic+\tC\t38\tmedium\tS\tC\t34\t0 bands\nEvoker Devastation\tRaid\tA\t64\tmedium\tB\tA+\t74\t-1 bands\nEvoker Devastation\tMythic+\tB\t40\thigh\tC\tB\t55\t0 bands\nEvoker Preservation\tRaid\tS\t100\tmedium\tA+\tS\t98\t0 bands\nEvoker Preservation\tMythic+\tA+\t83\thigh\tC\tB\t54\t+2 bands\nHunter Beast Mastery\tRaid\tB\t44\tlow\tC\tB\t48\t0 bands\nHunter Beast Mastery\tMythic+\tA\t60\tmedium\tB\tA\t64\t0 bands\nHunter Marksmanship\tRaid\tA\t68\tmedium\tA+\tA\t70\t0 bands\nHunter Marksmanship\tMythic+\tA\t67\tmedium\tB\tB\t55\t+1 bands\nHunter Survival\tRaid\tB\t54\tlow\tA\tC\t37\t+1 bands\nHunter Survival\tMythic+\tB\t47\tmedium\tA\tA\t60\t-1 bands\nMage Arcane\tRaid\tA\t64\tmedium\tC\tS\t91\t-2 bands\nMage Arcane\tMythic+\tA+\t81\tmedium\tB\tS\t89\t-1 bands\nMage Fire\tRaid\tC\t37\tlow\tC\tB\t43\t-1 bands\nMage Fire\tMythic+\tC\t36\tmedium\tC\tB\t49\t-1 bands\nMage Frost\tRaid\tB\t51\tmedium\tA+\tB\t48\t0 bands\nMage Frost\tMythic+\tB\t40\tmedium\tA\tC\t39\t+1 bands\nMonk Brewmaster\tRaid\tA\t61\tlow\tB\tA\t60\t0 bands\nMonk Brewmaster\tMythic+\tB\t40\thigh\tA+\tA\t62\t-1 bands\nMonk Mistweaver\tRaid\tA\t70\tlow\tA+\tB\t49\t+1 bands\nMonk Mistweaver\tMythic+\tA\t60\tmedium\tS\tB\t58\t+1 bands\nMonk Windwalker\tRaid\tA\t64\tlow\tA\tB\t54\t+1 bands\nMonk Windwalker\tMythic+\tA+\t85\tmedium\tB\tA+\t77\t0 bands\nPaladin Holy\tRaid\tA+\t79\tmedium\tA\tA+\t86\t0 bands\nPaladin Holy\tMythic+\tS\t93\thigh\tB\tS\t98\t0 bands\nPaladin Protection\tRaid\tB\t42\tmedium\tC\tB\t52\t0 bands\nPaladin Protection\tMythic+\tB\t57\thigh\tB\tA\t66\t-1 bands\nPaladin Retribution\tRaid\tB\t41\tlow\tA\tB\t47\t0 bands\nPaladin Retribution\tMythic+\tB\t55\tmedium\tA\tA\t66\t-1 bands\nPriest Discipline\tRaid\tS\t94\tlow\tA+\tA\t72\t+2 bands\nPriest Discipline\tMythic+\tA\t62\tmedium\tB\tC\t39\t+2 bands\nPriest Holy\tRaid\tB\t54\tlow\tB\tA+\t77\t-2 bands\nPriest Holy\tMythic+\tB\t44\tmedium\tC\tB\t48\t0 bands\nPriest Shadow\tRaid\tB\t47\tmedium\tB\tA+\t74\t-2 bands\nPriest Shadow\tMythic+\tB\t47\tmedium\tA\tB\t55\t0 bands\nRogue Assassination\tRaid\tB\t45\tlow\tC\tA\t64\t-1 bands\nRogue Assassination\tMythic+\tA\t72\tmedium\tA\tA+\t75\t-1 bands\nRogue Outlaw\tRaid\tC\t37\tmedium\tC\tB\t53\t-1 bands\nRogue Outlaw\tMythic+\tA\t73\tmedium\tB\tA+\t84\t-1 bands\nRogue Subtlety\tRaid\tB\t45\tmedium\tB\tA\t71\t-1 bands\nRogue Subtlety\tMythic+\tB\t52\tmedium\tA\tA\t68\t-1 bands\nShaman Elemental\tRaid\tB\t56\tmedium\tB\tA\t64\t-1 bands\nShaman Elemental\tMythic+\tA+\t83\thigh\tA+\tA+\t86\t0 bands\nShaman Enhancement\tRaid\tB\t55\tmedium\tB\tB\t54\t0 bands\nShaman Enhancement\tMythic+\tB\t57\tmedium\tA\tA\t60\t-1 bands\nShaman Restoration\tRaid\tA\t69\tmedium\tB\tA\t70\t0 bands\nShaman Restoration\tMythic+\tA\t73\thigh\tA+\tA+\t77\t-1 bands\nWarlock Affliction\tRaid\tB\t51\tmedium\tB\tB\t48\t0 bands\nWarlock Affliction\tMythic+\tB\t55\tmedium\tB\tB\t48\t0 bands\nWarlock Demonology\tRaid\tA\t64\tlow\tA+\tB\t54\t+1 bands\nWarlock Demonology\tMythic+\tB\t49\tmedium\tA\tA+\t80\t-2 bands\nWarlock Destruction\tRaid\tA\t72\tlow\tA\tA+\t74\t-1 bands\nWarlock Destruction\tMythic+\tA\t63\tmedium\tB\tA\t66\t0 bands\nWarrior Arms\tRaid\tA+\t84\tmedium\tB\tS\t91\t-1 bands\nWarrior Arms\tMythic+\tS\t92\thigh\tA\tS\t89\t0 bands\nWarrior Fury\tRaid\tB\t57\tmedium\tA\tB\t52\t0 bands\nWarrior Fury\tMythic+\tC\t39\tmedium\tA\tB\t55\t-1 bands\nWarrior Protection\tRaid\tA\t72\tlow\tA+\tA\t67\t0 bands\nWarrior Protection\tMythic+\tA\t67\tmedium\tB\tB\t48\t+1 bands\n+28 days\n\nPending. season not settled yet — need a snapshot on or after 2026-09-15 (launch 2026-08-18 + 28d); newest post-launch is 2026-09-08\n\nProvenance\n\nThe artifact and its explicit history declaration agree on every forecast and prior cell. Forecast values and carry-forward priors come from the immutable artifact, never a new model run.\n\nArtifact\ndata/forecasts/frozen-2026-08-11.json\nDeclared history\ndata/history/2026-08-11.json\nPhase\n12.1-ptr\nVersions\nProjection 13 · consensus 3 · rank 3\nOriginal Git SHA\n397373b300714a0ce0ed193d38be51b12e1f94b8\nOriginal data SHA-256\nc20edc631f835a08fafe1ef448b1649d1915d7a2c5da87e5568f61b626ff6441\nSource dates recorded at freeze\nPrior letters and frozen-source receipts for every cell\nEach completed checkpoint keeps its first eligible historical outcome. Later refreshes do not replace it. Return to the tracker.",
+      "links": [
+        {
+          "text": "← Spec Tracker",
+          "href": "index.html"
+        },
+        {
+          "text": "+14 days · 2026-09-01",
+          "href": "#checkpoint-14"
+        },
+        {
+          "text": "+28 days · pending",
+          "href": "#checkpoint-28"
+        },
+        {
+          "text": "Return to the tracker",
+          "href": "index.html"
+        }
+      ],
+      "tables": [
+        {
+          "label": "Consensus source composition",
+          "clientWidth": 345,
+          "scrollWidth": 526,
+          "top": 838.078125,
+          "rows": 2
+        },
+        {
+          "label": "Forecast versus carry-forward ordering",
+          "clientWidth": 345,
+          "scrollWidth": 1141,
+          "top": 1582.6875,
+          "rows": 6
+        },
+        {
+          "label": "All forecast cells at +14 days",
+          "clientWidth": 345,
+          "scrollWidth": 965,
+          "top": 2152.390625,
+          "rows": 80
+        },
+        {
+          "label": "Registry receipts at freeze",
+          "clientWidth": 345,
+          "scrollWidth": 345,
+          "top": 6377.171875,
+          "rows": 17
+        },
+        {
+          "label": "Prior source receipts",
+          "clientWidth": 345,
+          "scrollWidth": 671,
+          "top": 6331.578125,
+          "rows": 80
+        }
+      ],
+      "scripts": 0,
+      "duplicateIds": []
+    },
+    "focus": [
+      {
+        "tag": "A",
+        "text": "← Spec Tracker",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 23
+      },
+      {
+        "tag": "A",
+        "text": "+14 days · 2026-09-01",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 428.140625
+      },
+      {
+        "tag": "A",
+        "text": "+28 days · pending",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 428.140625
+      },
+      {
+        "tag": "DIV",
+        "text": "Consensus source compositionBracketFrozen prior contributorsSettled contrib",
+        "label": "Consensus source composition",
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 325.078125
+      },
+      {
+        "tag": "DIV",
+        "text": "Forecast versus carry-forward orderingBracket / roleCellsForecast SpearmanC",
+        "label": "Forecast versus carry-forward ordering",
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 246.6875
+      },
+      {
+        "tag": "DIV",
+        "text": "All forecast cells at +14 daysSpecBracketForecastRecorded scoreConfidenceCa",
+        "label": "All forecast cells at +14 days",
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": -1201.609375
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Source dates recorded at freeze",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 538.1875
+      },
+      {
+        "tag": "SUMMARY",
+        "text": "Prior letters and frozen-source receipts for every cell",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 582.984375
+      },
+      {
+        "tag": "A",
+        "text": "Return to the tracker",
+        "label": null,
+        "outline": "solid",
+        "outlineWidth": "2px",
+        "top": 744.171875
+      },
+      {
+        "tag": "BODY",
+        "text": "← Spec TrackerSPEC TRACKER / FORECAST ACCOUNTABILITYForecast report card\nTh",
+        "label": null,
+        "outline": "none",
+        "outlineWidth": "3px",
+        "top": -5683
+      }
+    ],
+    "pending": {
+      "top": -0.078125,
+      "parent": "+28 days\n\nPending. season not settled yet — need a snapshot on or after 2026-09-15 (launch 2026-08-18 + 28d); newest post-launch is 2026-09-08"
+    },
+    "disclosure": {
+      "open": true,
+      "width": 375
+    },
+    "horizontal": {
+      "left": 0,
+      "max": 326
+    },
+    "tracker": {
+      "url": "file:///C:/Users/Riley/Documents/Projects/WoW%20Class%20Tracker/dist/index.html#era=live",
+      "chip": "Settled forecast report · +14 days · 80/80 cells graded · 41% exact · 89% within one band against publisher consensus on 2026-09-01. The report includes the carry-forward comparison.",
+      "width": 375,
+      "movers": "FORECAST VS. LIVE CONSENSUS our frozen 2026-08-11 forecast against today's live reading — current comparison; settled report below · 35 of 40 specs change tier",
+      "reportLinks": [
+        "Settled forecast report · +14 days"
+      ],
+      "roundTripTitle": "Forecast report card — Spec Tracker"
+    },
+    "errors": [],
+    "logs": [],
+    "requests": [
+      "https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap",
+      "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2",
+      "https://fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gt79mT7.woff2",
+      "https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2"
+    ]
+  }
+]

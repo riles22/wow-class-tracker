@@ -1,0 +1,655 @@
+{
+  "validation": {
+    "frozenDataHash": "c20edc631f835a08fafe1ef448b1649d1915d7a2c5da87e5568f61b626ff6441",
+    "matchesArtifact": true,
+    "topLevelFiles": 12,
+    "settledRawConsensusDifferences": 0,
+    "settledCellsValidated": 80
+  },
+  "sites": [
+    {
+      "cutoff": "freeze-inputs",
+      "id": "wowhead",
+      "coverage": {
+        "rated": 80,
+        "eligible": 80
+      },
+      "full": {
+        "n": 80,
+        "exact": 37,
+        "withinOne": 75,
+        "exactPct": 46,
+        "withinOnePct": 94,
+        "meanAbsBands": 0.6,
+        "biasBands": -0.45,
+        "meanAbsScore": 8.8,
+        "biasScore": -4.1
+      },
+      "holdout": {
+        "n": 80,
+        "exact": 37,
+        "withinOne": 70,
+        "exactPct": 46,
+        "withinOnePct": 88,
+        "meanAbsBands": 0.66,
+        "biasBands": -0.59,
+        "meanAbsScore": 10.5,
+        "biasScore": -5.1
+      }
+    },
+    {
+      "cutoff": "freeze-inputs",
+      "id": "icyveins-ptr",
+      "coverage": {
+        "rated": 40,
+        "eligible": 40
+      },
+      "full": {
+        "n": 40,
+        "exact": 15,
+        "withinOne": 39,
+        "exactPct": 38,
+        "withinOnePct": 98,
+        "meanAbsBands": 0.65,
+        "biasBands": 0.35,
+        "meanAbsScore": 11.8,
+        "biasScore": 6
+      },
+      "holdout": {
+        "n": 40,
+        "exact": 14,
+        "withinOne": 35,
+        "exactPct": 35,
+        "withinOnePct": 88,
+        "meanAbsBands": 0.78,
+        "biasBands": 0.68,
+        "meanAbsScore": 13.2,
+        "biasScore": 9.3
+      }
+    },
+    {
+      "cutoff": "prior-season-carry-forward",
+      "id": "icyveins",
+      "coverage": {
+        "rated": 80,
+        "eligible": 80
+      },
+      "full": {
+        "n": 80,
+        "exact": 22,
+        "withinOne": 56,
+        "exactPct": 28,
+        "withinOnePct": 70,
+        "meanAbsBands": 1.2,
+        "biasBands": 0.23,
+        "meanAbsScore": 19.6,
+        "biasScore": 3.8
+      },
+      "holdout": {
+        "n": 80,
+        "exact": 25,
+        "withinOne": 49,
+        "exactPct": 31,
+        "withinOnePct": 61,
+        "meanAbsBands": 1.24,
+        "biasBands": 0.51,
+        "meanAbsScore": 21.2,
+        "biasScore": 7.4
+      }
+    },
+    {
+      "cutoff": "prior-season-carry-forward",
+      "id": "method",
+      "coverage": {
+        "rated": 79,
+        "eligible": 80
+      },
+      "full": {
+        "n": 79,
+        "exact": 20,
+        "withinOne": 55,
+        "exactPct": 25,
+        "withinOnePct": 70,
+        "meanAbsBands": 1.25,
+        "biasBands": -0.47,
+        "meanAbsScore": 22.5,
+        "biasScore": -7.3
+      },
+      "holdout": {
+        "n": 79,
+        "exact": 17,
+        "withinOne": 52,
+        "exactPct": 22,
+        "withinOnePct": 66,
+        "meanAbsBands": 1.32,
+        "biasBands": -0.53,
+        "meanAbsScore": 23.7,
+        "biasScore": -8.8
+      }
+    },
+    {
+      "cutoff": "prior-season-carry-forward",
+      "id": "archon",
+      "coverage": {
+        "rated": 80,
+        "eligible": 80
+      },
+      "full": {
+        "n": 80,
+        "exact": 23,
+        "withinOne": 50,
+        "exactPct": 29,
+        "withinOnePct": 63,
+        "meanAbsBands": 1.3,
+        "biasBands": -0.5,
+        "meanAbsScore": 24.6,
+        "biasScore": -8.7
+      },
+      "holdout": {
+        "n": 80,
+        "exact": 17,
+        "withinOne": 52,
+        "exactPct": 21,
+        "withinOnePct": 65,
+        "meanAbsBands": 1.3,
+        "biasBands": -0.47,
+        "meanAbsScore": 24.9,
+        "biasScore": -8.4
+      }
+    },
+    {
+      "cutoff": "preseason-2026-08-17",
+      "id": "wowhead",
+      "coverage": {
+        "rated": 80,
+        "eligible": 80
+      },
+      "full": {
+        "n": 80,
+        "exact": 39,
+        "withinOne": 76,
+        "exactPct": 49,
+        "withinOnePct": 95,
+        "meanAbsBands": 0.57,
+        "biasBands": -0.45,
+        "meanAbsScore": 8.7,
+        "biasScore": -4.1
+      },
+      "holdout": {
+        "n": 80,
+        "exact": 36,
+        "withinOne": 70,
+        "exactPct": 45,
+        "withinOnePct": 88,
+        "meanAbsBands": 0.69,
+        "biasBands": -0.59,
+        "meanAbsScore": 10.4,
+        "biasScore": -5.1
+      }
+    },
+    {
+      "cutoff": "preseason-2026-08-17",
+      "id": "icyveins",
+      "coverage": {
+        "rated": 79,
+        "eligible": 80
+      },
+      "full": {
+        "n": 79,
+        "exact": 32,
+        "withinOne": 72,
+        "exactPct": 41,
+        "withinOnePct": 91,
+        "meanAbsBands": 0.68,
+        "biasBands": 0.25,
+        "meanAbsScore": 11.7,
+        "biasScore": 3.4
+      },
+      "holdout": {
+        "n": 79,
+        "exact": 25,
+        "withinOne": 71,
+        "exactPct": 32,
+        "withinOnePct": 90,
+        "meanAbsBands": 0.8,
+        "biasBands": 0.54,
+        "meanAbsScore": 13.7,
+        "biasScore": 7
+      }
+    },
+    {
+      "cutoff": "preseason-2026-08-17",
+      "id": "method",
+      "coverage": {
+        "rated": 80,
+        "eligible": 80
+      },
+      "full": {
+        "n": 80,
+        "exact": 39,
+        "withinOne": 75,
+        "exactPct": 49,
+        "withinOnePct": 94,
+        "meanAbsBands": 0.57,
+        "biasBands": -0.4,
+        "meanAbsScore": 10.4,
+        "biasScore": -5.8
+      },
+      "holdout": {
+        "n": 80,
+        "exact": 33,
+        "withinOne": 69,
+        "exactPct": 41,
+        "withinOnePct": 86,
+        "meanAbsBands": 0.74,
+        "biasBands": -0.46,
+        "meanAbsScore": 13.9,
+        "biasScore": -7.3
+      }
+    }
+  ],
+  "creators": [
+    {
+      "creator": "Zorthas",
+      "date": "2026-08-09",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 29,
+        "preservedVideoMentions": 40,
+        "roleUniverse": 40
+      },
+      "comparison": {
+        "creator": {
+          "mplus/DPS": {
+            "n": 23,
+            "k": 5,
+            "spearman": 0.865,
+            "ndcg": 0.937,
+            "topK": {
+              "overlap": 2,
+              "of": 5,
+              "pct": 40
+            }
+          },
+          "mplus/Healer": {
+            "n": 3,
+            "spearman": 1,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          },
+          "mplus/Tank": {
+            "n": 3,
+            "spearman": 1,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "oursSameCells": {
+          "mplus/DPS": {
+            "n": 23,
+            "k": 5,
+            "spearman": 0.736,
+            "ndcg": 0.97,
+            "topK": {
+              "overlap": 3,
+              "of": 5,
+              "pct": 60
+            }
+          },
+          "mplus/Healer": {
+            "n": 3,
+            "spearman": 0.866,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          },
+          "mplus/Tank": {
+            "n": 3,
+            "spearman": 0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/DPS": {
+            "n": 23,
+            "k": 5,
+            "spearman": 0.353,
+            "ndcg": 0.851,
+            "topK": {
+              "overlap": 2,
+              "of": 5,
+              "pct": 40
+            }
+          },
+          "mplus/Healer": {
+            "n": 3,
+            "spearman": -1,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          },
+          "mplus/Tank": {
+            "n": 3,
+            "spearman": -0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        }
+      }
+    },
+    {
+      "creator": "AutomaticJak",
+      "date": "2026-08-01",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 5,
+        "preservedVideoMentions": 7,
+        "roleUniverse": 7
+      },
+      "comparison": {
+        "creator": {
+          "mplus/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.763,
+            "ndcg": 0.974,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        },
+        "oursSameCells": {
+          "mplus/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.821,
+            "ndcg": 0.974,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": -0.158,
+            "ndcg": 0.71,
+            "topK": {
+              "overlap": 1,
+              "of": 3,
+              "pct": 33
+            }
+          }
+        }
+      }
+    },
+    {
+      "creator": "AutomaticJak",
+      "date": "2026-08-04",
+      "bracket": "raid",
+      "coverage": {
+        "explicitTiers": 5,
+        "preservedVideoMentions": 7,
+        "roleUniverse": 7
+      },
+      "comparison": {
+        "creator": {
+          "raid/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.791,
+            "ndcg": 0.982,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        },
+        "oursSameCells": {
+          "raid/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.6,
+            "ndcg": 0.927,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        },
+        "carryForwardSameCells": {
+          "raid/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0,
+            "ndcg": 0.806,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        }
+      }
+    },
+    {
+      "creator": "YoDaTV",
+      "date": "2026-08-08",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 6,
+        "preservedVideoMentions": 6,
+        "roleUniverse": 40
+      },
+      "comparison": {
+        "creator": {
+          "mplus/Tank": {
+            "n": 3,
+            "spearman": 1,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "oursSameCells": {
+          "mplus/Tank": {
+            "n": 3,
+            "spearman": 0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/Tank": {
+            "n": 3,
+            "spearman": -0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        }
+      }
+    },
+    {
+      "creator": "LBNinja7",
+      "date": "2026-08-02",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 3,
+        "preservedVideoMentions": 7,
+        "roleUniverse": 7
+      },
+      "comparison": {
+        "creator": {
+          "mplus/Healer": {
+            "n": 3,
+            "spearman": 0.866,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "oursSameCells": {
+          "mplus/Healer": {
+            "n": 3,
+            "spearman": 1,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/Healer": {
+            "n": 3,
+            "spearman": -1,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        }
+      }
+    },
+    {
+      "creator": "MadSkillzzTV",
+      "date": "2026-07-28",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 5,
+        "preservedVideoMentions": 7,
+        "roleUniverse": 7
+      },
+      "comparison": {
+        "creator": {
+          "mplus/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.783,
+            "ndcg": 0.902,
+            "topK": {
+              "overlap": 3,
+              "of": 3,
+              "pct": 100
+            }
+          }
+        },
+        "oursSameCells": {
+          "mplus/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.7,
+            "ndcg": 0.946,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/Healer": {
+            "n": 5,
+            "k": 3,
+            "spearman": 0.1,
+            "ndcg": 0.718,
+            "topK": {
+              "overlap": 2,
+              "of": 3,
+              "pct": 67
+            }
+          }
+        }
+      }
+    },
+    {
+      "creator": "Kalamazi",
+      "date": "2026-07-27",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 3,
+        "preservedVideoMentions": 3,
+        "roleUniverse": 3
+      },
+      "comparison": {
+        "creator": {
+          "mplus/DPS": {
+            "n": 3,
+            "spearman": 0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "oursSameCells": {
+          "mplus/DPS": {
+            "n": 3,
+            "spearman": -0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/DPS": {
+            "n": 3,
+            "spearman": 0.866,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        }
+      }
+    },
+    {
+      "creator": "Bansherz",
+      "date": "2026-08-07",
+      "bracket": "mplus",
+      "coverage": {
+        "explicitTiers": 3,
+        "preservedVideoMentions": 3,
+        "roleUniverse": 3
+      },
+      "comparison": {
+        "creator": {
+          "mplus/DPS": {
+            "n": 3,
+            "spearman": null,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "oursSameCells": {
+          "mplus/DPS": {
+            "n": 3,
+            "spearman": -0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        },
+        "carryForwardSameCells": {
+          "mplus/DPS": {
+            "n": 3,
+            "spearman": 0.5,
+            "ndcg": null,
+            "topK": null,
+            "caveat": "Tiny cohort; top-k omitted because it would include the entire subset."
+          }
+        }
+      }
+    }
+  ]
+}

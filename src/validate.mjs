@@ -8,6 +8,8 @@ import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
 import { specBuildChanges } from "./render.mjs";
 import { validateOfficialNotes } from "./official-notes.mjs";
 import { validateWclCoverage } from "./wcl-coverage.mjs";
+import { validateSourcePredictions } from "./source-predictions.mjs";
+import { validateCreatorPredictions } from "./creator-predictions.mjs";
 
 const ROLES = new Set(["DPS", "Healer", "Tank"]);
 const BRACKETS = new Set(["raid", "mplus"]);
@@ -112,7 +114,7 @@ const isRealDate = v => {
 /* opts.fullRoster: enforce the real 40-spec Midnight roster — used by the CLI, the build,
    and the apply-* merge scripts (which operate on the repo's real data), but not by unit
    fixtures, which validate small synthetic datasets. */
-export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast, gearingSpecs, officialNotes, wclCoverage }, opts = {}) {
+export function validateData({ specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers, historySnapshots, pendingTranscripts, seasonFinal, frozenForecast, gearingSpecs, officialNotes, wclCoverage, sourcePredictions, creatorPredictions }, opts = {}) {
   const errors = [];
   // Every date in the data is a claim about when something was fetched or published —
   // none may sit in the future. +1 day of skew allowed: a nightly UTC run can honestly
@@ -121,6 +123,8 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
   const maxDate = new Date(new Date(today + "T00:00:00Z").getTime() + 86400000).toISOString().slice(0, 10);
   errors.push(...validateOfficialNotes(officialNotes, { specs, ptrBuilds, now: Date.parse(maxDate + "T23:59:59Z") }));
   errors.push(...validateWclCoverage(wclCoverage, { specs, now: opts.now ? Date.parse(maxDate + "T23:59:59Z") : Date.now() }));
+  errors.push(...validateSourcePredictions(sourcePredictions, { frozenForecast }));
+  errors.push(...validateCreatorPredictions(creatorPredictions, { specs, community, now: maxDate }));
   const isoOk = (v, what) => {
     if (v == null) return;
     if (!ISO_DATE.test(v)) { errors.push(`${what} must be YYYY-MM-DD, got "${v}"`); return; }
@@ -1064,6 +1068,9 @@ export async function loadData(root) {
   let wclCoverage = null;
   try { wclCoverage = await read("wcl-coverage.json"); }
   catch (error) { if (error?.code !== "ENOENT") throw error; }
+  let creatorPredictions = null;
+  try { creatorPredictions = await read("creator-predictions.json"); }
+  catch (error) { if (error?.code !== "ENOENT") throw error; }
   // Frozen final-season letters (data/season-final.json). Optional — absent means no
   // outlet has moved ahead of the live season yet, which reproduces the pre-2026-08-09
   // consensus exactly. Corrupt JSON must error rather than silently un-freeze a source,
@@ -1093,6 +1100,17 @@ export async function loadData(root) {
   } catch (error) {
     if (error?.code !== "ENOENT") throw error;
   }
+  // Historical ledgers are immutable, cycle-specific accounting evidence. Load only
+  // the exact freeze match; never attach an earlier cycle's predictions to a new one.
+  let sourcePredictions = null;
+  try {
+    const pDir = path.join(root, "data", "predictions");
+    const ledgers = await Promise.all((await readdir(pDir)).filter(f => f.endsWith(".json")).sort()
+      .map(async f => JSON.parse(await readFile(path.join(pDir, f), "utf8"))));
+    const matches = ledgers.filter(l => l.forecastDate === frozenForecast?.date);
+    if (matches.length > 1) throw new Error("source predictions: multiple ledgers name the same frozen forecast");
+    sourcePredictions = matches[0] ?? null;
+  } catch (error) { if (error?.code !== "ENOENT") throw error; }
   /* Gearing keeps its OWN copy of each spec's tierSet, generated from this one, and it
      renders as fact on a second public page. Optional load: gearing/ is a self-contained
      subproject and the tracker copies its artifact only if present, so an absent file is
@@ -1106,7 +1124,7 @@ export async function loadData(root) {
   }
   return { specs, sources, scales, community, ptrBuilds, creatorTakes, encounterTiers,
            historySnapshot: historySnapshots[0] ?? null, historySnapshots, pendingTranscripts,
-           seasonFinal, frozenForecast, gearingSpecs, officialNotes, wclCoverage };
+           seasonFinal, frozenForecast, gearingSpecs, officialNotes, wclCoverage, sourcePredictions, creatorPredictions };
 }
 
 /* SEASON-AHEAD BUT NEVER RE-MERGED — a WARNING, deliberately not an error (audit 2026-08-14).
