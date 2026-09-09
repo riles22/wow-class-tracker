@@ -15,6 +15,38 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+
+## 2026-09-09 (nightly) — SimC new build (23), Bloodmallet re-sim (23 MID2), Mythicstats period 1080, WoWMeta byte-identical, Archon walled
+
+- **SimulationCraft** — `MID2_Raid.txt` 1,368,993 B with a `DPS Ranking:` block, so the plain-text lane
+  sufficed. Header build string (never the visible "12.3.0", which is Highcharts): `12.1.0.69587 Live
+  (hotfix 2026-09-08/69587, git build HEAD ba72a9dcfe)` — the hash moved from `f5b50a3f97`, which is the
+  honest reason all 23 values moved. 43 profiles, Raid aggregate skipped, longest-prefix mapping with a
+  hyphen allowed -> 23 of 27 DPS; the 7 tank profiles correctly unmapped; Balance/Feral/Augmentation/
+  Devastation still absent upstream. 0 moves >60%.
+- **Bloodmallet** — 27 requested, **23 charts** returned, the same persistent 4 on the 76-byte error body
+  (Balance, Feral, Augmentation, Devastation). `simc_settings.ptr` compared explicitly against the STRING
+  `"0"`; `tier` READ off each chart, all **MID2**, matching the stored pool, so uniformity holds at 23.
+  Upstream re-simmed today: every chart's own `timestamp` is 2026-09-09, so the coverage date moved
+  because upstream moved, not because we stamped it. 138 overlapping target rows, **0 moved >60%**.
+- **Murlok / Mythicstats** — merged ONLY `metrics-fetch/updates.json`, no second parser. Murlok's three
+  pages fetched clean but its `<time datetime>` is still **2026-09-02** with all 40 values unchanged, so
+  the row is **partial** and the 7-day age red is the honest signal. Mythicstats rolled to **period 1080**
+  (was 1079): 40 rows, role subtotals 35.9/23.9/20.1/20.2 summing 100.1 — that sum is still the only
+  thing separating this share column from the `/meta` per-key-presence column. `check-stable-metrics` green.
+- **WoWMeta** — manifest `snapshotDate` 2026-09-08 and the rankings file's `Last-Modified` 08 Sep agree
+  (not the pinned-manifest shape). Whitelisted `{dps,hps,tank}` + `lowerBound` + `keyRange undefined` ->
+  27+7+6 = 40. The payload was DIFFED anyway: all 40 values byte-identical at 1 dp, so **nothing merged**
+  and the stored source-owned date stays 09-08.
+- **Archon** — all six numeric requirements unreachable, day 16 of the human-verification wall; values
+  and dates untouched. See refresh-tiers' entry for the two independent observations.
+- **WCL** — evidence-only, as always on a runner: the deterministic collector applied 218 raid + 320 M+
+  leaderboard rows itself and I neither fetched nor edited a row or `wcl-coverage.json`.
+  `check-wcl-metrics` green. The legacy `wcl-live-*` aggregates stay unreachable at 2026-08-10 — no
+  verified sanctioned endpoint, and `rdps` being FFXIV-only is not a WoW outage.
+- **Robydoby** — deliberately NOT refreshed: its series is the closed 12.1 PTR zone-54 cut, historical
+  receipts under the between-cycles posture, and it sits outside the refresh contract by design.
+
 ## 2026-09-08 (nightly) — **WoWMeta's standing red CLEARS** (40 rows, fresh 09-08 snapshot); SimC re-simmed (23 rows); Murlok and Bloodmallet byte-identical; Archon walled night 20
 
 - **WoWMeta unfroze upstream — the owner-accepted standing red of 2026-08-21 is over.** Both

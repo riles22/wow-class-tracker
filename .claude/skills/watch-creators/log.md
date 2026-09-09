@@ -15,6 +15,61 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+
+## 2026-09-09 (nightly) — 44 channels, 7 transcripts resolved: 2 distilled (18 records), 5 verified-skipped, 1 queued
+
+All **44** unique tracked channels polled inline (41 class creators + 3 generalCreators), 15 entries each,
+**660 entries, 0 fetch failures**, `media:description` parsed alongside every title. Seen-set recomputed
+from the four structured lanes — never from this file — at **1,249 ids**; **314** unseen videos fall on or
+after the cycle-opening build **2026-06-18** (oldest date in ptr-builds, not `builds[0]`). Nightly, so the
+queue stayed keyword-filtered.
+
+Supadata step: verdict `ok`, 3 fetched + 4 cached, 11 counted requests in the 30-day window. All 7 read in
+full and resolved, so `videos[]` drained to 0 before one new video was queued.
+
+**Distilled (2 videos -> 16 metaNotes + 2 takes).**
+- izen `zf9FpCLuTeI` (2026-09-07, week-3 M+ recap) -> 16 M+-lens metaNotes. Movers: Demonology 0.9->5%
+  and Beast Mastery 0.7->3.4% of high-key DPS after their buffs; the three meta specs all shed share
+  (Arcane 15.1->13.8, Arms 12.7->8.9, Elemental 9.9->7.1) and in the popular comps Elemental is replaced
+  first, Arms second, Arcane not at all. Healers/tanks unchanged (Holy Paladin then Resto Shaman; heavy
+  Blood DK). Two careful ones: Holy Priest out-picking Discipline is rare (not seen since Shadowlands
+  S3/S4) but he says it is still far from meta, so **mixed**, not positive; and Brewmaster's apparent
+  "continuous rise" is a handful of one-trick mains — he says explicitly it did not get more popular —
+  so **negative**. Frost DK, Retribution, Windwalker and Balance appear only in enumerations and were
+  dropped per the list-mention rule; Marksmanship and Survival appear only as a bottom-level comparison
+  anchor for BM and were dropped for the same reason.
+- MadSkillzzTV `4qn2cENo0Rk` (2026-09-07, 20-chunk short) -> a bracket-SPLIT Holy Priest pair: raid
+  **buff** (topping heroic charts, good Mythic HPS, Oracle, three-button rotation, fewest raid deaths via
+  Restitution), M+ **mixed** (not the meta healer, but better than expected). His 09-04 whole-spec "both"
+  take was superseded by the pair.
+
+**Supersession discipline — one near-miss worth recording.** A first pass matched izen's older notes with
+a loose `/M\+|Mythic\+/` test over `patchContext` and retired **7 RAID-lens 08-17 predictions**, because
+that raid context mentions Mythic+ in its own caveat sentence. Caught on the diff and fully reverted by
+restoring every flag from `HEAD` before re-applying an explicit, enumerated list: **14** notes retired,
+all of them prior M+-RECAP-lens notes (08-15, 08-25, 08-27 x2, 09-01 x9, 09-03). The 08-29 tuning-pass
+notes were deliberately LEFT LIVE — a "what does this buff do" read is not the same lens as a weekly meta
+recap, which is the same call the 09-01 recap made. **Match the lens on an exact phrase, not a substring.**
+
+**Verified-skipped (5), each with its reason in `skipped[]`.** Preheat `AUuP4Ex29X0` (Arcane variance +
+proc pre-stacking technique, then an ElvUI walkthrough); leak `enxnA4o5aDo` (per-boss Survival cheat
+sheet); LBNinja7 `QtsKpXY7NQE` — the interesting one: titled "Mistweaver Is Broken & NEEDS Fixing" but he
+disclaims the power question in the opening, and the only power line in it is POSITIVE (the tier set makes
+the spec "very strong" in M+), which merely corroborates his live 08-29 take, so writing a negative take
+off that title would have inverted him; Obli `m7lbOASbT4s` (season CONTENT review — dungeons, raid design,
+bonus rolls killing the Great Vault — whose only class content is a closing aside he flags himself, and
+whose Frost trajectory claim is already carried, bracket-scoped, by his 09-04 raid takes; his "only
+Warlocks enjoy this raid's cleave profile" line is outside his registered DK scope); AutomaticJak
+`1z2CQXNWFLM` (heroic Ula'tek healing cooldown guide; its Shaman-intermission and Holy-Priest-immobility
+lines are fight artifacts, not spec reads).
+
+**Queued (1):** izen `TJe8OnXl3pY`, the 2026-09-08 RAID counterpart of the distilled M+ recap.
+`npm run audit:creators`: 0 HIGH, 0 MED, 9 INFO (8 zero-yield transcribable creators + the standing
+between-cycles note that the expert lane is dormant while `PHASES.ptr` is null).
+izen's `latest` advanced to the video actually distilled and says the raid counterpart is queued, NOT
+distilled. **MadSkillzzTV's entries are `managedBy: overrides`** and were left alone — an agent edit there
+is overwritten at prebuild and would fail Gate 0; his `latest` is the owner's to move.
+
 ## 2026-09-09 (local, scheduled) — caption 429 on day EIGHTEEN; full 44/44 sweep (no nightly landed again); queue 4 → 7, nothing distilled
 
 - **The anonymous caption lane is still dead, day EIGHTEEN.** One probe only, on the oldest

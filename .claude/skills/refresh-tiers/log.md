@@ -15,6 +15,38 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+
+## 2026-09-09 (nightly) — three sources re-verified S2, 240/240 rows, 0 letters moved; Archon walled day 16
+
+All 14 reachable pages fetched inline in one session (no subagents), 195,983-343,487 B (Icy Veins),
+157,217/163,868 B (Method), 75,149-342,577 B (Wowhead), every one HTTP 200 off the written file.
+Per-page counts printed BEFORE the merge and reconciled against the roster shape — 27 DPS / 7 healer /
+6 tank = 40 per source-bracket, **240 rows, 0 unmatched** — which is still the only thing that would
+catch a silent per-page parser failure, since ratings upsert.
+**0 of 240 stored cells moved**, so only the 14 snapshot dates advanced.
+
+Transports and parses, all as documented, no drift: Icy Veins per-`<tr>`, letter from the first
+`<td>`, spec from each entry's FIRST `img alt` looked up WHOLE; Method from `.tier__tier` with specs
+resolved by ROSTER MATCH, which again rejected exactly the eight dungeon-difficulty entries on the M+
+page; Wowhead unescaped `\/`->`/` first, then `[tier-list=rows]`, keeping the LARGEST block of each
+page against the decoy-printHtml trap (1 block per page this run, 1,124-3,443 B).
+
+Era: all six Icy Veins pages self-identify Season 2 / Patch 12.1 in body and changelog — including the
+raid-healer page, whose TITLE still reads "(Patch 12.0.7 / Midnight)" and is overridden by the
+body-over-title precedent — Method states Midnight Season 2 in both ledes, and every Wowhead title says
+"for Midnight Season 2". Devourer present in all four DPS lists. `seasonVerified` s2 throughout and
+UNCHANGED, so freeze-season had nothing to freeze.
+Page self-dates re-read live, all unchanged and matching the pre-agent published-evidence artifact
+12/12: IV raid 08-30 / 09-01 / 08-29 and M+ all 08-30; WH raid all 08-31, M+ 08-28 / 08-26 / 09-01.
+Method's own stated dates (10 and 13 Aug) also unchanged; it carries no registry `published`.
+
+**Archon: day 16 behind the wall.** The pre-agent source-health receipt has the raid route at 403
+`cloudflare-challenge` and the M+ route at **200** `human-verification`; my own single ordinary GET of
+both returned 403 with "Just a moment" bodies and **`__NEXT_DATA__` count 0** — assert on that, never on
+the status code. Nothing solved or replayed, nothing backfilled from WCL, no snapshot bumped. Retention
+policy holds: the stored S2 letters still feed the four-source consensus. `encounter-tiers.json` is
+still `season: "s1"` / 2026-08-17, so the Fight selector stays hidden.
+
 ## 2026-09-08 (local, scheduled) — ran as a stand-in for a nightly that had not fired, then the nightly fired mid-run; DATA SUPERSEDED, one parser trap worth keeping
 
 **No tier data from this run is in the tree.** It started at 14:13Z because GitHub's schedule event

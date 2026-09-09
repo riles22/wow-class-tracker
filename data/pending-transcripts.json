@@ -2,51 +2,9 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "zf9FpCLuTeI",
+      "id": "TJe8OnXl3pY",
       "creator": "izen (Izenhart)",
-      "title": "Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?",
-      "published": "2026-09-07",
-      "queuedAt": "2026-09-08"
-    },
-    {
-      "id": "4qn2cENo0Rk",
-      "creator": "MadSkillzzTV",
-      "title": "Best \"Easy\" Healer in 12.1",
-      "published": "2026-09-07",
-      "queuedAt": "2026-09-08"
-    },
-    {
-      "id": "AUuP4Ex29X0",
-      "creator": "Preheat",
-      "title": "Arcane is RNG. Fix your damage by fixing the odds.",
-      "published": "2026-09-08",
-      "queuedAt": "2026-09-08"
-    },
-    {
-      "id": "enxnA4o5aDo",
-      "creator": "leak",
-      "title": "Quick Survival Hunter Raid Tips for Heroic Venomous Abyss",
-      "published": "2026-09-07",
-      "queuedAt": "2026-09-08"
-    },
-    {
-      "id": "QtsKpXY7NQE",
-      "creator": "LBNinja7",
-      "title": "Mistweaver Is Broken & NEEDS Fixing in 12.1.5",
-      "published": "2026-09-09",
-      "queuedAt": "2026-09-09"
-    },
-    {
-      "id": "m7lbOASbT4s",
-      "creator": "Obli",
-      "title": "Does Midnight Season 2 miss the mark?",
-      "published": "2026-09-09",
-      "queuedAt": "2026-09-09"
-    },
-    {
-      "id": "1z2CQXNWFLM",
-      "creator": "AutomaticJak",
-      "title": "Healing Heroic Ula'tek Guide",
+      "title": "12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the \"Overall Results\" Bait",
       "published": "2026-09-08",
       "queuedAt": "2026-09-09"
     }
@@ -2984,6 +2942,41 @@
       "title": "Season 2 Character & Channel Update! Future Plans Etc",
       "reason": "Transcript pre-fetched by the deterministic Supadata step (480 caption chunks, ~18k characters) and read in full: a character/channel housekeeping video with no spec-strength read anywhere in it. The first two thirds are his own gear state and Great Vault coining math (ilvl 322, crafted staff and boots, which mythic boss to coin next week, Janthrazette-plus-offhand about 2% over the crafted staff, which trinkets are landmines), which is gear-level by the distillation rules; the middle is guild progress in Just Woke Up and Blizzcon travel; the last third is channel planning and a request for video suggestions. The only two spec-adjacent lines both fail: his dungeon comments (\"Murder Row I like a lot more than I thought\", \"Altar of Fangs is insane\", \"RLP is honestly that bad\") rank DUNGEONS, not specs, and \"there is going to be some nerfs coming in demo soon\" is anticipation, which the rules exclude as a read — he says in the same breath that the 12.1.5 PTR carries no Warlock changes yet, which the official 12.1.5 ledger independently confirms (its only class sections are Devourer DH, Marksmanship Hunter and Protection Warrior). His existing Warlock takes remain the current read.",
       "verifiedAt": "2026-09-08"
+    },
+    {
+      "id": "AUuP4Ex29X0",
+      "creator": "Preheat",
+      "title": "Arcane is RNG. Fix your damage by fixing the odds.",
+      "reason": "Transcript pre-fetched by the deterministic Supadata step (273 chunks) and read in full: an Arcane Mage consistency/technique video with no spec-strength read. Its subject is variance — he measures the RNG band at roughly ±12% over a five-minute five-target segment but ~56% across the first 40 seconds, and the whole prescription is procedural: pre-stack Clearcasting, Arcane Salvo and Prismatic Bolt on a dummy or a pulled mob before starting the key, then carry procs between packs using Orb, Arcane Explosion, Missiles or a Mirror Image so cooldown windows open with more procs. The last third is an ElvUI Arcane Soul helper walkthrough and a BlizzCon note. He never compares Arcane against another spec, and the only spec-adjacent number (a top mage doing 429k overall, 1.3M in a first pull) is cited as evidence for the pre-stacking trick, not as a read on the spec's standing — guide-shaped content per the distillation rules, so no take.",
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "enxnA4o5aDo",
+      "creator": "leak",
+      "title": "Quick Survival Hunter Raid Tips for Heroic Venomous Abyss",
+      "reason": "Transcript read in full (70 chunks, ~2 minutes): a boss-by-boss Survival Hunter cooldown and build cheat sheet for heroic Venomous Abyss — single-target build on Nek'zali and Entombed Sentinels, raid cleave on The Lost Explorers and The Coiled Altar, AoE with Takedown and Boomstick delayed ~30s for the Vashnik add spawns, pet-follow between the Twin Fangs so the pet cleaves both, Feign Death with Emergency Salve to drop the Sszorak tornado debuff, and Takedown banked for the Ula'tek damage amps. Every line is execution for one encounter, with no comparison against another spec and no claim about where Survival sits — guide-shaped content per the distillation rules, so no take. His 2026-09-05 raid take remains his current read.",
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "QtsKpXY7NQE",
+      "creator": "LBNinja7",
+      "title": "Mistweaver Is Broken & NEEDS Fixing in 12.1.5",
+      "reason": "Transcript read in full (653 chunks): a Mistweaver Monk DESIGN critique, and he disclaims the power question explicitly in the opening — 'not necessarily in terms of power, I think that's a different discussion' — so the title's negativity is about mechanics, not standing. The three complaints are functional: Spirit Font (the apex talent) stops channelling the moment an ally reaches full health, so it returns nothing on a topped-up party where other healers' apex talents keep working; the Rising Mists hot-extension internal cooldown clashes with the four-piece's Rushing Wind Kick resets, wasting the proc and a global; and Master of Harmony loses a one-horse race to Conduit of the Celestials, because Conduit's own cooldown reduction beats the second Thunder Focus Tea charge and its Rising Sun Kick damage beats the Ancient Teachings bonus — his suggested fix is moving the old Jade Empowerment onto that tree. The one power statement in the video is POSITIVE and corroborates rather than updates his existing reads: the season's tier set, which buffs Rising Sun Kick damage and resets its cooldown, 'really makes Mistweaver fun and awesome and very strong' in Mythic+, which is what his live 2026-08-29 take already says. His only other self-referential line ('toward the bottom of the meters in my guild') is about his own play among guildmates, not a spec claim. Per the rule against minting a placeholder sentiment, no take.",
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "m7lbOASbT4s",
+      "creator": "Obli",
+      "title": "Does Midnight Season 2 miss the mark?",
+      "reason": "Transcript read in full (282 chunks): a season CONTENT review, not a spec read. The video argues Season 2 misses the mark on dungeon selection (King's Rest, Ruby Life Pools, Temple of Sethraliss; he likes Altar of Fangs), raid design and trash, best-in-slot gear being locked behind the last two bosses, bonus rolls having 'killed the Great Vault', poor dungeon loot forcing M+ players to raid, the split upstairs/downstairs zone, and an over-easy delve boss. He states at the end that he 'literally didn't talk about death knights basically at all', then adds a closing aside that Death Knights have been shafted, that Unholy is buggy and unenjoyable (the caption reads 'holy' mid-sentence in a Death Knight context), and that Frost was very weak at season start and is creeping up. No bracket, no comparison and no evidence is attached to any of it, and the trajectory claim is already covered — better sourced and bracket-scoped — by his 2026-09-04 raid takes distilled on 09-05, which read Death Knight as still low at the 95th percentile but on the way up. Distilling the aside would restate them from weaker evidence, so no take. One out-of-scope observation recorded for the log: he says the raid's two-target spread cleave profile suits only Warlocks, which is outside his registered Frost/Unholy Death Knight scope.",
+      "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "1z2CQXNWFLM",
+      "creator": "AutomaticJak",
+      "title": "Healing Heroic Ula'tek Guide",
+      "reason": "Transcript read in full (566 chunks): a heroic Ula'tek healing ENCOUNTER guide built around cooldown assignment, with a hardware sponsor read in the first two minutes. Content is per-phase execution — send two-minute cooldowns freely into Mephitic Thrash, empty the bag for the tether intermission while banking three- and four-minute cooldowns (AMZ, Darkness, Ascendance) for the later overlap, front-load ramping cooldowns (Apotheosis, Yu'lon, Wings) and space bursty ones (Rewind, Tranquility), and stand within range of the melee soaking eggs. Its two spec-adjacent lines are both fight artifacts by the distillation rules rather than spec-strength reads: Shamans felt weaker for that specific intermission because their Ascendance and Spirit Link went into the earlier split, and they 'make up for it later around the 8-minute mark'; and Holy Priest's immobility can be played around by turret healing at large raid sizes. He compares no spec against another on standing, so no take. His 2026-08-27 raid takes remain his current read.",
+      "verifiedAt": "2026-09-09"
     }
   ],
   "seen": [

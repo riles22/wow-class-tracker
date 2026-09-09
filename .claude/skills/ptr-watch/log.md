@@ -15,6 +15,35 @@ Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "#
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+
+## 2026-09-09 (nightly) — nothing new in any channel; official ledger unchanged at 102 sections
+
+**Official revision ledger first, as the skill orders.** This run's pre-agent receipt (checkedAt
+14:49:21Z) returned both sources `success`: live-hotfixes topic 2336376 post 1 still **version 31** /
+updatedAt 2026-09-05T01:21Z, ptr-preview topic 2344395 post 1 still **version 3** / updatedAt
+2026-09-03T22:48Z. Every one of the **102 class sections** hashed identically to the committed ledger,
+so all prior resolutions carried forward (**5 applied, 97 irrelevant**) — no new, edited, removed or
+unresolved sections, and only `checkedAt` moved in `data/official-notes.json`.
+`check-official-notes.mjs --base=HEAD` passes.
+The 12.1.5 lane stayed **NOTES ONLY**: `PHASES.ptr` still null, nothing written into `ptr-builds` or any
+`spec.ptr` verdict, no forecast reopened, no archived 12.1 PTR metric relabelled.
+
+**Feed sweep — four channels, not one.** (1) Wowhead RSS 198,705 B, 40 items parsed per `<item>` block;
+newest live 12.1 class item is still *September 4th Hotfixes* (news=382760), already logged.
+(2) The news INDEX (which leads RSS within a run) brace-balanced from `data.news.newsData`: agrees, newest
+382735. (3) Blue tracker `data.blueTracker.default`, 50 entries: newest class-relevant post is still
+Linxy's 09-04 hotfix topic. The one new Linxy-flagged topic since, **2343549 "Week 3 of 3: Interrupts and
+dispels"**, was fetched and is a PLAYER bug-report thread (a quest not counting warlock pets) — logged here
+so the next run does not re-open it. (4) Dev-notes thread `2317811.json`: 17 posts, highest_post_number 19,
+last post 2026-07-31 — the closed cycle, expected, rediscovery gotcha still suspended.
+`ptr-builds.json` unchanged at **29 entries**, newest 2026-09-04. No set-bonus line landed, so no
+`tierSet.asOf` bump and no gearing resync.
+Everything newer in the feeds is 12.1.5 datamining, the Kith'ix raid-testing schedule, or non-class content.
+
+Dormant lanes skipped as designed (zones 54 / 52 / 56 / 57); their contract rows left the manifest at the
+flip, so they are absent rather than "unreachable". One writeup gap remains and is deliberate: Demonology
+Warlock, whose source reported no changes.
+
 ## 2026-09-09 (local, scheduled) — ledger re-checked at a fresh receipt (102 sections, 0 unresolved, nothing moved upstream); no new live 12.1 tuning; no 12.2
 
 - **Ran the trusted collector locally** because no nightly output landed today (see below):
