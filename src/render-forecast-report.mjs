@@ -98,9 +98,13 @@ export function createForecastReport({ frozenForecast: artifact, historySnapshot
         forecast, scales, specs: roles }) };
   });
   const latest = checkpoints.filter(c => c.grade).at(-1);
+  const compactScorecard = card => card?.mode === "unavailable" || !card ? null : {
+    right: card.right, total: card.total, unscored: card.unscored, method: card.method
+  };
   const summary = latest?.grade.consensusVersion.comparable && latest.grade.overall ? {
     href: "forecast-report.html", forecastDate: artifact.date, actualDate: latest.grade.actualDate,
     settleDays: latest.settleDays, coverage: latest.grade.coverage, overall: latest.grade.overall,
+    scorecard: compactScorecard(latest.scorecard), baselineScorecard: compactScorecard(latest.baselineScorecard),
     comparable: true
   } : null;
   return { artifact, forecast, checkpoints, summary };
@@ -158,7 +162,12 @@ function checkpointSummaryHTML(checkpoint) {
   return `<section class="checkpoint-summary">${heading}<p class="endpoint">Predictions saved ${esc(g.forecastDate)} · checked ${esc(g.actualDate)}</p>
     ${accuracy}<p class="coverage">${comparable ? `Checked ${esc(c.graded)} of ${esc(c.obtainable)} predictions across Raid and Mythic+.` : `Coverage: ${esc(c.graded)}/${esc(c.obtainable)} paired cells.`}
     ${c.declined ? `${esc(c.declined)} had no prediction. ` : ""}${c.ungradeable ? `${esc(c.ungradeable)} had no outcome. ` : ""}${c.rosterGap ? `${esc(c.rosterGap)} had a roster gap. ` : ""}
-    ${c.sufficient ? "" : `<strong>Partial coverage${comparable ? ": these results cover only the checked predictions" : ""}.</strong>`}</p></section>`;
+    ${c.sufficient ? "" : `<strong>Partial coverage${comparable ? ": these results cover only the checked predictions" : ""}.</strong>`}</p>
+    <nav class="checkpoint-shortcuts" aria-label="+${esc(checkpoint.settleDays)} day prediction breakdowns">
+      <a href="#checkpoint-${esc(checkpoint.settleDays)}-ours">Our predictions</a>${checkpoint.sourcePredictions ? `
+      <a href="#checkpoint-${esc(checkpoint.settleDays)}-creators">Creators</a>
+      <a href="#checkpoint-${esc(checkpoint.settleDays)}-sites">Sites</a>` : ""}
+    </nav></section>`;
 }
 
 function checkpointDetailsHTML(checkpoint, forecast) {
@@ -194,9 +203,9 @@ function checkpointDetailsHTML(checkpoint, forecast) {
   }));
   return `<section class="checkpoint-details"><h2>+${esc(checkpoint.settleDays)} days · prediction breakdown</h2>
     <p class="outcome-definition"><b>Actual = the settled ranking from the tracked sites on ${esc(g.actualDate)}.</b> This checks agreement with those sites; it does not measure every spec's in-game performance.</p>
-    ${sourcePredictionsHTML(checkpoint.sourcePredictions)}
+    ${sourcePredictionsHTML(checkpoint.sourcePredictions, checkpoint.settleDays)}
     <h3>Our forecast</h3>
-    <details class="cells-detail"><summary>Our predictions · ${comparable ? scorecardCount(checkpoint.scorecard) : "Not scored"}</summary>
+    <details class="cells-detail"><summary id="checkpoint-${esc(checkpoint.settleDays)}-ours">Our predictions · ${comparable ? scorecardCount(checkpoint.scorecard) : "Not scored"}</summary>
     ${scorecardContextHTML(checkpoint.scorecard)}
     ${scorecardTableHTML(checkpoint.scorecard, `Our predicted and actual results at +${checkpoint.settleDays} days`)}</details>
     <details class="methods"><summary>How this checkpoint was checked · technical detail</summary>
@@ -215,7 +224,7 @@ function checkpointDetailsHTML(checkpoint, forecast) {
 }
 
 // Source comparisons are supplied by the durable historical receipt module.
-function sourcePredictionsHTML(report) {
+function sourcePredictionsHTML(report, settleDays) {
   if (!report) return "";
   const groups = [
     ["creator", "Creator results", "Open a creator's dated prediction to see every pick and its outcome. Each date stays separate, including older predictions the creator later revised."],
@@ -229,7 +238,8 @@ function sourcePredictionsHTML(report) {
     ${report.status !== "ready" ? `<p class="notice">Source comparison unavailable for this checkpoint. Historical evidence is missing; no current ranks are substituted.</p>` : ""}
     ${groups.map(([id, label, description]) => {
       const group = cohorts.filter(c => c.comparisonGroup === id || (id === "creator" && c.kind === "creator"));
-      return `<details class="source-group" data-group="${esc(id)}"${["creator", "same-cutoff"].includes(id) ? " open" : ""}><summary>${esc(label)} · ${group.length} ${id === "creator" ? "dated lists" : "lists"}</summary><p>${esc(description)}</p>
+      const target = id === "creator" ? "creators" : id === "same-cutoff" ? "sites" : null;
+      return `<details class="source-group" data-group="${esc(id)}"${["creator", "same-cutoff"].includes(id) ? " open" : ""}><summary${target ? ` id="checkpoint-${esc(settleDays)}-${target}"` : ""}>${esc(label)} · ${group.length} ${id === "creator" ? "dated lists" : "lists"}</summary><p>${esc(description)}</p>
         ${group.length ? group.map(sourceCohortHTML).join("\n") : `<p>No gradeable historical prediction receipts were retained for this group. Accuracy is unknown.</p>`}</details>`;
     }).join("\n")}
     ${(report.warnings ?? []).length ? `<details><summary>Historical evidence limits</summary>${report.warnings.map(w => `<p>${esc(w)}</p>`).join("")}</details>` : ""}</section>`;
@@ -319,6 +329,7 @@ export function renderForecastReport(report) {
 :root{color-scheme:dark;--bg:#0c0913;--panel:#171020;--ink:#ede6f5;--muted:#b7a8c9;--gold:#e3c37b;--line:#463052}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif}main{max-width:1240px;margin:auto;padding:32px 24px 72px}a{color:var(--gold)}a:focus-visible,summary:focus-visible,.tablewrap:focus-visible{outline:2px solid var(--gold);outline-offset:4px}header{border-bottom:1px solid var(--gold);padding-bottom:24px}h1,h2,h3{line-height:1.2}h1{font:700 clamp(28px,5vw,46px)/1.15 Georgia,serif;letter-spacing:.025em;color:var(--gold);margin:16px 0}h2{font:700 26px/1.2 Georgia,serif;color:var(--gold)}h3{font-size:19px;margin-top:28px}.eyebrow{font:12px ui-monospace,monospace;letter-spacing:.18em;color:var(--muted)}section{margin-top:36px;min-width:0}p{max-width:100ch}.lede{font-size:18px}.coverage,.notice,.pending{padding:14px 18px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}.result{font-size:21px;color:var(--gold)}.tablewrap{width:100%;max-width:100%;overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}caption{text-align:left;padding:12px;color:var(--gold);font-weight:700}th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line)}th{background:var(--panel);color:var(--muted)}tbody tr:last-child td{border:0}.tier{color:var(--gold)}details{margin-top:20px}summary{cursor:pointer;color:var(--gold)}dl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:8px 16px}dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}code{font-size:13px}footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:var(--muted)}@media(max-width:600px){main{padding:22px 14px 44px}dl{grid-template-columns:1fr;gap:3px}dd{margin-bottom:10px}.coverage,.notice,.pending{padding:12px}}
 .checkpoint-summaries{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:28px}.checkpoint-summary{min-width:0}.checkpoint-summary h2{margin:0 0 14px}.endpoint{margin:0 0 14px}.checkpoint-details{border-top:1px solid var(--line);padding-top:26px}.result{margin:14px 0 8px}.baseline{margin-top:8px}summary{font-weight:650;padding:7px 0}.source-cohort{border:1px solid var(--line);border-radius:8px;padding:10px 16px}.muted{color:var(--muted)}
+.checkpoint-shortcuts{display:flex;flex-wrap:wrap;gap:4px 18px}.checkpoint-shortcuts a{display:inline-flex;align-items:center;min-height:44px}summary[id]{scroll-margin-top:20px}summary:target{outline:2px solid var(--gold);outline-offset:4px}
 .scoring-rule{max-width:84ch}.coverage{font-size:14px;margin-top:16px}.source-group>summary{font-size:20px}.source-cohort>summary{position:relative;padding-right:170px}.source-title{font-size:17px}.source-date{font-size:14px;color:var(--muted);font-weight:400}.source-count{position:absolute;right:0;top:7px;font-size:20px}.source-scope{display:block;font-size:13px;font-weight:400;color:var(--muted);margin:3px 0 0 18px}.source-methods{border-top:1px solid var(--line);padding-top:8px}.source-methods>summary{font-size:14px}.scorecard-context{font-size:14px;color:var(--muted)}.answer{font-weight:650}.answer-right{color:#a6dfbb}.answer-too-high,.answer-too-low{color:#efd29c}.answer-not-scored{color:var(--muted)}.row-note{display:block;max-width:40ch;white-space:normal;font-weight:400;color:var(--muted)}
 @media(max-width:800px){.checkpoint-summaries{grid-template-columns:1fr;gap:0}}
 @media(max-width:600px){.source-cohort>summary{padding-right:0}.source-count{position:static;display:block;margin-left:18px;font-size:19px}.source-scope{margin-top:1px}.source-date{display:block;margin-left:18px}.source-title{font-size:16px}.source-group>summary{font-size:18px}}

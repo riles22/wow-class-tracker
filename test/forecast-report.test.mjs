@@ -60,7 +60,31 @@ test("+14 and +28 keep separate first eligible outcomes; current state cannot re
   const html = renderForecastReport(report);
   assert.match(html, /id="checkpoint-14"/);
   assert.match(html, /id="checkpoint-28"/);
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
+  assert.equal(ids.length, new Set(ids).size, "completed checkpoints have distinct navigation targets");
+  for (const days of [14, 28]) {
+    for (const section of ["ours", "creators", "sites"]) {
+      assert.ok(html.includes(`href="#checkpoint-${days}-${section}"`));
+      assert.ok(html.includes(`<summary id="checkpoint-${days}-${section}">`), "shortcuts land on a keyboard-operable disclosure");
+    }
+  }
   assert.ok(!html.includes(later.date), "later current state must not become a settled endpoint");
+});
+
+test("the compact report summary preserves main-letter counts separately from detailed-band accuracy", () => {
+  const report = createForecastReport(fixture);
+  const latest = report.checkpoints.filter(c => c.grade).at(-1);
+  for (const name of ["scorecard", "baselineScorecard"]) {
+    const card = latest[name];
+    const independentlyMatched = card.rows.filter(r => r.predicted != null && r.actual != null
+      && /^[A-Z]/.exec(r.predicted)?.[0] === /^[A-Z]/.exec(r.actual)?.[0]).length;
+    assert.deepEqual(report.summary[name], {
+      right: independentlyMatched, total: card.total, unscored: card.unscored, method: "main-letter"
+    });
+  }
+  assert.notEqual(report.summary.scorecard.right, latest.grade.overall.exact,
+    "the retained forecast has main-letter matches that are not exact plus/minus matches");
+  assert.deepEqual(report.summary.overall, latest.grade.overall, "existing detailed-band metrics remain available");
 });
 
 test("pending checkpoints disclose their required date and never manufacture accuracy", () => {
@@ -76,6 +100,7 @@ test("pending checkpoints disclose their required date and never manufacture acc
   assert.ok(html.includes(completed.checkpoints[0].settleBy));
   assert.ok(html.includes(completed.checkpoints[1].settleBy));
   assert.doesNotMatch(html, /% exact letters/);
+  assert.doesNotMatch(html, /class="checkpoint-shortcuts"/, "pending checks have no nonexistent breakdown links");
   base.historySnapshots = base.historySnapshots.filter(s => s.date < launch);
   assert.match(renderForecastReport(createForecastReport(base)), /launch has not happened yet/);
   assert.equal(createForecastReport({}), null);
@@ -154,7 +179,7 @@ test("rendering is deterministic, escapes provenance, and stays entirely offline
   assert.doesNotMatch(tags, /\sonerror\s*=/i, "escaped prose must never become an event attribute");
   assert.match(html, /default-src 'none'/);
   const links = [...html.matchAll(/href="([^"]*)"/g)].map(m => m[1]);
-  assert.ok(links.every(link => link === "index.html" || /^#checkpoint-\d+$/.test(link) || /^https?:\/\//.test(link)));
+  assert.ok(links.every(link => link === "index.html" || /^#checkpoint-\d+(?:-(?:ours|creators|sites))?$/.test(link) || /^https?:\/\//.test(link)));
   assert.match(html, /\.tablewrap\{[^}]*overflow-x:auto/);
 });
 
