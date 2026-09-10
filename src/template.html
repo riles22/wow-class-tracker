@@ -55,10 +55,9 @@ try {
     --t-splus:#FFE3A3; --t-s:#F0C24B; --t-aplus:#C77DFF; --t-a:#6AA8F0; --t-bplus:#4FBCBB; --t-b:#45C4A8; --t-c:#8A93A8; --t-d:#D2887A; --t-f:#D27575;
     --v-pos:#52C97A; --v-mix:#E0A73E; --v-neg:#E0655F;
 
-    /* Console (direction C) adds two quiet greys and a hairline below --edge. Density
-       is bought with a four-step ramp — ink / ink-dim / ink-mute / ink-struct — so that
-       tier colour is the only saturated thing in the row body. */
-    --hair:#190F2E; --ink-mute:#6B5D8C; --ink-struct:#4A3D6B;
+    /* Supporting text stays quiet through size and weight, while retaining the
+       same readable contrast floor as other secondary labels. */
+    --hair:#190F2E; --ink-mute:var(--ink-faint); --ink-struct:var(--ink-faint);
 
     --mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;
     --disp:'Cinzel',Georgia,'Times New Roman',serif;
@@ -304,7 +303,7 @@ try {
   .legend-wrap .legend{padding-top:6px}
   /* phones pay ~330px for the legend; wide screens do not, so it starts open there */
   @media(max-width:759px){ .sub{font-size:13px; max-width:none} }
-  .note.standalone{display:block; font-size:12px; color:var(--ink-faint); padding:2px 0 4px; max-width:78ch}
+  .note.standalone{display:block; font-size:12px; color:var(--ink-faint); margin:6px 0; max-width:78ch}
   /* one-line caption under the controls, only when the active view needs disclosing */
   .viewnote{
     margin:8px 0 0; padding:7px 12px; font-size:12px; line-height:1.5; color:var(--ink-dim);
@@ -446,7 +445,7 @@ try {
   .cmp-tray .cmp-item{display:flex; align-items:center; gap:8px; font-size:13px}
   .cmp-tray .cmp-item button{background:none; border:0; color:var(--ink-faint); cursor:pointer; font-size:13px}
   .cmp-tray .cmp-go{font-family:var(--body); font-weight:600; font-size:13px; background:var(--accent); color:#160a24; border:0; border-radius:8px; padding:7px 12px; cursor:pointer}
-  .cmpbtn{font-family:var(--body); font-size:12px; font-weight:600; color:var(--accent-2); background:none; border:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent); border-radius:7px; padding:3px 9px; cursor:pointer; margin-left:8px}
+  .cmpbtn, .gearlink{font-family:var(--body); font-size:12px; font-weight:600; color:var(--accent-2); background:none; border:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent); border-radius:7px; padding:3px 9px; cursor:pointer; margin-left:8px}
   .cmpbtn.on{background:var(--accent-2); color:#08222e; border-color:var(--accent-2)}
   /* the drawer's link into the gearing explorer — shares the Compare pill's shape */
   .gearlink{display:inline-block; text-decoration:none; color:var(--gold);
@@ -815,7 +814,9 @@ try {
       row-gap:5px; column-gap:9px; padding:0;
       contain-intrinsic-size:auto 60px
     }
-    .idcell{grid-column:1; grid-row:1/-1; flex-direction:column; justify-content:center;
+    /* Span the four explicit card lines, not -1 (which only spans the implicit first
+       track and makes the 44px star plus rank stretch that line). Exclude the drawer. */
+    .idcell{grid-column:1; grid-row:1 / span 4; flex-direction:column; justify-content:center;
       align-self:stretch; gap:3px; border-right:1px solid var(--hair); background:color-mix(in srgb,var(--bg-3) 45%,transparent)}
     .spec-name{grid-column:2; grid-row:1; flex-wrap:wrap; padding-top:9px}
     .chev{grid-column:3; grid-row:1; align-self:center; padding:9px 13px 0 0}
@@ -967,7 +968,11 @@ try {
   table.alltab{border-collapse:separate; border-spacing:0; width:100%; font-size:12px}
   table.alltab th, table.alltab td{padding:2px 7px; white-space:nowrap; border-bottom:1px solid var(--edge)}
   table.alltab thead th{position:sticky; top:0; z-index:3; background:var(--bg-2); text-align:center;
-    font-family:var(--body); font-weight:600; font-size:11px; color:var(--ink-dim); cursor:pointer; user-select:none}
+    font-family:var(--body); font-weight:600; font-size:11px; color:var(--ink-dim); user-select:none}
+  .all-sort, .all-spec{font:inherit; color:inherit; background:none; border:0; padding:0; cursor:pointer}
+  .all-sort{display:block; width:100%}
+  .all-spec{text-align:left}
+  .all-sort:focus-visible, .all-spec:focus-visible, .all-fs:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:2px}
   table.alltab thead tr.filt th{top:var(--all-h1, 44px); z-index:3; cursor:default; padding:2px 4px; background:var(--bg-3)}
   .all-val{font-family:var(--mono); font-size:11px; color:var(--ink-faint)}
   table.alltab thead th.grp{cursor:default; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint)}
@@ -1182,7 +1187,7 @@ try {
      where #tlcount lives (a pinned invariant reads it). -->
 <div class="pitch">
   <p class="pitchline">Every major tier list, distilled into <b>one consensus</b> — with a <b class="pm">±</b> wherever they disagree.</p>
-  <div class="sub"><details class="sub-more"><summary>How to read it</summary>Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.</details></div>
+  <div class="sub"><details class="sub-more"><summary>How to read it</summary>Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.<p>A healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown.</p></details></div>
 </div>
 
 <main class="wrap" id="main">
@@ -1232,7 +1237,7 @@ try {
        screens before the first spec, so the explanation has to earn every line. The full
        band table lives in the legend; the number a reader is staring at lives here.
        Keep 88 in sync with data/scales.json `consensus.bands`. -->
-  <span class="note standalone"><span class="count" id="count"></span> · <b>Overall</b> is a 0–100 score, not a letter — 100 means every source gave its top tier, and the consensus reads <b>S from 88 up</b>. Tiers are <b>within role</b>: a healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown. A <span class="divmark">±</span> marks a rating the sources <b>disagree</b> on.<span class="notestamp" id="notestamp"></span></span>
+  <div class="note standalone score-note"><span class="count" id="count"></span> · <b>Overall 0–100</b>: 100 means every source's top tier; <b>S from 88 up</b>. Tiers compare <b>within role</b>. <span class="divmark">±</span> sources disagree.<span class="notestamp" id="notestamp"></span></div>
 
   <!-- Deliberately NOT a disclosure: template history records that hiding this buried the
        honesty disclaimer from first-time visitors. Condensed in place instead — the claim
@@ -1331,8 +1336,8 @@ const CLASS_COLOR = {
    set in: Death Knight 3.27, Demon Hunter 3.48, Shaman 3.97 (measured 2026-08-22; every
    other colour on the page passes). Hue is preserved and lightness lifted, so the class
    still reads as itself. The canonical colour stays in CLASS_COLOR for the 4px class
-   bar, the compare-tray dots and the compare table headers, where the glyph is
-   decorative or large enough that the small-text ratio does not apply. */
+   bar and the compare-tray dots, where the glyph is decorative. Names in both
+   comparison tables use the accessible text colours too. */
 const CLASS_COLOR_TEXT = { ...CLASS_COLOR,
   "Death Knight":"#D45E76", "Demon Hunter":"#BE5AE0", "Shaman":"#3E93E8" };
 const CLASS_ORDER = Object.keys(CLASS_COLOR);
@@ -1624,16 +1629,16 @@ const FROZEN_FC = META.frozenForecast ?? null;
   if(retained.length){
     const host = document.getElementById('retained-ratings');
     host.hidden = false;
-    host.innerHTML = `<b>Retained source ratings:</b> ${retained.map(s=>`${esc(s.name)} last verified ${esc(s.date)}`).join(' · ')}. These in-season letters still contribute to consensus. Freshness alerts remain active; an outage does not silently remove a source.`;
+    host.innerHTML = `<b>Retained source ratings:</b> ${retained.map(s=>`${esc(s.name)} last verified ${esc(s.date)}`).join(' · ')}; still contribute to consensus.`;
   }
 }
 const FORECAST_REPORT = META.forecastReport ?? null;
 {
   const host = document.getElementById('forecast-grade');
   const report = FORECAST_REPORT;
-  if(FROZEN_FC && report?.forecastDate === FROZEN_FC.date && report.comparable && report.overall){
+  if(FROZEN_FC && report?.forecastDate === FROZEN_FC.date && report.comparable && report.scorecard?.total > 0){
     host.hidden = false;
-    host.innerHTML = `<a href="forecast-report.html"><b>Settled forecast report · +${esc(report.settleDays)} days</b></a> · ${esc(report.coverage.graded)}/${esc(report.coverage.obtainable)} cells graded · ${esc(report.overall.exactPct)}% exact · ${esc(report.overall.withinOnePct)}% within one band <span class="mnote">against publisher consensus on ${esc(report.actualDate)}. The report includes the carry-forward comparison.</span>`;
+    host.innerHTML = `<a href="forecast-report.html"><b>Forecast: ${esc(report.scorecard.right)} of ${esc(report.scorecard.total)} right</b> · +${esc(report.settleDays)} days</a> <span class="mnote">Main-letter match · publisher consensus on ${esc(report.actualDate)}.${report.scorecard.unscored ? ` ${esc(report.scorecard.unscored)} predictions unscored.` : ''}</span>`;
   }
 }
 const projAvailable = () => state.era !== "live" || !!FROZEN_FC;
@@ -2301,7 +2306,7 @@ function passFilters(s){
   if(state.starOnly && !STARS.has(`${s.class}|${s.spec}`)) return false;
   if(state.q){
     const q = state.q.toLowerCase();
-    if(!(s.spec.toLowerCase().includes(q) || s.class.toLowerCase().includes(q))) return false;
+    if(![s.spec, s.class, s.role, ROLE_ABBR[s.role]].some(value=>value?.toLowerCase().includes(q))) return false;
   }
   return true;
 }
@@ -2730,7 +2735,7 @@ matrix.addEventListener('click', e=>{
     return;
   }
   const hs = e.target.closest('.hsort'); if(hs){ setSort(hs.dataset.sort); return; }
-  const cb = e.target.closest('.cmpbtn');
+  const cb = e.target.closest('.cmpbtn[data-cmp]');
   if(cb){ // compare toggle lives inside the drawer — handle before the drawer guard
     if(!toggleCompare(cb.dataset.cmp)){ cb.textContent = 'max 3 specs'; setTimeout(syncCmpButtons, 900); }
     else syncCmpButtons();
@@ -3222,10 +3227,10 @@ function cmpBtnHTML(s){
    vocabulary across both pages. slugOf lowercases and collapses non-alphanumerics to "-",
    so the fragment can only ever be [a-z0-9-] no matter what the roster data says. */
 function gearingLinkHTML(s){
-  return `<a class="cmpbtn gearlink" href="gearing.html#spec=${esc(slugOf(s))}" title="Season 2 gearing for ${esc(s.spec)} ${esc(s.class)} — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ Gearing</a>`;
+  return `<a class="gearlink" href="gearing.html#spec=${esc(slugOf(s))}" title="Season 2 gearing for ${esc(s.spec)} ${esc(s.class)} — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ Gearing</a>`;
 }
 function syncCmpButtons(){
-  document.querySelectorAll(".cmpbtn").forEach(b=>{
+  document.querySelectorAll(".cmpbtn[data-cmp]").forEach(b=>{
     const on = COMPARE.has(b.dataset.cmp);
     b.classList.toggle("on", on); b.textContent = on?'✓ In compare':'⚖ Compare'; b.setAttribute("aria-pressed", on?"true":"false");
   });
@@ -3327,7 +3332,7 @@ function openCompare(focusId){
     ${crossRole?`<p class="mnote cmp-crossrole"><b>Cross-role compare</b> — every number and rank below is <b>within each spec's own role</b> (a healer's HPS against healers, a tank's DPS against tanks). The columns are not comparable to each other; read each one down, not across.</p>`:""}
     <div class="wcl-controls"><label>Mythic raid boss<select id="cmp-raid">${wclOptions("raid",CMP_WCL.raid)}</select></label><label>M+10 dungeon<select id="cmp-mplus">${wclOptions("mplus",CMP_WCL.mplus)}</select></label><label><span><input id="cmp-archive" type="checkbox"${CMP_WCL.archive?" checked":""}> Show historical WCL aggregates</span></label></div>
     <p class="mnote">${leaderboardExplanation()} Each selection is one encounter, with mixed log dates; M+ uses exactly +10 with mixed affixes.</p>
-    <div style="overflow-x:auto"><table class="cmp-table"><thead><tr><th></th>${list.map(s=>`<th style="color:${CLASS_COLOR[s.class]||'#888'}">${esc(s.spec)}<br><span class="mnote">${esc(s.class)}</span></th>`).join("")}</tr></thead>
+    <div style="overflow-x:auto"><table class="cmp-table"><thead><tr><th></th>${list.map(s=>`<th style="color:${CLASS_COLOR_TEXT[s.class]||'#888'}">${esc(s.spec)}<br><span class="mnote">${esc(s.class)}</span></th>`).join("")}</tr></thead>
     <tbody>${rows.map(([label,fn])=>`<tr><td>${label}</td>${list.map(s=>`<td>${fn(s)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
   </div>`;
   cmpOv.querySelector("#cmp-close").onclick = closeCompare;
@@ -3591,10 +3596,10 @@ function syncControls(){
   if(fsel && [...fsel.options].some(o=>o.value===state.fight)) fsel.value = state.fight; else state.fight = "";
 }
 /* Open a spec's row in the CURRENT view (no filter reset) — deep-link landing + overlay jumps. */
-function openRowFor(cls, spec){
+function openRowFor(cls, spec, focus=false){
   const row = [...matrix.querySelectorAll('.row')].find(r =>
     r.querySelector('.spec-txt')?.textContent===spec && r.querySelector('.cls')?.textContent===cls);
-  if(row){ if(!row.classList.contains('open')) row.click(); row.scrollIntoView({ behavior:motionScrollBehavior(), block:"center" }); }
+  if(row){ if(!row.classList.contains('open')) row.click(); if(focus) row.focus({preventScroll:true}); row.scrollIntoView({ behavior:motionScrollBehavior(), block:"center" }); }
   return !!row;
 }
 // The masthead mark is the home button: back to the default view. A same-URL navigation
@@ -3639,7 +3644,7 @@ function openSpecFromOverlay(cls, spec){
   document.getElementById('ptronly').checked=false; document.getElementById('search').value="";
   if(document.getElementById('fightsel')) document.getElementById('fightsel').value="";
   render();
-  openRowFor(cls, spec);
+  openRowFor(cls, spec, true);
 }
 
 /* ================================================================
@@ -4170,28 +4175,54 @@ function openSpecFromOverlay(cls, spec){
   const ov = document.createElement("div"); ov.className="finder-ov"; ov.id="all-ov"; document.body.appendChild(ov);
 
   function render(){
+    // Replacing the dialog must retain the control being used and the table's
+    // scroll position, including filters in columns reached by horizontal scrolling.
+    const active = document.activeElement;
+    const focusRef = ov.contains(active) ? ["id", "data-bkt", "data-ar", "data-k", "data-f"]
+      .map(attr=>[attr, active.getAttribute(attr)]).find(([,value])=>value!==null) : null;
+    const scroll = ov.querySelector(".all-wrap");
+    const scrollPos = scroll ? {left:scroll.scrollLeft, top:scroll.scrollTop} : null;
     if(!wclEncounters(A.bracket).some(e=>String(e.id)===String(A.encounters[A.bracket]))) A.encounters[A.bracket]=wclEncounters(A.bracket)[0]?.id || "";
     const tcs = tierCols(), mcs = metricCols(), proj = showProjection();
     const list = rows();
-    const mk = k => A.sortKey === k ? '<span class="all-sortmk">'+(A.sortDir<0?"▼":"▲")+'</span>' : '';
+    const mk = k => A.sortKey === k ? '<span class="all-sortmk" aria-hidden="true">'+(A.sortDir<0?"▼":"▲")+'</span>' : '';
+    // Rank cells use negative ranks, but the PTR score column can also show raw
+    // unranked scores. A mixture is ordered by rank first, then score, not one
+    // numeric direction. Describe the cells remaining after the current filters.
+    const sortDirection = key => {
+      let ranks=false;
+      if(key.startsWith("m:")){
+        const cells=list.map(s=>cellFor(s,key));
+        ranks=cells.some(c=>c.rank!=null);
+        const scores=cells.some(c=>c.val!=null);
+        if(ranks && scores) return "other";
+        if(!scores) ranks=true;
+      }
+      return (ranks ? A.sortDir>0 : A.sortDir<0) ? "descending" : "ascending";
+    };
+    const sortHead = (key, label, tip, extra="", cls="") => '<th data-k="'+esc(key)+'"'+(cls?' class="'+cls+'"':'')
+      +' aria-sort="'+(A.sortKey===key?sortDirection(key):"none")+'" title="'+esc(tip)+'">'
+      +'<button type="button" class="all-sort" data-k="'+esc(key)+'" aria-label="Sort by '+esc(label)+'">'+esc(label)+mk(key)+extra+'</button></th>';
+    const columnLabels = Object.fromEntries([["consensus","Consensus"],["projection","12.1 forecast"],
+      ...tcs.map(c=>[c.id,c.name]), ...mcs.map(c=>["m:"+c.key,c.label])]);
     const tierScales = [...new Set(tcs.map(c=>c.scale))];
     // A tier filter offers the union of every tier in play, ordered by score descending.
     const tierOpts = [...new Set(tierScales.flatMap(sc => SCALES.scales[sc].tiers))]
       .map(t => ({ t, v: Math.max(...tierScales.map(sc => SCALES.scales[sc].values[t] ?? -1)) }))
       .filter(o => o.v >= 0).sort((a,b)=>b.v-a.v);
-    const tierSel = key => '<select class="all-fs" data-f="'+esc(key)+'" aria-label="Minimum tier"><option value="">all</option>'
+    const tierSel = key => '<select class="all-fs" data-f="'+esc(key)+'" aria-label="'+esc(columnLabels[key])+': minimum tier"><option value="">all</option>'
       + tierOpts.map(o=>'<option value="'+o.v+'"'+(String(A.filt[key])===String(o.v)?" selected":"")+'>≥'+esc(o.t)+'</option>').join("") + '</select>';
-    const rankSel = key => '<input class="all-fs" type="number" min="1" placeholder="≤#" data-f="'+esc(key)+'" aria-label="Maximum rank" value="'+esc(A.filt[key] ?? "")+'">';
+    const rankSel = key => '<input class="all-fs" type="number" min="1" placeholder="≤#" data-f="'+esc(key)+'" aria-label="'+esc(columnLabels[key])+': maximum rank" value="'+esc(A.filt[key] ?? "")+'">';
     const currentMcs=mcs.filter(c=>c.current),otherMcs=mcs.filter(c=>!c.current);
-    const metricHead=c=>'<th data-k="m:'+esc(c.key)+'" title="'+esc(c.tip)+'">'+esc(c.label)+mk("m:"+c.key)+colChip(metricColSeason(c),c.label)+'</th>';
+    const metricHead=c=>sortHead("m:"+c.key,c.label,c.tip,colChip(metricColSeason(c),c.label));
     const metricBody=(s,c)=>'<td class="all-rk'+(c.current?' all-current':'')+'">'+rankHtml(rankCell(s,c))+'</td>';
 
     const head = '<tr>'
-      + '<th class="nm" data-k="consensus">Spec</th>'
+      + '<th class="nm">Spec</th>'
       + currentMcs.map(metricHead).join("")
-      + tcs.map(c=>'<th data-k="'+esc(c.id)+'" title="'+esc(c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""))+'">'+esc(c.shortName||c.name)+mk(c.id)+colChip(tierColSeason(c), c.name+"'s "+(A.bracket==="raid"?"raid":"M+")+" list")+'</th>').join("")
-      + '<th data-k="consensus" title="Mean of the live-era tier lists, on a shared 0–100 axis">Consensus'+mk("consensus")+'</th>'
-      + (proj ? '<th class="all-ours" data-k="projection" title="Our own 12.1 forecast — a projection, never a source'+(FROZEN_FC?' — FROZEN pre-launch record, declared '+esc(FROZEN_FC.date):'')+'">Ours: 12.1 ✦'+(FROZEN_FC?'<br><span class="mnote">frozen '+esc(FROZEN_FC.date)+'</span>':'')+mk("projection")+'</th>' : '')
+      + tcs.map(c=>sortHead(c.id,c.shortName||c.name,c.name+(isPtrSource(c.id)?" — a 12.1 PTR list, excluded from the live consensus":""),colChip(tierColSeason(c), c.name+"'s "+(A.bracket==="raid"?"raid":"M+")+" list"))).join("")
+      + sortHead("consensus","Consensus","Mean of the live-era tier lists, on a shared 0–100 axis")
+      + (proj ? sortHead("projection","Ours: 12.1 ✦","Our own 12.1 forecast — a projection, never a source"+(FROZEN_FC?' — FROZEN pre-launch record, declared '+FROZEN_FC.date:''),FROZEN_FC?'<br><span class="mnote">frozen '+esc(FROZEN_FC.date)+'</span>':'',"all-ours") : '')
       + otherMcs.map(metricHead).join("")
       + '</tr><tr class="filt"><th class="nm"><input class="all-fs" id="all-q" type="search" placeholder="filter specs…" value="'+esc(A.q)+'" aria-label="Filter specs by name"></th>'
       + currentMcs.map(c=>'<th>'+rankSel("m:"+c.key)+'</th>').join("")
@@ -4202,7 +4233,7 @@ function openSpecFromOverlay(cls, spec){
       + '</tr>';
 
     const body = list.map(s => '<tr data-cls="'+esc(s.class)+'" data-spec="'+esc(s.spec)+'">'
-      + '<td class="nm"><span style="color:'+(CLASS_COLOR[s.class]||"#888")+'">'+esc(s.spec)+'</span> '
+      + '<td class="nm"><button type="button" class="all-spec" aria-label="Open '+esc(s.spec+' '+s.class)+' details" style="color:'+(CLASS_COLOR_TEXT[s.class]||"#888")+'">'+esc(s.spec)+'</button> '
         + '<span class="all-role">'+esc(s.class)+' · '+esc(s.role)+'</span></td>'
       + currentMcs.map(c=>metricBody(s,c)).join("")
       + tcs.map(c=>'<td style="text-align:center">'+tierHtml(tierCell(s,c))+'</td>').join("")
@@ -4214,6 +4245,9 @@ function openSpecFromOverlay(cls, spec){
     const bkt = ["raid","mplus"].map(b=>'<button data-bkt="'+b+'" aria-pressed="'+(b===A.bracket)+'">'+(b==="raid"?"Raid":"M+")+'</button>').join("");
     const roles = ["All","DPS","Healer","Tank"].map(r=>'<button data-ar="'+r+'" aria-pressed="'+(r===A.role)+'">'+r+'</button>').join("");
 
+    // Removing a focused, edited number input can fire another change while
+    // innerHTML is still replacing it. Retire old handlers before removing nodes.
+    ov.querySelectorAll('input, select').forEach(control=>{ control.onchange=null; });
     ov.innerHTML = '<div class="finder-panel all-panel" role="dialog" aria-modal="true" aria-label="Compare all specs">'
       + '<div class="finder-head"><div><h2>⊞ Compare all</h2><p>Select an encounter to compare current WCL samples. Click a column to sort, filter below it, or click a spec for its full card. Ranks stay within each spec’s role.</p></div>'
       + '<button class="finder-x" id="all-close" aria-label="Close">✕</button></div>'
@@ -4238,15 +4272,24 @@ function openSpecFromOverlay(cls, spec){
     ov.querySelector("#all-archive").onchange=e=>{A.archive=e.target.checked; if(!A.archive && A.sortKey==="m:archivewcl") A.sortKey="consensus"; delete A.filt["m:archivewcl"]; render(); ov.querySelector("#all-archive").focus();};
     ov.querySelectorAll("#all-bkt button").forEach(b=>b.onclick=()=>{ A.bracket=b.dataset.bkt; A.filt={}; render(); });
     ov.querySelectorAll("#all-role button").forEach(b=>b.onclick=()=>{ A.role=b.dataset.ar; render(); });
-    ov.querySelectorAll("thead th[data-k]").forEach(th=>th.onclick=()=>{
-      const k = th.dataset.k;
+    ov.querySelectorAll(".all-sort").forEach(button=>button.onclick=()=>{
+      const k = button.dataset.k;
       if(A.sortKey === k) A.sortDir = -A.sortDir; else { A.sortKey = k; A.sortDir = -1; }
       render();
     });
-    ov.querySelectorAll(".all-fs[data-f]").forEach(el=>el.onchange=()=>{ A.filt[el.dataset.f] = el.value; render(); });
+    ov.querySelectorAll(".all-fs[data-f]").forEach(el=>el.onchange=()=>{
+      const key=el.dataset.f, value=el.value;
+      if(String(A.filt[key] ?? "")===value) return;
+      A.filt[key]=value; render();
+    });
     const q = ov.querySelector("#all-q");
     q.oninput = ()=>{ A.q = q.value.trim(); render();
       const n = ov.querySelector("#all-q"); if(n){ n.focus(); n.setSelectionRange(n.value.length, n.value.length); } };
+    if(scrollPos) ov.querySelector(".all-wrap").scrollTo(scrollPos);
+    if(focusRef){
+      const [attr,value] = focusRef;
+      [...ov.querySelectorAll('button, input, select')].find(el=>el.getAttribute(attr)===value)?.focus({preventScroll:true});
+    }
     // Mirror bracket/role/sort into the URL while open (q and per-column filters are
     // deliberately not link state — they are exploration, not a destination).
     if(ov.classList.contains("open")) writeHash();

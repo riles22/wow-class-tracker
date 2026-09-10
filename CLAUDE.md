@@ -350,6 +350,20 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   publisher holdouts and technical receipts below the breakdown in closed disclosures.
   This reader-facing count is separate from the original exact-tier grading metrics;
   it never changes frozen data, native source scales or model weights.
+- **UI/UX follow-up (2026-09-09):** the tracker forecast banner uses the same
+  main-letter `X of Y right` scorecard as the report; exact-tier statistics remain
+  in technical evidence. Checkpoint shortcuts focus the native Our predictions /
+  Creators / Sites disclosures. Compare all uses keyboard-operable sort and spec
+  buttons and preserves control focus after filtering; role search includes the
+  displayed abbreviations. Supporting text uses readable text tokens in all views.
+  The compact phone preamble still shows source count, snapshot date, retained-source
+  dates, the 0–100 definition, S threshold and within-role qualifier. At 375×812 the
+  first complete tracker card and gearing recommendation now fit on the opening
+  screen; older Console measurements below are historical. Gearing discloses full
+  scoring/source detail nearby, labels custom picks explicitly, leaves custom-mode
+  trinkets unranked, and preserves item tooltip access after partial renders. Archive
+  navigation wraps on phones, and its named table regions scroll by keyboard.
+  [Implementation and verification](docs/ui-ux-audit-fixes-2026-09-09.md).
 - **`SNAPSHOT_PHASE` (`render.mjs`) — the 12.1 flip is DONE** (2026-08-18: `"12.1-ptr"`
   → `"12.1-live"`, and the gate below self-silenced as designed; this bullet is the
   playbook for the NEXT cycle's flip). **Gated since 2026-08-02**: `check-refresh --age`
@@ -1435,7 +1449,8 @@ freshness heartbeat continues to age-check current guide evidence; the historica
 being presented as a periodically refreshed live feed.
 
 **Browser and release verification (2026-09-05):** the independent CI browser job
-runs the tracker and gearing invariants in Chromium, Firefox and WebKit. The Pages
+runs the tracker, gearing, forecast-report and archive invariants in Chromium,
+Firefox and WebKit. The Pages
 workflow keeps browsers outside publication and verifies all three public HTML
 pages after deployment against the normalized hashes from that build's separate
 SHA-bound artifact. A stale or mismatched page fails the deploy workflow after

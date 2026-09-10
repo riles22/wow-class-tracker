@@ -3,10 +3,14 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8");
 
-test('forecast browser checks run in every browser job and historical receipts are immutable during refresh', () => {
+test('all four page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
   const ci = workflow('ci');
   assert.match(ci, /browser: \[chromium, firefox, webkit\]/);
-  assert.match(ci, /run: node --test test\/ui-invariants\.test\.mjs test\/forecast-report-ui\.test\.mjs gearing\/test\/ui-invariants\.test\.mjs/);
+  const browserCommand = ci.match(/run: node --test ([^\r\n]+)/)?.[1];
+  assert.ok(browserCommand, 'CI runs the page browser suites');
+  for (const file of ['test/ui-invariants.test.mjs', 'test/forecast-report-ui.test.mjs',
+    'test/season-archive-ui.test.mjs', 'gearing/test/ui-invariants.test.mjs'])
+    assert.ok(browserCommand.split(/\s+/).includes(file), `${file} runs in the browser matrix`);
   assert.match(workflow('nightly'), /git diff --quiet HEAD --[^\n]*data\/predictions\//);
 });
 

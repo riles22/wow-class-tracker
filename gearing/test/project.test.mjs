@@ -485,9 +485,9 @@ test("self-contained output embeds current data and valid browser JavaScript", a
      measures the viewport, not the column. */
   assert.ok(template.indexOf('<nav class="refrow"') > template.indexOf('id="p-bis"'),
     "the reference row must come after the slot sheet");
-  assert.ok(/customBanner\(\)\s*\+\s*.<div class="sheet">/.test(template)
+  assert.ok(/customBanner\(\)\s*\+\s*.<div class="sheet/.test(template)
     && template.indexOf("weaponLoadoutCards(weaponItems)", template.indexOf("customBanner()"))
-       > template.indexOf('<div class="sheet">'),
+       > template.indexOf('<div class="sheet'),
     "the sheet must be emitted before the weapon loadout cards");
   assert.match(template, /#bis \.sheet\{grid-column:1\/-1\}/);
   /* .src is the generic small-mono meta class, used on divs, spans AND table cells all
@@ -577,6 +577,22 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
     return { document, app };
   };
   const { document, app } = startClient(data);
+  const noPriorityData = clone(data);
+  const noPrioritySpec = noPriorityData.specs.specs.find(s => s.class === "Mage" && s.spec === "Frost");
+  noPrioritySpec.statPriority = null;
+  noPrioritySpec.statPriorityVariants = [];
+  noPriorityData.guides.specs["Frost Mage"].builds = [];
+  const noPriorityClient = startClient(noPriorityData).document;
+  noPriorityClient.ids.get("spec").value = "Mage|Frost";
+  noPriorityClient.ids.get("spec").listeners.change();
+  assert.match(noPriorityClient.ids.get("scoring-summary").innerHTML, /No sourced stat priority/);
+  noPriorityClient.ids.get("scoring-mode").value = "custom";
+  for (const stat of ["crit", "haste", "mast", "vers"])
+    noPriorityClient.ids.get("weight-" + stat).value = "1.25";
+  noPriorityClient.ids.get("scoring-mode").listeners.change();
+  assert.match(noPriorityClient.ids.get("bis-note").innerHTML, /Using your custom decimal weights/);
+  assert.doesNotMatch(noPriorityClient.ids.get("bis-note").innerHTML, /not ranked/,
+    "valid custom weights still compare secondary fit when the guide build is absent");
   assert.match(document.ids.get("foot").innerHTML,
     new RegExp('Icy Veins \\(verified through ' + guides.sources.icyveins.harvestedAt + '\\)'));
   const incompleteGuideData = clone(data);
@@ -613,6 +629,8 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   // 2026-08-22 sheet merged tier slots back in, but Neck keeps this pin stable.)
   assert.equal(app.consensusOf("268265"), 3);
   const bisHtml = document.ids.get("bis").innerHTML;
+  assert.match(bisHtml, /<span>Guide pick<\/span>/);
+  assert.match(bisHtml, /class="scons-label">\/3 guides/);
   assert.match(bisHtml, /3\/3 guides/);
   assert.match(bisHtml, /data-ilvl-ceiling>up to \d+/); // the G2 named ilvl term
   const neckCard = bisHtml.slice(bisHtml.indexOf('<span class="sname">Neck</span>'));
@@ -728,6 +746,21 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   document.ids.get("weight-vers").value = "0.40";
   document.ids.get("weight-mast").listeners.input();
   assert.match(document.ids.get("scoring-summary").innerHTML, /Custom weights supplied by you/);
+  assert.match(document.ids.get("bis").innerHTML, /<span>Custom pick<\/span>/);
+  assert.doesNotMatch(document.ids.get("bis").innerHTML, /class="scons"|<span>Guide pick<\/span>/,
+    "custom-ranked sheet rows do not retain guide-count headings or cells");
+  const customTrinkets = document.ids.get("bis").innerHTML
+    .slice(document.ids.get("bis").innerHTML.indexOf('<span class="sname">Trinkets</span>'));
+  const trinketSummary = customTrinkets.slice(0, customTrinkets.indexOf("</summary>"));
+  assert.match(trinketSummary, /View trinkets — custom weights cannot rank effects/);
+  assert.match(trinketSummary, /class="ssrc"><\/span>/);
+  assert.match(trinketSummary, /class="sceil"><\/span>/,
+    "unranked trinkets must not imply a winning item's source or ceiling");
+  assert.match(customTrinkets, /Custom weights cannot score trinkets/,
+    "expanded trinket explanation remains available");
+  assert.match(document.ids.get("bis-note").innerHTML, /Scoring and sources/);
+  assert.match(document.ids.get("bis-note").innerHTML, /1\.120/,
+    "full custom coefficients remain available in the methodology disclosure");
   for (const surface of ["bis", "tier"])
     assert.match(document.ids.get(surface).innerHTML, /Ranked by your custom weights/,
       `custom announcement missing on #${surface}`);

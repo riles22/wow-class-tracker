@@ -154,6 +154,33 @@ ui("forecast report keyboard reaches checkpoints, opens disclosures and returns 
   assert.equal(await page.title(), "Tracker return target");
 });
 
+ui("checkpoint shortcuts reach operable breakdown summaries on desktop and phones", async page => {
+  const days = report.checkpoints.find(c => c.grade).settleDays;
+  const shortcuts = page.getByRole("navigation", { name: `+${days} day prediction breakdowns` });
+  assert.deepEqual(await shortcuts.locator("a").allTextContents(), ["Our predictions", "Creators", "Sites"]);
+  for (const width of [1440, 320, 375, 390]) {
+    await page.setViewportSize({ width, height: 812 });
+    for (const section of ["ours", "creators", "sites"]) {
+      const id = `checkpoint-${days}-${section}`;
+      const link = shortcuts.locator(`a[href="#${id}"]`);
+      await link.focus();
+      const bounds = await link.boundingBox();
+      assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= width, "shortcut stays within the viewport");
+      assert.ok(bounds.height >= 44, "shortcut provides a touch-sized target");
+      await page.keyboard.press("Enter");
+      assert.ok(page.url().endsWith(`#${id}`));
+      assert.equal(await page.evaluate(() => document.activeElement.id), id, "fragment moves keyboard focus to its summary");
+      const target = page.locator(`#${id}`);
+      const wasOpen = await target.evaluate(el => el.parentElement.open);
+      await page.keyboard.press("Enter");
+      assert.equal(await target.evaluate(el => el.parentElement.open), !wasOpen, "the landing summary responds to the next keyboard action");
+      await page.keyboard.press("Enter");
+    }
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), width);
+  }
+  assert.equal(await page.locator(".source-group").first().getAttribute("data-group"), "creator", "shortcuts preserve creator-first reading order");
+});
+
 ui("all source and provenance disclosures stay inside a phone viewport", async page => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.evaluate(() => { for (const details of document.querySelectorAll("details")) details.open = true; });

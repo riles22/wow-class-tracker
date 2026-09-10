@@ -70,6 +70,10 @@ test("renderer escapes hostile data, ships zero script, and keeps hrefs on the a
   assert.ok(html.includes("frozen 2026-08-09"), "a frozen source's column must disclose its freeze date");
   assert.ok(html.includes("excluded from the final mean"), "an excluded source must be disclosed in provenance");
   assert.ok(html.includes("This is a frozen record"), "the archive banner must render");
+  assert.equal((html.match(/Tiers are within role:/g) ?? []).length, 2, "both brackets explain the scope of tier comparisons");
+  for (const title of ["Raid", "Mythic+"]) {
+    assert.ok(html.includes(`tabindex="0" role="region" aria-label="${title} final standings"`), "wide tables are named keyboard scroll regions");
+  }
 });
 
 test("renderer refuses a wrong-shape record instead of rendering a half-page", async () => {

@@ -994,8 +994,8 @@ ui("Compare all distinguishes 'no such measurement' from 'not fetched', and era-
 ui("Compare all sorts tiers by scale score, not alphabetically", async page => {
   await page.click("#allbtn");
   await page.waitForSelector("table.alltab tbody tr");
-  await page.click('thead th[data-k="consensus"]');   // already the default key; this toggles
-  await page.click('thead th[data-k="consensus"]');   // …back to descending
+  await page.click('.all-sort[data-k="consensus"]');   // already the default key; this toggles
+  await page.click('.all-sort[data-k="consensus"]');   // …back to descending
   // Locate the consensus column by its header key — a positional selector silently reads
   // whichever column the era gate happens to have left in that slot.
   const order = await page.$$eval("table.alltab tbody tr", rows => {
@@ -1006,6 +1006,9 @@ ui("Compare all sorts tiers by scale score, not alphabetically", async page => {
   const data = payload();
   const rank = t => data.scales.consensus.bands.findIndex(b => b.tier === t);
   const seen = order.filter(Boolean).map(rank);
+  const expected = data.specs.filter(s=>s.consensus?.raid?.tier).length;
+  assert.ok(expected > 0, "fixture has rated raid specs");
+  assert.equal(seen.length, expected, "read the actual consensus column for every rated spec");
   // Alphabetically "A+" sorts before "A" and "B+" before "B"; by score the opposite holds.
   // Asserting monotonic band order catches either mistake.
   for (let i = 1; i < seen.length; i++) {
@@ -1603,6 +1606,196 @@ ui("keyboard sorting preserves the activated header's focus", async page => {
   assert.equal(await page.evaluate(()=>document.activeElement?.id), "sortsel", "dropdown sorting must not steal focus");
 });
 
+ui("Compare all retains keyboard focus through sorting and filtering, then opens the chosen spec", async page => {
+  await page.locator('#allbtn').click();
+  await page.waitForFunction(()=>document.activeElement?.id==='all-close');
+  const active = () => page.evaluate(()=>({id:document.activeElement?.id,
+    bracket:document.activeElement?.dataset.bkt, role:document.activeElement?.dataset.ar,
+    sort:document.activeElement?.dataset.k, filter:document.activeElement?.dataset.f}));
+
+  await page.locator('#all-bkt [data-bkt="mplus"]').focus();
+  await page.keyboard.press('Enter');
+  assert.equal((await active()).bracket, 'mplus');
+  await page.locator('#all-role [data-ar="Healer"]').focus();
+  await page.keyboard.press('Space');
+  assert.equal((await active()).role, 'Healer');
+  assert.equal(await page.locator('table.alltab tbody tr').count(), payload().specs.filter(s=>s.role==='Healer').length);
+
+  const sort = '.all-sort[data-k="consensus"]';
+  await page.locator(sort).focus();
+  await page.keyboard.press('Enter');
+  assert.equal((await active()).sort, 'consensus');
+  assert.equal(await page.locator('thead th[data-k="consensus"]').getAttribute('aria-sort'), 'ascending');
+  await page.keyboard.press('Space');
+  assert.equal((await active()).sort, 'consensus');
+  assert.equal(await page.locator('thead th[data-k="consensus"]').getAttribute('aria-sort'), 'descending');
+  await page.locator('.all-sort[data-k="m:wcl"]').focus();
+  await page.keyboard.press('Enter');
+  assert.equal((await active()).sort, 'm:wcl');
+  assert.equal(await page.locator('thead th[data-k="m:wcl"]').getAttribute('aria-sort'), 'ascending', 'best-first ranks run #1, #2, ...');
+  await page.keyboard.press('Space');
+  assert.equal((await active()).sort, 'm:wcl');
+  assert.equal(await page.locator('thead th[data-k="m:wcl"]').getAttribute('aria-sort'), 'descending');
+
+  const tierFilter = '.all-fs[data-f="consensus"]';
+  await page.locator(tierFilter).focus();
+  await page.selectOption(tierFilter, {index:1});
+  assert.equal((await active()).filter, 'consensus');
+  assert.match(await page.locator(tierFilter).getAttribute('aria-label'), /Consensus.*minimum tier/);
+  await page.selectOption(tierFilter, '');
+  const rankFilter = '.all-fs[data-f="m:wcl"]';
+  await page.locator(rankFilter).focus();
+  await page.keyboard.press('ArrowUp');
+  assert.equal((await active()).filter, 'm:wcl');
+  assert.match(await page.locator(rankFilter).getAttribute('aria-label'), /WCL top sample.*maximum rank/);
+  await page.locator(rankFilter).fill('');
+  await page.locator(rankFilter).dispatchEvent('change');
+  assert.equal((await active()).filter, 'm:wcl', 'committing a dirty number input must not re-enter the dialog render');
+
+  const target = await page.locator('table.alltab tbody tr').first().evaluate(row=>({cls:row.dataset.cls,spec:row.dataset.spec}));
+  await page.locator('table.alltab tbody tr .all-spec').first().focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.locator('#all-ov').evaluate(el=>el.classList.contains('open')), false);
+  const landing = await page.evaluate(()=>({open:document.activeElement?.matches('.row.open'),
+    cls:document.activeElement?.querySelector('.cls')?.textContent,
+    spec:document.activeElement?.querySelector('.spec-txt')?.textContent}));
+  assert.deepEqual(landing, {open:true,...target}, "keyboard activation lands on the opened spec, ready to continue reading");
+});
+
+ui("Compare all announces raw scores, ranks, and mixed PTR score ordering accurately", async page => {
+  // The supported PTR score column is dormant between cycles. Give it two
+  // deterministic metrics without changing the published data or other columns.
+  const targets = await page.evaluate(()=>{
+    state.era='both';
+    for(const role of ['DPS','Healer','Tank']) PTRNAMES.raidTestingScore[role]='UI test PTR score';
+    const specs=SPECS.filter(s=>s.role==='DPS').slice(0,2);
+    specs.forEach((s,i)=>(s.metrics ??= []).push({name:'UI test PTR score',bracket:'raid',
+      source:'warcraftlogs',value:i?80:20,unit:'/100',rank:null,n:5}));
+    return specs.map(s=>`${s.class}|${s.spec}`);
+  });
+  await page.locator('#allbtn').click();
+  const sort=page.locator('.all-sort[data-k="m:ptr"]');
+  const direction=()=>page.locator('thead th[data-k="m:ptr"]').getAttribute('aria-sort');
+  const first=()=>page.locator('table.alltab tbody tr').first().evaluate(row=>`${row.dataset.cls}|${row.dataset.spec}`);
+  // WebKit does not focus buttons after a pointer click; exercise this as an
+  // actual keyboard path so subsequent Enter/Space presses target the sort.
+  await sort.focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await direction(),'descending');
+  assert.equal(await first(),targets[1],'best-first raw scores put 80 ahead of 20');
+  await page.keyboard.press('Enter');
+  assert.equal(await direction(),'ascending');
+  assert.equal(await first(),targets[0]);
+
+  await page.evaluate(key=>{
+    const s=SPECS.find(s=>`${s.class}|${s.spec}`===key);
+    Object.assign(s.metrics.find(m=>m.name==='UI test PTR score'),{rank:1,of:2,n:100});
+  },targets[0]);
+  await page.keyboard.press('Space');
+  assert.equal(await direction(),'other','rank 1 followed by an unranked score is a mixed ordering');
+  assert.equal(await first(),targets[0],'ranked measurements stay ahead of raw below-floor scores');
+
+  const rankFilter=page.locator('.all-fs[data-f="m:ptr"]');
+  await rankFilter.focus();
+  await rankFilter.fill('1');
+  await rankFilter.dispatchEvent('change');
+  assert.equal(await page.locator('table.alltab tbody tr').count(),1);
+  assert.equal(await direction(),'ascending','filtering out raw scores leaves a numeric rank ordering');
+  await rankFilter.fill('');
+  await rankFilter.dispatchEvent('change');
+  assert.equal(await direction(),'other','clearing the filter restores the mixed ordering');
+
+  await page.evaluate(key=>{
+    const s=SPECS.find(s=>`${s.class}|${s.spec}`===key);
+    Object.assign(s.metrics.find(m=>m.name==='UI test PTR score'),{rank:2,of:2,n:100});
+  },targets[1]);
+  await sort.focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await direction(),'descending');
+  assert.equal(await first(),targets[1],'descending rank numbers put #2 before #1');
+  await page.keyboard.press('Space');
+  assert.equal(await direction(),'ascending');
+  assert.equal(await first(),targets[0]);
+});
+
+ui("Gearing keeps its link label and never changes the comparison selection", async page => {
+  const row = page.locator('.row').first();
+  await row.locator('.spec-txt').click();
+  const gear = row.locator('a.gearlink');
+  const href = await gear.getAttribute('href');
+  assert.match(href, /^gearing\.html#spec=/);
+  // Keep this page loaded to observe state and errors, while allowing the click
+  // to pass through the same drawer handlers as a real navigation.
+  await page.evaluate(()=>document.addEventListener('click', event=>{
+    if(event.target.closest('a.gearlink')) event.preventDefault();
+  }));
+  await gear.click();
+  assert.deepEqual(await page.evaluate(()=>[...COMPARE]), []);
+  await row.locator('.cmpbtn[data-cmp]').click();
+  const selected = await page.evaluate(()=>[...COMPARE]);
+  assert.equal(selected.length, 1);
+  assert.equal(await gear.innerText(), '⚙ Gearing');
+  assert.equal(await gear.getAttribute('aria-pressed'), null);
+  assert.equal(await gear.getAttribute('href'), href);
+  await gear.click();
+  assert.deepEqual(await page.evaluate(()=>[...COMPARE]), selected);
+});
+
+ui("tracker search matches role names and displayed role abbreviations", async page => {
+  for(const [query,role] of [['healer','Healer'],['HLR','Healer'],['tank','Tank'],['TNK','Tank'],['dps','DPS']]){
+    await page.locator('#search').fill(query);
+    const expected=payload().specs.filter(s=>s.role===role).length;
+    // The hash is written after the debounced render, so even two aliases with
+    // identical results must each finish rendering before the next query.
+    await page.waitForFunction(({query,expected})=>new URLSearchParams(location.hash.slice(1)).get('q')===query
+      && document.querySelectorAll('.row').length===expected, {query,expected});
+    const roles = await page.locator('.row .rolecell').evaluateAll(elements=>elements.map(el=>el.title));
+    assert.equal(roles.length, expected, query);
+    assert.ok(roles.every(value=>value===role), query);
+  }
+});
+
+ui("supporting labels and comparison names meet small-text contrast", async page => {
+  const contrast = selector => page.locator(selector).evaluateAll(elements=>{
+    const rgba = color=>color.match(/[\d.]+/g).map(Number);
+    const luminance = rgb=>rgb.slice(0,3).map(c=>c/255).map(c=>c<=0.04045?c/12.92:((c+0.055)/1.055)**2.4)
+      .reduce((sum,c,i)=>sum+c*[0.2126,0.7152,0.0722][i],0);
+    return elements.filter(el=>el.textContent.trim()).map(el=>{
+      let opacity=0, background=[0,0,0];
+      for(let parent=el;parent && opacity<1;parent=parent.parentElement){
+        const color=rgba(getComputedStyle(parent).backgroundColor), alpha=color[3]??1;
+        background=background.map((c,i)=>c+(1-opacity)*alpha*color[i]);
+        opacity+=(1-opacity)*alpha;
+      }
+      background=background.map(c=>c+(1-opacity)*255);
+      const color=rgba(getComputedStyle(el).color), alpha=color[3]??1;
+      const foreground=color.slice(0,3).map((c,i)=>alpha*c+(1-alpha)*background[i]);
+      const light=luminance(foreground), dark=luminance(background);
+      return {text:el.textContent.trim().slice(0,80),ratio:(Math.max(light,dark)+0.05)/(Math.min(light,dark)+0.05)};
+    });
+  });
+  await page.locator('.row .spec-txt').first().click();
+  const main = await contrast('.rank, .rolecell, .profcell, .notecell, .dfold-full');
+  assert.ok(main.length>=payload().specs.length*2, "main roster rank and role labels are covered");
+  assert.deepEqual(main.filter(row=>row.ratio<4.5), [], 'main supporting text has at least 4.5:1 contrast');
+  await page.locator('#allbtn').click();
+  const all = await contrast('.all-spec');
+  assert.equal(all.length, payload().specs.length);
+  assert.deepEqual(all.filter(row=>row.ratio<4.5), [], 'every class name in Compare all is readable');
+  await page.locator('#all-close').click();
+  await page.evaluate(()=>{
+    COMPARE.clear();
+    for(const cls of ['Death Knight','Demon Hunter','Shaman']){
+      const spec=SPECS.find(s=>s.class===cls);
+      COMPARE.add(`${spec.class}|${spec.spec}`);
+    }
+    openCompare();
+  });
+  const comparison = await contrast('.cmp-table thead th:not(:first-child)');
+  assert.equal(comparison.length, 3);
+  assert.deepEqual(comparison.filter(row=>row.ratio<4.5), [], 'side-by-side class names meet the same contrast floor');
+});
+
 ui("fractional consensus presentation explains a rounded boundary without changing scores", async page => {
   const shown = await page.evaluate(()=>{
     const s = SPECS[0];
@@ -1632,7 +1825,9 @@ ui("a settled forecast report is reachable and separate from today's comparison"
   }
   const chip = page.locator('#forecast-grade');
   assert.equal(await chip.isVisible(), true);
-  assert.match(await chip.innerText(), new RegExp(`${report.coverage.graded}/${report.coverage.obtainable} cells`));
+  assert.ok((await chip.innerText()).includes(`${report.scorecard.right} of ${report.scorecard.total} right`));
+  assert.match(await chip.innerText(), /Main-letter match/);
+  assert.doesNotMatch(await chip.innerText(), /% exact/);
   assert.ok((await chip.innerText()).includes(report.actualDate));
   assert.equal(await chip.locator('a').getAttribute('href'), 'forecast-report.html');
   assert.ok(!(await page.locator('#movers').innerText()).includes('not yet a grade'));
@@ -1640,6 +1835,8 @@ ui("a settled forecast report is reachable and separate from today's comparison"
   await page.waitForLoadState('domcontentloaded');
   const text = await page.locator('body').innerText();
   assert.ok(text.includes(report.actualDate));
+  assert.ok((await page.locator('.result').first().innerText()).includes(`${report.scorecard.right} of ${report.scorecard.total} right`),
+    'the report uses the same matching rule and count as its entry banner');
   assert.equal(await page.locator('.baseline').isVisible(), true);
   assert.match(await page.locator('.baseline').innerText(), /Keeping the old tiers: \d+ of \d+ right/);
   assert.equal(await page.locator('script').count(), 0);
@@ -1658,8 +1855,37 @@ ui("retained rating disclosure names actual older contributors without changing 
     const text = await page.locator('#retained-ratings').innerText();
     for(const s of expected) assert.ok(text.includes(`${s.name} last verified ${s.date}`));
     assert.match(text,/still contribute to consensus/);
-    assert.match(text,/Freshness alerts remain active/);
   }
+});
+
+test("the phone opening screen includes a complete spec card with visible scoring and source context", skipOpts, async () => {
+  await ensureBrowser();
+  const page = await browser.newPage({ viewport: { width: 375, height: 812 }, hasTouch: true,
+    ...(ENGINE !== "firefox" ? { isMobile: true } : {}) });
+  try {
+    await page.goto("file://" + DIST);
+    await page.waitForFunction(() => document.querySelectorAll('.row').length > 0);
+    await page.evaluate(() => document.fonts.ready);
+    const note = await page.locator('.score-note').innerText();
+    assert.match(note, /0–100/);
+    assert.match(note, /100 means every source's top tier/);
+    assert.match(note, /S from 88 up/);
+    assert.match(note, /within role/);
+    assert.match(note, /sources disagree/);
+    assert.equal(await page.locator('.score-note #count').isVisible(), true);
+    assert.equal(await page.locator('.score-note #notestamp').isVisible(), true);
+    assert.ok(note.includes(payload().meta.latestSnapshot), 'the snapshot remains visible with phone controls closed');
+    const row = page.locator('.row').first();
+    const box = await row.boundingBox();
+    assert.ok(box.y + box.height <= 812, 'at least one whole card is visible without scrolling');
+    assert.ok(box.height < 140, 'the star rail does not stretch the first line of the card');
+    assert.ok((await row.locator('.starbtn').boundingBox()).height >= 44, 'the star retains its touch target');
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 375);
+    // Opening the drawer must not make the star rail span the expanded content.
+    await row.click();
+    const rail = await row.locator('.idcell').boundingBox();
+    assert.ok(rail.height < 140, 'the rail spans the card header, not the expanded drawer');
+  } finally { await page.close(); }
 });
 
 ui("official previews keep their attribution and not-live label in mobile spec drawers", async page => {

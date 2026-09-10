@@ -41,12 +41,12 @@ function bracketTable(bracket, rows, sources, spreadThreshold) {
   const cols = sources.filter(s =>
     rows.some(r => r.perSource.some(p => p.source === s.id)));
   const head =
-    `<tr><th>#</th><th>Spec</th><th>Role</th><th>Consensus<span class="qual">final · 0–100 mean</span></th>` +
+    `<tr><th scope="col">#</th><th scope="col">Spec</th><th scope="col">Role</th><th scope="col">Consensus<span class="qual">final · 0–100 mean</span></th>` +
     cols.map(s => {
       const lane = s[bracket]?.lane;
       const qual = lane === "frozen"
         ? `frozen ${esc(s[bracket].frozenAt ?? "")}` : `snapshot ${esc(s[bracket]?.snapshot ?? "—")}`;
-      return `<th>${esc(s.name)}<span class="qual">${qual}</span></th>`;
+      return `<th scope="col">${esc(s.name)}<span class="qual">${qual}</span></th>`;
     }).join("");
   const body = rows.map((r, i) => {
     const by = Object.fromEntries(r.perSource.map(p => [p.source, p]));
@@ -63,8 +63,8 @@ function bracketTable(bracket, rows, sources, spreadThreshold) {
       `<td class="cons">${tierChip(r.tier)}${r.score != null ? `<span class="score">${esc(r.score)}</span>` : ""}${div}</td>` +
       cells + `</tr>`;
   }).join("\n");
-  return `<h2>${esc(meta.title)}</h2>\n<p class="bracket-note">${esc(meta.note)}</p>\n` +
-    `<div class="tablewrap"><table>\n<thead>${head}</thead>\n<tbody>\n${body}\n</tbody></table></div>`;
+  return `<h2>${esc(meta.title)}</h2>\n<p class="bracket-note">${esc(meta.note)} Tiers are within role: a healer's S is among healers, not across the whole game.</p>\n` +
+    `<div class="tablewrap" tabindex="0" role="region" aria-label="${esc(meta.title)} final standings"><table>\n<thead>${head}</thead>\n<tbody>\n${body}\n</tbody></table></div>`;
 }
 
 const bandsLegend = (bands, spreadThreshold) => {
