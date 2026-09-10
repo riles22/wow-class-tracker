@@ -16,6 +16,53 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-10 (nightly) — 44 channels, 1 transcript distilled into 8 raid metaNotes, 1 queued
+
+- **Discovery**: 44 of 44 unique tracked channels polled inline over the public RSS endpoint (41 class-creator
+  entries + the 3 generalCreators; `transcribable:false` skipped), all HTTP 200 with retry+backoff, **660 entries**.
+  Seen-set rebuilt as the STRUCTURED union of the four lanes = **1,250 ids**; log.md was not regexed.
+  **320 unseen**, and all 320 fall inside the cycle bound — the OLDEST date in ptr-builds.json, **2026-06-18**,
+  taken as a DATE and never as `builds[0]`. Nightly mode, so the keyword filter stays on: **156 title hits**,
+  10 of them PvP-framed and triaged out, leaving **146 candidates**.
+- **DISTILLED — izen, `TJe8OnXl3pY`, "12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the
+  'Overall Results' Bait" (published 2026-09-08)**, pre-fetched by the deterministic step (verdict `ok`,
+  `fetched:554` chunks, ms offsets). He is a generalCreator, so this is **metaNotes only** — 8 written, all
+  raid-lens: Holy Priest **positive**, Discipline Priest **mixed**, Restoration Druid **positive**, Holy Paladin
+  **negative**, Restoration Shaman **negative**, Preservation Evoker **mixed**, Arms Warrior **mixed**, Frost Mage
+  **mixed**.
+- **Curation was deliberately narrow, and the video is why.** Its whole thesis is that the overall raid DPS
+  ranking is a LOGGING ARTIFACT — almost every parse sits on the early, easy, multi-target bosses, which is why 10
+  of the top 13 are casters — so the caster cluster at the top was **not** distilled as spec strength. Only two DPS
+  reads survive his own caveat, and both are recorded **mixed rather than positive** because he is explicit that
+  Twin Fangs is the only boss in the tier with that two-target profile: Arms Warrior (Sweeping Strikes uptime he
+  measures at 97.34%) and Frost Mage (innate Flurry + Frostbolt/Frostfire and Ice Lance cleave, surviving the nerf).
+- **Deliberately DROPPED under the list-mention rule**: the buffs he enumerates for Balance Druid, Beast Mastery,
+  Frost DK and Survival ("none of this had too big of an effect for now") — bare enumeration, no spec-specific
+  read — and **Mistweaver Monk**, which appears only inside his recital of the PRE-tier consensus, never as his own
+  read. Also dropped: the Marksmanship "isn't even turning around to target the adds" line, which is a comment on
+  one player's play, not a spec read; and the pure-single-target boss enumeration ("triple rogue up there, feral,
+  ret, beast mastery, marksmanship, havoc"), which is enumeration on both sides.
+- **ASR discipline**: the boss the transcript renders variously as "Zorok" / "Zul'jin" / "Zuldazar" is one mangled
+  name and is never quoted — only Twin Fangs, Entombed Sentinels and The Lost Explorers, which the captions render
+  consistently. "Frost is very good at two target cleaving" is Frost MAGE, fixed by the following clause naming
+  Flurry, Frostbolt/Frostfire Bolt and Ice Lance, not by the bare token.
+- **Supersession, and what was deliberately NOT superseded.** Two older raid-lens izen notes retired: Holy Priest
+  2026-07-17 and Arms Warrior 2026-08-31. The 2026-08-17 pre-launch and 2026-08-29 tuning-pass notes for the same
+  specs were **left live on purpose** — their `patchContext` names both brackets, so under the model's own lens
+  rule (`takeInBracket`/the metaNotes filter) they feed M+ as well, and retiring them with a raid-only note would
+  silently drop that contribution. The new context is worded to mention raid and NOT any M+ token, so it stays
+  raid-scoped.
+- `TJe8OnXl3pY` removed from `videos[]` in the same edit — the take url is now its record, and no id sits in
+  two lanes.
+- **QUEUED (1)**: AutomaticJak `4SH6SUfKxpM` "Midnight Season 2 Healer M+ Tier List" (2026-09-10). His registered
+  scope across five class entries is exactly the seven healers, so a healer tier list is squarely in scope and worth
+  a metered request.
+- **Left UNSEEN, not marked seen**: the remaining ~145 candidates are gameplay VODs, key-run PoVs, boss/spec guides
+  and 12.1.5 feature explainers — guide-shaped content the distillation rules say carries no spec-strength read.
+  Budget/priority cuts are not durable dismissals, so the next run reconsiders them.
+- No YouTube or transcript-API fetch by the agent; yt-dlp neither run nor installed. izen's `generalCreators.latest`
+  advanced to what this run actually distilled.
+
 ## 2026-09-09 (nightly) — 44 channels, 7 transcripts resolved: 2 distilled (18 records), 5 verified-skipped, 1 queued
 
 All **44** unique tracked channels polled inline (41 class creators + 3 generalCreators), 15 entries each,

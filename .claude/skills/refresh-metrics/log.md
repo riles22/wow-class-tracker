@@ -16,6 +16,57 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-10 (nightly) — SimC new build (23), Bloodmallet 24 with Feral BACK, Mythicstats period 1080, WoWMeta byte-identical, Archon walled day 17
+
+- **SimulationCraft** — `MID2_Raid.txt` 1,405,879 B **with** a `DPS Ranking:` block, so the plain-text lane
+  sufficed and the HTML was not needed. Header build string (never the visible "12.3.0", which is Highcharts):
+  `12.1.0.69587 Live (hotfix 2026-09-10/69587, git build HEAD ba1d6a064f)`. The hash moved from **ba72a9dcfe**
+  (last night's) to **ba1d6a064f**, which is the honest reason all 23 values moved; **largest single move 2.21%**,
+  far under the 60% gate, so no `value_move_ack` is needed. 45 entries, Raid aggregate skipped, longest-prefix
+  mapping with a hyphen allowed -> **23 of 27 DPS**; the 7 unmapped entries are all tanks (Prot Warrior, both Prot
+  Paladin builds, Brewmaster, Vengeance Annihilator, Blood San'layn), correctly excluded. Balance, Feral,
+  Augmentation and Devastation still absent upstream in SimC.
+- **Bloodmallet** — 27 requested with up to 3 attempts each, **24 charts returned**. The persistent error set is
+  down to **three** (Balance Druid, Augmentation Evoker, Devastation Evoker) on the 76-byte
+  `{"status":"error"}` body across all 3 attempts, while 24 succeeded interleaved in the same minutes — so this is
+  "not re-simmed yet", not an outage. `simc_settings.ptr` compared EXPLICITLY against the string `"0"`;
+  `tier` READ off each chart, **all 24 MID2**, matching the stored pool, so uniformity holds and no mixed-tier
+  merge was possible. **FERAL DRUID IS BACK** — one of the four dropped in the 2026-09-03 wholesale MID2 adoption,
+  re-simmed upstream today, joining the pool on its own night exactly as that note anticipated. Pool **23 -> 24**,
+  a row ADD: the floor (15) and the 25% row-drop gate are not in play, and **no stored value moved**. `asOf` per
+  spec from each chart's own timestamp: 23 at 2026-09-09, Feral at 2026-09-10 — so the coverage date (min-th-freshest,
+  min 15) stays **2026-09-09**, one day old, which is what the manifest row records.
+- **Murlok** — from the trusted pre-agent collector only (checkedAt 14:39:22Z); no second parser written. Status
+  success: three pages HTTP 200 first attempt (71,302 / 42,311 / 40,911 B), 27/7/6 = 40 rows, 0 omitted,
+  `sourceAsOf` **2026-09-02** off the pages' own `<time datetime>`. Recorded **partial**: upstream has not
+  republished in 8 days, past `maxAgeDays: 5`, and stamping today would defeat exactly the gate that is supposed
+  to notice.
+- **Mythicstats** — same collector. `/period/latest` resolved to `/period/1080` again (same weekly period as
+  last night, so no half-landed roll), HTTP 200, 228,471 B, 40 rows, 0 omitted. Share-column shape check passed:
+  role subtotals Ranged 33 / Melee 27.3 / Tank 20 / Healer 20, **sum 100.3%** — the representation SHARE series and
+  not the `/meta` per-key-presence column. Page publishes no timestamp, so `sourceAsOf` is honestly null with
+  `dateBasis: observed-undated-source`: 39 changed rows take 2026-09-10, the 1 unchanged row keeps 2026-09-09.
+- **WoWMeta** — both JSON API files by plain curl, no headers/proxy/auth; the HTML page deliberately not fetched.
+  `manifest.json` snapshotDate **2026-09-08**, and `rankings/…/0.json` HTTP 200 162,405 B with
+  `Last-Modified: Tue, 08 Sep 2026` — **the two agree**, so no repeat of the 2026-08-04 split where a pinned
+  manifest hid moved rankings. Blocks whitelisted on `categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"`
+  + `keyRange === undefined` (melee/ranged are SUBSETS of dps): 27 + 7 + 6 = 40, 0 misses. Re-merged at the
+  source's own date, rounded to the stored 1-decimal convention: **all 40 values byte-identical**. Recorded
+  **partial** (source date lags 2 days; `maxAgeDays` is 8, so no staleness breach).
+- **Warcraft Logs** — reported entirely from the pre-agent `wcl-fetch/evidence.json` (attemptedAt 14:37:05Z); the
+  agent fetched, recomputed and edited nothing, and `data/wcl-coverage.json` was left as the collector wrote it.
+  `wcl-leaderboard-raid` **success, 222 rows** (min 200): 222 of 320 cuts produced a median, 98 empty/sparse, 0
+  failed. `wcl-leaderboard-mplus` **success, 320 rows** (min 280): all 320 cuts landed, 0 empty. Both match
+  `evidence.landed` exactly and `check-wcl-metrics.mjs` passes. The legacy `wcl-live-raid`/`-mplus` rows stay
+  **unreachable** on the collector's own finding — no verified sanctioned aggregate endpoint — and the leaderboard
+  series explicitly cannot green them. `rdps` remains FFXIV-only; its rejection is not a WoW outage, and the
+  supported dps/hps OAuth+GraphQL path worked (7.08 points of a 3,600/hour budget).
+- **Archon — day 17 of the wall**, all six numeric requirements `unreachable` and reported separately so it stays
+  visible which series failed. HTTP 403 Cloudflare interstitial on every route, corroborated by the pre-agent
+  source-health artifact. Nothing merged; every stored Archon value and date is byte-identical.
+- **Robydoby** deliberately not refreshed: it is a closed-cycle 12.1 PTR zone-54 series, outside the contract by
+  design, and the PTR lanes are dormant.
+
 ## 2026-09-09 (nightly) — SimC new build (23), Bloodmallet re-sim (23 MID2), Mythicstats period 1080, WoWMeta byte-identical, Archon walled
 
 - **SimulationCraft** — `MID2_Raid.txt` 1,368,993 B with a `DPS Ranking:` block, so the plain-text lane

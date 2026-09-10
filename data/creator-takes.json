@@ -7935,7 +7935,7 @@
       "note": "izen: Holy Priest is one of the more-buffed healers after Holy Paladin — +10% healing, mana discounts, and Benediction now cast about twice as often (tied to Holy Word/Serenity rather than Apotheosis), plus a smaller latest round buffing Prayer of Mending +20% and Prompt Prognosis. After roughly three rounds of buffs (over 20% more total healing) it's now testing okay, up notably from the prior week.",
       "patchContext": "Season 2 PTR — raid testing outlook",
       "url": "https://youtu.be/WQI9eNr4qpo?t=945",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -11973,7 +11973,7 @@
       "note": "One of the two specs he expects the September 1 pass to actually matter for, because it is already being played at the top. He credits the add-heavy damage profile: Balance is extremely good on the add-slop AoE on Ula'tek — the eggs in phase one especially, but also phase two and the intermission — and it sits high in the overall Mythic results alongside the Warlocks, Arcane and Shadow. The 4% buff lands on top of that. His one reservation is defensive: he names Balance, with Windwalker, as the squishiest DPS spec right now."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "izen (Izenhart)",
@@ -12312,6 +12312,94 @@
       "note": "Against the two specs that grew this week, Devourer went the other way, slipping from 2.8% to 1.6% of high-key DPS. He calls the move very minor and does not attach a cause to it, and Devourer remains on his list of specs that occasionally turn up as a replacement pick in high-key compositions.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=543",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "positive",
+      "note": "izen reads Holy Priest as the biggest mover of the healer field. The back-to-back buffs to its overall healing and to Oracle let it drop the five talents a mana-intensive Prayer of Healing build needed and respend them elsewhere, so its mana problem is now effectively gone and its main buttons are much stronger (he cites roughly 30% on one and about 50% and 25-30% on two others). The result, he says, is very high overall healing that has passed Discipline, and it can now hold the composition's spot-healer role he describes as previously belonging to Holy Paladin. He also expects it to gain relatively more value on the easier, lower-damage bosses.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=843",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "mixed",
+      "note": "izen has Holy Priest passing Discipline on overall healing, but does not write Discipline off: on bosses with very high burst damage windows he says the wider Atonement coverage from Evangelism plus Voidweaver's burst Atonement healing is still better than what Holy Priest does. His summary is that Discipline keeps that specific niche while Holy Priest becomes the default better choice for average raid coverage and spot healing — and he adds that Discipline is historically the far less popular of the two.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=950",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "positive",
+      "note": "izen repeats the channel's earlier claim that Restoration Druid was sandbagged on the PTR by a badly set-up player test, which he says gave players a wrong impression of how powerful it would be, and notes it has also been buffed recently. He presents the live healer results as unsurprising in that light rather than as a reversal.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=1006",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "negative",
+      "note": "izen argues players overvalued Holy Paladin's power level off the PTR dummy healing tests, which he says were unrealistic about the damage you actually heal in this raid — real fights ask for burst coverage in small windows, where he calls Preservation Evoker much stronger than Paladin. He also has Holy Priest taking over the composition's spot-healer role he describes as having been effectively Holy Paladin's.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=1067",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "negative",
+      "note": "izen names Restoration Shaman alongside Holy Paladin as a spec whose power level players overvalued on the strength of the PTR dummy healing tests, which he says did not reflect the burst-window damage taken in this raid's fights.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=1075",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "mixed",
+      "note": "izen's read on Preservation Evoker is burst-scaled rather than flat: he calls it much stronger than Holy Paladin at burst healing in small windows, and says it gains value as a fight's raid damage and small-window healing requirements rise. So it pulls ahead on the later, harder bosses — he points to the few Twin Fangs logs — while Holy Priest is ahead on the early, easier, lower-damage ones. He frames that as the only real by-boss swap on the healer side.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=1058",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "mixed",
+      "note": "izen has Arms Warrior at the very top of Twin Fangs and attributes it to a durable spec property rather than luck: he measures Sweeping Strikes uptime at 97.34%, so it is hitting both targets for almost the whole fight. He gives it similar credit on The Lost Explorers, where two-target cleave keeps it strong across two of the three bosses. His own caveat bounds the read — Twin Fangs is the only boss in the tier with that two-target damage profile, so this is a fight-profile strength rather than a claim about the raid as a whole.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=622",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-08",
+      "sentiment": "mixed",
+      "note": "izen has Frost Mage at the very top of Twin Fangs on two-target cleave, and says that value survives the nerf to its cleave because the mechanism is innate: Flurry plus Frostbolt or Frostfire Bolt hits an extra target, and Ice Lance does as well. The same caveat applies as for Arms Warrior — he is explicit that Twin Fangs is the only boss in the tier with that damage profile.",
+      "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
+      "url": "https://youtu.be/TJe8OnXl3pY?t=596",
       "superseded": false
     }
   ]

@@ -3,6 +3,34 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-09-09",
+      "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for September 9 — a bug-fix and Cooldown-Manager-tracking round-up with no tuning value in any class line. Read from the canonical source rather than the Wowhead mirror: Kaivax's running hotfix blue post (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - September 9”, post 1 at version 33, last edited 2026-09-09T23:21:51Z), with its <ul> heading structure INTACT. Five of the six class blocks sit under an explicit SPEC heading (Death Knight › Blood, Druid › Guardian, Paladin › Protection, Shaman › Enhancement, Warrior › Arms and Warrior › Protection); the Flash Heal line sits under a BARE Priest heading with no spec block beneath it, so it is logged class-wide rather than guessed onto Discipline and Shadow, even though its own text names them — the 2026-09-02 Warrior Bladestorm precedent. The Enhancement Totemic line names its hero tree in its own text, under the Enhancement heading, so it stays spec-scoped (the 2026-08-31 Affliction/Hellcaller precedent). ⚠ CLASSIFICATION DEFECT DISCLOSED, NOT WORKED AROUND: five of the seven class lines classify null under classifyHighlight, but BOTH Warrior lines classify as a NERF, and that is a misfire rather than a reading — the clause carries the NOUN “damage buff” (matching the `buff\\w*` up-verb) next to the words “Cooldown Manager” (matching RESOURCE_TERM's `cooldown`), so the resource inversion fires on a UI tracking change that alters no value in either direction. The verbatim blue-post text is stored anyway and the vote is left standing: editing a highlight to steer classifyHighlight would be gaming the outlook tally (the 2026-09-03 precedent), and the misfire cannot move either arrow because Arms and Protection Warrior both carry a dated ptr.verdict of Mixed, which outranks the tally — it only writes a −1 into their displayed basis line. Flagged here and in the run log for an owner-side classifier fix. BOTH WARRIOR LINES TOUCH A SET BONUS, so the tier-set upkeep gate requires Arms and Protection Warrior's spec.tierSet.asOf to advance to 2026-09-09 — which, since the 2026-08-23 two-page rule, also requires gearing/data/specs.json to be re-synced and the gearing artifact rebuilt in the SAME change; this run did exactly that (nightly tier-set publishing has been supported since 2026-09-05). The set bonus TEXT is unchanged in both cases — nothing about either bonus's behaviour or values moved, only whether its buff is visible in the Cooldown Manager — so only asOf and source move, with a dated parenthetical recording why. THE ENTIRE Player versus Player SECTION TRIAGES OUT (Preservation Evoker's Stasis-in-the-starting-room fix): PvP-only changes are out of scope for this tracker's PvE brackets, which is the standing rule, not an omission. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-9/2336376/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382794/class-bugfixes-and-delves-reward-proper-reputation-in-latest-hotfixes",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Blood Death Knight",
+        "Guardian Druid",
+        "Protection Paladin",
+        "Priest (class-wide)",
+        "Enhancement Shaman",
+        "Arms Warrior",
+        "Protection Warrior"
+      ],
+      "highlights": [
+        "Blood Death Knight — Resolved an issue causing Grip of the Dead from Death and Decay to permanently be active on targets.",
+        "Guardian Druid — Fixed an issue where Wild Guardian was incorrectly increasing Thrash and Mangle damage regardless of whether Rank 3 was selected.",
+        "Protection Paladin — Fixed an issue that caused Glory of the Vanguard to sometimes fail to deal damage to distant targets.",
+        "Priest (class-wide) — Fixed an issue where Flash Heal could not be tracked on the Cooldown Manager for Discipline and Shadow specializations.",
+        "Enhancement Shaman — Fixed an issue where damage from Doom Winds could interrupt channeled effects, such as the Font of Venomous Rage trinket; Totemic: Fixed an issue where Crash Lightning could cause unintended targets to be hit by Windfury Weapon.",
+        "Arms Warrior — The Venomous Abyss 4-set Bonus – The Winding Up bonus Slam damage buff can now be tracked in the Cooldown Manager; Rend is now able to be tracked in the Cooldown Manager.",
+        "Protection Warrior — The Venomous Abyss 2-set Bonus – The “Vengeful Shield” bonus Shield Slam damage buff can now be tracked in the Cooldown Manager; Rend is now able to be tracked in the Cooldown Manager.",
+        "Non-class: the September 9 round-up also made the Soft Underbelly achievement account-wide; fixed Bountiful Coffers in Delves not rewarding Zul’jarra’s Forces reputation; carried Dungeons and Raids work (Den of Nalorakk — player pets could not damage The Winter Squall; Venomous Abyss — Entombed Sentinels' Toxic Droplets are no longer instantly stepped on when they land on top of a player and Living Venom no longer pierces immunities, The Lost Explorers' empowered-tortollan visual fix plus Hoji teleporting back to the main platform if he falls from the bridge, and Ula’tek health backstops so the boss reliably transitions out of Rage of the Shackled at specific health thresholds); fixed the Preternatural Antivenom trinket effect only applying to the trinket wearer; made Void Elf and Blood Elf eyebrows visible under the Aquatic and Brick Gloomcap and removed Bouncy Mushrooms collision; and let Prey players receive 500 Corrosive Coin daily on every character that defeats Ral’kala after Preyhunter’s Journey rank 6 (was only the first character)."
+      ]
+    },
+    {
       "date": "2026-09-04",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for September 4: Balance Druid tracking and range fixes, an Enhancement Shaman Venomous Abyss 4-set bug fix, and the non-class round-up. Both class changes are explicitly spec-scoped in the official notes. Enhancement's printed bonus values are retained, with a dated amendment to the 4-set and both pages synchronized. Canonical source: Kaivax's running hotfix topic 2336376, post 1, version 31, last edited 2026-09-05T01:21:46Z. No Player versus Player section in this round-up. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-4/2336376/1.",

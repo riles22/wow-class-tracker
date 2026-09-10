@@ -16,6 +16,43 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-10 (nightly) — three sources re-verified S2, 240/240 rows, Wowhead M+ healer rebuilt (2 letters moved); Archon walled day 17
+
+- **Icy Veins** — all 6 pages direct browser-UA GET, HTTP 200, 195,860–343,365 B (measured off the written files,
+  never `size_download`). Parsed per `<tr>`, letter from the row's first `<td>`, spec from each
+  `tier-list-entry`'s FIRST `alt=` looked up WHOLE. Counts printed before merge: raid 27/7/6, M+ 27/7/6 = **80**,
+  0 unmatched. **0 of 80 cells moved.** `dateModified` re-read live and unchanged: 08-30 / 09-01 / 08-29 /
+  08-30 / 08-30 / 08-30, matching the pre-agent published-evidence artifact exactly. The raid-healer title still
+  says "(Patch 12.0.7 / Midnight)" — overridden by body-over-title as before (20 Season-2 mentions vs 5 Season-1;
+  changelog "01 Sep. 2026: Updated for the end of RWF Mythic progression").
+- **Method** — both pages HTTP 200, 157,217 B (raid) / 163,868 B (M+); parsed from `.tierlist` -> `.tier__tier`
+  blocks. **40 + 40 = 80, 0 misses, 0 moves.** The M+ page's second populated container is the dungeon-difficulty
+  block and was rejected by ROSTER MATCH, never by position: all 8 dungeon names plus the Method logo alt failed to
+  map and were dropped. Tier histogram raid S6/A11/B17/C6, M+ S2/A13/B21/C4 — an S tier is present on both this
+  week. Body era-verify: "the Midnight Season 2 Raid, The Venomous Abyss" / "Midnight Season 2"; 0 mentions of
+  Season 1 or 12.0.7. Its in-body "Last Updated 13th August 2026" is recorded here rather than written into
+  sources.json — method carries no registered `published` field and is not in the published-evidence artifact, so
+  inventing one would create a value the publish gate cannot cross-check.
+- **Wowhead** — all 6 pages with the FULL browser header set, HTTP 200, 75,149–343,122 B. Unescape `\/` across
+  the whole document FIRST, then locate `[tier-list=rows]`; never anchor on `WH.markup.printHtml(`. Exactly one
+  block per page this run. **80 rows, 0 unmatched. TWO CELLS MOVED, both upward, both on the M+ healer page:
+  Mistweaver Monk B -> A and Preservation Evoker B -> A.** That page's `dateModified` is **2026-09-10T08:59:35-05:00**
+  — Wowhead rebuilt it this morning (committed value was 2026-08-26; the pre-agent published-evidence artifact
+  independently reports 2026-09-10), so its stored `published` advanced. The rebuilt list reads S = Holy Paladin;
+  A = Restoration Shaman, Mistweaver, Preservation; B = Holy Priest; C = Restoration Druid, Discipline — all 7
+  healers accounted for, so this is a real editorial move and not a partial parse.
+- **Archon — day 17 of the human-verification wall.** All five registered routes attempted fresh with the full
+  header set: HTTP **403** with a Cloudflare interstitial ("Just a moment...", 5,956–6,043 B, **no**
+  `__NEXT_DATA__`). The pre-agent source-health artifact independently records the raid DPS route as
+  403/cloudflare-challenge and the M+ DPS route as HTTP 200 carrying a human-verification page. No challenge solved,
+  replayed or proxied; no alternate transport. Nothing parsed, nothing written — its last verified S2 letters stay
+  in the consensus under the owner-confirmed 2026-09-05 retention decision.
+- `seasonVerified` is **s2 on every page of all four sources and no value changed**, so there was nothing for
+  `freeze-season.mjs` to freeze. Snapshots advanced to 2026-09-10 on the 14 icyveins/method/wowhead pages only;
+  Archon's stayed at 2026-08-25 / 2026-08-18.
+- Anomaly check against the committed baseline: **2 tier moves, 0 of ≥2 bands** — far under the 25 / 6 limits, so
+  no `anomalyAckProposal` is warranted.
+
 ## 2026-09-09 (nightly) — three sources re-verified S2, 240/240 rows, 0 letters moved; Archon walled day 16
 
 All 14 reachable pages fetched inline in one session (no subagents), 195,983-343,487 B (Icy Veins),

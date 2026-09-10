@@ -5,16 +5,164 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-09T14:49:21.529Z",
+      "checkedAt": "2026-09-10T14:39:26.510Z",
       "removedSections": [],
       "posts": [
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 31,
-          "updatedAt": "2026-09-05T01:21:46.173Z",
-          "bodySha256": "443e3bd1e9d278a5993dd634c88b4587fc65b66d1c7b439437a967ae6d058635",
+          "version": 33,
+          "updatedAt": "2026-09-09T23:21:51.165Z",
+          "bodySha256": "3620e76898994022bcd083c4c08d0640afa142939a725bb6596c14bee30fd6c8",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-09:classes:death-knight:1",
+              "date": "2026-09-09",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Blood"
+              ],
+              "sha256": "444552caa52c558dcbe22f7c827ded4e49308607022f1268f20a21d125466518",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Blood Death Knight — Resolved an issue causing Grip of the Dead from Death and Decay to permanently be active on targets."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-09:classes:druid:1",
+              "date": "2026-09-09",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Guardian"
+              ],
+              "sha256": "f49c6474f3ed27d534306ed3a9a409ff3915a73283923830a8d5b200b9756a0b",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Guardian Druid — Fixed an issue where Wild Guardian was incorrectly increasing Thrash and Mangle damage regardless of whether Rank 3 was selected."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-09:classes:paladin:1",
+              "date": "2026-09-09",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Protection"
+              ],
+              "sha256": "af288614ef05f2c75bb8028fe7b7242b56e6ec357513a30d13303a0ac344e7ac",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Protection Paladin — Fixed an issue that caused Glory of the Vanguard to sometimes fail to deal damage to distant targets."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-09:classes:priest:1",
+              "date": "2026-09-09",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Holy",
+                "Priest|Shadow"
+              ],
+              "sha256": "607b7209b6e5ca8e5fa23110f7242c2b2a0c392c3696398faaea07d6916ca1c1",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json. The line sits under a BARE Priest heading with no spec block beneath it, so it is logged class-wide (the 2026-09-02 Warrior Bladestorm precedent) even though its own text names Discipline and Shadow; the class-wide line routes to all three Priest specs, which is exactly the section's recorded scope.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Priest (class-wide) — Fixed an issue where Flash Heal could not be tracked on the Cooldown Manager for Discipline and Shadow specializations."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-09:classes:shaman:1",
+              "date": "2026-09-09",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Enhancement"
+              ],
+              "sha256": "9b23e7734036aa0f8eb37d2f4b755cdeb8dc122c1c1935ae761b6f72152da849",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Enhancement Shaman — Fixed an issue where damage from Doom Winds could interrupt channeled effects, such as the Font of Venomous Rage trinket; Totemic: Fixed an issue where Crash Lightning could cause unintended targets to be hit by Windfury Weapon."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-09:classes:warrior:1",
+              "date": "2026-09-09",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Protection"
+              ],
+              "sha256": "eaa58404b2d7994131a2dab85022c499e428c60c8f171bcb29c3774b33f6fa4c",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json. Both lines touch a Venomous Abyss set bonus, so Arms and Protection Warrior's spec.tierSet.asOf advanced to 2026-09-09 with the September 9 hotfix topic as source and a dated parenthetical recording that this was a Cooldown Manager tracking addition only — no bonus behaviour or value changed — and gearing/data/specs.json was re-synced and the gearing artifact rebuilt in the same change.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Arms Warrior — The Venomous Abyss 4-set Bonus – The Winding Up bonus Slam damage buff can now be tracked in the Cooldown Manager; Rend is now able to be tracked in the Cooldown Manager."
+                  },
+                  {
+                    "kind": "build",
+                    "date": "2026-09-09",
+                    "highlight": "Protection Warrior — The Venomous Abyss 2-set Bonus – The “Vengeful Shield” bonus Shield Slam damage buff can now be tracked in the Cooldown Manager; Rend is now able to be tracked in the Cooldown Manager."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-09:player-versus-player:evoker:1",
+              "date": "2026-09-09",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Preservation"
+              ],
+              "sha256": "dbb6b35812c768ee46c73b5eea5a5f67af6489212f7f1403f79c56b831e8449a",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33. PvP-only change: Stasis could be used in the starting room of arenas and battlegrounds to store spells for after the gates opened. This tracker rates PvE raid and Mythic+ only, so an arena/battleground-scoped fix is out of scope and is deliberately not written as a spec highlight — the standing PvP exclusion, not an omission."
+              }
+            },
             {
               "id": "2336376:1:2026-09-04:classes:druid:1",
               "date": "2026-09-04",
@@ -1490,7 +1638,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-09T14:49:21.529Z",
+      "checkedAt": "2026-09-10T14:39:26.510Z",
       "removedSections": [],
       "posts": [
         {

@@ -16,6 +16,51 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-10 (nightly) — new 09-09 live hotfix logged (7 class lines), all 7 official-note obligations resolved, two Warrior tier sets bumped
+
+- **Official revision ledger ran FIRST**, from the pre-agent artifact (checkedAt 2026-09-10T14:39:26Z).
+  `live-hotfixes` (topic 2336376) post 1 moved **version 31 -> 33**, last edited 2026-09-09T23:21:51Z, and the
+  pending ledger surfaced **7 unresolved sections**, all dated 2026-09-09: Classes › Death Knight, Druid,
+  Paladin, Priest, Shaman, Warrior, plus Player versus Player › Evoker. `ptr-preview` (topic 2344395) is
+  unchanged — post 1 still version 3, all 3 sections hash-identical and still `applied`.
+- **Canonical body read directly**, not off the Wowhead mirror: `2336376.json` (266,024 B, title now
+  "World of Warcraft: Midnight Hotfixes - September 9", post 1 version 33 — matching the receipt exactly), with
+  the `<ul>` nesting INTACT. Confirms the receipt line for line.
+- **New feed entry, kind `hotfix`, dated 2026-09-09** (ptr-builds 29 -> 30). Six of the seven class lines sit
+  under an explicit SPEC heading; the Flash Heal line sits under a **bare Priest heading** with no spec block, so it
+  is logged `Priest (class-wide)` even though its own text names Discipline and Shadow — the 2026-09-02 Warrior
+  Bladestorm precedent, heading structure over line text. The Enhancement Totemic line names its hero tree inside
+  its own text under the Enhancement heading, so it stays spec-scoped (2026-08-31 Affliction/Hellcaller precedent).
+  The whole PvP section (Preservation Evoker's Stasis-in-the-starting-room fix) triages out.
+- ⚠ **classifyHighlight misfire, disclosed and left standing — this one is worth an owner fix.** Five of the seven
+  class lines classify null, but BOTH Warrior lines classify **nerf**. The cause is mechanical: the clause carries the
+  NOUN "damage buff" (matching the `up` regex `buff\w*`) beside the words "Cooldown Manager" (matching
+  `RESOURCE_TERM`'s `cooldown`), so the resource inversion fires `up && res -> nerf` on a pure UI tracking line.
+  Verified in isolation: "Arms Warrior — Slam damage buff can now be tracked in the Cooldown Manager." alone returns
+  `nerf`. The verbatim blue-post text is stored anyway — rewording a highlight to steer the tally is gaming it
+  (2026-09-03 precedent) — and the misfire **cannot move either arrow**, because Arms and Protection Warrior both
+  carry `ptr.verdict: "Mixed"`, which outranks the tally; it only writes a −1 into their displayed basis line
+  ("+5/−0" -> "+5/−1"). A fix would need `RESOURCE_TERM` to not match "Cooldown Manager", or the `up` verb regex
+  to not match the noun "buff".
+- **Tier-set upkeep: two specs.** Both Warrior lines name a Venomous Abyss set bonus, so `SET_KEYWORD` fires and
+  Arms + Protection Warrior's `tierSet.asOf` advanced 2026-08-07 / 2026-07-08 -> **2026-09-09**, source set to the
+  September 9 topic, with a dated parenthetical on set4 / set2 recording that only Cooldown Manager tracking changed
+  and **no bonus behaviour or value moved**. Per the 2026-08-23 two-page rule the gearing mirror was re-synced in the
+  SAME change (`harvest-specs.mjs`, then `--check`, then `gearing:build`) — the nightly has been able to do this
+  since 2026-09-05, so it was NOT deferred to a local run.
+- **Discovery lanes, all four swept, nothing else new.** Wowhead RSS: 40 items, HTTP 200, 204,557 B, parsed per
+  `<item>` block — the mirror is news=382794 (2026-09-09T23:47). News INDEX (`data.news.newsData`, brace-balanced
+  from the id attribute) leads no further, also topping out at 382794. Blue tracker (`data.blueTracker.default`,
+  50 entries, deduped by topic): no standalone class-tuning blue post since "Class Tuning Incoming – September 1"
+  (2026-08-31), already carried by the 2026-08-28 build entry. Nothing 12.1.5 entered the feed.
+- **12.1.5 stayed NOTES ONLY.** `PHASES.ptr` untouched at null; no 12.1.5 material in ptr-builds or any `ptr`
+  verdict; no archived 12.1 PTR metric relabelled. Note the RSS carried "The Unbinding of Kith'ix Raid Testing
+  Schedule - Patch 12.1.5 PTR" (news=382788) — a raid-testing schedule, deliberately NOT a forecast-cycle trigger.
+- **Dormant lanes correctly skipped**: zones 54 / 52 / 56 / 57. Their contract rows left at the flip; the stored
+  rows are the closed cycle's final receipts and were not touched.
+- **Writeup coverage recomputed, not remembered**: exactly one spec has no writeup — Demonology Warlock, whose null
+  is deliberate. The expert-read lane stays dormant (`PHASES.ptr` null), as documented.
+
 ## 2026-09-09 (nightly) — nothing new in any channel; official ledger unchanged at 102 sections
 
 **Official revision ledger first, as the skill orders.** This run's pre-agent receipt (checkedAt

@@ -4,11 +4,11 @@
   "caveat": "Current stat priorities come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the reviewed 12.0.7 fallback, used only when the guide layer lacks a build. Structural sync checks local inputs; it does not reverify external game facts.",
   "structuralSync": {
     "schemaVersion": 1,
-    "checkedAt": "2026-09-09",
+    "checkedAt": "2026-09-10",
     "sources": {
       "tracker": {
         "path": "data/specs.json",
-        "digest": "d7f0e9bf3f41a41c01710973e73aa442161d4aa9102ffc821989218c177494b5",
+        "digest": "5682e903872dc30c7f0f5a4ac875c41dccfcddc553cddfce60aa4b0111fba2c9",
         "scope": "class, spec, role, tierSet; each tier set retains its own source and asOf"
       },
       "armor": {
@@ -3225,9 +3225,9 @@
       "statPrioritySource": "https://www.icy-veins.com/wow/arms-warrior-pve-dps-stat-priority",
       "tierSet": {
         "set2": "Mortal Strike and Execute damage increased by 10% and when you Slam a target, Slam also deals damage to enemies within 8 yards of it. Deals reduced damage beyond 5 targets.",
-        "set4": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 20% (was 10%), stacking up to 5 times (was 3).",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/18",
-        "asOf": "2026-08-07"
+        "set4": "Overpower damage increased by 15%. Mortal Strike and Overpower increase the damage of your next Slam by 20% (was 10%), stacking up to 5 times (was 3). (2026-09-09 hotfix: the Winding Up bonus Slam damage buff can now be tracked in the Cooldown Manager — a UI tracking addition only; no bonus behaviour or value changed.)",
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-9/2336376/1",
+        "asOf": "2026-09-09"
       }
     },
     {
@@ -3357,10 +3357,10 @@
       "statPriorityPatch": "12.0.7",
       "statPrioritySource": "https://www.icy-veins.com/wow/protection-warrior-pve-tank-stat-priority",
       "tierSet": {
-        "set2": "Free Revenges deal 15% additional damage and cause your next Shield Slam to deal 20% additional damage.",
+        "set2": "Free Revenges deal 15% additional damage and cause your next Shield Slam to deal 20% additional damage. (2026-09-09 hotfix: the “Vengeful Shield” bonus Shield Slam damage buff can now be tracked in the Cooldown Manager — a UI tracking addition only; no bonus behaviour or value changed.)",
         "set4": "Ravager and your free Revenges cause all targets to bleed for damage over 12 sec (Bloody Rebuke bleed damage increased by 100% on 07-08). Ravager's cooldown is reduced by 30 seconds.",
-        "source": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/11",
-        "asOf": "2026-07-08"
+        "source": "https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-9/2336376/1",
+        "asOf": "2026-09-09"
       }
     }
   ]

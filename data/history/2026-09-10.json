@@ -1,0 +1,3994 @@
+{
+  "date": "2026-09-10",
+  "phase": "12.1-live",
+  "projectionVersion": 13,
+  "rankVersion": 3,
+  "consensusVersion": 6,
+  "sourceReceipts": {
+    "schemaVersion": 1,
+    "liveSeason": "s2",
+    "scales": {
+      "_comment": "Tier-scale definitions and the normalization map. Each source declares which scale it uses (sources.json → scale). Values place every tier on one 0–100 axis so sources with different scales can be averaged into a consensus. Consensus bands must be sorted by descending min, ending at 0. 2026-08-14 (owner decision, Riley — applied ahead of the 08-18 flip rather than in the flip commit): the LIVE icyveins scale is now the SAME seven bands as icyveins-ptr. Icy Veins rebuilt its live M+ lists for Midnight Season 2 and they publish S+ and B+, which the old five-band scale could not represent — the merge had been blocked for six days because storing an S+ letter would have failed validation and collapsing it into S was refused as fabrication. The two scales are now identical by intent, not coincidence, so the note below about them deliberately diverging is HISTORY: it described the window when only the PTR list had the extra rungs. Measured on landing: re-spacing S from 100 to 92 re-scores the frozen Season-1 letters the consensus still reads through the frozen lane, moving 13 consensus scores and 3 M+ letters (Unholy DK, Devourer DH, Augmentation Evoker, all S -> A+) — a scale decision, not spec movement, which is why CONSENSUS_VERSION went 3 -> 4 in the same commit. Its shared tiers keep the live anchors exactly (A+ 82 / A 66 / B 48 / C 30) so the same author's live and PTR reads are directly comparable on the axis; B+ sits at 57, the midpoint of A and B. 2026-08-04 (owner decision, Riley): the PTR DPS list added a SEVENTH band, S+, in its 02 Aug. \"Update #4\" — S+ takes the 100 anchor and S shifts down to 92. This is the one place the PTR scale deliberately stops matching the live one: PTR S is 92 while live S is 100, because the PTR list now reserves a rung above S that the live list has no equivalent for. Collapsing S+ into S was rejected — it would fabricate a placement the source is explicitly distinguishing. Note this re-spacing moves every icyveins-ptr-derived projection input, not just the two S+ specs, since the source feeds projectionFor via ptrTierRead at weight .25 (it is era:ptr, so consensus is untouched).",
+      "scales": {
+        "icyveins": {
+          "label": "Icy Veins",
+          "tiers": [
+            "S+",
+            "S",
+            "A+",
+            "A",
+            "B+",
+            "B",
+            "C"
+          ],
+          "values": {
+            "S+": 100,
+            "S": 92,
+            "A+": 82,
+            "A": 66,
+            "B+": 57,
+            "B": 48,
+            "C": 30
+          }
+        },
+        "icyveins-ptr": {
+          "label": "Icy Veins (12.1 PTR)",
+          "tiers": [
+            "S+",
+            "S",
+            "A+",
+            "A",
+            "B+",
+            "B",
+            "C"
+          ],
+          "values": {
+            "S+": 100,
+            "S": 92,
+            "A+": 82,
+            "A": 66,
+            "B+": 57,
+            "B": 48,
+            "C": 30
+          }
+        },
+        "method": {
+          "label": "Method",
+          "tiers": [
+            "S",
+            "A",
+            "B",
+            "C"
+          ],
+          "values": {
+            "S": 100,
+            "A": 72,
+            "B": 48,
+            "C": 24
+          }
+        },
+        "archon": {
+          "label": "Archon",
+          "tiers": [
+            "S",
+            "A",
+            "B",
+            "C"
+          ],
+          "values": {
+            "S": 100,
+            "A": 72,
+            "B": 48,
+            "C": 24
+          }
+        },
+        "wowmeta": {
+          "label": "WoWMeta",
+          "tiers": [
+            "S",
+            "A",
+            "B",
+            "C",
+            "D"
+          ],
+          "values": {
+            "S": 100,
+            "A": 72,
+            "B": 52,
+            "C": 34,
+            "D": 16
+          }
+        },
+        "wowhead": {
+          "label": "Wowhead",
+          "tiers": [
+            "S",
+            "A+",
+            "A",
+            "B",
+            "C",
+            "D",
+            "F"
+          ],
+          "values": {
+            "S": 100,
+            "A+": 84,
+            "A": 70,
+            "B": 52,
+            "C": 34,
+            "D": 18,
+            "F": 6
+          }
+        }
+      },
+      "consensus": {
+        "label": "Consensus",
+        "bands": [
+          {
+            "tier": "S",
+            "min": 88
+          },
+          {
+            "tier": "A+",
+            "min": 74
+          },
+          {
+            "tier": "A",
+            "min": 58
+          },
+          {
+            "tier": "B",
+            "min": 40
+          },
+          {
+            "tier": "C",
+            "min": 0
+          }
+        ],
+        "spreadThreshold": 22
+      }
+    },
+    "sources": [
+      {
+        "id": "icyveins",
+        "name": "Icy Veins",
+        "kind": "tier-list",
+        "scale": "icyveins",
+        "author": "Icy Veins guide writers",
+        "methodology": "Broad-meta tier lists per role and bracket, aimed at the general player population.",
+        "pages": [
+          {
+            "bracket": "raid",
+            "role": "DPS",
+            "url": "https://www.icy-veins.com/wow/dps-rankings-tier-list",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-30",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "Healer",
+            "url": "https://www.icy-veins.com/wow/healer-rankings-tier-list",
+            "snapshot": "2026-09-10",
+            "published": "2026-09-01",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "Tank",
+            "url": "https://www.icy-veins.com/wow/tank-rankings-tier-list",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-29",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "DPS",
+            "url": "https://www.icy-veins.com/wow/mythic-dps-tier-list",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-30",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "Healer",
+            "url": "https://www.icy-veins.com/wow/mythic-healer-tier-list",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-30",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "Tank",
+            "url": "https://www.icy-veins.com/wow/mythic-tank-tier-list",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-30",
+            "seasonVerified": "s2"
+          }
+        ],
+        "summary": "A guide site's own letter grades for the live patch, written by its spec authors. Editorial judgement, not measured play."
+      },
+      {
+        "id": "method",
+        "name": "Method",
+        "kind": "tier-list",
+        "scale": "method",
+        "author": "Tactyks (M+); Method raiders (raid)",
+        "methodology": "Top-end lens: M+ list by Tactyks, raid list written with Method raiders from a race-to-world-first output perspective.",
+        "pages": [
+          {
+            "bracket": "mplus",
+            "role": "All",
+            "url": "https://www.method.gg/guides/tier-list/mythic-plus",
+            "snapshot": "2026-09-10",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "All",
+            "url": "https://www.method.gg/guides/tier-list/raiding",
+            "snapshot": "2026-09-10",
+            "seasonVerified": "s2"
+          }
+        ],
+        "notes": "Raid list omits Vengeance DH (not ranked on the page). Method's list content is unchanged since its 2026-03-31 revision; re-verified live and era-confirmed (Devourer present) 2026-07-09.",
+        "summary": "Letter grades from a world-first raiding guild's guide team. Its M+ list currently publishes no S tier at all, so its ceiling is a grade lower than everyone else's."
+      },
+      {
+        "id": "wowhead",
+        "name": "Wowhead",
+        "kind": "tier-list",
+        "scale": "wowhead",
+        "author": "Wowhead class writers",
+        "methodology": "Rankings for all classes based on Raid and Mythic+ performance; also the primary PTR datamining source for 12.1 class tuning and tier-set changes.",
+        "pages": [
+          {
+            "bracket": "raid",
+            "role": "DPS",
+            "url": "https://www.wowhead.com/guide/classes/tier-lists/dps-rankings-raids",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-31",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "Healer",
+            "url": "https://www.wowhead.com/guide/classes/tier-lists/healer-rankings-raids",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-31",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "Tank",
+            "url": "https://www.wowhead.com/guide/classes/tier-lists/tank-rankings-raids",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-31",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "DPS",
+            "url": "https://www.wowhead.com/guide/classes/tier-lists/dps-rankings-mythic-plus",
+            "snapshot": "2026-09-10",
+            "published": "2026-08-28",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "Healer",
+            "url": "https://www.wowhead.com/guide/classes/tier-lists/healer-rankings-mythic-plus",
+            "snapshot": "2026-09-10",
+            "published": "2026-09-10",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "Tank",
+            "url": "https://www.wowhead.com/guide/classes/tier-lists/tank-rankings-mythic-plus",
+            "snapshot": "2026-09-10",
+            "published": "2026-09-01",
+            "seasonVerified": "s2"
+          }
+        ],
+        "summary": "Letter grades from a large guide site, written per role and bracket by its guide authors."
+      },
+      {
+        "id": "archon",
+        "name": "Archon",
+        "kind": "tier-list",
+        "scale": "archon",
+        "author": "Archon.gg (statistical)",
+        "methodology": "Statistical tier lists computed from Warcraft Logs parses and Blizzard leaderboards — 14-day rolling window, refreshed daily. Raid tiers read from the throughput metric tier list (NOT the default popularity grouping); M+ tiers from the M+ score tier list. EARLY-S2 BASIS (owner decision 2026-08-25): the raid letters come from the HEROIC throughput list while Mythic is sparse — Heroic carries ~170x the parses and covers all 27 DPS specs where Mythic held 6 specs under 10 parses and no Fire Mage at all. Switch back to the Mythic list (a reviewed registry edit + CONSENSUS_VERSION bump) once Mythic reaches 27/27 DPS with healthy samples. The Mythic rankings pages stay registered as ancillary metric feeds. U.GG has its own methodology and filters; it is not a verified equivalent mirror or replacement feed.",
+        "pages": [
+          {
+            "bracket": "raid",
+            "role": "DPS",
+            "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/heroic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "Healer",
+            "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/heroic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "Tank",
+            "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/heroic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "DPS",
+            "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/all-dungeons/this-week",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "Healer",
+            "url": "https://www.archon.gg/wow/tier-list/healer-rankings/mythic-plus/10/all-dungeons/this-week",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "mplus",
+            "role": "Tank",
+            "url": "https://www.archon.gg/wow/tier-list/tank-rankings/mythic-plus/10/all-dungeons/this-week",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2"
+          },
+          {
+            "bracket": "raid",
+            "role": "All",
+            "label": "Per-boss tiers (9 bosses, throughput)",
+            "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/nekzali",
+            "snapshot": "2026-08-18",
+            "seasonVerified": "s2",
+            "ancillary": true
+          },
+          {
+            "bracket": "mplus",
+            "role": "All",
+            "label": "Per-dungeon tiers (8 dungeons, score)",
+            "url": "https://www.archon.gg/wow/tier-list/dps-rankings/mythic-plus/10/altar-of-fangs/this-week",
+            "snapshot": "2026-08-18",
+            "seasonVerified": "s2",
+            "ancillary": true
+          },
+          {
+            "bracket": "raid",
+            "role": "All",
+            "label": "Survivability tiers (Mythic raid)",
+            "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2",
+            "ancillary": true
+          },
+          {
+            "bracket": "raid",
+            "role": "DPS",
+            "label": "Mythic rankings — DPS (95th-pct numbers)",
+            "url": "https://www.archon.gg/wow/tier-list/dps-rankings/raid/mythic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2",
+            "ancillary": true
+          },
+          {
+            "bracket": "raid",
+            "role": "Healer",
+            "label": "Mythic rankings — Healer (95th-pct numbers)",
+            "url": "https://www.archon.gg/wow/tier-list/healer-rankings/raid/mythic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2",
+            "ancillary": true
+          },
+          {
+            "bracket": "raid",
+            "role": "Tank",
+            "label": "Mythic rankings — Tank (95th-pct numbers)",
+            "url": "https://www.archon.gg/wow/tier-list/tank-rankings/raid/mythic/all-bosses",
+            "snapshot": "2026-08-25",
+            "seasonVerified": "s2",
+            "ancillary": true
+          }
+        ],
+        "notes": "Fetch recipe: parse the __NEXT_DATA__ JSON script tag from raw HTML (WebFetch markdown drops it). Raid pages carry three tierLists (popularity/throughput/survivability) — use metric \"throughput\"; M+ pages use metric \"score\". The Heroic raid pages (the letter basis since 2026-08-25) parse with the IDENTICAL recipe — only the /heroic/ path segment differs; the ancillary Mythic rankings pages feed the \"(Mythic)\" numeric families and survivability. U.GG has its own methodology and filters; it is not a verified equivalent mirror or replacement feed.",
+        "summary": "Letter grades computed from logged play. Raid tiers come from its THROUGHPUT list and M+ tiers from its SCORE list — never the default popularity grouping, which ranks how often a spec is played rather than how it performs."
+      }
+    ],
+    "seasonFinal": {
+      "s1": {
+        "icyveins": {
+          "mplus": {
+            "frozenAt": "2026-08-11",
+            "fromCommit": "9ed717de57a0b19cecf0e54e2b67b2649660fcc9",
+            "lastSeasonVerifiedSnapshot": "2026-08-10",
+            "publishedRange": {
+              "first": "2026-07-01",
+              "last": "2026-07-01"
+            },
+            "letters": {
+              "Death Knight|Blood": "C",
+              "Death Knight|Frost": "A",
+              "Death Knight|Unholy": "S",
+              "Demon Hunter|Havoc": "A+",
+              "Demon Hunter|Devourer": "S",
+              "Demon Hunter|Vengeance": "A",
+              "Druid|Balance": "A",
+              "Druid|Feral": "A+",
+              "Druid|Guardian": "S",
+              "Druid|Restoration": "B",
+              "Evoker|Augmentation": "S",
+              "Evoker|Devastation": "C",
+              "Evoker|Preservation": "C",
+              "Hunter|Beast Mastery": "A+",
+              "Hunter|Marksmanship": "C",
+              "Hunter|Survival": "A+",
+              "Mage|Arcane": "B",
+              "Mage|Fire": "C",
+              "Mage|Frost": "A",
+              "Monk|Brewmaster": "A+",
+              "Monk|Mistweaver": "S",
+              "Monk|Windwalker": "A",
+              "Paladin|Holy": "B",
+              "Paladin|Protection": "A",
+              "Paladin|Retribution": "A+",
+              "Priest|Discipline": "A",
+              "Priest|Holy": "C",
+              "Priest|Shadow": "A+",
+              "Rogue|Assassination": "A",
+              "Rogue|Outlaw": "A+",
+              "Rogue|Subtlety": "A",
+              "Shaman|Elemental": "A+",
+              "Shaman|Enhancement": "A+",
+              "Shaman|Restoration": "A+",
+              "Warlock|Affliction": "B",
+              "Warlock|Demonology": "A",
+              "Warlock|Destruction": "B",
+              "Warrior|Arms": "A+",
+              "Warrior|Fury": "A",
+              "Warrior|Protection": "B"
+            }
+          },
+          "raid": {
+            "frozenAt": "2026-08-11",
+            "fromCommit": "9ed717de57a0b19cecf0e54e2b67b2649660fcc9",
+            "lastSeasonVerifiedSnapshot": "2026-08-10",
+            "publishedRange": {
+              "first": "2026-06-30",
+              "last": "2026-08-04"
+            },
+            "letters": {
+              "Death Knight|Blood": "B",
+              "Death Knight|Frost": "S",
+              "Death Knight|Unholy": "A+",
+              "Demon Hunter|Havoc": "B",
+              "Demon Hunter|Devourer": "A+",
+              "Demon Hunter|Vengeance": "C",
+              "Druid|Balance": "B",
+              "Druid|Feral": "C",
+              "Druid|Guardian": "S",
+              "Druid|Restoration": "B",
+              "Evoker|Augmentation": "A",
+              "Evoker|Devastation": "B",
+              "Evoker|Preservation": "S",
+              "Hunter|Beast Mastery": "B",
+              "Hunter|Marksmanship": "A+",
+              "Hunter|Survival": "S",
+              "Mage|Arcane": "C",
+              "Mage|Fire": "C",
+              "Mage|Frost": "A+",
+              "Monk|Brewmaster": "A",
+              "Monk|Mistweaver": "B",
+              "Monk|Windwalker": "A+",
+              "Paladin|Holy": "S",
+              "Paladin|Protection": "B",
+              "Paladin|Retribution": "B",
+              "Priest|Discipline": "S",
+              "Priest|Holy": "A",
+              "Priest|Shadow": "A+",
+              "Rogue|Assassination": "B",
+              "Rogue|Outlaw": "A",
+              "Rogue|Subtlety": "A",
+              "Shaman|Elemental": "B",
+              "Shaman|Enhancement": "A",
+              "Shaman|Restoration": "A",
+              "Warlock|Affliction": "A",
+              "Warlock|Demonology": "S",
+              "Warlock|Destruction": "A+",
+              "Warrior|Arms": "A",
+              "Warrior|Fury": "A",
+              "Warrior|Protection": "S"
+            }
+          }
+        },
+        "method": {
+          "mplus": {
+            "frozenAt": "2026-08-14",
+            "fromCommit": "f02caec40afc5669a985efbabbaa389ab112266d",
+            "lastSeasonVerifiedSnapshot": "2026-08-13",
+            "publishedRange": null,
+            "letters": {
+              "Death Knight|Blood": "C",
+              "Death Knight|Frost": "B",
+              "Death Knight|Unholy": "A",
+              "Demon Hunter|Havoc": "B",
+              "Demon Hunter|Devourer": "A",
+              "Demon Hunter|Vengeance": "A",
+              "Druid|Balance": "B",
+              "Druid|Feral": "A",
+              "Druid|Guardian": "B",
+              "Druid|Restoration": "A",
+              "Evoker|Augmentation": "A",
+              "Evoker|Devastation": "B",
+              "Evoker|Preservation": "B",
+              "Hunter|Beast Mastery": "B",
+              "Hunter|Marksmanship": "A",
+              "Hunter|Survival": "A",
+              "Mage|Arcane": "B",
+              "Mage|Fire": "C",
+              "Mage|Frost": "A",
+              "Monk|Brewmaster": "A",
+              "Monk|Mistweaver": "A",
+              "Monk|Windwalker": "B",
+              "Paladin|Holy": "B",
+              "Paladin|Protection": "B",
+              "Paladin|Retribution": "B",
+              "Priest|Discipline": "B",
+              "Priest|Holy": "C",
+              "Priest|Shadow": "B",
+              "Rogue|Assassination": "B",
+              "Rogue|Outlaw": "C",
+              "Rogue|Subtlety": "A",
+              "Shaman|Elemental": "A",
+              "Shaman|Enhancement": "B",
+              "Shaman|Restoration": "A",
+              "Warlock|Affliction": "C",
+              "Warlock|Demonology": "A",
+              "Warlock|Destruction": "B",
+              "Warrior|Arms": "C",
+              "Warrior|Fury": "B",
+              "Warrior|Protection": "B"
+            }
+          },
+          "raid": {
+            "frozenAt": "2026-08-14",
+            "fromCommit": "f02caec40afc5669a985efbabbaa389ab112266d",
+            "lastSeasonVerifiedSnapshot": "2026-08-13",
+            "publishedRange": null,
+            "letters": {
+              "Death Knight|Blood": "B",
+              "Death Knight|Frost": "C",
+              "Death Knight|Unholy": "B",
+              "Demon Hunter|Havoc": "B",
+              "Demon Hunter|Devourer": "S",
+              "Druid|Balance": "A",
+              "Druid|Feral": "B",
+              "Druid|Guardian": "A",
+              "Druid|Restoration": "A",
+              "Evoker|Augmentation": "B",
+              "Evoker|Devastation": "A",
+              "Evoker|Preservation": "S",
+              "Hunter|Beast Mastery": "C",
+              "Hunter|Marksmanship": "S",
+              "Hunter|Survival": "B",
+              "Mage|Arcane": "C",
+              "Mage|Fire": "C",
+              "Mage|Frost": "S",
+              "Monk|Brewmaster": "A",
+              "Monk|Mistweaver": "S",
+              "Monk|Windwalker": "A",
+              "Paladin|Holy": "A",
+              "Paladin|Protection": "C",
+              "Paladin|Retribution": "A",
+              "Priest|Discipline": "A",
+              "Priest|Holy": "C",
+              "Priest|Shadow": "B",
+              "Rogue|Assassination": "C",
+              "Rogue|Outlaw": "C",
+              "Rogue|Subtlety": "B",
+              "Shaman|Elemental": "B",
+              "Shaman|Enhancement": "B",
+              "Shaman|Restoration": "C",
+              "Warlock|Affliction": "A",
+              "Warlock|Demonology": "S",
+              "Warlock|Destruction": "A",
+              "Warrior|Arms": "C",
+              "Warrior|Fury": "A",
+              "Warrior|Protection": "S"
+            }
+          }
+        },
+        "wowhead": {
+          "mplus": {
+            "frozenAt": "2026-08-09",
+            "fromCommit": "8aba2ba13e3896b6f8ae4adf2430c14e7ef06e02",
+            "lastSeasonVerifiedSnapshot": "2026-08-08",
+            "publishedRange": {
+              "first": "2026-04-19",
+              "last": "2026-08-05"
+            },
+            "letters": {
+              "Death Knight|Blood": "B",
+              "Death Knight|Frost": "B",
+              "Death Knight|Unholy": "A+",
+              "Demon Hunter|Havoc": "B",
+              "Demon Hunter|Devourer": "A+",
+              "Demon Hunter|Vengeance": "A",
+              "Druid|Balance": "A",
+              "Druid|Feral": "B",
+              "Druid|Guardian": "S",
+              "Druid|Restoration": "A",
+              "Evoker|Augmentation": "A+",
+              "Evoker|Devastation": "B",
+              "Evoker|Preservation": "B",
+              "Hunter|Beast Mastery": "B",
+              "Hunter|Marksmanship": "B",
+              "Hunter|Survival": "B",
+              "Mage|Arcane": "B",
+              "Mage|Fire": "B",
+              "Mage|Frost": "A",
+              "Monk|Brewmaster": "A",
+              "Monk|Mistweaver": "S",
+              "Monk|Windwalker": "C",
+              "Paladin|Holy": "A",
+              "Paladin|Protection": "A",
+              "Paladin|Retribution": "A",
+              "Priest|Discipline": "B",
+              "Priest|Holy": "B",
+              "Priest|Shadow": "C",
+              "Rogue|Assassination": "B",
+              "Rogue|Outlaw": "B",
+              "Rogue|Subtlety": "B",
+              "Shaman|Elemental": "A",
+              "Shaman|Enhancement": "B",
+              "Shaman|Restoration": "S",
+              "Warlock|Affliction": "B",
+              "Warlock|Demonology": "A+",
+              "Warlock|Destruction": "B",
+              "Warrior|Arms": "A",
+              "Warrior|Fury": "B",
+              "Warrior|Protection": "B"
+            }
+          },
+          "raid": {
+            "frozenAt": "2026-08-09",
+            "fromCommit": "8aba2ba13e3896b6f8ae4adf2430c14e7ef06e02",
+            "lastSeasonVerifiedSnapshot": "2026-08-08",
+            "publishedRange": {
+              "first": "2026-04-21",
+              "last": "2026-06-25"
+            },
+            "letters": {
+              "Death Knight|Blood": "B",
+              "Death Knight|Frost": "C",
+              "Death Knight|Unholy": "A",
+              "Demon Hunter|Havoc": "B",
+              "Demon Hunter|Devourer": "A",
+              "Demon Hunter|Vengeance": "C",
+              "Druid|Balance": "C",
+              "Druid|Feral": "B",
+              "Druid|Guardian": "B",
+              "Druid|Restoration": "S",
+              "Evoker|Augmentation": "A",
+              "Evoker|Devastation": "B",
+              "Evoker|Preservation": "A",
+              "Hunter|Beast Mastery": "C",
+              "Hunter|Marksmanship": "A",
+              "Hunter|Survival": "B",
+              "Mage|Arcane": "B",
+              "Mage|Fire": "B",
+              "Mage|Frost": "A",
+              "Monk|Brewmaster": "B",
+              "Monk|Mistweaver": "S",
+              "Monk|Windwalker": "B",
+              "Paladin|Holy": "B",
+              "Paladin|Protection": "C",
+              "Paladin|Retribution": "A",
+              "Priest|Discipline": "A",
+              "Priest|Holy": "B",
+              "Priest|Shadow": "B",
+              "Rogue|Assassination": "B",
+              "Rogue|Outlaw": "C",
+              "Rogue|Subtlety": "B",
+              "Shaman|Elemental": "B",
+              "Shaman|Enhancement": "C",
+              "Shaman|Restoration": "B",
+              "Warlock|Affliction": "C",
+              "Warlock|Demonology": "A",
+              "Warlock|Destruction": "A",
+              "Warrior|Arms": "C",
+              "Warrior|Fury": "B",
+              "Warrior|Protection": "A"
+            }
+          }
+        }
+      }
+    }
+  },
+  "specs": {
+    "Death Knight|Blood": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 1,
+        "archon|raid|Popularity": 1,
+        "archon|mplus|M+ score (95th pct)": 1,
+        "archon|mplus|Popularity": 1,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 3,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 3,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 1,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 1,
+        "archon|raid|95th pct DPS (Heroic)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 1
+      },
+      "scores": {
+        "raid": 91,
+        "mplus": 98
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 87,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "S",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "S",
+          "archon": "S"
+        }
+      }
+    },
+    "Death Knight|Frost": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 21,
+        "archon|raid|Popularity": 20,
+        "archon|mplus|M+ score (95th pct)": 19,
+        "archon|mplus|Popularity": 20,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 7,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 26,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 19,
+        "mythicstats|mplus|Top-2000 keys representation": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 7,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 15,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 1,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 11,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 16,
+        "archon|raid|95th pct DPS (Heroic)": 27,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 4
+      },
+      "scores": {
+        "raid": 54,
+        "mplus": 70
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 56,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Death Knight|Unholy": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 10,
+        "archon|raid|Popularity": 10,
+        "archon|mplus|M+ score (95th pct)": 9,
+        "archon|mplus|Popularity": 7,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 11,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 1,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 13,
+        "mythicstats|mplus|Top-2000 keys representation": 12,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 14,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 8,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 19,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 13,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 2,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 7,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 9,
+        "archon|raid|95th pct DPS (Heroic)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 11
+      },
+      "dummy": {
+        "rank": 7,
+        "score": 57
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 68
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 61,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 78,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "A"
+        }
+      }
+    },
+    "Demon Hunter|Havoc": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 20,
+        "archon|raid|Popularity": 16,
+        "archon|mplus|M+ score (95th pct)": 16,
+        "archon|mplus|Popularity": 15,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 8,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 16,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 16,
+        "mythicstats|mplus|Top-2000 keys representation": 10,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 5,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 20,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 21,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 7,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 19,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 15,
+        "archon|raid|95th pct DPS (Heroic)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 10,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 10,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 17,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 8
+      },
+      "scores": {
+        "raid": 43,
+        "mplus": 60
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 66,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Demon Hunter|Devourer": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 8,
+        "archon|raid|Popularity": 6,
+        "archon|mplus|M+ score (95th pct)": 7,
+        "archon|mplus|Popularity": 7,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 3,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 2,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 8,
+        "mythicstats|mplus|Top-2000 keys representation": 11,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 2,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 7,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 17,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 6,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5,
+        "archon|raid|95th pct DPS (Heroic)": 11,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 11,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 17,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 11,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 18,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 11,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 13
+      },
+      "dummy": {
+        "rank": 6,
+        "score": 65
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 77
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 72,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 83,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "S"
+        }
+      }
+    },
+    "Demon Hunter|Vengeance": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 5,
+        "archon|mplus|Popularity": 5,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 6,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 4,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 3,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 4,
+        "archon|raid|95th pct DPS (Heroic)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 3
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 64
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 40,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 66,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "B",
+          "wowhead": "A",
+          "archon": "A",
+          "method": "B"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "B"
+        }
+      }
+    },
+    "Druid|Balance": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 5,
+        "archon|raid|Popularity": 5,
+        "archon|mplus|M+ score (95th pct)": 10,
+        "archon|mplus|Popularity": 6,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 6,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 24,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 12,
+        "mythicstats|mplus|Top-2000 keys representation": 9,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 11,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 1,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 15,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 14,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 14,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 13,
+        "archon|raid|95th pct DPS (Heroic)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 10
+      },
+      "dummy": {
+        "rank": 9,
+        "score": 44
+      },
+      "scores": {
+        "raid": 68,
+        "mplus": 70
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 55,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 62,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Druid|Feral": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 22,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 14,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 4,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 9,
+        "mythicstats|mplus|Top-2000 keys representation": 13,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 10,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 15,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 16,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 16,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 10,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 10,
+        "archon|raid|95th pct DPS (Heroic)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 6
+      },
+      "scores": {
+        "raid": 33,
+        "mplus": 71
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "S"
+        }
+      }
+    },
+    "Druid|Guardian": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 2,
+        "archon|raid|Popularity": 4,
+        "archon|mplus|M+ score (95th pct)": 2,
+        "archon|mplus|Popularity": 3,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 1,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 1,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 5,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 2,
+        "archon|raid|95th pct DPS (Heroic)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 5
+      },
+      "scores": {
+        "raid": 70,
+        "mplus": 74
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A+",
+          "score": 78,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 54,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        }
+      }
+    },
+    "Druid|Restoration": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 6,
+        "archon|raid|Popularity": 6,
+        "archon|mplus|M+ score (95th pct)": 7,
+        "archon|mplus|Popularity": 6,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 4,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 7,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 7,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 4,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 6,
+        "archon|raid|95th pct HPS (Heroic)": 4,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 3
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 39
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 32,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "C"
+        }
+      }
+    },
+    "Evoker|Augmentation": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 18,
+        "archon|raid|Popularity": 18,
+        "archon|mplus|M+ score (95th pct)": 26,
+        "archon|mplus|Popularity": 26,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 1,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 3,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 27,
+        "mythicstats|mplus|Top-2000 keys representation": 22,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 26,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 16,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 24,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 24,
+        "archon|raid|95th pct DPS (Heroic)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 18,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 27,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 27
+      },
+      "scores": {
+        "raid": 33,
+        "mplus": 34
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 46,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 38,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "C",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "B"
+        }
+      }
+    },
+    "Evoker|Devastation": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 4,
+        "archon|raid|Popularity": 9,
+        "archon|mplus|M+ score (95th pct)": 21,
+        "archon|mplus|Popularity": 17,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 12,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 23,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 21,
+        "mythicstats|mplus|Top-2000 keys representation": 22,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 19,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 12,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 12,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 21,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 22,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 21,
+        "archon|raid|95th pct DPS (Heroic)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 8,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 9,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 17
+      },
+      "dummy": {
+        "rank": 4,
+        "score": 69
+      },
+      "scores": {
+        "raid": 74,
+        "mplus": 55
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 40,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Evoker|Preservation": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 2,
+        "archon|raid|Popularity": 2,
+        "archon|mplus|M+ score (95th pct)": 5,
+        "archon|mplus|Popularity": 7,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 3,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 7,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 4,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 1,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 2,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5,
+        "archon|raid|95th pct HPS (Heroic)": 1,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 7
+      },
+      "scores": {
+        "raid": 98,
+        "mplus": 58
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "S",
+          "score": 100,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 83,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "S",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "B"
+        }
+      }
+    },
+    "Hunter|Beast Mastery": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 16,
+        "archon|raid|Popularity": 13,
+        "archon|mplus|M+ score (95th pct)": 20,
+        "archon|mplus|Popularity": 5,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 26,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 15,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 15,
+        "mythicstats|mplus|Top-2000 keys representation": 7,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 6,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 13,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 25,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 8,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 26,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 17,
+        "archon|raid|95th pct DPS (Heroic)": 18,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 9
+      },
+      "scores": {
+        "raid": 48,
+        "mplus": 64
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 60,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Hunter|Marksmanship": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 7,
+        "archon|raid|Popularity": 4,
+        "archon|mplus|M+ score (95th pct)": 17,
+        "archon|mplus|Popularity": 13,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 5,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 19,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 20,
+        "mythicstats|mplus|Top-2000 keys representation": 20,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 13,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 1,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 23,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 3,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 22,
+        "archon|raid|95th pct DPS (Heroic)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 10,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 22
+      },
+      "dummy": {
+        "rank": 7,
+        "score": 57
+      },
+      "scores": {
+        "raid": 70,
+        "mplus": 55
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 68,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 67,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Hunter|Survival": {
+      "consensus": {
+        "raid": "C",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 23,
+        "archon|mplus|Popularity": 24,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 2,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 24,
+        "mythicstats|mplus|Top-2000 keys representation": 20,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 9,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 24,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 16,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 13,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 22,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 23,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 19,
+        "archon|raid|95th pct DPS (Heroic)": 26,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 27,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 25,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 25,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 17
+      },
+      "scores": {
+        "raid": 37,
+        "mplus": 60
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 54,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 47,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Mage|Arcane": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 1,
+        "archon|raid|Popularity": 1,
+        "archon|mplus|M+ score (95th pct)": 3,
+        "archon|mplus|Popularity": 1,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 27,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 21,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 2,
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 22,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 4,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 13,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 5,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 5,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 2,
+        "archon|raid|95th pct DPS (Heroic)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 9,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 2
+      },
+      "dummy": {
+        "rank": 2,
+        "score": 75
+      },
+      "scores": {
+        "raid": 91,
+        "mplus": 89
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 81,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S+",
+          "method": "A",
+          "wowhead": "A+",
+          "archon": "S"
+        }
+      }
+    },
+    "Mage|Fire": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 22,
+        "archon|mplus|Popularity": 27,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 19,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 25,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 26,
+        "mythicstats|mplus|Top-2000 keys representation": 22,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 20,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 23,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 20,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 15,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 18,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 15,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 25,
+        "archon|raid|95th pct DPS (Heroic)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 26
+      },
+      "scores": {
+        "raid": 43,
+        "mplus": 49
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 37,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 36,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Mage|Frost": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 27,
+        "archon|mplus|Popularity": 23,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 4,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 22,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 25,
+        "mythicstats|mplus|Top-2000 keys representation": 27,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 21,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 27,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 18,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 4,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 25,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 27,
+        "archon|raid|95th pct DPS (Heroic)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 25,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 26,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 26
+      },
+      "dummy": {
+        "rank": 11,
+        "score": 27
+      },
+      "scores": {
+        "raid": 48,
+        "mplus": 39
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 51,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 40,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "C"
+        }
+      }
+    },
+    "Monk|Brewmaster": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 5,
+        "archon|raid|Popularity": 3,
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 6,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 4,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 2,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mythicstats|mplus|Top-2000 keys representation": 6,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 6,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5,
+        "archon|raid|95th pct DPS (Heroic)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 6
+      },
+      "scores": {
+        "raid": 60,
+        "mplus": 62
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 61,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 40,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "B"
+        }
+      }
+    },
+    "Monk|Mistweaver": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 7,
+        "archon|raid|Popularity": 7,
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 4,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 1,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 1,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 2,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 5,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 6,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3,
+        "archon|raid|95th pct HPS (Heroic)": 6,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 7
+      },
+      "scores": {
+        "raid": 49,
+        "mplus": 62
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 70,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 60,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "B"
+        }
+      }
+    },
+    "Monk|Windwalker": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 12,
+        "archon|raid|Popularity": 12,
+        "archon|mplus|M+ score (95th pct)": 14,
+        "archon|mplus|Popularity": 11,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 9,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 18,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 11,
+        "mythicstats|mplus|Top-2000 keys representation": 8,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 10,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 1,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 12,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 13,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 9,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 2,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 5,
+        "archon|raid|95th pct DPS (Heroic)": 17,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 17,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 11,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 17,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 7
+      },
+      "scores": {
+        "raid": 54,
+        "mplus": 77
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 85,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        }
+      }
+    },
+    "Paladin|Holy": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 4,
+        "archon|raid|Popularity": 1,
+        "archon|mplus|M+ score (95th pct)": 1,
+        "archon|mplus|Popularity": 1,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 6,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 1,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 6,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 2,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 5,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 1,
+        "archon|raid|95th pct HPS (Heroic)": 3,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 4
+      },
+      "scores": {
+        "raid": 80,
+        "mplus": 98
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A+",
+          "score": 79,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "S",
+          "score": 93,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "S",
+          "wowhead": "B",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "S",
+          "archon": "S"
+        }
+      }
+    },
+    "Paladin|Protection": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 4,
+        "archon|raid|Popularity": 2,
+        "archon|mplus|M+ score (95th pct)": 3,
+        "archon|mplus|Popularity": 2,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 5,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 4,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3,
+        "archon|raid|95th pct DPS (Heroic)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 4
+      },
+      "scores": {
+        "raid": 59,
+        "mplus": 66
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 42,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Paladin|Retribution": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 19,
+        "archon|raid|Popularity": 14,
+        "archon|mplus|M+ score (95th pct)": 11,
+        "archon|mplus|Popularity": 4,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 21,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mythicstats|mplus|Top-2000 keys representation": 5,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 18,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 16,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 15,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 21,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 14,
+        "archon|raid|95th pct DPS (Heroic)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 9,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 8,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 5
+      },
+      "scores": {
+        "raid": 47,
+        "mplus": 66
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 41,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 55,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "C",
+          "wowhead": "C",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Priest|Discipline": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "C"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 5,
+        "archon|raid|Popularity": 5,
+        "archon|mplus|M+ score (95th pct)": 6,
+        "archon|mplus|Popularity": 5,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 2,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 3,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 7,
+        "mythicstats|mplus|Top-2000 keys representation": 7,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 1,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 3,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 3,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 7,
+        "archon|raid|95th pct HPS (Heroic)": 7,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 5
+      },
+      "scores": {
+        "raid": 72,
+        "mplus": 39
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "S",
+          "score": 94,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 62,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "C"
+        }
+      }
+    },
+    "Priest|Holy": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 1,
+        "archon|raid|Popularity": 4,
+        "archon|mplus|M+ score (95th pct)": 3,
+        "archon|mplus|Popularity": 3,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 5,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 4,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 3,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 4,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 7,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3,
+        "archon|raid|95th pct HPS (Heroic)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 1
+      },
+      "scores": {
+        "raid": 84,
+        "mplus": 48
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 54,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 44,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "B"
+        }
+      }
+    },
+    "Priest|Shadow": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 3,
+        "archon|raid|Popularity": 11,
+        "archon|mplus|M+ score (95th pct)": 15,
+        "archon|mplus|Popularity": 10,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 17,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 17,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 17,
+        "mythicstats|mplus|Top-2000 keys representation": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 23,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 16,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 6,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 12,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 18,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 20,
+        "archon|raid|95th pct DPS (Heroic)": 9,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 18
+      },
+      "dummy": {
+        "rank": 13,
+        "score": 19
+      },
+      "scores": {
+        "raid": 74,
+        "mplus": 55
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 47,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 47,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "B",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Rogue|Assassination": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 17,
+        "archon|raid|Popularity": 21,
+        "archon|mplus|M+ score (95th pct)": 2,
+        "archon|mplus|Popularity": 14,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 25,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 14,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 4,
+        "mythicstats|mplus|Top-2000 keys representation": 6,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 11,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 9,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 23,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 15,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 8,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 3,
+        "archon|raid|95th pct DPS (Heroic)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 16,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 10
+      },
+      "scores": {
+        "raid": 64,
+        "mplus": 75
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 45,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 72,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "S"
+        }
+      }
+    },
+    "Rogue|Outlaw": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 14,
+        "archon|raid|Popularity": 18,
+        "archon|mplus|M+ score (95th pct)": 6,
+        "archon|mplus|Popularity": 19,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 23,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 11,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "mythicstats|mplus|Top-2000 keys representation": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 3,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 6,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 14,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 16,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 7,
+        "archon|raid|95th pct DPS (Heroic)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 18,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 9
+      },
+      "dummy": {
+        "rank": 10,
+        "score": 35
+      },
+      "scores": {
+        "raid": 53,
+        "mplus": 84
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "C",
+          "score": 37,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "B"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "S"
+        }
+      }
+    },
+    "Rogue|Subtlety": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 11,
+        "archon|raid|Popularity": 7,
+        "archon|mplus|M+ score (95th pct)": 8,
+        "archon|mplus|Popularity": 11,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 10,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 8,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 10,
+        "mythicstats|mplus|Top-2000 keys representation": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 1,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 17,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 26,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 17,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 10,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 17,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 10,
+        "archon|raid|95th pct DPS (Heroic)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 9,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 17
+      },
+      "dummy": {
+        "rank": 12,
+        "score": 20
+      },
+      "scores": {
+        "raid": 71,
+        "mplus": 68
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 45,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 52,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "A"
+        }
+      }
+    },
+    "Shaman|Elemental": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 9,
+        "archon|raid|Popularity": 7,
+        "archon|mplus|M+ score (95th pct)": 4,
+        "archon|mplus|Popularity": 3,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 18,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 20,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 3,
+        "mythicstats|mplus|Top-2000 keys representation": 3,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 8,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 2,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 3,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 1,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 6,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 1,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 4,
+        "archon|raid|95th pct DPS (Heroic)": 8,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 10,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 4
+      },
+      "dummy": {
+        "rank": 3,
+        "score": 71
+      },
+      "scores": {
+        "raid": 64,
+        "mplus": 86
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 56,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A+",
+          "score": 83,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "S+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "S"
+        }
+      }
+    },
+    "Shaman|Enhancement": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 15,
+        "archon|raid|Popularity": 17,
+        "archon|mplus|M+ score (95th pct)": 12,
+        "archon|mplus|Popularity": 16,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 16,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 9,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 14,
+        "mythicstats|mplus|Top-2000 keys representation": 14,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 15,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 21,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 11,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 12,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 5,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 11,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 20,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 12,
+        "archon|raid|95th pct DPS (Heroic)": 10,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 14
+      },
+      "dummy": {
+        "rank": 5,
+        "score": 67
+      },
+      "scores": {
+        "raid": 54,
+        "mplus": 60
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 55,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Shaman|Restoration": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct HPS (Mythic)": 3,
+        "archon|raid|Popularity": 3,
+        "archon|mplus|M+ score (95th pct)": 2,
+        "archon|mplus|Popularity": 2,
+        "warcraftlogs|raid|Median HPS (Mythic, all bosses)": 7,
+        "warcraftlogs|mplus|Median HPS (M+, all dungeons)": 2,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "warcraftlogs|raid|Median DPS (Mythic, healer)": 5,
+        "warcraftlogs|mplus|Median HPS (12.1 PTR M+ testing)": 6,
+        "robydoby|raid|99th pct HPS (12.1 PTR Mythic raid testing, Robydoby)": 1,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 2,
+        "archon|raid|95th pct HPS (Heroic)": 5,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Entombed Sentinels, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Vashnik the Malignant, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Lost Explorers, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Altar of Fangs, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Den of Nalorakk, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Kings' Rest, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 6,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 6
+      },
+      "scores": {
+        "raid": 70,
+        "mplus": 77
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 69,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 73,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "S",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        }
+      }
+    },
+    "Warlock|Affliction": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 25,
+        "archon|mplus|Popularity": 24,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 24,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 13,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 23,
+        "mythicstats|mplus|Top-2000 keys representation": 22,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 17,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 14,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 22,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 18,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 3,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 9,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 23,
+        "archon|raid|95th pct DPS (Heroic)": 25,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 8,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 15,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 20,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 12,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 25
+      },
+      "scores": {
+        "raid": 48,
+        "mplus": 48
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 51,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 55,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "C",
+          "wowhead": "B",
+          "archon": "B"
+        }
+      }
+    },
+    "Warlock|Demonology": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "A+"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 13,
+        "archon|raid|Popularity": 15,
+        "archon|mplus|M+ score (95th pct)": 18,
+        "archon|mplus|Popularity": 9,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 15,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 7,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 7,
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 22,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 24,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 9,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 20,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 13,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 8,
+        "archon|raid|95th pct DPS (Heroic)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 11,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 1
+      },
+      "scores": {
+        "raid": 54,
+        "mplus": 80
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 64,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "B",
+          "score": 49,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "S+",
+          "method": "B",
+          "wowhead": "S",
+          "archon": "A"
+        }
+      }
+    },
+    "Warlock|Destruction": {
+      "consensus": {
+        "raid": "A+",
+        "mplus": "A"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 2,
+        "archon|raid|Popularity": 3,
+        "archon|mplus|M+ score (95th pct)": 24,
+        "archon|mplus|Popularity": 17,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 13,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 27,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 22,
+        "mythicstats|mplus|Top-2000 keys representation": 22,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 19,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 12,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 7,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 2,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 19,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 12,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 26,
+        "archon|raid|95th pct DPS (Heroic)": 7,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 21,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 6
+      },
+      "scores": {
+        "raid": 74,
+        "mplus": 66
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 72,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 63,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A+",
+          "method": "A",
+          "wowhead": "A",
+          "archon": "A"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "A",
+          "wowhead": "B",
+          "archon": "A"
+        }
+      }
+    },
+    "Warrior|Arms": {
+      "consensus": {
+        "raid": "S",
+        "mplus": "S"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 6,
+        "archon|raid|Popularity": 2,
+        "archon|mplus|M+ score (95th pct)": 1,
+        "archon|mplus|Popularity": 2,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 22,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 12,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 1,
+        "mythicstats|mplus|Top-2000 keys representation": 2,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 12,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 5,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 14,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 1,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 3T)": 1,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 5T)": 4,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 18,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 4,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 1,
+        "archon|raid|95th pct DPS (Heroic)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 9,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 8,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 1,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 7,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 8,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 5
+      },
+      "dummy": {
+        "rank": 1,
+        "score": 93
+      },
+      "scores": {
+        "raid": 91,
+        "mplus": 89
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A+",
+          "score": 84,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "S",
+          "score": 92,
+          "confidence": "high"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "S",
+          "method": "S",
+          "wowhead": "A",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "S+",
+          "method": "A",
+          "wowhead": "A+",
+          "archon": "S"
+        }
+      }
+    },
+    "Warrior|Fury": {
+      "consensus": {
+        "raid": "B",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|mplus|M+ score (95th pct)": 12,
+        "archon|mplus|Popularity": 21,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 20,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 10,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 18,
+        "mythicstats|mplus|Top-2000 keys representation": 19,
+        "simulationcraft|raid|SimC nightly Patchwerk DPS": 4,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 25,
+        "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 18,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 8,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 2T)": 10,
+        "warcraftlogs|raid|Median raw DPS (12.1 PTR Venomous Abyss, pooled)": 13,
+        "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 27,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 17,
+        "archon|raid|95th pct DPS (Heroic)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 26,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 27,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 18,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 27,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 22,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 19,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 19
+      },
+      "scores": {
+        "raid": 52,
+        "mplus": 55
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "B",
+          "score": 57,
+          "confidence": "medium"
+        },
+        "mplus": {
+          "tier": "C",
+          "score": 39,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "A",
+          "archon": "C"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "C",
+          "archon": "A"
+        }
+      }
+    },
+    "Warrior|Protection": {
+      "consensus": {
+        "raid": "A",
+        "mplus": "B"
+      },
+      "ranks": {
+        "archon|raid|95th pct DPS (Mythic)": 3,
+        "archon|raid|Popularity": 5,
+        "archon|mplus|M+ score (95th pct)": 6,
+        "archon|mplus|Popularity": 4,
+        "warcraftlogs|raid|Median rDPS (Mythic, all bosses, tank)": 2,
+        "warcraftlogs|mplus|Median rDPS (M+, all dungeons, tank)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "mythicstats|mplus|Top-2000 keys representation": 4,
+        "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing, tank)": 2,
+        "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 6,
+        "archon|raid|95th pct DPS (Heroic)": 1,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 2,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 2
+      },
+      "scores": {
+        "raid": 67,
+        "mplus": 48
+      },
+      "consensusSources": {
+        "raid": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ],
+        "mplus": [
+          "icyveins",
+          "method",
+          "wowhead",
+          "archon"
+        ]
+      },
+      "projection": {
+        "raid": {
+          "tier": "A",
+          "score": 72,
+          "confidence": "low"
+        },
+        "mplus": {
+          "tier": "A",
+          "score": 67,
+          "confidence": "medium"
+        }
+      },
+      "sourceRatings": {
+        "raid": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "S"
+        },
+        "mplus": {
+          "icyveins": "A",
+          "method": "B",
+          "wowhead": "B",
+          "archon": "C"
+        }
+      }
+    }
+  }
+}
