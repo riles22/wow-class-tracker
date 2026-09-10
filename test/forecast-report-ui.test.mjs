@@ -143,6 +143,7 @@ ui("forecast report keyboard reaches checkpoints, opens disclosures and returns 
   assert.equal(outline, "solid");
   await page.locator('a[href="#checkpoint-28"]').focus();
   await page.keyboard.press("Enter");
+  await page.waitForURL(url => url.hash === "#checkpoint-28", { timeout: 5000 });
   assert.ok(page.url().endsWith("#checkpoint-28"));
   const summary = page.locator(".cells-detail > summary").first();
   await summary.focus();
@@ -168,6 +169,7 @@ ui("checkpoint shortcuts reach operable breakdown summaries on desktop and phone
       assert.ok(bounds.x >= 0 && bounds.x + bounds.width <= width, "shortcut stays within the viewport");
       assert.ok(bounds.height >= 44, "shortcut provides a touch-sized target");
       await page.keyboard.press("Enter");
+      await page.waitForURL(url => url.hash === `#${id}`, { timeout: 5000 });
       assert.ok(page.url().endsWith(`#${id}`));
       assert.equal(await page.evaluate(() => document.activeElement.id), id, "fragment moves keyboard focus to its summary");
       const target = page.locator(`#${id}`);
