@@ -1755,6 +1755,131 @@ ui("tracker search matches role names and displayed role abbreviations", async p
   }
 });
 
+ui("NEW opens the exact visible take with stable same-date selection and keyboard focus", async page => {
+  await page.locator('#reduce-motion').focus();
+  await page.keyboard.press('Space');
+  assert.equal(await page.locator('#reduce-motion').isChecked(),true);
+  const expected=await page.evaluate(()=>{
+    Date.now=()=>Date.parse('2030-01-15T12:00:00Z');
+    PHASE.ptr={label:'Test PTR',marker:'test-ptr'}; PHASE.ptrSunset=false; state.era='ptr';
+    const s=SPECS[0]; s.buildChanges=[];
+    const base={class:s.class,spec:s.spec,creator:'Fixture creator',date:'2030-01-15',patchContext:'test-ptr',sentiment:'neutral'};
+    CREATOR_TAKES.push(
+      {...base,date:'2030-01-14',url:'https://example.com/older',claim:'Older visible take'},
+      {...base,url:'https://example.com/z',claim:'Same-date second source'},
+      {...base,url:'https://example.com/a',claim:'Exact fresh source claim'},
+      {...base,date:'2030-01-16',url:'https://example.com/live',patchContext:'live',claim:'Newer but hidden live take'},
+      {...base,date:'2030-01-16',url:'https://example.com/superseded',superseded:true,claim:'Superseded take'});
+    // A raw feed mention with no scoped lines has no item in this drawer.
+    PTR_BUILDS.builds.push({date:'2030-01-16',specsAffected:[`${s.spec} ${s.class}`],highlights:[]});
+    const first=newInfoFor(s);
+    CREATOR_TAKES.reverse();
+    const reordered=newInfoFor(s);
+    render();
+    return {index:0,key:first.key,reorderedKey:reordered.key,date:reordered.date,target:reordered.targetId};
+  });
+  assert.equal(expected.key,expected.reorderedKey,'same-date selection follows citation/content identity, not feed order');
+  assert.equal(expected.date,'2030-01-15','use the visible source date, not the newer hidden or superseded item');
+  const row=page.locator(`.row[data-idx="${expected.index}"]`), badge=row.locator('button.newbadge');
+  assert.equal(await badge.getAttribute('data-fresh-target'),expected.target);
+  await badge.focus();
+  await page.keyboard.press('Enter');
+  const target=page.locator(`#${expected.target}`);
+  assert.equal(await page.evaluate(()=>document.activeElement.id),expected.target);
+  assert.equal(await target.isVisible(),true);
+  assert.ok((await target.innerText()).includes('Exact fresh source claim'));
+  assert.equal(await target.locator('a').getAttribute('href'),'https://example.com/a');
+  assert.ok((await target.locator('a').innerText()).includes(expected.date));
+
+  // An already-open row may contain more than one closed disclosure around its
+  // destination. NEW must open every ancestor and never act as a row toggle.
+  await target.evaluate(el=>{
+    const outer=el.closest('details');
+    const nested=document.createElement('details');
+    const summary=document.createElement('summary'); summary.textContent='Nested source details';
+    nested.append(summary); el.before(nested); nested.append(el);
+    outer.open=false;
+  });
+  await badge.focus();
+  await page.keyboard.press('Space');
+  assert.equal(await page.evaluate(()=>document.activeElement.id),expected.target);
+  assert.equal(await row.getAttribute('aria-expanded'),'true');
+  const visibility=await target.evaluate(el=>{
+    const folds=[]; for(let p=el.parentElement;p;p=p.parentElement) if(p.matches('details')) folds.push(p.open);
+    const box=el.getBoundingClientRect();
+    return {folds,inView:box.top>=0 && box.bottom<=innerHeight};
+  });
+  assert.ok(visibility.folds.length>=2 && visibility.folds.every(Boolean));
+  assert.equal(visibility.inView,true,'the actual fresh item is scrolled into view');
+  await page.setViewportSize({width:390,height:844});
+  await badge.click();
+  assert.equal(await target.isVisible(),true);
+  assert.equal(await page.evaluate(()=>document.activeElement.id),expected.target);
+  assert.equal(await row.getAttribute('aria-expanded'),'true','pointer activation also preserves the open row');
+});
+
+ui("NEW targets each scoped tuning kind and preserves its exact citation and lines", async page => {
+  await page.locator('#reduce-motion').focus();
+  await page.keyboard.press('Space');
+  assert.equal(await page.locator('#reduce-motion').isChecked(),true);
+  for(const kind of ['hotfix','patch-notes','build']){
+    const expected=await page.evaluate(kind=>{
+      Date.now=()=>Date.parse('2030-01-15T12:00:00Z');
+      PHASE.ptr=null; state.era='live';
+      const s=SPECS[0];
+      const lines=[{text:`Exact ${kind} change`,classWide:false},{text:'Applicable class-wide change',classWide:true},
+        ...(kind==='build'?Array.from({length:60},(_,i)=>({text:`Additional development change ${i}: preserve this source line while keeping the dated heading visible.`,classWide:false})):[])];
+      s.buildChanges=[
+        {kind,date:'2030-01-14',forumUrl:'https://example.com/older',lines:[{text:'Older scoped change',classWide:false}]},
+        {kind,date:'2030-01-15',forumUrl:`https://example.com/${kind}/a`,forumPostNumber:12,
+          lines},
+        {kind,date:'2030-01-15',forumUrl:`https://example.com/${kind}/z`,lines:[{text:'Same-date other post',classWide:false}]}];
+      const first=newInfoFor(s);
+      s.buildChanges.reverse();
+      const selected=newInfoFor(s);
+      render();
+      return {target:selected.targetId,key:first.key,reorderedKey:selected.key,date:selected.date,
+        lines:lines.map(line=>(line.classWide?'class-wide':'')+line.text)};
+    },kind);
+    assert.equal(expected.key,expected.reorderedKey);
+    const row=page.locator('.row[data-idx="0"]');
+    await row.locator('button.newbadge').click();
+    const target=page.locator(`#${expected.target}`);
+    assert.equal(await page.evaluate(()=>document.activeElement.id),expected.target);
+    assert.equal(await target.isVisible(),true);
+    assert.equal(await target.locator('a').getAttribute('href'),`https://example.com/${kind}/a`);
+    assert.ok((await target.getAttribute('aria-label')).includes(expected.date));
+    assert.deepEqual(await target.locator('li').allTextContents(),expected.lines);
+    assert.equal(await target.locator('li.cw').count(),1);
+    const position=await target.evaluate(el=>{
+      const heading=el.querySelector('.d-h').getBoundingClientRect();
+      const obstruction=Math.max(0,...['.controls','.head'].map(selector=>document.querySelector(selector)?.getBoundingClientRect().bottom||0));
+      return {headingVisible:heading.top>=obstruction && heading.bottom<=innerHeight,tallerThanViewport:el.getBoundingClientRect().height>innerHeight};
+    });
+    assert.equal(position.headingVisible,true,'the exact entry heading stays below sticky controls after the jump');
+    if(kind==='build') assert.equal(position.tallerThanViewport,true,'exercise an official entry taller than the viewport');
+  }
+});
+
+ui("NEW requires a visible scoped item within the unchanged freshness window", async page => {
+  const seen=await page.evaluate(()=>{
+    Date.now=()=>Date.parse('2030-01-15T12:00:00Z');
+    PHASE.ptr={label:'Test PTR',marker:'test-ptr'}; PHASE.ptrSunset=false; state.era='ptr';
+    const s=SPECS[0]; s.buildChanges=[];
+    const base={class:s.class,spec:s.spec,creator:'Fixture',url:'https://example.com/source',claim:'Fixture claim',patchContext:'test-ptr'};
+    CREATOR_TAKES.push({...base,date:'2030-01-11'}, {...base,date:'2030-01-18'},
+      {...base,date:'2030-01-15',superseded:true}, {...base,date:'2030-01-15',patchContext:'live'});
+    PTR_BUILDS.builds.push({date:'2030-01-15',specsAffected:[`${s.spec} ${s.class}`,`${s.class} (hero talents)`],highlights:[]});
+    const missing=newInfoFor(s);
+    s.buildChanges=[{kind:'build',date:'2030-01-15',lines:[]}];
+    const empty=newInfoFor(s);
+    state.era='live';
+    const hidden=newBadgeHTML(s);
+    return {missing,empty,hidden,window:NEW_WINDOW_DAYS};
+  });
+  assert.deepEqual(seen,{missing:null,empty:null,hidden:'',window:3});
+});
+
 ui("supporting labels and comparison names meet small-text contrast", async page => {
   const contrast = selector => page.locator(selector).evaluateAll(elements=>{
     const rgba = color=>color.match(/[\d.]+/g).map(Number);
@@ -1886,6 +2011,59 @@ test("the phone opening screen includes a complete spec card with visible scorin
     const rail = await row.locator('.idcell').boundingBox();
     assert.ok(rail.height < 140, 'the rail spans the card header, not the expanded drawer');
   } finally { await page.close(); }
+});
+
+ui("source registry keeps credits and page dates distinct in a contained layout", async page => {
+  const sources = payload().sources.filter(s=>Array.isArray(s.pages));
+  assert.equal(await page.locator('#srclist .srcfold').count(), sources.length);
+  for (const source of sources) {
+    const fold = page.locator(`.srcfold[data-source="${source.id}"]`);
+    const summary = fold.locator('summary');
+    assert.equal(await summary.locator('.srccredit').count(), 0, 'credits do not crowd the summary date');
+    const snapshots = source.pages.map(p=>p.snapshot).filter(Boolean).sort();
+    const latest = snapshots.at(-1);
+    if (latest) {
+      assert.equal(await summary.locator('time').getAttribute('datetime'), latest);
+      assert.match(await summary.innerText(), /Latest snapshot/);
+    } else assert.equal(await summary.locator('time').count(), 0, 'undated tools do not gain a date');
+    if (new Set(snapshots).size > 1) assert.match(await summary.innerText(), /mixed dates/);
+    if (source.author) assert.equal(await fold.locator('.srccredit').textContent(), source.author);
+    const rows = fold.locator('.srcpages > .srcitem');
+    assert.equal(await rows.count(), source.pages.length);
+    for (const [index, sourcePage] of source.pages.entries()) {
+      const row = rows.nth(index);
+      assert.equal(await row.locator('time').count(), Number(!!sourcePage.snapshot)+Number(!!sourcePage.published));
+      for (const [key, label] of [['snapshot','Snapshot'], ['published','Page updated']]) {
+        if (!sourcePage[key]) continue;
+        const date = row.locator(`time[datetime="${sourcePage[key]}"]`).first();
+        assert.equal(await date.textContent(), sourcePage[key]);
+        assert.ok((await row.locator('.srcpage-dates').textContent()).includes(label));
+      }
+      if (!sourcePage.snapshot && source.kind !== 'reference') assert.match(await row.textContent(), /Not recorded/);
+    }
+  }
+  for (const width of [1440, 900, 720, 375, 320]) {
+    await page.setViewportSize({width,height:900});
+    await page.locator('#srclist .srcfold').evaluateAll(els=>els.forEach(el=>{el.open=true;}));
+    const layout = await page.locator('#srclist').evaluate(root=>{
+      const bounds = root.getBoundingClientRect();
+      const dates = [...root.querySelectorAll('time')].map(el=>{
+        const box=el.getBoundingClientRect();
+        const range=document.createRange();range.selectNodeContents(el);
+        return {left:box.left,right:box.right,lines:range.getClientRects().length};
+      });
+      const headings=[...root.querySelectorAll('.srcfold > summary')].map(el=>{
+        const name=el.querySelector('.srcname').getBoundingClientRect();
+        const date=el.querySelector('.when').getBoundingClientRect();
+        return {nameRight:name.right,dateLeft:date.left};
+      });
+      return {left:bounds.left,right:bounds.right,dates,headings};
+    });
+    assert.ok(layout.dates.every(date=>date.lines===1), `dates stay on one line at ${width}px`);
+    assert.ok(layout.dates.every(date=>date.left>=layout.left-1 && date.right<=layout.right+1), `dates stay inside the source column at ${width}px`);
+    assert.ok(layout.headings.every(row=>row.nameRight<=row.dateLeft), `names and dates never overlap at ${width}px`);
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth), width);
+  }
 });
 
 ui("official previews keep their attribution and not-live label in mobile spec drawers", async page => {

@@ -56,3 +56,31 @@ They are layout observations, not fixed requirements for future data or source w
   NVDA/VoiceOver session; those are outside this pass.
 - This document records implementation validation. Publication requires a separate
   exact-commit Pages deployment receipt and verification of all four public pages.
+
+## Follow-up: source dates and NEW links
+
+The source registry now separates source identity from a fixed date column. Page
+counts, mixed dates and missing dates remain visible; full author credits move into
+the disclosure. Individual pages distinguish the date captured (Snapshot) from the
+publisher's own date (Page updated). Dates remain unbroken on phones and desktops.
+
+NEW becomes a keyboard-accessible action for the exact newest visible creator take
+or scoped tuning entry. It opens the drawer and containing disclosures, then scrolls
+and moves focus to the dated item. A build with no relevant rendered lines, a hidden
+era, or a superseded take cannot supply an unreachable target. The existing expiry
+window and date/source records are preserved.
+
+Follow-up validation:
+
+- Full suite: **608 passed, 0 failed, 1 existing seasonal skip** (609 tests).
+- All four new regression checks passed in Chromium, Firefox and WebKit: source/date
+  preservation and responsive layout; exact creator-take navigation; all three tuning
+  kinds including a tall entry; visibility, expiry and missing-target rules.
+- The complete tracker UI suite also passed in Firefox and WebKit: **45 of 45** in
+  each engine, with no skips. Final build, instruction and whitespace checks passed.
+- A 390px touch walkthrough used real stored content with a controlled September 7
+  browser clock. Blood Death Knight's 44×44px NEW button focused Dorki's September 5
+  take and preserved its exact video timestamp link. This was a test of historical
+  content inside the freshness window, not a change to dates or the live clock.
+- Source pages remain intact across 16 registry entries; date layout was checked at
+  320, 375, 720, 900 and 1440px. No source data or dependencies changed.

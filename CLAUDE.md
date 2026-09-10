@@ -481,10 +481,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `.controls` 25px tall and every filter, the search and both overlay buttons unreachable.
   `@media(min-width:760px){ .ctlfold:not([open]) > .ctlsum{display:flex} }` makes it
   self-healing — a visible control beats a correct-looking but unusable toolbar.
-- **The source list folds per outlet** (audit stage 4): one summary line (name, author, page
-  count, freshest date, gold when behind `META.latestSnapshot`) with the pages underneath.
-  68 rows was 2,185px and the largest block left in the footer; it is 842px now, and the
-  footer 1,374px of a 3,728px document — against 7,200px of 10,533px before the audit.
+- **The source list folds per outlet** (audit stage 4; layout updated 2026-09-09):
+  names and labeled latest-snapshot dates occupy separate columns. Source type/page
+  count sits beneath the name; mixed dates and undated pages are explicit. Credits
+  live inside the disclosure beside the page links. Each page distinguishes its
+  captured snapshot from the publisher's update date when recorded; reference tools
+  and missing dates never acquire fabricated dates. Gold retains its existing meaning
+  of a snapshot older than `META.latestSnapshot`. The stage-4 measurements (68 rows:
+  2,185px → 842px) are historical, not a current layout requirement.
   **A source with an out-of-step page defaults to OPEN.** Its `.lagchip` is an honesty
   marker and must not be something you go looking for — and the chip is deliberately NOT
   copied onto the summary, because exactly one chip per out-of-step page is a pinned
@@ -492,6 +496,12 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   ⚠️ **The working tree is CRLF** (git autocrlf rewrites it on checkout/merge), so any patch
   script matching multi-line anchors must normalise its newlines to the file's or it
   silently finds 0 matches. This cost a cycle in stage 4.
+- **NEW badges are direct actions** (2026-09-09): the newest visible, non-superseded
+  creator take or spec-scoped tuning entry inside the three-day window is the target.
+  Activating the badge opens the spec drawer and its containing disclosures, scrolls
+  to that exact entry and focuses it. Badge selection shares the drawer's visibility
+  rules; raw build membership without a rendered scoped line is not a destination.
+  Source dates, the expiry window, and the existing live/PTR gate remain unchanged.
 - **The masthead is a 60px command bar** (audit stage 5, Riley's call after seeing it mocked
   against the shipped grid). The 302px masthead and the 100px health banner were 402 of the
   637px that preceded the first spec row; the page now reaches the grid at **363px** and
