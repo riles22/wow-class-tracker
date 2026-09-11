@@ -5248,7 +5248,8 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, Mythic+ side, rebuilt after the August 18 healer tuning (high-key framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=702",
       "claim": "He places Restoration Druid in B tier for Mythic+ alongside Holy Priest, saying both got buffs and both now do good amounts of healing. His reservation is cost rather than output: Druid has to spend an enormous number of globals just to set up its healing, which he calls really annoying and which cuts directly into the damage contribution he expects to matter more as the season matures. Against that he rates its utility highly, arguing Druid brings probably the best crowd control of any healer — naming disorient, Typhoon and Ursol's — and that Mark of the Wild plus the poison dispel puts it in a better position than Holy Priest or Discipline, neither of which dispels poison. He frames the whole tier list as a read on the start of the season specifically, before the meta solidifies and before personal damage becomes the dominant criterion.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=717) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Monk",
@@ -5272,7 +5273,8 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, Mythic+ side, rebuilt after the August 18 healer tuning (high-key framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=677",
       "claim": "For Mythic+ he says Mistweaver got good buffs to its caster spells from the August 18 pass and that this puts it in a bit better of a position, landing it around A tier on his list. He keeps two caveats attached. First, he still rates it a lot weaker than it was in Season 1, and expects the roughly 20-30% increase in health pools and creature damage going into the season to make that gap very noticeable in play. Second, the thing carrying the placement is efficiency rather than raw output — he credits it with still having really high efficiency, and it is on that basis rather than throughput that he puts it at A.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=465) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Priest",
@@ -5332,7 +5334,8 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, Mythic+ side, rebuilt after the August 18 healer tuning (high-key framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=598",
       "claim": "He states the case against Holy Paladin in keys plainly — it does not do as much damage as its peers — and then argues the case for it is stronger: ridiculously high healing that the pass left untouched, active mana regeneration that lets it continuously replenish output, and genuinely good dungeon utility including poison dispels and strong uses for Blessing of Protection, Freedom and immunities. He sets this inside his broader claim about how the season opens, that healing and safety matter more at the start and the emphasis on personal damage arrives later as players and routes improve, which is the framing that keeps Holy Paladin rated highly despite the damage shortfall.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=194) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Shaman",
@@ -5356,7 +5359,8 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, Mythic+ side, rebuilt after the August 18 healer tuning (high-key framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=636",
       "claim": "For keys he expects Restoration Shaman to be very widely represented, describing it as the constant second-place healer the bracket has repeatedly settled on. His reasons are safety, really strong overall output, crowd control, and Skyfury fitting into essentially every composition. The spec took no changes in the August 18 pass, so his read is continuity rather than reaction.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=394) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Evoker",
@@ -5380,7 +5384,8 @@
       "patchContext": "12.1 PTR — his Season 2 launch healer tier list, Mythic+ side, rebuilt after the August 18 healer tuning (high-key framing)",
       "url": "https://youtu.be/c_5u7Jpy-Uo?t=649",
       "claim": "In keys he rates Preservation on damage rather than healing, crediting it with really high output and especially high single-target damage. He attributes this to a wealth of Life Spark procs and Essence Burst, plus a tier set granting extra Living Flames which feed further Essence Burst, so that the spec can keep sending Essence Burst and Disintegrate while landing high-value Living Flames for additional damage. The spec took no changes in the August 18 pass; the placement reflects that damage profile rather than any reaction to tuning.",
-      "superseded": false
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=546) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Druid",
@@ -5763,7 +5768,9 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — first-week Mythic+ read on Discipline, revisiting the Atonement dungeon modifier he and Clandon argued for on the PTR",
       "claim": "Now that the season is live he reports the Mythic+ prediction he made on the PTR has come true, and he is blunt about it: Discipline is struggling badly in keys. He says it is very noticeable how weak the shields are and how little Atonement healing is doing, and describes running out of Penance casts and simply being unable to make something happen while healing dungeons. He ties it directly to the structural cause he has been naming since early August — the independent Atonement tuning modifier that used to increase Atonement healing specifically in a dungeon environment, which was removed going into this expansion so that Atonement would not feel half-strength when Disc heals ten targets in a raid. His read is that the back-end tuning Blizzard expected to substitute for it has not worked, and he says that if there were ever a season for them to bring the independent dungeon modifier back, this is it — noting the problem persists even after the launch healer rebalancing.",
-      "url": "https://youtu.be/PS-C4w5vJz8?t=16"
+      "url": "https://youtu.be/PS-C4w5vJz8?t=16",
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=819) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Priest",
@@ -5798,7 +5805,9 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — first-week Mythic+ read on Holy Priest, an upgrade on the B-tier placement in his launch list",
       "claim": "He is emphatic that Holy Priest is doing crazy amounts of healing in keys and, in his words, crushing it right now — a clear step up from the B-tier placement in his launch Mythic+ list, where throughput was never the concern. Running an Oracle build he describes having effectively infinite healing and never running out of mana, letting him keep pressure on constantly, and he adds that the spec also feels decently tanky, which speaks to the survivability gap he previously called the thing holding its placement down. The mechanisms he names are the buffed Prayer of Mending healing through Prompt Prognosis, and Enlightenment's mana regeneration going from 10% to 25%, which he calls a ridiculous amount of regeneration. He flags that further optimisation of the talent build is still open — he has moved onto Epiphany and thinks there may be an argument for Say Your Prayers instead — but stresses that none of it changes how the spec is played.",
-      "url": "https://youtu.be/PS-C4w5vJz8?t=92"
+      "url": "https://youtu.be/PS-C4w5vJz8?t=92",
+      "superseded": true,
+      "supersededNote": "Superseded 2026-09-11 by his 2026-09-10 Season 2 M+ healer tier list update (https://youtu.be/4SH6SUfKxpM?t=623) — same creator, same spec, same M+ lens."
     },
     {
       "class": "Monk",
@@ -7240,6 +7249,90 @@
       "patchContext": "Season 2 live — \"Best “Easy” Healer in 12.1\" (published 2026-09-07), a short arguing Holy Priest as the beginner-friendly healer pick of the season, argued from where the spec currently sits on raid and Mythic+ results. Bracket-split from his 2026-09-04 whole-spec read, which it supersedes.",
       "url": "https://youtu.be/4qn2cENo0Rk?t=39",
       "claim": "For Mythic+ he is explicitly more reserved than for raid: Holy Priest is not the meta healer, but he says it is doing a lot better in keys than expected, on the same Oracle hero build he recommends for raid.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Holy Paladin placed S",
+      "claim": "Holy Paladin is his S-tier healer at the top of the board. His PTR expectation that Paladin and Shaman would be the dominant M+ healers has held so far — at recording those were the only two healers to have timed a 21. Lightsmith has been the dominant playstyle over Herald of the Sun because it does roughly double Herald's damage in the logs he has seen while Paladin naturally heals a great deal anyway; he walks through the Laying Down Arms / Valiance infusion loop, Imperial Legacy still being free output in its nerfed form, and Call of the Righteousness trading Avenging Wrath duration for cooldown frequency. He describes middle-of-the-road damage with no damage raid buff, but effectively infinite non-cooldown healing, remarkable personal tankiness, and heal checks that were already trivial; in the tanky meta comps (Blood DK, Holy Paladin, Arcane Mage, Elemental Shaman, Arms Warrior) Paladins are running Faith over Virtue to beacon the one squishy player.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=194",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Restoration Shaman placed A+",
+      "claim": "Restoration Shaman is, as every season, about the second-best healer and that still holds; he places it in the A+ tier below Paladin (Mistweaver is then said to be 'also in that A+ tier'). Skyfury remains very valuable in a season where Arms Warrior and Paladin are A-team specs and will want a Shaman of either flavour in the group; Acid Rain's passive damage is in a good spot and the double Healing Rain this season means double Acid Rain; Poison Cleansing Totem does incredible work in a poison-heavy season. He notes it sometimes has to burn into its mana bar for heavy problems but has a tool for almost everything.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=394",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Mistweaver Monk placed A+",
+      "claim": "Mistweaver Monk is also in the A+ tier in his view, but with reservations. The raid-driven buffs to its casted spells (Sheilun's Gift among them) are not enough to restore the previous seasons' synergistic caster setups, which now fight for space against the Apex talent; Spin to Win is there but far weaker than before, and most healing comes from maximising Rising Sun Kick, which is why Monks bring the highest personal healer damage and pair well with physical comps for the vulnerability. Its cast spells remain very weak and Enveloping Mist mostly amplifies rather than heals, until the damage-to-healing conversion hits a wall on specific bosses. He still expects it represented in quite a few higher keys, if a little lighter.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=465",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Preservation Evoker placed A+",
+      "claim": "Preservation Evoker is discussed in the same tier as Mistweaver, before he moves to the next tier — another healer doing massive personal damage and in a really powerful position this season. Fluttering Seedlings now proccing Consume Flame plus the patch's Dream Breath buffs let Flameshaper burst better output than before in AoE and single target; fights he was worried about (Avatar Sethus) are being healed easily off Living Flames. He calls it probably the best position the spec has been in since its early-Dragonflight representation, while noting it stays one of the lower-represented healers because it is harder to play and it brings no strong raid buff.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=546",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Holy Priest placed B",
+      "claim": "Holy Priest is his B-tier healer, from a lot of personal key play (attempts on 20s, not yet timed). It always has some healing for whatever is happening, but it is single-target based, so he stacks enormous haste (~30%) to whack-a-mole health bars, and it is more cooldown-based than the healers above it. Survivability is better and it leech-heals off its own casts, yet it goes from 100 to zero quickly to bleed combos — he has popped Restitution Angel several times in 19s. He caveats that his haste/mastery set is optimised for Discipline raiding and a haste/crit/versatility build would do better. Decent personal damage, PI and stamina; it beats heal checks well, but he thinks a late-season 0.1% push would be more challenging, which is why it sits at B. Separately he flags Oracle's mana regen and hero-tree buffs as the big surprise making it never run out of mana.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=623",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Restoration Druid placed C",
+      "claim": "Restoration Druid is a C-tier healer. He calls this the patch Druids will remember for a long time: it was pitched as a quality-of-life improvement and then measurably destroyed it, with HoT extension via Swiftmend removed from the talents, so the setup and maintenance cost of keeping HoTs rolling has become a massive turn-off and spec representation has collapsed as players rerolled. The healing is achievable, and if Druids did not have to micro their HoTs they could do very good healer damage, but swapping forms to weave damage feels punishing next to healers whose damage comes naturally. He notes the recent buffs have helped Druid in raid, where it now looks strong, but in M+ nobody is going back to it.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=717",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-09-10",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Discipline Priest placed C",
+      "claim": "Discipline Priest sits at the bottom of his tier list, in his words by far the worst healer in M+ this season and its worst M+ position in a long time. The 20% Shadow Mend mana-cost reduction has not fixed a mana economy he calls miles worse than every other healer's; Shadowfiend is a terrible talent; the spec tree has been repeatedly nerfed; and Atonement is undertuned in dungeons yet would be too strong in raid if buffed. He attributes this to the removal of last expansion's dungeon-specific Atonement modifier in favour of the 5-to-20-Atonement back-end scaling, which has not worked for M+ at all, leaving weak Atonement healing, deliberately weakened shields, and expensive Shadow Mend casts that run the spec out of mana. He contrasts this with his own Mythic-progression raid healing, which he calls great.",
+      "url": "https://youtu.be/4SH6SUfKxpM?t=819",
       "superseded": false
     }
   ],

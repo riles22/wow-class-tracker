@@ -1,4 +1,107 @@
 {
   "schemaVersion": 1,
-  "panels": []
+  "panels": [
+    {
+      "id": "automaticjak-4SH6SUfKxpM-2026-09-10",
+      "label": "AutomaticJak — 2026-09-10 Season 2 Mythic+ healer tier list update",
+      "creator": "AutomaticJak",
+      "season": "s2",
+      "date": "2026-09-10",
+      "capturedAt": "2026-09-11",
+      "scope": {
+        "brackets": [
+          "mplus"
+        ],
+        "roles": [
+          "Healer"
+        ]
+      },
+      "scopeNote": "Live Season 2 Mythic+, a few weeks into the season; keys in the 19–21 range referenced; his own list ('our update for the M+ healer tier list', 'I've got it at the B tier').",
+      "nativeOrder": [
+        "S",
+        "A+",
+        "B",
+        "C"
+      ],
+      "pages": [
+        {
+          "url": "https://youtu.be/4SH6SUfKxpM",
+          "published": "2026-09-10",
+          "snapshot": "2026-09-11"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Paladin|Holy",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=194",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Explicit: 'Paladin is going to be our S tier healer at the top of the board.'",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Shaman|Restoration",
+          "bracket": "mplus",
+          "tier": "A+",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=394",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Explicit position ('about the second best healer') with the tier letter carried by the next sentence placing Mistweaver 'also in that A+ tier'.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Mistweaver",
+          "bracket": "mplus",
+          "tier": "A+",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=465",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Explicit: 'Mistweaver Monk I also think is in that A+ tier.'",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Evoker|Preservation",
+          "bracket": "mplus",
+          "tier": "A+",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=546",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Placed by the video's own sequence: discussed directly after Mistweaver ('another healer doing massive amounts of personal damage is also preservation evoker') and before 'On our next tier, we've got Holy Priest'; no letter is spoken for it.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Priest|Holy",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=623",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Explicit: 'On our next tier, we've got Holy Priest … that's why I've got it at the B tier.'",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Restoration",
+          "bracket": "mplus",
+          "tier": "C",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=717",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Explicit: 'For C-tier healers … Resto Druid'.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Priest|Discipline",
+          "bracket": "mplus",
+          "tier": "C",
+          "date": "2026-09-10",
+          "url": "https://youtu.be/4SH6SUfKxpM?t=819",
+          "context": "Season 2 live — Mythic+ healer tier list, creator's own placement",
+          "text": "Under the plural 'C-tier healers' heading, then 'at the bottom of our tier list, we've got Discipline Priest' — last place; no separate lower letter is spoken.",
+          "supersededAtFreeze": false
+        }
+      ]
+    }
+  ]
 }

@@ -16,6 +16,62 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-11 (local, scheduled) — THE CAPTION 429 HAS CLEARED (day 19); queue drained 1 → 0, AutomaticJak's M+ healer tier list distilled into 7 takes + 1 prediction panel
+
+- **The anonymous residential caption lane is back.** One probe, per the standing bound, on the
+  only queued video (`4SH6SUfKxpM`, AutomaticJak, published 2026-09-10): android player API 200,
+  subtitle track found, and `timedtext` returned the json3 (371 KB, 512 caption events, 16:55
+  runtime) — **no 429**. First successful anonymous caption download since 2026-08-23. yt-dlp at
+  the `requirements.txt` pin (2026.07.04), nothing installed or upgraded, no cookies, no
+  authenticated lane. The flag decayed on its own after 19 days of near-zero caption traffic
+  (one probe per run), which is the diagnosis's decay mechanism working, just an order of
+  magnitude slower than the 24–72h it expected. **Do not read one success as a durable state**:
+  a sweep is exactly the volume shape that flagged the IP, so the next local run should pace
+  from the start (`--sleep-requests 3`) and stop on the first 429 as before.
+- **Scope was residential-only**, and the nightly window was open (14:40–15:10Z expected), so
+  no discovery sweep was run this time: the nightly re-polls all 44 channels, and this run's
+  one job was to drain what CI could not. The 09-10 nightly's ~145 left-unseen candidates stay
+  unseen for it.
+- **DISTILLED — AutomaticJak `4SH6SUfKxpM`, "Midnight Season 2 Healer M+ Tier List"
+  (2026-09-10).** His own list ("our update for the M plus healer tier list", "I've got it at the
+  B tier"), no guests, no co-stream. Specialist `takes[]`, all **bracket `mplus`**, one per
+  healer, exactly his registered scope (six class entries = the seven healers): Holy Paladin
+  **buff** (S — Lightsmith ~2× Herald's damage, "infinite" non-cooldown healing, Paladin and Shaman
+  the only healers to time a 21 at recording), Restoration Shaman **buff** (A+ — "second best"
+  again; Skyfury, double Healing Rain/Acid Rain, Poison Cleansing Totem), Mistweaver **mixed**
+  (A+ but casted spells weak, Spin to Win far weaker, expects lighter representation),
+  Preservation Evoker **buff** (A+ — "best position since early Dragonflight", Flameshaper +
+  Fluttering Seedlings → Consume Flame), Holy Priest **mixed** (B — meets checks but single-target,
+  cooldown-based, 100-to-zero to bleeds; he caveats his Disc-raid stat set), Restoration Druid
+  **nerf** (C — Swiftmend HoT extension removed, representation collapsed, "worst patch from a
+  gameplay perspective"), Discipline Priest **nerf** (bottom — "by far the worst healer in M+",
+  Atonement dungeon modifier removed, mana economy "miles worse").
+- **Supersession, same lens only: 7 retired, 7 kept.** The five 08-15 launch-list **M+** takes
+  (Resto Druid, Mistweaver, Holy Paladin, Resto Shaman, Pres Evoker) and the two 08-21 first-week
+  **M+** reads (Disc, Holy Priest) are superseded with a dated note. Every RAID-lens take (08-15
+  raid rows, 08-26 Holy/Disc raid, 08-27 Pres/Resto Shaman raid) stays live — complementary,
+  not replaced.
+- **Prediction panel captured** (3a): `data/creator-predictions.json` gets its FIRST panel,
+  `automaticjak-4SH6SUfKxpM-2026-09-10`, season s2, mplus/Healer, nativeOrder S · A+ · B · C.
+  Two placements are positional rather than spoken letters, and the row text says so: Pres Evoker
+  sits between Mistweaver ("also in that A+ tier") and "On our next tier, we've got Holy Priest";
+  Disc is introduced under the plural "C-tier healers" heading and then "at the bottom of our
+  tier list", so it is recorded C, last, with no separate lower letter invented. Resto Shaman's
+  A+ is carried by the Mistweaver sentence ("also in that A+ tier"), and the text records that.
+- **Verification pass done against the transcript before writing**: every number (2× damage,
+  ~30% haste, 20% Shadow Mend, 5-to-20 Atonement scaling, 21s/20s/19s) sits on the referent he
+  attached it to; ASR mangles never written as names ("Shayoon's gift" → Sheilun's Gift only
+  where the spell is unambiguous; "night teams" for what is probably "nineteens" was DROPPED
+  rather than guessed). The Oracle mana-regen remark is folded into the Holy Priest take as a
+  spec-level read, not a separate claim. Nothing distilled from the sponsor segment.
+- **Not distilled, deliberately**: the composition roll-call (Blood DK / Arcane / Ele / Arms)
+  is a list-mention about DPS, outside his scope and outside the read; "Mistweaver casted spells
+  feel terrible" in the closing rant restates the take already recorded.
+- Lanes: `4SH6SUfKxpM` removed from `videos[]` in the same edit (queue **1 → 0**); the seven take
+  urls are now its record; no id sits in two lanes; `npm run validate` clean. `latest` advanced
+  on all six AutomaticJak entries to what was actually distilled. No metaNotes (specialist, not a
+  general creator). No `skipped[]` or `seen[]` change.
+
 ## 2026-09-10 (nightly) — 44 channels, 1 transcript distilled into 8 raid metaNotes, 1 queued
 
 - **Discovery**: 44 of 44 unique tracked channels polled inline over the public RSS endpoint (41 class-creator
