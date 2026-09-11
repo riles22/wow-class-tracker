@@ -5,16 +5,168 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-10T14:39:26.510Z",
+      "checkedAt": "2026-09-11T14:12:31.504Z",
       "removedSections": [],
       "posts": [
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 33,
-          "updatedAt": "2026-09-09T23:21:51.165Z",
-          "bodySha256": "3620e76898994022bcd083c4c08d0640afa142939a725bb6596c14bee30fd6c8",
+          "version": 36,
+          "updatedAt": "2026-09-11T03:11:02.075Z",
+          "bodySha256": "8971da8f3b798a0c6e98bcbaa9a1ec94d60ec487ded5812536c745771cb7cd44",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-10:classes:death-knight:1",
+              "date": "2026-09-10",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Unholy"
+              ],
+              "sha256": "427fb5342312a75f48f9692020119989ab24944c8d5d50ad4c775c41e454ac7c",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. Distilled into the new live hotfix feed entry dated 2026-09-10 in data/ptr-builds.json (Unholy spec heading).",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Unholy Death Knight — Resolved an issue causing Magus of the Dead to occasionally spawn at extreme vertical differences."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-10:classes:hunter:1",
+              "date": "2026-09-10",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Survival"
+              ],
+              "sha256": "3555579777d80111a94473e720756dad97b859ed9db95987c41eae3f57185230",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. Both Survival bullets consolidated into one spec line in the new 2026-09-10 feed entry.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Survival Hunter — Corrected an issue where the initial damage of Wildfire Bomb would not happen if the Hunter was affected by crowd control effects while the bomb hit the target; Corrected an issue where Strike As One would not deal damage with a Raptor Swipe that benefit from Tip of the Spear if Aspect of the Eagle is active."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-10:classes:mage:1",
+              "date": "2026-09-10",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Arcane",
+                "Mage|Fire",
+                "Mage|Frost"
+              ],
+              "sha256": "ec46e70a2695a5dc3c6a9f52a96762658d3fefb611dfc31b035de6c11ae792f2",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. The only line sits under Mage › Hero Talents › Spellslinger with no spec heading, so it is logged class-wide with the tree named (2026-08-27 Rogue/Deathstalker precedent) in the new 2026-09-10 feed entry; class-wide attribution covers all three Mage specs by build membership.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Mage (class-wide) — Spellslinger: Fixed an issue causing Splinters from Augury Abounds to sometimes strike crowd-controlled targets when other non-crowd controlled targets are available."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-10:classes:paladin:1",
+              "date": "2026-09-10",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy",
+                "Paladin|Protection"
+              ],
+              "sha256": "eb0bc26958d8292d6487ec74b2c79d527dcf903858fcdd90f130bcc2a2499367",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. Holy and Protection each get their own spec line in the new 2026-09-10 feed entry.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Holy Paladin — Fixed an issue that caused Ringing of the Heavens to not function if cast as Lightsmith while targeting an enemy."
+                  },
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Protection Paladin — Fixed an issue where Glory of the Vanguard was not dealing full damage to its primary target."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-10:classes:rogue:1",
+              "date": "2026-09-10",
+              "category": "Classes",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Outlaw",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "b510bfc5502820ffef427f3055883e1f160a552f6b2f9bf247b542ccf03e0b56",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. Bare Rogue heading, no spec block: logged class-wide in the new 2026-09-10 feed entry.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Rogue (class-wide) — Both versions of Thistle Tea can now be tracked in the Cooldown Manager."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-10:classes:shaman:1",
+              "date": "2026-09-10",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Restoration"
+              ],
+              "sha256": "f298d992e17bc3b728e1c197ff4bf1d1f599c3bd98656c52ba3caefac93c762c",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. Restoration spec heading: one spec line in the new 2026-09-10 feed entry.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-10",
+                    "highlight": "Restoration Shaman — Fixed an issue where Soothing Rain did not properly reduce the cast time of Healing Rain by 0.5 seconds."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-10:player-versus-player:evoker:1",
+              "date": "2026-09-10",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Devastation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "7ed40495de079561149faecf07bf0faed789a3eece85d9c2c59d6cf8a8ea8b2d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-11 (local run) against official hotfix topic 2336376, post 1, version 36 (last edited 2026-09-11T03:11:02Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382799. Player versus Player section: the Unburdened Flight / Deep Breath-during-Hover fix and the Chronowarden Warp snare-immunity fix alter PvP-only behaviour; this tracker rates PvE brackets, so PvP-only changes are out of scope and must not enter a spec line where they could vote in the outlook tally."
+              }
+            },
             {
               "id": "2336376:1:2026-09-09:classes:death-knight:1",
               "date": "2026-09-09",
@@ -109,15 +261,15 @@
               "specKeys": [
                 "Shaman|Enhancement"
               ],
-              "sha256": "9b23e7734036aa0f8eb37d2f4b755cdeb8dc122c1c1935ae761b6f72152da849",
+              "sha256": "94447e830df793456ce020eaf63aff58f7e1b3c477208b322dbcfcd32940792d",
               "resolution": {
                 "disposition": "applied",
-                "reason": "Reviewed 2026-09-10 against official hotfix topic 2336376, post 1, version 33 (last edited 2026-09-09T23:21:51Z), read from the canonical Discourse body with its list nesting intact. Distilled into the new live hotfix feed entry dated 2026-09-09 in data/ptr-builds.json.",
+                "reason": "Section EDITED without a new date or reply: post 1 moved version 33 -> 36 (last edited 2026-09-11T03:11:02Z) and the Crash Lightning / Windfury Weapon line was re-attributed from the Totemic hero tree to Stormbringer. Reviewed 2026-09-11 (local run) against the deterministic receipt text; the stored 2026-09-09 Enhancement highlight in data/ptr-builds.json was corrected to the new verbatim wording and the entry label records the correction.",
                 "references": [
                   {
                     "kind": "build",
                     "date": "2026-09-09",
-                    "highlight": "Enhancement Shaman — Fixed an issue where damage from Doom Winds could interrupt channeled effects, such as the Font of Venomous Rage trinket; Totemic: Fixed an issue where Crash Lightning could cause unintended targets to be hit by Windfury Weapon."
+                    "highlight": "Enhancement Shaman — Fixed an issue where damage from Doom Winds could interrupt channeled effects, such as the Font of Venomous Rage trinket; Stormbringer: Fixed an issue where Crash Lightning could cause unintended targets to be hit by Windfury Weapon."
                   }
                 ]
               }
@@ -1638,7 +1790,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-10T14:39:26.510Z",
+      "checkedAt": "2026-09-11T14:12:31.504Z",
       "removedSections": [],
       "posts": [
         {

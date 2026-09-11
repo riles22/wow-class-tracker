@@ -16,6 +16,62 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-11 (local, scheduled) — new 09-10 live hotfix logged (7 class lines), a SILENT 09-09 edit caught by the ledger (Totemic → Stormbringer), 8 obligations resolved
+
+- **Scope: residential-only catch-up, pushed BEFORE the nightly's window.** No nightly commit
+  existed for 09-11 at 14:10Z, but per the 09-08 lesson (the schedule has settled at roughly
+  +4h, ~14:40–15:10Z) a nightly was assumed to still be coming, so nothing CI regenerates was
+  touched — no tier, metric or WCL work. The official-note ledger and feed WERE worked, because
+  they are deterministic reads of one canonical post: a nightly starting after this push simply
+  finds the obligations already resolved.
+- **Official revision ledger ran FIRST**, locally (`node src/fetch-official-notes.mjs`, checkedAt
+  2026-09-11T14:12:31Z): `live-hotfixes` (topic 2336376) post 1 moved **version 33 → 36**, last
+  edited 2026-09-11T03:11:02Z, title now "…Hotfixes - September 10"; **116 pending vs 109 stored
+  sections, 8 unresolved**. `ptr-preview` (topic 2344395) unchanged — post 1 still v3, all 3
+  sections hash-identical and still `applied`. NOTE: the on-disk `official-notes/topic-*.json`
+  files are 09-05 leftovers the collector does not rewrite (post 1 at v31 inside them); the
+  receipt TEXT lives in `evidence.json`, and that is what was read, with the heading nesting
+  intact.
+- **Seven of the eight are a new dated section, 2026-09-10** — Death Knight › Unholy, Hunter ›
+  Survival, Mage › Hero Talents › Spellslinger, Paladin › Holy and › Protection, Rogue (bare
+  heading), Shaman › Restoration, plus Player versus Player › Evoker. **New feed entry, kind
+  `hotfix`, dated 2026-09-10** (ptr-builds 30 → 31), mirror news=382799 (pubDate 2026-09-10
+  22:43 −0500), every line cross-checked present in the mirror body. Heading discipline: the
+  Mage line has NO spec heading, only the hero-tree one, so it is `Mage (class-wide) —
+  Spellslinger: …` (the 2026-08-27 Rogue/Deathstalker precedent — the data does not say which
+  specs hold the tree, and guessing is the Hellcaller mis-attribution the 07-25 audit fixed);
+  Rogue's Thistle Tea line is under a bare Rogue heading and class-wide on its face; the other
+  five carry explicit spec headings. The PvP Evoker section triages out (`irrelevant`, PvP-only).
+  **All seven class lines classify null** under `classifyHighlight` — a pure bug-fix and
+  Cooldown-Manager round-up, so no arrow, no tally vote, and no misfire this time (the 09-09
+  Warrior "damage buff / Cooldown Manager" misfire has no counterpart here: the Rogue tracking
+  line carries no buff/nerf noun). No line names a set bonus; tier-set upkeep not engaged.
+- **The eighth is the one worth the ledger's existence: the 09-09 Shaman section was EDITED
+  without a new date or reply.** Its hash moved because Blizzard re-attributed the Crash
+  Lightning / Windfury Weapon fix from **Totemic to STORMBRINGER**. Neither the RSS date sweep
+  nor the mirror (news=382799 carries only the 09-10 block) could have surfaced this — exactly
+  the September-4 Enhancement-set omission shape the ledger was built for. The stored 09-09
+  Enhancement highlight now carries the corrected verbatim wording, the 09-09 entry's label
+  records the correction with the version/edit time, and the section is re-resolved `applied`
+  against the corrected line. `node src/check-official-notes.mjs --base=HEAD` passes.
+- **Discovery lanes: nothing else.** Wowhead RSS 40 items, HTTP 200, 203,920 B, parsed per
+  `<item>` block: newest item IS the 09-10 mirror; no "Class Tuning" post, no standalone blue
+  post, no 12.2 PTR announcement (zero titles carry "12.2"). 12.1.5 items in the window are
+  all feature/reward previews (Labyrinth rewards, decor, Kith'ix story prep) — none is a
+  forecast-cycle trigger. Blue tracker and news index not re-swept this run: the ledger and RSS
+  agree, and the nightly re-sweeps all four channels.
+- **12.1.5 stayed NOTES ONLY.** `PHASES.ptr` untouched at null; nothing 12.1.5 entered the feed
+  or any `ptr` verdict; no archived 12.1 PTR metric relabelled.
+- **Dormant lanes correctly skipped**: zones 54 / 52 / 56 / 57. Stored rows untouched.
+- Verification: `npm run test:quiet` 609 tests — 607 pass, 1 permanent skip, **1 fail that is
+  PRE-EXISTING on HEAD `a4c58ec`** (re-run on the stashed tree: same `ui-invariants` phone-card
+  assertion "the star rail does not stretch the first line of the card"; the owner-deferred
+  NEW-badge 44px touch-target regression, which self-heals ~09-12 when the 09-09 Blood DK entry
+  ages out). `freeze-season`: 8 pairs still live, nothing to freeze. `check-refresh --manifest`:
+  the expected `startedAt … 23h old` line plus a stale local `wcl-fetch/evidence.json`
+  (gitignored 09-08 leftover — no WCL fetch this run, manifest WCL rows untouched). Manifest
+  deliberately NOT rewritten (partial run). Snapshot `2026-09-11.json` written, then rebuilt.
+
 ## 2026-09-10 (nightly) — new 09-09 live hotfix logged (7 class lines), all 7 official-note obligations resolved, two Warrior tier sets bumped
 
 - **Official revision ledger ran FIRST**, from the pre-agent artifact (checkedAt 2026-09-10T14:39:26Z).
