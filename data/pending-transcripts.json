@@ -1,6 +1,14 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "rYFv6Ohr7mE",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 Week 4 | New Event Loot, Mega Delve's 7 Titles & Myth Track Loot, PTR Raid Testing",
+      "published": "2026-09-10",
+      "queuedAt": "2026-09-11"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

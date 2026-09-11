@@ -16,6 +16,33 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-11 (nightly) — ledger clean (116/116 sections unchanged, 0 unresolved), no new builds on any of four channels
+
+- **Revision ledger first**, from the pre-agent `official-notes/` artifact (checkedAt 14:37:49Z). Both sources fetched
+  `status: success` — live-hotfixes topic 2336376 post 1 at **version 36** (edited 2026-09-11T03:11:02Z) and
+  ptr-preview topic 2344395 post 1 at version 3. Diffed section by section against `data/official-notes.json`:
+  **116 sections on both sides, 0 added, 0 removed, 0 outline hashes changed**, 0 tombstones, therefore **0 unresolved
+  obligations**. The 09-11T03:11 edit had already been reconciled by the same-day local run at 14:12, so every section
+  legitimately retains its prior resolution (14 applied live-tuning references, 99 explicit irrelevant reasons, 3
+  applied 12.1.5 preview note sets). The ONLY write to the ledger is each source's `checkedAt`; no disposition,
+  reference, note, hash or source date altered. `check-official-notes --base=HEAD` passes.
+- **Wowhead RSS** HTTP 200, 203,920 B, 40 items parsed per `<item>` block. Newest class item is news=**382799**
+  "Wildfire Bomb, Glory of the Vanguard…", pubDate 2026-09-11T03:43Z — **already** the stored 2026-09-10 hotfix entry
+  (same id and slug). No new feed entry.
+- **News INDEX** polled too, since it leads RSS within a run: `data.news.newsData` brace-balanced from the id
+  attribute, 20 posts, top id 382799 — nothing ahead of RSS this time.
+- **Blue tracker** swept for standalone blue posts outside the tracked thread: `data.blueTracker.default`, 50 entries,
+  ~40 unique topics. Newest class-relevant are Linxy "Midnight Hotfixes - September 10" (topic 2336376, the running
+  compilation the ledger already covers) and "Class Tuning Incoming - September 1" (logged). No untracked tuning topic.
+- **Official 12.1 dev-notes thread** `2317811.json` fetched directly: 17 posts, highest_post_number 19, newest Linxy
+  post 2026-07-31 (edited 08-01). Quiet since the cycle closed — expected under the between-cycles posture, NOT a lost
+  thread, and the rediscovery gotcha stays suspended.
+- `data/ptr-builds.json` unchanged: 31 builds, newest 2026-09-10. Zone-52/54/56/57 sweeps correctly skipped (dormant;
+  their contract rows were removed at the flip). 12.1.5 stayed NOTES ONLY — PHASES untouched, nothing written into
+  ptr-builds or a `ptr` verdict, no forecast reopened, no archived PTR metric relabelled.
+- Writeup coverage recomputed rather than remembered: **1** spec at `ptr: null`, Demonology Warlock — the deliberate
+  "the source reported no changes" null.
+
 ## 2026-09-11 (local, scheduled) — new 09-10 live hotfix logged (7 class lines), a SILENT 09-09 edit caught by the ledger (Totemic → Stormbringer), 8 obligations resolved
 
 - **Scope: residential-only catch-up, pushed BEFORE the nightly's window.** No nightly commit

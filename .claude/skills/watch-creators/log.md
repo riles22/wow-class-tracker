@@ -16,6 +16,36 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-11 (nightly) — 44/44 feeds polled, 0 transcripts available (queue was empty at collector time), 1 video queued
+
+- **Discovery**: all **44** unique tracked channels polled inline (41 class-creator entries + 3 generalCreators; the 40
+  `transcribable: false` reference entries skipped; **0** pollable creators missing a `channelId`). 44/44 HTTP 200 with
+  retry+backoff, **660** entries, 0 failures.
+- **Seen-set** rebuilt as the structured union of the four lanes (`videos[]`/`skipped[]`/`seen[]` + every `youtu.be` id
+  in a take or metaNote url) = **1,251** ids. Log prose not regexed. Cycle bound derived as `min(builds[].date)` =
+  **2026-06-18** (the date, never an index) → **324 unseen in-cycle**, 178 matching the nightly keyword filter.
+- **No transcripts were available to this agent.** `transcript-fetch/summary.json` verdict `ok`, requested 0 / fetched 0
+  / cached 0 — the queue was already drained to 0 by the same-day local run, so the deterministic step had nothing to
+  fetch. Consequently **0 takes, 0 metaNotes**; `creator-takes.json` untouched. A run that finds nothing reports
+  nothing — no filler `neutral` was minted to record that the sweep happened.
+- **Queued narrowly — exactly one**: izen (Izenhart) `rYFv6Ohr7mE`, "12.1 Week 4 | New Event Loot, Mega Delve's 7 Titles
+  & Myth Track Loot, PTR Raid Testing" (2026-09-10). Settled from `media:description`, which publishes a chapter list
+  opening **"00:00 Balance Tuning"**; izen is a generalCreator, so anything distilled lands in `metaNotes[]`/leads, never
+  `takes[]`.
+- **Nothing else queued, and nothing retired.** The other 323 are gameplay PoVs, key runs, raid-night VODs, boss and
+  dungeon guides, gear/loot PSAs and PvP duel content — all recorded elsewhere in this skill as zero-yield or
+  out of scope. They stay **UNSEEN** rather than being marked as budget cuts, so a local unfiltered yt-dlp sweep can
+  still reach them and the accounting stays auditable. Specific declines worth recording:
+  · Supatease `UdxfQ28klNo` "RESET DAY Time to See Which Classes Are BETTER" — his channel is PvP and this is the exact
+    title shape the skill names as the trap; a PvP read must never vote in PvE.
+  · Dalaran Gaming `bmUC_tpsdF8` "Blizzard Is Fixing These 3 Specs in the Next Midnight Update" — a class-tuning
+    round-up, which the scoping rule says does not yield specialist takes; and the official channels were swept
+    directly this run, so it is not needed as a lead either.
+  · Tactyks `zncJeqViiTs` Mythic Twin Fangs boss guide — guide-shaped, the measured 7/7-zero-yield category. (He is
+    also raid-scope-only, being the Method M+ list author.)
+  · izen `rb9dofIbc_A` 12.1.5 patch overview — full chapter list is loot/delve content, no spec-strength segment.
+- No creator opinion moved any tier.
+
 ## 2026-09-11 (local, scheduled) — THE CAPTION 429 HAS CLEARED (day 19); queue drained 1 → 0, AutomaticJak's M+ healer tier list distilled into 7 takes + 1 prediction panel
 
 - **The anonymous residential caption lane is back.** One probe, per the standing bound, on the

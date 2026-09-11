@@ -16,6 +16,35 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-11 (nightly) — three sources re-verified S2, 240/240 rows, **0 letters moved**; Archon walled day 18
+
+- **Icy Veins** 6/6 pages, direct browser-UA GET, HTTP 200, 195,860–343,365 B off the written files.
+  Row counts printed before the merge and reconciled against the roster shape: raid 27/7/6 = 40, M+ 27/7/6 = 40.
+  0 unmatched, 0 of 80 stored cells moved. JSON-LD `dateModified` re-read live — raid DPS 08-30, raid healer 09-01,
+  raid tank 08-29, all three M+ 08-30 — matching this run's pre-agent published-evidence artifact exactly.
+  The raid-healer `<title>` still says "(Patch 12.0.7 / Midnight)"; body-over-title precedent applies, its own H2 is
+  "Midnight Healer Tier List for Season 2". seasonVerified stays s2 on all six.
+- **Method** 2/2 pages, HTTP 200 (raid 157,217 B, M+ 163,868 B), 80 rows, 0 unmatched, 0 moved. The M+ page carries
+  **8** `tier__tier` blocks: the first four are the spec list (S 2 / A 13 / B 21 / C 4 = 40), the last four are the
+  "Mythic+ Dungeon Difficulty Tier List" and were rejected by **roster match** (Voidscar Arena, Den of Nalorakk),
+  never by position. Its own dates are unchanged and now quite old: raid "Last Updated 10th August 2026",
+  M+ "13th August 2026", and the raid page still carries its written-from-PTR-testing disclaimer.
+  ⚠️ **Owner flag:** method has no `published` entries in the registry, so the pre-agent published-evidence step
+  never probes these two pages and their staleness is invisible to the published gate. Adding the field would widen
+  that gate's coverage without matching evidence, which is a reviewed registry edit, not a refresh edit — recorded
+  in the manifest row rather than written.
+- **Wowhead** 6/6 pages, full browser header set, HTTP 200, 75,150–345,238 B. Unescaped `\/` → `/` across the whole
+  document FIRST, then `[tier-list=rows]`; exactly **1** block per page and every one yielded rows, so no decoy.
+  80 rows, 0 unmatched, 0 moved. `dateModified` matches the evidence artifact: raid ×3 08-31, M+ DPS 08-28,
+  M+ healer 09-10 (yesterday's rebuild, unchanged since), M+ tank 09-01.
+- **Archon — day 18 of the access wall.** Both registered DPS routes fetched directly with the full header set:
+  HTTP **403**, Cloudflare "Just a moment..." interstitial (3,449 / 3,498 B), **zero** `__NEXT_DATA__` tags.
+  The pre-agent `source-health/evidence.json` independently records raid 403 `cloudflare-challenge` and M+ 200
+  `human-verification`. No challenge solved or replayed, no proxy. Per the 2026-09-05 owner decision the source is
+  RETAINED: its 80 S2 cells and 2026-08-25 snapshot are byte-unchanged and still feed the consensus.
+- No `seasonVerified` value changed, so freeze-season had nothing to freeze. Snapshots bumped to 2026-09-11 on the
+  14 icyveins/method/wowhead pages only; Archon's dates were deliberately left alone.
+
 ## 2026-09-10 (nightly) — three sources re-verified S2, 240/240 rows, Wowhead M+ healer rebuilt (2 letters moved); Archon walled day 17
 
 - **Icy Veins** — all 6 pages direct browser-UA GET, HTTP 200, 195,860–343,365 B (measured off the written files,

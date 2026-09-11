@@ -16,6 +16,45 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-11 (nightly) — SimC build hash UNCHANGED (so 0 values moved), Bloodmallet 24 unmoved, WoWMeta unmoved, Mythicstats 32 moves, Archon walled day 18
+
+- **SimulationCraft** — `MID2_Raid.txt` 1,405,879 B **with** a `DPS Ranking:` block, so the text lane sufficed and the
+  37 MB HTML was not fetched. Header build string (never the visible "12.3.0" — that is Highcharts):
+  `12.1.0.69587 Live (hotfix 2026-09-10/69587, git build HEAD ba1d6a064f)`. The hash is **identical to last night's
+  ba1d6a064f**, which is the whole and honest explanation for all 23 values being byte-unchanged — the report has not
+  been re-run. Said plainly rather than dressed up as a fresh sim. 44 entries, Raid aggregate skipped, longest-prefix
+  mapping with a hyphen allowed → 23 of 27 DPS; the 7 unmapped are all tanks. Balance, Feral, Augmentation,
+  Devastation still absent upstream in SimC. `asOf` = the report's own hotfix date 2026-09-10.
+- **Bloodmallet** — 27 requested, up to 3 attempts each, **24 charts returned**; the persistent error set is still the
+  same three (Balance Druid, Augmentation Evoker, Devastation Evoker) on the 76-byte `{"status":"error"}` body.
+  **Feral is present** and returned all six target counts. All 24 charts report `tier = MID2` — pool uniform, tier read
+  off each chart and carried into `profiles[].tier`, never hard-coded. `ptr` compared against the STRING `"0"`.
+  Per-chart timestamps: 23 at 2026-09-09, Feral alone at 2026-09-10; **0 of 24 profiles moved**, so upstream has not
+  re-simmed. Row floor 15 and the 25 % drop gate both clear. Row recorded `partial` on a 2-day-old coverage date.
+- **WoWMeta** — JSON API only. `manifest.json` `snapshotDate` 2026-09-08 AND `rankings/.../0.json`
+  `Last-Modified: Tue, 08 Sep 2026 09:11:42 GMT` — the two agree today, so no repeat of the 2026-08-04 divergence
+  where a pinned manifest hid moved rankings. Whitelist select (`dps|hps|tank` + `sortField lowerBound` +
+  `keyRange undefined`) → 3 of 44 blocks, 40 rows. **0 of 40 values and 0 of 40 `n` moved.** `partial`, 3-day lag.
+- **Murlok / Mythicstats** — taken ONLY from the trusted pre-agent `metrics-fetch/` receipts and merged verbatim; no
+  second parser written. Murlok status success, 40 rows, but `sourceAsOf` is the page's own `<time datetime>`
+  **2026-09-02** (9 days old) and **0 of 40 values moved** → `partial`, and the 5-day age gate going red is the true
+  signal. Mythicstats status success, period **1080** (unchanged), 40 rows, share column verified by the shape check
+  (sum 100.1 %, role subtotals 31.3 / 28.9 / 20.0 / 19.9 — this is what separates it from the `/meta` per-key-presence
+  column). Undated source, so only the **32 changed** rows take the 2026-09-11 fetch date; the 8 unchanged keep 09-10 /
+  09-09. Largest moves Blood DK 10.5 → 12.3 and Unholy DK 1.3 → 0.7, all under the 100-unit `minValueMagnitude`, so
+  the value-move gate is not engaged. `check-stable-metrics` passes.
+- **Warcraft Logs** — agent holds no credentials; everything reported from the pre-agent `wcl-fetch/evidence.json`
+  (attemptedAt 14:35:35Z), nothing re-fetched or recomputed. Both leaderboard brackets came back **partial**, so both
+  manifest rows are partial: raid 224 rows of 320 cuts (224 success / **95 sparse** / 1 invalid — Feral Druid enc 3445,
+  "Ranking amount must be positive"); M+ 319 rows of 320 (319 success / 0 sparse / 1 invalid — Prot Warrior enc 61762,
+  rejected by the collector's own clock guard for a run timestamp in the future). Legacy `wcl-live-raid/mplus` remain
+  `unreachable`: no verified sanctioned aggregate endpoint, and the FFXIV-only `rdps` enum is not a WoW outage test.
+- **Archon — day 18.** All six numeric families sit on pages behind the same Cloudflare wall, so each of the six
+  contract rows is `blocked` with its own detail rather than one combined line. Nothing touched; per-boss
+  survivability deliberately NOT substituted (the measured dead end above).
+- **Robydoby** deliberately not refreshed: its sheets are 12.1 **PTR** raid testing, i.e. the closed cycle, and it sits
+  outside the refresh contract by design.
+
 ## 2026-09-10 (nightly) — SimC new build (23), Bloodmallet 24 with Feral BACK, Mythicstats period 1080, WoWMeta byte-identical, Archon walled day 17
 
 - **SimulationCraft** — `MID2_Raid.txt` 1,405,879 B **with** a `DPS Ranking:` block, so the plain-text lane
