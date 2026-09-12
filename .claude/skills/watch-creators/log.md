@@ -16,6 +16,44 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-12 (local, scheduled) — queue drained 1 → 0; Dalaran Gaming's 12.1.5 walkthrough transcript-verified to NOTHING (correctly); anonymous caption lane clear for a second consecutive run
+
+- **Scope: residential-only catch-up.** The CI nightly landed `90e3607` at ~14:02Z (started 13:43Z), ~10 minutes
+  before this run started, with all 44 channels polled and one video queued. No discovery sweep was re-run here —
+  re-polling 44 feeds the nightly polled minutes earlier produces nothing the nightly did not already see. This
+  run's one job was to drain what CI could not fetch.
+- **Anonymous caption lane: still clear.** One paced probe (`--sleep-requests 3`) on the only queued video: android
+  player API 200, `en` auto-sub track found, json3 returned (283,365 B, 378 caption events, 12:33 runtime) — **no
+  429**, the second consecutive success since the 09-11 clearance. yt-dlp at the local 2026.07.04 (requirements.txt
+  pins 2026.8.19 for the RUNNER; nothing installed or upgraded in-run), no cookies, no authenticated lane. Metadata
+  was printed in a SEPARATE invocation from the sub download (the `--print` simulate-mode trap): `not_live`,
+  `was_live=False`, duration 753s.
+- **VERIFIED-SKIPPED — Dalaran Gaming `bmUC_tpsdF8`, "Blizzard Is Fixing These 3 Specs in the Next Midnight
+  Update" (2026-09-10).** Read end to end. It is a walkthrough of the **12.1.5 PTR** notes for exactly three specs:
+  Devourer DH (Collapsing Star cancel-lockout removed, Fury-drain slowdown capped, Demonic Intensity moves The Hunt
+  reset onto Star and +30% Hunt damage in Void Metamorphosis, Violent Transformation now resets Soul Immolation,
+  Monster Rising 15%→10% Intellect / 15%→20% Star damage); Marksmanship (Blood Fletching replaces Unload — Aimed
+  Shot crits apply a Master Marksman bleed at 20% for 4s with extra bleed on subsequent hits); Protection Warrior
+  (Execute no longer consumes extra Rage, damage +100%; Colossus Practiced Strikes cuts Execute/Revenge Rage by 10).
+  All three are the same three class sections already recorded as `applied` in `data/official-notes.json`
+  ptr-preview post 1 **v3** (updated 2026-09-03), which the nightly's ledger check re-verified identical this
+  morning — so it is a restatement of a tracked official post, **not a lead**.
+  · Demon Hunter and Warrior are **outside his registered scope** (Druid / Hunter / Mage / Rogue / Shaman) — not
+    distilled, per the scoping rule.
+  · Marksmanship **is** in scope, but he explicitly declines a strength read: "until we can get some raid boss
+    testing, we don't really know how good this is going to be for marksmanship" and "could potentially create
+    some more engaging gameplay possibly". Anticipation is not a read; a `neutral` here would be the placeholder
+    the skill forbids. And the 12.1.5 lane is notes-only while `PHASES.ptr` is null — `expertRead` would not
+    consume a PTR-era take anyway.
+  · **0 takes, 0 metaNotes**; `creator-takes.json` byte-unchanged; `latest` NOT advanced (still names `Fw6_unqijso`,
+    the 09-05 video actually distilled). Moved `videos[]` → `skipped[]` with the reason above, `verifiedAt` 2026-09-12.
+  · Note for the record: the 09-11 nightly declined to queue this id as a "class-tuning round-up" and the 09-12
+    nightly queued it because the description could not settle it. The transcript settled it the 09-11 way. Both
+    calls were defensible; the queue cost was one free residential fetch.
+- **No creator opinion moved any tier.** Queue 1 → 0. Nothing moved to `seen[]`; the ~325 unseen in-cycle videos the
+  nightly counted stay unexamined for a future unfiltered sweep — this run deliberately did not sweep, because a
+  sweep is the volume shape that flagged the IP for 19 days and the lane has been clear for exactly two probes.
+
 ## 2026-09-12 (nightly) — 44/44 feeds polled, the one queued transcript distilled to NOTHING (correctly), 1 new video queued
 
 - **Discovery**: all 44 unique tracked channels polled inline (41 class entries + 3 generalCreators; 40

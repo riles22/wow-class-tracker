@@ -1,14 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "bmUC_tpsdF8",
-      "creator": "Dalaran Gaming",
-      "title": "Blizzard Is Fixing These 3 Specs in the Next Midnight Update",
-      "published": "2026-09-10",
-      "queuedAt": "2026-09-12"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -2983,6 +2975,13 @@
       "creator": "izen (Izenhart)",
       "title": "12.1 Week 4 | New Event Loot, Mega Delve's 7 Titles & Myth Track Loot, PTR Raid Testing",
       "reason": "Transcript verified 2026-09-12 from the deterministic transcript-fetch receipt (303 chunks, Supadata native captions). A weekly news recap with NO per-spec read: izen opens by stating this reset carried zero balance tuning and zero class/spec changes and that none is expected for ~12 days, then covers the 12.1.5 Kith'ix flex-boss raid-testing schedule, the Winds of Mysterious Fortune satchel rewards, and the 12.1.5 mega-delve's seven titles and myth-track quest line. Reporting the ABSENCE of tuning is not a spec-strength claim and the loot/title material is reward-system content, so nothing was written to metaNotes[] rather than minting a placeholder neutral.",
+      "verifiedAt": "2026-09-12"
+    },
+    {
+      "id": "bmUC_tpsdF8",
+      "creator": "Dalaran Gaming",
+      "title": "Blizzard Is Fixing These 3 Specs in the Next Midnight Update",
+      "reason": "Transcript verified in full 2026-09-12 (local, anonymous yt-dlp lane — json3, 378 caption events, 12:33 runtime, no 429). A 12.1.5 PTR notes walkthrough of exactly the three class sections already carried as `applied` in data/official-notes.json ptr-preview post 1 v3 (Demon Hunter Devourer Collapsing Star / Demonic Intensity rework; Hunter Marksmanship Blood Fletching replacing Unload; Warrior Protection Execute rage/damage + Colossus Practiced Strikes) — so it is a restatement of a tracked official post, not a lead. Demon Hunter and Warrior are outside Dalaran Gaming's registered scope. Marksmanship IS in scope, but he explicitly declines a strength read (\"until we can get some raid boss testing, we don't really know how good this is going to be for marksmanship\"; \"could potentially create some more engaging gameplay possibly\") — anticipation is not a read, and the 12.1.5 lane is notes-only while PHASES.ptr is null. 0 takes, 0 metaNotes; `latest` not advanced.",
       "verifiedAt": "2026-09-12"
     }
   ],

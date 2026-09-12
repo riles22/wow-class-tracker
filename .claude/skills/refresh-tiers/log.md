@@ -16,6 +16,22 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-12 (local, scheduled) — Archon walled a NINETEENTH day, re-probed from a residential IP; 0 letters touched
+
+- **Scope: residential-only catch-up.** The CI nightly landed `90e3607` at ~14:02Z with Icy Veins, Method and
+  Wowhead all `success`, 240/240 re-verified S2 and 0 letters moved, so those three were NOT re-fetched here
+  (independently regenerating what CI produced minutes earlier is what makes a local push unmergeable).
+- **The two ordinary public archon.gg routes re-probed from Riley's residential IP** with the full browser header
+  set (raid Heroic DPS all-bosses; M+ 10 DPS all-dungeons this-week): both **HTTP 200**, **2,501 / 2,516 B**,
+  `<title>Human Verification</title>`, `__NEXT_DATA__` count **0**. Same 200-shaped wall the 08-31 and 09-06
+  local runs recorded; the nightly's source-health artifact drew a 403 Cloudflare challenge on the raid route and
+  the same 200 human-verification body on M+ from the runner four hours earlier. Not bypassed, no proxy, no
+  challenge solved, nothing backfilled from Warcraft Logs.
+- **Nothing merged, nothing stamped.** `data/specs.json`, `data/sources.json`, `data/encounter-tiers.json`
+  byte-identical to HEAD; all 11 archon snapshots stay at 2026-08-25 / 2026-08-18; the 80 stored letters stay in
+  the consensus per the 2026-09-05 retention decision.
+- Manifest deliberately NOT rewritten (partial run).
+
 - 2026-09-12 (nightly) — **icyveins + method + wowhead all fetched fresh, 240 cells re-verified, 0 moves. Archon walled day 19.**
   Counts printed and reconciled before every merge: icyveins 6 pages → 27/7/6 raid + 27/7/6 M+ = **80 rows, 0 unmatched,
   0 null tiers**; method 2 pages → 40 + 40 = **80**, the four extra M+ `tier__tier` blocks rejected by ROSTER MATCH
