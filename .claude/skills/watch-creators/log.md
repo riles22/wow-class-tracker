@@ -16,6 +16,29 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-12 (nightly) — 44/44 feeds polled, the one queued transcript distilled to NOTHING (correctly), 1 new video queued
+
+- **Discovery**: all 44 unique tracked channels polled inline (41 class entries + 3 generalCreators; 40
+  `transcribable: false` reference-only entries skipped; 0 pollable creators missing a `channelId`). 44/44 HTTP 200
+  with retry+backoff, **660 entries**, 0 failures. Seen-set rebuilt as the STRUCTURED union of the four lanes =
+  **1,252 ids** (no log regex). Date bound `min(builds[].date)` = **2026-06-18** → **325 unseen in-cycle**, **77**
+  keyword-matching.
+- **Distilled → nothing, which is the honest answer.** `transcript-fetch/summary.json` verdict `ok`, requested 1 /
+  fetched 1 (303 chunks, mode=native): izen's `rYFv6Ohr7mE` "12.1 Week 4 | New Event Loot, Mega Delve's 7 Titles &
+  Myth Track Loot, PTR Raid Testing". Read end to end. It **opens by stating this reset carried zero balance tuning and
+  zero class/spec changes**, with none expected for ~12 days, then covers the 12.1.5 Kith'ix raid-testing schedule, the
+  Winds of Mysterious Fortune satchels, and the mega-delve's seven titles and myth-track quest line. Reporting the
+  ABSENCE of tuning is not a spec-strength read, and the rest is reward-system content — so **0 takes, 0 metaNotes**,
+  `creator-takes.json` byte-unchanged, and izen's `latest` deliberately NOT advanced (it still names the 09-08 raid
+  video it actually distilled). Moved `videos[]` → `skipped[]` with that reason, `verifiedAt` 2026-09-12.
+- **Queued narrowly — one video**: Dalaran Gaming `bmUC_tpsdF8` "Blizzard Is Fixing These 3 Specs in the Next Midnight
+  Update" (2026-09-10). A registered class-overview creator's spec-level patch-change review; its `media:description`
+  is channel boilerplate with no chapter list, so only the transcript can settle it.
+- Nothing else queued and **nothing moved to `seen[]`**: the remainder are PvP duels (Dalaran Gaming's own 5v5/1v1
+  series, Supatease's "MM hunter 1v1 Feral"), gameplay PoVs and key runs, raid-night VODs, boss/dungeon/heal guides,
+  gearing and logs PSAs (Shadarek's catalysed-stats PSA), and 12.1.5 loot reveals — all documented zero-yield or
+  out-of-scope shapes. They stay UNEXAMINED rather than retired as budget cuts, so a local yt-dlp sweep can reach them.
+
 ## 2026-09-11 (nightly) — 44/44 feeds polled, 0 transcripts available (queue was empty at collector time), 1 video queued
 
 - **Discovery**: all **44** unique tracked channels polled inline (41 class-creator entries + 3 generalCreators; the 40

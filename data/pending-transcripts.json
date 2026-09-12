@@ -2,11 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "rYFv6Ohr7mE",
-      "creator": "izen (Izenhart)",
-      "title": "12.1 Week 4 | New Event Loot, Mega Delve's 7 Titles & Myth Track Loot, PTR Raid Testing",
+      "id": "bmUC_tpsdF8",
+      "creator": "Dalaran Gaming",
+      "title": "Blizzard Is Fixing These 3 Specs in the Next Midnight Update",
       "published": "2026-09-10",
-      "queuedAt": "2026-09-11"
+      "queuedAt": "2026-09-12"
     }
   ],
   "skipped": [
@@ -2977,6 +2977,13 @@
       "title": "Healing Heroic Ula'tek Guide",
       "reason": "Transcript read in full (566 chunks): a heroic Ula'tek healing ENCOUNTER guide built around cooldown assignment, with a hardware sponsor read in the first two minutes. Content is per-phase execution — send two-minute cooldowns freely into Mephitic Thrash, empty the bag for the tether intermission while banking three- and four-minute cooldowns (AMZ, Darkness, Ascendance) for the later overlap, front-load ramping cooldowns (Apotheosis, Yu'lon, Wings) and space bursty ones (Rewind, Tranquility), and stand within range of the melee soaking eggs. Its two spec-adjacent lines are both fight artifacts by the distillation rules rather than spec-strength reads: Shamans felt weaker for that specific intermission because their Ascendance and Spirit Link went into the earlier split, and they 'make up for it later around the 8-minute mark'; and Holy Priest's immobility can be played around by turret healing at large raid sizes. He compares no spec against another on standing, so no take. His 2026-08-27 raid takes remain his current read.",
       "verifiedAt": "2026-09-09"
+    },
+    {
+      "id": "rYFv6Ohr7mE",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 Week 4 | New Event Loot, Mega Delve's 7 Titles & Myth Track Loot, PTR Raid Testing",
+      "reason": "Transcript verified 2026-09-12 from the deterministic transcript-fetch receipt (303 chunks, Supadata native captions). A weekly news recap with NO per-spec read: izen opens by stating this reset carried zero balance tuning and zero class/spec changes and that none is expected for ~12 days, then covers the 12.1.5 Kith'ix flex-boss raid-testing schedule, the Winds of Mysterious Fortune satchel rewards, and the 12.1.5 mega-delve's seven titles and myth-track quest line. Reporting the ABSENCE of tuning is not a spec-strength claim and the loot/title material is reward-system content, so nothing was written to metaNotes[] rather than minting a placeholder neutral.",
+      "verifiedAt": "2026-09-12"
     }
   ],
   "seen": [

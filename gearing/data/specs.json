@@ -4,7 +4,7 @@
   "caveat": "Current stat priorities come from the Season 2 guide harvest (Icy Veins / Wowhead / Method). The statPriority field here is the reviewed 12.0.7 fallback, used only when the guide layer lacks a build. Structural sync checks local inputs; it does not reverify external game facts.",
   "structuralSync": {
     "schemaVersion": 1,
-    "checkedAt": "2026-09-11",
+    "checkedAt": "2026-09-12",
     "sources": {
       "tracker": {
         "path": "data/specs.json",

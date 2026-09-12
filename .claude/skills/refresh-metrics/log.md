@@ -16,6 +16,31 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+- 2026-09-12 (nightly) — **every contract family attempted; nothing upstream moved.** WCL: read-only from the pre-agent
+  receipt (attemptedAt 13:43:26Z) — **M+ leaderboard clean this run, 320/320 cuts, status `success`** (yesterday had 1
+  invalid), raid **partial** at 224 rows with 95 sparse cuts clustered on the late bosses and **1 invalid** (Druid Feral
+  on 3445 Entombed Sentinels, "Ranking amount must be positive", samples 0). Legacy `wcl-live-*` remain `unreachable`
+  from `evidence.legacy` — no verified sanctioned aggregate endpoint; the leaderboard series cannot green them and
+  `check-wcl-metrics` enforces that. `wcl-coverage.json` untouched by the agent.
+  **Murlok + Mythicstats**: merged `metrics-fetch/updates.json` verbatim, no second parser. Both `status: success`;
+  **0 of 80 values and 0 dates moved**, so mythicstats' period **1080** is unchanged and its 32 rows keep yesterday's
+  2026-09-11 date rather than being re-stamped by this same-day recheck (share column verified: sum 100.1, role subtotals
+  31.3/28.9/20.0/19.9). Murlok's `<time datetime>` is still **2026-09-02**, 10 days old → `partial`.
+  **WoWMeta**: JSON API only, manifest snapshotDate **2026-09-08** and the rankings file's Last-Modified agrees
+  (08 Sep 09:11:42 GMT), so no repeat of the 08-04 pinned-manifest divergence. Whitelist `{dps,hps,tank}` +
+  `sortField lowerBound` + `keyRange undefined` → 3 of 44 blocks, **40 rows, 0 unmatched, 0 value and 0 n moves**,
+  merged at the source's date and the stored 1-dp precision → `partial` (4 days old).
+  **SimC**: `MID2_Raid.txt` HTTP 200, 1,405,879 B, HAS a `DPS Ranking:` block. Header `git build HEAD ba1d6a064f` is
+  **identical to the last run**, which is the whole explanation for 0 of 23 moves — not a fresh sim. 44 entries, Raid
+  aggregate skipped, longest-prefix map with a hyphen allowed → 23 DPS specs; the 7 unmapped are all tanks. asOf is the
+  report's own hotfix date 2026-09-10, i.e. 2 days old → `partial` (it was success yesterday at 1 day).
+  **Bloodmallet**: 27 requested, 3 attempts each — **24 charts, all tier MID2** (pool uniform, tier carried through, not
+  hard-coded), **0 of 24 profiles moved**, no stored profile lost. The same persistent 3 returned the 76-byte error body
+  on every retry: Balance Druid, Augmentation and Devastation Evoker. Per-chart timestamps kept (23 at 09-09, Feral at
+  09-10) → `partial`. **Archon's six numeric rows**: all blocked by the day-19 wall, each reported on its own row;
+  per-boss survivability again NOT substituted for the empty aggregate (the measured dead end). **Robydoby** not
+  refreshed: its sheets are the closed 12.1 PTR zone-54 lane, dormant since the flip and deliberately outside the contract.
+
 ## 2026-09-11 (nightly) — SimC build hash UNCHANGED (so 0 values moved), Bloodmallet 24 unmoved, WoWMeta unmoved, Mythicstats 32 moves, Archon walled day 18
 
 - **SimulationCraft** — `MID2_Raid.txt` 1,405,879 B **with** a `DPS Ranking:` block, so the text lane sufficed and the

@@ -16,6 +16,29 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+- 2026-09-12 (nightly) — **icyveins + method + wowhead all fetched fresh, 240 cells re-verified, 0 moves. Archon walled day 19.**
+  Counts printed and reconciled before every merge: icyveins 6 pages → 27/7/6 raid + 27/7/6 M+ = **80 rows, 0 unmatched,
+  0 null tiers**; method 2 pages → 40 + 40 = **80**, the four extra M+ `tier__tier` blocks rejected by ROSTER MATCH
+  (Voidscar Arena, Den of Nalorakk) and not by position; wowhead 6 pages → **80**, exactly one `[tier-list=rows]` block
+  per page so no decoy `printHtml` was hit. **Pre-merge diff: 0 of 80 moved for each of the three sources.**
+  Transport: direct browser-UA / full-header GET on every page, r.jina.ai never attempted. Sizes taken off the written
+  files (icyveins 195,936–343,441 B; method 157,206 + 163,857 B; wowhead 75,139–345,252 B).
+  **Parser note worth keeping: Icy Veins' tier letter is NOT in a labelled div.** A selector keyed on a
+  `tier-list-tier-label` class returned the right 80 specs with **all 80 tiers null** — the letters live in a
+  `<table class="tier-list">` whose each `<tr>` is `<td>S</td><td>…entries…</td>`. Bounded the parse to that table and
+  took the row's first `<td>`; the FIRST-`alt`-per-`tier-list-entry` rule still does the spec lookup, whole-string.
+  This is exactly the failure the print-counts discipline exists to catch — the row count was perfect and the data wasn't.
+  Page self-dates re-read live and **all twelve match the pre-agent published-evidence artifact exactly** (icyveins raid
+  DPS 08-30 / healer 09-01 / tank 08-29, M+ all 08-30; wowhead raid all 08-31, M+ DPS 08-28 / healer 09-10 / tank 09-01).
+  Method's own dates unchanged: raid 10th August, M+ 13th August 2026 (33 and 30 days old at source) — still recorded
+  here rather than in a `published` field, since method has no registry `published` entries and the evidence step
+  therefore never probed those pages. Era-verified from bodies, not substring counts: all fourteen pages self-identify as
+  Midnight Season 2 and Devourer DH is present in every DPS list; the icyveins raid-healer title still says
+  "(Patch 12.0.7 / Midnight)" and is overridden by its own "…for Season 2" H2 (body-over-title). **seasonVerified stays
+  s2 everywhere — no value changed, so nothing for freeze-season.** Archon: all **eleven** registered routes attempted,
+  all HTTP 403 Cloudflare with **zero `__NEXT_DATA__`** (assert on that, not the status code), matching the pre-agent
+  source-health artifact; letters retained at their original 2026-08-25 snapshot per the 2026-09-05 retention decision.
+
 ## 2026-09-11 (nightly) — three sources re-verified S2, 240/240 rows, **0 letters moved**; Archon walled day 18
 
 - **Icy Veins** 6/6 pages, direct browser-UA GET, HTTP 200, 195,860–343,365 B off the written files.

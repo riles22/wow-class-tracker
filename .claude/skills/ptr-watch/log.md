@@ -16,6 +16,30 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-12 (nightly) — ledger clean (116/116 sections unchanged, 0 unresolved), no new builds on any of four channels
+
+- **Revision ledger first**, from the pre-agent `official-notes/` artifact (checkedAt 2026-09-12T13:45:39Z). Both sources
+  fetched `status: success` — live-hotfixes topic 2336376 post 1 at **version 36** (edited 2026-09-11T03:11:02Z) and
+  ptr-preview topic 2344395 post 1 at **version 3** (edited 2026-09-03T22:48:20Z), both matching the committed ledger's
+  recorded revision AND body hash. Diffed section by section: **116 sections on both sides, 0 added, 0 removed, 0 outline
+  hashes changed**, 0 tombstones, therefore **0 unresolved obligations** — every section keeps its prior resolution
+  (17 applied, 99 irrelevant). The only write to `data/official-notes.json` is each source's `checkedAt`; verified with
+  a normalised deep-compare that the two files are otherwise byte-identical before writing.
+  `check-official-notes --base=HEAD` passes.
+- **RSS** (HTTP 200, 202,633 B, 40 items, parsed per `<item>` block): newest class item is still **news=382799**
+  (09-10 class bugfixes), which is the stored 2026-09-10 entry. Newest item overall is news=382646, a Delve gravestone
+  article. **News INDEX** polled too (it leads RSS within a run): `data.news.newsData` brace-balanced from the id
+  attribute, 20 posts, top id 382646 — nothing class-relevant ahead of RSS. **Blue tracker**: 50 entries → 40 unique
+  topics, newest class-relevant are Linxy's "Midnight Hotfixes - September 10" (2336376, the compilation the ledger
+  covers) and the 12.1.5 dev notes (2344395, the ptr-preview source). No untracked tuning topic.
+- **Dev-notes thread 2317811.json** fetched directly: 17 posts, highest_post_number 19, newest Linxy post 2026-07-31
+  (edited 08-01). Quiet since the cycle closed — expected under the between-cycles posture, not a lost thread.
+- `ptr-builds.json` unchanged at **31 entries**, newest 2026-09-10. No set-bonus line landed, so no `tierSet.asOf` bump.
+  12.1.5 stayed NOTES ONLY — `PHASES` untouched, nothing into ptr-builds or any `ptr` verdict, no forecast reopened.
+  The RSS window's 12.1.5 Kith'ix raid-testing schedule and datamining articles were read as preview material only.
+- Dormant lanes correctly skipped (zone 52/54/56/57). Writeup coverage: **1** spec at `ptr: null` (Demonology Warlock,
+  the deliberate "source reported no changes" case).
+
 ## 2026-09-11 (nightly) — ledger clean (116/116 sections unchanged, 0 unresolved), no new builds on any of four channels
 
 - **Revision ledger first**, from the pre-agent `official-notes/` artifact (checkedAt 14:37:49Z). Both sources fetched
