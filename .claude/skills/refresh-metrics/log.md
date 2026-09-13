@@ -16,6 +16,45 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+- 2026-09-13 (nightly) — **every contract family attempted; not one upstream number moved.** WCL: read-only from the
+  pre-agent receipt (attemptedAt 14:38:41Z) — M+ leaderboard clean again, **320/320 cuts, status `success`**; raid
+  **`partial`** at 224 rows (floor 200) with 95 sparse cuts on the later bosses and the same **1 invalid** (Druid
+  Feral on 3445 Entombed Sentinels, "Ranking amount must be positive", 0 samples) as the last two nights. Legacy
+  `wcl-live-*` stay `unreachable` from `evidence.legacy` — no verified sanctioned aggregate endpoint, and the
+  leaderboard series cannot green them (`check-wcl-metrics --manifest` enforces it). `wcl-coverage.json` untouched
+  by the agent.
+  **Murlok + Mythicstats**: only `metrics-fetch/updates.json` merged, no second parser. Murlok `status: success`
+  (3 pages 200, 40 rows at 27/7/6, 0 omitted) and **0 of 40 values and 0 dates moved**, so the same-day recheck
+  confirms unchanged data without advancing a source-owned date; its `<time datetime>` is still **2026-09-02**,
+  11 days old → `partial`. **Mythicstats is `partial` FROM THE COLLECTOR this run** (it was success yesterday):
+  `/period/latest` → period **1080**, HTTP 200, share column healthy (sum 99.9; Ranged 29.3 / Melee 30.6 / Tank
+  19.9 / Healer 20.1), but **two chart specs are omitted upstream — Mage|Frost and Warlock|Affliction — and
+  Affliction has a NONZERO stored share**, so the collector held the entire source for review rather than let an
+  incomplete cut add phantom share. `updates.json` carries 0 mythicstats rows; the stored 40-row series is
+  preserved byte-identical at its own **2026-09-11** date, no fabricated zeros, no restamped older period.
+  `check-stable-metrics.mjs` passes.
+  **WoWMeta**: JSON API only. `manifest.json` `snapshotDate` **2026-09-08** and the rankings file's
+  `Last-Modified: Tue, 08 Sep 2026 09:11:42 GMT` agree, so no repeat of the 08-04 pinned-manifest divergence, and
+  the payload was diffed rather than trusted to the manifest. Whitelist `{dps,hps,tank}` + `sortField lowerBound`
+  + `keyRange undefined` → 3 of 44 blocks, **40 rows, 0 unmatched, 0 value / 0 n / 0 date moves**, merged at the
+  source's date and the stored 1-dp precision → `partial` (5 days; the owner-accepted frozen-upstream red).
+  **SimC**: `MID2_Raid.txt` HTTP 200, 1,405,879 B, HAS a `DPS Ranking:` block so the text lane sufficed. Header
+  `12.1.0.69587 Live (hotfix 2026-09-10/69587, git build HEAD ba1d6a064f)` — **the same hash for a third night**,
+  which is the whole honest explanation for 0 of 23 moves; the report has not been re-run. 45 entries, Raid
+  aggregate skipped, longest-prefix map with a hyphen allowed → 23 DPS specs, the 7 unmapped all tanks; asOf is the
+  report's own 2026-09-10, 3 days → `partial`. Parser note for the next reader: the ranking lines are
+  `<value> <pct>% <profile>`, so a `^\s*(\d[\d.]*)\s+(\S.*)$` capture takes the PERCENTAGE into the name and maps
+  **0 of 45** — consume the `[\d.]+%` column explicitly.
+  **Bloodmallet**: 27 requested, 3 attempts each → **24 charts, all `tier = MID2`** (read off each chart, never
+  hard-coded; pool uniform), `ptr` compared against the STRING `"0"`, **0 of 24 profiles moved a single target**,
+  no stored profile lost. The persistent error set is unchanged for a third night: Balance Druid, Augmentation and
+  Devastation Evoker on the 76-byte body, every retry. Per-chart timestamps kept (23 at 09-09, Feral at 09-10) →
+  `partial`. **Archon's six numeric rows**: all `blocked` by the day-20 wall, each on its own row; per-boss
+  survivability again NOT substituted for the empty aggregate (the measured dead end). **Robydoby** not refreshed:
+  closed 12.1 PTR zone-54 lane, dormant since the flip and deliberately outside the contract.
+  Metric-source page `snapshot` dates deliberately left at 2026-09-11 (they gate nothing — the staleness gate reads
+  each family's own coverage date — and the registry URLs for wowmeta/murlok are pages we intentionally never fetch).
+
 - 2026-09-12 (nightly) — **every contract family attempted; nothing upstream moved.** WCL: read-only from the pre-agent
   receipt (attemptedAt 13:43:26Z) — **M+ leaderboard clean this run, 320/320 cuts, status `success`** (yesterday had 1
   invalid), raid **partial** at 224 rows with 95 sparse cuts clustered on the late bosses and **1 invalid** (Druid Feral

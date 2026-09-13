@@ -16,6 +16,44 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-13 (nightly) — three live sources re-fetched and re-era-verified, **0 of 240 cells moved**; Archon walled a TWENTIETH day; Method's stale "Season 3" meta caught and overridden
+
+- **Icy Veins** — 6/6 pages, direct browser-UA GET, HTTP 200, 196,512–344,019 B (sizes off the written files, never
+  curl's compressed `size_download`). Parse bounded to each page's `<table class="tier-list">`, tier letter from the
+  row's first `<td>` as `^([SABCDF])([+-])?$`, spec from the FIRST `alt=` after `class="tier-list-entry"` looked up
+  WHOLE. Counts printed before merging: **raid 27/7/6 = 40, M+ 27/7/6 = 40**, 0 unmatched, 0 null tiers.
+  `dateModified` re-read live: raid DPS 08-30, raid healer 09-01, raid tank 08-29, M+ all three 08-30 — identical to
+  the registry AND to this run's pre-agent `published-evidence` artifact. Era from each ranking body: all six carry a
+  Season 2 H2; the raid-healer page's TITLE still says "(Patch 12.0.7 / Midnight)" and is overridden by its own H2
+  per body-over-title.
+- **Method** — 2/2 pages HTTP 200 (157,217 / 163,868 B). Parsed per `.tier__tier <letter>-tier` container; raid 4
+  blocks → 40 rows (S 6 / A 11 / B 17 / C 6), M+ 8 blocks → 40 rows (S 2 / A 13 / B 21 / C 4), 0 unmatched, 0
+  duplicate (bracket, spec) pairs. The M+ page's extra blocks are the dungeon-difficulty lists, rejected by **ROSTER
+  MATCH** ("Voidscar Arena", "Den of Nalorakk" fail to map) — never by container index.
+  ⚠️ **NEW ERA TRAP, worth remembering:** both Method pages' `og:description` / `twitter:description` now read
+  **"The War Within Season 3"** — stale social metadata from a previous expansion's template — while the ranking
+  bodies read "Midnight Season 2 Raid, The Venomous Abyss" and "Mythic+ content and dungeon difficulty in Midnight
+  Season 2" (Tactyks' byline names Midnight Season 2). An era check that counted "Season 3" in the raw document, or
+  read the meta tags, would have marked BOTH pages season-ahead and dropped Method out of the consensus for both
+  brackets. Body over title/meta, same precedent as the blue tracker's patch tag. `seasonVerified` stays `s2`.
+- **Wowhead** — 6/6 pages with the full browser header set, HTTP 200, 75,254–345,422 B. Unescape `\/` FIRST, then
+  slice `[tier-list=rows] … [/tier-list]` (never anchor on `WH.markup.printHtml` — the raid-healer decoy), tolerant
+  whitespace on the tier label, specs from the `[spec-badge=<spec>-<class>]` slug. **40 + 40 rows, 0 unmatched.**
+  `dateModified` live: raid ×3 = 08-31, M+ DPS 08-28, M+ healer **09-10**, M+ tank 09-01 — all matching the registry
+  and the published-evidence artifact. Era from each H1: all six "… for Midnight Season 2" (raid healer with the
+  documented DOUBLE space).
+- **Pre-merge diff: 0 of 240 stored cells moved** across the three sources, so `apply-ratings.mjs` re-applied 240
+  identical letters and the only registry change is **14 snapshot dates → 2026-09-13**. No `seasonVerified` value
+  changed anywhere, so there was **nothing for `freeze-season.mjs` to freeze** (and the publish job runs it anyway).
+- **Archon — walled day 20.** All eleven registered routes attempted fresh with the full header set: **HTTP 403
+  every time**, 5,947–6,031 B of Cloudflare "Just a moment" / `challenge-platform`, `__NEXT_DATA__` count **0**.
+  The pre-agent `source-health/evidence.json` (14:40:46Z) independently shows the two shapes side by side: raid
+  heroic **403 cloudflare-challenge**, M+ **200 "human verification" (2,516 B)** — which is exactly why the
+  assertion is on payload presence and never the status code. Nothing solved, replayed or automated past; nothing
+  backfilled from Warcraft Logs. Per the 2026-09-05 retention policy the 80 letters verified 2026-08-25 stay in the
+  consensus at their ORIGINAL dates — **no archon snapshot advanced**. `encounter-tiers.json` read off the file:
+  still `season s1` / `asOf 2026-08-17`, so the Fight selector stays hidden and the S1 archive stays quarantined.
+
 ## 2026-09-12 (local, scheduled) — Archon walled a NINETEENTH day, re-probed from a residential IP; 0 letters touched
 
 - **Scope: residential-only catch-up.** The CI nightly landed `90e3607` at ~14:02Z with Icy Veins, Method and

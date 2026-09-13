@@ -16,6 +16,37 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-13 (nightly) — 44/44 feeds polled, no transcripts to distil (queue was empty at collector time), **nothing queued: all 22 new videos are BlizzCon reactions, PvP or PoVs**
+
+- **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (41 class-creator
+  entries + 3 `generalCreators`; the 40 `transcribable: false` reference-only entries skipped by design; **0**
+  pollable creators missing a `channelId`). 44/44 HTTP 200 with retry+backoff, **660 entries**, 0 feed failures.
+- **Seen-set** rebuilt as the STRUCTURED union of the four lanes (`videos[]` + `skipped[]` + `seen[]` + every
+  `youtu.be` id in a take or metaNote url) = **1,253 ids**; `log.md` not regexed. Cycle bound derived as
+  `min(builds[].date)` = **2026-06-18** (the date, never an index) → **331 unseen in-cycle**, of which **22 are new
+  since the 09-12 sweep**.
+- **No transcripts were available to this agent.** `transcript-fetch/summary.json` verdict `ok`, **requested 0 /
+  fetched 0 / cached 0** — the queue had been drained to 0 by the 09-12 local run, so the deterministic step had
+  nothing to fetch (usage receipt: 13 counted requests in the 30-day window, 1 uncertain, no configured limit).
+  Consequently **0 takes, 0 metaNotes**, `creator-takes.json` byte-unchanged, and **no filler `neutral` was minted**
+  to record that the sweep happened.
+- **NOTHING QUEUED, and that is the honest call** — none of the 22 new videos carries a spec-strength read, all
+  settled from title + `media:description` at zero metered cost:
+  · **BlizzCon / Warcraft-Forever reaction and news** — Dalaran Gaming `rmOnt3L9KaY` (Classic+ reveal) and
+    `XnBZqAYwQW0` (watch party), NeekapHere `323h0qlDbJo` (retail roadmap) and `m4U-3TQxGDY`, MadSkillzzTV
+    `aP7R1utFvBg`, Preheat `ZeIE5nR4V7E` (Forever dungeon raw footage), Obli `i7wobRoM1cM` (Last Titan teaser lore),
+    Baze `nSB8oQYupl4` (12.2 Eclipse reaction) and `cNImgtirma4`. Announcement reaction is not a current-season spec
+    read, and the announcements themselves were swept directly from the official channels this run.
+  · **PvP** — Dalaran Gaming's 5v5/1v1 duel series (`PbgeFrYz10Q` Feral), Supatease `IhQMwNIWQbE` / `4gk3ouHr40o`
+    ("Arcane is GOD MODE"). A PvP read must never vote in PvE, and Supatease's channel is the recorded trap shape.
+  · **Key runs / raid PoVs / stream VODs** — Shadarek ×3, Bansherz `n-9SEoCrG6Y`, Musguete `fGix9q6vqeU`,
+    MadSkillzzTV `t_bPuqkCDgc`, Critcake `KQuMcv9IUgE`, YoDaTV `v95wrgYbe2U`, and LBNinja7 `5DM4ZQNpUl8` ("Trash
+    Mistweaver Build SLAMS +16") whose description is a build-string showcase, not a comparative read.
+  · **Tooling** — izen `PiVbpiKamoA`, an EXBoss addon review (Week 4 QoL), no spec-strength segment.
+- **Nothing moved to `seen[]`.** These are shape declines, not durable dismissals, so the 331 stay UNEXAMINED and
+  reachable by a future local unfiltered yt-dlp sweep; the accounting stays auditable. **No creator opinion moved any
+  tier.** No YouTube or transcript-API fetch was performed by the agent (no credentials held, by design).
+
 ## 2026-09-12 (local, scheduled) — queue drained 1 → 0; Dalaran Gaming's 12.1.5 walkthrough transcript-verified to NOTHING (correctly); anonymous caption lane clear for a second consecutive run
 
 - **Scope: residential-only catch-up.** The CI nightly landed `90e3607` at ~14:02Z (started 13:43Z), ~10 minutes

@@ -16,6 +16,37 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-13 (nightly) — ledger clean a second night (116/116 sections unchanged, 0 unresolved); no new tuning anywhere; **BlizzCon announced 12.2 but NO PTR — owner action, nothing touched**
+
+- **Revision ledger FIRST, from this run's pre-agent receipts** (`official-notes/evidence.json` + `pending.json`,
+  checkedAt 2026-09-13T14:40:53Z). Both configured sources `status: success`: live hotfix topic **2336376 post 1
+  still v36**, updated 2026-09-11T03:11:02Z, **113 sections**; the 12.1.5 dev thread **2344395 post 1 still v3**,
+  updated 2026-09-03T22:48:20Z, **3 sections**. Every section hash is identical to the committed ledger, so all 116
+  keep their prior resolutions (**14 applied live tuning · 99 irrelevant · 3 applied 12.1.5 preview**), **0
+  unresolved**, **0 removedSections**. `data/official-notes.json` rewritten from `pending.json` with source
+  identities, inventories, hashes and this run's check times exactly as received — the only change in the file is
+  the two `checkedAt` stamps. `check-official-notes.mjs --base=HEAD` passes.
+- **RSS sweep:** `wowhead.com/news/rss/all` HTTP 200, 354,642 B, 40 items parsed per `<item>` block (never by tag
+  adjacency). Window 2026-09-11 17:00 → 2026-09-13 00:51 and it is **entirely BlizzCon 2026 coverage** — no Class
+  Tuning, no hotfix round-up, no build post. **News INDEX** (`data.news.newsData`, brace-balanced from the id
+  attribute) leads the RSS by nothing this run: same newest id 382857.
+- **Blue tracker** (`data.blueTracker.default`, 50 entries → ~40 unique topics): newest class-tuning post is still
+  Linxy's "Hotfixes - September 10" (topic 2336376), already logged as the 2026-09-10 `hotfix` entry. Everything
+  newer is BlizzCon panel recaps, the Sept-17 Q&A announcement, and Linxy's **09-08 "The Unbinding of Kith'ix Raid
+  Testing Schedule"** — a scheduling post with no class content, so no feed entry.
+- **12.1 dev-notes thread 2317811.json fetched in full:** 17 posts, `last_posted_at` 2026-07-31T23:42:09Z,
+  unchanged. The cycle is closed, not a lost thread (the rediscovery gotcha stays suspended).
+- **OWNER ESCALATION, no agent action taken.** BlizzCon 2026 (2026-09-12) announced **patch 12.2 "Midnight:
+  Eclipse"** (news=382820), plus 12.1.7 "Talebound", 12.2.5 and a Season 3 dungeon rotation. **No 12.2 PTR realm
+  and no 12.2 dev-notes thread has opened** — the only PTR strings in the whole RSS window are Diablo's 3.2.0/3.2.1
+  and a HotS hero. Opening a new forecast cycle (`PHASES.ptr`, new thread key, contract rows, `wcl-probe.mjs` zone
+  probe) is an owner action, so **`PHASES`, the frozen 12.1 forecast, `ptr-builds.json` (31 entries, newest
+  2026-09-10) and every archived PTR metric were left exactly as they are**, and the 12.1.5 lane stays notes-only.
+  Worth knowing for that flip: the 12.2 announcement means the next cycle is now a *when*, not an *if*.
+- Dormant lanes skipped by posture, not marked unreachable: zone-54 / 52 / 56 / 57 WCL PTR sweeps (their contract
+  rows were removed at the flip). No tierSet touched → the upkeep gate is quiet. `npm run test:quiet` 546 pass /
+  0 fail / 63 skipped (UI invariants absent on the runner by design); build clean; snapshot written.
+
 ## 2026-09-12 (nightly) — ledger clean (116/116 sections unchanged, 0 unresolved), no new builds on any of four channels
 
 - **Revision ledger first**, from the pre-agent `official-notes/` artifact (checkedAt 2026-09-12T13:45:39Z). Both sources
