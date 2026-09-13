@@ -47,6 +47,54 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   rows were removed at the flip). No tierSet touched → the upkeep gate is quiet. `npm run test:quiet` 546 pass /
   0 fail / 63 skipped (UI invariants absent on the runner by design); build clean; snapshot written.
 
+## 2026-09-13 (local, scheduled) — ledger clean (116/116 unchanged, 0 unresolved); no new builds on any of four channels; 12.2 "Eclipse" ANNOUNCED at BlizzCon, no PTR
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly.** At 14:30Z origin/master was still `c21b150`
+  (the 09-12 local run) and `gh run list` showed no 2026-09-13 nightly — the schedule event has been landing
+  13:43–14:46Z all week (09-09 14:46, 09-10 14:36, 09-11 14:35, 09-12 13:43), so it had simply not fired yet.
+  Kept the default catch-up scope rather than a full refresh: the nightly is expected, and two independent
+  regenerations of the same day do not merge. Manifest deliberately NOT rewritten.
+- **Revision ledger first**, from a LOCAL `node src/fetch-official-notes.mjs` (checkedAt 2026-09-13T14:30:58Z; no
+  nightly receipt existed yet to preserve). Both sources `status: success` — live-hotfixes topic 2336376 post 1 still
+  **version 36** (edited 2026-09-11T03:11:02Z), ptr-preview topic 2344395 post 1 still **version 3** (edited
+  2026-09-03T22:48:20Z), both matching the committed ledger's revision AND updated time. Pending vs committed deep-compared
+  with `checkedAt` stripped: **byte-identical** (74,192 chars both sides) — 116 sections on both sides, 0 added, 0 removed,
+  0 outline hashes changed, 0 tombstones, **0 unresolved**. The only write this produced was the two `checkedAt`
+  values (a 2-line diff), and `check-official-notes --base=HEAD` passed on it — but that write was **SUPERSEDED,
+  not pushed**: the nightly fired at 14:38Z while this run was verifying, its publish landed `0c6b740` at 14:59Z
+  with its own trusted receipt and later `checkedAt`, so the held local commit was dropped (reset to origin/master,
+  no rebase) and only these log entries were re-applied. Net data change from this run: **none**.
+- **RSS** (HTTP 200, 354,642 B, 40 items, parsed per `<item>` block): the whole window is **BlizzCon 2026** (news
+  382809–382857, Sat 09-12 12:00Z → Sun 09-13 00:51Z). Newest class-TUNING item is still news=382799 (the stored
+  2026-09-10 hotfix). No "Class Tuning", no "Hotfixes", no Development Notes item.
+- **12.2 PTR announcement check — ANNOUNCED, NOT OPENED.** news=382820 "Midnight: Eclipse Announced as Patch 12.2 —
+  Reveal Cinematic" and news=382850 (roadmap: 12.1.7 "Talebound" rogue-like mode BEFORE 12.2; Wrath Remix summer 2027
+  after 12.2.7). Read both bodies from `content:encoded`: cinematic + roadmap only, **no PTR date, no development-notes
+  thread, no class notes**. Nothing agent-side follows from it — opening a cycle is the owner action recorded in the
+  posture block. Flagged for Riley: the next cycle will be **12.2 "Eclipse"**, with a 12.1.7 interim patch in between.
+  Also seen, none tuning: 382846 (spec-based top-5% M+ achievements in 12.2), 382831 (Season 3 M+ rotation),
+  382844 (final raid "The Worldcore"), 382825 (legendary caster dagger in 12.2), 382849 (transmog in 12.2.5).
+- **News INDEX** (`data.news.newsData`, brace-balanced from the id attribute; 20 posts, 1,551 pages): top id 382857,
+  agrees with RSS exactly — nothing ahead of it. **Both index and blue tracker drew CloudFront 403 (919 B) on a
+  UA+Accept curl and 200 (43,117 / 69,334 B) with the full browser header set** — the documented rule, re-bitten.
+- **Blue tracker** (`data.blueTracker.default`, 50 entries → 40 unique topics): all BlizzCon recaps (Blizzard
+  Entertainment ×N), Kaivax's Sept 17 Q&A call, Linxy's 09-08 Kith'ix raid-testing schedule; newest class-relevant
+  is still Linxy "Midnight Hotfixes - September 10" (topic 2336376, the ledger's source at v36). No standalone tuning
+  topic.
+- **Dev-notes thread 2317811.json**: 17 posts, highest_post_number 19, last staff post #19 Linxy 2026-07-31 (edited
+  08-01). Closed cycle, quiet as expected; rediscovery gotcha stays suspended.
+- `ptr-builds.json` unchanged at **31 entries**, newest 2026-09-10. No set-bonus line, no `tierSet.asOf` bump. 12.1.5
+  stayed notes-only, `PHASES` untouched, frozen forecast untouched. Dormant WCL lanes (zone 52/54/56/57) skipped.
+  Writeup coverage: 1 spec at `ptr: null` (Demonology Warlock, deliberate).
+- Verify (on the pre-nightly tree `c21b150` + the checkedAt edit): `npm run test:quiet` **608 pass / 0 fail /
+  1 skipped** (the permanent freeze-season skip; UI invariants ran — so the owner-deferred NEW-badge phone-card
+  regression has self-healed as predicted). Build OK (1948.4 KB). `freeze-season`: 8 pairs live, nothing to freeze.
+  `check-refresh --manifest`: the expected `startedAt … 25h old` line plus the stale gitignored 09-08
+  `wcl-fetch/evidence.json` leftover (no WCL fetch this run, WCL rows untouched, left in place as on 09-11).
+  **No snapshot written by this run**: the only rendered diff was the two `checkedAt` stamps, no tier/rank/projection
+  state moved, and a 09-13 history point would only have masked a dropped nightly — the nightly then wrote the real
+  `2026-09-13.json` itself. Re-verified after the reset: `npm run test:quiet` green on `0c6b740` + these logs.
+
 ## 2026-09-12 (nightly) — ledger clean (116/116 sections unchanged, 0 unresolved), no new builds on any of four channels
 
 - **Revision ledger first**, from the pre-agent `official-notes/` artifact (checkedAt 2026-09-12T13:45:39Z). Both sources

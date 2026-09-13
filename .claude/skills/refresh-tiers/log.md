@@ -54,6 +54,22 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   consensus at their ORIGINAL dates — **no archon snapshot advanced**. `encounter-tiers.json` read off the file:
   still `season s1` / `asOf 2026-08-17`, so the Fight selector stays hidden and the S1 archive stays quarantined.
 
+## 2026-09-13 (local, scheduled) — Archon walled a TWENTIETH day, re-probed from a residential IP; 0 letters touched
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (no 09-13 nightly had fired by 14:30Z; the
+  schedule event has been landing 13:43–14:46Z all week). Icy Veins, Method and Wowhead were NOT re-fetched here —
+  the nightly is expected to pull them within the hour, and a second independent regeneration of the same day is
+  what makes a local push unmergeable. Their letters stand as the 09-12 nightly left them (240/240 S2, 0 moves).
+- **The two ordinary public archon.gg routes re-probed from Riley's residential IP** with the full browser header
+  set (raid Heroic DPS all-bosses; M+ 10 DPS all-dungeons this-week): both **HTTP 200**, **2,501 / 2,516 B**,
+  `<title>Human Verification</title>`, `__NEXT_DATA__` count **0** — byte-for-byte the same 200-shaped wall the
+  08-31, 09-06 and 09-12 local runs recorded. Not bypassed, no proxy, no challenge solved, nothing backfilled.
+- **Nothing merged, nothing stamped.** `data/specs.json`, `data/sources.json`, `data/encounter-tiers.json`
+  byte-identical to HEAD; all 11 archon snapshots stay at 2026-08-25 / 2026-08-18; the 80 stored letters stay in
+  the consensus per the 2026-09-05 retention decision. Gearing guide harvest skipped: all three guide files
+  `harvestedAt` 2026-09-08 (5.6 d) and the weekly `gearing-refresh` run of 09-08 is green.
+- Manifest deliberately NOT rewritten (partial run).
+
 ## 2026-09-12 (local, scheduled) — Archon walled a NINETEENTH day, re-probed from a residential IP; 0 letters touched
 
 - **Scope: residential-only catch-up.** The CI nightly landed `90e3607` at ~14:02Z with Icy Veins, Method and

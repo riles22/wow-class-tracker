@@ -47,6 +47,33 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   reachable by a future local unfiltered yt-dlp sweep; the accounting stays auditable. **No creator opinion moved any
   tier.** No YouTube or transcript-API fetch was performed by the agent (no credentials held, by design).
 
+## 2026-09-13 (local, scheduled) — queue 0 → 0; RSS discovery re-run (no nightly yet today): the ~25h window is BlizzCon reactions, PvP and an addon review — 0 probes, 0 queued, 0 takes
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (origin/master still `c21b150`; the schedule event
+  has been firing 13:43–14:46Z all week and had not fired by 14:30Z). Unlike 09-12, the last discovery poll was
+  ~25h old, so an RSS sweep WAS re-run here — RSS costs no caption traffic and cannot re-flag the IP.
+- **Discovery**: 44/44 unique tracked channels HTTP 200 (79 pollable entries collapse to 44 channels), **660 entries**,
+  0 failures. Seen-set rebuilt as the STRUCTURED union of the four lanes = **1,253 ids** (549 seen + 426 skipped + 0
+  queued + take/metaNote urls; no log regex). Date bound `min(builds[].date)` = **2026-06-18** → **331 unseen in-cycle**
+  (the 09-12 nightly counted 325). `media:description` parsed alongside every title.
+- **The six videos newer than the 09-12 nightly's 13:43Z poll**, judged on title + description, none fetched:
+  Dalaran Gaming `rmOnt3L9KaY` (Classic+ / WoW Forever reveal reaction) and `XnBZqAYwQW0` (BlizzCon watch-party
+  livestream); Obli `i7wobRoM1cM` (Last Titan teaser — lore); MadSkillzzTV `aP7R1utFvBg` (BlizzCon watch party + MDI);
+  NeekapHere `323h0qlDbJo` / `m4U-3TQxGDY` (roadmap / Forever news); Preheat `ZeIE5nR4V7E` (Forever dungeon raw
+  footage); Baze `nSB8oQYupl4` ("Midnight Eclipse 12.2 Reaction | M+ rotation | New CASTER legendary?!") and
+  `cNImgtirma4` (Classic Forever reaction); Critcake `KQuMcv9IUgE` (key o'clock livestream); izen [G] `PiVbpiKamoA`
+  ("What is EXBoss" — an addon/tool review, neither a meta read nor a lead); Supatease `IhQMwNIWQbE` / `4gk3ouHr40o`
+  (Arcane PvP) and Dalaran Gaming `PbgeFrYz10Q` (Feral 5v5 duels) — PvP lens, out of scope.
+  Baze's 12.2 reaction is exactly the shape the 09-06 entry named: **content about a cycle the owner has not opened
+  has no lane** (`expertRead` era-filters on `PHASES.ptr.marker`, null), so a transcript could not surface a take
+  even if it held one. Reconsider when 12.2 opens.
+- **No yt-dlp caption probe this run.** The anonymous lane has been clear for exactly two single-video probes
+  (09-11, 09-12) after a 19-day IP flag; with nothing in the window that could yield a take, spending a probe would
+  be volume for its own sake. Nothing installed or upgraded; no cookies, no authenticated lane.
+- **Queue 0 → 0. 0 takes, 0 metaNotes**; `creator-takes.json` and `pending-transcripts.json` byte-unchanged; no
+  `latest` advanced; nothing moved to `seen[]` (the 331 are budget/relevance cuts, not durable dismissals, and stay
+  unexamined for a future unfiltered sweep). No creator opinion moved any tier.
+
 ## 2026-09-12 (local, scheduled) — queue drained 1 → 0; Dalaran Gaming's 12.1.5 walkthrough transcript-verified to NOTHING (correctly); anonymous caption lane clear for a second consecutive run
 
 - **Scope: residential-only catch-up.** The CI nightly landed `90e3607` at ~14:02Z (started 13:43Z), ~10 minutes
