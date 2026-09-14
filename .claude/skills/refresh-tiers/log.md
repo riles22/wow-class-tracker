@@ -16,6 +16,38 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (nightly) — 240/240 cells re-verified S2, 0 moves; Archon walled a TWENTY-SECOND day (403 shape from the runner)
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 0 of 240 stored cells moved.** All 14 pages fetched fresh this run;
+  only the 14 snapshot dates advanced to 2026-09-14. Counts printed and reconciled per page before every merge
+  (27 DPS / 7 healer / 6 tank = 40 per source-bracket), 0 unmatched, 0 duplicate (bracket,spec) pairs, 0 null tiers.
+- **Transports used, for the record.** Icy Veins: direct browser-UA GET (196,759–344,266 B off the written files), parse
+  bounded to `<table class="tier-list">`, tier from the row's first `<td>`, spec from the FIRST `alt=` after
+  `tier-list-entry` looked up WHOLE. Method: direct browser-UA GET, per `<div class="tier__tier <letter>-tier">` with the
+  letter from that block's own `.tier__title` and specs resolved by ROSTER MATCH on `.tier__icon data-original-title` —
+  the M+ page's four extra blocks (the dungeon-difficulty lists) failed to map and were rejected that way, never by index.
+  Wowhead: full browser header set, unescape `\/` FIRST then slice `[tier-list=rows] … [/tier-list]`, specs from the
+  `[spec-badge=<spec>-<class>]` slug; exactly one tier-list block per page, so no decoy `printHtml` was in play.
+- **Era checks, from bodies not titles.** Icy Veins raid-healer still titles itself "(Patch 12.0.7 / Midnight)" over an H2
+  reading "Midnight Healer Tier List for Season 2"; Method's raid AND M+ `og:description` still say "The War Within
+  Season 3" over bodies reading "Midnight Season 2". Both overridden by body, per the blue-tracker precedent. All six
+  Wowhead H1s read "… for Midnight Season 2". Devourer DH present in every DPS list. **No `seasonVerified` value changed,
+  so there was nothing for `freeze-season` to freeze** (it is publish-side on a nightly in any case).
+- **Page self-dates re-read live and cross-checked** against both the committed registry and this run's pre-agent
+  `published-evidence/evidence.json` — all 12 published-bearing pages agree exactly: IV raid 08-30 / 09-01 / 08-29, IV M+
+  08-30 ×3, WH raid 08-31 ×3, WH M+ 08-28 / 09-10 / 09-01. Method publishes neither JSON-LD `dateModified` nor an in-body
+  update line, so no `published` value was written for it.
+- **Archon: day 22 of the wall, and the shape differs from yesterday's LOCAL probe.** All 12 registered page entries
+  (11 unique URLs) fetched with the full browser header set: **HTTP 403, 6,054–6,159 B, "Just a moment" /
+  challenge-platform, `__NEXT_DATA__` count 0 on all twelve** — the Cloudflare shape, where the 09-14 local run from a
+  residential IP saw the 200-shaped "Human Verification" body on the same routes. Worth remembering that BOTH shapes are
+  the same block and neither is readable; the assertion stays on `__NEXT_DATA__` presence. This run's pre-agent
+  `source-health/evidence.json` independently saw one of each (raid heroic 403 cloudflare-challenge, M+ 200
+  human-verification). Nothing merged, no snapshot stamped, 80 letters unchanged at 2026-08-25 per the 2026-09-05
+  retention policy.
+- `data/encounter-tiers.json` read directly rather than assumed: still `season: "s1"`, asOf 2026-08-17 — Fight selector
+  stays hidden, S1 archive stays quarantined.
+
 ## 2026-09-14 (local, scheduled) — Archon walled a TWENTY-FIRST day, re-probed from a residential IP; 0 letters touched; run BEFORE today's nightly
 
 - **Archon: still walled from home.** Root plus all 12 registered pages fetched with the full browser header set, 1 s apart:

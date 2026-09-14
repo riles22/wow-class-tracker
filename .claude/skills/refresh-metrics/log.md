@@ -16,6 +16,50 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (nightly) — SimulationCraft genuinely re-simmed (build 69814, Feral Druid returns 23→24); everything else unmoved
+
+- **SimulationCraft — the git hash MOVED, so this is a real sim and not a re-read.** `MID2_Raid.txt` HTTP 200, 1,438,973 B,
+  and it carries a `DPS Ranking:` block, so the HTML lane was not needed. Header:
+  `SimulationCraft 1210-01 for World of Warcraft 12.1.0.69814 Live (hotfix 2026-09-12/69814, git build HEAD f8352efc00, no-networking)`
+  — against `ba1d6a064f` / build 69587 on the last three runs. **23 of 23 retained specs moved, max +2.02%** (Affliction
+  Warlock 233,411 → 238,115; every other move < 0.7%), comfortably under `maxValueMovePct` 0.6, so no `value_move_ack` is
+  implicated. 46 ranking entries, Raid aggregate skipped, LONGEST-PREFIX mapping with a hyphen allowed → **24** DPS specs:
+  **Feral Druid returned upstream** and joined the pool on its own night, per the 2026-09-03 wholesale-adoption rule. The 7
+  unmapped entries are all tanks. Balance / Augmentation / Devastation still absent. `asOf` = the report's own hotfix date
+  **2026-09-12**, 2 days old → manifest row `partial`.
+- **Bloodmallet — byte-identical for a fourth run.** All 27 DPS specs requested (talent_target_scaling / castingpatchwerk),
+  ≤3 attempts each: 24 charts, and the SAME persistent three returned the 76-byte `{"status":"error"}` body on every retry
+  (Balance Druid, Augmentation Evoker, Devastation Evoker) — **the same three SimC is also missing**, which is a useful
+  corroboration that the absence is upstream rather than transport. `simc_settings.ptr` compared against the STRING `"0"`;
+  tier read off each chart → all 24 `MID2`, pool stays uniform. 0 target-value moves, 0 tier changes, 0 profiles lost.
+  Coverage date is the data's own **2026-09-09**, 5 days → `partial`, and that red is the signal.
+- **Murlok — SUCCESS, the stall really is over.** Trusted pre-agent collector only (checkedAt 16:33:03Z): 3 pages HTTP 200
+  (101,323 / 72,332 / 70,932 B), 40 rows at 27/7/6, 0 omitted, source `<time datetime>` **2026-09-14T02:10:28Z** = today.
+  Merged `metrics-fetch/updates.json` verbatim: 0 of 40 values and 0 dates moved — a same-day recheck confirming unchanged
+  fresh data without advancing a source-owned date, which is exactly the shape the manifest rule describes.
+- **Mythicstats — still held for review, same period as 09-13.** Collector `partial`: `/period/latest` → period **1080**,
+  HTTP 200, share column healthy (sum 99.9; Ranged 29.3 / Melee 30.6 / Tank 19.9 / Healer 20.1 — the representation share,
+  not the `/meta` per-key-presence column), but Mage|Frost and Warlock|Affliction are omitted upstream and Affliction has a
+  NONZERO stored share, so the whole source is held rather than merged partially. 0 rows in updates; stored 40-row series
+  byte-identical at its own 2026-09-11.
+- **WoWMeta — upstream frozen at 2026-09-08 for a sixth day.** JSON API only (two plain curls); `manifest.snapshotDate`
+  2026-09-08 and the rankings file's `Last-Modified` (Tue, 08 Sep 2026 09:11:42 GMT) agree, and the 162,405 B payload was
+  diffed row by row rather than trusted to the manifest. Whitelisted `{dps,hps,tank}` + `lowerBound` + `keyRange ===
+  undefined` → 3 of 44 blocks = 40 rows, 0 unmatched, 0 value/n/date moves at the stored 1-dp precision. `partial`.
+- **Warcraft Logs — evidence only, no agent fetch of any kind.** From `wcl-fetch/evidence.json` (attemptedAt 16:30:50Z):
+  raid bracket **success, 226 rows** (zone 53 / p1 / diff 5 / size 20, 8 pinned Mythic bosses, Nymrissa 3379 excluded);
+  M+ bracket **partial, 319 rows** (zone 55 / p1 / diff 10 / size 5, rankingBracket 9 = exactly +10, discoveryVerified) with
+  exactly one INVALID cut — Holy Priest on 12993 Altar of Fangs, rejected for a ranking timestamp in the future
+  (16:41:53.171Z > observed 16:31:57.098Z). That cut keeps its previous observation, which is why the stored row count holds
+  at 320 while 319 landed. `legacy` still reports both `wcl-live-*` aggregates `unreachable` — no verified sanctioned
+  endpoint — and the leaderboard series cannot and did not green them. `check-wcl-metrics.mjs --manifest` passes.
+- **Archon: day 22, walled, all six numeric families untouched** — see the refresh-tiers entry for the probe detail
+  (403 / "Just a moment" / `__NEXT_DATA__` 0 on all 12 page entries). Per-boss survivability again NOT substituted for the
+  empty aggregate; the 2026-08-21 dead end stands.
+- **Robydoby deliberately not fetched.** Its two sheets are the `era: "ptr"` 12.1 zone-54 series, i.e. the CLOSED cycle's
+  receipts (26 DPS + 7 HPS rows, dated 2026-07-16/24). Between cycles that lane is dormant, not under-covered; it is outside
+  `required-sources.json` by design, so there is no manifest row and nothing to report.
+
 - 2026-09-14 (local, scheduled) — **Murlok's 12-day upstream stall has ended and the fresh cut is merged: 40/40 rows, all moved.**
   Run BEFORE today's nightly. `node src/fetch-stable-metrics.mjs` executed locally first, as the skill says (`metrics-fetch/` is
   gitignored, so no trusted nightly receipt was overwritten; checkedAt 2026-09-14T14:27:04Z). **Murlok `status: success`**:

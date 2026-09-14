@@ -16,6 +16,37 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (nightly) — 44/44 feeds polled, 660 entries, 0 transcripts available, 0 queued; one scope flag for Riley
+
+- **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (79 creator entries collapse
+  to 44 channels — 41 class-creator entries plus the 3 `generalCreators`; the 40 `transcribable: false` reference entries
+  skipped by design; **0** pollable creators missing a `channelId`). 44/44 HTTP 200 with retry+backoff, **660 entries**,
+  0 feed failures.
+- **Seen-set** rebuilt as the structured union of the four lanes (`videos[]` + `skipped[]` + `seen[]` + every `youtu.be`
+  id in a take or metaNote url) = **1,255 ids** (280 of them distilled). `log.md` was not regexed. Cycle bound derived as
+  `min(builds[].date)` = **2026-06-18** — the date, never an index — giving 530 in-cycle feed entries, **333 unseen**, of
+  which **19 are new since the 09-13 sweep**.
+- **0 takes, 0 metaNotes, and that is the honest outcome.** `transcript-fetch/summary.json` verdict `ok`, requested 0 /
+  fetched 0 / cached 0 — the queue was already drained to 0 by the 09-14 local run, so there was nothing to distil.
+  `creator-takes.json` is byte-unchanged. No filler neutral was minted to record that the sweep happened.
+- **Nothing queued.** The 19 new videos are BlizzCon/Forever reaction and roadmap news (Dalaran Gaming ×3, NeekapHere,
+  MadSkillzzTV ×2, Obli, and izen's 15-minute BlizzCon recap — news, not the per-spec meta read the `metaNotes` lane
+  takes), PvP duel/arena content (Supatease, Dalaran Gaming — a PvP read must never vote in PvE), and key-run / raid-prog
+  PoVs and stream VODs (Shadarek ×2, YoDaTV ×4, Clandon, Critcake, LBNinja7, MadSkillzzTV, Sha's tank coaching session).
+  All documented zero-yield or out-of-scope shapes, settled from title **plus `media:description`** without spending a
+  metered request.
+- **⚑ SCOPE FLAG FOR RILEY, not acted on.** Dorki published **"How To Do HUGE DAMAGE On Arms Warrior In M+ | Midnight 12.1"**
+  (`eoh6M6x0ohU`, 2026-09-14) — a chaptered rotation/uptime/minmax how-to. It passes the nightly keyword filter, and it was
+  the one genuinely borderline call this run, so the reasoning is recorded: it is **doubly excluded**. (a) Guide-shaped
+  content carries no spec-strength read. (b) More decisively, **every Dorki entry in `community.json` is tank-scoped** —
+  Blood, Vengeance, Guardian, Brewmaster, Protection Paladin, Protection Warrior — and Warrior|**Arms** is not among them,
+  so no take from this video could be attributed without a human widening his scope. His own description still says "I will
+  continue to provide tank and general content". Flagging rather than silently overriding, per the skill's rule.
+- Nothing was moved to `seen[]`: these are shape and scope declines, not durable dismissals, so the 19 stay UNEXAMINED and
+  reachable by a future local unfiltered yt-dlp sweep, and the accounting stays auditable.
+  `data/pending-transcripts.json` is unchanged — queue 0, skipped 426, seen 549.
+- No YouTube or transcript-API fetch was performed by the agent; no creator opinion moved any tier.
+
 ## 2026-09-14 (local, scheduled) — queue 0 → 0, but TWO fresh in-scope reads fetched and distilled locally: **4 takes** (Musguete ×3, Obli ×1), 0 metaNotes; anonymous caption lane clear a THIRD and FOURTH probe
 
 - **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by 14:15Z; last poll was the 09-13 nightly's

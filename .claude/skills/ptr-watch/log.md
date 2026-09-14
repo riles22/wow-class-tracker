@@ -16,6 +16,39 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (nightly) — ledger clean 116/116, nothing new in any of four channels; a 12.1.5 PTR realm is raid-testing but no 12.2 thread exists
+
+- **Official revision ledger ran FIRST** from the pre-agent receipts (checkedAt 16:33:07Z). Both sources `success`:
+  live hotfix topic **2336376** post 1 still **v36**, updated 2026-09-11T03:11:02Z, **113 sections**; the 12.1.5 dev thread
+  **2344395** post 1 still **v3**, updated 2026-09-03T22:48:20Z, **3 sections**. Every section hash matches the committed
+  ledger — **116 of 116 retained their prior resolutions (17 applied + 99 irrelevant), zero unresolved, zero tombstones**.
+  `data/official-notes.json` rewritten from `pending.json` with identities, inventories, hashes and this run's check times
+  exactly as received; the only diff is the two `checkedAt` stamps. `check-official-notes.mjs --base=HEAD` passes.
+- **RSS**: HTTP 200, 283,299 B, 40 items parsed per `<item>` block. Window 2026-09-12 19:31 → 2026-09-14 15:22, entirely
+  BlizzCon 2026 / WoW: Forever coverage. No Class Tuning, no hotfix round-up, no 12.1/12.1.5 build post.
+  The one hotfix-titled item, **news=382863 "Minimap Addon Tech Will Be Disabled in Hotfix"**, was read in full from
+  `content:encoded` rather than judged on its title: it is an announced restriction on `MinimapCompassTexture` (addons can
+  no longer supply custom compass assets or call `GetRotation`/`SetTexture`/`SetAtlas`/`SetSVG` on it while in an instance
+  with `rotateMinimap` on), sourced from the WoW UI Discord, with **no class or spec line and no ship date**. Out of feed
+  scope; nothing logged. Worth noting the shape for next time — "…in Hotfix" in a title is not a hotfix round-up.
+- **News INDEX** (`data.news.newsData`, brace-balanced from the id attribute) leads the RSS by nothing this run — same
+  newest id 382863. **Blue tracker** (`data.blueTracker.default`, 50 entries → 40 unique topics): newest class-tuning post
+  is still Linxy's "Hotfixes - September 10" (topic 2336376), already the 2026-09-10 feed entry. Everything newer is
+  BlizzCon panel recaps, the Sept-17 Q&A announcement, and the 09-08 Kith'ix raid-testing schedule.
+- **The tracked 12.1 thread 2317811.json fetched in full**: 17 posts, `last_posted_at` 2026-07-31T23:42:09Z, unchanged.
+  Closed, not lost.
+- **NEW this run, and the reason it is written down:** the PTR forum **category 345** listing was read as well. It confirms
+  the 12.1.5 PTR realm is live and testing — Linxy's "The Unbinding of Kith'ix Raid Testing Schedule" (topic 2346119,
+  created 2026-09-09, Heroic 13:30 PDT / Mythic 14:30 PDT on Wednesday September 16) was read in full and is a pure
+  timetable with **zero tuning content**. The only staff dev-notes topic in that category is the configured 12.1.5 thread
+  2344395; **there is no 12.2 dev-notes thread**. Everything else in the category is public player feedback, which the
+  source policy excludes. So: a running PTR realm is NOT by itself a forecast cycle. `PHASES.ptr` stays null, the frozen
+  12.1 forecast is untouched, archived PTR metrics keep their labels, and the 12.1.5 lane stays notes-only. Opening a cycle
+  (new `PHASES.ptr`, thread key, contract rows, zone probe) remains an OWNER action.
+- `data/ptr-builds.json` untouched — 31 entries, newest 2026-09-10. No build's notes touched a set bonus, so no
+  `spec.tierSet` moved and the upkeep gate (and its gearing mirror) stayed quiet.
+- Dormant lanes skipped as designed: zones 54 / 52 / 56 / 57 are the closed cycle and carry no contract rows.
+
 ## 2026-09-14 (local, scheduled) — ledger clean (116/116 unchanged, 0 unresolved); no new tuning on any of four channels; still no 12.2 PTR — run BEFORE today's nightly
 
 - **Scope:** residential-only catch-up run at ~14:15Z with **no nightly yet today** (origin/master still `9e4f2f3`; the schedule
