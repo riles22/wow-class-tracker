@@ -16,6 +16,22 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+- 2026-09-14 (local, scheduled) — **Murlok's 12-day upstream stall has ended and the fresh cut is merged: 40/40 rows, all moved.**
+  Run BEFORE today's nightly. `node src/fetch-stable-metrics.mjs` executed locally first, as the skill says (`metrics-fetch/` is
+  gitignored, so no trusted nightly receipt was overwritten; checkedAt 2026-09-14T14:27:04Z). **Murlok `status: success`**:
+  three meta pages HTTP 200 (101,323 / 72,332 / 70,932 B), 27 DPS / 7 healer / 6 tank = **40 rows, 0 omitted**, and every page's
+  `<time datetime>` now reads **2026-09-14T02:10Z** (was 2026-09-02T10:10Z since the 09-02 cut — the heartbeat's 11-day
+  `murlok` red). Merged ONLY `metrics-fetch/updates.json` through `apply-metrics.mjs`; no second parser. Pre-merge diff against
+  HEAD: **40 of 40 values moved, 39 up / 1 down, max +7.64% (Frost DK 3431 → 3693)**, median a few percent — twelve days of
+  top-50 rating climb, far under `maxValueMovePct` 0.6 and the family-median gate. `asOf` = the source's own 2026-09-14.
+  `check-stable-metrics.mjs` passes against the receipts. Registry `snapshot` for murlok deliberately not touched (gates nothing).
+  **Mythicstats `partial` from the collector, held unchanged** — same shape as the 09-13 nightly: period 1080, Warlock|Affliction
+  omitted upstream with a nonzero stored share, so 0 rows in `updates.json` and the stored 40 keep their 2026-09-11 date.
+  **Not attempted here (CI's job tonight, nothing residential-only about them):** WCL leaderboards (no local collection — the
+  gitignored `wcl-fetch/evidence.json` is a 09-08 local leftover, which is why `check-refresh --manifest` prints "wcl evidence …
+  is not from this run"; no WCL row changed, so nothing needed vouching), Bloodmallet, SimC, WoWMeta. Archon's six numeric rows:
+  walled day 21 from home (measured in refresh-tiers), nothing merged. Manifest deliberately left as the 09-13 nightly's record.
+
 - 2026-09-13 (nightly) — **every contract family attempted; not one upstream number moved.** WCL: read-only from the
   pre-agent receipt (attemptedAt 14:38:41Z) — M+ leaderboard clean again, **320/320 cuts, status `success`**; raid
   **`partial`** at 224 rows (floor 200) with 95 sparse cuts on the later bosses and the same **1 invalid** (Druid

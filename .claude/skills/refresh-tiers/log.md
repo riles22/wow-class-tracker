@@ -16,6 +16,18 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (local, scheduled) — Archon walled a TWENTY-FIRST day, re-probed from a residential IP; 0 letters touched; run BEFORE today's nightly
+
+- **Archon: still walled from home.** Root plus all 12 registered pages fetched with the full browser header set, 1 s apart:
+  **HTTP 200 every time, 2,452–2,519 B, `<title>Human Verification`, `__NEXT_DATA__` count 0** on all 13 — the 200-shaped wall
+  (the 09-13 nightly saw the 403 Cloudflare shape on the same routes from the runner). Same site-wide block, still impassable,
+  still not something this project defeats. Nothing merged, no snapshot stamped; the 80 letters verified 2026-08-25 stay in the
+  consensus at their original dates per the 2026-09-05 retention policy.
+- **Icy Veins / Method / Wowhead deliberately NOT re-fetched.** The 09-13 nightly re-parsed all 240 cells ~24h ago (0 moves), and
+  today's nightly is still pending — independently regenerating what CI is about to produce is what makes a local push
+  unmergeable. Same call as 09-12/09-13.
+- `freeze-season.mjs`: "8 source/bracket pairs still describe the live season — nothing to freeze"; archive unchanged.
+
 ## 2026-09-13 (nightly) — three live sources re-fetched and re-era-verified, **0 of 240 cells moved**; Archon walled a TWENTIETH day; Method's stale "Season 3" meta caught and overridden
 
 - **Icy Veins** — 6/6 pages, direct browser-UA GET, HTTP 200, 196,512–344,019 B (sizes off the written files, never

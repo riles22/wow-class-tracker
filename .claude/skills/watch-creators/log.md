@@ -16,6 +16,46 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (local, scheduled) — queue 0 → 0, but TWO fresh in-scope reads fetched and distilled locally: **4 takes** (Musguete ×3, Obli ×1), 0 metaNotes; anonymous caption lane clear a THIRD and FOURTH probe
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by 14:15Z; last poll was the 09-13 nightly's
+  ~14:40Z). RSS discovery re-run: **44/44 channels HTTP 200** (79 pollable entries → 44 channels), **660 entries**, 0 failures.
+  Seen-set = structured union of the four lanes = **1,253 ids** (549 seen + 426 skipped + 0 queued + take/metaNote urls; no log
+  regex). Cycle bound `min(builds[].date)` = **2026-06-18** → **335 unseen in-cycle**, of which **17 are newer than the 09-13
+  poll**. Titles AND `media:description` read for all 17.
+- **Two were worth a fetch, and both were fetched here rather than queued** (local transcripts are free; the queue is metered):
+  · **Musguete `4Y_CUMgHwp8` "Which Rogue Spec is META right now?"** (2026-09-14, 16:18 runtime) — a genuine comparative
+    strength read across all three Rogue specs, all in his registered scope. Distilled into **three `bracket: "both"` takes**:
+    Subtlety a little ahead for raid overall (one of the best single targets in the game; Assassination better on a number of
+    bosses), Fatebound **Assassination "the best spec right now, at least for M+"** and his pick for everyone on ease, Outlaw very
+    good in both brackets but gear-locked, hardest to learn and rarely brought ("popularity is awful"). **No predictions panel**:
+    he publishes no tier labels and no strict rank list — the raid order is hedged per boss and the M+ order is conditional on comp
+    and ease — and `docs/source-predictions.md` admits only explicitly ranked content. Same-lens supersessions: his 08-15 Subtlety
+    (both), 08-24 Assassination (both) + 08-04 Assassination (mplus), 08-27 Outlaw (raid) + 08-04 Outlaw (mplus) — a both-bracket
+    live read replaces the creator's live raid, M+ and both reads on that spec. His 07-31 tuning-direction reactions (no bracket)
+    are a different lens and stay as they were.
+  · **Obli `sZ6CJFwhwnk` "FROST DK Mythic + Guide and Breakdown / Blinding Vale +14"** (2026-09-14, 22:02) — mostly a how-to
+    walkthrough, but it opens on a placement: Frost "pretty powerful at the moment", a very good pick, now **edging Unholy** in keys
+    (reversing his 08-28 "Unholy a teeny bit ahead"), on the back of Yagi's and Mine's MDI showings, with gear dependence as the
+    standing caveat. **One `mplus` Frost take**, superseding his 08-28 Frost M+ read. Unholy is a passing comparison here, not
+    analysed — **no Unholy take**, and his 08-28 Unholy M+ read stays live. His 09-04 raid pair is untouched (different lens).
+  · `latest` advanced on both registry entries to the videos actually distilled. Neither id was in `seen[]`/`skipped[]`.
+- **Anonymous yt-dlp lane: clear again — two paced probes (`--sleep-requests 3`), two json3 tracks, no 429** (290 KB / 765
+  events and 495 KB / 1,313 events). That makes four consecutive successes since the 09-11 clearance (09-11, 09-12, ×2 today).
+  Metadata printed in separate invocations from the sub download; both `not_live`, `was_live=False`. yt-dlp still the local
+  2026.07.04, nothing installed, no cookies, no authenticated lane. Still **no unfiltered breadth sweep** — a sweep is the volume
+  shape that flagged the IP for 19 days; the 335 stay unexamined and reachable.
+- **The other 15 new videos, settled from title + description, none fetched, nothing queued:** BlizzCon/Forever recaps — Dalaran
+  Gaming `yRa_jes8GFs` ("Everything Blizzard Just Revealed for … Season 3"), izen [G] `B3_WVUOrqks` (6-hour BlizzCon recap — a
+  news recap of announcements the official lanes swept directly; not a current-season meta read, no metaNote), MadSkillzzTV
+  `2OLQVMsritQ` (Last Titan short). PvP — Dalaran Gaming `lLpAvn35aFY` (Frost DK 5v5 duels). PoVs/VODs/coaching — Shadarek
+  `5WjSXcgo44A` / `F4MUq1bOb6w`, LBNinja7 `nU0pMdvgk9M` (+16 Temple with a build string), Clandon `Vi4Ncw7BOfA`, Sha
+  `MuPfa4nRtkc`, Critcake `vc2fBBbFHL0`, YoDaTV ×4 (`Yge9HQFnKEQ`, `fHhpgM6WuG8`, `4BXJT9vweSs`, `c-GLu8sjGME`). And
+  **Dorki `eoh6M6x0ohU` "How To Do HUGE DAMAGE On Arms Warrior In M+"** — Arms is OUTSIDE his registered tank scope and the
+  video is a how-to, so not fetched; noted here in case Riley wants the scope reviewed.
+- Nothing moved to `seen[]` (shape declines are not durable dismissals). **Queue 0 → 0. 4 takes, 0 metaNotes.** No creator
+  opinion moved any tier; `expertRead` is dormant while `PHASES.ptr` is null, so these takes are drawer content only.
+
 ## 2026-09-13 (nightly) — 44/44 feeds polled, no transcripts to distil (queue was empty at collector time), **nothing queued: all 22 new videos are BlizzCon reactions, PvP or PoVs**
 
 - **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (41 class-creator

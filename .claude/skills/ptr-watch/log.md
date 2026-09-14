@@ -16,6 +16,32 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-14 (local, scheduled) — ledger clean (116/116 unchanged, 0 unresolved); no new tuning on any of four channels; still no 12.2 PTR — run BEFORE today's nightly
+
+- **Scope:** residential-only catch-up run at ~14:15Z with **no nightly yet today** (origin/master still `9e4f2f3`; the schedule
+  event fired 14:38Z yesterday). Between-cycles posture unchanged: `PHASES.ptr` null, dormant WCL PTR zone sweeps skipped, the
+  12.1.5 lane notes-only.
+- **Revision ledger FIRST, from a fresh local `node src/fetch-official-notes.mjs`** (checkedAt 2026-09-14T14:17:35Z; the
+  `official-notes/` directory is gitignored so no trusted nightly receipt was overwritten). Both sources `success`: live hotfix
+  topic **2336376 post 1 still v36** (updated 2026-09-11T03:11:02Z, 113 sections); 12.1.5 dev thread **2344395 post 1 still v3**
+  (2026-09-03T22:48:20Z, 3 sections). `pending.json` diffed against the committed ledger: **identical apart from the two
+  `checkedAt` stamps** — 14 applied live · 99 irrelevant · 3 applied 12.1.5, **0 unresolved, 0 removedSections**. Written to
+  `data/official-notes.json` per step 4; `check-official-notes.mjs --base=HEAD` passes. (Tonight's nightly will supersede the
+  stamps, as 0c6b740 did to yesterday's.)
+- **Wowhead news RSS:** HTTP 200, 289,290 B, 40 items parsed per `<item>` block; window 2026-09-12 14:23 → 2026-09-14 00:06 CDT,
+  newest id **382879** (Day-2 BlizzCon roundup). The 19 items newer than the 09-13 nightly's top id 382857 are ALL "WoW: Forever"
+  panel coverage. Every article BODY was grepped for PTR / hotfix / tuning strings, not just titles: the only PTR hits are Diablo's
+  (Iconic Uniques, Stone of Jordan) and one 12.2 feature line ("the Dummy Dome from PTR is getting an upgrade" — a Calibration
+  Chamber announcement, not a PTR opening). **0 class tuning, 0 hotfix round-ups, 0 build posts.** News INDEX polled too
+  (`data.news.newsData`, 20 posts, 1,552 pages): same top id, no lead over the RSS.
+- **Blue tracker** (`data.blueTracker.default`, 50 entries): newest class post is still Linxy's **"Hotfixes - September 10"**
+  (2336376, already the 2026-09-10 `hotfix` feed entry); everything newer is Nethaera's Sept-17 Q&A submissions thread and BlizzCon
+  panel recaps. Topic **2335871** "Season 2 Class Tuning Plans" is at 195 posts, Kaivax still only at #1 and still **v1**
+  (2026-08-12) — the Sept 22 pass it promised is still ahead. Thread **2317811** unchanged (17 posts, last 2026-07-31).
+- **12.2 PTR check: still NOT open.** No 12.2 dev-notes thread, no PTR realm string anywhere in the RSS window, the index or the
+  tracker. Opening the cycle stays an owner action; nothing touched. `ptr-builds.json` still 31 entries, newest 2026-09-10.
+- 0 builds, 0 hotfixes, 0 tierSet edits (upkeep gate quiet). `data/official-notes.json` is this lane's only write.
+
 ## 2026-09-13 (nightly) — ledger clean a second night (116/116 sections unchanged, 0 unresolved); no new tuning anywhere; **BlizzCon announced 12.2 but NO PTR — owner action, nothing touched**
 
 - **Revision ledger FIRST, from this run's pre-agent receipts** (`official-notes/evidence.json` + `pending.json`,

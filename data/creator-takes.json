@@ -3730,7 +3730,7 @@
       "patchContext": "12.1 PTR — review of PTR M+ logs across all three Rogue specs after the Rogue buff pass",
       "url": "https://youtu.be/HDqRItIXGmE?t=311",
       "claim": "Reviewing PTR M+ logs after the Rogue buffs, he puts Outlaw well ahead of where it sat the previous week and well ahead of Subtlety, citing a first page of logs already reaching almost 550k overall and 424k / 414k on Ruby Life Pools, and comparing favourably against Shadow Priest and Demon Hunter parses on the same keys. He says that if Blizzard wants Rogue at that level, Outlaw will be S tier in a physical comp. The honest limit he keeps returning to is not the damage but the delivery: Outlaw remains heavily dependent on the Roll the Bones jackpot, damage can drop off a lot without it, and he expects that RNG dependence to put players off even while the numbers are strong — he says he wants damage to depend on rotation rather than luck. He is explicit that he expects a nerf soon precisely because the numbers are this high. He also flags a methodology caveat on his own evidence twice: Warcraft Logs itself warns that treating testing data as live data is incorrect and inaccurate, and he stresses that pull count drives these overall numbers, walking through dungeons cleared in 7, 11 and 15 pulls to show why the same key level produces very different overalls.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -3742,7 +3742,7 @@
       "patchContext": "12.1 PTR — review of PTR M+ logs across all three Rogue specs after the Rogue buff pass",
       "url": "https://youtu.be/HDqRItIXGmE?t=535",
       "claim": "He identifies Assassination as the spec that got the most out of the buff pass — he puts the total at roughly 16% increased overall damage — and reads it as the best-performing Rogue spec overall. He shows more than a million damage on the burst window and says the sustain afterwards is what impresses him more, continuing to ramp after the burst and holding up even without Death Mark, on King's Bane alone. Logs cited: 443k overall on Altar of Fangs, and two parses above 300k on Murder Row, which he singles out because no Rogue spec had previously exceeded 300k there. He notes the build shown takes four nodes in the Apex talent, i.e. the far Apex route Blizzard intends players to use. He stops short of calling it the best spec of Season 2 — he says it is still too early with two weeks to launch and expects changes through the first two weeks of the raid — but says Assassination currently feels the best to play of the three and, like Outlaw, that he expects it to be the most nerfed if Blizzard does not want Rogue at this level. King's Rest is called out as awful for every Rogue spec.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -5829,7 +5829,8 @@
       "bracket": "both",
       "patchContext": "12.1 PTR — reaction to the August 18 tuning pass, Subtlety section (a separate read from his Assassination take on the same video; distilled 2026-08-21, after Subtlety entered his registry scope). Provenance notes: the official post frames this pass as pulling back overperforming tier sets while raising baseline damage, and no Subtlety damage-overperformance bug appears in our build feed for it, so the bug premise and the resulting net figure are his account rather than a stated delta; and the official four-set covers Eviscerate alongside Black Powder and carries no leech component, so his description of what the bonus does is partly off even though the 100%-to-60% figure is exact.",
       "claim": "Reacting to the tuning pass landing with the August 18 reset — which he is explicit is not live yet — he reads Subtlety as coming out ahead. He calls the 6% increase to overall damage very good, and although he presents it as compensation for a bug that had the spec doing roughly 4-5% more damage than intended, his own reading is that it still leaves Subtlety about 1% up on what they had previously, a figure he offers as belief rather than certainty. The counterweight he sets against it is a nerf he names as such: the four-set bonus effectiveness dropping from 100% to 60%, which he says matters because Black Powder — the ability he frames the bonus around — had been doing an enormous amount of damage and topping meters. From that he revises his own earlier stat guidance. He had been telling people Subtlety would want a lot of mastery, because the talent he names as Potent Powder scales Black Powder's increased damage at 20% of mastery; with the four-set cut he now expects the spec to want somewhat less mastery and a little more crit. He is candid that this is provisional, saying he is still not sure how the stats will land and deferring the question to his upcoming spec guide. He closes class-wide rather than on Subtlety specifically, calling it a very good time to play Rogue with all three specs in a good position.",
-      "url": "https://youtu.be/lanOZvwWzw0?t=87"
+      "url": "https://youtu.be/lanOZvwWzw0?t=87",
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -6288,7 +6289,7 @@
       "patchContext": "Season 2 live — his Season 2 Assassination guide, published 2026-08-24. The video is mostly how-to-play (rotation, energy management, macros, talents, stats), but it opens and closes on his own spec-strength read, which is what is distilled here",
       "url": "https://youtu.be/igWiPoYPlV4?t=140",
       "claim": "He reads Assassination as being in a really good spot in Season 2: damage is doing intense amounts even outside the burst window and the spec has a lot of sustain, and he closes by saying he likes Assassination's position and does not believe it is going away any time soon. He frames the season's play pattern as deliberately slower — Blizzard removing the Season 1 Envenom-aura cancel and pushing a paced Envenom chain — rather than as a downgrade.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -6434,7 +6435,7 @@
       "patchContext": "Season 2 live — \"Outlaw feels INSANE in Season 2! 12.1 Guide\", published 2026-08-27. Primarily a rotation and talent update video, but it reads his own live damage meters and log breakdowns and reaches an explicit placement claim.",
       "url": "https://youtu.be/ps4If_WbBPQ?t=124",
       "claim": "He puts Outlaw in a very good position for Season 2, and the reason he gives is fight profile rather than a rotation change: many of the new raid's bosses are two- and three-target cleave, which is where he says Outlaw performs really well, so he expects to keep seeing Outlaw played in raid. Off his own meters he describes sustained damage that is consistent and high even outside burst, and notably more front-loaded burst at the start of a pull than in Season 1, to the point that on a pull without opening burst he nearly catches a Mage who burst early by the end. He is clear Outlaw changed least of the three Rogue specs — the rotation is close to Season 1 apart from empowering Killing Spree, the tier set's Dispatch procs, and dropping Blade Rush on single target.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -6458,7 +6459,8 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
       "url": "https://youtu.be/n0H4JFE6Suc?t=266",
-      "claim": "He separates the brackets sharply and reads Mythic+ as the healthy one for Frost: 'in Mythic+ we're actually doing pretty good', with Frost and Unholy at about the same damage and Unholy a teeny bit ahead. He raises it as a balancing problem rather than a complaint — the 10-15% raid buff he wants would, applied flatly, make Frost a powerhouse in keys, so he says any raid-targeted tuning has to be careful not to overshoot there. This is a placement read on the current state, not a claim that keys have improved."
+      "claim": "He separates the brackets sharply and reads Mythic+ as the healthy one for Frost: 'in Mythic+ we're actually doing pretty good', with Frost and Unholy at about the same damage and Unholy a teeny bit ahead. He raises it as a balancing problem rather than a complaint — the 10-15% raid buff he wants would, applied flatly, make Frost a powerhouse in keys, so he says any raid-targeted tuning has to be careful not to overshoot there. This is a placement read on the current state, not a claim that keys have improved.",
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -7333,6 +7335,54 @@
       "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Discipline Priest placed C",
       "claim": "Discipline Priest sits at the bottom of his tier list, in his words by far the worst healer in M+ this season and its worst M+ position in a long time. The 20% Shadow Mend mana-cost reduction has not fixed a mana economy he calls miles worse than every other healer's; Shadowfiend is a terrible talent; the spec tree has been repeatedly nerfed; and Atonement is undertuned in dungeons yet would be too strong in raid if buffed. He attributes this to the removal of last expansion's dungeon-specific Atonement modifier in favour of the 5-to-20-Atonement back-end scaling, which has not worked for M+ at all, leaving weak Atonement healing, deliberately weakened shields, and expensive Shadow Mend casts that run the spec out of mana. He contrasts this with his own Mythic-progression raid healing, which he calls great.",
       "url": "https://youtu.be/4SH6SUfKxpM?t=819",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Musguete",
+      "date": "2026-09-14",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — \"Which Rogue Spec is META right now?\", published 2026-09-14. A comparative read of all three Rogue specs against his own live meters and the Warcraft Logs boards for the last two weeks of the raid and for keys; the video gives no letter tiers and no strict rank list, only prose placements, so it is distilled as takes and not as a predictions panel.",
+      "url": "https://youtu.be/4Y_CUMgHwp8?t=232",
+      "claim": "For raid he names Subtlety the best of the three Rogue specs right now — 'a little bit ahead' of Assassination and Outlaw and the one to pick for maximum performance across all the bosses — and calls its single target one of the best in the game at the moment, with sustained damage that holds up even outside the burst window because Secret Technique now procs properly with Ancient Arts. He reads it off the two-week boss boards, where Subtlety sits near the middle of the whole field, and adds that in a number of fights Assassination is actually better, so the raid lead is overall rather than per boss. For keys he is less specific: Subtlety is 'very good' and viable, may be the better choice on single-target-heavy keys where Assassination's energy is tight, but is not the spec he recommends for most players because it carries a lot of Deathstalker min-maxing. Popularity is a separate observation — Rogue is one of the least played classes this tier, which he does not treat as a strength signal.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Musguete",
+      "date": "2026-09-14",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — \"Which Rogue Spec is META right now?\", published 2026-09-14. A comparative read of all three Rogue specs against his own live meters and the Warcraft Logs boards for the last two weeks of the raid and for keys; the video gives no letter tiers and no strict rank list, only prose placements, so it is distilled as takes and not as a predictions panel.",
+      "url": "https://youtu.be/4Y_CUMgHwp8?t=541",
+      "claim": "He calls Assassination 'the best spec right now, at least for M+' and 'completely insane' in keys: heavy sustained damage from spreading bleeds even without the burst window, out-DPSing everyone in his groups except Warlocks, and on the dungeon boards one of the best specs in the game while also among the most played. He is explicit that his recommendation rests partly on ease — Outlaw can be higher overall in a physical comp but is the hardest of the three to learn — so Fatebound Assassination is his pick 'for everyone', with Deathstalker still the choice for very high keys where its cross-target plague damage matters. For raid he rates it very good and viable on many bosses (Twin Fangs, The Lost Explorers, Entombed Sentinels) and better than Subtlety in a number of fights, but overall a little behind Subtlety on the two-week boards, and second to Subtlety in raid popularity by a small margin.",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Musguete",
+      "date": "2026-09-14",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — \"Which Rogue Spec is META right now?\", published 2026-09-14. A comparative read of all three Rogue specs against his own live meters and the Warcraft Logs boards for the last two weeks of the raid and for keys; the video gives no letter tiers and no strict rank list, only prose placements, so it is distilled as takes and not as a predictions panel.",
+      "url": "https://youtu.be/4Y_CUMgHwp8?t=282",
+      "claim": "He reads Outlaw as very good in both brackets while explaining why it is rarely played. In keys the Season 2 tier set's global-cooldown reduction on finishers gives him near-guaranteed Adrenaline Rush on every pack, the damage is consistent in AoE and single target, and on the all-dungeon boards the top Rogue parse is an Outlaw — he says it can be the best of the three overall in a physical comp, but it is the hardest to learn, which is why he does not recommend it as the default. In raid he calls the single target very good and consistent and reads it as still ahead of Assassination on the two-week boss boards, though behind Subtlety; the reasons it is not brought are that its gear is spec-specific (an Outlaw cannot swap specs the way a Subtlety player can go Assassination) and that it was never played in the race, so prog teams reach for the other two unless a fight specifically wants it. He states outright that Outlaw's popularity is 'awful' and that it deserves more love.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-09-14",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"FROST DK Mythic + Guide and Breakdown / Blinding Vale +14 / Midnight 12.1\", published 2026-09-14. Mostly a how-to walkthrough of a +14 key (openers, Bone Grinder / Cryogenic Chamber windows, pull-by-pull); the spec-strength read is his framing at the top and his closing, which is what is distilled here.",
+      "url": "https://youtu.be/sZ6CJFwhwnk?t=17",
+      "claim": "He opens by calling Frost 'pretty powerful at the moment' and a very good pick for keys, and now puts it slightly ahead of Unholy — the two on the same playing field with Frost edging up a little — which reverses the 'Unholy a teeny bit ahead' he gave on 08-28. The evidence he cites is the MDI, where Yagi and Mine played Death Knight and 'popped off', with the single target holding up (around 200k at the end of a boss) rather than only the AoE. The caveat he keeps returning to is gear dependence: Frost does considerable damage on heroic-level weapons but 'you're creaming' once the gear is good, and he suggests the Death Knights' poor showing at the start of the season may have been a gear effect. Stacked low-target cleave (Twin Fangs-style pulls) is where the Howling Blast cleave doubles Cryogenic Chamber's value; he adds that a Shaman's buff is close to vital for the melee-swing-driven kit. He closes that even 'our weakest versions' of Frost carry themselves decently.",
       "superseded": false
     }
   ],
