@@ -5,6 +5,19 @@
     {
       "date": "2026-09-15",
       "kind": "hotfix",
+      "label": "The Venomous Abyss seasonal raid buff “Fury of the Dead” turned on at 1% damage and healing for all players in the raid, on the Season-1 escalation pattern (weekly +1%, expected cap 15%). Observed live and read from the Wowhead round-up news=382904 (2026-09-15T15:39Z); it is NOT a Blizzard forum post — the blue tracker (50 entries, ~40 unique topics) and the hotfix compilation topic 2336376 (still post 1 v36, 2026-09-11) carry nothing about it, so the round-up is the only citation and the entry says so. NO CLASS OR SPEC LINE: the buff is a flat raid-wide aura granted by a quest from Strongblood Jak’mo, identical for every spec, so specsAffected is deliberately empty (the posts #7/#12/#13 precedent) and nothing reaches a spec drawer or votes in any outlook tally. Logged for the same reason as the September 14 raid tuning entry — raid difficulty is the context the raid bracket’s letters are read against — and explicitly NOT as spec tuning: a uniform +1% moves no spec relative to another.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382904/1-raid-buff-now-live-in-the-venomous-abyss",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: Fury of the Dead, the Venomous Abyss raid buff, is now active at 1% increased damage and healing inside the raid. It is not granted automatically — players must speak to Strongblood Jak’mo inside the instance and complete the quest Fury of the Dead. Wowhead notes it is expected to escalate by 1% per week to a 15% cap, matching the Season 1 pattern; that escalation is an expectation, not an announced schedule."
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "kind": "hotfix",
       "label": "Midnight Season 2 trinket tuning, announced a week ahead for the September 22 weekly maintenance. Read from the canonical source: Linxy, us.forums topic 2349649 “Midnight Season 2 Trinket Tuning – September 22”, post 1, created 2026-09-15T00:31:16Z, with the bullet list read intact, and cross-checked against the Wowhead round-up. NO CLASS OR SPEC LINE: every change is an ITEM effect on a named trinket, so nothing here is spec tuning and nothing reaches a spec drawer — specsAffected is deliberately empty (the posts #7/#12/#13 precedent for a zero-class-content entry). Blizzard frames it as the final round of raid and dungeon trinket adjustments for Season 2, aimed at making single-target healing effects viable, plus Mastery-on-use nerfs to three Season 1 carry-overs. Citation: https://us.forums.blizzard.com/en/wow/t/midnight-season-2-trinket-tuning-september-22/2349649.",
       "forumPostNumber": null,
       "forumUrl": null,

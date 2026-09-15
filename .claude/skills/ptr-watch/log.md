@@ -17,6 +17,42 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-15 (nightly, second run of the day) — ledger clean 116/116 again; ONE new feed entry: the Venomous Abyss raid buff went live (non-class)
+
+- **Official revision ledger ran FIRST** from the pre-agent receipts (`official-notes/`, checkedAt **15:54:15Z**). Both
+  sources unchanged from the committed ledger: live hotfix topic **2336376** post 1 still **v36** (updated
+  2026-09-11T03:11:02Z, **113 sections**); the 12.1.5 dev thread **2344395** post 1 still **v3** (2026-09-03T22:48:20Z,
+  **3 sections**). Every section hash byte-identical, so all **116** retained their prior resolutions (**17 applied / 99
+  irrelevant, 0 unresolved, 0 removedSections**). `data/official-notes.json` rewritten from `pending.json` so only the
+  two `checkedAt` stamps moved; `check-official-notes.mjs --base=HEAD` passes.
+- **All four discovery channels swept.** Wowhead RSS 285,646 B / 40 items (parsed per `<item>` block); the JS-hydrated
+  news index from `data.news.newsData` by brace-balancing off the id attribute (20 posts, newest **382898** and
+  **382904**); the blue tracker from `data.blueTracker.default` (50 entries, ~40 unique topics after deduping by topic
+  id); and the official 12.1 dev-notes thread **2317811** (17 posts, `last_posted_at` 2026-07-31T23:42:09Z — unchanged,
+  and between cycles a quiet thread is not a lost thread).
+- **ONE new entry, `kind: "hotfix"`, dated 2026-09-15** — Wowhead **news=382904**, "1% Raid Buff Now Live in The
+  Venomous Abyss": the seasonal **Fury of the Dead** buff activated at 1% damage and healing, granted by a quest from
+  Strongblood Jak'mo rather than automatically, and expected (Wowhead's expectation, not an announced schedule) to
+  escalate 1%/week to a 15% cap on the Season 1 pattern. **There is no Blizzard forum post for it** — neither the blue
+  tracker nor topic 2336376 carries it — so the round-up is the only citation and the entry's label says exactly that.
+  `specsAffected: []` plus a `Non-class:` highlight (the posts #7/#12/#13 precedent): it reaches no spec drawer and votes
+  in no outlook tally, because **a uniform +1% moves no spec relative to another**. Logged for the same reason as the
+  09-14 raid-tuning entry — raid difficulty is the context the raid bracket's letters are read against. No set bonus is
+  touched, so the tier-set upkeep gate is not engaged and no `spec.tierSet.asOf` moved.
+- **Everything else in the RSS window triages out and it is worth recording why:** 37 of the 40 items are BlizzCon /
+  *WoW: Forever* / Season 3 / 12.2 announcement coverage, and `news=382898` ("Dungeon Experience Changes in … Forever")
+  is a *different game version*, not Midnight tuning. Nothing datamined, no class-tuning article, no per-spec 12.1
+  review to distil.
+- **12.2 LEADS STILL NOTED, STILL NOT ACTED ON.** BlizzCon announced 12.2 / 12.2.5 / Season 3 and Linxy posted "The
+  Unbinding of Kith'ix Raid Testing Schedule" on 09-08. Opening a forecast cycle is an **OWNER** action (new
+  `PHASES.ptr`, new thread key, contract rows, `wcl-probe` zone enumeration) — `PHASES.ptr` stays **null**, no 12.2
+  material was written to `ptr-builds`, `spec.ptr` or any metric, archived 12.1 PTR metrics keep their labels, and the
+  12.1.5 lane stays notes-only.
+- **Dormant WCL PTR zone lanes (52 / 54 / 56 / 57) correctly NOT swept** — their contract rows left at the flip and the
+  stored rows are the closed cycle's final receipts. I hold no WCL credentials and made no warcraftlogs.com request.
+- **Writeups:** one spec still at `ptr: null` — **Demonology Warlock** — and that null is deliberate (the source reported
+  no changes; "nothing changed" is not a verdict). No writeup was manufactured from tuning lines.
+
 ## 2026-09-15 (nightly) — ledger clean 116/116; TWO live tuning posts logged, both entirely non-class (raid encounters + trinkets)
 
 - **Official revision ledger ran FIRST** from the pre-agent receipts (checkedAt 15:17:39Z). Both sources unchanged:

@@ -17,6 +17,44 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-15 (nightly, second run of the day) — Murlok 40 (collector), WoWMeta 40, Bloodmallet 24, SimC 24 — **0 value moves anywhere**; Mythicstats held; Archon walled
+
+- **Murlok — from the trusted collector only.** `metrics-fetch/evidence.json` checkedAt 15:54:10Z, status `success`,
+  three pages HTTP 200 in one attempt (71,302 / 42,311 / 40,911 B), roleCounts 27/7/6, `omittedSpecs []`, `sourceAsOf`
+  **2026-09-15** from the pages' own `<time datetime>` (02:11:24–02:11:29Z). Merged ONLY `metrics-fetch/updates.json`
+  (40 rows) — no second parser was written. **0 of 40 values moved.** `check-stable-metrics.mjs` green.
+- **Mythicstats — `partial`, held for review, nothing merged.** Same receipt: `/period/latest` HTTP 200 (182,823 B)
+  resolving to **period 1080**, role totals Ranged 27.9 / Melee 32.3 / Tank 20 / Healer 20 (sum 100.2%), but **rows 0**
+  and detail *"Omitted Evoker|Devastation has a nonzero stored share; source held for review"* — four specs absent from
+  the chart (Devastation, Fire Mage, Frost Mage, Affliction). The whole prior series stays byte-identical at 2026-09-11
+  and the page snapshot stays 2026-09-11. `dateBasis: observed-undated-source`, so no date was invented.
+- **WoWMeta — JSON API, `success`.** `manifest.json` completedAt 15T14:25:48Z / snapshotDate **2026-09-15**;
+  `rankings/midnight/mplus/all/0.json` 162,109 B, `Last-Modified: Tue, 15 Sep 2026 09:33:36 GMT`. Whitelisted
+  `categoryType ∈ {dps,hps,tank}` + `sortField === "lowerBound"` + `keyRange === undefined` → 27+7+6 = **40 rows**, 0
+  unmatched (className/spec byte-identical to the roster). Merged at the series' stored **1-dp** precision with
+  `n = numberOfCharacters`. **0 of 40 values moved** — expected on a same-day recheck; the snapshot has not rolled since
+  this morning. HTML never fetched.
+- **Bloodmallet — `partial`, 24 of 27.** All 27 DPS specs requested, ≤3 attempts each. **Balance Druid, Augmentation and
+  Devastation** returned the 76-byte error body on 3/3 retries each (the documented persistent-absence set; **Feral has
+  rejoined** and now carries a chart). Every returned chart: `tier "MID2"`, `ptr "0"` (compared explicitly — `"0"` is
+  truthy). Pool stays **uniform MID2**, no mixing. `asOf` taken per chart: 23 specs at **2026-09-09**, Feral at
+  **2026-09-10** — never the run date. **0 of 144 target values moved, 0 dates moved.** Partial because the coverage date
+  the contract measures is 6 days old; that red is the honest signal, not something to stamp away.
+- **SimulationCraft — `partial`, 24 specs.** `MID2_Raid.txt` HTTP 200, 1,439,514 B, and it HAS a `DPS Ranking:` block, so
+  the HTML lane was not needed. Header: `12.1.0.69814 Live (hotfix 2026-09-12/69814, git build HEAD ac0f3a3c7f)` —
+  **the HEAD hash is unchanged from the committed state**, which is the honest explanation for **0 of 24 values moving**,
+  said plainly rather than dressed up as a fresh sim. 45 profiles → longest-prefix map (hyphen allowed in the variant
+  suffix) → 7 tank/healer profiles correctly fall outside the DPS roster → 24 best-hero-variant rows. Same three specs
+  absent as Bloodmallet, which is a useful cross-check that the absence is upstream and not a parse bug.
+- **Archon — all six numeric families `blocked`.** Cloudflare wall, evidence as recorded in the ptr/tiers logs; the
+  per-boss survivability substitute is a measured dead end and was **not** attempted. Every stored Archon number keeps
+  its 2026-08-24/25 date and value.
+- **WCL — no agent-side request of any kind.** Rows reported from `wcl-fetch/evidence.json` (15:51:58Z, verdict
+  `success`, 655.68/3600 hourly points): leaderboard raid `success` 227 rows = `landed` 227, leaderboard M+ `success`
+  320 = 320; `legacy.wcl-live-raid`/`-mplus` both `unreachable` with the no-verified-aggregate-endpoint detail.
+  `check-wcl-metrics.mjs --manifest` green. Closed PTR zone 52/54/56 rows and the S1 zone 46/47 rows untouched.
+  Robydoby was **not** refreshed — it is a closed-cycle 12.1 PTR lane and deliberately outside the contract.
+
 ## 2026-09-15 (nightly) — WoWMeta UNFROZE after a week; SimC re-simmed again; Bloodmallet byte-identical a fifth run
 
 - **WoWMeta — the standing red CLEARED by an actual upstream re-run, not by an ack.** JSON API only (two plain curls, no

@@ -17,6 +17,40 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-15 (nightly, second run of the day) — 240/240 cells re-verified S2 across the three reachable sources, 0 moves; Archon still walled
+
+- **Scope:** this is the SECOND nightly-shaped run today (the first wrote the committed manifest at 15:18Z; my collector
+  receipts are 15:54Z). Every source was re-fetched from scratch anyway — the committed manifest is the previous run's
+  record and never excuses skipping work — so all three reachable tier sources were parsed and diffed fresh.
+- **Icy Veins 80/80** (6 pages, direct browser-UA GET, HTTP 200, 196,773–344,280 B off the written files). Counts printed
+  and reconciled before the merge: raid 27/7/6, M+ 27/7/6. Letters raid DPS S4/A+9/A10/B3/C1, raid healer S3/A3/B1, raid
+  tank S2/A3/B1, M+ DPS S+4/S3/A+7/A7/B5/C1, M+ healer S2/A+1/A2/B2, M+ tank S1/A+2/A3. **0 of 80 cells moved.**
+  JSON-LD `dateModified` re-read live: 08-30 / 09-01 / 08-29 / 08-30 / 08-30 / 08-30 — identical to the registry AND to
+  this run's pre-agent `published-evidence` artifact. The raid-healer page title still says "(Patch 12.0.7 / Midnight)"
+  and is overridden by its own **"Midnight Healer Tier List for Season 2"** H2 — body over title.
+- **Method 80/80** (raid 157,217 B, M+ 163,868 B). Parsed by walking `.tierlist pw-item` containers and their
+  `.tier__tier` blocks; **the M+ dungeon-difficulty container was rejected BY ROSTER MATCH**, its 8 entries (King's Rest,
+  Ruby Life Pools, Voidscar Arena, The Blinding Vale, Den of Nalorakk, Murder Row, Temple of Sethraliss, Altar of Fangs)
+  simply failing to map — never by position. Raid S6/A11/B17/C6, M+ S2/A13/B21/C4, **0 of 80 moved**. Self-dates read
+  live from the "Last Updated" line: 10th August / 13th August 2026, matching the registry and the published-evidence
+  artifact. ⚠ Both pages' **og:description still reads "The War Within Season 3"** while the bodies read "Midnight
+  Season 2 Raid, The Venomous Abyss" and Tactyks' "Mythic+ Spec and Dungeon Tier List for Midnight Season 2" — body over
+  meta, the same precedent as the Icy Veins title. Worth remembering: the meta tag is the WRONG lane to era-verify from.
+- **Wowhead 80/80** (full browser header set; r.jina.ai deliberately not attempted, IP-403 on `/guide/*` since 08-03).
+  Unescaped `\/` first, THEN found `[tier-list=rows]` — exactly one block per page, 1,124–3,443 B, including the
+  raid-HEALER page that carries the 2026-08-01 decoy `printHtml`. Specs resolved from the `[spec-badge=<spec>-<class>]`
+  kebab slug. Raid DPS A8/B14/C5, raid healer S1/A3/B3, raid tank S1/A3/B2, M+ DPS S1/A+2/A7/B14/C3, M+ healer
+  S1/A3/B1/C2, M+ tank S1/A3/B2, **0 of 80 moved**. `dateModified` 08-31 ×3 / 08-28 / 09-10 / 09-01, matching registry
+  and published-evidence.
+- **Archon BLOCKED, ninth requirement row and all.** `source-health/evidence.json` read FIRST as directed (15:54:08Z):
+  raid Heroic DPS **HTTP 403 `cloudflare-challenge`** (5,743 B), M+ DPS **HTTP 200 `human-verification`** (2,516 B). My
+  own three attempts at 16:00Z with the full header set returned HTTP 403 "Just a moment…" interstitials of 5,956–6,022 B
+  with **zero `__NEXT_DATA__` tags**. No challenge solved, replayed or proxied. Retention rule holds: Archon's last
+  verified S2 letters stay in the consensus at their 2026-08-25 dates.
+- **No `seasonVerified` value changed** on any page (all 14 non-ancillary pages stay `s2`), so freeze-season had nothing
+  to freeze and no movement baseline was recomposed. Page snapshots for the three reachable sources already read
+  2026-09-15 from this morning's run and were **confirmed, not advanced** — a same-day recheck must not move a date.
+
 ## 2026-09-15 (nightly) — 240/240 cells re-verified S2, 0 moves; Archon still walled, 403 Cloudflare shape from the runner
 
 - **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 0 of 240 stored cells moved.** All 14 pages fetched fresh this run;

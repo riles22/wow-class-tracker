@@ -17,6 +17,36 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-15 (nightly, second run of the day) — 44/44 feeds polled, 660 entries; 3 genuinely new videos, all *WoW: Forever* — 0 queued, 0 takes
+
+- **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (116 class-creator entries
+  + 3 `generalCreators` collapse to 44 distinct channels; `transcribable: false` reference entries skipped by design;
+  **0** pollable creators missing a `channelId`). **44/44 succeeded** with retry+backoff, **660 entries**, 0 failures.
+- **Seen-set** rebuilt as the structured union of the four lanes (`videos[]` 0 + `skipped[]` 426 + `seen[]` 549 + every
+  `youtu.be` id in a take or metaNote url, 280 distilled) = **1,255 ids**. `log.md` was not regexed. Cycle bound derived
+  as `min(builds[].date)` = **2026-06-18** — the date, never an index — giving **336 unseen** in-cycle entries, of which
+  **16 are dated 2026-09-15 UTC** and **three are new since the 15:17Z sweep earlier today**.
+- **The three new ones are all Supatease, all *WoW: Forever*, all declined from title + `media:description` without
+  spending a metered request**: `POSft313GdI` "WoW Forever Paladin Overview" (15:32Z), `yC-bdPm3724` "Best Race WoW
+  Forever" (15:54Z), `FBaKWdgvvg8` "Best Racials WoW Forever" (15:58Z). Two things rule them out independently: the
+  content is a **different game version** and carries no Midnight Season 2 PvE spec read, and Supatease's comparative
+  reads are **PvP-framed** by construction (the 2026-08-09 rule — a PvP read must never vote in PvE). The `#midnight`
+  hashtag in two of the descriptions is channel boilerplate, not a subject.
+- **0 takes, 0 metaNotes, 0 queued.** `transcript-fetch/summary.json` verdict **`ok`**, requested 0 / fetched 0 /
+  cached 0 — the queue was already empty, so the deterministic step had nothing to drain and there was no transcript to
+  distil. Usage receipt: 13 counted requests in the 30-day window, 0 uncertain, limit `null`. `creator-takes.json` and
+  `data/pending-transcripts.json` are **byte-unchanged**. No filler neutral was minted to record that the sweep happened,
+  and no `latest` was advanced.
+- **Nightly keyword filter kept** (Supadata requests are metered); breadth belongs to local yt-dlp runs. No YouTube or
+  transcript-API request was made by me at all.
+- **Nothing moved to `seen[]`.** These are shape/scope declines, not durable dismissals, so all 336 stay unexamined and
+  reachable by a future local unfiltered sweep — which is what keeps the accounting auditable.
+- **⚑ SCOPE FLAG STILL OPEN FOR RILEY** (re-stated, not acted on, third night running): Dorki's "How To Do HUGE DAMAGE On
+  Arms Warrior In M+ | Midnight 12.1" (`eoh6M6x0ohU`, 2026-09-14) stays **doubly excluded** — guide-shaped content
+  carries no spec-strength read, and every Dorki entry in `community.json` is tank-scoped, so Warrior|**Arms** is outside
+  his registered scope and no take could be attributed without a human widening it.
+- No creator opinion moved any tier.
+
 ## 2026-09-15 (nightly) — 44/44 feeds polled, 660 entries, 0 transcripts available, 0 queued, 0 takes
 
 - **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (119 creator entries → 79
