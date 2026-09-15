@@ -16,6 +16,38 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-15 (nightly) — 44/44 feeds polled, 660 entries, 0 transcripts available, 0 queued, 0 takes
+
+- **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (119 creator entries → 79
+  transcribable with a `channelId` → **44 distinct channels**; the 40 `transcribable: false` reference entries skipped by
+  design; **0** pollable creators missing a `channelId`). 44/44 succeeded with retry+backoff, **660 entries**, 0 failures.
+- **Seen-set** rebuilt as the structured union of the four lanes (`videos[]` 0 + `skipped[]` 426 + `seen[]` 549 + every
+  `youtu.be` id in a take or metaNote url, 280 distilled) = **1,255 ids**. `log.md` was not regexed. Cycle bound derived
+  as `min(builds[].date)` = **2026-06-18** — the date, never an index — giving **336 unseen** in-cycle entries, of which
+  **26 are dated 2026-09-14 or later** and **13 are new since the 09-14 nightly sweep**.
+- **0 takes, 0 metaNotes, 0 queued — the honest outcome.** `transcript-fetch/summary.json` verdict `ok`, requested 0 /
+  fetched 0 / cached 0: the queue was already at 0, so there was nothing for the deterministic step to drain and nothing
+  to distil. `creator-takes.json` and `data/pending-transcripts.json` are byte-unchanged (queue 0, skipped 426, seen 549).
+  No filler neutral was minted to record that the sweep happened, and no YouTube or transcript-API fetch was made.
+- **Nothing queued.** The nightly keyword filter was kept (Supadata requests are metered). **10** of the new videos pass
+  it and all 10 are documented zero-yield or out-of-scope shapes, settled from title **plus `media:description`** without
+  spending a metered request: item-level tuning news (Shadarek "Trinket Tuning | Puzzle Box Nerfed & Healer Trinket
+  Buffs" — a gear-level claim is never a spec read, and it recaps the very blue post logged in ptr-watch tonight),
+  guide-shaped how-tos (Shadarek's Raidbots dungeon-route simming guide; Sha's Ruby Life Pools tank-pull coaching
+  session), PvP (Dalaran Gaming's 5v5/1v1 Balance Druid duels), BlizzCon / Forever / Season 3 announcement news (Dalaran
+  Gaming ×2, Psybear, Tettles' "I skipped raid to go to Blizzcon"), and a stream VOD (MadSkillzzTV Preservation Evoker).
+  The other 16 are key-run and raid-prog PoVs (Shadarek ×4, J-Funk, Clandon ×2, Critcake, LBNinja7), Twitch restream
+  stubs (YoDaTV, Shindigg) and Forever shorts (Bansherz ×3, Supatease).
+- **General lane quiet**: no `generalCreators` upload is newer than 2026-09-13, and izen's 15-minute BlizzCon recap was
+  already declined on 09-14 as news rather than a per-spec meta read. The `metaNotes` lane is correctly empty tonight.
+- **⚑ SCOPE FLAG STILL OPEN FOR RILEY** (re-stated, not acted on): Dorki's "How To Do HUGE DAMAGE On Arms Warrior In M+ |
+  Midnight 12.1" (`eoh6M6x0ohU`, 2026-09-14) remains **doubly excluded** — guide-shaped content carries no spec-strength
+  read, and every Dorki entry in `community.json` is tank-scoped, so Warrior|**Arms** is outside his registered scope and
+  no take could be attributed without a human widening it.
+- Nothing was moved to `seen[]`: these are shape and scope declines, not durable dismissals, so all 26 stay unexamined
+  and reachable by a future local unfiltered yt-dlp sweep, and the accounting stays auditable. No creator opinion moved
+  any tier.
 ## 2026-09-14 (nightly) — 44/44 feeds polled, 660 entries, 0 transcripts available, 0 queued; one scope flag for Riley
 
 - **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (79 creator entries collapse

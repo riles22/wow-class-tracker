@@ -3,6 +3,35 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-09-15",
+      "kind": "hotfix",
+      "label": "Midnight Season 2 trinket tuning, announced a week ahead for the September 22 weekly maintenance. Read from the canonical source: Linxy, us.forums topic 2349649 “Midnight Season 2 Trinket Tuning – September 22”, post 1, created 2026-09-15T00:31:16Z, with the bullet list read intact, and cross-checked against the Wowhead round-up. NO CLASS OR SPEC LINE: every change is an ITEM effect on a named trinket, so nothing here is spec tuning and nothing reaches a spec drawer — specsAffected is deliberately empty (the posts #7/#12/#13 precedent for a zero-class-content entry). Blizzard frames it as the final round of raid and dungeon trinket adjustments for Season 2, aimed at making single-target healing effects viable, plus Mastery-on-use nerfs to three Season 1 carry-overs. Citation: https://us.forums.blizzard.com/en/wow/t/midnight-season-2-trinket-tuning-september-22/2349649.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382890/final-round-of-trinket-tuning-for-midnight-season-2-for-next-weekly-reset",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: Season 2 healing trinkets buffed for the September 22 weekly maintenance — Preternatural Antivenom healing +75%; Seed of Radiant Hope cooldown reduced to 1 min (was 1.5 mins) and healing +40%; Mycolic Medicine effect frequency +33% and healing +58%; Unstable Felheart Crystal cooldown reduced to 1.5 mins (was 2 mins) and healing +58%.",
+        "Non-class: Season 1 carry-over trinkets nerfed in the same pass — Ruby Whelp Shell frequency of all effects +100%, all damage -42%, single-target healing +37%, multi-target healing +5%, stat effects -50%; Gaze of the Alnseer primary stat -10%; Vaelgor’s Final Stare Mastery -10%; Algeth’ar Puzzle Box Mastery -25%."
+      ]
+    },
+    {
+      "date": "2026-09-14",
+      "kind": "hotfix",
+      "label": "The Venomous Abyss raid tuning for the September 15 weekly maintenance — post-Race-to-World-First difficulty reductions on the last four encounters. Read from the canonical source: Linxy, us.forums topic 2349528 “The Venomous Abyss Raid Tuning - September 15”, post 1, created 2026-09-14T22:22:12Z, with the per-boss heading nesting intact, and cross-checked against the Wowhead round-up. NO CLASS OR SPEC LINE: every change is an ENCOUNTER mechanic or boss-ability value, so nothing here is spec tuning and nothing reaches a spec drawer — specsAffected is deliberately empty. It is logged because raid difficulty is the context the raid bracket’s letters are read against. Citation: https://us.forums.blizzard.com/en/wow/t/the-venomous-abyss-raid-tuning-september-15/2349528.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382885/massive-nerfs-to-coiled-altar-and-ulatek-post-race-to-world-first-raid-tuning",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: Sszorak — Tempest damage -20% on Heroic and Mythic; Caustic Claws no longer forms a pool of Caustic Residue on Heroic. Twin Fangs — Corrosive Spit damage -20% on Mythic; Broodlings of Ithraz spawned by Rouse the Brood reduced to 10; Visceral Burst cast time +0.5s.",
+        "Non-class: The Coiled Altar — Venom Rupture damage -10% on Heroic and Mythic; Mutagenic Venom damage -15%; Wail of Terror cast time increased to 12s on Heroic and 10s on Mythic; Spiteful Soulcoiler spawning/relocation on interrupt made more predictable and one always spawns near Malacrass on Mythic; Dreadmarch no longer increases its target count through the phase on all difficulties; Manifestations of Dread deprioritize players already carrying Unnerving Fixation and stay visible 3s longer after an interrupted Wail of Terror; Fragments of Malacrass spawned in the intermission -25% on Mythic.",
+        "Non-class: Ula’tek — Stone Venom damage reduced on all difficulties; Putrid Membrane duration reduced to 30s on Mythic (was 1 hour); Blightscale Spawn from Serpent’s Call reduced to 8 per wave in Stage 1 (was 13) and 12 per side in Stage 2 (was 14) on Mythic, with intermission eggs reduced to 8 (was 14); on Raid Finder, failing Mother’s Wrath now inflicts only 1 stack of Stone Venom, Doomscale Warden’s Malice cast time increased to 5s (was 1.5s) with reduced damage, Stage 2 Blightscale Spawn reduced to 6, and Unchecked Rage and Gore Rattler’s Rattler Slam damage reduced."
+      ]
+    },
+    {
       "date": "2026-09-10",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for September 10 — a pure bug-fix and Cooldown-Manager-tracking round-up with no tuning value in any class line. Read from the canonical source: Kaivax's running hotfix blue post (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - September 10”, post 1 at version 36, last edited 2026-09-11T03:11:02Z), via the deterministic official-notes receipt with its heading nesting INTACT and cross-checked line for line against the Wowhead mirror. Five class blocks sit under an explicit SPEC heading (Death Knight › Unholy, Hunter › Survival, Paladin › Holy and › Protection, Shaman › Restoration). Two do not: the Mage line sits under Mage › Hero Talents › Spellslinger with NO spec heading, so it is logged class-wide with the tree named in the line (the 2026-08-27 Rogue/Deathstalker precedent — heading structure over inference about which specs hold the tree); the Rogue Thistle Tea line sits under a BARE Rogue heading and is class-wide on its face. No line names a set bonus, so the tier-set upkeep gate is not engaged. THE ENTIRE Player versus Player SECTION TRIAGES OUT (Evoker Unburdened Flight / Deep Breath during Hover, and the Chronowarden Warp snare-immunity fix): PvP-only changes are out of scope for this tracker's PvE brackets. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-10/2336376/1.",

@@ -16,6 +16,40 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-15 (nightly) — ledger clean 116/116; TWO live tuning posts logged, both entirely non-class (raid encounters + trinkets)
+
+- **Official revision ledger ran FIRST** from the pre-agent receipts (checkedAt 15:17:39Z). Both sources unchanged:
+  live hotfix topic **2336376** post 1 still **v36**, updated 2026-09-11T03:11:02Z, **113 sections**; the 12.1.5 dev
+  thread **2344395** post 1 still **v3**, updated 2026-09-03T22:48:20Z, **3 sections**. Every section hash is
+  byte-identical to the committed ledger, so all 116 retained their prior resolutions (live 14 applied / 99 irrelevant;
+  preview 3 applied), **0 unresolved, 0 removedSections**. `data/official-notes.json` rewritten from `pending.json` so
+  only the two `checkedAt` stamps moved; `check-official-notes.mjs --base=HEAD` passes.
+- **RSS + news index + blue tracker all swept, and they agree.** Wowhead RSS 286,562 B / 40 items (parsed per `<item>`
+  block, never by tag adjacency); the JS-hydrated news index read from `data.news.newsData` by brace-balancing off the id
+  attribute (20 posts, newest **382891** at 2026/09/15 09:00); the blue tracker from `data.blueTracker.default` (50
+  entries, ~40 unique topics). The newest Blizzard hotfix compilation post is still "Midnight Hotfixes - September 10",
+  already in the feed.
+- **TWO new feed entries, both `kind: "hotfix"`, both read from the CANONICAL Blizzard post rather than the mirror.**
+  · Linxy topic **2349528** "The Venomous Abyss Raid Tuning - September 15" (created 2026-09-14T22:22:12Z) → entry
+    **2026-09-14**: post-RWF difficulty cuts across Sszorak, Twin Fangs, The Coiled Altar and Ula'tek.
+  · Linxy topic **2349649** "Midnight Season 2 Trinket Tuning - September 22" (created 2026-09-15T00:31:16Z) → entry
+    **2026-09-15**: eight named trinkets, announced a week ahead of the Sept 22 maintenance.
+  **Neither carries a class or spec line** — one is entirely encounter mechanics, the other entirely item effects — so
+  both get `specsAffected: []` plus `Non-class:` highlights (the posts #7/#12/#13 precedent), reach no spec drawer and
+  cast no vote in any outlook tally. **No set bonus is touched in either post**, so the tier-set upkeep gate is not
+  engaged and no `spec.tierSet.asOf` moved. Logged rather than dropped because raid difficulty and trinket power are the
+  context the raid bracket's letters are read against.
+- **The 12.1 PTR dev-notes thread 2317811 is CLOSED and that is expected** — polled for completeness: 17 posts,
+  `last_posted_at` 2026-07-31T23:42:09Z, unchanged. Between cycles a quiet thread is not a lost thread; the
+  rediscovery gotcha stays suspended. The dormant WCL PTR zone lanes (52 / 54 / 56 / 57) were correctly NOT swept —
+  their contract rows left at the flip and their stored rows are the closed cycle's final receipts.
+- **12.2 LEADS NOTED, NOT ACTED ON.** BlizzCon (12–13 Sep) announced 12.2, 12.1.7 "Talebound" and Season 3 content, and a
+  blue post "The Unbinding of Kith'ix Raid Testing Schedule" appeared 2026-09-08. Opening a new forecast cycle is an
+  OWNER action (new `PHASES.ptr`, new thread key, contract rows, zone probe) — **`PHASES.ptr` stays null**, no 12.2
+  material was written to `ptr-builds`, `spec.ptr` or any metric, and the 12.1.5 lane remains notes-only.
+- **Writeups:** one spec still at `ptr: null` — Warlock Demonology — and that null is deliberate (the source reported no
+  changes; "nothing changed" is not a verdict). No writeup was manufactured from tuning lines.
 ## 2026-09-14 (nightly) — ledger clean 116/116, nothing new in any of four channels; a 12.1.5 PTR realm is raid-testing but no 12.2 thread exists
 
 - **Official revision ledger ran FIRST** from the pre-agent receipts (checkedAt 16:33:07Z). Both sources `success`:

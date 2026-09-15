@@ -16,6 +16,52 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-15 (nightly) — WoWMeta UNFROZE after a week; SimC re-simmed again; Bloodmallet byte-identical a fifth run
+
+- **WoWMeta — the standing red CLEARED by an actual upstream re-run, not by an ack.** JSON API only (two plain curls, no
+  headers/proxy/auth): `manifest.snapshotDate` **2026-09-15** and the rankings file's `Last-Modified` (Tue, 15 Sep 2026
+  09:33:36 GMT) agree, against 2026-09-08 on both for the previous six runs. 162,109 B payload diffed row by row rather
+  than trusted to the manifest. Whitelist `{dps,hps,tank}` + `sortField === "lowerBound"` + `keyRange === undefined` → 3
+  of 44 blocks = **40 rows**, 0 unmatched (className/spec are byte-identical to the roster). All 40 values moved, all
+  small — largest value delta Blood DK 365.9 → 365.1, largest population delta Arcane Mage 226,534 → 209,528 characters —
+  nothing near `maxValueMovePct` 0.6. Stored at the series' own **1 dp**. `asOf` = the source's snapshotDate. **success.**
+- **SimulationCraft — the git hash moved again, so this is a real sim.** `MID2_Raid.txt` HTTP 200, 1,439,514 B, and it
+  carries a `DPS Ranking:` block, so the HTML lane was not needed. Header:
+  `SimulationCraft 1210-01 for World of Warcraft 12.1.0.69814 Live (hotfix 2026-09-12/69814, git build HEAD ac0f3a3c7f, no-networking)`
+  — same build 69814 as 09-14 but HEAD **f8352efc00 → ac0f3a3c7f**. 45 ranking entries, Raid aggregate skipped,
+  LONGEST-PREFIX mapping with a hyphen allowed → **24** DPS specs; the 7 unmapped entries are all tanks. **23 of 24 values
+  moved and every move is noise** — largest Outlaw Rogue **-0.10%** (256,878 → 256,620), several under 0.01%. `asOf` = the
+  report's own hotfix date **2026-09-12**, unchanged, 3 days old → `partial`. Balance / Augmentation / Devastation still
+  absent upstream.
+- **Bloodmallet — byte-identical for a FIFTH run, and a parser trap caught before it merged.** All 27 DPS specs requested
+  (talent_target_scaling / castingpatchwerk), ≤3 attempts each: 24 charts, and the same persistent three returned the
+  76-byte `{"status": "error"}` body on every retry (Balance Druid, Augmentation Evoker, Devastation Evoker) — **the same
+  three SimC is missing**, which corroborates upstream absence over transport. ⚠️ The first parse in this session treated
+  `data[<tier>][<count>]` as a per-build object to max over and produced **24 empty target maps** — the pre-merge diff
+  reported "all 24 moved" with identical dates, which is what exposed it; the level is a bare number and is ALREADY
+  best-build. Corrected before any merge. `ptr` compared against the STRING `"0"`; tier read off each chart → all 24
+  `MID2`, pool uniform. 0 value moves, 0 tier changes, 0 profiles lost. Coverage date is the data's own **2026-09-09**,
+  6 days → `partial`, and that red is the signal.
+- **Murlok — success.** Trusted pre-agent collector only (checkedAt 15:17:34Z): 3 pages HTTP 200 (71,302 / 42,311 /
+  40,911 B), 40 rows at 27/7/6, 0 omitted, source `<time datetime>` **2026-09-15T02:11:29Z**. Merged
+  `metrics-fetch/updates.json` verbatim; `check-stable-metrics.mjs` passes.
+- **Mythicstats — held for review, period 1080.** Collector `partial`: `/period/latest` → period 1080, HTTP 200,
+  182,823 B, share column healthy (sum 100.2; Ranged 27.9 / Melee 32.3 / Tank 20 / Healer 20 — the representation share,
+  not the `/meta` per-key-presence column). **Four** specs omitted upstream (Devastation Evoker, Fire Mage, Frost Mage,
+  Affliction Warlock) and Devastation carries a nonzero stored share, so the whole source is held rather than merged
+  partially. 0 rows in updates; stored 40-row series byte-identical at its own 2026-09-11.
+- **Warcraft Logs — evidence only, no agent fetch of any kind.** From `wcl-fetch/evidence.json` (attemptedAt 15:15:15Z):
+  raid bracket **success, 227 rows** (zone 53 / p1 / diff 5 / size 20, 8 pinned Mythic bosses, Nymrissa 3379 excluded) and
+  M+ bracket **success, 320 rows** (zone 55 / p1 / diff 10 / size 5, rankingBracket 9 = exactly +10) — unlike 09-14 there
+  was **no invalid cut**, so both brackets claim success. Across both, 547 cuts success and 93 sparse; sparse cuts land
+  nothing and retain their prior observations. Transport: oauth+graphql, 7.6 points of a 3,600/hr limit, 138 queries.
+  `legacy` still reports both `wcl-live-*` aggregates `unreachable`; the leaderboard series cannot and did not green them.
+  `check-wcl-metrics.mjs` passes.
+- **Archon: still walled, all six numeric families untouched** — 403 / "Just a moment" / `__NEXT_DATA__` 0 on all 11
+  unique URLs; see the refresh-tiers entry. Per-boss survivability again NOT substituted for the empty aggregate.
+- **Robydoby deliberately not fetched** — its two sheets are the closed 12.1 PTR zone-54 cycle's receipts, dormant between
+  cycles and outside `required-sources.json` by design.
 ## 2026-09-14 (nightly) — SimulationCraft genuinely re-simmed (build 69814, Feral Druid returns 23→24); everything else unmoved
 
 - **SimulationCraft — the git hash MOVED, so this is a real sim and not a re-read.** `MID2_Raid.txt` HTTP 200, 1,438,973 B,

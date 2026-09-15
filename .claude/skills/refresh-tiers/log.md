@@ -16,6 +16,40 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+
+## 2026-09-15 (nightly) — 240/240 cells re-verified S2, 0 moves; Archon still walled, 403 Cloudflare shape from the runner
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 0 of 240 stored cells moved.** All 14 pages fetched fresh this run;
+  only the 14 snapshot dates advanced to 2026-09-15. Counts printed and reconciled per page before every merge:
+  Icy Veins raid 27/7/6 + M+ 27/7/6, Method raid 40 + M+ 40, Wowhead raid 27/7/6 + M+ 27/7/6. 0 unmatched rows,
+  0 duplicate (bracket,spec) pairs, 0 null tiers across all three sources. `apply-ratings.mjs` accepted all 240.
+- **Transport, for the record:** direct browser-UA GET everywhere. Icy Veins 196,701–343,872 B, Method 157,217 / 163,868 B,
+  Wowhead 75,209–345,374 B — all measured off the WRITTEN FILES, never curl's `size_download` (which reports the
+  compressed size under `--compressed`). r.jina.ai was not attempted on any host; it is dead on `wowhead.com/guide/*`.
+- **Parser notes.** Icy Veins: one `<table class="tier-list">` per page, tier letter from each row's first `<td>`, spec
+  from the FIRST `img alt` after `class="tier-list-entry"` and looked up WHOLE — the 64 `tier-list-entry` occurrences on
+  the raid-DPS page collapse to 27 entries because the spell-icon alts inside the details blocks are correctly excluded by
+  the first-alt rule. Wowhead: unescape `\/` → `/` across the whole document FIRST, then find `[tier-list=rows]`; exactly
+  one block per page, so no `printHtml` decoy this run. Method: rejected the 8 dungeon-name entries BY ROSTER MATCH
+  (King's Rest, Ruby Life Pools, Voidscar Arena, The Blinding Vale, Den of Nalorakk, Murder Row, Temple of Sethraliss,
+  Altar of Fangs), never by container position.
+- **Era-verification read off each page's own ranking body.** All six Icy Veins H2s say Season 2 — note the raid-HEALER
+  page TITLE still reads "(Patch 12.0.7 / Midnight)" while its H2 reads "Midnight Healer Tier List for Season 2"; body
+  over title, the blue-tracker precedent. Method's raid page states "This Midnight Season 2 Raiding tier list for The
+  Venomous Abyss Raid". All six Wowhead titles read "for Midnight Season 2". Devourer DH present in every DPS list.
+  **No `seasonVerified` value changed**, so `freeze-season` had nothing to freeze and none was needed agent-side.
+- **`published` re-read live, not carried forward**, and every value matched both the registry and this run's pre-agent
+  `published-evidence/evidence.json`: Icy Veins raid DPS 2026-08-30 / healer 2026-09-01 / tank 2026-08-29, M+ all
+  2026-08-30; Wowhead raid all 2026-08-31, M+ DPS 2026-08-28 / healer 2026-09-10 / tank 2026-09-01. Method publishes a
+  "Last Updated" line (raid 10 Aug 2026, M+ 13 Aug 2026) but carries no `published` field in the registry, so nothing was
+  written to one.
+- **Archon: still walled, unbroken since 2026-08-25/26.** `source-health/evidence.json` read first (raid Heroic DPS 403
+  `cloudflare-challenge`, M+ DPS 200 `human-verification`); the agent then attempted all 11 unique registered URLs and got
+  **HTTP 403 + a ~6 KB "Just a moment" interstitial on 11 of 11**, `__NEXT_DATA__` count **0** on every one. Asserted on
+  `__NEXT_DATA__` presence, never the status code. Nothing solved, replayed or proxied; no snapshot advanced; the retained
+  S2 letters stay in the four-source consensus per the 2026-09-05 owner policy. `encounter-tiers.json` re-read directly —
+  still `season: "s1"`, asOf 2026-08-17, 619 tier rows — so the Fight selector stays hidden and the S1 archive stays
+  quarantined.
 ## 2026-09-14 (nightly) — 240/240 cells re-verified S2, 0 moves; Archon walled a TWENTY-SECOND day (403 shape from the runner)
 
 - **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 0 of 240 stored cells moved.** All 14 pages fetched fresh this run;
