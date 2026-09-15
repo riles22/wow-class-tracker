@@ -1960,10 +1960,14 @@ ui("a settled forecast report is reachable and separate from today's comparison"
   await page.waitForLoadState('domcontentloaded');
   const text = await page.locator('body').innerText();
   assert.ok(text.includes(report.actualDate));
-  assert.ok((await page.locator('.result').first().innerText()).includes(`${report.scorecard.right} of ${report.scorecard.total} right`),
+  // The banner summarises the LATEST settled checkpoint (`settleDays`) while the report lists every
+  // checkpoint in order, so once +28 settles `.result.first()` is the +14 count, not the banner's.
+  // Read the section the banner actually points at (surfaced 2026-09-15, launch +28).
+  const settled = page.locator(`section.checkpoint-summary:has(#checkpoint-${report.settleDays})`);
+  assert.ok((await settled.locator('.result').innerText()).includes(`${report.scorecard.right} of ${report.scorecard.total} right`),
     'the report uses the same matching rule and count as its entry banner');
-  assert.equal(await page.locator('.baseline').isVisible(), true);
-  assert.match(await page.locator('.baseline').innerText(), /Keeping the old tiers: \d+ of \d+ right/);
+  assert.equal(await settled.locator('.baseline').isVisible(), true);
+  assert.match(await settled.locator('.baseline').innerText(), /Keeping the old tiers: \d+ of \d+ right/);
   assert.equal(await page.locator('script').count(), 0);
 });
 
