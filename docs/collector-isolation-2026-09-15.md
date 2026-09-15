@@ -112,6 +112,14 @@ Independent review of the collector bundle, secret boundaries and untrusted over
 found no blocker; the 18 collector/overlay/workflow tests passed independently.
 The state-authentication helper has its own review and tests.
 
-Hosted execution and any state reconciliation require separate release receipts.
-Local tests do not establish successful deployment, provider calls, or account
-billing. No exploit is needed to validate the intended fail-closed substitutions.
+Hosted validation subsequently passed in
+[run 34990700222](https://github.com/riles22/wow-class-tracker/actions/runs/34990700222):
+all three jobs succeeded, the publisher admitted 23 allowed data/log files and
+authenticated all 12 collector files, and the exact resulting commit was deployed.
+The collector also authenticated a prior run's signed transcript state and repaired
+one proven historical completion with zero new transcript requests. See the
+[priority-fix closeout and linked receipts](audit-priority-fixes-2026-09-15.md).
+
+These receipts establish the observed execution and state transitions; they do not
+independently establish provider account billing. No exploit is needed to validate
+the intended fail-closed substitutions.

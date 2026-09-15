@@ -1,0 +1,56 @@
+{
+  "runId": 34990700222,
+  "commitSha": "dbe47dbfc9522c1dd91f3584c76ba9098d0e8bbe",
+  "artifactId": 10406230514,
+  "checkedAt": "2026-09-15T15:54:50.633Z",
+  "stateSha256": "4834b8a9014c5e795b0f7caf9522a311e1f4bad3c78f7e3899ead306f58c50ac",
+  "signedStateHashMatches": true,
+  "requested": 0,
+  "usage": {
+    "windowDays": 30,
+    "limit": null,
+    "countedRequests": 13,
+    "uncertainRequests": 0,
+    "remaining": null
+  },
+  "reconciliations": [
+    {
+      "artifactId": 10298937863,
+      "runId": 34697196941,
+      "at": "2026-09-15T15:54:19.853Z",
+      "resolved": [
+        {
+          "videoId": "rYFv6Ohr7mE",
+          "runKey": "34697196941-1"
+        }
+      ]
+    }
+  ],
+  "video": {
+    "status": "fetched",
+    "failures": 0,
+    "nextAttemptAt": null
+  },
+  "attempt": {
+    "videoId": "rYFv6Ohr7mE",
+    "runKey": "34697196941-1",
+    "at": "2026-09-12T13:45:42.528Z",
+    "outcome": "fetched"
+  },
+  "authContext": {
+    "repository": "riles22/wow-class-tracker",
+    "workflow": ".github/workflows/nightly.yml",
+    "runId": "34990700222",
+    "runAttempt": "1",
+    "phase": "complete"
+  },
+  "reservation": null,
+  "collectorLogProof": [
+    "2026-09-15T15:54:19.1390002Z Verified transcript state from artifact 10405308457 (hmac-sha256)",
+    "2026-09-15T15:54:19.8145406Z Verified transcript state from artifact 10298937863 (legacy-sha256)",
+    "2026-09-15T15:54:19.8581364Z Reconciled 1 completed transcript request(s) from artifact 10298937863; no provider requests made",
+    "2026-09-15T15:54:19.9467335Z Authenticated transcript reserved state for run 34990700222, attempt 1",
+    "2026-09-15T15:54:21.0234337Z Authenticated transcript complete state for run 34990700222, attempt 1",
+    "2026-09-15T15:54:24.3297640Z Sealed 12 collector files for run 34990700222, attempt 1"
+  ]
+}

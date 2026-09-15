@@ -1,0 +1,87 @@
+{
+  "checkedAt": "2026-09-15T16:13:47.937Z",
+  "runs": [
+    {
+      "runId": 34990653726,
+      "url": "https://github.com/riles22/wow-class-tracker/actions/runs/34990653726",
+      "commitSha": "dbe47dbfc9522c1dd91f3584c76ba9098d0e8bbe",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "jobId": 104454118851,
+          "name": "ui-invariants (firefox)",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T15:46:16Z",
+          "completedAt": "2026-09-15T15:48:14Z"
+        },
+        {
+          "jobId": 104454118864,
+          "name": "test",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T15:46:16Z",
+          "completedAt": "2026-09-15T15:46:41Z"
+        },
+        {
+          "jobId": 104454118918,
+          "name": "ui-invariants (chromium)",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T15:46:16Z",
+          "completedAt": "2026-09-15T15:47:44Z"
+        },
+        {
+          "jobId": 104454119021,
+          "name": "ui-invariants (webkit)",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T15:46:17Z",
+          "completedAt": "2026-09-15T15:48:44Z"
+        }
+      ]
+    },
+    {
+      "runId": 34993293103,
+      "url": "https://github.com/riles22/wow-class-tracker/actions/runs/34993293103",
+      "commitSha": "300d39640c665df9464d6b9f0564ede39480a3ef",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "jobId": 104463129586,
+          "name": "ui-invariants (chromium)",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T16:10:28Z",
+          "completedAt": "2026-09-15T16:11:47Z"
+        },
+        {
+          "jobId": 104463129793,
+          "name": "ui-invariants (webkit)",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T16:10:28Z",
+          "completedAt": "2026-09-15T16:13:04Z"
+        },
+        {
+          "jobId": 104463129796,
+          "name": "ui-invariants (firefox)",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T16:10:28Z",
+          "completedAt": "2026-09-15T16:12:31Z"
+        },
+        {
+          "jobId": 104463129847,
+          "name": "test",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-09-15T16:10:28Z",
+          "completedAt": "2026-09-15T16:10:54Z"
+        }
+      ]
+    }
+  ]
+}
