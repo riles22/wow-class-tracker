@@ -1,8 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { extractDateModified, extractLastUpdated, resolvePage, evidenceTargets } from "../src/fetch-published.mjs";
+import { checkPublished, checkFreshness } from "../src/check-refresh.mjs";
 
-/* The two page idioms the deterministic step reads, as fixtures. Both parsers are the
+/* The page date formats the deterministic step reads, as fixtures. Both parsers are the
    frozen deterministic forms of what the refresh-tiers recipe reads by hand; the gate's
    whole value is that these cannot "remember" a stale value. */
 
@@ -35,6 +36,21 @@ test("extractLastUpdated: the Icy Veins body idiom, with year inference that can
   // No match, or an impossible month, is null — never a guess.
   assert.equal(extractLastUpdated("no date line here", "2026-08-04"), null);
   assert.equal(extractLastUpdated("Last UPDATED - 5th of Smarch.", "2026-08-04"), null);
+});
+
+test("Method's publisher date resolves from its Last Updated body line without 'of'", () => {
+  // Exact public page lines verified 2026-09-15; collection day must not replace them.
+  for (const [day, expected] of [[10, "2026-08-10"], [13, "2026-08-13"]]) {
+    const html = `<p class="last-updated">Last Updated ${day}th August 2026</p>`;
+    assert.equal(extractLastUpdated(html, "2026-09-15"), expected);
+    assert.deepEqual(resolvePage(html, "2026-09-15"), {
+      dateModified: null, lastUpdated: expected, resolved: expected
+    });
+  }
+  assert.equal(extractLastUpdated("Last Updated 31st December", "2026-01-02"), "2025-12-31");
+  const disagreement = resolvePage(ldPage("2026-08-14") + "Last Updated 13th August 2026", "2026-09-15");
+  assert.equal(disagreement.resolved, "2026-08-14", "JSON-LD retains its established precedence");
+  assert.match(disagreement.note, /disagree/);
 });
 
 test("resolvePage: dateModified wins, disagreement is stated, nothing found is an honest null", () => {
@@ -85,7 +101,41 @@ test("the repo's real contract yields exactly the published-gated pages as evide
   // icyveins-ptr's 3 pages left this map at the 2026-08-18 flip (the source was removed
   // from the registry — runbook step 5). The pin stays deliberate: a published block
   // appearing or vanishing is always a reviewed change.
-  assert.deepEqual(byKey, { icyveins: 6, wowhead: 6 },
-    "published-gated pages: icyveins 6 + wowhead 6");
+  // Method's two body-dated pages joined after the 2026-09-15 audit found that
+  // new capture dates hid older publisher opinions from the same verification.
+  assert.deepEqual(byKey, { icyveins: 6, method: 2, wowhead: 6 },
+    "published-gated pages: icyveins 6 + method 2 + wowhead 6");
   assert.ok(targets.every(t => t.url.startsWith("https://")));
+});
+
+test("Method's real contract checks publisher dates independently of fresh captures", async () => {
+  const { readFile } = await import("node:fs/promises");
+  const config = JSON.parse(await readFile(new URL("../data/required-sources.json", import.meta.url), "utf8"));
+  const sources = JSON.parse(await readFile(new URL("../data/sources.json", import.meta.url), "utf8"));
+  const requirement = config.requirements.find(r => r.key === "method");
+  const method = structuredClone(sources.find(s => s.id === "method"));
+  assert.ok(method.pages.every(p => /^\d{4}-\d{2}-\d{2}$/.test(p.published)), "both real Method pages retain publisher dates");
+  const cfg = { maxRunAgeHours: 36, requirements: [requirement] };
+  // Fixed observed source text keeps this regression independent of future refreshes.
+  for (const page of method.pages) {
+    page.snapshot = "2026-09-15";
+    page.published = page.bracket === "raid" ? "2026-08-10" : "2026-08-13";
+  }
+  const data = { sources: [method], specs: [] };
+  const evidence = { attemptedAt: "2026-09-15T15:00:00Z", pages: method.pages.map(page => ({
+    key: "method", url: page.url, httpStatus: 200,
+    ...resolvePage(`Last Updated ${page.bracket === "raid" ? "10th" : "13th"} August 2026`, "2026-09-15")
+  })) };
+  assert.deepEqual(checkPublished(cfg, data, null, evidence, "2026-09-15").errors, []);
+  const overclaim = structuredClone(data);
+  overclaim.sources[0].pages.find(page => page.bracket === "mplus").published = "2026-09-15";
+  assert.ok(checkPublished(cfg, overclaim, null, evidence, "2026-09-15").errors
+    .some(error => error.includes("stores published 2026-09-15 but the page itself says 2026-08-13")));
+
+  const dayAfterLimit = new Date(Date.parse("2026-08-10") + (requirement.published.maxAgeDays + 1) * 86400000)
+    .toISOString().slice(0, 10);
+  for (const page of method.pages) page.snapshot = dayAfterLimit;
+  const health = checkFreshness(cfg, { run: dayAfterLimit }, data, dayAfterLimit);
+  assert.deepEqual(health.fingerprint.split(","), ["method-published"],
+    "fresh page captures cannot hide an expired publisher date");
 });

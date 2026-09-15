@@ -1,8 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { VALID_ID, chunksOf, statusOf, verdictOf, PER_RUN_CAP, fetchOne, collectBatch } from "../src/fetch-transcripts.mjs";
-import { newState, prepareBatch, usageOf, recordOutcome, finishBatch, validateState, requestBudget } from '../src/transcript-state.mjs';
+import { newState, prepareBatch, usageOf, recordOutcome, finishBatch, validateState, requestBudget, encryptTranscript } from '../src/transcript-state.mjs';
 import { locateState } from '../src/restore-transcript-state.mjs';
+import { reconcileState } from '../src/reconcile-transcript-state.mjs';
 
 /* The deterministic transcript stage's pure logic — the id gate is a security
    boundary (queue ids are agent-written and reach the request URL), and the
@@ -233,16 +234,90 @@ function artifactFetch(artifacts, run = trustedRun) {
 
 test('restore chooses newest reservation even after failed publication and refuses stale fallback', async () => {
   const artifacts = [
-    { id: 10, name: 'transcript-state-complete', workflow_run: { id: 3 }, expired: false },
-    { id: 11, name: 'transcript-state-reserved', workflow_run: { id: 4 }, expired: false },
+    { id: 10, name: 'transcript-state-complete', workflow_run: { id: 3 }, expired: false, created_at: '2026-09-12T10:00:00Z' },
+    { id: 11, name: 'transcript-state-reserved', workflow_run: { id: 4 }, expired: false, created_at: '2026-09-13T10:00:00Z' },
   ];
   const options = { repository: 'owner/repo', token: 'test', fetchImpl: artifactFetch(artifacts) };
-  assert.deepEqual(await locateState(options), { found: true, initialize: false, artifact_id: 11, run_id: 4 });
+  assert.deepEqual(await locateState(options), { found: true, initialize: false, artifact_id: 11, run_id: 4, phase: 'reserved' });
   artifacts[1].expired = true;
   await assert.rejects(() => locateState(options), /expired/);
   artifacts[1].expired = false;
   await assert.rejects(() => locateState({ ...options, fetchImpl: artifactFetch(artifacts,
     { ...trustedRun, event: 'pull_request' }) }), /trusted master/);
+});
+
+test('restore orders by creation time and completed phase, never numeric artifact IDs', async () => {
+  const artifacts = [
+    { id: 10358492062, name: 'transcript-state-reserved', workflow_run: { id: 34869052776 }, expired: false, created_at: '2026-09-14T16:33:10Z' },
+    { id: 10358447261, name: 'transcript-state-complete', workflow_run: { id: 34869052776 }, expired: false, created_at: '2026-09-14T16:33:11Z' },
+  ];
+  const options = { repository: 'owner/repo', token: 'test', fetchImpl: artifactFetch(artifacts) };
+  assert.equal((await locateState(options)).artifact_id, 10358447261);
+  artifacts[0].created_at = artifacts[1].created_at;
+  assert.equal((await locateState(options)).artifact_id, 10358447261, 'completion wins same-second phases in one run');
+  artifacts[0].created_at = '2026-09-15T10:00:00Z';
+  assert.equal((await locateState(options)).artifact_id, 10358492062, 'a later cancelled reservation remains authoritative');
+  artifacts[0].created_at = 'invalid';
+  await assert.rejects(() => locateState(options), /chronology is invalid/);
+  artifacts[0].created_at = artifacts[1].created_at;
+  artifacts[0].workflow_run.id = 99;
+  await assert.rejects(() => locateState(options), /ambiguous across runs/);
+});
+
+test('restore scans every artifact page and refuses incomplete history', async () => {
+  const artifacts = Array.from({ length: 101 }, (_, i) => ({ id: 500 - i, name: 'transcript-state-complete',
+    workflow_run: { id: 3 }, expired: false, created_at: new Date(NOW + i * 1000).toISOString() }));
+  const options = { repository: 'owner/repo', token: 'test', fetchImpl: async url => {
+    if (url.includes('/actions/runs/')) return response(200, trustedRun);
+    const parsed = new URL(url), page = Number(parsed.searchParams.get('page'));
+    const rows = parsed.searchParams.get('name') === 'transcript-state-complete' ? artifacts : [];
+    return response(200, { total_count: rows.length, artifacts: rows.slice((page - 1) * 100, page * 100) });
+  } };
+  assert.equal((await locateState(options)).artifact_id, 400);
+  await assert.rejects(() => locateState({ ...options, fetchImpl: async () => response(200, { total_count: 1, artifacts: [] }) }), /inaccessible/);
+});
+
+test('explicit reconciliation requires an exact accessible completed artifact from the trusted workflow', async () => {
+  const artifacts = [
+    { id: 10, name: 'transcript-state-complete', workflow_run: { id: 3 }, expired: false, created_at: '2026-09-12T10:00:00Z' },
+    { id: 11, name: 'transcript-state-reserved', workflow_run: { id: 4 }, expired: false, created_at: '2026-09-13T10:00:00Z' },
+  ];
+  const options = { repository: 'owner/repo', token: 'test', fetchImpl: artifactFetch(artifacts), reconcileArtifactId: '10' };
+  assert.deepEqual(await locateState(options), { found: true, initialize: false, artifact_id: 11, run_id: 4, phase: 'reserved',
+    reconcile_found: true, reconcile_artifact_id: 10, reconcile_run_id: 3 });
+  for (const id of ['11', '12', 'NaN', '-1']) await assert.rejects(() => locateState({ ...options, reconcileArtifactId: id }), /[Rr]econciliation/);
+  artifacts[0].expired = true;
+  await assert.rejects(() => locateState(options), /expired/);
+});
+
+test('reconciliation authenticates one existing successful request without resetting usage or buying captions', () => {
+  const reserved = prep(undefined, [queue[0]]).state;
+  const completed = structuredClone(reserved);
+  recordOutcome(completed, VIDEO, 'fetched', { now: NOW, transcript: encryptTranscript({ id: VIDEO,
+    fetchedAt: new Date(NOW).toISOString(), chunks: caption.content }, 'test-key') });
+  finishBatch(completed, NOW);
+  const current = prep(reserved, queue, { now: NOW + 86400_000, runKey: '2-1' }).state;
+  const options = { artifactId: 123, runId: 1, key: 'test-key', now: NOW + 86400_000 };
+  const { state, resolved } = reconcileState(current, completed, options);
+  assert.equal(resolved.length, 1);
+  assert.equal(usageOf(state, options.now).countedRequests, usageOf(current, options.now).countedRequests);
+  assert.equal(usageOf(state, options.now).uncertainRequests, usageOf(current, options.now).uncertainRequests - 1);
+  assert.equal(state.attempts[0].outcome, 'fetched');
+  assert.equal(state.videos[VIDEO].status, 'fetched');
+  assert.ok(state.cache[VIDEO]);
+  assert.deepEqual(state.reservation, current.reservation, 'preserve unrelated current reservations');
+  assert.deepEqual(reconcileState(state, completed, options).state, state, 'idempotent receipt replay');
+  assert.equal(prep(state, [queue[0]], { runKey: '3-1' }).plan.videoIds.length, 0, 'cache reuse makes no new reservation');
+  assert.throws(() => reconcileState(current, completed, { ...options, key: 'wrong-key' }), /authenticate/);
+  assert.deepEqual(reconcileState(current, completed, { ...options, runId: 99 }).resolved, []);
+  const mismatched = structuredClone(completed); mismatched.attempts[0].at = new Date(NOW - 1000).toISOString();
+  assert.deepEqual(reconcileState(current, mismatched, options).resolved, []);
+  const later = structuredClone(current);
+  later.attempts.push({ videoId: VIDEO, runKey: '2-1', at: new Date(NOW + 1000).toISOString(), outcome: 'review-required' });
+  const held = reconcileState(later, completed, options).state;
+  assert.equal(held.videos[VIDEO].status, 'review-required', 'an older success cannot release a later uncertain request');
+  assert.equal(held.cache[VIDEO], undefined, 'older cache must not bypass the newer hold');
+  assert.equal(held.attempts.at(-1).outcome, 'review-required');
 });
 
 test('restore requires explicit first-install initialization and never treats API failures as empty history', async () => {

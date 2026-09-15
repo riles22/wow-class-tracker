@@ -8,8 +8,11 @@ and maintain `data/pending-transcripts.json` after distillation or verified skip
 
 ## Persistent state
 
-Before collection, the workflow restores the newest `transcript-state-reserved`
-or `transcript-state-complete` artifact from the master nightly workflow. The
+Before collection, the trusted collector job restores the newest `transcript-state-reserved`
+or `transcript-state-complete` artifact from the master nightly workflow, ordered by
+creation time across every artifact-list page. Numeric IDs are not chronological.
+For uploads in the same second of one run, completed state supersedes reservation;
+ambiguous ordering across runs stops collection. The
 workflow conclusion does not matter: a failed publication still consumed any
 requests already made. Lookup, expired-artifact, download, and state-validation
 failures stop collection instead of silently resetting usage.
@@ -26,14 +29,41 @@ State artifacts retain 90 days and contain only `state.json`, `plan.json`, and
 optionally `summary.json`. **Never upload the plaintext `<videoId>.json` files.**
 The state caches successful captions using AES-256-GCM, with a key derived by
 HKDF from the step-scoped transcript API key and a fresh random salt. Only the
-fetch step has that key. The reservation step uses cache metadata; the fetch step
-decrypts captions for the agents. This avoids publishing full transcripts in
+fetch step and optional authenticated-reconciliation step have that key. The reservation step uses cache metadata; the fetch step
+decrypts captions in the collector job. A separate `TRANSCRIPT_HANDOFF_KEY` encrypts
+the short-lived caption handoff to the agent job, which never receives the metered
+API key. This avoids publishing full transcripts in
 public-repository artifacts. Cached captions retain their original fetch dates
 and are removed from state once the video leaves the queue.
 
 An unchanged queue after a failed publication reuses cached captions without
 another provider request. Key rotation or corrupted encrypted content reports a
 review hold; it never silently purchases a replacement transcript.
+
+State uploads also include `authentication.json`, signed using the collector-only
+`TRANSCRIPT_STATE_SIGNING_KEY`. Verification binds the exact state bytes to the
+repository, workflow, run, attempt and reserved/completed phase before the restored
+state can be used. Agent jobs never receive that signing key. Migration accepts
+only the two explicitly reviewed historical artifact IDs and exact state hashes
+listed in `src/transcript-state-auth.mjs`; there is no general unsigned fallback.
+
+### Reconcile an already completed request
+
+Use the manual nightly input `transcript_reconcile_artifact_id` with the exact
+completed receipt ID. The collector checks provenance and state authentication,
+then matches video ID, originating run/attempt and reservation timestamp. Only a
+successful receipt with an authenticated encrypted caption can resolve that
+existing request. This performs no provider call, preserves request counts and
+unrelated reservations, and never clears a later unresolved attempt. Replaying
+the receipt is idempotent. The resulting state records the receipt ID and resolved
+attempts for audit. Normal queue processing may discard a recovered cache after
+the video has already left the queue.
+
+For the September 15 repair, artifact `10298937863` from run `34697196941` proves
+video `rYFv6Ohr7mE` completed with 303 chunks. The repair resolves the false hold
+carried forward by the previous numeric-ID selection bug; it does not approve a
+new request. This differs from `transcript_retry_ids`, which explicitly approves
+a potentially chargeable retry after review.
 
 ## Usage and retry policy
 

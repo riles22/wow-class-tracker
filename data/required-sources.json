@@ -118,10 +118,14 @@
     {
       "key": "method",
       "label": "Method tier lists (raid + M+)",
+      "comment": "Publisher-date verification added 2026-09-15 after the audit found fresh captures hiding the pages' August publication dates. Read each page's own Last Updated line independently of snapshot; both pages participate in trusted pre-agent evidence. The 45-day publication-age window matches Icy Veins' live editorial cadence; the UI still exposes older publisher dates immediately. Publication age does not change source membership or renew captures.",
       "maxAgeDays": 4,
       "date": {
         "type": "pages",
         "sourceId": "method"
+      },
+      "published": {
+        "maxAgeDays": 45
       },
       "rows": {
         "type": "ratings",

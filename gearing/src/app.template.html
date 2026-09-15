@@ -1622,8 +1622,9 @@ function trinketCard(list, usingCustom) {
     + '</div>';
 }
 
-/* What is the highest item level each gearing path can reach? Uses the validated
-   community-sheet ladder, so it covers paths with no per-item data (Delves, world). */
+/* These are listed rewards from the reviewed chart, including crafts and Ascended
+   gear. A reward's item level alone does not identify its upgrade track (tracks
+   overlap), so do not infer upgrades for paths without individual item/track data. */
 function ceilingCard() {
   if (!SHEET) return '';
   const paths = [
@@ -1639,8 +1640,9 @@ function ceilingCard() {
       + '<div class="ceil-v">' + top.ilvl + '</div>'
       + '<div class="ceil-s">' + esc(top.label) + '</div></div>';
   }).join('');
-  return '<div class="card wide"><h3>Item level ceiling by path<span>how high each route goes</span></h3>'
-    + '<div class="ceils">' + cells + '</div></div>';
+  return '<div class="card wide"><h3>Top listed rewards by path<span>from the reviewed reward chart</span></h3>'
+    + '<div class="ceils">' + cells + '</div>'
+    + '<div class="note">These are charted rewards, including drops, Vault, crafting and Ascended gear. Individual items may be upgraded further along their track; these values are not upgrade ceilings.</div></div>';
 }
 
 function slotsOf(list) {
@@ -1682,17 +1684,11 @@ function equippedWeaponLoadouts() {
   }
   return loadouts;
 }
-function equippedIlvlBySlot() {
-  // Lowest equipped ilvl per canonical slot (Finger/Trinket pairs: the one you'd replace).
-  const map = {};
-  for (const key of Object.keys(MYGEAR)) {
-    const eq = MYGEAR[key];
-    if (!eq.ilvl) continue;
-    const slot = eq.slotLabel === '@mainHand' ? 'Main Hand'
-      : eq.slotLabel === '@offHand' ? 'Off Hand' : eq.slotLabel;
-    map[slot] = map[slot] == null ? eq.ilvl : Math.min(map[slot], eq.ilvl);
-  }
-  return map;
+function canReplaceEquipped(it, simcSlot) {
+  // Replacing your existing copy is legal; putting another Unique-Equipped copy in
+  // a different slot is not. IDs remain usable evidence even when ilevel is absent.
+  return !it.uniqueEquipped || !Object.entries(MYGEAR).some(([key, eq]) =>
+    key !== simcSlot && String(eq.id) === String(it.id));
 }
 function planFor(items) {
   // items: catalog items from one source, already filtered to CUR-usable gear.
@@ -1702,32 +1698,28 @@ function planFor(items) {
   // one slot a named item could fill — otherwise it stays null and renders as a dash.
   // A paste with no ilevel= fields (common addon exports) must never claim "+0"
   // (adversarial review, 2026-08-18: an uncomputed quantity rendered as a computed zero).
-  const equipped = equippedIlvlBySlot();
+  const equipped = Object.entries(MYGEAR).filter(([, eq]) => eq.ilvl);
   const loadoutIds = equippedWeaponLoadouts().map(loadout => loadout.id);
   let potential = null;
-  if (Object.keys(equipped).length) {
+  if (equipped.length) {
     const bestBySlot = {};
     let readable = 0;
     for (const it of named) {
       // A weapon only replaces a matching hand in the equipped loadout. This also
       // handles dual-wield Two-Hand weapons without treating caster/shield offhands
       // as a second weapon slot, or valuing an incomplete change of weapon setup.
-      let slotKey, have;
-      if (isWeaponItem(it)) {
-        const hands = [...new Set(matchingWeaponHands(CUR, it)
-          .filter(match => loadoutIds.includes(match.loadout.id))
-          .map(match => match.hand === 'mainHand' ? 'Main Hand' : 'Off Hand'))]
-          .filter(hand => equipped[hand] != null);
-        if (!hands.length) continue;
-        slotKey = hands.reduce((a, b) => (equipped[a] <= equipped[b] ? a : b));
-        have = equipped[slotKey];
-      } else {
-        slotKey = it.slot;
-        have = equipped[slotKey];
-        if (have == null) continue; // slot not read from the paste
-      }
+      const hands = isWeaponItem(it) ? matchingWeaponHands(CUR, it)
+        .filter(match => loadoutIds.includes(match.loadout.id))
+        .map(match => '@' + match.hand) : null;
+      const replacements = equipped.filter(([key, eq]) => canReplaceEquipped(it, key)
+        && (hands ? hands.includes(eq.slotLabel) : eq.slotLabel === it.slot));
+      if (!replacements.length) continue;
+      // Keep individual equipped IDs through eligibility before choosing the weakest
+      // legal replacement. Ring/trinket pairs still contribute one best gain per slot.
+      const [, eq] = replacements.reduce((a, b) => a[1].ilvl <= b[1].ilvl ? a : b);
+      const slotKey = hands ? (eq.slotLabel === '@mainHand' ? 'Main Hand' : 'Off Hand') : it.slot;
       readable++;
-      const gain = maxAttainable(it) - have;
+      const gain = maxAttainable(it) - eq.ilvl;
       if (gain > 0) bestBySlot[slotKey] = Math.max(bestBySlot[slotKey] || 0, gain);
     }
     if (readable) potential = Object.values(bestBySlot).reduce((sum, g) => sum + g, 0);
@@ -1834,6 +1826,7 @@ function renderSrc() {
     + (hasGear ? ' in the Upgrade checker.'
       : ' &mdash; <b>paste your <code>/simc</code> export in the Upgrade checker to light that column up.</b>')
     + ' Dungeons are ordered by guide-named count; raid bosses keep their encounter order. Guide-named TIER pieces count toward a token boss\'s coverage (labeled “(tier)”) but never its potential — their upgrade route runs through tokens, the Great Vault and the Catalyst, not one drop.'
+    + ' Potential includes Myth upgrades. Reaching it may require a higher difficulty, a Vault reward or crests. Conflicting Unique-Equipped copies are excluded.'
     + ' This plan maps the guides\' picks and does not change with custom weights.</div>';
 
   $('#src').innerHTML = planNote
@@ -1843,8 +1836,8 @@ function renderSrc() {
     + '<div class="card"><h3>Mythic+ dungeon pool<span>8 dungeons &middot; ordered by guide-named count</span></h3><div class="table-scroll"><table class="src-tbl">'
     + '<tr><th>Expansion</th><th>Dungeon</th><th>Guide-named</th><th>Their picks here</th><th>Your potential</th></tr>' + dRows + '</table></div>'
     + '<div class="note" style="margin:16px 0 0"><b>Mythic+ item levels are set by key level, not by the item.</b> '
-    + 'The same drop is worth more from a higher key; potential for M+ items uses the top <b>Great Vault</b> reward '
-    + '(the ceiling an M+ drop can reach), not the end-of-dungeon ilvl — both columns are in the key table below.</div>'
+    + 'The key table shows acquisition levels. Potential for M+ items includes upgrading a top <b>Great Vault</b> '
+    + 'reward along the Myth track to <b>' + mythUpgradeCeiling() + '</b>; this requires Myth crests. An end-of-dungeon drop has its own lower upgrade track.</div>'
     + '<div class="table-scroll"><table class="src-tbl" style="margin-top:14px"><tr><th>Key</th><th>End of dungeon</th><th>Great Vault</th></tr>'
     + keys + '</table></div></div>'
     + craftedPlanCard();
@@ -1855,11 +1848,20 @@ const SIMC_SLOT = {head:'Head',neck:'Neck',shoulder:'Shoulder',shoulders:'Should
   finger1:'Finger',finger2:'Finger',trinket1:'Trinket',trinket2:'Trinket',
   main_hand:'@mainHand',off_hand:'@offHand'};
 
-/* What difficulty / key level does a given item have to come from to beat what you
-   already wear? Raid difficulties and M+ key levels both come from the validated ladder. */
+/* The reviewed chart records the complete Myth track separately from acquisition
+   levels. Every modeled raid/M+ item has a Myth acquisition route; final-boss drops
+   above that cap remain non-upgradeable exceptions, never clamped down to the cap. */
+function mythUpgradeCeiling() {
+  return Math.max(0, ...((SHEET && SHEET.seasonShift && SHEET.seasonShift.mythSeason2) || []));
+}
 function raidLadder(boss) {
   const row = RAID.bosses.filter(entry => entry.boss === boss)[0];
-  return row ? row.dropLevels : [];
+  if (!row) return [];
+  const mythic = row.dropLevels.find(step => step.need === 'Mythic');
+  // Reviewed chart: Mythic bosses 1–6 award 6/6 Myth from the Vault; bosses 7–8
+  // retain their higher, non-upgradeable drop level in the Vault as well.
+  return row.dropLevels.concat(mythic ? [{need: 'Mythic Vault',
+    ilvl: Math.max(mythic.ilvl, mythUpgradeCeiling())}] : []);
 }
 function mplusLadder() {
   const drops = MPLUS_KEYS.map(k => ({need: k.key, ilvl: k.end}));
@@ -1869,11 +1871,15 @@ function mplusLadder() {
 
 function maxAttainable(it) {
   const steps = it.kind === 'mplus' ? mplusLadder() : raidLadder(it.boss);
-  return steps.reduce((max, step) => Math.max(max, step.ilvl || 0), 0);
+  const acquisition = steps.reduce((max, step) => Math.max(max, step.ilvl || 0), 0);
+  return acquisition ? Math.max(acquisition, mythUpgradeCeiling()) : 0;
 }
 
 function ladderHtml(it, cur) {
   const steps = it.kind === 'mplus' ? mplusLadder() : raidLadder(it.boss);
+  const acquisition = steps.reduce((max, step) => Math.max(max, step.ilvl || 0), 0);
+  const ceiling = maxAttainable(it);
+  if (ceiling > acquisition) steps.push({need: 'After Myth upgrades', ilvl: ceiling});
   const first = steps.filter(s => s.ilvl > cur)[0];
   return '<div class="ladder">' + steps.map(s =>
     '<span class="step' + (s.ilvl > cur ? ' up' : ' down')
@@ -1884,7 +1890,7 @@ function ladderHtml(it, cur) {
 
 function candidatesForEquipped(simcSlot, equipped, bySlot) {
   if (equipped.slotLabel !== '@mainHand' && equipped.slotLabel !== '@offHand')
-    return (bySlot[equipped.slotLabel] || []).slice();
+    return (bySlot[equipped.slotLabel] || []).filter(it => canReplaceEquipped(it, simcSlot));
 
   const handName = equipped.slotLabel === '@mainHand' ? 'mainHand' : 'offHand';
   let loadouts = CUR.weaponLoadouts || [];
@@ -1901,7 +1907,7 @@ function candidatesForEquipped(simcSlot, equipped, bySlot) {
     if (inferred.length) loadouts = inferred;
   }
 
-  return GEAR.filter(it => isWeaponItem(it) && canUse(CUR, it)
+  return GEAR.filter(it => isWeaponItem(it) && canUse(CUR, it) && canReplaceEquipped(it, simcSlot)
     && loadouts.some(loadout => handMatches(loadout.hands && loadout.hands[handName], it)));
 }
 
@@ -2021,7 +2027,7 @@ function renderUp() {
   }).join('') + '</div>';
   const knownLevels = keys.filter(key => MYGEAR[key].ilvl).length;
   $('#up-hint').innerHTML = '<b>' + keys.length + '</b> slots read &middot; <b>' + knownLevels
-    + '</b> with item levels &middot; steps announced as “Upgrade” exceed that slot';
+    + '</b> with item levels &middot; acquisition and Myth upgrade steps are shown separately; “Upgrade” exceeds that slot';
   enhanceInteractiveRows();
 }
 

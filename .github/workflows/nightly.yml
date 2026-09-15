@@ -1,33 +1,25 @@
 name: Nightly tracker refresh
 run-name: "Nightly tracker refresh (${{ inputs.agent_model || 'claude-opus-5' }})"
 
-# Machine-off nightly automation. Isolated stages (2026-07-14 security audit + same-day
-# re-audit; agent-resilience pass 2026-07-16/17 after six consecutive incomplete runs):
-#
-#   1. Deterministic WCL fetch — the ONLY step holding WCL_CLIENT_ID/WCL_CLIENT_SECRET
-#      (step-scoped env). Runs src/fetch-wcl.mjs, writes wcl-fetch/evidence.json, and
-#      uploads it as its own artifact BEFORE any agent runs — the agents' only WCL
-#      input, and tamper-evident for the publish gate.
-#   2. Primary agent (DE-PRIVILEGED) — Claude Code fetches untrusted web content on a
-#      contents:read token with no persisted checkout credentials and NO WCL secrets;
-#      its only secret is its own OAuth token. Leaves edits in the working tree and
-#      rebuilds data/run-manifest.json.
-#   3. Recovery agent — runs only when the primary ended without satisfying the
-#      deterministic completion check (the recurring failure shape: agents ending
-#      after minutes with no manifest).
-#   4. Final deterministic completion gate — manifest rewritten + npm test + build +
-#      check-refresh + WCL-credential health, so an incomplete refresh fails HERE
-#      with the real reason.
-#   5. publish (deterministic, PRIVILEGED) — no AI. Downloads the artifacts, re-runs
-#      every gate (cross-checking WCL manifest rows against the pre-agent evidence
-#      artifact), snapshots, stages explicit paths, commits, pushes, dispatches the
-#      Pages deploy. The anomaly gate's override is HUMAN-ONLY via the anomaly_ack
-#      workflow_dispatch input — the agent-written manifest can only propose.
+# Machine-off nightly automation. Three separate runners form the trust boundary:
+#   collect: deterministic source collectors and transcript reservations/outcomes.
+#     WCL and transcript provider credentials exist only in their collector steps.
+#     Outputs bind an exact artifact ID, archive digest and file-manifest digest.
+#   refresh: untrusted primary/recovery agents with a read-only GitHub token.
+#     They receive authenticated receipts and an encrypted caption handoff,
+#     never provider API keys. Their completion checks are advisory to publish.
+#   publish: fresh trusted code verifies collector outputs after the agent overlay,
+#     reruns all gates and publishes explicit paths. Human-only anomaly/value
+#     approvals and stale-base/rejected-push safeguards remain.
+# Captions cross jobs encrypted with TRANSCRIPT_HANDOFF_KEY, which has no provider
+# access. No plaintext caption files or provider keys enter collector artifacts.
 #
 # Secrets required (Settings → Secrets and variables → Actions):
 #   CLAUDE_CODE_OAUTH_TOKEN — from `claude setup-token` (Pro/Max; valid ~1 year — renew!)
 #   WCL_CLIENT_ID           — Warcraft Logs v2 API client UUID
 #   WCL_CLIENT_SECRET       — Warcraft Logs v2 API client secret
+#   TRANSCRIPT_HANDOFF_KEY  — independent random 32-byte hexadecimal caption-handoff key
+#   TRANSCRIPT_STATE_SIGNING_KEY — separate collector-only state authentication key
 
 on:
   schedule:
@@ -63,6 +55,11 @@ on:
         type: boolean
         required: false
         default: false
+      transcript_reconcile_artifact_id:
+        description: "Reviewed completed transcript artifact to reconcile into the newest ledger without another provider request."
+        type: string
+        required: false
+        default: ""
       transcript_retry_ids:
         description: "Reviewed YouTube IDs to retry after uncertain requests (comma-separated). May consume requests again; usage history is preserved."
         type: string
@@ -74,16 +71,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  refresh:
+  collect:
+    # Fresh trusted runner: no agent execution, source evidence and request state only.
     runs-on: ubuntu-latest
-    timeout-minutes: 110   # 90 left the recovery path ~6 min of headroom (audit A7)
+    timeout-minutes: 35
+    outputs:
+      artifact_id: ${{ steps.receipts.outputs.artifact-id }}
+      artifact_digest: ${{ steps.receipts.outputs.artifact-digest }}
+      manifest_sha256: ${{ steps.manifest.outputs.manifest_sha256 }}
     permissions:
-      contents: read # the agent job holds NO write scopes — publication happens in `publish`
-      actions: read # restore the last pre-agent transcript usage/cache artifact
+      contents: read
+      actions: read # restore durable transcript usage/cache state
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          # No token left in .git/config: the agents' shells have no ambient push credential.
           persist-credentials: false
           fetch-depth: 1
 
@@ -91,13 +92,16 @@ jobs:
         with:
           node-version: "22"
 
-      # yt-dlp at the version pinned in requirements.txt — the agents must never
-      # install or upgrade packages themselves.
-      - name: Install pinned yt-dlp
-        run: pipx install "yt-dlp==$(sed -n 's/^yt-dlp==//p' requirements.txt)"
+      - name: Validate collector keys before any provider requests
+        env:
+          TRANSCRIPT_HANDOFF_KEY: ${{ secrets.TRANSCRIPT_HANDOFF_KEY }}
+          TRANSCRIPT_STATE_SIGNING_KEY: ${{ secrets.TRANSCRIPT_STATE_SIGNING_KEY }}
+        run: |
+          node src/collector-receipts.mjs check-key
+          node src/transcript-state-auth.mjs check-key
 
       # Deterministic WCL stage (re-audit 2026-07-14): the ONLY step holding the WCL
-      # credentials — step-scoped env, gone before any agent starts. Always exits 0
+      # credentials — step-scoped env, on this collector runner only. Always exits 0
       # when evidence was written; bad verdicts go red in the final gate.
       - name: Deterministic WCL fetch (only step with WCL credentials)
         env:
@@ -105,13 +109,13 @@ jobs:
           WCL_CLIENT_SECRET: ${{ secrets.WCL_CLIENT_SECRET }}
         run: node src/fetch-wcl.mjs
 
-      # Uploaded BEFORE the agents run: the publish gate cross-checks WCL manifest
-      # rows against THIS copy, so an agent (which can edit the working-tree copy)
-      # has no window to tamper with what the gate reads.
-      - name: Publish WCL fetch evidence (pre-agent, tamper-evident)
+      # Individual artifacts remain diagnostic receipts. Publication uses the sealed
+      # collector bundle ID and digests below, never these name lookups.
+      - name: Publish WCL fetch evidence (collector diagnostics)
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: wcl-evidence
+          overwrite: true
           retention-days: 7
           if-no-files-found: error
           path: wcl-fetch/
@@ -123,6 +127,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: source-health
+          overwrite: true
           retention-days: 7
           path: source-health/
 
@@ -133,6 +138,7 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: stable-metrics
+          overwrite: true
           retention-days: 7
           if-no-files-found: error
           path: metrics-fetch/
@@ -144,12 +150,13 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: official-notes
+          overwrite: true
           retention-days: 7
           if-no-files-found: error
           path: official-notes/
 
       # Deterministic transcript stage (owner-approved 2026-07-17): the ONLY step
-      # holding TRANSCRIPT_API_KEY (Supadata; mode=native = YouTube's own captions,
+      # using TRANSCRIPT_API_KEY (also used by reviewed cache reconciliation; Supadata; mode=native = YouTube's own captions,
       # the same source yt-dlp read before the datacenter bot-wall). Drains the
       # agent-maintained data/pending-transcripts.json queue into transcript-fetch/
       # for the agents to distill. A missing secret is a CLEAN skip (verdict
@@ -159,6 +166,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           TRANSCRIPT_STATE_ALLOW_INITIALIZE: ${{ inputs.transcript_state_initialize == true }}
+          TRANSCRIPT_RECONCILE_ARTIFACT_ID: ${{ inputs.transcript_reconcile_artifact_id }}
         run: node src/restore-transcript-state.mjs
 
       - name: Restore last transcript reservation or completed state
@@ -169,6 +177,54 @@ jobs:
           run-id: ${{ steps.transcript_state.outputs.run_id }}
           github-token: ${{ github.token }}
           path: transcript-fetch/
+          merge-multiple: true
+
+      - name: Authenticate restored transcript state before use
+        if: steps.transcript_state.outputs.found == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TRANSCRIPT_STATE_SIGNING_KEY: ${{ secrets.TRANSCRIPT_STATE_SIGNING_KEY }}
+          STATE_ARTIFACT_ID: ${{ steps.transcript_state.outputs.artifact_id }}
+          STATE_RUN_ID: ${{ steps.transcript_state.outputs.run_id }}
+          STATE_PHASE: ${{ steps.transcript_state.outputs.phase }}
+        run: >-
+          node src/transcript-state-auth.mjs verify --state transcript-fetch/state.json
+          --authentication transcript-fetch/authentication.json --repository "$GITHUB_REPOSITORY"
+          --workflow .github/workflows/nightly.yml --run-id "$STATE_RUN_ID"
+          --phase "$STATE_PHASE" --artifact-id "$STATE_ARTIFACT_ID"
+
+      - name: Download reviewed transcript completion for reconciliation
+        if: steps.transcript_state.outputs.reconcile_found == 'true'
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ steps.transcript_state.outputs.reconcile_artifact_id }}
+          run-id: ${{ steps.transcript_state.outputs.reconcile_run_id }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/transcript-reconcile
+          merge-multiple: true
+      - name: Authenticate the reviewed completion before reconciliation
+        if: steps.transcript_state.outputs.reconcile_found == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TRANSCRIPT_STATE_SIGNING_KEY: ${{ secrets.TRANSCRIPT_STATE_SIGNING_KEY }}
+          RECEIPT_ARTIFACT_ID: ${{ steps.transcript_state.outputs.reconcile_artifact_id }}
+          RECEIPT_RUN_ID: ${{ steps.transcript_state.outputs.reconcile_run_id }}
+        run: >-
+          node src/transcript-state-auth.mjs verify --state "$RUNNER_TEMP/transcript-reconcile/state.json"
+          --authentication "$RUNNER_TEMP/transcript-reconcile/authentication.json" --repository "$GITHUB_REPOSITORY"
+          --workflow .github/workflows/nightly.yml --run-id "$RECEIPT_RUN_ID"
+          --phase complete --artifact-id "$RECEIPT_ARTIFACT_ID"
+
+      - name: Reconcile proven transcript outcomes without a provider request
+        if: steps.transcript_state.outputs.reconcile_found == 'true'
+        env:
+          RECEIPT_ARTIFACT_ID: ${{ steps.transcript_state.outputs.reconcile_artifact_id }}
+          RECEIPT_RUN_ID: ${{ steps.transcript_state.outputs.reconcile_run_id }}
+          TRANSCRIPT_API_KEY: ${{ secrets.TRANSCRIPT_API_KEY }}
+        run: >-
+          node src/reconcile-transcript-state.mjs --state transcript-fetch/state.json
+          --completed "$RUNNER_TEMP/transcript-reconcile/state.json"
+          --receipt-artifact-id "$RECEIPT_ARTIFACT_ID" --receipt-run-id "$RECEIPT_RUN_ID"
 
       - name: Reserve the bounded transcript request batch
         env:
@@ -177,6 +233,15 @@ jobs:
           TRANSCRIPT_RETRY_IDS: ${{ inputs.transcript_retry_ids }}
         run: node src/fetch-transcripts.mjs --prepare
 
+      - name: Sign the transcript reservation on the collector runner
+        env:
+          TRANSCRIPT_STATE_SIGNING_KEY: ${{ secrets.TRANSCRIPT_STATE_SIGNING_KEY }}
+        run: >-
+          node src/transcript-state-auth.mjs sign --state transcript-fetch/state.json
+          --authentication transcript-fetch/authentication.json --repository "$GITHUB_REPOSITORY"
+          --workflow .github/workflows/nightly.yml --run-id "$GITHUB_RUN_ID"
+          --run-attempt "$GITHUB_RUN_ATTEMPT" --phase reserved
+
       - name: Save transcript reservation before requests
         id: transcript_reserved
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -184,24 +249,37 @@ jobs:
           name: transcript-state-reserved
           path: |
             transcript-fetch/state.json
+            transcript-fetch/authentication.json
             transcript-fetch/plan.json
             transcript-fetch/summary.json
           retention-days: 90
           if-no-files-found: error
           overwrite: true
 
-      - name: Deterministic transcript fetch (only step with the transcript API key)
+      - name: Deterministic transcript fetch (collector-only provider key)
         env:
           TRANSCRIPT_API_KEY: ${{ secrets.TRANSCRIPT_API_KEY }}
         run: node src/fetch-transcripts.mjs --fetch
 
-      - name: Save transcript outcomes before the agents run
+      - name: Sign transcript outcomes on the collector runner
+        id: transcript_complete_signature
         if: always() && steps.transcript_reserved.outcome == 'success'
+        env:
+          TRANSCRIPT_STATE_SIGNING_KEY: ${{ secrets.TRANSCRIPT_STATE_SIGNING_KEY }}
+        run: >-
+          node src/transcript-state-auth.mjs sign --state transcript-fetch/state.json
+          --authentication transcript-fetch/authentication.json --repository "$GITHUB_REPOSITORY"
+          --workflow .github/workflows/nightly.yml --run-id "$GITHUB_RUN_ID"
+          --run-attempt "$GITHUB_RUN_ATTEMPT" --phase complete
+
+      - name: Save transcript outcomes before the agents run
+        if: always() && steps.transcript_complete_signature.outcome == 'success'
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: transcript-state-complete
           path: |
             transcript-fetch/state.json
+            transcript-fetch/authentication.json
             transcript-fetch/plan.json
             transcript-fetch/summary.json
           retention-days: 90
@@ -218,12 +296,63 @@ jobs:
       - name: Deterministic published-date evidence
         run: node src/fetch-published.mjs
 
-      - name: Publish published-date evidence (pre-agent, tamper-evident)
+      - name: Publish published-date evidence (collector diagnostics)
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: published-evidence
+          overwrite: true
           retention-days: 7
           path: published-evidence/
+
+      - name: Seal collector receipts and encrypted caption handoff
+        id: manifest
+        env:
+          TRANSCRIPT_HANDOFF_KEY: ${{ secrets.TRANSCRIPT_HANDOFF_KEY }}
+          COLLECTOR_BUNDLE_DIR: ${{ runner.temp }}/collector-receipts
+        run: node src/collector-receipts.mjs pack
+
+      - name: Upload the exact trusted collector bundle
+        id: receipts
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: collector-receipts-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/collector-receipts/
+          retention-days: 7
+          if-no-files-found: error
+
+  refresh:
+    needs: collect
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Install pinned yt-dlp
+        run: pipx install "yt-dlp==$(sed -n 's/^yt-dlp==//p' requirements.txt)"
+
+      - name: Download exact collector inputs for the agents
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          artifact-ids: ${{ needs.collect.outputs.artifact_id }}
+          path: ${{ runner.temp }}/collector-receipts
+          merge-multiple: true
+      - name: Authenticate inputs and materialize captions without the provider key
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TRANSCRIPT_HANDOFF_KEY: ${{ secrets.TRANSCRIPT_HANDOFF_KEY }}
+          COLLECTOR_BUNDLE_DIR: ${{ runner.temp }}/collector-receipts
+          COLLECTOR_ARTIFACT_ID: ${{ needs.collect.outputs.artifact_id }}
+          COLLECTOR_ARTIFACT_DIGEST: ${{ needs.collect.outputs.artifact_digest }}
+          COLLECTOR_MANIFEST_SHA256: ${{ needs.collect.outputs.manifest_sha256 }}
+        run: node src/collector-receipts.mjs install-agent
 
       # First-party action pinned to the v1-tag commit (unpinned mutable tags are a
       # supply-chain risk in an unattended secret-bearing job); Dependabot proposes
@@ -559,9 +688,10 @@ jobs:
   publish:
     # Deterministic publication — no AI, no untrusted fetches. Runs even when the
     # refresh job failed: the gates below, not the agents' exit codes, decide
-    # publishability, and they re-run from scratch on the downloaded artifacts.
-    needs: refresh
-    if: ${{ !cancelled() }}
+    # publishability. A failed collector blocks both dependent jobs; ordinary source
+    # unavailability still produces valid degraded receipts and may publish.
+    needs: [collect, refresh]
+    if: ${{ !cancelled() && needs.collect.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -597,39 +727,29 @@ jobs:
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: nightly-refresh
-          path: .
+          path: ${{ runner.temp }}/untrusted-refresh
 
-      # The evidence copy the gate trusts: uploaded by the deterministic fetch step
-      # BEFORE any agent ran (the agents' working-tree copy travels nowhere). A
-      # missing artifact fails this step — and therefore the publish — by design.
-      - name: Download WCL fetch evidence (pre-agent artifact)
+      - name: Admit untrusted artifact paths before overlaying data
+        env:
+          REFRESH_OUTPUT_DIR: ${{ runner.temp }}/untrusted-refresh
+        run: node src/install-refresh-output.mjs
+
+      # The agent runner cannot choose the artifact identity or the manifest digest.
+      # Download outside its overlay, verify all bytes, then install only receipt files.
+      - name: Download exact collector receipts for publication
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: wcl-evidence
-          path: wcl-fetch
-
-      # Same trust construction as the WCL evidence: the gate reads the pre-agent copy,
-      # not the working tree the agents could edit. A missing artifact fails the publish
-      # by design — the fetch step always writes evidence, so absence means the step
-      # itself was skipped or broke.
-      - name: Download published-date evidence (pre-agent artifact)
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: published-evidence
-          path: published-evidence
-
-      # Download these AFTER untrusted refresh output, from fixed pre-agent producers.
-      - name: Download trusted stable metric receipts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: stable-metrics
-          path: metrics-fetch
-
-      - name: Download trusted official note receipts
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: official-notes
-          path: official-notes
+          artifact-ids: ${{ needs.collect.outputs.artifact_id }}
+          path: ${{ runner.temp }}/collector-receipts
+          merge-multiple: true
+      - name: Authenticate trusted collector receipts after the untrusted overlay
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          COLLECTOR_BUNDLE_DIR: ${{ runner.temp }}/collector-receipts
+          COLLECTOR_ARTIFACT_ID: ${{ needs.collect.outputs.artifact_id }}
+          COLLECTOR_ARTIFACT_DIGEST: ${{ needs.collect.outputs.artifact_digest }}
+          COLLECTOR_MANIFEST_SHA256: ${{ needs.collect.outputs.manifest_sha256 }}
+        run: node src/collector-receipts.mjs install-publish
 
       # Gate 0 (2026-07-18 portfolio audit): the refresh artifact may deliver VALUES,
       # never the rules that judge them. Before this guard, the agent-overlaid working
