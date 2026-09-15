@@ -1,0 +1,46 @@
+{
+  "checkedAt": "2026-09-15T15:02:51.963Z",
+  "commit": "20cbc5d21cc7978340cca9e7df1888eaa6223f13",
+  "pages": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "bytes": 1994798,
+      "builtSha256": "854ae3b35ac62cef58a71988a21069844469faf42c7f110153a3372f6a077c9d",
+      "committedSha256": "854ae3b35ac62cef58a71988a21069844469faf42c7f110153a3372f6a077c9d",
+      "liveSha256": "854ae3b35ac62cef58a71988a21069844469faf42c7f110153a3372f6a077c9d",
+      "rebuildMatchesCommit": true,
+      "liveMatchesBuild": true
+    },
+    {
+      "file": "gearing.html",
+      "status": 200,
+      "bytes": 2480030,
+      "builtSha256": "cae8d5243cef2f4116e7dd525144a917ed8c3251ec01e3bd54b8189d32e4d4a0",
+      "committedSha256": "cae8d5243cef2f4116e7dd525144a917ed8c3251ec01e3bd54b8189d32e4d4a0",
+      "liveSha256": "cae8d5243cef2f4116e7dd525144a917ed8c3251ec01e3bd54b8189d32e4d4a0",
+      "rebuildMatchesCommit": true,
+      "liveMatchesBuild": true
+    },
+    {
+      "file": "forecast-report.html",
+      "status": 200,
+      "bytes": 635893,
+      "builtSha256": "9486950d47411417637ff0a3695fb72a88bee6e955c94faf2287347b36215dde",
+      "committedSha256": "9486950d47411417637ff0a3695fb72a88bee6e955c94faf2287347b36215dde",
+      "liveSha256": "9486950d47411417637ff0a3695fb72a88bee6e955c94faf2287347b36215dde",
+      "rebuildMatchesCommit": true,
+      "liveMatchesBuild": true
+    },
+    {
+      "file": "s1.html",
+      "status": 200,
+      "bytes": 49991,
+      "builtSha256": "ded255cfb703876bd42cedd98a8d033c3bcd506b39a502da89e85bc229bd501a",
+      "committedSha256": "ded255cfb703876bd42cedd98a8d033c3bcd506b39a502da89e85bc229bd501a",
+      "liveSha256": "ded255cfb703876bd42cedd98a8d033c3bcd506b39a502da89e85bc229bd501a",
+      "rebuildMatchesCommit": true,
+      "liveMatchesBuild": true
+    }
+  ]
+}

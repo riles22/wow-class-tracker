@@ -1341,44 +1341,60 @@ deliberately absent, so 43 nightly commits deployed unchecked. Dispatched rather
 UI break is found minutes AFTER the push, not before it. The dispatch is `continue-on-error` —
 a dispatch hiccup must never redden a good publish; the ci.yml run reddens on its own.
 
-Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC), split into
-isolated stages since the 2026-07-14 security audit (tightened by the same-day
-re-audit). First a **deterministic WCL fetch step** — the ONLY process holding
-`WCL_CLIENT_ID`/`WCL_CLIENT_SECRET` (step-scoped env) — runs `src/fetch-wcl.mjs` and
-writes `wcl-fetch/evidence.json`, uploaded as its own artifact before the agent
-starts. Since 2026-09-05, `src/fetch-source-health.mjs` also probes the two ordinary
-public Archon DPS routes and writes `source-health/evidence.json` (separate artifact).
-The Murlok/Mythicstats collectors (`src/fetch-stable-metrics.mjs`) and official-note
-collector (`src/fetch-official-notes.mjs`) likewise produce separate pre-agent
-artifacts in `metrics-fetch/` and `official-notes/`. Agents consume those receipts
-instead of inventing parsers or ignoring edited sections. Publish downloads the
-trusted copies after the agent output, then runs `check-stable-metrics.mjs` and
-`check-official-notes.mjs`: verified values must match, failed sources must remain
-unchanged, and every changed class section must have a valid disposition. An
-unresolved section blocks publication. Official-note verification dates measure
-the intake check, never a new date for the underlying tuning facts.
-The prompts read this availability evidence before attempting the normal refresh;
-a reachable payload still needs normal season, coverage and source-date checks, and
-a blocked page never advances a stored data date. The transcript stage
-(`src/fetch-transcripts.mjs`, step-scoped
-OPTIONAL `TRANSCRIPT_API_KEY`) drains the agent-maintained
-`data/pending-transcripts.json` queue through the Supadata captions API
-(`mode=native` — YouTube's own auto-captions; offsets in ms) into
-`transcript-fetch/` for the agents to distill; a missing key is a clean
-"no-credentials" skip. The workflow restores trusted operational state, uploads a
-request reservation before collection, then saves results before agents run.
-Requests have 45-second deadlines and a six-minute stage budget; unavailable
-captions back off, ambiguous consumption waits for explicit review, and successful
-captions are cached encrypted across failed publications. No plaintext transcript
-is included in state artifacts. See `docs/transcript-operations.md` for usage,
-first-install initialization and reviewed retries. (Datacenter IPs can't reach YouTube directly — 2026-07
-bot-wall, android-client workaround failed 2026-07-17). The published-date stage
-(`src/fetch-published.mjs`, no credentials) records what each published-bearing
-registry page says about its own update date into `published-evidence/evidence.json`
-(artifact, pre-agent) — the publish gate cross-checks stored `published` values
-against it and the heartbeat alarms past `published.maxAgeDays`
-(docs/published-gate-scope.md; an unreachable page degrades the cross-check, never
-red). Then the **refresh** job runs a PRIMARY agent and — when a deterministic
+Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC).
+**Since the September 15 isolation fix, collection, agent work, and publication use
+three separate runners.** The trusted `collect` job runs WCL, public source-health,
+Murlok/Mythicstats, official-note, published-date and transcript collectors. It never
+executes an agent. WCL credentials and `TRANSCRIPT_API_KEY` stay step-scoped on that
+runner; the latter also authenticates a reviewed existing caption during explicit
+state reconciliation, without sending a provider request.
+
+Individual `wcl-evidence`, `source-health`, `stable-metrics`, `official-notes` and
+`published-evidence` artifacts remain diagnostic records. Consumers instead download
+one **exact collector bundle ID** from `needs.collect.outputs`, along with the
+producer's archive digest and file-manifest digest. `src/collector-receipts.mjs`
+checks artifact identity, run/commit metadata, every file hash and the exact allowed
+inventory before installing anything. Publication downloads agent output into an isolated temporary directory and
+`src/install-refresh-output.mjs` admits only HEAD-tracked data and skill logs; it
+never extracts untrusted files over gate code and ignores all agent history. It then
+independently repeats the collector check **after** this safe overlay and installs
+only receipt files; it does not overwrite the
+agent's canonical data with the collector's initial snapshot. WCL's deterministic
+pre-agent metric merge and coverage travel to the agent in the same sealed bundle.
+A deleted/replaced named artifact cannot supply a different trusted receipt.
+
+The transcript collector preserves the existing 25-request cap, 45-second request
+deadlines, six-minute stage budget, unavailable-caption backoff, conservative
+uncertainty holds, and encrypted persistent cache. Reservation state is uploaded
+before collection; outcomes are saved even if later publication fails. Durable
+state is authenticated with a separate **collector-only**
+`TRANSCRIPT_STATE_SIGNING_KEY`; future restores verify that signature before usage
+and confirm the artifact was created during its signed attempt's completed collector
+job, preventing a later agent upload from replaying an earlier signed state.
+The only unsigned migration exceptions are exact reviewed artifact IDs and state
+hashes in the verifier, never arbitrary older artifacts. See
+`docs/transcript-operations.md` for initialization and reviewed reconciliation.
+
+Cross-job caption transfer uses a different `TRANSCRIPT_HANDOFF_KEY`: captions are
+AES-256-GCM encrypted and bound to repository, commit, run and attempt. A deterministic
+step on the agent runner materializes these already-fetched captions before the
+agent starts; it never receives the metered API key or durable-state signing key.
+The collector uploads no plaintext caption files or provider secrets. Both new keys must be
+independent random 32-byte hexadecimal secrets; collector preflight validates them
+before any provider request. `docs/collector-isolation-2026-09-15.md` covers the
+boundary, artifact lifecycle and rerun requirements.
+
+The prompts read the collector's availability receipts before attempting normal
+refreshes. A reachable payload still needs the usual season, coverage and source-date
+checks; a blocked page never advances a stored data date. Publication's
+`check-wcl-metrics.mjs`, `check-stable-metrics.mjs` and `check-official-notes.mjs`
+continue to verify exact values, failed-source preservation and complete class-section
+dispositions. Ordinary source unavailability produces a degraded receipt, not a
+collector infrastructure failure. The published-date gate likewise preserves its
+existing severity split: unreachable source pages degrade verification rather than
+blocking solely because the collector could not reach the publisher.
+
+Then the **refresh** job runs a PRIMARY agent and — when a deterministic
 completion check finds the manifest unwritten or failing (the recurring 07-15→07-17
 early-stop failure) — a RECOVERY agent, both Claude
 Code headless with a READ-ONLY token (no push/dispatch scopes, checkout credentials

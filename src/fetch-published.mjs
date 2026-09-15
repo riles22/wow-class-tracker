@@ -57,12 +57,12 @@ export function extractDateModified(html) {
 const MONTHS = ["january", "february", "march", "april", "may", "june", "july",
   "august", "september", "october", "november", "december"];
 
-/* The Icy Veins body idiom: "Last UPDATED - 2nd of August." (year usually absent, an
-   optional trailing year tolerated). Year inference when absent: the latest occurrence
+/* Body dates include Icy Veins' "Last UPDATED - 2nd of August." and Method's
+   "Last Updated 13th August 2026". Year inference when absent: the latest occurrence
    of that day+month that is not after the reference (fetch) date — "2nd of August" read
    on 2026-08-04 is 2026-08-02; "31st of December" read on 2026-01-02 is 2025-12-31. */
 export function extractLastUpdated(html, ref) {
-  const m = /last\s+updated\s*(?:[-–—:]|\bon\b)?\s*(\d{1,2})(?:st|nd|rd|th)?\s+of\s+([a-z]+)\.?,?\s*(\d{4})?/i
+  const m = /last\s+updated\s*(?:[-–—:]|\bon\b)?\s*(\d{1,2})(?:st|nd|rd|th)?\s+(?:of\s+)?([a-z]+)\.?,?\s*(\d{4})?/i
     .exec(String(html ?? ""));
   if (!m) return null;
   const day = Number(m[1]);

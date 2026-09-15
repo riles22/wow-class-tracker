@@ -28,6 +28,13 @@ Nightly availability evidence uses ordinary public Archon routes and the sanctio
 API. It detects recovery but is not fresh game data; only a validated data merge may
 clear a data-age failure.
 
+**Publisher dates:** Icy Veins, Method and Wowhead participate in the deterministic
+publication-date check. Method's two pages expose a `Last Updated` body date (for
+example, `13th August 2026`); preserve it separately from the date we captured the
+rankings. Method's publication-age alert uses the same 45-day editorial window as
+Icy Veins. Older publisher dates remain visible and do not remove a source from
+consensus or advance its capture date.
+
 ### Historical prediction accuracy
 
 The [forecast report](https://riles22.github.io/wow-class-tracker/forecast-report.html)

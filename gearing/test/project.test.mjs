@@ -132,6 +132,37 @@ function fakeDocument(data) {
   };
 }
 
+async function upgradeClient(changeFixture = () => {}) {
+  const data = await allValidatedData();
+  data.guides = await loadGuidePayload(data.raid, data.dungeons, data.tier, data.specs);
+  data.icons = {};
+  changeFixture(data);
+  const template = await readFile(fromRoot("src/app.template.html"), "utf8");
+  const source = [...template.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].at(-1)[1];
+  const document = fakeDocument(data);
+  const app = new Function("document", "innerWidth", "innerHeight", source + `
+    return {
+      item: id => BY_ID[id], ceiling: id => maxAttainable(BY_ID[id]),
+      ladder: (id, level) => ladderHtml(BY_ID[id], level),
+      plan: id => planFor([BY_ID[id]]),
+      candidateIds: slot => {
+        const bySlot = {};
+        GEAR.filter(it => canUse(CUR, it)).forEach(it => (bySlot[it.slot] ||= []).push(it));
+        return candidatesForEquipped(slot, MYGEAR[slot], bySlot).map(it => String(it.id));
+      }
+    };`)(document, 1600, 900);
+  return { app, document, data,
+    select(value) {
+      document.ids.get("spec").value = value;
+      document.ids.get("spec").listeners.change();
+    },
+    paste(lines) {
+      document.ids.get("simc").value = lines.join("\n");
+      document.ids.get("parse").listeners.click();
+    },
+  };
+}
+
 test("tooltip parsing preserves rating amounts and hybrid primary stats", () => {
   const item = parseItem({
     name: "Hybrid Shield", quality: 4, icon: "shield",
@@ -948,4 +979,80 @@ test("the game plan shows two named components and lights potential up after a p
   assert.equal(app.plan(staff.id).potential, app.ceiling(staff.id) - 280, "two-hand to two-hand replacement");
   paste(["main_hand=x,id=271092,ilevel=280", "off_hand=x,id=1,ilevel=280"]);
   assert.equal(app.plan(staff.id).potential, null, "a change of weapon setup is not a single-hand replacement");
+});
+
+test("upgrade ceilings include the reviewed Myth track and preserve higher final-boss acquisition", async () => {
+  const { app, document, data, select, paste } = await upgradeClient();
+  select("Mage|Frost");
+  // Independent oracle: the reviewed chart and actual tooltip, not a second copy of
+  // maxAttainable's calculation. Boss 1 drops at 318; this item reaches Myth 6/6 334.
+  assert.equal(data.sheet.seasonShift.mythSeason2.at(-1), 334);
+  assert.equal(app.item("268236").ilvl, 334);
+  assert.equal(app.item("268236").track, "Myth 6/6");
+  assert.equal(app.ceiling("268236"), 334);
+  assert.equal(app.ceiling("268249"), 334, "boss 4 also reaches the track cap");
+  assert.equal(app.ceiling("271092"), 344, "Ula'tek's weapon is not capped at 334");
+  const dungeonLegs = data.dungeons.dungeons.flatMap(d => d.items)
+    .find(it => it.slot === "Legs" && it.type === "Cloth");
+  assert.ok(dungeonLegs);
+  assert.equal(app.ceiling(dungeonLegs.id), 334, "a Myth-track Vault instance can be upgraded");
+  const raidSteps = app.ladder("268236", 324);
+  assert.match(raidSteps, /Mythic <b>318<\/b>/, "the acquisition level is not relabeled 334");
+  assert.match(raidSteps, /Upgrade: <\/span>Mythic Vault <b>334<\/b>/);
+  const dungeonSteps = app.ladder(dungeonLegs.id, 324);
+  assert.match(dungeonSteps, /vault \+10 and above <b>318<\/b>/);
+  assert.match(dungeonSteps, /Upgrade: <\/span>After Myth upgrades <b>334<\/b>/);
+  assert.doesNotMatch(app.ladder("271092", 334), /After Myth upgrades/,
+    "the final-boss exception is an acquisition, not an invented upgrade track");
+
+  paste(["legs=x,id=268236,ilevel=324"]);
+  const output = document.ids.get("up").innerHTML;
+  assert.doesNotMatch(output, /no Season 2 source exceeds item level 324/);
+  assert.match(output, /data-id="\d+"/);
+  assert.match(output, /<b>334<\/b>/, "the upgrade route is visible, not just admitted to the list");
+  assert.match(document.ids.get("paths").innerHTML, /Top listed rewards by path/);
+  assert.match(document.ids.get("paths").innerHTML, /these values are not upgrade ceilings/);
+});
+
+test("Unique-Equipped rings and trinkets replace their own copy without filling the other slot", async () => {
+  const { app, document, select, paste } = await upgradeClient();
+  select("Mage|Frost");
+  for (const [slot, id] of [["finger", "268249"], ["trinket", "270164"]]) {
+    assert.equal(app.item(id).uniqueEquipped, true);
+    assert.equal(app.plan(id).named.length, 1, `${id}: actual guide-named regression fixture`);
+    paste([`${slot}1=x,id=${id},ilevel=324`, `${slot}2=x,id=1,ilevel=280`]);
+    assert.ok(app.candidateIds(`${slot}1`).includes(id), "the existing copy may be upgraded");
+    assert.ok(!app.candidateIds(`${slot}2`).includes(id), "a second copy cannot fill the weak slot");
+    assert.equal(app.plan(id).potential, 10, "334 minus the existing copy's 324, never minus 280");
+    const output = document.ids.get("up").innerHTML;
+    const secondCardStart = output.indexOf(`<h3>${slot === "finger" ? "Finger" : "Trinket"} 2`);
+    assert.ok(secondCardStart >= 0, "the rendered second slot is present");
+    const secondCard = output.slice(secondCardStart);
+    assert.doesNotMatch(secondCard, new RegExp(`data-id="${id}"`));
+
+    paste([`${slot}1=x,id=${id},ilevel=334`, `${slot}2=x,id=1,ilevel=280`]);
+    assert.equal(app.plan(id).potential, 0, "the existing copy is already at its cap");
+    paste([`${slot}1=x,id=${id}`, `${slot}2=x,id=1,ilevel=280`]);
+    assert.ok(!app.candidateIds(`${slot}2`).includes(id), "missing item level does not erase ownership");
+    assert.equal(app.plan(id).potential, null, "the only legal replacement has an unknown item level");
+    paste([`${slot}1=x,id=1,ilevel=324`, `${slot}2=x,id=${id},ilevel=280`]);
+    assert.equal(app.plan(id).potential, 54, "a weak existing copy remains a valid upgrade");
+  }
+});
+
+test("Unique-Equipped weapon checks use both hands while non-unique dual wield stays eligible", async () => {
+  const { app, select, paste } = await upgradeClient(data => {
+    // Synthetic eligibility flag only: exercise unique dual-wield rules without
+    // asserting that this particular live weapon is Unique-Equipped.
+    for (const group of [...data.raid.bosses, ...data.dungeons.dungeons])
+      for (const it of group.items) if (it.id === "268211") it.uniqueEquipped = true;
+  });
+  select("Demon Hunter|Devourer");
+  paste(["main_hand=x,id=268211,ilevel=324", "off_hand=x,id=1,ilevel=280"]);
+  assert.ok(app.candidateIds("main_hand").includes("268211"));
+  assert.ok(!app.candidateIds("off_hand").includes("268211"));
+  assert.equal(app.plan("268211").potential, app.ceiling("268211") - 324);
+  app.item("268211").uniqueEquipped = false;
+  assert.ok(app.candidateIds("off_hand").includes("268211"), "ordinary duplicate weapons remain legal");
+  assert.equal(app.plan("268211").potential, app.ceiling("268211") - 280);
 });

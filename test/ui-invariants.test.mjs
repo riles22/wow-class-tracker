@@ -1987,7 +1987,7 @@ ui("retained rating disclosure names actual older contributors without changing 
   }
 });
 
-test("the phone opening screen includes a complete spec card with visible scoring and source context", skipOpts, async () => {
+for (const fresh of [false, true]) test(`the phone opening screen includes a complete spec card with visible scoring and source context${fresh ? ' and a NEW badge' : ''}`, skipOpts, async () => {
   await ensureBrowser();
   const page = await browser.newPage({ viewport: { width: 375, height: 812 }, hasTouch: true,
     ...(ENGINE !== "firefox" ? { isMobile: true } : {}) });
@@ -1995,6 +1995,16 @@ test("the phone opening screen includes a complete spec card with visible scorin
     await page.goto("file://" + DIST);
     await page.waitForFunction(() => document.querySelectorAll('.row').length > 0);
     await page.evaluate(() => document.fonts.ready);
+    // Always exercise the conditional 44px NEW button, regardless of today's
+    // source dates. Its legitimate wrapping used to fail an arbitrary 140px cap.
+    if (fresh) await page.evaluate(() => {
+      Date.now = () => Date.parse('2030-01-15T12:00:00Z');
+      PHASE.ptr = null; state.era = 'live';
+      const s = SPECS[Number(document.querySelector('.row').dataset.idx)];
+      s.buildChanges = [{ kind: 'hotfix', date: '2030-01-15', forumUrl: 'https://example.com/phone-fixture',
+        lines: [{ text: 'Fresh scoped phone layout fixture', classWide: false }] }];
+      render();
+    });
     const note = await page.locator('.score-note').innerText();
     assert.match(note, /0–100/);
     assert.match(note, /100 means every source's top tier/);
@@ -2007,13 +2017,25 @@ test("the phone opening screen includes a complete spec card with visible scorin
     const row = page.locator('.row').first();
     const box = await row.boundingBox();
     assert.ok(box.y + box.height <= 812, 'at least one whole card is visible without scrolling');
-    assert.ok(box.height < 140, 'the star rail does not stretch the first line of the card');
+    const closedRail = await row.locator('.idcell').boundingBox();
+    const headerBottom = await row.evaluate(el => Math.max(...[...el.children]
+      .filter(child => !child.matches('.idcell,.drawer') && child.getBoundingClientRect().height > 0)
+      .map(child => child.getBoundingClientRect().bottom)));
+    assert.ok(Math.abs(closedRail.y + closedRail.height - headerBottom) <= 1,
+      'the star rail spans the complete card header without stretching a single line');
     assert.ok((await row.locator('.starbtn').boundingBox()).height >= 44, 'the star retains its touch target');
+    if (fresh) assert.ok((await row.locator('button.newbadge').boundingBox()).height >= 44,
+      'the fresh-information button is present with its complete touch target');
+    assert.equal(await page.getByRole('button', { name: 'Ladder', exact: true }).isVisible(), true);
+    assert.equal(await page.getByRole('button', { name: 'Compare all', exact: true }).isVisible(), true);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 375);
     // Opening the drawer must not make the star rail span the expanded content.
-    await row.click();
+    await row.locator('.clscell').click();
     const rail = await row.locator('.idcell').boundingBox();
-    assert.ok(rail.height < 140, 'the rail spans the card header, not the expanded drawer');
+    const drawer = await row.locator('.drawer').boundingBox();
+    assert.equal(await row.getAttribute('aria-expanded'), 'true');
+    assert.ok(Math.abs(rail.height - closedRail.height) <= 1, 'opening the drawer does not expand the star rail');
+    assert.ok(rail.y + rail.height <= drawer.y + 1, 'the rail ends before the expanded drawer');
   } finally { await page.close(); }
 });
 

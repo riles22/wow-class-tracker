@@ -1,0 +1,83 @@
+{
+  "auditDate": "2026-09-15",
+  "baselineCommit": "20cbc5d21cc7978340cca9e7df1888eaa6223f13",
+  "scope": "Read-only project audit; only audit documentation and evidence added",
+  "tests": {
+    "command": "npm run test:quiet -- --test-concurrency=1",
+    "total": 609,
+    "passed": 608,
+    "failed": 0,
+    "skipped": 1,
+    "durationSeconds": 106.4,
+    "uiInvariantsRan": true,
+    "skipReason": "a frozen record's commit really is the newest one still describing the live season"
+  },
+  "builds": {
+    "isolatedSourceArchive": true,
+    "gearingBuild": "passed",
+    "trackerBuild": "passed",
+    "structuralConsistency": "40 specs passed",
+    "allFourRebuiltPagesMatchCommittedAndLive": true
+  },
+  "hosted": {
+    "ciRun": "https://github.com/riles22/wow-class-tracker/actions/runs/34978613203",
+    "deploymentRun": "https://github.com/riles22/wow-class-tracker/actions/runs/34978610639",
+    "ciConclusion": "success",
+    "deploymentConclusion": "success",
+    "scheduledNightliesSeptember5Through14": {"success": 10, "failure": 0},
+    "deploymentWindowSinceSeptember5": {"success": 36, "failure": 0, "inspectionWindowRuns": 200}
+  },
+  "browser": {
+    "surface": "live public site through Brave browser",
+    "viewportChecks": {"tracker": [1440, 375], "gearing": [375], "forecast": [320], "archive": [320]},
+    "newNavigation": "Frost Death Knight NEW opens and focuses Obli take dated 2026-09-14",
+    "comparison": "Keyboard opening and Escape restoration to allbtn passed; input focus retained while filtering",
+    "forecast": "Checkpoint shortcut focuses SUMMARY; Enter opens labeled prediction records",
+    "archive": "Raid region tabindex=0; ArrowRight moved scrollLeft to 40; 871px table contained in 263px region",
+    "settledPageOverflow": false,
+    "mobileAccessibleNameDefect": ["Ladder button exposes only chart glyph", "Compare all button exposes only squared-plus glyph"],
+    "physicalDeviceOrScreenReaderSession": false,
+    "extensionWarningsExcludedFromAppErrors": true
+  },
+  "liveGearingReproduction": {
+    "spec": "Frost Mage",
+    "syntheticInput": "finger1=,id=268249,ilevel=324\nfinger2=,id=268252,ilevel=280\nlegs=,id=268236,ilevel=324",
+    "duplicateRing": "Finger 2 recommends Vile Alchemist's Band already equipped in Finger 1",
+    "ceiling": "Ordinary legs upgrades report no source exceeding 324, while stored item has Myth 6/6 level 334",
+    "realCharacterDataUsed": false
+  },
+  "forecast14": {
+    "outcomeDate": "2026-09-01",
+    "mainLetter": {"right": 40, "total": 80, "baselineRight": 27},
+    "exact": {"right": 33, "total": 80, "baselineRight": 17},
+    "withinOneBand": {"right": 71, "total": 80, "baselineRight": 57}
+  },
+  "forecast28ConcurrentLocalAddendum": {
+    "checkedAt": "2026-09-15T15:09:55Z",
+    "savedAt": "2026-09-15T15:07:53Z",
+    "publicationStatusAtCheck": "local uncommitted result",
+    "mainLetterRight": 41,
+    "baselineMainLetterRight": 27,
+    "total": 80,
+    "exactRight": 33,
+    "withinOneBand": 72,
+    "meanBandError": 0.69,
+    "outcomeCellsReconstructed": 80,
+    "frozenArtifactUnchanged": true
+  },
+  "finalPublicationCheck": {
+    "checkedAt": "2026-09-15T15:13:55.394Z",
+    "remoteMaster": "20cbc5d21cc7978340cca9e7df1888eaa6223f13",
+    "forecastHttpStatus": 200,
+    "forecastSha256": "9486950d47411417637ff0a3695fb72a88bee6e955c94faf2287347b36215dde",
+    "matchesPreviouslyBrowserVerifiedPendingBaseline": true,
+    "local28ResultPublished": false
+  },
+  "limitations": [
+    "Shared checkout was being refreshed by another process; those changes were preserved.",
+    "Local WCL evidence gate rejected stale or baseline-mismatched scratch receipt; no fresh independent credentialed collection was performed.",
+    "A Git-dependent WCL check cannot validate from a plain source archive.",
+    "Security isolation gap was reviewed in workflow and pinned action source; no end-to-end exploit or artifact mutation was attempted.",
+    "No paid transcript calls, workflow dispatches, source membership changes, or deployments performed by audit."
+  ]
+}

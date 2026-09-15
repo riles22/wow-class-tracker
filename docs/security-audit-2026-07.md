@@ -1,5 +1,11 @@
 # External security audit (2026-07) — disposition
 
+> September 15, 2026 update: the earlier same-runner “pre-agent artifact” trust
+> assurance below was incomplete. Collection now has a separate runner, publication
+> binds artifact IDs and digests to trusted collector outputs, and cross-run transcript
+> state has collector-only authentication. See [the isolation design and validation
+> boundary](collector-isolation-2026-09-15.md). This July disposition remains history.
+
 An outside audit of all riles22 repos (received 2026-07-14) flagged this project's
 nightly automation and several data-integrity gaps. This file maps each
 wow-class-tracker finding to what was changed in the repo, what risk remains, and what
