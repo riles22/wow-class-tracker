@@ -62,6 +62,39 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   unique URLs; see the refresh-tiers entry. Per-boss survivability again NOT substituted for the empty aggregate.
 - **Robydoby deliberately not fetched** — its two sheets are the closed 12.1 PTR zone-54 cycle's receipts, dormant between
   cycles and outside `required-sources.json` by design.
+- 2026-09-15 (local, scheduled) — **Murlok's fresh daily cut merged and verified LOCALLY, then NOT pushed — superseded by tonight's nightly cut (same 2026-09-15 source date).**
+  Run BEFORE today's nightly. `node src/fetch-stable-metrics.mjs` executed locally first (`metrics-fetch/` is gitignored, so no
+  trusted nightly receipt was overwritten; checkedAt 2026-09-15T15:04:37Z). **Murlok `status: success`**: three meta pages HTTP 200
+  (71,302 / 42,311 / 40,911 B), 27 DPS / 7 healer / 6 tank = **40 rows, 0 omitted**, every page's `<time datetime>` **2026-09-15T02:11Z**
+  (was 2026-09-14T02:10Z). Merged ONLY `metrics-fetch/updates.json` through `apply-metrics.mjs`; no second parser. Pre-merge diff
+  against HEAD: **38 of 40 values moved, 33 up / 5 down, max +0.99% (Augmentation 3245 → 3277), median |Δ| 0.26%** — one day of
+  top-50 ceiling drift, nowhere near `maxValueMovePct`. Within-role ceiling ranks: **8 cells swapped in 4 adjacent pairs** (Devourer↔Havoc
+  10/11, Shadow↔Fury 18/19, Survival↔Affliction 22/23, Augmentation↔Frost Mage 26/27) — the ▲▼ engine narrates those honestly.
+  `asOf` = the source's own 2026-09-15. `check-stable-metrics.mjs` passes against the receipts. Registry `snapshot` for murlok
+  deliberately not touched (gates nothing).
+  **Mythicstats `partial` from the collector, held unchanged** — period **1080** again, but the omitted-upstream set has GROWN to four:
+  Evoker|Devastation, Mage|Fire, Mage|Frost, Warlock|Affliction, and Devastation has a nonzero stored share, so the whole source is
+  held rather than merged partially; 0 rows in `updates.json`, the stored 40 keep their 2026-09-11 date. Worth watching: the
+  omission list has gone 0 → 2 → 4 specs across three days on the same period id.
+  **Not attempted here (CI's job tonight, nothing residential-only about them):** WCL leaderboards (no local collection — the gitignored
+  `wcl-fetch/evidence.json` is still the 09-08 local leftover, which is why `check-refresh --manifest` prints "wcl evidence … is not from
+  this run"; no WCL row changed, so nothing needed vouching), Bloodmallet, SimC, WoWMeta. Archon's six numeric rows: walled day 22 from
+  home (measured in refresh-tiers), nothing merged. Manifest deliberately left as the 09-14 nightly's record.
+  **Side effect worth knowing: today is launch +28, and this run's `data/history/2026-09-15.json` is the first snapshot on or after
+  the +28 settlement date**, so `dist/forecast-report.html` now renders the second checkpoint — **41 of 80 right vs 27 of 80 for
+  carry-forward** (the +14 checkpoint read 40 / 27). Tonight's nightly rewrites the same-dated snapshot; letters did not move today,
+  so the endpoint is the same either way. Chosen by date, not by anyone's action — no owner step is implied.
+  **Why the data commit never shipped:** the nightly (run 34987153606) started while this run was verifying, and publish's `check-refresh-base` rejects newer `data/`
+  or skill-log edits on master, so pushing would have failed the night red. The data commit was parked on branch `local-run-2026-09-15` and dropped once the
+  nightly landed the same-day Murlok cut itself; these four log entries were re-applied on top of the nightly's commit (logs only, as on 09-13).
+  **The +28 settlement also surfaced a stale TEST fixture, fixed in its own commit and pushed AHEAD of the nightly as code-only `7bde94d`:** `ui-invariants` read the report's FIRST `.result` and
+  compared it with the banner, which summarises the LATEST settled checkpoint (`createForecastReport` takes `checkpoints.filter(c=>c.grade).at(-1)`).
+  True while only +14 existed; today the first `.result` is the +14 count (40) and the banner says +28 (41), so the run went 608 → 607 pass
+  the moment the snapshot landed. The locator now reads the `section.checkpoint-summary:has(#checkpoint-<settleDays>)` the banner points at —
+  same intent, one section deeper. No application code changed; the banner behaviour is the 2026-09-08 owner design. Without the fix tonight's
+  dispatched ci.yml would have gone red on the nightly's own 09-15 snapshot.
+
+
 ## 2026-09-14 (nightly) — SimulationCraft genuinely re-simmed (build 69814, Feral Druid returns 23→24); everything else unmoved
 
 - **SimulationCraft — the git hash MOVED, so this is a real sim and not a re-read.** `MID2_Raid.txt` HTTP 200, 1,438,973 B,

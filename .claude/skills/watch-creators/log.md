@@ -48,6 +48,36 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
 - Nothing was moved to `seen[]`: these are shape and scope declines, not durable dismissals, so all 26 stay unexamined
   and reachable by a future local unfiltered yt-dlp sweep, and the accounting stays auditable. No creator opinion moved
   any tier.
+## 2026-09-15 (local, scheduled) — queue 0 → 0; 18 new videos since the 09-14 nightly, none carries a spec-strength read: 0 probes, 0 queued, 0 takes — run BEFORE today's nightly
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by ~15:00Z; last poll was the 09-14 nightly's
+  16:30Z). RSS discovery re-run — it costs no caption traffic: **44/44 channels HTTP 200** (79 pollable entries → 44 channels, 0
+  transcribable creators missing a `channelId`), **660 entries**, 0 failures. Seen-set = structured union of the four lanes =
+  **1,255 ids** (549 seen + 426 skipped + 0 queued + 280 distilled-only take/metaNote urls; no log regex). Cycle bound
+  `min(builds[].date)` = **2026-06-18** → 532 in-cycle, **336 unseen in-cycle**, of which **18 are newer than the 09-14 nightly's poll**.
+  Titles AND `media:description` read for all 18.
+- **None was worth a fetch, and nothing was queued** — every one is a documented zero-yield or out-of-scope shape:
+  · **Key-run / raid-prog PoVs and stream VODs** — Shadarek `9FBANvZ3mMc` (RLP +19) and `3DmQGTenvTY` (Kings' Rest +20), J-Funk
+    `dWhzyDIf6pA` (Mythic Coiled Altar world-22nd kill clip, a talent string in the description), Clandon `IVzZJ5kB60g` (Disc Altar
+    prog), Critcake `OTH3SnpSwbY` (Altar prog), MadSkillzzTV `VZH4oZxZI-U` (Prevoker stream + UI), Shindigg `jYuO77ty3iY` (vault
+    stream), YoDaTV `Fsi6B3DHZ9s` (bare Twitch-link restream).
+  · **BlizzCon / Forever news and vlogs** — Dalaran Gaming `BmYgPJ6BaHA`, Psybear `caQ-kyV5Hvw`, NeekapHere `0M8HkPndl3A` ("This Week
+    in WoW"), Tettles `wT9Qh0s0Luk` ("I skipped raid to go to Blizzcon" — regular programming back next week), Bansherz `l4Nzd9CJvis`
+    (#shorts), `JoiaTSNX0N0`, `9OyscfAD4PM` (Skyborne cinematic / leveling).
+  · **PvP** — Dalaran Gaming `EDena1l9XBs` (Balance 5v5 / 1v1 duels): a PvP read must never vote in PvE.
+  · **Tooling / item-level** — Shadarek `fjBuMMigym0` (Raidbots dungeon-route sim how-to) and **`FHbZ5oWpl6U` "Trinket Tuning | Puzzle
+    Box Nerfed & Healer Trinket Buffs"** — a reaction to Linxy's 22-Sep trinket post (read directly in ptr-watch, zero class lines).
+    Recorded as the one borderline call: it is in a registered creator's own scope and passes the keyword filter, but the content is
+    ITEM-level by construction, and the standing rule is that an item- or gear-level claim never mints a spec take (a Mastery trinket
+    nerf lands on every spec that carries it). Not fetched, not queued; reconsider only if a later video frames it as a spec placement.
+- **No yt-dlp caption probe this run.** The anonymous lane has been clear for four single-video probes (09-11, 09-12, 09-14 ×2) after
+  the 19-day IP flag; with nothing in the window that could yield a take, a probe would be volume for its own sake. Nothing installed
+  or upgraded (yt-dlp still the local 2026.07.04); no cookies, no authenticated lane; still no unfiltered breadth sweep.
+- **Queue 0 → 0. 0 takes, 0 metaNotes**; `creator-takes.json` and `pending-transcripts.json` byte-unchanged; no `latest` advanced;
+  nothing moved to `seen[]` (shape and relevance declines are not durable dismissals — the 336 stay unexamined and reachable). The
+  Dorki Arms scope flag from 09-14 still awaits Riley. No creator opinion moved any tier.
+
+
 ## 2026-09-14 (nightly) — 44/44 feeds polled, 660 entries, 0 transcripts available, 0 queued; one scope flag for Riley
 
 - **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (79 creator entries collapse

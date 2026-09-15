@@ -50,6 +50,21 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   S2 letters stay in the four-source consensus per the 2026-09-05 owner policy. `encounter-tiers.json` re-read directly —
   still `season: "s1"`, asOf 2026-08-17, 619 tier rows — so the Fight selector stays hidden and the S1 archive stays
   quarantined.
+## 2026-09-15 (local, scheduled) — Archon walled a TWENTY-SECOND day, re-probed from a residential IP (403 shape today); 0 letters touched; run BEFORE today's nightly
+
+- **Archon: still walled from home, and today the residential IP sees the 403 shape.** Root plus all 12 registered page entries (11
+  unique URLs) fetched with the full browser header set, 1 s apart: **HTTP 403 every time, 5,937–6,223 B, `<title>Just a moment...`,
+  `__NEXT_DATA__` count 0** on all 13 — yesterday the same routes from home returned the 200-shaped "Human Verification" body, so
+  the two shapes are confirmed interchangeable on one IP; the assertion stays on `__NEXT_DATA__` presence, never the status code.
+  Nothing merged, no snapshot stamped; the 80 letters verified 2026-08-25 stay in the consensus at their original dates per the
+  2026-09-05 retention policy.
+- **Icy Veins / Method / Wowhead deliberately NOT re-fetched.** The 09-14 nightly re-parsed all 240 cells ~22h ago (0 moves), and
+  today's nightly is still pending — independently regenerating what CI is about to produce is what makes a local push unmergeable.
+  Same call as 09-12/13/14.
+- `freeze-season.mjs`: "8 source/bracket pairs still describe the live season — nothing to freeze"; archive unchanged.
+- `data/encounter-tiers.json` still `season: "s1"` (asOf 2026-08-17) — Fight selector stays hidden.
+
+
 ## 2026-09-14 (nightly) — 240/240 cells re-verified S2, 0 moves; Archon walled a TWENTY-SECOND day (403 shape from the runner)
 
 - **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — 0 of 240 stored cells moved.** All 14 pages fetched fresh this run;

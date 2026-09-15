@@ -50,6 +50,51 @@ else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have 
   material was written to `ptr-builds`, `spec.ptr` or any metric, and the 12.1.5 lane remains notes-only.
 - **Writeups:** one spec still at `ptr: null` — Warlock Demonology — and that null is deliberate (the source reported no
   changes; "nothing changed" is not a verdict). No writeup was manufactured from tuning lines.
+## 2026-09-15 (local, scheduled) — ledger clean (116/116 unchanged, 0 unresolved); two NEW Linxy blue posts read in full — raid-encounter tuning and a 22-Sep trinket pass, ZERO class lines, nothing logged; still no 12.2 PTR — run BEFORE today's nightly
+
+- **Scope:** residential-only catch-up at ~14:58Z with **no nightly yet today** (origin/master at `20cbc5d`, the 13:59Z weekly
+  gearing-guide refresh; the last nightly is 55794e3, schedule event 16:30Z yesterday). Between-cycles posture unchanged:
+  `PHASES.ptr` null, dormant WCL PTR zone sweeps skipped, the 12.1.5 lane notes-only.
+- **Revision ledger FIRST, from a fresh local `node src/fetch-official-notes.mjs`** (checkedAt 2026-09-15T14:58:51Z; `official-notes/`
+  is gitignored, so no trusted nightly receipt was overwritten). Both sources `success`: live hotfix topic **2336376 post 1 still v36**
+  (updated 2026-09-11T03:11:02Z, 113 sections); 12.1.5 dev thread **2344395 post 1 still v3** (2026-09-03T22:48:20Z, 3 sections).
+  `pending.json` deep-diffed against the committed ledger with `checkedAt` stripped: **identical** — 14 applied live · 99 irrelevant ·
+  3 applied 12.1.5, **0 unresolved, 0 removedSections**. Written to `data/official-notes.json` per step 4 (the two `checkedAt` stamps
+  are the whole diff); `check-official-notes.mjs --base=HEAD` passes.
+- **Wowhead news RSS:** HTTP 200, 286,562 B, 40 items parsed per `<item>` block; window 2026-09-12 17:00 → 2026-09-15 09:00 CDT,
+  newest id **382891**. Nine items are newer than the 09-14 nightly's top id 382879. Every article BODY was grepped for
+  PTR / hotfix / tuning / 12.2 strings, not just titles. **0 class tuning, 0 hotfix round-ups, 0 build posts.** The two
+  tuning-titled items are mirrors of the blue posts below (382885 raid tuning, 382890 trinket tuning); 382863 (minimap addon
+  hotfix) is the UI restriction already read on 09-14; every other hit is BlizzCon interview/roadmap prose naming 12.2 / 12.2.5 /
+  12.2.7 as release cadence. **News INDEX** polled too (`data.news.newsData`, 20 posts, 1,552 pages): same top id, no lead.
+- **Blue tracker** (`data.blueTracker.default`, 50 entries → 41 unique topics): **two NEW Linxy standalone posts since the 09-14
+  nightly, both fetched as Discourse JSON and read with heading structure intact:**
+  · **"The Venomous Abyss Raid Tuning - September 15"** (topic **2349528**, created 2026-09-14T22:22Z, v1) — Sszorak / Twin Fangs /
+    Coiled Altar / Ula'tek encounter nerfs (damage, cast times, add counts, per difficulty). **0 class or spec names in the body.**
+    Encounter tuning, not class tuning — same disposition as the 08-27 Coiled Altar and 09-01 Vashnik precedents; no feed entry.
+  · **"Midnight Season 2 Trinket Tuning – September 22"** (topic **2349649**, created 2026-09-15T00:31Z, v1) — announced a week
+    ahead for the **22 September** reset: Preternatural Antivenom +75% healing, Seed of Radiant Hope / Mycolic Medicine / Unstable
+    Felheart Crystal healing +40–58% with shorter cooldowns, Ruby Whelp Shell reshaped, Gaze of the Alnseer −10% primary stat,
+    Vaelgor's Final Stare −10% and **Algeth'ar Puzzle Box −25% Mastery**; Blizzard calls it the FINAL S2 trinket pass. **0 class
+    or spec names.** Item-level tuning is not class tuning and never enters the feed (an item-level claim is not a spec claim).
+    ⚑ **Heads-up for the GEARING lane, not acted on:** these are scheduled, not live, and the guide trinket letters are the
+    guides' to move — the weekly gearing-refresh (Tuesdays 08:37 UTC) will pick up whatever Icy Veins / Wowhead / Method republish
+    after 09-22. Nothing to write today.
+  Everything else newer is BlizzCon recaps, the Sept-17 Q&A thread and Forever marketing. Topic **2335871** "Season 2 Class Tuning
+  Plans" is at 195 posts, Kaivax still only at #1 and still **v1** (2026-08-12) — the Sept 22 class pass it promised is still ahead
+  (and now shares a reset with the trinket pass). Thread **2317811** unchanged (17 posts, last 2026-07-31).
+- **12.2 PTR check: still NOT open.** PTR forum category 345 re-read: the only staff topics are the configured 12.1.5 dev thread
+  2344395 and the 09-09 Kith'ix testing schedule; **no 12.2 dev-notes thread**, no PTR realm string in the RSS window, index or
+  tracker beyond the Diablo 3.2.1 PTR notes inside the BlizzCon Day-1 roundup. Opening the cycle stays an owner action; nothing touched.
+  `ptr-builds.json` still 31 entries, newest 2026-09-10.
+- 0 builds, 0 hotfixes, 0 tierSet edits (upkeep gate quiet) from THIS run; its `data/official-notes.json` stamp write was never pushed (see refresh-metrics).
+  ⚑ **Disposition divergence, for Riley:** the nightly that landed ~40 minutes later (f4ace95) read the SAME two Linxy posts and DID log them, as
+  two `kind: "hotfix"` feed entries with `specsAffected: []` and Non-class highlights (the thread-post precedent of #7/#12/#13 extended to standalone
+  blue posts), where this run logged nothing on the encounter/trinket-tuning precedent (08-27 Coiled Altar, 09-01 Vashnik). Both keep every class
+  drawer and tally untouched — the difference is whether the patch feed indexes non-class Blizzard posts. The nightly's entries stand; this is
+  recorded so the two agents stop alternating on it. Worth a one-line rule in SKILL.md either way.
+
+
 ## 2026-09-14 (nightly) — ledger clean 116/116, nothing new in any of four channels; a 12.1.5 PTR realm is raid-testing but no 12.2 thread exists
 
 - **Official revision ledger ran FIRST** from the pre-agent receipts (checkedAt 16:33:07Z). Both sources `success`:
