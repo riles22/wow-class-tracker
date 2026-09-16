@@ -5,6 +5,26 @@
     {
       "date": "2026-09-15",
       "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for September 15 — three class bug fixes, two of them tier-set behaviour fixes, plus the live landing of the Venomous Abyss encounter tuning already logged from its own September 14 announcement. Read from the canonical source: Kaivax's running hotfix blue post (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - September 15”, post 1 at version 38, last edited 2026-09-16T00:41:40Z), via the deterministic official-notes receipt with its heading nesting INTACT and cross-checked line for line against the Wowhead mirror news=382918. All three class blocks sit under an explicit SPEC heading (Hunter › Marksmanship, Paladin › Protection, Priest › Holy). Two lines touch a Venomous Abyss set bonus — Protection Paladin's 2-set critical-strike illumination now applies to Consecration's first tick, and Holy Priest's 2-set Renewed Vigor is capped at 3 stacks as printed — so both specs' spec.tierSet.asOf advance to 2026-09-15 with this topic as source and a dated parenthetical recording that these are behaviour fixes making the printed bonus apply as written (no value changed); gearing/data/specs.json was re-synced and the gearing artifact rebuilt in the same change. The Marksmanship line is a cast-animation fix with no tuning value. The Dungeons and Raids block restates the encounter tuning announced in topic 2349528 (logged on 2026-09-14) as now live and adds one Coiled Altar fix; encounter mechanics are not class tuning. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-15/2336376/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382918/spark-of-tides-fix-patch-12-1-hotfixes-for-september-15th",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Marksmanship Hunter",
+        "Protection Paladin",
+        "Holy Priest"
+      ],
+      "highlights": [
+        "Marksmanship Hunter — Fixed an issue where Aimed Shot was not properly playing its cast animation when using a gun or crossbow.",
+        "Protection Paladin — Fixed an issue where Consecration’s first tick would not benefit from the Venomous Abyss tier set’s increase to its critical strike chance.",
+        "Holy Priest — Fixed an issue where Renewed Vigor from the Venomous Abyss 2-piece tier bonus could exceed 3 stacks.",
+        "Non-class: the September 15 round-up also carried the Venomous Abyss encounter tuning announced on September 14 (Sszorak, Twin Fangs, The Coiled Altar, Ula’tek — logged in full from topic 2349528) now live, plus a Coiled Altar fix so Coalesced Venoms and Virulent Mutations no longer fail to drop on the ground if a priest carrying one enters Spirit of Redemption; players behind on Spark of Tides receive their missing Sparks directly into their bags on login; two quest fixes (the Hijacked Portal for “Still Behind Enemy Portals” now teleports to the correct destination, and delves again count toward “Hope in the Darkest Corners”); and Coiled Isle Curse Surges now rotate every 30 minutes (was 45)."
+      ]
+    },
+    {
+      "date": "2026-09-15",
+      "kind": "hotfix",
       "label": "The Venomous Abyss seasonal raid buff “Fury of the Dead” turned on at 1% damage and healing for all players in the raid, on the Season-1 escalation pattern (weekly +1%, expected cap 15%). Observed live and read from the Wowhead round-up news=382904 (2026-09-15T15:39Z); it is NOT a Blizzard forum post — the blue tracker (50 entries, ~40 unique topics) and the hotfix compilation topic 2336376 (still post 1 v36, 2026-09-11) carry nothing about it, so the round-up is the only citation and the entry says so. NO CLASS OR SPEC LINE: the buff is a flat raid-wide aura granted by a quest from Strongblood Jak’mo, identical for every spec, so specsAffected is deliberately empty (the posts #7/#12/#13 precedent) and nothing reaches a spec drawer or votes in any outlook tally. Logged for the same reason as the September 14 raid tuning entry — raid difficulty is the context the raid bracket’s letters are read against — and explicitly NOT as spec tuning: a uniform +1% moves no spec relative to another.",
       "forumPostNumber": null,
       "forumUrl": null,

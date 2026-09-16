@@ -6738,7 +6738,7 @@
       "claim": "He reads Survival's 7% as the same pet-plus-abilities shape as Beast Mastery's, with a slightly lower value in PvP, and states the intent plainly: the pass is meant to bring Survival and Beast Mastery up to roughly the competitive level of Marksmanship. He hedges on the magnitude rather than the direction — \"we'll see how those numbers really do stack up\" — so this is a corrective buff he expects to help, not a claim that Survival is now strong."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "Critcake",
@@ -6834,7 +6834,7 @@
       "claim": "He calls Restoration Shaman OP as well, and scopes the strength to Mythic+ melee compositions in particular."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "MadSkillzzTV",
@@ -6918,7 +6918,7 @@
       "claim": "He extends the tier-set complaint to Holy Paladin's raid position: the four-piece leans on Holy Light and Virtue, which he says players do not end up casting because the mana cost is punishing, so many Holy Paladins are not eager to complete the set. He wishes Blizzard would revisit that four-piece specifically. Its Race-to-World-First appearances he attributes to raid utility — blessings and being a main source of Devotion Aura — rather than to throughput."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "MadSkillzzTV",
@@ -6954,7 +6954,7 @@
       "claim": "He rates Preservation as an S-tier raid healer, citing pure HPS and the fact that Liquid, Echo and Method all brought double Preservation to Mythic Ula'tek, where he says the HPS is insane and the last one or two bosses are what actually decide a Mythic guild's tier. He also singles out Preservation and Holy Priest as being well ahead on Twin Fangs, while warning that the public-log sample there is small."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Evoker",
       "spec": "Preservation",
       "creator": "MadSkillzzTV",
@@ -6978,7 +6978,7 @@
       "claim": "He calls Restoration Druid a sleeper for raid: its raw HPS is, in his words, bonkers, and while he is explicit that much of that is overhealing and that effective healing is what matters, he still thinks it is being slept on for guilds progressing on already-nerfed bosses rather than racing. He notes it was not brought to the Race to World First as much as he would have liked, and that the Regrowth-heavy, stand-still gameplay it was pushed into is not to everyone's taste even after the heart-of-the-wild buffs."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "MadSkillzzTV",
@@ -7098,7 +7098,7 @@
       "claim": "He reads Demonology as already very strong in Mythic+ — \"gapping\" in keys — and probably the best or one of the best specs in the game at mass AoE, and uses that standing to argue Demonology should stop playing its own signature pet. After Blizzard buffed every Warlock pet except the Felguard by 350% while giving the Felguard 20%, his sims put Succubus about 1,400 DPS (~6%) ahead of Felguard in single target, and dropping the Felguard talent for a 2% mastery node gains a further ~1.2k; in a 10-target AoE sim the no-Felguard builds land within about 1.5% of the Felguard build. He judges that 1.5% effectively unnoticeable in keys precisely because Demonology's damage is not the constraint, and says the trade buys the thing that has held the spec back for years — a real interrupt, since Axe Toss is a 30-second stun that does not lock a school and lets a ranged mob resume casting, against Fel Hunter's 24-second ranged spell lockout, plus Fel Hunter's purge on top of the Imp's Singe Magic through Grimoire of Service. He expects Blizzard to buff the Felguard within a few weeks, saying its damage is currently a wet noodle now that Demonology's profile has shifted onto its Apex talents."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "VooDooSaurus",
@@ -7122,7 +7122,7 @@
       "claim": "He splits the announced 12.1.5 Devourer changes in two, and lands mixed. On Void-Scarred: Demonic Intensity now has Collapsing Star reset the Hunt, where Violent Transformation used to, and its Hunt empower is stated at 30% — a figure he notes matches every Havoc empower, so he reads it as normalisation rather than a real buff, saying he is not sure what the empower was before. Violent Transformation stops resetting the Hunt, and the Hunt stops resetting Soul Immolation; that reset moves onto entering Void metamorphosis instead, which he thinks is probably right, because Collapsing Star resetting the Hunt and the Hunt resetting Soul Immolation would have created a GCD-economy problem on top of Undying Embers already letting Soul Immolations chain. Monster Rising trades 15% out-of-form Intellect for 10% — about a 5% damage cut outside metamorphosis — against Collapsing Star damage rising from 15% to 20%, and he calls the cut for the best, since Void-Scarred does too much damage outside metamorphosis while its mastery barely differs inside and out. He understands the design intent — be pushed toward pressing Collapsing Star instead of idling in metamorphosis — but says it does not fix the spec: the reset still requires talenting the Hunt, the Collapsing Star talents demand a lot of points low in the tree, and getting there means dropping Devourer's Bite, the talent carrying most of his AoE damage and Hungering Slash damage, and even then something else has to go. He calls the tree very scuffed as it stands and says larger changes are needed. On Collapsing Star he is unreserved: added range once the cast begins, and no more 5-second lockout on a cancelled cast, are changes he expects no Devourer player to argue with. He notes the Fury-drain slow is now capped at roughly 1.5 full casts and reads the old lockout as having existed precisely to stop cancel-spam manipulating Fury drain, so with the cap in place it is unnecessary. It is not a direct buff — a perfectly played Devourer sees no change — but he expects it to raise average damage, more in keys than in raid, and it also stops a knockback putting Collapsing Star on cooldown, which matters given how many this season has. He still calls Collapsing Star fairly weak and hopes for an Annihilator-focused buff to it."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "Nintern",
@@ -7383,6 +7383,90 @@
       "patchContext": "Season 2 live — \"FROST DK Mythic + Guide and Breakdown / Blinding Vale +14 / Midnight 12.1\", published 2026-09-14. Mostly a how-to walkthrough of a +14 key (openers, Bone Grinder / Cryogenic Chamber windows, pull-by-pull); the spec-strength read is his framing at the top and his closing, which is what is distilled here.",
       "url": "https://youtu.be/sZ6CJFwhwnk?t=17",
       "claim": "He opens by calling Frost 'pretty powerful at the moment' and a very good pick for keys, and now puts it slightly ahead of Unholy — the two on the same playing field with Frost edging up a little — which reverses the 'Unholy a teeny bit ahead' he gave on 08-28. The evidence he cites is the MDI, where Yagi and Mine played Death Knight and 'popped off', with the single target holding up (around 200k at the end of a boss) rather than only the AoE. The caveat he keeps returning to is gear dependence: Frost does considerable damage on heroic-level weapons but 'you're creaming' once the gear is good, and he suggests the Death Knights' poor showing at the start of the season may have been a gear effect. Stacked low-target cleave (Twin Fangs-style pulls) is where the Howling Blast cleave doubles Cryogenic Chamber's value; he adds that a Shaman's buff is close to vital for the melee-swing-driven kit. He closes that even 'our weakest versions' of Frost carry themselves decently.",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-16",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Resto Druid is the BEST MDI Healer? | M+ Healer Meta & More\" (published 2026-09-16): his read of the BlizzCon MDI Grand Finals healer picks against live high-key pushing, with his own explicit disclaimer that MDI (16–19 keys, speed-running) does not translate to the retail high-key meta. M+ lens.",
+      "url": "https://youtu.be/6g8e91B7DDg?t=123",
+      "claim": "Restoration Druid was the most popular MDI healer — nearly every team but one ran it, on Keeper of the Grove with Call of the Elder Druid and Dream of Cenarius, healing through Starfire damage windows (400–600k in big pulls) and bringing Mark of the Wild — but he does not see that translating to real high keys: the build is hard to optimise, HoTs fall off during the Starfire windows, it is not safe when a party needs a lot of healing, and Season 1 showed the same issue. Resto Druid is not popular in live high-key pushing, and the most popular live build is the safer Wildstalker.",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-16",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Resto Druid is the BEST MDI Healer? | M+ Healer Meta & More\" (published 2026-09-16): his read of the BlizzCon MDI Grand Finals healer picks against live high-key pushing, with his own explicit disclaimer that MDI (16–19 keys, speed-running) does not translate to the retail high-key meta. M+ lens.",
+      "url": "https://youtu.be/6g8e91B7DDg?t=396",
+      "claim": "He expected Preservation Evoker in MDI and thinks it could easily have made it: its damage is really high (matching the ~100k overall the Resto Druids did) with the added advantage of priority damage — tier set, Essence Burst, Disintegrate on the mob that needs to die, plus Living Flames — which matters in this dungeon pool. What keeps it out is the raid buff: Blessing of the Bronze is 'something of a meme' next to Mark of the Wild or Skyfury. He also notes it has climbed a little on live high-key score.",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-16",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Resto Druid is the BEST MDI Healer? | M+ Healer Meta & More\" (published 2026-09-16): his read of the BlizzCon MDI Grand Finals healer picks against live high-key pushing, with his own explicit disclaimer that MDI (16–19 keys, speed-running) does not translate to the retail high-key meta. M+ lens.",
+      "url": "https://youtu.be/6g8e91B7DDg?t=548",
+      "claim": "Moving from MDI to real high-key data, he reads Holy Paladin as climbing every week and as the best high-key pushing healer right now — a lot of spot healing and extremely safe — and expects most people to keep playing it unless something changes. He agrees with the live score-based picture that Holy Paladin is the best Mythic+ healer, while hoping Blizzard buffs the healers viewed as worse.",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-16",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"12.1 Resto Druid is the BEST MDI Healer? | M+ Healer Meta & More\" (published 2026-09-16): his read of the BlizzCon MDI Grand Finals healer picks against live high-key pushing, with his own explicit disclaimer that MDI (16–19 keys, speed-running) does not translate to the retail high-key meta. M+ lens.",
+      "url": "https://youtu.be/6g8e91B7DDg?t=670",
+      "claim": "In pure HPS he does not think there is a huge difference between Restoration Shaman and a bunch of other healers — Holy Priest and Mistweaver can heal for a lot too. He reads Resto Shaman as being propped up in high keys by utility, Skyfury and Bloodlust for the melee comps especially, which is why it is viewed as a slightly higher healer than its healing alone would justify.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Nintern",
+      "date": "2026-09-16",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. His unedited reaction, recorded straight off the plane from BlizzCon, to the 2026-09-15 update of the official 12.1.5 PTR development notes (Soulforged Blades 18% crit, Voidpurge 2.5s, and The Hunt / Eradicate moving from the final gate to the middle gate); nothing here describes the live 12.1 spec, and his 2026-08-09 Season 2 guide read stands alongside it. Supersedes his 2026-09-03 reaction to the first 12.1.5 notes.",
+      "url": "https://youtu.be/lgKrVkwJcfc?t=156",
+      "claim": "He is happy with the changes and says they do exactly what Blizzard said: the bottom gate is no longer pressured, and having The Hunt in the middle gate makes Void-Scarred life a lot easier. But it does not necessarily solve Devourer's problems — if he puts the points back into the melee talents he is still in the 'Collapsing Star bad, AFK-ing good' problem. What has him 'kind of stoked' is a speculative Void-Scarred caster-cleave build that drops Hungering Slash, Devourer's Bite, Soulforged Blades and Void Rush for four points in Midnight while keeping The Hunt for free — an improved version of the old caster-cleave he calls a middle ground, with his own warning that it is 1 a.m. plane conjecture that is 'extremely likely' to be bad.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-09-16",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. His breakdown of the 2026-09-15 update of the official 12.1.5 PTR development notes (the Devourer talent-tree reshuffle, Soulforged Blades 18% crit, Voidpurge 2.5s), recorded before any sims; nothing here describes the live 12.1 spec, and his 2026-08-17 live read stands alongside it. Supersedes his 2026-09-05 first-look at the first 12.1.5 notes.",
+      "url": "https://youtu.be/kgkTd-wi-mE?t=153",
+      "claim": "He loves the tree reshuffle: The Hunt and Eradicate moving to the middle gate means Eradicate is no longer a big damage loss to take and comes free in almost every build, Void-Scarred no longer has to go down the whole melee path to reach The Hunt, and Annihilator picks up Demonic Instinct plus the 2.5s Voidpurge — likely another Void Ray per Void Metamorphosis. He calls it a big improvement on last week and a step in the right direction, but not all the way there: playstyle barely changes, Reap is still unused in AoE, Rolling Torment is still too powerful so it is likely still correct to AFK as Void-Scarred, the Collapsing Star melee sequence has too many hard casts and feels unsafe, Void-Scarred has 'lost its identity a little bit', and the bigger fixes he wants (instant Hunt on Collapsing Star reset, baseline Reap cleave) are 12.2-sized, not 12.1.5-sized.",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "Critcake",
+      "date": "2026-09-16",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — the intro to a +20 Voidscar Arena key run (\"+20 Voidscar Arena - Arms Warrior - Midnight M+ Season 2\", published 2026-09-16), answering the hot-topic question of whether Arms is actually S tier; explicitly a Mythic+ read. Supersedes his 2026-08-29 M+ read.",
+      "url": "https://youtu.be/ccjTZkATHRU?t=0",
+      "claim": "Asked whether Arms is actually S tier, his M+ answer is that it is probably more like A+ or S−: other classes can match its single-target priority damage and can easily out-AoE it, while its two-target damage is pretty much unmatched in M+. So Arms is not as good as some have hyped it to be, but still really good and the Slayer playstyle is really fun this season; AoE buffs would be nice but he thinks asking for buffs at this point is asking too much.",
       "superseded": false
     }
   ],
@@ -10232,7 +10316,7 @@
       "note": "He keeps Protection Paladin ahead of Vengeance and Guardian in the middle tank tier while describing it as displaced: it began the PTR as the tank meta before being hit by nerfs at the same time Blood Death Knight was buffed, which is what changed the standing. He allows it a residual case in physical compositions through Devotion Aura."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Guardian",
       "creator": "izen (Izenhart)",
@@ -12232,7 +12316,7 @@
       "creator": "izen (Izenhart)",
       "date": "2026-09-01",
       "sentiment": "mixed",
-      "superseded": false,
+      "superseded": true,
       "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
       "url": "https://youtu.be/4z49EhVeP7I?t=602",
       "note": "Grouped with Retribution as sitting in the top half without being expected to do much unless a melee-physical composition takes hold, which it has not; of the pair he says Retribution has clearly kept more popularity."
@@ -12243,7 +12327,7 @@
       "creator": "izen (Izenhart)",
       "date": "2026-09-01",
       "sentiment": "mixed",
-      "superseded": false,
+      "superseded": true,
       "patchContext": "Season 2 live — M+ outlook, \"12.1 Season 2 | Mythic+ Best Specs & Meta - Preseason Tier Lists Before & After\" (published 2026-09-01), the Mythic+ companion to his raid recap of the day before. He scores the channel's own pre-season Mythic+ predictions against two weeks of live results, reading average score and damage at 15+ key levels alongside popularity and the group compositions actually being fielded, and says up front that Mythic+ was the easier of the two brackets to predict.",
       "url": "https://youtu.be/4z49EhVeP7I?t=679",
       "note": "The specs predicted to do well have mostly turned up; Balance is the one that has turned up least. He puts its average Mythic+ score a full 100 points below Feral while its popularity is over four times higher, so it keeps the representation without the performance — and notes a Balance buff lands on the reset he is recording ahead of."
@@ -12290,7 +12374,7 @@
       "note": "Three resets in, he still reads Holy Paladin as the number one healer pick with the highest average score in high keys, and says the healer picture has not moved from what the previous weeks showed. It is present in nearly all of the top 25-30 Mythic+ compositions, and its dominance gets clearer the higher the key level he filters to.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=58",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -12301,7 +12385,7 @@
       "note": "He puts Restoration Shaman second among healers behind Holy Paladin on average high-key score, with every other healer dropping away below it; it appears in a handful of the top compositions rather than nearly all of them the way Holy Paladin does.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=66",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -12334,7 +12418,7 @@
       "note": "Tanks are unchanged from the previous weeks and he reads them as still a very high dominance of Blood Death Knight; the only other tanks he can find in the most popular 15-and-up compositions are one Protection Paladin and one Guardian Druid.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=206",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -12345,7 +12429,7 @@
       "note": "He deliberately walks back the apparent 'continuous rise' of Brewmaster: it is the least played tank of the season, it sits towards the bottom on average parses in Mythic+ keys, and there is not a single Brewmaster in the most popular 15-and-up compositions. His explanation is that a handful of die-hard one-trick Brewmaster mains are pushing very high keys and inflating the totals, so the visibility is those individuals rather than the player base picking the spec — 'it's not that Brewmaster from week one to week three became any more popular'.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=169",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -12356,7 +12440,7 @@
       "note": "Arcane is the one meta DPS he expects not to be replaced. Its high-key share did slip from 15.1% to 13.8% of DPS between weeks one and three, the smallest of the three meta losses, but across the popular compositions Arcane is the constant while Elemental and Arms are the slots that get swapped out. He also calls its damage profile easily the most complete of the meta specs: Arcane Barrage cleaves natively, the Apex change granting Prismatic Bolt strengthens its AoE, and it is very good single target — it loses AoE to Elemental's earthquake but wins the value back on boss damage.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=1310",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -12367,7 +12451,7 @@
       "note": "Arms took the largest week-one-to-week-three fall of the three meta DPS at high keys, from 12.7% to 8.9% of DPS players (a 3.8-point drop), and in the popular compositions it is the second-most-often replaced slot after Elemental. He still rates the spec's profile highly — up to now arguably the second most complete, losing the least between trash and boss damage, holding two-target value through Sweeping Strikes uptime, with strong priority damage because Overpower's main hit, Execute, Heroic Strike, Mortal Strike and Slayer Strike all land on the primary target — and notes it does better in a melee composition than mixed with an Arcane Mage or Elemental Shaman.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=451",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -12378,7 +12462,7 @@
       "note": "Elemental fell from 9.9% to 7.1% of high-key DPS across three weeks and is the first spec he sees being replaced in the popular compositions. He calls its damage profile the most lopsided of the meta specs: very high AoE value, but its weakest point is two-to-three-target cleave, where there are not enough targets to pay off Lava Burst's six-target cleave, Chain Lightning or Earthquake, and it lacks the ability to focus damage onto a main target the way Arms can. He also calls it on the squishy end of DPS picks. Its retained argument is group value — it still brings a mastery buff and a windfury buff.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=465",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -12389,7 +12473,7 @@
       "note": "The headline mover of week three. Demonology went from 0.9% of high-key DPS in week one to 5% now — roughly a five-fold increase — on the back of the large buffs it received the previous reset, and he says it is currently pumping the most damage. In the group compositions it is now the second most popular comp, a slot it took from Elemental, and he traces the change reset by reset. On profile he calls it one of the more complete but standard shapes: no unique funnel or resource-focusing tool, mostly blanket AoE since the Dominion of Argus demon damage was equalised, but unlike Elemental it does not shed value on bosses. He raises whether Demonology will fully replace Elemental, noting the trade is losing the windfury and mastery buffs for health stones, a redundant combat res and a gateway, and that Demonology is significantly tankier.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=506",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -12411,7 +12495,7 @@
       "note": "Of the three Rogue specs, Assassination is the one that kept its popularity into week three while Subtlety and Outlaw shrank, and it is concentrated in high keys rather than spread across all levels — he counts it at second through fifth in the 15-and-up results. He credits a distinctive damage profile: bleeds on multiple targets generate extra energy, which funnels Envenom onto the main target, giving very good priority damage during trash. He adds that most Assassination players at high keys are on Fatebound, which funnels less than Deathstalker's Singular Focus, so the spec is performing without its strongest funnel build.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=558",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -12444,7 +12528,7 @@
       "note": "He repeats his standing Feral caveat: on average score it sits only about three points below Arms Warrior, so the results are there, but it continues to be one of the least played specs overall. It appears only as an occasional alternative in his list of specs that turn up replacing Elemental or Arms in high-key compositions.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=342",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -12455,7 +12539,7 @@
       "note": "Against the two specs that grew this week, Devourer went the other way, slipping from 2.8% to 1.6% of high-key DPS. He calls the move very minor and does not attach a cause to it, and Devourer remains on his list of specs that occasionally turn up as a replacement pick in high-key compositions.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=543",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -12543,6 +12627,171 @@
       "note": "izen has Frost Mage at the very top of Twin Fangs on two-target cleave, and says that value survives the nerf to its cleave because the mechanism is innate: Flurry plus Frostbolt or Frostfire Bolt hits an extra target, and Ice Lance does as well. The same caveat applies as for Arms Warrior — he is explicit that Twin Fangs is the only boss in the tier with that damage profile.",
       "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
       "url": "https://youtu.be/TJe8OnXl3pY?t=596",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "Demonology continues to do reasonably well: slightly down on last week overall, but it has set itself up as popular at reasonably high keys — counting from 15 upward it is the fifth DPS spec played, even with Retribution's standing popularity. There is only one Demonology in the top 100 keys, but slightly lower it appears in more and more high-key compositions, and he estimates close to 20% of all keys above 15 include one. He credits better priority damage than Elemental or Havoc, though not enough to be the replacement for Arcane.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=93",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "Confirmation of what he had already figured: of the three very popular meta DPS, the one replaced least in compositions is now Arcane — always present in the top ~15 most popular comps and even more so toward the very high end, while Arms and Elemental are the slots that get swapped. He calls Arcane the premier spec for priority damage (Arcane Missiles, Arcane Barrage and Prismatic Bolt all hit harder on the main target, so it still focuses the dangerous mob during AoE) and the best of the meta-viable casters. The one exception is the very top: from +15 to +20 Arcane sees its largest drop, replaced by an Assassination-based or traditional physical comp.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=154",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "At the very top keys there is a clear divide between the group being played — Arms, Arcane and Elemental — and the rest, and he counts Arms among the few melee doing very well right now after the significant buffs it received at the start of the season. Within that group, though, Arms and Elemental remain the two slots replaced more often than Arcane, and he notes Arms is not especially good at priority damage on a single target.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=124",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "mixed",
+      "note": "Elemental sits in the top-keys group with Arms and Arcane, and with Arcane it is one of only two casters among the top average scores — but it remains one of the two slots replaced more often than Arcane, and he characterises its damage as blanket AoE with no particular focus on the main target (Chain Lightning, Earthquake, the five-to-six-target Lava Burst and Storm Elemental), which is exactly what Arcane and Assassination bring instead.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=459",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "The one growth confirmed over time toward the very high end of keys: Assassination has a slight edge over the rest of the field behind the top three, and at +20 — where Arcane sees its largest drop — an Assassination comp is the one most often replacing the Arcane Mage. He credits better overall damage, a much faster AoE ramp than old Assassination, and priority damage from Envenom splashing AoE with Caustic Spatter support plus Kingsbane on the focus target. It costs the group Arcane Intellect, but double Bloodlust this season makes the swap affordable, and of the three Rogue specs — all buffed together — Assassination's funnel plus very high flat AoE is the one winning out at this key level.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=581",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "mixed",
+      "note": "One of the more interesting growths: thanks to its early-season buffs and the end-of-PTR Devourer nerfs, Havoc's play rate in higher keys has grown a lot and for the past couple of resets it has passed Devourer, which is not how the season opened. He is careful about what that means — Havoc has nothing particularly special in its damage profile now that it no longer plays Aldrachi Reaver and lacks Wounded Quarry, so most of its damage is blanket AoE with no priority damage; the burst windows are nice after the Essence Break buffs, but the overall damage is 'fine'.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=275",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "negative",
+      "note": "Fewer and fewer Devourers have kept up in Mythic+: after the end-of-PTR nerfs and Havoc's buffs, Havoc has passed Devourer in the last couple of resets, whereas Devourer was ahead at the start of the season and during the race to world first; the season-long average still shows Devourer ahead only because of that early lead.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=275",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "mixed",
+      "note": "At the very highest keys Feral suddenly pops up in multiple flavours of physical melee comps — it is the 'hipster pick' there, and on average score it sits among the melee specs above everything but Elemental and Arcane — but that disappears as soon as you go down to 15s, where the only Druid he sees is Balance. Feral has if anything slightly increased over time while Balance lost out far more, yet it remains unpopular (Balance is played more than twice as much) despite significantly lower parses than most specs.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=763",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "negative",
+      "note": "Balance has lost out far more than Feral over time — the two started evening out and then Balance dropped away. It had been one of his meta question marks alongside Elemental, Arcane and Devourer (for a caster comp had Arms not made the meta), with two doubts: how squishy Balance is, and a season of far smaller pulls, more RP and more mini-bosses meaning less blanket AoE, which hurts Balance most. It has not played out for the spec, and given the dungeon pool he no longer expects Balance to find a spot high in the meta; it remains about the seventh most popular DPS overall.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=794",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "mixed",
+      "note": "Windwalker has grown slightly and is doing quite well on score, but it is often accused of pad damage — AoE that targets nothing in particular with little on the main target — and he calls it terribly squishy compared to other specs. A good pick for roughly 16–18, after which it starts dropping off against other DPS; the only way a Guardian Druid sneaks into a physical comp is by making room for a Windwalker over a Feral, which costs the versatility buff and a combat res.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=950",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "mixed",
+      "note": "Tanks are unchanged except that Guardian's share went from 11 to almost 20 — nearly doubling — while Blood stayed put, so the growth came out of the other tanks. Guardian has gotten much better in tankiness, and the season's compositions and pulls built around three-minute timers and Reincarnation play out well for it, but its damage is still a significant gap behind Blood. At the very highest keys the two de facto melee-comp picks still include a Brewmaster instead, and Guardian only gets in by making room for a Windwalker.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=920",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "Blood remains very popular and easily ahead of all the other tanks: it got much tankier before the season from the many damage-reduction buffs it received, and now even its damage is quite the gap over the other tanks.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=1043",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "mixed",
+      "note": "At the very highest keys the two de facto major picks for melee compositions still include a Brewmaster Monk, which he attributes to physical damage being what those comps run; he gives no broader share read for Brewmaster this week beyond that top-end composition role.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=950",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "Confirmed as he expected: Restoration Shaman is still finding a spot as the meta healer for physical comps, because Enhancement is not meta and Elemental does not belong in a physical comp, so Windfury has to come from Restoration. It also finds some room in traditional comps — small shares per composition (0.6–0.8%), but adding up to about 18% of keys at that level, close to one in five, and much higher in the 15+ range. He puts the healer picture as two tiers roughly 100 score points apart.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=1104",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-15",
+      "sentiment": "positive",
+      "note": "Holy Paladin still remains much better overall: its single-target healing and ability to deal with hits for ~90% of a player's health is unique to it right now, and it is the default healer up to 20, 21, 22. His one doubt is very high keys: at high keys most play Lightsmith, which has significantly lower HPS than Herald of the Sun with Beacon of Virtue party healing, so once players get chunked for 60% per tick and all need healing it could become a problem — but it clearly has not yet.",
+      "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
+      "url": "https://youtu.be/7ZaRcXRH8u4?t=1164",
       "superseded": false
     }
   ]

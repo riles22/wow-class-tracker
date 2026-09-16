@@ -17,6 +17,52 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-16 (local, scheduled) — ledger MOVED: hotfix post v36→v38 (+3 live class sections, two tier-set fixes) and a NEW 12.1.5 dev-thread post #4 (+7 preview sections, 13 spec notes); ONE hotfix feed entry; still no 12.2 PTR — run BEFORE today's nightly
+
+- **Scope:** residential-only catch-up at 14:21Z with **no nightly yet today** (origin/master at `c8ee5cb`; the last nightly is `300d396`, the
+  second 09-15 run). Between-cycles posture unchanged: `PHASES.ptr` null, the dormant WCL PTR zone sweeps (52/54/56/57) skipped, the 12.1.5 lane
+  notes-only. Manifest deliberately NOT rewritten (partial run).
+- **Revision ledger FIRST, from a fresh local `node src/fetch-official-notes.mjs`** (checkedAt 2026-09-16T14:22:56Z; `official-notes/` is
+  gitignored, so no trusted nightly receipt was overwritten). Both sources `success` and BOTH MOVED for the first time since 09-11:
+  · live hotfix topic **2336376 post 1: v36 → v38**, updated 2026-09-16T00:41:40Z, title now "…Hotfixes - September 15", **116 sections
+    (was 113)** — three NEW class sections dated 2026-09-15, all under explicit spec headings: Hunter › Marksmanship (Aimed Shot cast
+    animation on gun/crossbow), Paladin › Protection (Consecration's first tick now benefits from the Venomous Abyss set's crit increase),
+    Priest › Holy (Renewed Vigor from the 2-piece could exceed 3 stacks). All 113 prior sections hash-identical → prior resolutions retained.
+  · 12.1.5 dev thread **2344395: post 1 still v3 (3 sections)** and a **NEW staff post #4** (Linxy, 2026-09-15T23:09:31Z, v1, 6,833 B) with
+    **7 class sections / 13 spec notes**: Devourer (Soulforged Blades 18%, Voidpurge 2.5s, The Hunt + Eradicate moved to the middle gate, tree
+    reshuffle), Resto Druid (Nature's Bounty redesign), Pres Evoker (Merithra's Blessing 30s), Arcane (Spell Density) + Frost (Splitting Ice
+    fixes, Frostfire/Spellslinger hero fixes), Disc (Master the Darkness 30s) + Holy Priest (Holy Celerity ↔ Ultimate Serenity swap), Outlaw
+    (Deft Maneuvers 5 Energy/target) + Subtlety (Shadow-damage modifier consistency pass), Prot Warrior (Execute RESTORED to old behaviour
+    with +100% and +30%; further Prot work refocused on 12.2/13.0). Also in the post: Kith'ix raid testing starts Sept 16 (non-class).
+  **All 10 unresolved sections resolved**: 3 live `applied` with `references` into the new feed entry, 7 preview `applied` with one faithful
+  `notes[]` summary per specKey (13 notes). 0 irrelevant this time, 0 removedSections. `check-official-notes.mjs --base=HEAD` passes.
+  Ledger totals now **17 applied live / 99 irrelevant / 10 applied preview, 0 unresolved**.
+- **ONE new feed entry, `kind: "hotfix"`, dated 2026-09-15**, read from the canonical Discourse body (post 1 v38) with nesting intact and
+  cross-checked line for line against the Wowhead mirror **news=382918** ("Spark of Tides Fix - Patch 12.1 Hotfixes for September 15th"):
+  three spec lines (Marksmanship Hunter / Protection Paladin / Holy Priest) plus a Non-class line for the rest of the round-up (the Venomous
+  Abyss encounter tuning announced 09-14 now live + one new Coiled Altar Spirit-of-Redemption fix, Spark of Tides catch-up, two quest fixes,
+  Curse Surges every 30 min). All three spec lines `classifyHighlight` → **null** (bug fixes, no outlook vote). It sits at index 0 — the two
+  existing 09-15 entries (trinket post 00:31Z, raid-buff round-up 15:39Z) predate the hotfix post's ~19:41Z appearance.
+- **TIER-SET UPKEEP GATE ENGAGED, twice.** Both the Paladin and Priest lines touch a Venomous Abyss set bonus, so `spec.tierSet.asOf` → 2026-09-15
+  for **Protection Paladin** (07-14 → 09-15, source now the Sept-15 hotfix topic, set2 gains a dated parenthetical: first-tick crit fix, no value
+  changed) and **Holy Priest** (09-03 → 09-15, second dated parenthetical on set2: 3-stack cap fix, no value changed). `npm run validate` then
+  reddened on exactly the four expected gearing-mirror mismatches; `node gearing/src/harvest-specs.mjs && --check && npm run gearing:build`
+  re-synced `gearing/data/specs.json` and rebuilt the artifact; validate green.
+- **Discovery sweep, all four channels, and they agree.** Wowhead RSS 224,438 B / 40 items (per-`<item>` parse), newest **382919**; nine items
+  newer than the last nightly's top id 382904. Every body grepped for PTR/hotfix/tuning/12.2 strings: hits are the two mirrors above
+  (382918 hotfixes, **382916** "More Class Changes - Patch 12.1.5 PTR Development Notes" — read and matched against post #4 verbatim),
+  382919 (12.1.5 decor recipe costs, non-class), 382908 (Curse Surges hotfix, non-class), 382917 (Paladin glyph, cosmetic). News INDEX
+  (`data.news.newsData`, 20 posts, 1,553 pages) same top ids. Blue tracker (`data.blueTracker.default`, 50 entries → 41 unique topics): the
+  US/EU mirrors of both posts, "Missing Sparks of Tides - Updated September 15" (2341043, item), "Season 1 Mythic+ 0.1%/1% Rewards"
+  (2350346, non-class), the Sept-17 Q&A and BlizzCon recaps — **no new class-tuning standalone post**. Topic **2335871** "Season 2 Class
+  Tuning Plans" still Kaivax #1 v1 (2026-08-12), 195 posts — the promised Sept-22 class pass is still ahead. Thread **2317811** unchanged
+  (17 posts, last 2026-07-31; quiet ≠ lost between cycles).
+- **12.2 PTR check: still NOT open.** The PTR forum category now redirects to `/c/in-development/midnight-1215-public-test-realm/345` — it is
+  the 12.1.5 category — and its only staff topics are the configured dev thread 2344395 and the Kith'ix testing schedule 2346119 (whose 09-16
+  reply is a deleted non-staff post). No "12.2 PTR" string in any RSS body, index entry or tracker title. Opening a cycle stays an owner action.
+  `ptr-builds.json` now **35 entries**, newest 2026-09-15.
+- **Writeups:** one spec still at `ptr: null` — Demonology Warlock, deliberate. No writeup manufactured. No WCL request of any kind.
+
 ## 2026-09-15 (nightly, second run of the day) — ledger clean 116/116 again; ONE new feed entry: the Venomous Abyss raid buff went live (non-class)
 
 - **Official revision ledger ran FIRST** from the pre-agent receipts (`official-notes/`, checkedAt **15:54:15Z**). Both

@@ -5,16 +5,79 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-15T15:54:15.599Z",
+      "checkedAt": "2026-09-16T14:22:56.514Z",
       "removedSections": [],
       "posts": [
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 36,
-          "updatedAt": "2026-09-11T03:11:02.075Z",
-          "bodySha256": "8971da8f3b798a0c6e98bcbaa9a1ec94d60ec487ded5812536c745771cb7cd44",
+          "version": 38,
+          "updatedAt": "2026-09-16T00:41:40.512Z",
+          "bodySha256": "caffa97be4bd7889d12d630c37021f44bafeb1f43c55cb94ed5443098c56bd38",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-15:classes:hunter:1",
+              "date": "2026-09-15",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship"
+              ],
+              "sha256": "3d2fa01bc53dac06cf14ac03086c52f2decbdf937303758e9a82d1b6e1c2d8ac",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against official hotfix topic 2336376, post 1, version 38 (last edited 2026-09-16T00:41:40Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382918. Marksmanship spec heading: a cast-animation fix with no tuning value, logged as one spec line in the new 2026-09-15 feed entry.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-15",
+                    "highlight": "Marksmanship Hunter — Fixed an issue where Aimed Shot was not properly playing its cast animation when using a gun or crossbow."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-15:classes:paladin:1",
+              "date": "2026-09-15",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Protection"
+              ],
+              "sha256": "30102018152f5c1685a1521739ccd490875cbd5409878b889b2b519b7de88052",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against official hotfix topic 2336376, post 1, version 38 (last edited 2026-09-16T00:41:40Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382918. Protection spec heading. The line touches the Venomous Abyss set bonus (the 2-set's critical strike chance increase now applies to Consecration's first tick), so Protection Paladin's spec.tierSet.asOf advanced to 2026-09-15 with this topic as source and a dated parenthetical recording a behaviour fix with no value change; gearing/data/specs.json was re-synced and the gearing artifact rebuilt in the same change.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-15",
+                    "highlight": "Protection Paladin — Fixed an issue where Consecration’s first tick would not benefit from the Venomous Abyss tier set’s increase to its critical strike chance."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-15:classes:priest:1",
+              "date": "2026-09-15",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "6af4f04722a02a9cd7d443b0bae8f655066d3feffe02d4b393a840672848abe9",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against official hotfix topic 2336376, post 1, version 38 (last edited 2026-09-16T00:41:40Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=382918. Holy spec heading. The line touches the Venomous Abyss 2-piece bonus (Renewed Vigor capped at 3 stacks as printed), so Holy Priest's spec.tierSet.asOf advanced to 2026-09-15 with this topic as source and a dated parenthetical recording a cap fix with no value change; gearing/data/specs.json was re-synced and the gearing artifact rebuilt in the same change.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-15",
+                    "highlight": "Holy Priest — Fixed an issue where Renewed Vigor from the Venomous Abyss 2-piece tier bonus could exceed 3 stacks."
+                  }
+                ]
+              }
+            },
             {
               "id": "2336376:1:2026-09-10:classes:death-knight:1",
               "date": "2026-09-10",
@@ -1790,7 +1853,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-15T15:54:15.599Z",
+      "checkedAt": "2026-09-16T14:22:56.514Z",
       "removedSections": [],
       "posts": [
         {
@@ -1856,6 +1919,170 @@
                   {
                     "specKey": "Warrior|Protection",
                     "summary": "Execute loses optional Rage spending and its damage doubles. For Colossus, Practiced Strikes also lowers the Rage cost of Execute and Revenge by 10."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 30066038,
+          "postNumber": 4,
+          "version": 1,
+          "updatedAt": "2026-09-15T23:09:31.283Z",
+          "bodySha256": "51bad53c0d9ed23fb89d0ddfe27ff260eb1772e11c62a37fe7662208edd938cc",
+          "sections": [
+            {
+              "id": "2344395:4:2026-09-15:classes:demon-hunter:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "5b069fa166f1ef91f2a04292ec63a48431976ddf59d89a36455ef57825e1fb6c",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Demon Hunter|Devourer",
+                    "summary": "Soulforged Blades now raises the critical strike chance of Hungering Slash and Voidblade by 18% (was 15%), and Voidpurge reduces Void Ray's cooldown by 2.5 seconds during Void Metamorphosis (was 2 seconds). Alongside the Void-Scarred changes the talent tree is reshuffled: The Hunt (featured in Void-Scarred builds) and Eradicate (a core AoE building block) move out of the dense final gate into the middle gate so builds reach them more easily, other talents move into the vacated capstone positions, many talents change position, and Demonic Instinct and Devourer's Edge gain new connections one row down."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:4:2026-09-15:classes:druid:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Restoration"
+              ],
+              "sha256": "f25925cd96286998ee202d3c8f72bc4baa7148f8c58a6a3b5e571535b521f201",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Druid|Restoration",
+                    "summary": "Nature's Bounty is redesigned to remove rotational friction and work with the rest of the healing kit: Regrowth now heals up to 3 allies who have Rejuvenation active for 15% of its healing, prioritizing the lowest-health allies."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:4:2026-09-15:classes:evoker:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Preservation"
+              ],
+              "sha256": "e01f8f0f8e4bc9ba0e6dcb72dd6f1015f63f792f381fd72b254539ef832e608b",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Evoker|Preservation",
+                    "summary": "Merithra's Blessing duration reduced to 30 seconds (was 1 minute)."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:4:2026-09-15:classes:mage:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Arcane",
+                "Mage|Frost"
+              ],
+              "sha256": "e0db76ea5e72eec3529e6f2b2ab4df43c49885275a75a14b96f8341831f98794",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Mage|Arcane",
+                    "summary": "Several Arcane spells are added to the Spell Density system, giving non-Mage players additional visibility options; no tuning change."
+                  },
+                  {
+                    "specKey": "Mage|Frost",
+                    "summary": "Splitting Ice bug fixes: its damage modifier now applies to Frostbolt (both Frostbolts had been hitting for full damage), and casting Frostfire Bolt then switching to Spellslinger no longer leaves the Splitting Ice multiplier on the main target. Frostfire: Frostfire Empowerment's effects now apply to the second target when Frostfire Bolt hits it via Splitting Ice, and Frostfire Infusion's tooltip is updated with functionality unchanged. Spellslinger: Splinterstorm is now trackable in the Cooldown Manager as a buff and is no longer removed at the start of a raid encounter or Mythic+."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:4:2026-09-15:classes:priest:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Holy"
+              ],
+              "sha256": "95676ab4aeca5483e23d41c270c0d2c7e8711b5f59299d2c7654cff04af16cab",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Priest|Discipline",
+                    "summary": "Master the Darkness duration reduced to 30 seconds (was 1 minute)."
+                  },
+                  {
+                    "specKey": "Priest|Holy",
+                    "summary": "Holy Celerity and Ultimate Serenity swap positions on the specialization tree, moving Ultimate Serenity up so it takes less investment to reach — Blizzard calls it a powerful tool specifically in M+ — and Holy priests gain more choice among talents beyond the second gate."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:4:2026-09-15:classes:rogue:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Outlaw",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "163157dff71b90f63e0df8eab799e890f0bf8b6e2c623db715b220d87c403729",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Rogue|Outlaw",
+                    "summary": "Deft Maneuvers reworked: instead of a flat +30 Energy cost on Blade Flurry, it now adds 5 Energy per target hit, up to 30, intended to make maintaining Blade Flurry cheaper against small numbers of extra targets."
+                  },
+                  {
+                    "specKey": "Rogue|Subtlety",
+                    "summary": "All Shadow damage modifiers and many Shadow damage abilities are updated so bonuses apply consistently: individual Shadow abilities (Secret Technique's secondary hits, Shadowed Finishers attacks, Shadow Clone attacks) now benefit reliably, and effects dealing Shadow damage based on attack damage (Shadow Blades, Goremaw's Bite mirror damage, Lingering Shadow) benefit correctly when the input attack is physical and no longer double dip when it is Shadow. Blizzard says the overall damage impact remains under review."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:4:2026-09-15:classes:warrior:1",
+              "date": "2026-09-15",
+              "category": "CLASSES",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Protection"
+              ],
+              "sha256": "468c0ef344e137cd6cb059da6084ac4dd72a0120c0a8a329d43f587ff73c466d",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Warrior|Protection",
+                    "summary": "Execute is restored to its previous functionality with a damage boost: it no longer consumes additional Rage for additional damage, and its damage is increased by 100% and then by a further 30%. Blizzard says last week's Execute changes did not meet their goals, the scope needed is better suited to a major update, and further Protection changes are being refocused on 12.2 and 13.0."
                   }
                 ]
               }

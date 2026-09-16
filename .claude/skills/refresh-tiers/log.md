@@ -17,6 +17,21 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-16 (local, scheduled) — Archon walled a TWENTY-THIRD day, re-probed once from a residential IP (200-shaped "Human Verification" today); 0 letters touched; run BEFORE today's nightly
+
+- **Archon: still walled from home.** One registered page (raid DPS Heroic) fetched with the browser header set: **HTTP 200, 1,287 B,
+  `<title>Human Verification</title>`, `challenge-platform` present, `__NEXT_DATA__` count 0** — the 200 shape again (yesterday from home was
+  the 403 "Just a moment..." shape; the two remain interchangeable on one IP). Assertion stays on `__NEXT_DATA__` presence, never the status
+  code. One probe only; nothing merged, no snapshot stamped; the 80 letters verified 2026-08-25 stay in the consensus at their original dates
+  per the 2026-09-05 retention policy.
+- **Icy Veins / Method / Wowhead deliberately NOT re-fetched.** The second 09-15 nightly re-parsed all 240 cells ~22h ago (0 moves), and
+  today's nightly is still pending at 14:21Z — independently regenerating what CI is about to produce is what makes a local push unmergeable.
+  Same call as 09-12/13/14/15.
+- `freeze-season.mjs`: "8 source/bracket pairs still describe the live season — nothing to freeze"; archive unchanged.
+- **Tier-set upkeep touched two specs tonight via ptr-watch** (Protection Paladin, Holy Priest — Sept-15 hotfix set-bonus behaviour fixes,
+  `asOf` → 2026-09-15) and the gearing mirror was re-synced + rebuilt in the same change; no letter or scale involved.
+- `data/encounter-tiers.json` still `season: "s1"` (asOf 2026-08-17) — Fight selector stays hidden.
+
 ## 2026-09-15 (nightly, second run of the day) — 240/240 cells re-verified S2 across the three reachable sources, 0 moves; Archon still walled
 
 - **Scope:** this is the SECOND nightly-shaped run today (the first wrote the committed manifest at 15:18Z; my collector

@@ -17,6 +17,77 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-16 (local, scheduled) — queue 0 → 0, but FIVE in-scope videos fetched and distilled locally: **7 takes + 15 metaNotes** (izen Week-4 M+ recap, MadSkillzzTV healer read, two Devourer 12.1.5 reactions, Critcake Arms); anonymous caption lane clear — run BEFORE today's nightly
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by 14:21Z; last poll was the second 09-15 nightly's
+  ~15:54Z sweep). RSS discovery re-run — it costs no caption traffic: **44/44 channels HTTP 200** (119 creator entries → 79 pollable → 44
+  distinct channels, 0 transcribable creators missing a `channelId`), **660 entries**, 0 failures. Seen-set = structured union of the four
+  lanes = **1,255 ids** (549 seen + 426 skipped + 0 queued + 280 distilled-only take/metaNote urls; no log regex). Cycle bound
+  `min(builds[].date)` = **2026-06-18** → 535 in-cycle, **348 unseen in-cycle**, of which **30 are newer than 2026-09-15T15:30Z**. Titles
+  AND `media:description` read for all 30; metadata (`duration`, `live_status`, `was_live`) printed in a SEPARATE yt-dlp invocation from
+  the caption downloads for the six candidates (the simulate-mode trap).
+- **Six candidates, five fetched, one durable dismissal.** Captions via the anonymous yt-dlp lane (json3, `--sleep-requests 3`, one video
+  per invocation, stop-on-first-error): **5/5 landed, 0 errors, no 429** — the lane is clear for a fifth, sixth, seventh, eighth and ninth
+  consecutive probe after the August flag. Shindigg `kAb3PLNfGKk` "Addressing the Elephant in the room... ft. Dratnos" is a **58-second
+  clip** → `seen[]` (sub-minute duration is a durable fact). Nothing installed or upgraded (yt-dlp still the local 2026.07.04; the
+  "no JavaScript runtime" deprecation warning is cosmetic — captions still download); no cookies, no authenticated lane.
+- **izen `7ZaRcXRH8u4` "Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?" (2026-09-15, 23:05, 582
+  events)** — the Week-3 recap's direct successor, same M+-outlook lens → **15 metaNotes**, one per genuine spec-level read: Demonology
+  (positive: ~20% of 15+ keys, fifth DPS played, one in the top 100), Arcane (positive: now the LEAST-replaced meta DPS and the premier
+  priority-damage spec; drops out most from +15 to +20), Arms (positive: in the top-keys trio after its buffs, but a swapped slot),
+  Elemental (mixed: top trio but AoE without main-target focus, swapped most), Assassination (positive: the one growth confirmed at the very
+  top, replaces Arcane at +20), Havoc (mixed: passed Devourer on play rate, damage "fine", no prio), Devourer (negative: fewer keeping up,
+  passed by Havoc), Feral (mixed: top-end hipster pick in physical comps, gone by 15s), Balance (negative: dropped out of meta contention —
+  squishy, small-pull season), Windwalker (mixed: good to ~16–18, pad damage, squishy), Guardian (mixed: share 11→~20 out of the other
+  tanks, tankier, damage gap to Blood), Blood (positive: easily ahead on tankiness AND damage), Brewmaster (mixed: still one of the two
+  de facto top-end melee-comp picks, no broader share read), Resto Shaman (positive: the physical-comp healer for Windfury, ~18% of keys),
+  Holy Paladin (positive: default healer to 20–22; a Lightsmith-HPS doubt at very high keys). **Not distilled**: Retribution ("pretty
+  much always extremely popular" — popularity only, no strength read), BM Hunter / Outlaw / Subtlety (bare list mentions in the
+  top-average-score enumeration; the "Assassination is winning out" comparison is recorded on Assassination, not minted as Outlaw/Sub
+  negatives), Mistweaver / Disc (not named). Sept-22 class tuning mentioned as upcoming — a lead already held by ptr-watch (topic 2335871).
+- **MadSkillzzTV `6g8e91B7DDg` "12.1 Resto Druid is the BEST MDI Healer? | M+ Healer Meta & More" (2026-09-16, 12:15)** → **4 M+ takes**,
+  all his own reads with his own MDI-does-not-translate disclaimer: Resto Druid (mixed: MDI-dominant on the Keeper of the Grove / Call of
+  the Elder Druid / Dream of Cenarius damage-healing build he does not expect to work in real high keys; live build is Wildstalker),
+  Preservation Evoker (mixed: the damage and priority damage to have made MDI, held out by Blessing of the Bronze), Holy Paladin (buff:
+  the best high-key healer, climbing weekly), Resto Shaman (mixed: HPS not much different from other healers, propped up by
+  Skyfury/Bloodlust utility). **Not distilled**: Vengeance DH and Assassination (MDI reads, and outside his registered healer scope);
+  "Holy Priest / Mistweaver can heal for a lot too" (a single comparative aside, not a spec read). He reads Archon's auto-generated
+  tier list on screen at ~10:40 but states his own agreement/disagreement — the takes carry HIS reasons (spot healing, safety, utility),
+  not the list's letters.
+- **Nintern `lgKrVkwJcfc` "CASTER CLEAVE IS BACK?! | 12.1.5 PTR Devourer Patch Notes 9/15" (2026-09-16, 10:15)** → **1 take**, Devourer,
+  mixed, `both`, patchContext **"12.1.5 PTR preview — NOT LIVE"** (the 09-03/09-05 precedent): happy with the reshuffle, "doesn't solve our
+  problems necessarily", excited by a speculative four-points-in-Midnight caster-cleave build he himself labels 1 a.m. plane conjecture.
+  Supersedes his 09-03 preview reaction (`JMVnCyVzlNM`); his 08-09 live guide read stands.
+- **VooDooSaurus `kgkTd-wi-mE` "MASSIVE Devourer Talent Tree Changes! But do they change anything?" (2026-09-16, 17:35)** → **1 take**,
+  Devourer, mixed, `both`, same NOT-LIVE lens: loves The Hunt/Eradicate reachability and Annihilator's gains (Demonic Instinct, an extra
+  Void Ray per meta from 2.5s Voidpurge), "big improvement" on last week, but playstyle barely changes, AFK Void-Scarred likely still
+  correct, too many hard casts, real fixes are 12.2-sized. Supersedes his 09-05 first-look (`qthDWT2G9NM`); his 08-17 live read stands.
+  Both Devourer reads verified against the official post #4 text read in ptr-watch tonight (18% / 2.5s / middle-gate moves all match).
+- **Critcake `ccjTZkATHRU` "+20 Voidscar Arena - Arms Warrior" (2026-09-16, 30:11)** → **1 M+ take** from the 0:00 intro answering
+  "is Arms actually S tier?": A+ or S− in keys — two-target unmatched, single-target prio matched by others, easily out-AoE'd; "not as
+  good as the hype but still really good". Mixed. Supersedes his 08-29 M+ neutral (`S2nGA4gww8I`). The remaining 28 minutes are the key
+  run (grepped: one in-run line "we're best at two targets, three targets, and we do really good prio damage", consistent, no separate
+  claim). A single-spec placement is not a published tier list → nothing for `creator-predictions.json`.
+- **Supersede pass (same creator + same spec + same lens): 14 izen metaNotes retired** — 11 from the 09-07 Week-3 recap
+  (`zf9FpCLuTeI`), 2 from the 09-01 M+ outlook (`4z49EhVeP7I`: Balance, Windwalker), 1 from the 08-16 pre-launch M+ tier list
+  (`KktdoK1OZVY`: Guardian) — **and 7 takes** (MadSkillzzTV's 09-04 M+ HPal/Pres/RSham + the 09-01 whole-spec Resto Druid short, whose
+  raid half is separately held by his 09-04 raid take; Nintern 09-03; VooDooSaurus 09-05; Critcake 08-29). ⚠ A first pass over-matched:
+  a `/Mythic\+|M\+/` lens regex also retired izen's **08-17 RAID predictions** (`okaZqAQVRN0`, 7 notes) and his **08-29 tuning
+  walkthrough** (`bDElWkJxvtY`, 5 notes) because their patchContexts mention Mythic+ in passing; both were restored from HEAD before
+  anything was committed. Earlier runs deliberately kept those two videos live beside the weekly M+ recaps — the raid lens is a different
+  lens, and a tuning walkthrough is not a weekly recap. izen live metaNotes 104 → 105.
+- **Declined from title + description, not queued, nothing to `seen[]`** (shape/relevance declines are not durable dismissals): stream
+  VODs / reclear and key PoVs (LBNinja7, Bansherz, Tactyks "YAPPING INTO RECLEAR", Whispyr, Shindigg ×2, Shadarek, Clandon, Preheat
+  Arcane raid, Supatease stream, Critcake keys, Tettles, Dalaran Gaming livestream); BlizzCon / *Forever* content (Kalamazi's Forever
+  Warlock talent review, Psybear's Forever class updates, Preheat's vlog — a different game version); PvP (Dalaran Gaming Balance
+  duels); vault/loot openings (Dratnos, NeekapHere); Supatease `f6jLlrhXSDg` "12.1.5 Class Tuning Udate" (clip-short shape, description
+  copies the title, and his comparative reads are PvP-framed by the 08-09 rule); Whispyr `WtRqmNBkcEo` "Bye Bye Puzzle Box" (trinket
+  nerf — an item-level claim never mints a spec take; same call as Shadarek's trinket video on 09-15). The three 09-15 Supatease *Forever*
+  uploads were already declined by the second nightly.
+- **Queue 0 → 0. 7 takes, 15 metaNotes; `latest` advanced for izen, MadSkillzzTV, Nintern, VooDooSaurus, Critcake** (each states what was
+  distilled, never merely the newest upload). The 09-14 Dorki Arms scope flag still awaits Riley. No creator opinion moved any tier —
+  metaNotes are display + the ±3 nudge only, and takes feed `expertRead`, which is era-dormant while `PHASES.ptr` is null.
+
 ## 2026-09-15 (nightly, second run of the day) — 44/44 feeds polled, 660 entries; 3 genuinely new videos, all *WoW: Forever* — 0 queued, 0 takes
 
 - **Discovery**: all **44** unique tracked channels polled inline via the public RSS endpoint (116 class-creator entries
