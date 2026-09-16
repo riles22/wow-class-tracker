@@ -1,6 +1,63 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "f6jLlrhXSDg",
+      "creator": "Supatease",
+      "title": "12.1.5 Class Tuning Udate",
+      "published": "2026-09-16",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "B3_WVUOrqks",
+      "creator": "izen (Izenhart)",
+      "title": "6 Hours of Blizzcon in 15 Minutes | Midnight & WoW: Forever News Recap",
+      "published": "2026-09-13",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "rb9dofIbc_A",
+      "creator": "izen (Izenhart)",
+      "title": "12.1.5 Patch | Flex Mythic Boss & NEW 344ilvl Special Loot + Delve Mega Dungeon Reveal!",
+      "published": "2026-09-05",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "nSB8oQYupl4",
+      "creator": "Baze",
+      "title": "Midnight Eclipse 12.2 Reaction | M+ rotation | New CASTER legendary?! Baze Reacts",
+      "published": "2026-09-12",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "323h0qlDbJo",
+      "creator": "NeekapHere",
+      "title": "New Midnight Roadmap Revealed! | What's Next in Retail",
+      "published": "2026-09-13",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "smqnFDWL7D0",
+      "creator": "NeekapHere",
+      "title": "7 Million Gold Mount | 12.1.5 PTR Development Notes",
+      "published": "2026-09-03",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "yRa_jes8GFs",
+      "creator": "Dalaran Gaming",
+      "title": "Everything Blizzard Just Revealed for WoW Midnight Season 3!",
+      "published": "2026-09-14",
+      "queuedAt": "2026-09-16"
+    },
+    {
+      "id": "mSNa0_bbpak",
+      "creator": "Dratnos",
+      "title": "Race to World First Day 12 Recap - A Nerf, An Unnerf, A Vantus, and finally a boss down!",
+      "published": "2026-08-30",
+      "queuedAt": "2026-09-16"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
