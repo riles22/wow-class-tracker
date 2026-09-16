@@ -2104,23 +2104,33 @@ ui("official previews keep their attribution and not-live label in mobile spec d
     const row = page.locator(`.row[data-idx="${index}"]`);
     // Use the full roster and leave earlier drawers open: their layout must not
     // move a later spec's hit target between pointer-down and pointer-up.
-    await row.locator('.spec-txt').scrollIntoViewIfNeeded();
-    await row.locator('.spec-txt').click();
+    // A spec can carry previews from more than one official post (the 12.1.5
+    // thread's post 1 and post 4 both touch Devourer and Protection Warrior), so
+    // a row may be visited twice: the row and fold clicks TOGGLE, and a second
+    // click would close what the first opened. Open only what is still closed.
+    if (!(await row.evaluate(el => el.classList.contains('open')))) {
+      await row.locator('.spec-txt').scrollIntoViewIfNeeded();
+      await row.locator('.spec-txt').click();
+    }
     await page.waitForFunction(index => {
       const row = document.querySelector(`.row[data-idx="${index}"]`);
       return row?.classList.contains('open') && !row.classList.contains('motion-enter')
         && row.querySelector('.drawer').style.maxHeight === 'none';
     }, index, { timeout: 5000 });
     const fold = row.locator('details.dfold').filter({ has: page.locator('.preview-notes') });
-    await fold.locator('summary').scrollIntoViewIfNeeded();
-    await fold.locator('summary').click();
+    if (!(await fold.evaluate(el => el.open))) {
+      await fold.locator('summary').scrollIntoViewIfNeeded();
+      await fold.locator('summary').click();
+    }
     assert.match(await fold.locator('summary').innerText(), /PTR preview.*not live/is);
     const preview = row.locator('.preview-notes');
     await preview.waitFor({ state: 'visible', timeout: 5000 });
     assert.ok(await preview.isVisible(), `${note.specKey} has a visible preview`);
     const text = await preview.innerText();
     assert.ok(text.includes(note.summary) && text.includes(note.date));
-    assert.equal(await preview.locator('a').first().getAttribute('href'), note.url);
+    // Match the anchor by href rather than taking the first one: with two posts
+    // previewing the same spec, the first link belongs to the other post.
+    assert.ok(await preview.locator(`a[href="${note.url}"]`).count() >= 1, `${note.specKey} links its source post ${note.url}`);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
   }
 });
