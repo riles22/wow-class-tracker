@@ -1,81 +1,81 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-09-10T13:05:48.918Z",
+  "observedAt": "2026-09-17T13:44:58.488Z",
   "baselineDigest": "8272e9f78a4667e1050a09fbef569433567745f5bb88e1bb2e8071fde1429aeb",
   "groups": {
     "tierBonuses": {
-      "status": "verified",
-      "reason": "Current source text matches the reviewed baseline",
-      "inputDigest": "ed39ec19eafb5953d373231ceceffa088bc57b18947bc8b70da3de194094926d",
+      "status": "review-required",
+      "reason": "Curated facts changed since source review",
+      "inputDigest": "c1d35c125d559e732c59ca528941e4aab282a17c66df4dc2969c967aa7eed085",
       "sourceDigest": "579bf9bac02759808af7a84d530db7dfc2fae8b4d2146f90409d1b6bbb68f85c",
       "sources": [
         {
           "url": "https://nether.wowhead.com/tooltip/item/271474?locale=0",
-          "observedAt": "2026-09-10T13:05:49.225Z",
+          "observedAt": "2026-09-17T13:44:58.666Z",
           "sha256": "fec7d00af5980dcab59ab9146c2191ff08092ba0e512a0bd695cfe5ed6a9d592"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271537?locale=0",
-          "observedAt": "2026-09-10T13:05:49.478Z",
+          "observedAt": "2026-09-17T13:44:58.733Z",
           "sha256": "4f11349d39e579cd07c1051c27039cef0ad0be5d5e72ba228f59991b493fa0e7"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271528?locale=0",
-          "observedAt": "2026-09-10T13:05:49.690Z",
+          "observedAt": "2026-09-17T13:44:58.777Z",
           "sha256": "0efb4a78654b20f7e24ee2537c0cd5626714bea7374a3f642e80508d78b68e30"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271501?locale=0",
-          "observedAt": "2026-09-10T13:05:49.794Z",
+          "observedAt": "2026-09-17T13:44:58.823Z",
           "sha256": "c66f2b7071370e8783554b2ada2e01e8d3929b3ab9a413fd960e588f16b28db2"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271492?locale=0",
-          "observedAt": "2026-09-10T13:05:49.895Z",
+          "observedAt": "2026-09-17T13:44:58.867Z",
           "sha256": "c0f9defbfde8a569a6c55ecae9103292938872621da9ab640a0fa0f11ffb37c4"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271564?locale=0",
-          "observedAt": "2026-09-10T13:05:50.003Z",
+          "observedAt": "2026-09-17T13:44:58.907Z",
           "sha256": "9a30bb8ce444917d2b68ca0918a38979c3eecae3ec50bc82617d430766b1bdd0"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271519?locale=0",
-          "observedAt": "2026-09-10T13:05:50.106Z",
+          "observedAt": "2026-09-17T13:44:58.955Z",
           "sha256": "313d819fa15bfd810d8009918441aa1029983750c4c887264eb074992da10361"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271465?locale=0",
-          "observedAt": "2026-09-10T13:05:50.209Z",
+          "observedAt": "2026-09-17T13:44:58.973Z",
           "sha256": "92f38de02048fdfffbbbd9d64087d2c8f29f50161fc2d60ffb9d205495f4adb6"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271555?locale=0",
-          "observedAt": "2026-09-10T13:05:50.311Z",
+          "observedAt": "2026-09-17T13:44:59.020Z",
           "sha256": "be626cb708990adf7e6d82dff8aee8afbe7f9b5fd75c2180252b4533994622eb"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271510?locale=0",
-          "observedAt": "2026-09-10T13:05:50.412Z",
+          "observedAt": "2026-09-17T13:44:59.118Z",
           "sha256": "bc9dc2bc23943e66dcd7e2533f8f8603b45c7128b8af70b5bf4cf1d4544c1af9"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271483?locale=0",
-          "observedAt": "2026-09-10T13:05:50.506Z",
+          "observedAt": "2026-09-17T13:44:59.158Z",
           "sha256": "efe156a55ab77d643ce1a2e8db7a3bccd02932c5ea569d764c32ca8b4954d890"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271546?locale=0",
-          "observedAt": "2026-09-10T13:05:50.603Z",
+          "observedAt": "2026-09-17T13:44:59.201Z",
           "sha256": "c3bf9831270cf028a5b20812b52b454ce4d1e91c2151be5de7bc7575fae71212"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/item/271456?locale=0",
-          "observedAt": "2026-09-10T13:05:50.696Z",
+          "observedAt": "2026-09-17T13:44:59.245Z",
           "sha256": "526224c80285cc3cd3d5d0568ec9990fe0df572f517bbceda24b6aa8782028e8"
         }
       ],
-      "lastVerifiedAt": "2026-09-10T13:05:48.918Z"
+      "lastVerifiedAt": null
     },
     "catalystRules": {
       "status": "verified",
@@ -85,28 +85,28 @@
       "sources": [
         {
           "url": "https://www.wowhead.com/guide/midnight/matrix-catalyst-crafting-tier-set",
-          "observedAt": "2026-09-10T13:05:51.362Z",
-          "sha256": "65eeb996bd5313395db814b69b1df0ec1a8166a3a19caf1d107c7e6b35962300"
+          "observedAt": "2026-09-17T13:44:59.734Z",
+          "sha256": "522c5bd7db8ba7c289a360ef3b4612539fd33dd9378d5e8ac05d775bb74de3e5"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/currency/3465?locale=0",
-          "observedAt": "2026-09-10T13:05:51.464Z",
+          "observedAt": "2026-09-17T13:44:59.781Z",
           "sha256": "e89f6f0e0238e1b65595de843533c4cc3bf07e3163ca0c86e0bfbee5a0b2df4c"
         },
         {
           "url": "https://nether.wowhead.com/tooltip/achievement/62872?locale=0",
-          "observedAt": "2026-09-10T13:05:51.578Z",
+          "observedAt": "2026-09-17T13:44:59.838Z",
           "sha256": "75b3f65b980008c5aa9a36ffdf69a704554e521fa612ce2eaf067cdc84089c79"
         }
       ],
-      "lastVerifiedAt": "2026-09-10T13:05:48.918Z"
+      "lastVerifiedAt": "2026-09-17T13:44:58.488Z"
     },
     "raid": {
       "status": "verified",
       "reason": "Loot membership and parsed item fields match",
       "inputDigest": "a35a278c022f9151d3a280cd713d2ec00392326435b45fdc64d3128ad64db503",
       "sourceDigest": "a35a278c022f9151d3a280cd713d2ec00392326435b45fdc64d3128ad64db503",
-      "lastVerifiedAt": "2026-09-10T13:05:48.918Z",
+      "lastVerifiedAt": "2026-09-17T13:44:58.488Z",
       "scope": "Loot membership and item tooltip fields; excludes set-bonus prose and hard-coded item-level ladders"
     },
     "dungeons": {
@@ -114,7 +114,7 @@
       "reason": "Loot membership and parsed item fields match",
       "inputDigest": "30371b1f5625bc85f49b5ff1d44a1ea5e38f12a8fac95e70f8d63537118c76bd",
       "sourceDigest": "30371b1f5625bc85f49b5ff1d44a1ea5e38f12a8fac95e70f8d63537118c76bd",
-      "lastVerifiedAt": "2026-09-10T13:05:48.918Z",
+      "lastVerifiedAt": "2026-09-17T13:44:58.488Z",
       "scope": "Loot membership and item tooltip fields; excludes set-bonus prose and hard-coded item-level ladders"
     },
     "tier": {
@@ -122,7 +122,7 @@
       "reason": "Loot membership and parsed item fields match",
       "inputDigest": "97646fbc85fd17a1dc72a10fb6d969ac4a9b19c61655000267fb8eed6db6846f",
       "sourceDigest": "97646fbc85fd17a1dc72a10fb6d969ac4a9b19c61655000267fb8eed6db6846f",
-      "lastVerifiedAt": "2026-09-10T13:05:48.918Z",
+      "lastVerifiedAt": "2026-09-17T13:44:58.488Z",
       "scope": "Loot membership and item tooltip fields; excludes set-bonus prose and hard-coded item-level ladders"
     },
     "allocations": {
@@ -130,7 +130,7 @@
       "reason": "Loot membership and parsed item fields match",
       "inputDigest": "ef8e10352b15d7329db3c6594095207fc6b1231a4747cb06f122f28f74c42ef6",
       "sourceDigest": "ef8e10352b15d7329db3c6594095207fc6b1231a4747cb06f122f28f74c42ef6",
-      "lastVerifiedAt": "2026-09-10T13:05:48.918Z",
+      "lastVerifiedAt": "2026-09-17T13:44:58.488Z",
       "scope": "Secondary-stat allocation fingerprints"
     },
     "rewardLadders": {
