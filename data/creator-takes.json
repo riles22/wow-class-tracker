@@ -6483,7 +6483,8 @@
       "bracket": "mplus",
       "patchContext": "Season 2 live — his first raid week on both Death Knights after the August 25 tuning pass, argued from his own logs and from playing Frost on his 311-ilvl main against Unholy on a lower-geared alt, both on the 4-piece. Published 2026-08-28T13:20Z, nine hours before the September 1 tuning pass was announced, so it does not react to it.",
       "url": "https://youtu.be/n0H4JFE6Suc?t=286",
-      "claim": "On keys he states plainly that Unholy's damage in Mythic+ is very good, and that it does more than Frost — though only a teeny bit more, with the two at about the same damage right now. He raises it as the constraint on tuning Frost for raid rather than as a fresh case for Unholy, so it is a confirmation of his 08-25 'really, really strong' key read at a lower intensity rather than a new argument for it."
+      "claim": "On keys he states plainly that Unholy's damage in Mythic+ is very good, and that it does more than Frost — though only a teeny bit more, with the two at about the same damage right now. He raises it as the constraint on tuning Frost for raid rather than as a fresh case for Unholy, so it is a confirmation of his 08-25 'really, really strong' key read at a lower intensity rather than a new argument for it.",
+      "superseded": true
     },
     {
       "superseded": false,
@@ -7030,7 +7031,7 @@
       "date": "2026-09-04",
       "bracket": "raid",
       "class": "Death Knight",
-      "superseded": false,
+      "superseded": true,
       "spec": "Frost",
       "sentiment": "buff",
       "patchContext": "Season 2 live — his raid read after the September 1 tuning pass, argued from his own Mythic raid week on Unholy plus play on his second Death Knight in Frost, and from the public Heroic Sszorak Death Knight logs of September 2-3 rather than from a tier list. Published 2026-09-04.",
@@ -7042,7 +7043,7 @@
       "date": "2026-09-04",
       "bracket": "raid",
       "class": "Death Knight",
-      "superseded": false,
+      "superseded": true,
       "spec": "Unholy",
       "sentiment": "mixed",
       "patchContext": "Season 2 live — his raid read after the September 1 tuning pass, argued from his own Mythic raid week on Unholy plus play on his second Death Knight in Frost, and from the public Heroic Sszorak Death Knight logs of September 2-3 rather than from a tier list. Published 2026-09-04.",
@@ -7467,6 +7468,42 @@
       "patchContext": "Season 2 live — the intro to a +20 Voidscar Arena key run (\"+20 Voidscar Arena - Arms Warrior - Midnight M+ Season 2\", published 2026-09-16), answering the hot-topic question of whether Arms is actually S tier; explicitly a Mythic+ read. Supersedes his 2026-08-29 M+ read.",
       "url": "https://youtu.be/ccjTZkATHRU?t=0",
       "claim": "Asked whether Arms is actually S tier, his M+ answer is that it is probably more like A+ or S−: other classes can match its single-target priority damage and can easily out-AoE it, while its two-target damage is pretty much unmatched in M+. So Arms is not as good as some have hyped it to be, but still really good and the Slayer playstyle is really fun this season; AoE buffs would be nice but he thinks asking for buffs at this point is asking too much.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-09-17",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"What changes does Unholy DK need to be good? / Midnight 12.1 Season 2\", published 2026-09-17: a talk-through of Unholy's raid standing argued from the Warcraft Logs 95th-percentile spec rankings over the past one and two weeks, per-boss breakdowns, and his own Twin Fangs kills on both Death Knights, followed by his tuning wish list (Necrotic Coil, Dread Plague, a two-target Death Coil talent). Supersedes his 2026-09-04 raid read.",
+      "url": "https://youtu.be/u2JZWKphGfM?t=16",
+      "claim": "Obli now reads Unholy as 'not looking great' in raid — a clear step down from his 09-04 'wasn't impressed' — pointing at the 95th-percentile rankings where it sits right at the bottom over the past one to two weeks and is near the bottom on almost every boss. His diagnosis is the damage profile: low-target and spread cleave are 'so, so bad' (Sentinels and Nexali, where Warlocks and Shadow Priests thrive), single target is 'not great' either, and he calls the spec bottom-of-the-barrel DPS through a mix of being undertuned and the fights not being built for it. The exceptions are cooldown-timing fights (Vashnik, Sszorak) and possibly the execute-heavy Coiled Altar for San'layn, which he is waiting on logs to judge. He still thinks a great Unholy player beats mid meta classes, and his fix list is a Necrotic Coil main-target buff, a Dread Plague tuning knob and a two-target Death Coil talent.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-09-17",
+      "sentiment": "neutral",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"What changes does Unholy DK need to be good? / Midnight 12.1 Season 2\", published 2026-09-17: a talk-through of Unholy's raid standing argued from the Warcraft Logs 95th-percentile spec rankings over the past one and two weeks, per-boss breakdowns, and his own Twin Fangs kills on both Death Knights, followed by his tuning wish list (Necrotic Coil, Dread Plague, a two-target Death Coil talent). The Mythic+ read is a short aside bracketing the raid case. Supersedes his 2026-08-28 M+ read.",
+      "url": "https://youtu.be/u2JZWKphGfM?t=441",
+      "claim": "On keys he is brief and untroubled: Unholy is 'not so bad in Mythic+ — actually pretty decent', and in closing 'absolutely fine, there's no issues for Mythic+'; it is raid alone where the spec falls down. This is a genuine steady read rather than a placeholder, but it is quieter than his 08-28 'very good, does more than Frost' and carries no Frost comparison this time — his 09-14 Frost M+ read, which puts Frost slightly ahead, is the newer word on that.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "Obli",
+      "date": "2026-09-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"What changes does Unholy DK need to be good? / Midnight 12.1 Season 2\", published 2026-09-17: a talk-through of Unholy's raid standing argued from the Warcraft Logs 95th-percentile spec rankings over the past one and two weeks, per-boss breakdowns, and his own Twin Fangs kills on both Death Knights, followed by his tuning wish list (Necrotic Coil, Dread Plague, a two-target Death Coil talent). Frost is read only as the comparison point for Unholy. Supersedes his 2026-09-04 raid read.",
+      "url": "https://youtu.be/u2JZWKphGfM?t=33",
+      "claim": "Frost is the better of his two Death Knights in raid but still not where he wants it: it is also low in the 95th-percentile rankings — 'Frost still being here isn't great' — yet it has two fights where it really shines, The Lost Explorers and Twin Fangs, on the strength of its two-target cleave, and it beat his own Unholy on his Twin Fangs kills. For Mythic progression he says he would play Frost so that he always has damage available, whereas Unholy centres everything into cooldown windows; Vashnik is the one fight where Unholy's overlap-friendly cooldowns are the better fit. This drops the 'on par single target, edging ahead on cleave' upgrade of 09-04 to a more guarded 'better of the two, but low' read.",
       "superseded": false
     }
   ],

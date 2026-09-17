@@ -17,6 +17,18 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-17 (local, scheduled) — Archon walled a TWENTY-FOURTH day, re-probed once from a residential IP (200-shaped "Human Verification" again); 0 letters touched; run BEFORE today's nightly
+
+- **Archon: still walled from home.** One registered page (raid DPS Heroic) fetched with the browser header set: **HTTP 200, 2,501 B,
+  `<title>Human Verification</title>`, `challenge-platform` present, `__NEXT_DATA__` count 0**. Assertion stays on `__NEXT_DATA__`
+  presence, never the status code. One probe only; nothing merged, no snapshot stamped; the 80 letters verified 2026-08-25 stay in the
+  consensus at their original dates per the 2026-09-05 retention policy.
+- **Icy Veins / Method / Wowhead: NOT re-fetched.** The 09-16 nightly re-verified all 240 cells S2 with 0 moves ~23h ago and today's nightly
+  is expected at ~15:00Z; independently regenerating them here is exactly the unmergeable-push shape the local-run skill warns about.
+  `node src/freeze-season.mjs`: "8 source/bracket pairs still describe the live season — nothing to freeze".
+- Manifest deliberately left alone (partial run). `check-refresh --manifest` printed the two expected lines only: the stale `startedAt`
+  (23h) and the gitignored 09-08 `wcl-fetch/evidence.json` leftover.
+
 ## 2026-09-16 (nightly) — 240/240 cells re-verified S2 across the three reachable sources, **0 moves**; Archon walled a TWENTY-FOURTH day (403 "Just a moment..." from CI)
 
 - **All three reachable sources re-fetched from scratch**, even though today's residential local run had deliberately skipped them: the committed manifest is the previous run's record and never excuses skipping work.

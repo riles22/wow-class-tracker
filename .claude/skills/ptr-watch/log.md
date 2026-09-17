@@ -17,6 +17,35 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-17 (local, scheduled) — ledger clean 126/126 (both sources byte-identical to the 09-16 nightly); NO new feed entry; 12.1.5 PTR loot change and raid-testing posts read, all non-class; still no 12.2 PTR — run BEFORE today's nightly
+
+- **Scope:** residential-only catch-up at 14:23Z with **no nightly yet today** (origin/master at `1b05436`, the weekly gearing verification's
+  publish; the last nightly is `da9bf44`, 09-16 at 15:30Z). Between-cycles posture unchanged: `PHASES.ptr` null, the dormant WCL PTR zone
+  sweeps (52/54/56/57) skipped (NOT marked unreachable — their contract rows were removed at the flip), the 12.1.5 lane notes-only. Manifest
+  deliberately NOT rewritten (partial run).
+- **Revision ledger FIRST, from a fresh local `node src/fetch-official-notes.mjs`** (checkedAt 2026-09-17T14:25:14Z; `official-notes/` is
+  gitignored, so no trusted nightly receipt was overwritten). Both sources `success` and **both byte-identical to the committed ledger**:
+  live hotfix topic **2336376 post 1 still v38** (updated 2026-09-16T00:41:40Z, 116 sections) and the 12.1.5 dev thread **2344395 post 1
+  still v3** (3 sections) **plus staff post #4 still v1** (2026-09-15T23:09:31Z, 7 sections). All **126** section hashes matched, so every
+  prior resolution was retained — 17 applied live / 99 irrelevant / 10 applied preview, **0 unresolved, 0 removedSections**.
+  `data/official-notes.json` rewritten from the reconciled pending ledger so that ONLY the two `checkedAt` stamps moved
+  (15:10:55Z → 14:25:14Z); `check-official-notes.mjs --base=HEAD` passes.
+- **NO new feed entry.** `ptr-builds.json` stays at **35 entries**, newest 2026-09-15.
+- **All four discovery channels swept.** Wowhead RSS 208,839 B / 40 items (parsed per `<item>` block), newest id **382961**; the news INDEX
+  (`data.news.newsData`, 20 posts / 1,554 pages) agrees on the top ids; the blue tracker (`data.blueTracker.default`, 50 entries, fetched
+  with the full browser header set after a UA-only GET returned the 919-byte CloudFront 403) tops out at Linxy's 09-16 **Kith'ix Heroic /
+  Mythic raid-testing** posts — no new class-tuning blue post; topic **2335871** "Season 2 Class Tuning Plans" still Kaivax #1 v1, last reply
+  2026-08-31, the promised **September 22** class pass still ahead; topic **2346119** (Kith'ix testing schedule) unchanged at 2 staff posts.
+- **Items newer than the 09-16 nightly's sweep, all read in full, all non-class:** **382926** "Mythic Kith'ix No Longer Drops Myth 9/6 Loot on
+  Patch 12.1.5 PTR" (this week's PTR build downgrades the Kith'ix cantrip drops from Myth 9/6 = 344 to Myth 3/6 — a **gearing-lane** fact
+  for the 12.1.5 window, no class data), **382934** (undocumented Mythic Coiled Altar fixate change / Soulcoiler spawn hotfix not applying —
+  encounter tuning, no class line), **382930** (Season 3 M+ dungeon rotation and per-dungeon changes), **382920** (MMORPG interview: Paladin
+  chargers, the 12.2 caster legendary), **382921** (addon changes carried into *Forever*), plus ~25 *WoW: Forever* datamining items. Zero
+  `12.2 PTR` strings across RSS bodies, the index and the tracker.
+- **12.2 PTR check: still NOT open.** Opening a cycle stays an owner action.
+- **Writeups:** one spec still at `ptr: null` — Demonology Warlock, deliberate. No tier-set change today, so the upkeep gate had nothing to
+  pair and the gearing mirror needed no resync. **No WCL request of any kind.**
+
 ## 2026-09-16 (nightly) — ledger clean 126/126 (both sources byte-identical to this morning's local run); NO new build entry; three new non-class news items read in full; still no 12.2 PTR
 
 - **Scope:** the scheduled nightly, starting 15:11Z, ~50 minutes after today's residential local run (`e38de11`) which had already logged the Sept-15 hotfixes and resolved every pending section. Between-cycles posture unchanged: `PHASES.ptr` null, the dormant WCL PTR zone sweeps (52/54/56/57) skipped (NOT marked unreachable — their contract rows were removed at the flip), the 12.1.5 lane notes-only.

@@ -17,6 +17,55 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-17 (local, scheduled) — queue **8 → 0** drained through the anonymous yt-dlp lane (10/10 captions, no 429) plus one fresh in-scope video: **3 takes** (Obli's Unholy/Frost DK raid read), 0 metaNotes, **9 verified skips** — run BEFORE today's nightly
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by 14:23Z; the last poll was the 09-16 nightly's 15:08Z
+  sweep). RSS discovery re-run: **44/44 channels HTTP 200** (0 failures), **660 entries**. Seen-set = structured union of the four lanes =
+  **1,269 ids** (976 seen+skipped + 8 queued + 285 distilled-only take/metaNote urls; no log regex). Cycle bound `min(builds[].date)` =
+  **2026-06-18** → 536 in-cycle, **341 unseen in-cycle**, of which **39 are newer than 2026-09-16T14:30Z**. Titles AND `media:description`
+  read for all 39; metadata (`duration`, `live_status`, `was_live`) printed in a SEPARATE yt-dlp invocation from the caption downloads
+  for the ten candidates (the simulate-mode trap). All ten are normal 8–36 min VODs, none live, none sub-minute.
+- **Captions: 10/10 landed via the anonymous lane** (json3, `--sleep-requests 3`, one video per invocation, stop-on-first-error): **0
+  errors, no 429** — the tenth through nineteenth consecutive clean probes since the August flag. Nothing installed or upgraded (yt-dlp
+  still the local 2026.07.04; the impersonation warning is cosmetic); no cookies, no authenticated lane, no Supadata request.
+- **The 8 queued by the 09-16 nightly were all transcript-verified and all yielded NOTHING — moved to `skipped[]` with reasons, which
+  is the point of draining them here rather than spending 8 metered requests tonight:** Supatease `f6jLlrhXSDg` (read-aloud of the
+  12.1.5 post #4 notes with PvP asides — every spec line restates the official note already in the preview ledger); izen `rb9dofIbc_A`
+  (12.1.5 Kith'ix cantrip loot by armour type — gear-lane, and its 344-ilvl figure is already superseded by this week's PTR build per
+  Wowhead 382926) and `B3_WVUOrqks` (BlizzCon day-1 recap; "Arcane is the meta mage" is a passing example for the new spec-based M+ title
+  percentiles, not a read); NeekapHere `smqnFDWL7D0` (12.1.5 systems notes + the 7M-gold mount, "no paladin changes") and `323h0qlDbJo`
+  (roadmap); Dalaran Gaming `yRa_jes8GFs` (BlizzCon systems recap); Baze `nSB8oQYupl4` (36-min live reaction to the Midnight panel — no
+  Arms/Fury read; "monk tanks happen to be the meta" is a hypothetical for the title change); Dratnos `mSNa0_bbpak` (RWF day-12 recap:
+  the Coiled Altar nerf/revert saga and Vantus calculus, no spec read). Grep triage was proved on the known-positive Obli file first.
+- **Obli `u2JZWKphGfM` "What changes does Unholy DK need to be good? / Midnight 12.1 Season 2" (2026-09-17, 8:05)** → **3 takes**, all
+  his own reads argued from the WCL 95th-percentile spec rankings, per-boss breakdowns and his own Twin Fangs kills on both DKs:
+  **Unholy raid nerf** ("not looking great", right at the bottom of the rankings; low-target and spread cleave "so, so bad", single target
+  "not great"; exceptions Vashnik/Sszorak on cooldown timing and possibly Coiled Altar for San'layn once logs exist; wish list = Necrotic
+  Coil main-target buff, Dread Plague knob, a two-target Death Coil talent) — supersedes his 09-04 raid mixed; **Unholy M+ neutral**
+  ("not so bad in Mythic+ — actually pretty decent … absolutely fine, no issues") — a genuine expressed steady read, not a placeholder;
+  supersedes his 08-28 M+ buff; **Frost raid mixed** (also low in the rankings, "still being here isn't great", but shines on The Lost
+  Explorers and Twin Fangs on two-target cleave, beat his own Unholy on Twin Fangs, and is his Mythic-progression pick for always-available
+  damage) — supersedes his 09-04 raid buff. His 09-14 Frost M+ read stands (different lens). Not distilled: "Warlocks and Shadow Priests
+  are having a great time on Sentinels" (a comparison point, outside his scope) and the Fury "haven't seen a single one" aside.
+- **izen `oiREXpVWxQk` "Season 2's BiS Gear Problem: AWFUL Trinket Season" (2026-09-16, 19:24)** — fetched because izen is the
+  highest-yield general creator; it is Complain Caturday on trinket distribution (raid last-boss Guillotine / Dooming Idol / Font of
+  Venomous Rage / Voracious Heart vs weak M+ trinkets, and the Sept-22 trinket tuning). **Item-level throughout, no spec-level read** —
+  an item- or gear-level claim never mints a spec take → `skipped[]`. Gearing-lane context only.
+- **Declined from title + description, not fetched, nothing to `seen[]`** (shape/relevance declines are not durable dismissals): stream
+  VODs and key/reclear PoVs (MadSkillzzTV healer stream, LBNinja7, Musguete Sszorak Sub PoV, Shadarek ×3, YoDaTV ×5, Bansherz ×2 incl. the
+  Heroic Kith'ix PTR MM PoV, Clandon, Sha, Shindigg ×2, Preheat, Tettles, Tactyks' Kith'ix testing stream, Maximum's Kith'ix testing,
+  Zorthas' Ula'tek Ele PoV); BlizzCon / *WoW: Forever* content (Tactyks' BlizzCon recap + future-of-content, Supatease ×6 Forever
+  overviews, Shindigg vlog, Dalaran Gaming Talebound); PvP (Dalaran Gaming Feral-vs-Rogue duels); Whispyr's Kith'ix first look and Sha's
+  Season-3 dungeon-pool video (encounter/dungeon content, no spec read); AutomaticJak's cooldown-planner addon video; Dalaran Gaming's
+  alt-catch-up PSA. **Obli `5Itu4dmNP8M` "THE TWIN FANGS MYTHIC / Unholy DK POV"** (description: "it's DEFINITELY the weaker spec but…")
+  was NOT fetched: the same-day talk video above is his full statement of that read and a PoV would only re-derive it.
+- **Supersede pass (same creator + same spec + same lens): 3 Obli takes retired** (09-04 Unholy raid, 08-28 Unholy M+, 09-04 Frost raid);
+  Obli live takes stay at 4. **Lane discipline:** the 8 drained ids left `videos[]` in the same edit they entered `skipped[]`; the
+  distilled id sits in no lane; `npm run validate` clean.
+- **Queue 8 → 0. 3 takes, 0 metaNotes; `latest` advanced for Obli only** (states what was distilled). No creator scope was widened. A
+  single-spec standing read is not a published tier list → nothing for `creator-predictions.json`. No creator opinion moved any tier;
+  `expertRead` remains dormant between cycles (`PHASES.ptr` null), so the take lane is display-only.
+
 ## 2026-09-16 (nightly) — 44/44 feeds polled; queue was empty when the collector ran so **0 transcripts, 0 takes, 0 metaNotes**; **8 in-scope videos queued** for the next drain
 
 - **Discovery:** all **44** unique tracked channels polled inline via the public RSS endpoint (116 class-creator entries + 3 `generalCreators` collapse to 44 distinct `channelId`s once `transcribable: false` and id-less entries are dropped), **44/44 HTTP 200** with retry+backoff, 0 failures. Nothing backgrounded, no subagents.
