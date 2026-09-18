@@ -17,6 +17,37 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (local, scheduled) — ledger MOVED on revision only: hotfix post v38→v40 with **0 class-section changes** (September 17 section is dungeon/raid/PvP only); NO new feed entry; still no 12.2 PTR — run BEFORE today's nightly
+
+- **Official revision ledger ran FIRST**, from a fresh local `node src/fetch-official-notes.mjs` (checkedAt 2026-09-18T14:24:03Z, both
+  sources `success`). `live-hotfixes` (topic 2336376) post 1 moved **version 38 → 40**, last edited 2026-09-17T23:29:35Z, and the pending
+  ledger surfaced **0 unresolved, 0 removed**: all **116** class sections hash-identical to the 09-17 nightly's ledger, newest class section
+  still dated 2026-09-15. `ptr-preview` (topic 2344395) unchanged — post 1 v3, post 4 v1, **10** sections all still `applied`. Ledger clean
+  **126/126**; `data/official-notes.json` rewritten from `pending.json` exactly as received (only the revision/hash/checkedAt stamps
+  moved). `node src/check-official-notes.mjs --base=HEAD` → "revisions, section dispositions and applied references verified".
+- **What v39/v40 added was read directly off the canonical post** (`posts/29891478.json`, version 40, 87,603 chars): a new **September 17**
+  section — Ruby Life Pools enemy-forces credit fix (Blazebound Destroyers / Primalist Flamedancers), The Coiled Altar's Unnerving Fixation
+  targeting tanks less, a PvP rating-inflation increase, and Font of Venomous Rage −50% in PvP combat. **No Classes heading, no class line**
+  → no `kind: "hotfix"` entry (same call as the 08-28 Bonus Roll / Coiled Altar items). The tier-set upkeep gate had nothing to check.
+- **Wowhead RSS: 40 items, 135,223 B, parsed per `<item>` block**; 18 newer than 2026-09-17T14:00Z. The only hotfix-shaped item is the
+  09-17 23:37 mirror of the section above ("Fixed Count Issues in Ruby Life Pools"), body read in full, no class line. Everything else is
+  *WoW: Forever* beta coverage, the BlizzCon Live Q&A liveblog (scanned for tuning/balance/12.2 — only transmog/race-class-combo answers
+  and "Class Design … high skill ceiling" generalities), and one 12.1.5 PTR item (Mythic Kith'ix loot ilvl, already noted 09-17). **Zero
+  titles carry "12.2 PTR"**; no 12.2 forecast-cycle trigger.
+- **Threads re-read directly**: 2335871 "Season 2 Class Tuning Plans" still 195 posts with Kaivax only at #1 (v1, unedited since 08-12) —
+  the roadmap's **Sep 22** pass is next Tuesday; 2344395 still 4 staff posts (#4 last, 09-15T23:09Z). Dev-notes 2317811 not re-polled
+  (closed cycle; the RSS would carry a new post).
+- **12.1.5 stayed NOTES ONLY.** `PHASES.ptr` untouched at null; nothing entered the feed or any `ptr` verdict. Dormant zones 54/52/56/57
+  correctly skipped, stored rows untouched.
+- Verification: `npm run test:quiet` 639 tests — **636 pass, 1 permanent skip, 2 fail that are PRE-EXISTING on HEAD `7126952`**
+  (re-run on the clean tree before any edit: identical) — both `ui-invariants` WCL tests ("WCL coverage distinguishes insufficient logs…"
+  asserts `fixture has a verified sparse raid cut`; "the Ladder defaults to current WCL…" expects "insufficient logs" text). The nightly's
+  honest `failed` receipt for all 320 raid cuts removed the `insufficient` fixture both tests assume; the ci.yml run the 09-17 nightly
+  dispatched (35241401522) reds on exactly these two in all three browsers. Fixture-rot, not a page defect — root cause and fix in tonight's
+  refresh-metrics entry. `freeze-season`: 8 pairs still live, nothing to freeze. `check-refresh --manifest`: the expected
+  `startedAt … 23h old` line plus the stale gitignored local `wcl-fetch/evidence.json` (09-08 leftover — no WCL merge this run).
+  Manifest deliberately NOT rewritten (partial run). Snapshot `2026-09-18.json` written, then rebuilt.
+
 ## 2026-09-17 (nightly) — ledger clean **126/126** again (both sources byte-identical to this morning's local run); **no new feed entry**; 12.1.5 stayed notes-only; still no 12.2 PTR; dev-notes thread dormant
 
 - **Ledger FIRST, from this run's pre-agent receipts** (`official-notes/evidence.json` + `pending.json`, checkedAt 2026-09-17T15:18:22Z). Both configured sources `success`: live hotfix topic **2336376** post 1 (updated 2026-09-16T00:41:40Z, **116** class sections) and the 12.1.5 preview topic **2344395** posts 1 and 4 (updated 2026-09-03T22:48:20Z / 2026-09-15T23:09:31Z, **3 + 7** sections). Every one of the **126** section hashes matched the committed ledger, so all 126 retained their prior applied/irrelevant resolution — **0 unresolved, 0 `removedSections` tombstones**, nothing to review. The reviewed pending ledger was written to `data/official-notes.json`; the ONLY diff is each source's `checkedAt` (14:25:14Z -> 15:18:22Z). `node src/check-official-notes.mjs --base=HEAD` passes.

@@ -17,6 +17,33 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (local, scheduled) — **WCL raid `invalid` ROOT-CAUSED: WCL added encounter 3513 "Kith'ix" (the 12.1.5 boss) to zone 53**, and `zoneValid` refuses any encounter outside the reviewed list — a one-line reviewed recipe edit, NOT applied here; no metric merged; Archon walled day 26
+
+- **Diagnosis, read-only, via `node src/wcl-probe.mjs`** (local credentials from the gitignored config, OAuth ok, exit 0): zone 53
+  "The Venomous Abyss" is `frozen: false`, partitions `[{1,"12.1"}]`, Mythic difficulty 5 sizes `[20]` — all as reviewed — but its
+  encounter list is now **TEN**: the eight pinned bosses, the excluded world boss 3379 Nymrissa Wavecaller, **and a new `3513 Kith'ix`**.
+  `src/wcl-live.mjs` `zoneValid()` rejects a zone carrying any encounter not in `encounters ∪ excludedEncounters`, so every one of the
+  320 raid cuts was refused with *"Zone identity/season/encounter/difficulty/keystone metadata differs from reviewed configuration"* —
+  the collector doing exactly what its reviewed-configuration guard is for. The data endpoint itself is healthy: encounter 3470
+  `characterRankings` dps AND hps both HTTP 200 with 100 rows, `hasMorePages` true. Zone 55 (M+) is unchanged (8 encounters,
+  brackets 2–30 bucket 1) which is why the M+ cut landed 320/320 last night.
+- **Why it appeared 09-17**: Kith'ix is the 12.1.5 encounter currently in PTR raid testing (Wowhead 382926 "Mythic Kith'ix … on Patch
+  12.1.5 PTR"; Bansherz's "Mythic Kithix Best Pull PTR" PoV) — WCL registered it in the live zone ahead of the patch, as it did Nymrissa.
+  It is not live and not one of the eight pinned Mythic bosses, so the shape of the fix is the Nymrissa precedent: add
+  `{ id: 3513, name: "Kith'ix" }` to that bracket's `excludedEncounters` in `src/wcl-live.mjs` (line ~22), with a comment that it is
+  the 12.1.5 boss registered pre-patch. **Not applied in this run**: the recipe is gatekeeper code and a reviewed configuration change per
+  CLAUDE.md ("New cycle/zone configuration needs a reviewed recipe change"), and a scheduled data run does not edit it. Until it lands,
+  every nightly's raid cut will refuse the same way (M+ unaffected) and the two WCL UI invariants stay red on each dispatched ci.yml run
+  (they assume an `insufficient` raid cut exists in `wcl-coverage.json`, which the honest all-`failed` receipt no longer provides —
+  a fixture assumption worth deriving from the data rather than asserting, but the receipt is honest and the page renders
+  "collection failed · historical data retained" correctly).
+- **Nothing merged anywhere.** No local `fetch-wcl.mjs` run (it would refuse identically and the local `wcl-fetch/evidence.json` is
+  the gitignored 09-08 leftover); the 227 stored `(S2 Mythic: …)` rows keep their 09-14/15/16 dates, `wcl-coverage.json` untouched.
+  Murlok / Mythicstats / SimC / Bloodmallet / WoWMeta not re-fetched — the 09-17 nightly covered all of them and today's will again.
+- **Archon: six numeric requirements still `blocked`, day 26** — probe written up in tonight's refresh-tiers entry. Stored values, n and
+  dates untouched.
+- Robydoby not refreshed (closed zone-54 cycle, outside the contract).
+
 ## 2026-09-17 (nightly) — **Mythicstats receipt RECOVERED** (invalid -> success, 40 rows); SimC re-simmed (24, jitter only); Bloodmallet byte-identical; WoWMeta frozen at 09-15; **WCL RAID leaderboard cut came back `invalid`**; Archon walled day 25
 
 - **Mythicstats — the 09-16 `invalid` cleared, 40 rows, `parse_error` -> `success`.** Reported from the trusted pre-agent collector only (`metrics-fetch/evidence.json`, checkedAt 15:18:18Z); I parsed no second copy. `/period/latest` HTTP 200 (233,769 B) resolving to **period 1081** — the SAME period id that failed to verify last night, so this is a completed/fixed upstream render rather than a new weekly roll. Receipt shape checks: rows 40, `omittedSpecs []`, roleCounts 27/7/6, **sum 99.9%** with role totals Ranged 32.2 / Melee 27.8 / Tank 19.9 / Healer 20.0 — the representation SHARE series, not the `/meta` per-key-presence column. Source publishes no update timestamp, so `dateBasis` stays `observed-undated-source`: **34** changed/new observations take the fetch date 2026-09-17 and the 6 unchanged shares keep their 2026-09-09/10/11 dates. Coverage 2026-09-11 -> **2026-09-17**.

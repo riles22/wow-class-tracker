@@ -17,6 +17,17 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (local, scheduled) — Archon walled a TWENTY-SIXTH day, re-probed once from a residential IP (403 "Just a moment..." today); 0 letters touched; run BEFORE today's nightly
+
+- **Archon: still walled.** Root plus two registered pages (raid Heroic DPS all-bosses, raid Heroic healer all-bosses) with a browser
+  header set: all three **HTTP 403**, 5,690–5,901 B, `<title>Just a moment...`, `__NEXT_DATA__` count **0** (asserted on presence,
+  never on the status code — the 09-17 local probe saw the 200-shaped "Human Verification" variant of the same wall). Not solved, not
+  replayed, nothing backfilled from Warcraft Logs. Stored letters, snapshot dates and `seasonVerified` byte-identical; the owner-confirmed
+  retention policy (2026-09-05) keeps the four-source consensus.
+- **Icy Veins / Method / Wowhead deliberately NOT re-fetched** — the 09-17 nightly re-verified 240/240 cells S2 with 0 moves (1d against a
+  4d max), today's nightly will pull them again in an hour, and an independent regeneration is what makes a local push unmergeable.
+- `freeze-season`: 8 pairs still describe the live season, nothing to freeze; `season-final.json` untouched.
+
 ## 2026-09-17 (nightly) — Icy Veins / Method / Wowhead all re-fetched and re-parsed, **240/240 cells re-verified S2, 0 moves**; Archon walled a **TWENTY-FIFTH** day
 
 - **Icy Veins — 6/6 pages, 80 rows (27/7/6 per bracket), 0 moves.** Direct browser-UA GET, HTTP 200, 197,156-344,663 B measured off the written files. ⚠️ **Trap hit and fixed inside this run:** the first parse read the icyveins scale with `Object.keys(scales.scales.icyveins.tiers)` — `tiers` is an **ARRAY**, so the membership set was `{"0".."6"}` and every tier cell was rejected: **0 rows on all six healthy pages**, which looks exactly like an upstream rebuild. The per-page count print is the only thing that caught it (the standing rule, earned again). Correct form is `new Set(scales.scales.<source>.tiers)`. Letters: raid DPS S4/A+9/A10/B3/C1, raid healer S3/A3/B1, raid tank S2/A3/B1, M+ DPS S+4/S3/A+7/A7/B5/C1, M+ healer S2/A+1/A2/B2, M+ tank S1/A+2/A3. JSON-LD `dateModified` re-read live on each page (08-30 / 09-01 / 08-29 / 08-30 / 08-30 / 08-30) and matches both the registry and the pre-agent published-evidence artifact. Era from each page's own ranking-body H2 ("... for Season 2" on all six); the raid-healer page TITLE still says "(Patch 12.0.7 / Midnight)" and is overridden by its body, the blue-tracker precedent.

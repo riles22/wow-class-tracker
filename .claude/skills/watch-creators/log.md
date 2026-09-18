@@ -17,6 +17,41 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (local, scheduled) — THE CAPTION 429 IS BACK (first relapse since the 09-11 clearance); queue **0 → 1** (LBNinja7's healer-balance read queued for tonight's Supadata drain), 0 takes, 0 metaNotes — run BEFORE today's nightly
+
+- **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by 14:20Z; the last poll was the 09-17 nightly's
+  15:16Z sweep). RSS discovery re-run: **44/44 channels HTTP 200** (0 failures), **660 entries**. Seen-set = structured union of the four
+  lanes = **1,272 ids** (no log regex). Cycle bound `min(builds[].date)` = **2026-06-18** → **342 unseen in-cycle**, of which **28 are
+  newer than 2026-09-17T14:30Z**. Titles AND `media:description` read for all 28.
+- **Three candidates chosen for a caption fetch**, metadata printed in a SEPARATE yt-dlp invocation first (all normal VODs, none live):
+  LBNinja7 `ALQD4CucMB0` "Healer Balancing is... CONCERNING!!!" (09-18, 21:54 — a healer-balance talk video from the broad healer
+  specialist, the one clear spec-read candidate); Dalaran Gaming `uyfaXIhTzzA` "5 Things You MUST Do This Week" (8:34, a weekly to-do
+  that might carry a tuning note); Maximum `GBTie1Efs-k` "LIQUID WON THE MDI!!!" (65 min, a general-creator reaction that might carry a
+  comp read).
+- **Captions: 0/3 — `HTTP Error 429: Too Many Requests` on the `timedtext` download for every one**, the same IP-scoped abuse-flag
+  shape as 08-23→09-10 (android player API, formats, titles and durations all resolve clean; only the subtitle fetch 429s). The 09-11
+  clearance held for ten consecutive clean local runs through 09-17 (10/10 captions yesterday) and has now relapsed. ⚠️ Three videos were
+  attempted in one loop rather than stopping on the first error — a process slip, not a retry (each id got exactly one attempt, no
+  client shuffling, no backoff ladder). Nothing installed or upgraded (yt-dlp still the local 2026.07.04); no Supadata request.
+- **The authenticated fallback was again NOT used, same reasoning as 09-02/09-03.** A genuine Netscape export
+  (`~/Downloads/www.youtube.com_cookies.txt`, 2026-08-24, 23 youtube.com records — NOT the 792-byte robots.txt the 08-30 run found
+  beside it) IS on disk, so the lane now has a usable credential — but SKILL.md scopes it QUEUE-ONLY as a bridge for a queued backlog,
+  and an unattended scheduled run moving a logged-in Google session around is the wrong shape regardless. **Owner decision, unchanged:**
+  if Riley wants scheduled runs to use that file when the anonymous lane 429s, say so explicitly; until then it stays untouched.
+- **Queue 0 → 1: `ALQD4CucMB0` queued** (`{id, creator: "LBNinja7", title, published 2026-09-18, queuedAt 2026-09-18}`) — in scope by
+  creator and content (all six of his registered healer specs are plausible subjects), transport-blocked, and its title carries no class
+  or spec NAME, so the nightly's own keyword discovery might not queue it; tonight's Supadata drain (different network path, proven
+  unaffected by this flag) should land it. **The other two stay UNQUEUED** per "fetch broadly, queue narrowly" — neither title carries
+  class/spec/12.1/Season signal, and a metered request on a to-do list or an MDI reaction is exactly what the nightly filter exists to
+  avoid. Neither goes to `seen[]` (transport dismissals stay unseen; they will be reconsidered by the next clean local run).
+- **Declined from title + description, not fetched, nothing to `seen[]`** (25 of 28): stream VODs and key/reclear PoVs (Shadarek ×2
+  Havoc +20s, Bansherz BM +20 / Kith'ix PTR MM PoV / M raid stream, YoDaTV ×2 VDH +20s, AutomaticJak Holy Priest key, Critcake pug keys,
+  Preheat Coiled Altar Arcane, Kalamazi / Tactyks / Shindigg Coiled Altar prog streams, Megasett prog stream); *WoW: Forever* beta
+  content (Supatease ×6 incl. the Dev Q&A reaction, NeekapHere ×2, Whispyr); Dalaran Gaming PvP duels; AutomaticJak's Eiiko
+  cooldown-planner addon video.
+- 0 takes, 0 metaNotes, 0 verified skips. `data/creator-takes.json` untouched; `npm run validate` clean. `expertRead` remains dormant
+  between cycles (`PHASES.ptr` null).
+
 ## 2026-09-17 (nightly) — 44/44 feeds polled (660 entries); queue was empty when the collector ran, so **0 transcripts, 0 takes, 0 metaNotes**; **0 queued** — the one upload since this morning's local sweep is *WoW: Forever* content
 
 - **Discovery:** all **44** unique tracked channels polled inline via the public RSS endpoint (116 class-creator entries + 3 `generalCreators` collapse to 44 distinct `channelId`s once `transcribable: false` and id-less entries drop), **44/44 HTTP 200** with retry+backoff, **0 failures**, **660 entries**. Nothing backgrounded, no subagents.
