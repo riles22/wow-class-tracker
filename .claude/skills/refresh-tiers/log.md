@@ -17,6 +17,24 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (nightly) — 240/240 cells re-verified S2, **0 moves**; Archon still walled (day 26), re-confirmed after this morning’s local probe
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80**, all fetched fresh this session, all HTTP 200. Per-page counts printed and reconciled to
+  27 DPS / 7 healer / 6 tank before every merge; 0 unmatched, 0 duplicates, 0 role mismatches. **Pre-merge diff moved 0 of 240 stored cells.**
+- **The scales.json shape trap bit again and the printed count caught it again.** `scales.icyveins` is a wrapper — the tier list is
+  `scales.scales.icyveins.tiers`, an ARRAY. Reading it the other way produced **0 rows on all six healthy Icy Veins pages**, which looks
+  exactly like a page rebuild. Print per-page counts before believing any parse.
+- Method: the M+ page's **second populated tierlist is the dungeon-difficulty list** (9 entries) and the raid page carries the site logo; all 10
+  were rejected by **roster match**, never by container position.
+- Wowhead: unescape `\/` first, then choose the `[tier-list=rows]` block with the most `[spec-badge=]` entries (one block per page this run,
+  so no decoy — but the rule is what makes that checkable). Tolerant whitespace on `[tier-label ...]`.
+- **Page self-dates re-read live and 0 of 14 disagreed** with either the committed registry or this run's published-evidence artifact.
+  Era-verified from each ranking body; note Icy Veins' raid-healer page still **titles** itself "(Patch 12.0.7 / Midnight)" over a Season-2
+  body — body over title. **No `seasonVerified` value changed**, so there was nothing for `freeze-season` to do.
+- **Archon**: source-health receipt first (raid 403 cloudflare-challenge, M+ 200 human-verification), then one confirming GET per bracket —
+  both 403, "Just a moment", `__NEXT_DATA__` count **0**. Nothing parsed, nothing bypassed. All 240 Archon letters keep their 2026-08-25 dates
+  under the owner-confirmed retention rule; `encounter-tiers.json` still stamps **s1** so the Fight selector stays hidden.
+
 ## 2026-09-18 (local, scheduled) — Archon walled a TWENTY-SIXTH day, re-probed once from a residential IP (403 "Just a moment..." today); 0 letters touched; run BEFORE today's nightly
 
 - **Archon: still walled.** Root plus two registered pages (raid Heroic DPS all-bosses, raid Heroic healer all-bosses) with a browser

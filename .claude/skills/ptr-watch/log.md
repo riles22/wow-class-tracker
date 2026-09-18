@@ -17,6 +17,24 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (nightly) — ledger clean at post-1 v40; ONE new feed entry (Sept 17 live hotfixes, zero class content); dev-notes thread still quiet at #19
+
+- **Revision ledger FIRST** (official-notes receipts, checkedAt 14:38:51Z). Both sources returned: live hotfixes topic 2336376 post 1 now at
+  **version 40**, last edited 2026-09-17T23:29:35Z, 116 sections; 12.1.5 thread 2344395 posts 1 and 4, 3 + 7 sections. Every post bodySha256
+  and all **126 section hashes identical** to the committed ledger, so 27 applied / 99 irrelevant / **0 unresolved** all carried forward and the
+  only thing that changed in `data/official-notes.json` is `checkedAt`. `check-official-notes --base=HEAD` passes.
+- **Feed: +1 entry, 2026-09-17, kind hotfix, `specsAffected: []`.** Read from the forum post with nesting intact and cross-checked against
+  Wowhead news=382983. The September 17 block has **no Classes heading at all** — Dungeons and Raids (Ruby Life Pools enemy-forces count fix;
+  Coiled Altar Unnerving Fixation no longer over-targeting tanks) and Player versus Player (rating inflation up; Font of Venomous Rage -50% in
+  PvP). PvP lines carry the out-of-scope prefix, so nothing reaches a drawer or the outlook tally. No set bonus touched → no `tierSet.asOf` moved.
+- **Dev-notes thread 2317811**: newest staff post is still **#19 (Linxy, 2026-07-31)**. Cycle closed, `PHASES.ptr` stays null.
+- **Discovery, all four channels**: RSS 40 items + news index 20 posts (index polled because it leads the feed) + blue tracker 50 entries /
+  50 unique topics. The window is almost entirely **WoW: Forever beta** coverage. 382983 was the only new in-scope item.
+- **12.1.5 stayed NOTES ONLY.** The Kith'ix PTR raid-testing blue posts (2026-09-16, Heroic 10-30 and Mythic 15-25) and news=382926 (Kith'ix
+  Myth 9/6 loot removed) were read and deliberately **not** written into `ptr-builds`, `spec.ptr`, tier sets or any model input.
+- Dormant WCL PTR zones (52/54/56/57) not swept — contract rows removed at the flip. Writeup gaps: still exactly **1** (Demonology Warlock,
+  deliberate). Note for the record: Kith'ix is also why the WCL **raid** collector reads `invalid` — zone 53 gained encounter 3513.
+
 ## 2026-09-18 (local, scheduled) — ledger MOVED on revision only: hotfix post v38→v40 with **0 class-section changes** (September 17 section is dungeon/raid/PvP only); NO new feed entry; still no 12.2 PTR — run BEFORE today's nightly
 
 - **Official revision ledger ran FIRST**, from a fresh local `node src/fetch-official-notes.mjs` (checkedAt 2026-09-18T14:24:03Z, both

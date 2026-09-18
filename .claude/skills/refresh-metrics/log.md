@@ -17,6 +17,32 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (nightly) — SimC build moved (23/24 values), everything else upstream-static; WCL raid cut still `invalid` on the Kith'ix zone change
+
+- **SimulationCraft — the one real move.** `MID2_Raid.txt`, 1,439,899 B, has a `DPS Ranking:` block so the HTML lane was not needed. Header
+  build **HEAD ae999065c5** (12.1.0.69814, hotfix 2026-09-17), a new hash against the stored values — which is the honest explanation for the
+  movement. 45 profiles → longest-prefix map → **24 DPS specs** (7 tank profiles correctly matched nothing). **23 of 24 moved**, all tiny —
+  largest `|delta|` **357 DPS on Outlaw (0.14%)**, nowhere near the 0.6 value-move gate. Shadow Priest held and kept its stored date.
+- **Bloodmallet `partial`**: 24 charts HTTP 200, 3 persistent `{"status":"error"}` specs (Balance, Augmentation, Devastation — same set).
+  All 24 `tier` **MID2**, `ptr` the string `"0"`, chart timestamps all **2026-09-16**. **0 of 24 profiles moved.** partial because that chart
+  date is 2 days old; stamping today would defeat the very probe (`fightProfile.asOf`) the staleness gate reads.
+- **WoWMeta `partial`**: rankings file diffed independently of the manifest date, as the rule requires — and this time both are static
+  (`snapshotDate` 2026-09-15, rankings `Last-Modified` 15 Sep 09:33 GMT). Whitelisted dps/hps/tank + `lowerBound` + `keyRange === undefined`
+  → 40 rows; all 40 values and all 40 `numberOfCharacters` identical to stored at the stored 1-dp precision. Re-merged at the source's date.
+- **Murlok `success`** and **Mythicstats `partial`** both reported from the trusted collector receipt; I parsed no second copy. Murlok
+  `sourceAsOf` **2026-09-17** (its own `<time datetime>`), 40 rows, 0 moved — last night landed the same cut. Mythicstats reached
+  `/period/1081` (HTTP 200) but the receipt **held the provider**: Frost Mage is absent from the chart while carrying a nonzero stored share,
+  so 0 rows landed and the whole 40-row series is preserved with its original dates. Worth a reviewed look at whether that omission is real.
+  `check-stable-metrics` passes.
+- **WCL**: no credentials, no request. M+ bracket **success, 320 rows** (all 320 cuts success, minRows 280), coverage 09-16 → 09-17. Raid bracket
+  **`invalid`, 0 rows** — all 320 cuts report "Zone identity/season/encounter/difficulty/keystone metadata differs from reviewed configuration",
+  the 09-17 root cause unchanged: **WCL added encounter 3513 (Kith'ix) to zone 53**, so `zoneValid` refuses the bracket. Reported `parse_error`,
+  not an outage; the recipe is gatekeeper code and was **not** touched in a data refresh. `check-wcl-metrics --manifest` passes.
+- **Archon's six numeric families all `blocked`** (day 26). Each reported as its own row so a partial recovery cannot hide behind a combined
+  status. The per-boss survivability substitution stays a measured dead end — nothing was substituted.
+- **Robydoby not refreshed**: its series is zone-54 **12.1 PTR** and that cycle is closed, so those rows are historical receipts. It is
+  deliberately outside `required-sources.json`, so no manifest row.
+
 ## 2026-09-18 (local, scheduled) — **WCL raid `invalid` ROOT-CAUSED: WCL added encounter 3513 "Kith'ix" (the 12.1.5 boss) to zone 53**, and `zoneValid` refuses any encounter outside the reviewed list — a one-line reviewed recipe edit, NOT applied here; no metric merged; Archon walled day 26
 
 - **Diagnosis, read-only, via `node src/wcl-probe.mjs`** (local credentials from the gitignored config, OAuth ok, exit 0): zone 53

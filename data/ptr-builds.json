@@ -3,6 +3,20 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-09-17",
+      "kind": "hotfix",
+      "label": "Live 12.1 hotfixes for September 17 — NO class or spec line in the entire batch. Read from the canonical source: the running hotfix blue post (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - September 17”, post 1 at version 40, last edited 2026-09-17T23:29:35Z), fetched fresh this run and read with its heading nesting INTACT, then cross-checked line for line against the Wowhead mirror news=382983. The September 17 block carries exactly two headings — Dungeons and Raids (one Ruby Life Pools enemy-forces count fix and one Coiled Altar tank-targeting fix) and Player versus Player (a rating-inflation increase and a PvP-only trinket nerf). There is no Classes heading, which is why this run’s deterministic official-notes receipt reports no new or edited class section and specsAffected is deliberately empty (the posts #7/#12/#13 precedent). The two PvP lines are logged for the record with the out-of-scope prefix so they reach no drawer and cannot vote in the PvE outlook tally. No set bonus is touched, so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-17/2336376/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=382983/fixed-count-issues-in-ruby-life-pools-patch-12-1-midnight-hotfixes",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: Ruby Life Pools — Blazebound Destroyers and Primalist Flamedancers no longer fail to contribute towards enemy forces when no player is on their threat table as they finish their death sequence; Blizzard notes the side-effect that these creatures no longer display their enemy-forces contribution in the default UI tooltip. The Venomous Abyss, The Coiled Altar — fixed an issue where Unnerving Fixation was targeting tanks more often than intended.",
+        "PvP only (out of scope for this tracker’s PvE ratings) — rating inflation significantly increased for all rated PvP modes, with emphasis on Battleground Blitz, Rated Battlegrounds and Rated 3v3 Arena; Font of Venomous Rage trinket damage reduced by 50% in PvP combat."
+      ]
+    },
+    {
       "date": "2026-09-15",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for September 15 — three class bug fixes, two of them tier-set behaviour fixes, plus the live landing of the Venomous Abyss encounter tuning already logged from its own September 14 announcement. Read from the canonical source: Kaivax's running hotfix blue post (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - September 15”, post 1 at version 38, last edited 2026-09-16T00:41:40Z), via the deterministic official-notes receipt with its heading nesting INTACT and cross-checked line for line against the Wowhead mirror news=382918. All three class blocks sit under an explicit SPEC heading (Hunter › Marksmanship, Paladin › Protection, Priest › Holy). Two lines touch a Venomous Abyss set bonus — Protection Paladin's 2-set critical-strike illumination now applies to Consecration's first tick, and Holy Priest's 2-set Renewed Vigor is capped at 3 stacks as printed — so both specs' spec.tierSet.asOf advance to 2026-09-15 with this topic as source and a dated parenthetical recording that these are behaviour fixes making the printed bonus apply as written (no value changed); gearing/data/specs.json was re-synced and the gearing artifact rebuilt in the same change. The Marksmanship line is a cast-animation fix with no tuning value. The Dungeons and Raids block restates the encounter tuning announced in topic 2349528 (logged on 2026-09-14) as now live and adds one Coiled Altar fix; encounter mechanics are not class tuning. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-15/2336376/1.",

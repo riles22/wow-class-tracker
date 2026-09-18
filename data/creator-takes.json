@@ -3318,7 +3318,8 @@
       "sentiment": "nerf",
       "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
       "url": "https://youtu.be/gvh4R_QSwaI?t=69",
-      "claim": "Corrects his earlier ranking and drops Mistweaver a clear step below Holy Paladin, to the back of A tier. As a Mistweaver main he says the Rising Sun Kick nerf hurts less on its own than people expected — the globals still heal well for their cost — but that it exposed how little Shaluun's Gift and the spec's spot healing contribute now they are no longer hidden behind the oversized kicks. Calls it a jack of all trades, master of none, and says he has not enjoyed its PTR raid healing outside Chi-Ji."
+      "claim": "Corrects his earlier ranking and drops Mistweaver a clear step below Holy Paladin, to the back of A tier. As a Mistweaver main he says the Rising Sun Kick nerf hurts less on its own than people expected — the globals still heal well for their cost — but that it exposed how little Shaluun's Gift and the spec's spot healing contribute now they are no longer hidden behind the oversized kicks. Calls it a jack of all trades, master of none, and says he has not enjoyed its PTR raid healing outside Chi-Ji.",
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -3338,7 +3339,8 @@
       "sentiment": "buff",
       "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
       "url": "https://youtu.be/gvh4R_QSwaI?t=289",
-      "claim": "Moves Resto Shaman to the top of A tier as the consistent healer of the season and expects it to chisel its way into the meta composition — helped, he notes, by its raid buff being unlikely to be covered by a DPS spec in the group."
+      "claim": "Moves Resto Shaman to the top of A tier as the consistent healer of the season and expects it to chisel its way into the meta composition — helped, he notes, by its raid buff being unlikely to be covered by a DPS spec in the group.",
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -3348,7 +3350,8 @@
       "sentiment": "neutral",
       "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
       "url": "https://youtu.be/gvh4R_QSwaI?t=384",
-      "claim": "Keeps Discipline in the solid middle — 'still very solid' — below the top three but comfortably clear of the bottom, and in comp terms he treats it as the better of the two Priest healers rather than the other way round."
+      "claim": "Keeps Discipline in the solid middle — 'still very solid' — below the top three but comfortably clear of the bottom, and in comp terms he treats it as the better of the two Priest healers rather than the other way round.",
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -3368,7 +3371,8 @@
       "sentiment": "mixed",
       "patchContext": "12.1 PTR — S2 M+ healer tier list (corrected)",
       "url": "https://youtu.be/gvh4R_QSwaI?t=396",
-      "claim": "Defends Holy Priest as better than its reputation — he notes the recent healing buff and says it has climbed steadily from a genuinely bad early PTR — but keeps it near the bottom because of comp: he reads it as essentially a worse Disc Priest in a group."
+      "claim": "Defends Holy Priest as better than its reputation — he notes the recent healing buff and says it has climbed steadily from a genuinely bad early PTR — but keeps it near the bottom because of comp: he reads it as essentially a worse Disc Priest in a group.",
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -4602,7 +4606,7 @@
       "claim": "He argues the Annihilator caster build is more viable than the community initially concluded: after recent discoveries it is behind by only a couple of percent in AoE, which he calls not much in the grand scheme, and he tells viewers the playstyle is totally viable and still very competitive, especially in Mythic+, where he expects a lot of people to keep playing it. He reads the 12.1 changes as an improvement to the spec's feel: some damage has been moved out of the Void Metamorphosis windows into the out-of-meta windows for more even and reliable output, though he is careful to say a lot of damage still sits inside meta and centres on Collapsing Star. He rates the tier set very highly — the two-piece gives harvesting four or more fragments with Reap a 20% chance to make the next Consume instant and explode, and the four-piece grants eight fragments plus 20% increased Reap damage — and says the practical effect is pressing Reap almost as often as Consume, so that Consume spam is a thing of the past. He confirms Collapsing Star was nerfed but, unlike the Void Scourge build, still calls it the main bread and butter at high target counts. This is a different lens from VooDooSaurus's same-week read, which puts Annihilator behind Void Scourge in all situations."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "LBNinja7",
@@ -5433,7 +5437,7 @@
       "patchContext": "12.1 PTR — reaction to the August 18 healer tuning pass (supersedes his 08-02 main-choice review and M+ tier list read)",
       "url": "https://youtu.be/DMtMmUW5uRE?t=494",
       "claim": "He reads the Holy Priest changes as large and, unusually, delivered by tuning a weaker hero tree upward rather than nerfing the stronger one — which he calls phenomenal and wants applied to other healers, naming Mistweaver's Master of Harmony as the case he would like treated the same way. On mana he says Enlightenment regenerating 25% faster instead of 10% is very good and very worthwhile, and notes he had argued on stream the day before that 10% was indefensible next to the mana return other healers now get. On the Oracle buffs he is emphatic: Words of the Wise raising Holy Word Serenity and Sanctify healing from 10% to 40% is a massive buff to ultimate Serenity casts, Prompt Prognosis increasing the Prayer of Mending spot heal by 55% is likewise massive, and Preventive Measures raising Prayer of Mending healing by 40% he calls insanity. His summary is that these read as massive and represent big tuning in favour of Oracle. He flags openly that he had not fully read the Holy Priest notes before reacting.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -5457,7 +5461,7 @@
       "patchContext": "12.1 PTR — reaction to the August 18 healer tuning pass (supersedes his 08-02 main-choice review and M+ tier list read)",
       "url": "https://youtu.be/DMtMmUW5uRE?t=52",
       "claim": "Restoration Shaman is absent from the tuning notes and he reads that as confirmation of strength, calling the spec in a fantastic spot with really good healing and saying he is excited to see how it performs in both raid and Mythic+. He describes it as a big-time contender in the conversation about the meta spec, while adding one qualification: with the buffs landing elsewhere he now thinks it may face competition again for the physical composition slot.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -6511,7 +6515,7 @@
       "claim": "In Mythic+ he says he has actually felt Havoc seems pretty good right now, and that an extra 4% will go a long way. He draws a build consequence from the size of the buff: a player who already has enough AoE can now drop Glaive Tempest for Isolated Prey, which he prices at about 4% of overall damage lost against about 10% gained in single target, so the aura buff roughly pays for the swap. That makes it possible to fix boss damage in keys while still doing good AoE, which he calls a newly available option and one he finds exciting."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "LBNinja7",
@@ -6535,7 +6539,7 @@
       "claim": "He welcomes the blanket 4% healing increase but frames Restoration Druid as already fine — \"their healing’s pretty good\" and only in need of a minor buff. Later in the same video he names this as the change on the list he thought was least needed, while saying he does not dislike it."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "LBNinja7",
@@ -7505,6 +7509,126 @@
       "url": "https://youtu.be/u2JZWKphGfM?t=33",
       "claim": "Frost is the better of his two Death Knights in raid but still not where he wants it: it is also low in the 95th-percentile rankings — 'Frost still being here isn't great' — yet it has two fights where it really shines, The Lost Explorers and Twin Fangs, on the strength of its two-target cleave, and it beat his own Unholy on his Twin Fangs kills. For Mythic progression he says he would play Frost so that he always has damage available, whereas Unholy centres everything into cooldown windows; Vashnik is the one fight where Unholy's overlap-friendly cooldowns are the better fit. This drops the 'on par single target, edging ahead on cleave' upgrade of 09-04 to a more guarded 'better of the two, but low' read.",
       "superseded": false
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18), a data video in which he counts every healer spec by hand across the top 100/200/300/400/500 of the Mythic+ leaderboards, then sets those counts against each spec's total player count to derive a conversion rate.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=98",
+      "claim": "Holy Paladin is the spec his whole M+ dataset is built around: 354 of the top 500 healers on the leaderboard are Holy Paladin, and he attributes that stranglehold to the spec rather than to hype alone — excellent spot heals, great five-man healing, powerful cooldowns and great utility make it, in his words, the perfect healer for this environment this season. Asked which spec gives the best chance of grinding into the top 500, his answer is Holy Paladin."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18), a data video in which he counts every healer spec by hand across the top 100/200/300/400/500 of the Mythic+ leaderboards, then sets those counts against each spec's total player count to derive a conversion rate.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=171",
+      "claim": "Restoration Shaman is the only healer he says can compete with Holy Paladin on representation in the top 100, sitting at a little under a third of the Holy Paladin count. He calls it a very safe pick and lists the reasons: it still has a kick in an expansion where healer interrupts are scarce, strong CC and utility, and it brings Bloodlust for compositions whose tank does not. He notes physical push compositions are opting for it specifically."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18), a data video in which he counts every healer spec by hand across the top 100/200/300/400/500 of the Mythic+ leaderboards, then sets those counts against each spec's total player count to derive a conversion rate.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=236",
+      "claim": "Holy Priest is his breakout surprise of the season in keys: nobody expected any Holy Priest in the top 100 and there is one, and it keeps climbing where the other non-meta healers stall — 20 Holy Priests in the top 500 against 13 Mistweavers, despite Mistweaver starting ahead with five in the top 100. He frames the reason as its mana, saying it is a strange world where the infinite-mana Holy Priest gets it done better than Discipline. Later he explicitly hopes any raid correction does not break its chance of finally being part of the M+ meta."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18), a data video in which he counts every healer spec by hand across the top 100/200/300/400/500 of the Mythic+ leaderboards, then sets those counts against each spec's total player count to derive a conversion rate.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=346",
+      "claim": "Discipline Priest is his clearest negative M+ read. It is not represented at all through the top 400 — not a single player pushing on it — and only one appears in the top 500, which he calls shocking but logical: why play it when the better alternative exists. Set against its player base the conversion rate is among the lowest of the roster, so in his read anyone wanting to push the top 500 on Discipline has a very small chance."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18), a data video in which he counts every healer spec by hand across the top 100/200/300/400/500 of the Mythic+ leaderboards, then sets those counts against each spec's total player count to derive a conversion rate.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=646",
+      "claim": "Restoration Druid sits with Discipline Priest at the bottom of his conversion table: the first one only appears around the top 300 and there are two in the top 500. He gives the same verdict for both — despite so few people playing them, the conversion of players into the top 500 is very low, so pushing high keys on Restoration Druid is, on this data, a very small chance."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — M+ outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18), a data video in which he counts every healer spec by hand across the top 100/200/300/400/500 of the Mythic+ leaderboards, then sets those counts against each spec's total player count to derive a conversion rate.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=422",
+      "claim": "As a Mistweaver main he reads its M+ curve as the one that surprised him most in the wrong direction: five Mistweavers in the top 100 (the die-hards, in his framing) growing to only 13 by the top 500, while Holy Priest went from one to 20 over the same range. He closes by asking Blizzard for Mythic+ buffs to Mistweaver specifically — naming Vivify and its spot healing — separately from the raid tuning he wants."
+    },
+    {
+      "superseded": false,
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — raid outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18); the raid half of the video reads the Warcraft Logs Mythic healer HPS statistics chart, which he cautions is HPS only and does not price in mitigation or utility.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=914",
+      "claim": "Mistweaver is the bottom of the raid HPS chart and he calls the size of the gap concerning. He argues a spec like Mistweaver normally has die-hard outliers stretching its maximum well above its median, and that this season it does not — very little skill expression showing in the spread. His own parse is his example: against a Holy Priest in the same raid he is 70k HPS behind, about a quarter of his own HPS, for a 12% worse parse. He says he has not seen a healer gap this big since he started playing in Shadowlands, and names Mistweaver first among the four healers whose raid floor he wants pushed up."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — raid outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18); the raid half of the video reads the Warcraft Logs Mythic healer HPS statistics chart, which he cautions is HPS only and does not price in mitigation or utility.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=826",
+      "claim": "Holy Priest is the top of the raid chart on every measure he reads off it — significantly higher average HPS, a significantly higher maximum, and a significantly higher minimum, so its whole floor-to-ceiling band sits above the field. He treats it as the spec the rest of the roster is measured against, and the tuning question he puts to viewers is how Blizzard could bring its raid performance down without costing it the M+ standing it has only just earned."
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — raid outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18); the raid half of the video reads the Warcraft Logs Mythic healer HPS statistics chart, which he cautions is HPS only and does not price in mitigation or utility.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=1212",
+      "claim": "Asked repeatedly on stream whether Mistweaver is low in raid healing he says yes, it is true, and adds that the same holds for Restoration Shaman — a spec he says he loves and is asked about a lot. He names it second among the four healers he thinks need raid tuning to lift the bottom end of the chart. He also notes earlier that Shaman HPS can read low partly because of the utility it brings to a raid, while saying that should not skew the numbers too much."
+    },
+    {
+      "superseded": false,
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-09-18",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — raid outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18); the raid half of the video reads the Warcraft Logs Mythic healer HPS statistics chart, which he cautions is HPS only and does not price in mitigation or utility.",
+      "url": "https://youtu.be/ALQD4CucMB0?t=1106",
+      "claim": "He singles Discipline Priest out as the raid chart entry to distrust: only about a thousand logs feed it, so the sample is disproportionately die-hard players, and he would stick his neck out and say that with a normal player base its line would shift down, closer to where Holy Paladin sits. He nonetheless includes it among the four healers whose raid performance he wants lifted, so his read is that its true raid standing is below where the chart places it."
     }
   ],
   "metaNotes": [

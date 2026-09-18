@@ -17,6 +17,29 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-18 (nightly) — 44/44 feeds polled, 1 pre-fetched transcript → 10 LBNinja7 healer takes, 2 queued, 0 metaNotes
+
+- **Discovery**: 44 unique channelIds (116 class entries + 3 generalCreators), **44/44 HTTP 200**, 0 failures. Seen-set rebuilt from structured
+  data only — **1,272 ids**. Cycle bound `Math.min` over ptr-builds = **2026-06-18**. **341 unseen in-cycle**, 244 keyword-matching.
+- **Transcripts**: none fetched by me. `transcript-fetch/summary.json` verdict **ok**, requested 1 / fetched 1 (`ALQD4CucMB0`, 553 chunks),
+  usage 14 counted requests / 30d. No API-key problem to surface.
+- **Distilled**: LBNinja7 "Healer Balancing is... CONCERNING!!!" (2026-09-18) → **10 bracket-scoped takes**. M+ (his own hand count of the
+  leaderboard top 500): Holy Paladin **buff** (354 of 500), Resto Shaman **buff**, Holy Priest **buff** (1→20 across the range), Disc Priest
+  **nerf** (absent through top 400), Resto Druid **nerf**, Mistweaver **nerf** (5→13). Raid (WCL Mythic HPS chart): Holy Priest **buff**
+  (highest average, max AND min), Mistweaver **nerf** (lowest; his own parse 70k HPS behind a Holy Priest for a 12% worse parse), Resto Shaman
+  **nerf**, Disc Priest **nerf** (chart position flattered by a ~1,000-log die-hard sample, on his own reading).
+- **Deliberate abstentions**: **Preservation Evoker got no take** — its only appearances are membership in representation lists, which is not a
+  read. His closing M+ tuning ask contains two ASR-mangled ability names; only Vivify and "spot healing" were written, the mangles paraphrased.
+- **Supersession**: 9 of his older live takes retired — same-lens replacements plus the general `both`/unscoped reads for the four specs where
+  this run lands both brackets. His Holy Paladin and Resto Druid general reads stayed live as complementary (only M+ landed for those).
+- **Lane hygiene**: `ALQD4CucMB0` removed from `videos[]` in the same edit. Validation's one-record gate reds on the overlap and it fired
+  during this run before the merge — it works. Six LBNinja7 registry `latest` strings advanced to what was actually distilled.
+- **Queued (2)**: MadSkillzzTV `VZH4oZxZI-U` (healer M+/raid stream, 09-14) and Critcake `OkopAG80pXg` (keys/raid stream, 09-17) — both
+  creators whose streams yielded takes this month. The other 242 keyword matches were **not** queued and **not** marked seen: Blizzcon recaps,
+  WoW: Forever beta coverage, boss/dungeon PoVs and guides carry no live-season spec-strength read, and a budget/keyword cut is not durable.
+- yt-dlp probed **once** for metadata → the known datacenter bot wall ("Sign in to confirm you're not a bot"). No further YouTube requests, no
+  version change. `audit:creators` HIGH 0 / MED 0.
+
 ## 2026-09-18 (local, scheduled) — THE CAPTION 429 IS BACK (first relapse since the 09-11 clearance); queue **0 → 1** (LBNinja7's healer-balance read queued for tonight's Supadata drain), 0 takes, 0 metaNotes — run BEFORE today's nightly
 
 - **Scope: residential-only catch-up, run BEFORE today's nightly** (no schedule event by 14:20Z; the last poll was the 09-17 nightly's
