@@ -2,18 +2,67 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "VZH4oZxZI-U",
-      "creator": "MadSkillzzTV",
-      "title": "Healer M+ & Raid (6/8M) Preservation Evoker - *NEW* !UI",
-      "published": "2026-09-14",
-      "queuedAt": "2026-09-18"
+      "id": "iXjoMyr1LAs",
+      "creator": "izen (Izenhart)",
+      "title": "Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
     },
     {
-      "id": "OkopAG80pXg",
-      "creator": "Critcake",
-      "title": "Pug keys into reclear raid",
-      "published": "2026-09-17",
-      "queuedAt": "2026-09-18"
+      "id": "KYrUOokbzHc",
+      "creator": "MadSkillzzTV",
+      "title": "12.1 HUGE Healer Changes | What Does it Mean for M+ & Raid in Midnight?",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "UOTX7JIDhfo",
+      "creator": "Shadarek",
+      "title": "Anni Devourer and Aldrachi Havoc buffs | Sept 22nd Class Tuning",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "TupcXnUY65E",
+      "creator": "Shadarek",
+      "title": "Is Havoc Demon Hunter entering an Aldrachi Reaver Season?",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "tE55Y-E3ljE",
+      "creator": "NeekapHere",
+      "title": "Templars Rejoice! Retribution Paladin BUFFS | Midnight 12.1",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "zqsyJMYa9q0",
+      "creator": "Kesslive",
+      "title": "Midnight Season 2 Tuning Update: September 22nd Dev/Aug Thoughts",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "H8jFWzDNKSs",
+      "creator": "Dratnos",
+      "title": "Class Tuning Inc - Hero Talent Buffs!",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "9Q-7rLk1vFU",
+      "creator": "Nintern",
+      "title": "STARS and SOULS! | 12.1 Devourer and Havoc Patch Notes 9/22",
+      "published": "2026-09-18",
+      "queuedAt": "2026-09-19"
+    },
+    {
+      "id": "-OuQUMzzWTE",
+      "creator": "Dalaran Gaming",
+      "title": "BLIZZARD JUST BUFFED 23 SPECS! (Midnight Reset Tuning)",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-19"
     }
   ],
   "skipped": [

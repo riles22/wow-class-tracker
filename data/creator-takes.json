@@ -4726,7 +4726,7 @@
       "claim": "Walking through the finished tuning arc he concludes Arms is actually really strong now and that it is a good time to play Slayer Arms, saying it feels amazing on the PTR. He traces how it got there: large buffs first — auto attack damage increased by 100%, a much higher Slayer Strike proc chance, a buffed two-piece, a stronger Opportunist and a substantially stronger Dreadnought on multi-target though not single target — after which the sims came back showing execute damage and overall damage both very high, so Blizzard trimmed execute and Powerful Momentum and buffed Forethought partly to offset the execute cut. The gameplay consequence he emphasises is proc density: the higher Slayer Strike rate feeds many more Sudden Death procs, and Tactical Edge was reworked to guarantee a Sudden Death proc on every Colossal Smash. This is a launch-eve stream rather than a guide, and he says plainly that he has deliberately not studied the season in depth yet and is only now reading through a written guide on stream."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Fury",
       "creator": "Critcake",
@@ -6947,7 +6947,7 @@
       "claim": "Holy Priest is the read he returns to most: he calls it the biggest underdog and the biggest surprise of the patch, doing really well in both raid and Mythic+ after a run of buffs. He points to it topping HPS among the early Mythic bosses and on the Heroic charts, and says Priest players are no longer effectively forced into Discipline — both specs work this season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Evoker",
       "spec": "Preservation",
       "creator": "MadSkillzzTV",
@@ -7629,6 +7629,66 @@
       "patchContext": "Season 2 live — raid outlook. \"Healer Balancing is... CONCERNING!!!\" (published 2026-09-18); the raid half of the video reads the Warcraft Logs Mythic healer HPS statistics chart, which he cautions is HPS only and does not price in mitigation or utility.",
       "url": "https://youtu.be/ALQD4CucMB0?t=1106",
       "claim": "He singles Discipline Priest out as the raid chart entry to distrust: only about a thousand logs feed it, so the sample is disproportionately die-hard players, and he would stick his neck out and say that with a normal player base its line would shift down, closer to where Holy Paladin sits. He nonetheless includes it among the four healers whose raid performance he wants lifted, so his read is that its true raid standing is below where the chart places it."
+    },
+    {
+      "superseded": true,
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-14",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a ten-hour Preservation Evoker stream, \"Healer M+ & Raid (6/8M) Preservation Evoker - *NEW* !UI\" (published 2026-09-14), mixing weekly Mythic+ keys with Mythic Venomous Abyss progression. The reads below are volunteered in chat answers between pulls, not a tier-list segment.",
+      "url": "https://youtu.be/VZH4oZxZI-U?t=5908",
+      "claim": "Asked which healer he will actually push keys on, he says he wants to play Restoration Shaman but is fully aware Holy Paladin is better, and his reasons are compositional rather than raw throughput: Holy Paladin fits into more compositions, has better spot healing, and benefits from what the popular comps already bring (an Elemental Shaman plus a Mage feed it a Mastery and an Intellect buff). He calls it less restrictive in comps and, in his opinion, the better healer. Recorded superseded on arrival: his 2026-09-16 Holy Paladin M+ read is the newer take in the same lens."
+    },
+    {
+      "superseded": true,
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-14",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a ten-hour Preservation Evoker stream, \"Healer M+ & Raid (6/8M) Preservation Evoker - *NEW* !UI\" (published 2026-09-14), mixing weekly Mythic+ keys with Mythic Venomous Abyss progression. The reads below are volunteered in chat answers between pulls, not a tier-list segment.",
+      "url": "https://youtu.be/VZH4oZxZI-U?t=5980",
+      "claim": "His read on why Restoration Shaman sits where it does in keys is that the spec is carried by its raid buffs rather than its healing: he calls it the second most popular healer \"legitimately raid buffs\", says you have to build a comp around it, and notes it cannot sit alongside Elemental Shaman because the utility and raid-buff overlap is too much. On pure healing he places it level with Preservation Evoker, Holy Priest and Mistweaver Monk, all of which he says have more than enough healing for high keys. Recorded superseded on arrival: his 2026-09-16 Restoration Shaman M+ read is the newer take in the same lens."
+    },
+    {
+      "superseded": true,
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-14",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — a ten-hour Preservation Evoker stream, \"Healer M+ & Raid (6/8M) Preservation Evoker - *NEW* !UI\" (published 2026-09-14), mixing weekly Mythic+ keys with Mythic Venomous Abyss progression. The reads below are volunteered in chat answers between pulls, not a tier-list segment.",
+      "url": "https://youtu.be/VZH4oZxZI-U?t=3819",
+      "claim": "Playing his own Preservation Evoker in keys, he says the spec does a lot of damage with the new tier set and that its damage is honestly probably the only thing that could make it desirable in really high keys — the damage is its main advantage. He adds that its healing is good as well, but that it is more difficult to play and it brings no raid buff. Recorded superseded on arrival: his 2026-09-16 Preservation Evoker M+ read is the newer take in the same lens."
+    },
+    {
+      "superseded": false,
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "MadSkillzzTV",
+      "date": "2026-09-14",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — a ten-hour Preservation Evoker stream, \"Healer M+ & Raid (6/8M) Preservation Evoker - *NEW* !UI\" (published 2026-09-14), mixing weekly Mythic+ keys with Mythic Venomous Abyss progression. The reads below are volunteered in chat answers between pulls, not a tier-list segment.",
+      "url": "https://youtu.be/VZH4oZxZI-U?t=2054",
+      "claim": "In raid he says Preservation Evoker is probably the main ramp healer right now — the one that still has the ramp identity, and the difficulty that goes with it. His complaint is not the kit but the buff slot: he is surprised Preservation saw no use in the race, says he could genuinely see it being used, and states that if Preservation Evoker had a raid buff like the Druid buff he is very certain you would have seen it cover the AoE-plus-tank-buster window. On his read the missing raid buff, not throughput, is what keeps it out of top raid compositions."
+    },
+    {
+      "superseded": false,
+      "class": "Warrior",
+      "spec": "Fury",
+      "creator": "Critcake",
+      "date": "2026-09-17",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Pug keys into reclear raid\" (published 2026-09-17), a pug-key and raid-reclear stream. The read is his answer to two separate viewer questions about where Fury stands in raid.",
+      "url": "https://youtu.be/OkopAG80pXg?t=7687",
+      "claim": "Asked how Fury is doing in raid, he answers that it is objectively the worst — the lowest spec on the raid rankings — that it is doing really bad, and jokes that it needs a 50% buff so people will play it again, adding that he is not lying about the raid stats. Earlier in the same stream he tells a viewer that the mid-season raid weapon will help but will not make a meaningful difference, and that what will actually change things is Blizzard buffing the spec soon, precisely because Fury sits at the bottom of the raid rankings. He then checks live and corrects himself: Fury has climbed off the bottom on the rankings he is looking at, while Heroic is still bottom."
     }
   ],
   "metaNotes": [
