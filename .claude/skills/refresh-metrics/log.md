@@ -17,6 +17,16 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-19 (local, scheduled) — NOT re-run: nightly metrics landed 30 minutes earlier; WCL raid still `invalid` on the Kith'ix encounter (owner fix pending)
+
+- No metric fetched or merged. The nightly's manifest already records the day: SimC 24 rows fresh, Bloodmallet 24/27 unchanged (upstream
+  2026-09-16), Murlok 40/40 unchanged (source date 09-17), Mythicstats held for review (omitted Frost Mage share), WCL M+ 320 ok, **WCL raid 0
+  rows / `invalid`** — still the zone-53 encounter 3513 (Kith'ix) refusal root-caused 09-18; the one-line `excludedEncounters` recipe edit
+  remains a reviewed owner change and was not made. Consequences unchanged: `wcl-leaderboard-raid` stays `parse_error`, and the two
+  ui-invariants WCL fixture tests stay red on every run (636/2/1 again today).
+- `check-refresh --manifest` on this partial run: the only failure is the stale gitignored local `wcl-fetch/evidence.json` (09-08 leftover,
+  no WCL merge here) — the `startedAt` line did NOT fire because the nightly's 14:19Z stamp is still fresh. Manifest deliberately NOT rewritten.
+
 ## 2026-09-19 (nightly) — SimC re-simmed (24 rows, jitter only); Bloodmallet / WoWMeta / Murlok byte-identical upstream; Mythicstats **held for review** by the collector; WCL raid cut still `invalid`; Archon walled day 27
 
 - **SimC — `success`, the one genuine mover.** `MID2_Raid.txt` HTTP 200, 1,439,746 B, and it **had** a `DPS Ranking:` block so the HTML fallback was not needed. Header build string (never the visible Highcharts version): `12.1.0.69875 Live (hotfix 2026-09-19/69875, git build HEAD 9f6eac0659)` — hash advanced, which is the honest explanation for the movement. 46 profile lines, Raid aggregate skipped, **longest-prefix mapping with hyphens allowed** → **24** DPS specs (best hero variant each). The 7 unmapped names are all tank profiles and correctly not ingested. **All 24 moved, every one <0.15%** (largest Windwalker 246,526→246,669, 0.06%) — ordinary overnight jitter, nowhere near `maxValueMovePct` 0.6. asOf 2026-09-19.

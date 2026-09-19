@@ -17,6 +17,16 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-19 (local, scheduled, 30 min after the nightly) — verify-only: RSS re-read, **nothing newer than the nightly's sweep**; no new build/hotfix, no 12.2 PTR
+
+- The 09-19 nightly (publish 14:23Z) had already logged the **September 22 tuning post** (topic 2354340, 24 specs, 24 highlights) and the
+  Ula'tek Stone Venom hotfix and rewritten the notes ledger (clean, 0 unresolved). This run started 14:29Z on `51efd6a` and did NOT re-derive any
+  of that. Wowhead `/news/rss/all` re-fetched HTTP 200, 161,893 B, 40 items — **byte-for-byte the same size the nightly recorded**; newest item is
+  still the 09-19 14:00Z *WoW: Forever* phasing note; the only tuning items are the 09-18 "Augmentation Evoker Buff — Class Tuning Incoming" mirror
+  and the Ula'tek hotfix, both already in the feed. Zero "12.2 PTR" titles. Forum threads not re-polled (the RSS would carry a new post).
+- `data/official-notes.json` and `data/ptr-builds.json` untouched; `PHASES.ptr` null; dormant zones skipped. Only creator-layer data changed
+  this run (see watch-creators) — the nine queued reaction videos to that very tuning post.
+
 ## 2026-09-19 (nightly) — **TWO new feed entries**: the Sept 22 class tuning pass (24 specs) and a datamined Ula'tek encounter hotfix; official ledger clean at post-1 v40; still no 12.2 PTR
 
 - **Ledger first, per the skill.** `official-notes/evidence.json` (checkedAt 14:00:04Z) — both configured sources **success**: live hotfix compilation topic **2336376 post 1 at revision 40** (updatedAt 2026-09-17T23:29:35Z, **116** class sections) and the 12.1.5 development thread **2344395** posts 1 (v3, 3 sections) and 4 (v1, 7 sections). The reviewed pending ledger is byte-identical to the committed `data/official-notes.json` **apart from the two `checkedAt` stamps** — 0 new, 0 edited, 0 removed sections, **0 unresolved dispositions**. Written through; `check-official-notes` passes.

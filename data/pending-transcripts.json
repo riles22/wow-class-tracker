@@ -1,70 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "iXjoMyr1LAs",
-      "creator": "izen (Izenhart)",
-      "title": "Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "KYrUOokbzHc",
-      "creator": "MadSkillzzTV",
-      "title": "12.1 HUGE Healer Changes | What Does it Mean for M+ & Raid in Midnight?",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "UOTX7JIDhfo",
-      "creator": "Shadarek",
-      "title": "Anni Devourer and Aldrachi Havoc buffs | Sept 22nd Class Tuning",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "TupcXnUY65E",
-      "creator": "Shadarek",
-      "title": "Is Havoc Demon Hunter entering an Aldrachi Reaver Season?",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "tE55Y-E3ljE",
-      "creator": "NeekapHere",
-      "title": "Templars Rejoice! Retribution Paladin BUFFS | Midnight 12.1",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "zqsyJMYa9q0",
-      "creator": "Kesslive",
-      "title": "Midnight Season 2 Tuning Update: September 22nd Dev/Aug Thoughts",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "H8jFWzDNKSs",
-      "creator": "Dratnos",
-      "title": "Class Tuning Inc - Hero Talent Buffs!",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "9Q-7rLk1vFU",
-      "creator": "Nintern",
-      "title": "STARS and SOULS! | 12.1 Devourer and Havoc Patch Notes 9/22",
-      "published": "2026-09-18",
-      "queuedAt": "2026-09-19"
-    },
-    {
-      "id": "-OuQUMzzWTE",
-      "creator": "Dalaran Gaming",
-      "title": "BLIZZARD JUST BUFFED 23 SPECS! (Midnight Reset Tuning)",
-      "published": "2026-09-19",
-      "queuedAt": "2026-09-19"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3110,6 +3046,13 @@
       "title": "Midnight Eclipse 12.2 Reaction | M+ rotation | New CASTER legendary?! Baze Reacts",
       "reason": "Live reaction to the BlizzCon Midnight panel (Talebound, 12.1.7, 12.2 Eclipse, Midnight's Edge caster dagger, spec-based M+ titles, housing, calibration chamber). No Arms/Fury or other spec-strength read; 'monk tanks happen to be the meta' is a hypothetical for the title change.",
       "verifiedAt": "2026-09-17"
+    },
+    {
+      "id": "H8jFWzDNKSs",
+      "creator": "Dratnos",
+      "title": "Class Tuning Inc - Hero Talent Buffs!",
+      "reason": "Transcript read in full (21 min, 4,166 words): a class-by-class read-through of the September 22 tuning post. The only Warrior content — his registered scope (Arms, Fury) — is reading the developer note aloud ('Warrior's in a good state overall, Mountain Thane a bit behind') with no comparative read of his own on Arms or Fury, so no take could honestly be minted. His substantive reads are all outside his registered scope (Augmentation 'secretly the best spec in the game for really high-end play' on Mythic Coiled Altar/Ula'tek boss damage and mid-pack for most players; Devastation possibly a sleeper M+ spec; DPS DKs unused in raid for lacking a raid buff; Aldrachi funnel a dangerous profile to balance; Brewmaster still needs survivability help; Protection Paladin already fine and now better) and are flagged in the run log for the owner rather than distilled.",
+      "verifiedAt": "2026-09-19"
     }
   ],
   "seen": [

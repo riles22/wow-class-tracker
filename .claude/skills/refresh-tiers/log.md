@@ -17,6 +17,12 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-19 (local, scheduled) — NOT re-run: the nightly re-verified 240/240 cells 30 minutes earlier (publish 14:23Z, 0 moves, Archon walled day 27)
+
+- Residential-only scope; regenerating what CI produced today is the unmergeable-push failure the local-run skill warns about. No tier page
+  fetched, no `snapshot` date touched, Archon not re-probed (the nightly's own attempt with the full header set was 403 + `__NEXT_DATA__` 0 an hour
+  before this run; a second residential probe would add nothing to the wall count and the retention policy is unchanged).
+
 ## 2026-09-19 (nightly) — 240/240 cells re-verified S2, **0 moves**; Archon walled a **twenty-seventh** day
 
 - **Icy Veins 80/80.** All 6 pages direct browser-UA GET, HTTP 200, 197,156–344,663 B off the written files. Parse bounded to `<table class="tier-list">`: tier from each `<tr>`'s own first `<td>`, spec from the FIRST `img alt` after `class="tier-list-entry"`, looked up WHOLE. Counts printed before the merge: raid 27/7/6, M+ 27/7/6, **0 unmatched**. Tiers: raid DPS S/A+/A/B/C · raid healer S/A/B · raid tank S/A/B · M+ DPS S+/S/A+/A/B/C · M+ healer S/A+/A/B · M+ tank S/A+/A.

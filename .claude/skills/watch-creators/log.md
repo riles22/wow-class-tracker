@@ -17,6 +17,65 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-19 (local, scheduled) — CAPTION 429 CLEARED (one-day relapse, 09-18 only); queue **9 → 0** drained at home (9/9 captions), **19 takes** + **9 metaNotes**, 1 verified skip — run AFTER today's nightly
+
+- **Scope: residential-only catch-up, 30 minutes after the 09-19 nightly finished** (publish 14:23Z; this run reset onto `51efd6a`). The nightly had
+  queued 9 Sept-22-tuning reaction videos for Supadata; all nine were fetched here with yt-dlp instead, so the metered lane spends nothing on them.
+  Metadata printed in a SEPARATE invocation first for every id (all `not_live`, `was_live=False`, 4–23 min). **One caption probe first** (izen
+  `iXjoMyr1LAs`) → 407 KB json3 landed, so the IP-scoped `timedtext` flag that relapsed yesterday has decayed after one day of zero caption
+  traffic; the other eight were then fetched one per invocation, `--sleep-requests 3` plus a 4 s pause, **9/9 landed** (61–505 KB), no 429, no
+  client shuffling, nothing installed (yt-dlp still 2026.07.04). The authenticated cookies lane was NOT needed and NOT touched.
+  ⚠️ Process slip worth writing down: the first batch loop grepped for `ERROR|429` case-insensitively and stopped on yt-dlp's impersonation
+  WARNING ("If you encounter **errors**…") — a false stop, the caption had landed. Match `^ERROR` / `HTTP Error 4xx`, not the word.
+- **izen `iXjoMyr1LAs`** (general creator → `metaNotes[]` only; 22 min, 3,974 words, published 2026-09-18/19) → **9 raid-lens metaNotes**,
+  each anchored to its own passage: Balance **mixed** (#2 overall on two spread-add bosses, outdone on every other profile), Shadow **negative**
+  (last Zoroak, last Vashnik, bottom third Twin Fangs), Arms **positive** (top of Twin Fangs on two-target uptime + early execute; named a
+  cross-boss consistency), Demonology **positive**, Affliction **positive** (#1 Coiled Altar with real single target in every phase), Augmentation
+  **mixed** (its Coiled Altar #1 is the intermission window; irrelevant elsewhere), Marksmanship **positive**, Fury **mixed**, Windwalker **mixed**.
+  11 older izen RAID-lens notes on those specs superseded (lens read off `patchContext`; his M+-lens and unscoped 08-22 tuning notes untouched).
+  **Abstentions:** Arcane (named only inside the "Demo, Arms and Arcane" consistency list — list-mention rule), Beast Mastery ("honorary melee",
+  list only), Survival / Retribution / Unholy (two list-mentions each, no spec-specific read), Frost Mage (one fight-profile description on Twin
+  Fangs), and the three Rogues ("all of the rogues" have very high single target on Zoroak — class-level, so no per-spec note).
+- **MadSkillzzTV `KYrUOokbzHc`** (09-19, 11 min) → **10 bracket-scoped takes**: Resto Druid raid **mixed** / M+ **mixed**; Mistweaver raid **buff**
+  / M+ **buff**; Discipline M+ **buff** (the 40% out-of-raid Atonement; 20%+ of an Oracle's healing, ~50% of a Voidweaver's; "not S tier with Holy
+  Paladin"); Holy Priest raid **mixed** (tier-set crit bug fix → HPS dips, still very good); Holy Paladin M+ **buff** (still the S-tier healer) /
+  raid **nerf** (deserved an HPS buff, got none); Resto Shaman M+ **mixed** (A tier on Skyfury/Bloodlust, not healing) / raid **nerf**. **10 older
+  same-lens takes superseded**, including his 09-16 M+ reads on Resto Druid, Holy Paladin and Resto Shaman — a 09-19 video outdates a 09-16 one
+  in the same lens. Preservation is not mentioned in the video and got no take. `latest` NOT advanced (managedBy overrides, owner-only).
+- **Shadarek ×2, same day, and the second REVISES the first** — handled by lens split rather than same-date supersession (forbidden): the
+  first-reaction video `UOTX7JIDhfo` supplies the **Devourer both/buff** take (Annihilator ~5% ST / ~5% raid, all on the priority target it lacks);
+  the follow-up `TupcXnUY65E`, recorded after he simmed the buffs, supplies **both Havoc takes** — raid **buff** (~9% ST, "very strong in raid",
+  boss-by-boss predictions; Fel-Scarred on the lower end and untouched) and M+ **mixed** (50% more priority damage but AoE still poor, comp- and
+  dungeon-specific) — with the first video's superseded read ("tiny buff, Havoc struggling in raid") recorded inside each `patchContext`. His
+  08-22 + 09-03 Devourer and 08-28 raid + M+ Havoc takes superseded.
+- **Nintern `9Q-7rLk1vFU`** (09-18, 4 min) → Devourer **both/mixed** (welcome ST buff; "12.1.5 then 12.2 waiting room") and Havoc **both/mixed**
+  ("not particularly confident" Aldrachi is playable; DH "not great in raid" for fight-structure reasons). His 08-09 Devourer and 08-10 Havoc live
+  takes superseded; the 09-16 12.1.5-PTR-preview Devourer take is a different lens and stays live.
+- **NeekapHere `tE55Y-E3ljE`** → Ret **both/buff** (Templar +4–6% ST, "extremely competitive" with Herald, which stays best in raid and his M+
+  pick); 08-22 take superseded. The WoW: Forever half of the video is out of scope.
+- **Kesslive `zqsyJMYa9q0`** → Augmentation **both/mixed** (buffs "basically do nothing", favour a dead Scalecommander build; spec "good for
+  about ten guilds") and Devastation **both/mixed** (Pyre and Shattering Star real, the rest air; "fundamental issues" a tuning post cannot fix).
+  His two unscoped 07-22 12.1-PTR takes superseded — first live reads from him this season.
+- **Dalaran Gaming `-OuQUMzzWTE`** (23 min, 4,750 words) → **1 take**: Arcane **both/buff** ("everybody's playing Arcane, we all know this spec is
+  really good"); 08-24 Arcane take superseded. Everything else inside his Druid/Hunter/Mage/Rogue/Shaman scope is the tuning post read aloud with
+  "really good to see" — no comparative read, no take (Fire/Frost: "we'll see if it's enough"; Subtlety: Deathstalker "pretty solid ST" but the
+  passage is hero-talent commentary). PvP section skipped.
+- **Dratnos `H8jFWzDNKSs` → `skipped[]`** (21 min read in full). His registered scope is Arms/Fury and the Warrior passage is the dev note read
+  aloud, nothing of his own — a neutral would be a placeholder. **⚑ Owner flag, not actioned:** his substantive reads are all out of scope and
+  several are strong — Augmentation "secretly the best spec in the game for really high-end play" (Mythic Coiled Altar / Ula'tek boss damage) yet
+  mid for 95% of players; Devastation "better than the numbers look", a possible sleeper M+ spec; DPS DKs unused in raid for lacking a raid buff;
+  Aldrachi funnel a dangerous profile to balance; Protection Paladin already fine. If Riley wants Dratnos widened (he is a Liquid raider and reads
+  the whole roster), that is a `community.json` scope decision; the transcript is on record here.
+- **Lane hygiene**: 8 distilled ids removed from `videos[]`; Dratnos added to `skipped[]` with the reason above; queue **9 → 0**, skipped
+  435 → 436. One-record gate: `npm run validate` clean, `audit:creators` **HIGH 0 / MED 0 / INFO 9** (unchanged set). Registry `latest`
+  advanced for Shadarek, Nintern, NeekapHere, Kesslive, Dalaran Gaming (all five class entries) and izen — each to what was actually distilled.
+- **Every claim re-read against its own transcript at the deep-linked offset before the merge**; two wordings tightened in that pass (Balance's Twin
+  Fangs position was gestured on screen, not spoken — written as "outdone on two-target cleave", which he does say; Kesslive does not say
+  Devastation's standing "will not move", so the claim says he treats the package as padding). No ASR name was written as a person.
+- Verification: `npm run test:quiet` **636 pass / 2 fail / 1 skip** — the two fails are the PRE-EXISTING ui-invariants WCL fixture tests (red on
+  `51efd6a` before any edit; owner fix pending, see refresh-metrics 09-18). `expertRead` dormant (`PHASES.ptr` null) → display-only, 0
+  projection movement. Snapshot written (byte-identical to the nightly's — takes are not snapshot state), rebuilt, all 28 entries present in dist.
+
 ## 2026-09-19 (nightly) — 44/44 feeds polled, 2 pre-fetched transcripts → **5 takes** (4 MadSkillzzTV, 1 Critcake), 0 metaNotes, **9 queued**
 
 - **Discovery**: 44 unique channelIds, **44/44 HTTP 200**, 0 failures, **660 entries**. Seen-set rebuilt from structured data only = **1,274 ids**. Cycle bound `Math.min` over ptr-builds = **2026-06-18** → **348 unseen in-cycle**, 238 keyword-matching.
