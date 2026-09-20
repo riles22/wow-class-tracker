@@ -17,6 +17,15 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-20 (nightly) — all 44 feeds polled (660 entries, 0 errors); **5 queued**, 0 distilled because the queue was empty when the transcript step ran
+
+- **Discovery**: every transcribable creator with a `channelId` — 41 specialists + izen/Maximum/Zorthas — polled inline, no retries needed. Seen-set rebuilt from structured data only (queue `videos[]`/`skipped[]`/`seen[]` + every `youtu.be` id in a take or metaNote url): **1,283 ids**, 297 of them distilled. **346** unseen entries fall on or after the cycle-opening build **2026-06-18** (the OLDEST date in `ptr-builds.json`, never `builds[0]`); **177** pass the nightly keyword filter, which this run KEEPS — the queue is drained by the metered captions API, so breadth belongs in local runs.
+- **Queued 5**, chosen as the analysis pieces rather than the POV/gameplay bulk: Dorki `HuVu1eVqq98` *FINAL SEASON 2 M+ TIER LIST* (09-20 — its `media:description` is a per-spec chapter list, so this is a real list read and a `creator-predictions.json` candidate when it is distilled), YoDaTV `tNPYXq3elsI` *ZERO NERFS? Tierlist Update & Patch Notes (September 22)* (09-19), Obli `q4sDG0siKnU` *Strange Unholy Buffs & BIG Frost ST Buff next reset!* (09-19), izen `sFNCt1mNb7U` *Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5* (09-19, **general lane** → metaNotes/leads only, never `takes[]`), Supatease `lvXugC_JcAY` *12.1.5 Emergency Class Tuning Update* (09-18 — flag at distillation: this creator's reads are routinely PvP-framed, and a 12.1.5-lens read is preview material, not a live-season take).
+- **0 takes / 0 metaNotes, and that is not a gap.** `transcript-fetch/summary.json` reads verdict `ok`, **requested 0 / fetched 0 / cached 0** — the queue was empty when the deterministic step ran, so no transcript exists on this runner to read. The five drain next run. Usage receipt: 16 counted requests in the 30-day window, 0 uncertain.
+- **One yt-dlp metadata probe, then stop.** Confirmed the settled datacenter-IP wall ("Sign in to confirm you're not a bot") on the first id and did not repeat it, install anything, or attempt a workaround — the decision is closed.
+- **Deliberately left UNSEEN, not written to `seen[]`:** the 172 keyword hits not queued, the WoW:Forever beta uploads (a different product, but that is a title judgment), and LBNinja7 `Ljq_r4zAa0g` *"They did it… Mistweaver BUFFED!!"* — empty description and hashtag styling read as a Short, but the bot wall means the duration could not be **proved**, and only durable facts earn a `seen[]` entry.
+
+
 ## 2026-09-19 (local, scheduled) — CAPTION 429 CLEARED (one-day relapse, 09-18 only); queue **9 → 0** drained at home (9/9 captions), **19 takes** + **9 metaNotes**, 1 verified skip — run AFTER today's nightly
 
 - **Scope: residential-only catch-up, 30 minutes after the 09-19 nightly finished** (publish 14:23Z; this run reset onto `51efd6a`). The nightly had

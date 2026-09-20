@@ -17,6 +17,17 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-20 (nightly) — 240/240 cells re-verified, **0 moves**; Archon walled day 28
+
+- **Icy Veins 80/80, Method 80/80, Wowhead 80/80 — all fetched fresh, all parsed, 0 unmatched, 0 stored cells moved.** Per-page counts printed and reconciled against the 27/7/6 roster shape before any merge, because nothing mechanical catches a per-page shortfall (ratings upsert).
+- **Icy Veins**: 6 pages, HTTP 200, 197,083–344,590 B. Era-verified from each page's own BODY: the raid-healer page still titles itself *"(Patch 12.0.7 / Midnight)"* while its breadcrumb is the Venomous Abyss Raid Guide, its byline reads *Last Updated: Sep 1, 2026* and its changelog's newest lines are *"01 Sep. 2026: Updated for the end of RWF Mythic progression"* and *"11 Aug. 2026: Updated for Midnight Season 2 launch"* — body over title, so `seasonVerified` stays `s2`.
+- **Method**: 2 pages. The M+ page carries **8** tier blocks; the extras are the dungeon-difficulty lists and the site logo, rejected by ROSTER MATCH (9 rejects, all dungeon names) and never by position. 40 + 40 with no duplicate (bracket, spec) pair; M+ still has no S+ band.
+- **Wowhead**: 6 pages with the full browser header set. Unescaped `\/`→`/` across the document FIRST, then located `[tier-list=rows]`; exactly one block per page this run, so the healer-page decoy was not in play. Tier labels matched with tolerant whitespace; specs resolved from the kebab `[spec-badge=<spec>-<class>]` slug.
+- **Published dates re-read live and all 14 match** both the committed registry and this run's pre-agent `published-evidence` artifact: Icy Veins 08-30/09-01/08-29/08-30/08-30/08-30, Method 08-10 + 08-13, Wowhead 08-31×3 / 08-28 / 09-10 / 09-01. 0 mismatches, so no `published` value changed — only the 14 `snapshot` dates advanced to 2026-09-20.
+- **Archon day 28**: the registered raid-Heroic route probed once — HTTP 403, 3,278 B, Cloudflare *"Just a moment…"*, `__NEXT_DATA__` count **0** (assert on payload, never status). This run's `source-health` receipt independently records raid 403 challenge + M+ **HTTP 200** human-verification, the documented 200-with-a-wall shape. Letters and snapshot dates untouched at 2026-08-25; per the owner retention policy Archon stays in the four-source consensus with its last verified S2 letters.
+- No `seasonVerified` value changed, so `freeze-season` had nothing to do (it runs in publish regardless).
+
+
 ## 2026-09-19 (local, scheduled) — NOT re-run: the nightly re-verified 240/240 cells 30 minutes earlier (publish 14:23Z, 0 moves, Archon walled day 27)
 
 - Residential-only scope; regenerating what CI produced today is the unmergeable-push failure the local-run skill warns about. No tier page

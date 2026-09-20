@@ -17,6 +17,15 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-20 (nightly) — three channels swept, **nothing new since the Sept 18 head**; official revision ledger clean (0 added / 0 changed / 0 removed sections)
+
+- **Revision ledger first, as the skill requires.** Read the trusted pre-agent receipts `official-notes/evidence.json` + `pending.json` (checkedAt 2026-09-20T14:22:01Z). `live-hotfixes` post 1 still **v40** (updated 2026-09-17T23:29:35Z); `ptr-preview` posts **1 v3** and **4 v1**. Section-by-section diff against the committed ledger: **0 added, 0 hash-changed, 0 removed** across all 126 sections, so every prior disposition (17 applied + 99 irrelevant on the hotfix post, 3 + 7 applied 12.1.5-preview notes) is retained by identical hash rather than re-asserted. Wrote the reviewed pending ledger to `data/official-notes.json` keeping the receipts' own check times; `node src/check-official-notes.mjs --base=HEAD` passes. No section touched a set bonus, so no `tierSet.asOf` needed to move.
+- **RSS** (`/news/rss/all`, HTTP 200, 177,152 B): 40 items parsed per `<item>` block, newest 2026-09-20 09:00 -0500. **News INDEX** polled too, because it leads the feed within a run: `data.news.newsData` brace-balanced off its id attribute, 20 posts, newest `news=382973` — nothing above the RSS head. **Blue tracker** (`data.blueTracker.default`, 50 entries, deduped by topic): newest class-relevant Linxy post is still *Class Tuning Incoming -- September 22* (topic 2354340, 09-18 18:48), already the logged head; everything after it is Brewfest and Pirate's Day.
+- **One borderline call, read in full rather than judged by title:** `news=382966` *"Mythic Nymrissa May Guarantee Great Vault Loot Slots"* (09-19). Body is a Raid Leader Discord **theory** about Flexible Mythic vault slots — "this theory hasn't been disproven yet" — i.e. a player discovery, not a Blizzard change, and no class content. Correctly **not** a feed entry.
+- **Dev-notes thread 2317811.json** fetched directly (HTTP 200, 72,718 B): `posts_count` 13, `last_posted_at` **2026-07-31T23:42:09Z**, nothing after the logged post #19. That is the documented closed-cycle quiet, not a lost thread — the 12.1.5 preview rides its own configured source. `PHASES.ptr` stays null; no 12.1.5 material entered `ptr-builds`, `spec.ptr` or any model input.
+- Dormant lanes (WCL zones 54 / 52 / 56 / 57) skipped by design and carry no manifest row. `data/ptr-builds.json` unchanged at 38 builds, head 2026-09-18.
+
+
 ## 2026-09-19 (local, scheduled, 30 min after the nightly) — verify-only: RSS re-read, **nothing newer than the nightly's sweep**; no new build/hotfix, no 12.2 PTR
 
 - The 09-19 nightly (publish 14:23Z) had already logged the **September 22 tuning post** (topic 2354340, 24 specs, 24 highlights) and the

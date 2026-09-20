@@ -1,6 +1,42 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "HuVu1eVqq98",
+      "creator": "Dorki",
+      "title": "FINAL SEASON 2 M+ TIER LIST | Midnight 12.1",
+      "published": "2026-09-20",
+      "queuedAt": "2026-09-20"
+    },
+    {
+      "id": "tNPYXq3elsI",
+      "creator": "YoDaTV",
+      "title": "ZERO NERFS? Tierlist Update & Patch Notes (September 22)",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-20"
+    },
+    {
+      "id": "q4sDG0siKnU",
+      "creator": "Obli",
+      "title": "Strange Unholy Buffs & BIG Frost ST Buff next reset! / Midnight 12.1 Season 2 Update",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-20"
+    },
+    {
+      "id": "sFNCt1mNb7U",
+      "creator": "izen (Izenhart)",
+      "title": "Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-20"
+    },
+    {
+      "id": "lvXugC_JcAY",
+      "creator": "Supatease",
+      "title": "12.1.5 Emergency Class Tuning Update",
+      "published": "2026-09-18",
+      "queuedAt": "2026-09-20"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
