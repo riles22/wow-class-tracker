@@ -102,6 +102,242 @@
           "supersededAtFreeze": false
         }
       ]
+    },
+    {
+      "id": "dorki-HuVu1eVqq98-2026-09-20",
+      "label": "Dorki — 2026-09-20 final Season 2 Mythic+ tier list (tank placements)",
+      "creator": "Dorki",
+      "season": "s2",
+      "date": "2026-09-20",
+      "capturedAt": "2026-09-20",
+      "scope": {
+        "brackets": [
+          "mplus"
+        ],
+        "roles": [
+          "Tank"
+        ],
+        "keys": [
+          "Death Knight|Blood",
+          "Demon Hunter|Vengeance",
+          "Druid|Guardian",
+          "Monk|Brewmaster",
+          "Paladin|Protection",
+          "Warrior|Protection"
+        ]
+      },
+      "scopeNote": "Live Season 2 Mythic+ after the announced September 22 tuning (\"the final announced tuning\"); a full-roster list built on Wowhead Tiercraft, captured here only for the six tank specs inside his registered scope. His tiers split S and A each into a raid-buffs and a \"natty strong\" (raw power) half, which carry the same letter; the F tier he calls realistically a B.",
+      "nativeOrder": [
+        "S",
+        "A",
+        "F"
+      ],
+      "pages": [
+        {
+          "url": "https://youtu.be/HuVu1eVqq98",
+          "published": "2026-09-20",
+          "snapshot": "2026-09-20"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Death Knight|Blood",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-09-20",
+          "url": "https://youtu.be/HuVu1eVqq98?t=149",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Spoken as \"natty strong\" — his shorthand for the S natty-strong tier (he reserves \"A natty strong\" for the A tier, e.g. Arms, Protection Paladin) — and \"still one of the best tanks if not the best\".",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Demon Hunter|Vengeance",
+          "bracket": "mplus",
+          "tier": null,
+          "date": "2026-09-20",
+          "url": "https://youtu.be/HuVu1eVqq98?t=456",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "\"I had this at S tier, but I'm not entirely sold on Vengeance anymore\" — moved down on screen; the destination letter is never spoken.",
+          "supersededAtFreeze": false,
+          "reason": "Demoted from S on screen without a spoken destination tier."
+        },
+        {
+          "key": "Druid|Guardian",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-09-20",
+          "url": "https://youtu.be/HuVu1eVqq98?t=490",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"I'm slamming bear at the highest. Raid buffs\" — the S raid-buffs tier.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Brewmaster",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-09-20",
+          "url": "https://youtu.be/HuVu1eVqq98?t=823",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "\"I'm slamming all three of these monk specs in raid [buffs]\", then only Windwalker is corrected up to S raid buffs — Brewmaster stays in the A raid-buffs tier.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Protection",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-09-20",
+          "url": "https://youtu.be/HuVu1eVqq98?t=908",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"I would say it's a natty strong\" — spoken with the article, his shorthand for the A natty-strong tier, matching his \"worse than Blood DK in everything\" read.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Protection",
+          "bracket": "mplus",
+          "tier": "F",
+          "date": "2026-09-20",
+          "url": "https://youtu.be/HuVu1eVqq98?t=1357",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"why even play pro[t] warrior\" — the F tier, which he immediately qualifies as realistically a B.",
+          "supersededAtFreeze": false
+        }
+      ]
+    },
+    {
+      "id": "yodatv-tNPYXq3elsI-2026-09-19",
+      "label": "YoDaTV — 2026-09-19 Mythic+ tier-list update after the September 22 tuning post",
+      "creator": "YoDaTV",
+      "season": "s2",
+      "date": "2026-09-19",
+      "capturedAt": "2026-09-20",
+      "scope": {
+        "brackets": [
+          "mplus"
+        ],
+        "roles": [
+          "Tank",
+          "DPS",
+          "Healer"
+        ],
+        "keys": [
+          "Death Knight|Blood",
+          "Paladin|Holy",
+          "Warrior|Arms",
+          "Demon Hunter|Vengeance",
+          "Druid|Guardian",
+          "Paladin|Retribution",
+          "Paladin|Protection",
+          "Monk|Brewmaster",
+          "Warrior|Protection"
+        ]
+      },
+      "scopeNote": "Live Season 2 Mythic+, read against the announced September 22 tuning before it applied; a full-roster list captured here only for the specs inside his registered scope (the six tanks, Arms, Holy and Retribution Paladin). Tiers named aloud: S+, S, A+, A; nothing lower is spoken.",
+      "nativeOrder": [
+        "S+",
+        "S",
+        "A+",
+        "A"
+      ],
+      "pages": [
+        {
+          "url": "https://youtu.be/tNPYXq3elsI",
+          "published": "2026-09-19",
+          "snapshot": "2026-09-20"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Death Knight|Blood",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=354",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"Blood DK and HPal are kind of the only characters in S+.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Holy",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=354",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"Blood DK and HPal are kind of the only characters in S+.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Arms",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=359",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "\"Arcane Mage and Arms are still looking really good\" — named in the S group directly after the two S+ specs and before \"I am going to leave devourer in S tier\".",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Demon Hunter|Vengeance",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=419",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"I do have VDH separate from Guardian now in S tier.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Guardian",
+          "bracket": "mplus",
+          "tier": null,
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=419",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Split from Vengeance (which is placed in S and called the second-best tank); Guardian's own tier is not spoken.",
+          "supersededAtFreeze": false,
+          "reason": "Placement not spoken; only that it now sits separately from, and below, Vengeance."
+        },
+        {
+          "key": "Paladin|Retribution",
+          "bracket": "mplus",
+          "tier": "A+",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=544",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"definitely deserves to be an A+ tier … I'm leaving it here.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Protection",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=553",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"A tier we are going to leave prot paladin.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Brewmaster",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=568",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"I'm going to also leave Brew in A tier.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Protection",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-09-19",
+          "url": "https://youtu.be/tNPYXq3elsI?t=584",
+          "context": "Season 2 live — Mythic+ tier list, creator's own placement",
+          "text": "Explicit: \"Prot Warrior we're also leaving in A tier.\"",
+          "supersededAtFreeze": false
+        }
+      ]
     }
   ]
 }
