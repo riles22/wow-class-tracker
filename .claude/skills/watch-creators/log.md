@@ -16,6 +16,17 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-21 (nightly) — 44/44 channels polled, 2 queued, 0 takes (queue was empty when the transcript step ran)
+
+- **44 of 44 configured channels polled inline**, all 200 on the first attempt; **660** feed entries read, `media:description` parsed alongside every title.
+- **Seen-set rebuilt from STRUCTURED DATA** (pending-transcripts `seen[]`/`skipped[]`/`videos[]` + every `youtu.be` id cited in `creator-takes.json`): **1,288**. log.md prose was not regexed.
+- **345 unseen entries** fall on or after the cycle's OPENING build date **2026-06-18** — derived as the MINIMUM date in `ptr-builds.json`, never `builds[0]` (which is the newest hotfix round-up). That is the standing local-run backlog and it is deliberately left **UNSEEN**: a nightly keyword cut is a budget dismissal, not a durable judgment, and marking it seen would silently abandon the hand-forward.
+- **37 of those were published since the previous nightly started.** Triage of that window: **WoW: Forever beta content is a different product** and carries no Midnight 12.1 S2 spec read (Supatease ×6, Bansherz ×5, Whispyr ×3, NeekapHere ×2, Psybear, Kalamazi, MadSkillzzTV, Dalaran Gaming) — note Psybear's *"Feral Druid Is BROKEN in WoW Forever!"* names a roster spec in its title and is still out of scope, which is why the description is read and not just the title; PvP duel content out of scope (Dalaran Gaming); raw key/prog PoVs and boss guides carry no spec-strength read (YoDaTV ×6, Shadarek, Shindigg, Tactyks, Clandon, Critcake, Maximum, Sha, Dratnos ×2, Bansherz).
+- **`leak`'s Twin Fangs commentary (`5LF-JYAo8j0`) declined on the fight-artifact rule**, and it is the interesting case of the night: its description says outright *"Survival is not very good at this boss"*, which reads like a spec-strength call but is BOSS-scoped — the same shape the skill records as a fight artifact rather than a meta read. Left unseen, not skipped.
+- **2 videos QUEUED** to `pending-transcripts.json` for the deterministic step to drain: **`kEorL6oVefU`** (LBNinja7, *"Healer Hero Tree Data You WON'T Like"*, 2026-09-21 — a cross-healer hero-tree comparison; he is scoped to seven healer specs) and **`2FgeUweFdXQ`** (AutomaticJak, *"Secrets of Disc Raid Healing Midnight Season 2"*, 2026-09-21 — Discipline is in his registered scope and the lens is raid). Both ids came off the live RSS with an author match; neither sits in any existing lane. Both are hours old, so captions may still be lagging.
+- **0 takes, 0 metaNotes.** `transcript-fetch/summary.json` (attemptedAt 16:35:45Z) reports verdict `ok` with **requested 0 / fetched 0** — the queue was EMPTY when the deterministic step ran, because the 2026-09-20 local run had drained it. So there was nothing to distil this run; tonight's two entries are for the next drain. The agent fetched no transcript from YouTube or any transcript API.
+- No creator `latest` field advanced — none names a video distilled this run, and advancing one to a merely-newer title trades information for recency.
+
 
 ## 2026-09-20 (local, scheduled) — queue **5 → 0** drained at home (5/5 captions, no 429); **18 takes** + **15 metaNotes**, 1 verified skip, **2 tier-list panels** captured — run 1.5 h AFTER today's nightly
 
