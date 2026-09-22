@@ -774,7 +774,7 @@ function profilesFor(spec) {
   if (g && g.builds.length) return g.builds.map(b => ({
     name: b.id, label: b.label + ' — ' + (GUIDE_SOURCE_NAMES[b.source] || b.source),
     source: b.source, primary: b.primary, secondaries: b.secondaries,
-    leadsWithItemLevel: b.leadsWithItemLevel, published: b.published,
+    leadsWithItemLevel: b.leadsWithItemLevel, published: b.published, guideUrl: b.guideUrl,
   }));
   const variants = (spec && spec.statPriorityVariants) || [];
   if (variants.length) return variants.map(v => ({name: v.name, label: v.name,
@@ -1310,10 +1310,21 @@ function sheetRows(bySlot, usingCustom) {
   return out.join('');
 }
 
+/* "View the source" links only an https page. A guide Build's `source` is a source KEY
+   ("icyveins"), and using it as the href gave every guide Build a broken relative link
+   (2026-09-22). A Build links its own guide page; only a legacy (source-less) profile
+   falls back to the 12.0.7 stat-priority page, so no Build is credited to another source. */
+function httpsUrl(value) {
+  try {
+    const url = new URL(String(value));
+    return url.protocol === 'https:' ? url.href : null;
+  } catch { return null; }
+}
+
 function renderBis() {
   const priority = activePriority();
   const profile = activeProfile();
-  const prioritySource = profile?.source || CUR.statPrioritySource;
+  const prioritySource = profile?.source ? httpsUrl(profile.guideUrl) : httpsUrl(CUR.statPrioritySource);
   const priorityPatch = profile?.patch || CUR.statPriorityPatch;
   const usingCustom = customModeSelected() && !!customWeights();
   const usingGuide = !usingCustom;

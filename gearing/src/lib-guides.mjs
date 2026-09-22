@@ -327,7 +327,8 @@ export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs 
  * - builds: the UNION of published combinations, source-labeled (G7). When one source
  *   publishes TWO different orders under one label (Wowhead's "Shado-Pan" twice, raid vs
  *   M+ tab), the ids are uniquified and the labels disambiguated as "(list N)" — never
- *   silently shadowed, never given an invented scope name.
+ *   silently shadowed, never given an invented scope name. Each build carries its guide
+ *   page (`guideUrl`) beside `published`: `source` is a source key, not a link (2026-09-22).
  * - candidates: bucketed by the CATALOG's slot when we know the item (the guides misfile
  *   a handful — Icy Veins puts a Neck under Finger — and the catalog is our canonical
  *   vocabulary); the guide's slot only buckets items outside our catalog.
@@ -383,7 +384,8 @@ export function buildGuidePayload(guides, specs, { itemSlots = new Map(), source
         labelCounts.set(lk, (labelCounts.get(lk) || 0) + 1);
         builds.push({ id: lk, source: srcId, label: p.label,
           primary: p.primary ?? null, secondaries: p.secondaries,
-          leadsWithItemLevel: !!p.leadsWithItemLevel, published: rec.published ?? null });
+          leadsWithItemLevel: !!p.leadsWithItemLevel, published: rec.published ?? null,
+          guideUrl: rec.guideUrl ?? null });
       }
       for (const r of rec.bis) {
         const inCatalog = itemSlots.has(String(r.itemId));

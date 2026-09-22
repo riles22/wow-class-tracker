@@ -834,6 +834,69 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   assert.match(uniqueWeaponClient.document.ids.get("bis").innerHTML, /Alternative hand only:/);
 });
 
+test("client app: \"View the source\" links the active Build's own guide page, never a source key", async () => {
+  // A guide Build's `source` is a source KEY ("icyveins"). The stat note used it as the
+  // href, so every guide Build rendered a broken relative link (runtime snapshot 2026-09-22).
+  const GUIDE_HOSTS = { icyveins: "www.icy-veins.com", wowhead: "www.wowhead.com", method: "www.method.gg" };
+  const harvest = Object.fromEntries(await Promise.all(Object.keys(GUIDE_HOSTS)
+    .map(async (id) => [id, await json(`data/guides/${id}.json`)])));
+  // The fake DOM keeps raw markup, so esc() output such as &amp; or &#39; is undone here (&amp; last).
+  const sourceHref = (document) => {
+    const links = [...document.ids.get("bis-note").innerHTML
+      .matchAll(/<a href="([^"]*)"[^>]*>View the source<\/a>/g)];
+    assert.ok(links.length <= 1, "at most one source link");
+    return links.length ? links[0][1].replace(/&quot;/g, '"').replace(/&#39;/g, "'")
+      .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&") : null;
+  };
+  const { document, data, select } = await upgradeClient();
+  const profileSelect = document.ids.get("profile");
+  let specsChecked = 0, buildsChecked = 0;
+  for (const spec of data.specs.specs) {
+    const key = `${spec.spec} ${spec.class}`;
+    select(`${spec.class}|${spec.spec}`);
+    for (const build of data.guides.specs[key].builds) {
+      profileSelect.value = build.id;
+      profileSelect.listeners.change();
+      const where = `${key}, Build ${build.id}`;
+      const href = sourceHref(document);
+      assert.match(String(href), /^https:\/\//, `${where}: "View the source" href ${JSON.stringify(href)} is not https`);
+      const url = new URL(href);
+      assert.ok(Object.values(GUIDE_HOSTS).includes(url.host), `${where}: ${url.host} is not an allowlisted guide host`);
+      assert.equal(url.host, GUIDE_HOSTS[build.source], `${where}: links another source's page`);
+      assert.equal(url.href, new URL(harvest[build.source].specs[key].guideUrl).href,
+        `${where}: not the harvested guide page`);
+      buildsChecked += 1;
+    }
+    specsChecked += 1;
+  }
+  // buildGuidePayload refuses a spec with zero Builds, so every roster spec has a guide profile.
+  assert.equal(specsChecked, data.specs.specs.length);
+  assert.ok(buildsChecked > specsChecked, "non-default Builds were exercised too");
+
+  // Only a legacy (source-less) profile falls back to CUR.statPrioritySource, and only to an
+  // https URL. A guide Build without its page gets no link, never the Icy Veins 12.0.7 page.
+  const frostMage = (d) => d.specs.specs.find((s) => s.class === "Mage" && s.spec === "Frost");
+  const legacy = await upgradeClient((d) => { d.guides.specs["Frost Mage"].builds = []; });
+  legacy.select("Mage|Frost");
+  assert.match(frostMage(legacy.data).statPrioritySource, /^https:\/\/www\.icy-veins\.com\//);
+  assert.equal(sourceHref(legacy.document), frostMage(legacy.data).statPrioritySource);
+  for (const bad of ["icyveins", "http://www.icy-veins.com/wow/frost-mage-pve-dps-stat-priority", null]) {
+    const client = await upgradeClient((d) => {
+      d.guides.specs["Frost Mage"].builds = [];
+      frostMage(d).statPrioritySource = bad;
+    });
+    client.select("Mage|Frost");
+    assert.match(client.document.ids.get("bis-note").innerHTML, /Ranked by guide consensus/);
+    assert.equal(sourceHref(client.document), null, `legacy source ${JSON.stringify(bad)} must not be linked`);
+  }
+  const unlinked = await upgradeClient((d) => {
+    for (const build of d.guides.specs["Frost Mage"].builds) delete build.guideUrl;
+  });
+  unlinked.select("Mage|Frost");
+  assert.match(unlinked.document.ids.get("bis-note").innerHTML, /Ranked by guide consensus/);
+  assert.equal(sourceHref(unlinked.document), null, "a guide Build without its page URL gets no link");
+});
+
 test("weapon consensus merges hand vocabularies in BOTH directions", async () => {
   // Guides file weapons by worn hand ("Main Hand"); the catalog stores the item's own
   // slot type ("One-Hand"). 271092 (Jan'thrazet, the Soul Fang) is Frost Mage's
