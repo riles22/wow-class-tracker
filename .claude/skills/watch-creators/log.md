@@ -16,6 +16,78 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-22 (local, scheduled) — queue **3 → 0** drained at home (3/3 captions, no 429); **1 take, 0 metaNotes**; two videos verified-skipped — run AFTER the nightly, which today started 4.5 h late at 15:08Z
+
+- **Ordering: the nightly had NOT pushed when this run started.** Its schedule event fired at
+  **15:08:44Z instead of the 10:37 cron** (the known degraded-cron drift), so at bootstrap the tip was
+  `4a1d2d1` (the weekly gearing refresh) and `df8d35c` was still the newest nightly. The run therefore
+  **waited for the nightly to reach a terminal state** rather than racing it — collect/refresh/publish all
+  green, `0b660ed` pushed — then reset to it and worked on its output. Two rules made that the only
+  correct move: a local run must not independently regenerate what CI is producing (unmergeable, proven
+  2026-07-31), and a push into the publish window can red Gate 0 on a file the agent never touched.
+- **Captions: 3/3 on the anonymous yt-dlp lane, no 429 at all** (`player_client=android`, json3,
+  `--sleep-requests 1.5`). The only stderr was the standard SABR-formats and impersonation warnings,
+  which do not affect subtitle retrieval. No authenticated fallback needed, no cookies used.
+- **Jedith `sYjd851J9Ow` → 1 TAKE** (Demon Hunter Devourer, `both`, **buff**, dated 2026-09-21). His read of
+  the **September 22 weekly-reset tuning** — Collapsing Star primary-target +25%, Consume/Devour +8%, both
+  PvE only — which is the pass already logged in this tracker's **2026-09-18** build entry; the stored line
+  was checked against his account before distilling and matches, including the PvE-only qualifier he states
+  as "does not affect PvP combat". He reads it as a real buff landing almost entirely on **Annihilator**:
+  raid now "fully viable" and much closer, but still Void-Scarred on the earlier fights with Annihilator
+  easier on roughly the last three bosses; in **M+** he goes further and says everyone will simply play
+  Annihilator from now on, because the buff closes what had been Void-Scarred's priority-damage edge through
+  Devour's Bite against Annihilator's stronger mass AoE. Logged `bracket: "both"` rather than split raid/M+
+  rows because the SENTIMENT is positive in both brackets and his previous six takes all use `both`; the
+  per-bracket nuance lives in the claim text.
+  **Superseded his 2026-08-17** post-sim Season 2 read (same creator/spec/lens, different date — the
+  dilution case the supersede rule exists for). **His 2026-09-03 take was deliberately LEFT LIVE**: its lens
+  is the *12.1.5 PTR preview, NOT LIVE*, a different subject from a live tuning read, so superseding it
+  would have destroyed his only 12.1.5 record. For the same reason his closing 12.1.5 aside (that Annihilator
+  and Void-Scarred are "pretty much equal" there) was **not** folded into this live take — a live take must
+  not carry a PTR claim.
+- **Preheat `4NEaLcoFYSw` → verified skip.** Transcript read in full: an alternative "scripted" Arcane
+  cast-sequence method for coaching (open on Missiles, close on Barrage, three Barrage rules, the 4+-target
+  AoE variant). He says outright it is about teachability and mental bandwidth rather than damage, and offers
+  it beside Por's guides rather than against them. Rotation-guide shaped, no spec-strength or tuning read —
+  the same disposition as AutomaticJak's Disc guide on 09-21. The nightly's own entry predicted this.
+- **izen `nN28Rxe40_Y` → verified skip.** Despite a description framing it as a "Mythic+ DPS Survivability
+  Census", the transcript is **pure player-skill coaching** on defensive and health-potion timing from a
+  healer's seat — the thesis being that deaths come from overlapping mechanics, worked through pulls in
+  Blinding Veil, Murder Row and Voidscar Arena. The spec mentions are the example players in his group, not
+  reads on those specs, so there is **nothing for the `metaNotes[]` lane** and nothing that could be. A
+  census would have been metaNote material; this is not one.
+- **Lane hygiene:** all three ids left `videos[]`; two entered `skipped[]`; `sYjd851J9Ow` is now cited by its
+  take url, i.e. the distilled lane. Each id sits in exactly one lane, so the one-record precedence ladder
+  holds. Nothing was added to `seen[]` — a transcript was read in every case, which is never a `seen[]`
+  judgment. The 354-entry local backlog the nightly recorded stays **UNSEEN** and untouched.
+- **Verification.** `npm run validate` clean (40 specs). `freeze-season` — "8 source/bracket pairs still
+  describe the live season, nothing to freeze", archive not rewritten. `npm run test:quiet`
+  **636 pass / 2 fail / 1 skip**; the 2 fails are the PRE-EXISTING WCL ui-invariants fixture tests, and they
+  were **re-confirmed red on clean `0b660ed` via `git stash` before any edit of mine was in the tree** —
+  owner fix still pending (Kith'ix encounter 3513 in zone 53). `npm run build` OK.
+  `node src/snapshot.mjs` wrote `2026-09-22.json` **byte-identical to the nightly's committed one** (takes
+  are not snapshot state — same result as 09-20), then rebuilt per the snapshot-before-rebuild ordering.
+  New take present once in `dist/index.html` and absent from `HEAD:dist/index.html`.
+- **Manifest deliberately NOT touched** — partial run, and the nightly rewrote it hours earlier with a fresh
+  `startedAt`. `check-refresh --manifest` therefore does **not** raise the usual local `startedAt` line; its
+  single failure is the gitignored local `wcl-fetch/evidence.json` still being the **09-08** leftover, which
+  cannot vouch for this run — a local artifact the nightly regenerates, not a data finding (identical to
+  09-21). Every "degraded" row below it is the nightly's own honest record.
+- **Gearing harvest skipped, correctly:** the weekly workflow succeeded today at 13:37Z and all three guide
+  files read `harvestedAt` **2026-09-22** with 40 specs each. Nothing to catch up.
+- **Standing owner items, unchanged and worth repeating:** `wcl-leaderboard-raid` is now on its **seventh
+  consecutive night** of `parse_error`/`invalid` for the one-line `excludedEncounters` recipe edit (add
+  `{ id: 3513, name: "Kith'ix" }`, the Nymrissa precedent) — coverage frozen at 09-16 against a 2-day
+  threshold, and the two red UI invariants are downstream of exactly this. The **Archon wall** held again
+  (day 28; both a 403 and a 200 human-verification shape measured, which is why the `__NEXT_DATA__`
+  assertion is load-bearing). `gearing-verify-tierBonuses` reads **review-required** with the SOURCE digest
+  unchanged since the 09-06 review but the CURATED digest moved, so only a human can re-bless it.
+- **Housekeeping flag, not done here:** this log is **47 entries / 200,249 bytes** against the header's
+  "newest ~20" and the 262,144-byte Read gate that broke it once at 270KB — roughly 15 entries of headroom.
+  A correct prune must first audit the out-of-range entries for durable traps that exist nowhere else (the
+  2026-08-15 prune had to promote ~31KB of them into SKILL.md first), which is a reviewable change rather
+  than data-run work, so it is flagged here with numbers instead of done silently.
+
 ## 2026-09-22 (nightly) — 44/44 feeds polled, **3 videos queued**, 0 takes / 0 metaNotes (the transcript step ran on an EMPTY queue)
 
 - **Discovery: 44 of 44 channels returned 200 on the first attempt**, retry/backoff available and unused; 660 feed entries, `media:description` parsed alongside the title on every one. Seen-set rebuilt from STRUCTURED DATA only — `seen[]` 550 + `skipped[]` 439 + `videos[]` 0 + **301** distinct `youtu.be` ids cited in `creator-takes.json` = **1,290**. No regex over this log.

@@ -1,28 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "sYjd851J9Ow",
-      "creator": "Jedith",
-      "title": "Devourer DH is BACK TO BASICS! What You Need To Know",
-      "published": "2026-09-21",
-      "queuedAt": "2026-09-22"
-    },
-    {
-      "id": "4NEaLcoFYSw",
-      "creator": "Preheat",
-      "title": "12.1 Arcane Mage Rotation Guide - NEW Easy Mode",
-      "published": "2026-09-21",
-      "queuedAt": "2026-09-22"
-    },
-    {
-      "id": "nN28Rxe40_Y",
-      "creator": "izen (Izenhart)",
-      "title": "SURVIVE! | Your Mythic+ Deaths & How To Be Aware Of WHEN You Can Die",
-      "published": "2026-09-21",
-      "queuedAt": "2026-09-22"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3096,6 +3074,20 @@
       "title": "Secrets of Disc Raid Healing Midnight Season 2",
       "reason": "Transcript read in full (11 min, 2,346 words, 2026-09-21 local run): a Discipline raid rotation/gameplay guide (Penance clipping, Greater Smite uptime, 5-12 atonement float, four Flash Heals a minute, Mind Blast before Penance, haste/GCD-cap, Evangelism and Ultimate Penitence sequencing). His only spec-choice remark is that he moved from Holy to Disc for the damage checks on Twin Fangs and Coiled Altar — a fight-driven pick, not a comparative read. Guide-shaped, no take.",
       "verifiedAt": "2026-09-21"
+    },
+    {
+      "id": "4NEaLcoFYSw",
+      "creator": "Preheat",
+      "title": "12.1 Arcane Mage Rotation Guide - NEW Easy Mode",
+      "reason": "Transcript read in full (7 min, ~1,500 words, 2026-09-22 local run): an alternative “scripted” Arcane cast-sequence method he teaches in coaching — always open on Arcane Missiles and close on Barrage, three rules for when to Barrage (never in the last two GCDs before Arcane Soul; always after a Clearcasting proc mid-Arcane Blast or at 24 Salvo; chain two missiles on two Clearcasting unless Overpowered Missiles), plus the AoE variant of Barraging instead of Blasting at four or more targets while an orb is up. He states explicitly that it is not about the damage but about teachability and mental bandwidth, and offers it as an alternative to Por's guides rather than a correction. No spec-strength, tuning or comparative read. Rotation-guide shaped, no take.",
+      "verifiedAt": "2026-09-22"
+    },
+    {
+      "id": "nN28Rxe40_Y",
+      "creator": "izen (Izenhart)",
+      "title": "SURVIVE! | Your Mythic+ Deaths & How To Be Aware Of WHEN You Can Die",
+      "reason": "Transcript read in full (21 min, ~4,400 words, 2026-09-22 local run): a general Mythic+ survival coaching video on defensive and health-potion timing from a healer's perspective, the thesis being that deaths come from overlapping mechanics rather than single hits — worked through pulls in Blinding Veil (Belcher AoE, Hydra triple-target beam), Murder Row (one poison dispel vs the Fellworm dot, golem AoE) and Voidscar Arena (Overseer pulsing AoE plus the bat jump and void beam). The spec mentions are the example players in his group, not reads on those specs. No per-spec season or meta outlook, so nothing for the generalCreators metaNotes lane.",
+      "verifiedAt": "2026-09-22"
     }
   ],
   "seen": [

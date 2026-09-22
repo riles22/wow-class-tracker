@@ -5498,7 +5498,7 @@
       "patchContext": "12.1 PTR — post-sim read on the August 18 Devourer tuning pass (supersedes his 08-15 pre-sim speculation)",
       "url": "https://youtu.be/QOmfIifvkgw?t=21",
       "claim": "With the sims settled he reads Devourer as coming out of the tuning pass in good shape and still in the upper ranks of all content, with Void's Guard on top. He treats the tier set as the real loss: the four-piece had been worth an extra 30-40% damage, which he concedes was unreasonable, and is now weak enough that the spec no longer plays around it at all, changing the AoE rotation so Reap and Call are dropped above one target to avoid starving Eradicate of soul fragments. He reads Annihilator as hit harder than Void's Guard because it leaned on Reap, leaving it severely behind on single target, though he puts the two within a few percent on AoE and calls Annihilator very much viable in Mythic+ for players who prefer the caster build. For raid he reads Void's Guard melee as the way to go.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -8134,6 +8134,18 @@
       "patchContext": "Season 2 live — \"Strange Unholy Buffs & BIG Frost ST Buff next reset!\" (published 2026-09-19), his read of the announced September 22 tuning post for all three DK specs, recorded before the changes are live; he plans to test Blightfall next week.",
       "url": "https://youtu.be/q4sDG0siKnU?t=134",
       "claim": "Obli's read on the Unholy raid buffs is that they do not deliver the single-target lift they appear to: Blightfall at 200% is nuts on paper but the build is still bugged (plague eruption damage), so it is only \"somewhat competitive\" and he refuses to call it better to use; Dread Plague +20% and Frenzied Bloodthirst 5% per stack are \"a tiny amount of damage onto a tiny amount of damage\". You would think single target goes up a lot, \"but it hasn't\" — Frost is the play and Unholy needs a lot of help to push forward. Recorded before he tests the changes next week."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Jedith",
+      "date": "2026-09-21",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Live 12.1 — his read of the September 22 weekly-reset class tuning for Devourer (Collapsing Star primary-target damage +25%, Consume/Devour damage +8%, both PvE only), the pass logged in this tracker's 2026-09-18 build entry. Supersedes his 2026-08-17 post-sim Season 2 read.",
+      "url": "https://youtu.be/sYjd851J9Ow?t=65",
+      "claim": "He reads the September 22 pass as a genuine buff to Devourer that lands almost entirely on the Annihilator hero tree. The Collapsing Star line he frames as restoring a 25% primary-target increase that was in the patch notes but never actually made it into the game, which he says was one of the main reasons Collapsing Star felt weak on the main target; combined with the 8% Consume/Devour increase he calls it a very good buff for Annihilator and reads the developers' stated intent — raid and single-target performance — as exactly what landed. He is careful not to over-read it for raid: Annihilator is now fully viable and the gap is much closer, but he still wants Void-Scarred on a lot of the earlier fights, with Annihilator probably just easier to play and losing less damage on roughly the last three bosses. For Mythic+ he goes further: the extra Collapsing Star and Consume/Devour damage closes what had been Void-Scarred's edge in priority damage through Devour's Bite against Annihilator's stronger mass AoE, so he says everyone is simply going to be playing Annihilator in Mythic+ from now on and calls it the best damage there for the rest of the season barring further changes. He adds that Collapsing Star is still not worth pressing for Void-Scarred, attributing that to the talent tree not affording the points rather than to the damage, and that nothing has changed rotationally since Season 1.",
+      "superseded": false
     }
   ],
   "metaNotes": [
