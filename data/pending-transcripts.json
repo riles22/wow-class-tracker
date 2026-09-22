@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "kEorL6oVefU",
-      "creator": "LBNinja7",
-      "title": "Healer Hero Tree Data You WON'T Like",
-      "published": "2026-09-21",
-      "queuedAt": "2026-09-21"
-    },
-    {
-      "id": "2FgeUweFdXQ",
-      "creator": "AutomaticJak",
-      "title": "Secrets of Disc Raid Healing Midnight Season 2",
-      "published": "2026-09-21",
-      "queuedAt": "2026-09-21"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3075,6 +3060,20 @@
       "title": "12.1.5 Emergency Class Tuning Update",
       "reason": "Transcript verified in full 2026-09-20 (local run, yt-dlp; 14 min, 3,160 words). Despite the title it is a straight read-through of the September 22 LIVE tuning post (us.forums topic 2354340, already logged as build 2026-09-18), class by class with PvP-lens asides — the class-tuning-roundup shape the skill says not to stretch into per-spec takes, and the same shape as his verified-skipped hvxrLgUQk1w. Every in-scope spec (Shaman, Affliction, Arms, Protection Warrior) is discussed only inside the post's PLAYER VERSUS PLAYER section (from ~8:33), which is out of scope for this tracker's PvE ratings; the PvE half is narration with no comparative read. 0 takes, 0 metaNotes (he is not a generalCreators entry).",
       "verifiedAt": "2026-09-20"
+    },
+    {
+      "id": "kEorL6oVefU",
+      "creator": "LBNinja7",
+      "title": "Healer Hero Tree Data You WON’T Like",
+      "reason": "Transcript read in full (27 min, 5,249 words, 2026-09-21 local run): a WITHIN-spec hero-talent-tree share comparison from top logs (M+ then raid) for all seven healers — Lightsmith/Herald, Oracle/Voidweaver, Wildstalker/Keeper, Oracle/Archon, Conduit/Master of Harmony, Flameshaper/Chronowarden, Totemic/Farseer. No cross-spec strength read that is not already his 2026-09-18 data read (Holy Priest strong, Mistweaver needing the buffs); the Disc/Resto Druid/Mistweaver tuning mentions are anticipation of the Sept-22 pass, not a read. Hero-tree share is build data, not spec strength.",
+      "verifiedAt": "2026-09-21"
+    },
+    {
+      "id": "2FgeUweFdXQ",
+      "creator": "AutomaticJak",
+      "title": "Secrets of Disc Raid Healing Midnight Season 2",
+      "reason": "Transcript read in full (11 min, 2,346 words, 2026-09-21 local run): a Discipline raid rotation/gameplay guide (Penance clipping, Greater Smite uptime, 5-12 atonement float, four Flash Heals a minute, Mind Blast before Penance, haste/GCD-cap, Evangelism and Ultimate Penitence sequencing). His only spec-choice remark is that he moved from Holy to Disc for the damage checks on Twin Fangs and Coiled Altar — a fight-driven pick, not a comparative read. Guide-shaped, no take.",
+      "verifiedAt": "2026-09-21"
     }
   ],
   "seen": [

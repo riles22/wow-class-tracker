@@ -5,16 +5,39 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-21T16:35:41.142Z",
+      "checkedAt": "2026-09-22T02:09:55.209Z",
       "removedSections": [],
       "posts": [
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 40,
-          "updatedAt": "2026-09-17T23:29:35.826Z",
-          "bodySha256": "f062b3a68d69522ab4262554c7be63e43a11b591a834a7840b282dbd48ed7723",
+          "version": 42,
+          "updatedAt": "2026-09-22T00:51:27.431Z",
+          "bodySha256": "b25facd061bf788421d8d7849bfbf5178fcada6ac663f4b55a0d28efda863194",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-21:classes:evoker:1",
+              "date": "2026-09-21",
+              "category": "Classes",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Devastation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "b9c596c1c3af9846d4c071e7af7a3d133f21b16fd3697b10a9021321faeb6e23",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-21 (local run) against official hotfix topic 2336376, post 1, version 42 (last edited 2026-09-22T00:51:27Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383042. Bare Evoker heading with no spec block, two Unravel/Fire Breath behaviour fixes and no tuning value: logged class-wide in the new 2026-09-21 hotfix feed entry; class-wide attribution covers all three Evoker specs by build membership. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-21",
+                    "highlight": "Evoker (class-wide) — Fixed an issue preventing Unravel from activating when Fire Breath was cast with Tip the Scales; Fixed an issue where Unravel may not hit all targets struck by Fire Breath."
+                  }
+                ]
+              }
+            },
             {
               "id": "2336376:1:2026-09-15:classes:hunter:1",
               "date": "2026-09-15",
@@ -1853,7 +1876,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-21T16:35:41.142Z",
+      "checkedAt": "2026-09-22T02:09:55.209Z",
       "removedSections": [],
       "posts": [
         {
