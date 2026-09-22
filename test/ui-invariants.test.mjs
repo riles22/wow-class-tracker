@@ -1112,13 +1112,21 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
   await page.waitForFunction(() => document.querySelectorAll(".row").length > 0);
   /* .rule and the #stars canvas were retired with the tall masthead (2026-08-22), so the
      ambient probes are gone. The .switch and .chev transitions replace them: both are
-     motion surfaces the control governs, and both survive every layout this page has. */
+     motion surfaces the control governs, and both survive every layout this page has.
+     The switch is the control's own (#reduce-motion + .switch). A bare ".switch" found the
+     first of three, the "PTR-tracked only" toggle's, whose label is hidden while PHASE.ptr
+     is null — and WebKit intermittently kept that unrendered element's 0.15s after the
+     control was turned on, while every rendered probe read 0s (CI, 2026-09-21 and 09-22).
+     A probe only means something if it is rendered, so that is asserted, not assumed. */
+  assert.deepEqual(await page.evaluate(() => ["#reduce-motion + .switch", ".chev"]
+    .map(sel => document.querySelector(sel).getClientRects().length > 0)), [true, true],
+    "each motion probe is a rendered element");
 
   const defaultOn = await page.evaluate(() => ({
     rootReduced: document.documentElement.dataset.reduceMotion ?? null,
     stored: localStorage.getItem("wct-reduce-motion"),
     checked: document.getElementById("reduce-motion").checked,
-    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    switchTransition: getComputedStyle(document.querySelector("#reduce-motion + .switch")).transitionDuration,
     chevTransition: getComputedStyle(document.querySelector(".chev")).transitionDuration,
     topScroll: (() => {
       let behavior = null;
@@ -1170,7 +1178,7 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
     panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
     barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
-    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    switchTransition: getComputedStyle(document.querySelector("#reduce-motion + .switch")).transitionDuration,
     chevTransition: getComputedStyle(document.querySelector(".chev")).transitionDuration,
     topScroll: (() => {
       let behavior = null;
@@ -1193,7 +1201,7 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     rootReduced: document.documentElement.dataset.reduceMotion,
     stored: localStorage.getItem("wct-reduce-motion"),
     checked: document.getElementById("reduce-motion").checked,
-    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    switchTransition: getComputedStyle(document.querySelector("#reduce-motion + .switch")).transitionDuration,
     chevTransition: getComputedStyle(document.querySelector(".chev")).transitionDuration,
   }));
   assert.deepEqual(persisted, {
@@ -1205,7 +1213,7 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
   await page.evaluate(() => document.getElementById("reduce-motion").click());
   await page.evaluate(() => document.getElementById("ladderbtn").click());
   await page.waitForFunction(() =>
-    getComputedStyle(document.querySelector(".switch")).transitionDuration !== "0s");
+    getComputedStyle(document.querySelector("#reduce-motion + .switch")).transitionDuration !== "0s");
   const resumed = await page.evaluate(() => ({
     rootReduced: document.documentElement.dataset.reduceMotion ?? null,
     stored: localStorage.getItem("wct-reduce-motion"),
@@ -1214,7 +1222,7 @@ ui("motion defaults on, marks real entrances, and persists the site reduction co
     chartClass: document.getElementById("ladder-chart").classList.contains("motion-enter"),
     panelAnimation: getComputedStyle(document.querySelector("#ladder-ov .finder-panel")).animationName,
     barAnimation: getComputedStyle(document.querySelector("#ladder-chart .ladderbar")).animationName,
-    switchTransition: getComputedStyle(document.querySelector(".switch")).transitionDuration,
+    switchTransition: getComputedStyle(document.querySelector("#reduce-motion + .switch")).transitionDuration,
   }));
   assert.deepEqual(resumed, {
     rootReduced: null, stored: null, checked: false,
