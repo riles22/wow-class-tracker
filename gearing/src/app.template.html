@@ -1325,7 +1325,6 @@ function renderBis() {
   const priority = activePriority();
   const profile = activeProfile();
   const prioritySource = profile?.source ? httpsUrl(profile.guideUrl) : httpsUrl(CUR.statPrioritySource);
-  const priorityPatch = profile?.patch || CUR.statPriorityPatch;
   const usingCustom = customModeSelected() && !!customWeights();
   const usingGuide = !usingCustom;
   const buildSource = profile && profile.source ? GUIDE_SOURCE_NAMES[profile.source] : null;

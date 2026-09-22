@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-y6sJsb4rXE/vVlinAum8hE/59pXTPbLRwb4ug0vXa78='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-PEYJ458wGCFFGD8UwkaoaJq0/XqZZ//CGJwMgefReSI='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -1326,7 +1326,6 @@ function renderBis() {
   const priority = activePriority();
   const profile = activeProfile();
   const prioritySource = profile?.source ? httpsUrl(profile.guideUrl) : httpsUrl(CUR.statPrioritySource);
-  const priorityPatch = profile?.patch || CUR.statPriorityPatch;
   const usingCustom = customModeSelected() && !!customWeights();
   const usingGuide = !usingCustom;
   const buildSource = profile && profile.source ? GUIDE_SOURCE_NAMES[profile.source] : null;
