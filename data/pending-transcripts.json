@@ -1,6 +1,28 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "sYjd851J9Ow",
+      "creator": "Jedith",
+      "title": "Devourer DH is BACK TO BASICS! What You Need To Know",
+      "published": "2026-09-21",
+      "queuedAt": "2026-09-22"
+    },
+    {
+      "id": "4NEaLcoFYSw",
+      "creator": "Preheat",
+      "title": "12.1 Arcane Mage Rotation Guide - NEW Easy Mode",
+      "published": "2026-09-21",
+      "queuedAt": "2026-09-22"
+    },
+    {
+      "id": "nN28Rxe40_Y",
+      "creator": "izen (Izenhart)",
+      "title": "SURVIVE! | Your Mythic+ Deaths & How To Be Aware Of WHEN You Can Die",
+      "published": "2026-09-21",
+      "queuedAt": "2026-09-22"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
