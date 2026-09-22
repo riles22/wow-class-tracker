@@ -1,7 +1,9 @@
 /* An accounting-only intake lane. Sentiment in creator-takes.json never supplies ranks. */
 const ROLES = new Set(['DPS', 'Healer', 'Tank']);
 const BRACKETS = new Set(['raid', 'mplus']);
-const HOSTS = new Set(['youtube.com', 'www.youtube.com', 'm.youtube.com', 'youtu.be',
+// Exact host names only, never a suffix test: "evil-youtube.com" ends with "youtube.com".
+const YOUTUBE_HOSTS = new Set(['youtube.com', 'www.youtube.com', 'm.youtube.com']);
+const HOSTS = new Set([...YOUTUBE_HOSTS, 'youtu.be',
   'hackmd.io', 'kalamazi.gg', 'www.kalamazi.gg', 'wingsisup.com']);
 const dateOK = value => typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)
   && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value;
@@ -13,7 +15,7 @@ export function creatorPredictionResource(value) {
   if (!creatorPredictionUrlAllowed(value)) return null;
   const url = new URL(value);
   if (url.hostname === 'youtu.be') return `youtube:${url.pathname.split('/').filter(Boolean)[0] ?? ''}`;
-  if (url.hostname.endsWith('youtube.com')) return `youtube:${url.searchParams.get('v') ?? url.pathname.match(/^\/(?:shorts|embed|live)\/([^/]+)/)?.[1] ?? ''}`;
+  if (YOUTUBE_HOSTS.has(url.hostname)) return `youtube:${url.searchParams.get('v') ?? url.pathname.match(/^\/(?:shorts|embed|live)\/([^/]+)/)?.[1] ?? ''}`;
   url.hash = '';
   return url.href;
 }

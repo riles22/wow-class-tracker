@@ -9,13 +9,15 @@
    at build time, so a static scan of the built file is vacuous for it — dropping `esc()`
    from the take-claim sink did not fail an earlier static version of this test. The
    rendered probes therefore live in test/ui-invariants.test.mjs, which drives Chromium.
-   What remains here are the two genuinely static properties: the payload island's
-   escaping, and the CSP hash list. */
+   What remains here are the genuinely static properties: the payload island's escaping,
+   the CSP hash list, and (CodeQL triage 2026-09-22) the one shared esc() both pages carry
+   plus the regex-free script extraction the two builds hash. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { esc, ESC_SOURCE, inlineScripts, scriptTagCount } from "../src/html-safety.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -48,9 +50,10 @@ test("the payload island can never terminate its own <script> block", async () =
 });
 
 test("the CSP hash list covers every script the artifact ships (audit 2026-07-24, S3)", async () => {
-  // build.mjs hashes `<script>` with a regex that only matches the bare tag. A future
+  // build.mjs hashes only the bare `<script>` blocks (html-safety.mjs inlineScripts). A future
   // template edit adding an attribute (`<script defer>`) would ship a page whose CSP
-  // blocks its own script — with every gate green, because nothing checks the count.
+  // blocks its own script — with every gate green, unless something checks the count.
+  // The build now refuses that itself; this checks the shipped artifact independently.
   const dist = path.join(ROOT, "dist", "index.html");
   const html = await readFile(dist, "utf8").catch(() => null);
   if (html == null) return; // dist not built in this run; the build test covers presence
@@ -67,4 +70,39 @@ test("the CSP hash list covers every script the artifact ships (audit 2026-07-24
     `CSP lists ${hashes} script hash(es) but the document ships ${scriptTags} <script> tag(s) — ` +
     "an unhashed script would be blocked at runtime with every gate green");
   assert.ok(!/'unsafe-inline'/i.test(csp[1]), "script-src must not fall back to 'unsafe-inline'");
+});
+
+/* ---- the shared escape (CodeQL triage 2026-09-22) --------------------------------------
+   Both pages are self-contained under a hashed CSP, so neither can import the helper at run
+   time; each template carries a copy. These pin the copies to src/html-safety.mjs so a
+   quote-less or null-unsafe variant cannot creep back into either page. */
+test("both published templates define the shared esc() exactly once, byte-identical", async () => {
+  for (const rel of ["src/template.html", "gearing/src/app.template.html"]) {
+    const html = await readFile(path.join(ROOT, rel), "utf8");
+    assert.ok(html.includes(ESC_SOURCE), `${rel} must define esc exactly as src/html-safety.mjs ESC_SOURCE`);
+    assert.equal(html.split("const esc =").length - 1, 1, `${rel} must define esc once`);
+  }
+});
+
+test("esc() covers & < > \" and ', so one call is safe in element text and in quoted attributes", () => {
+  assert.equal(esc(`<a href="x" title='y'>&</a>`),
+    "&lt;a href=&quot;x&quot; title=&#39;y&#39;&gt;&amp;&lt;/a&gt;");
+  assert.equal(esc(null), "");
+  assert.equal(esc(undefined), "");
+  assert.equal(esc(0), "0");
+  assert.equal(esc(false), "false");
+  assert.equal(esc("&amp;"), "&amp;amp;", "esc() escapes; it never guesses that input is already escaped");
+});
+
+test("CSP hash input is extracted without a regex and refuses script tags a template did not author", () => {
+  assert.deepEqual(
+    inlineScripts(`<p>x</p><script>a()</script><script id="d" type="application/json">{}</script><script>b()</script>`),
+    ["a()", "b()"]);
+  // The browser ends the first block at "</script >", so hashing up to the next exact
+  // "</script>" would bless the second script. The extractor refuses instead.
+  assert.throws(() => inlineScripts("<script>a()</script ><script>b()</script>"), /second script end tag/);
+  assert.throws(() => inlineScripts("<script>a()</SCRIPT><script>b()</script>"), /second script end tag/);
+  assert.throws(() => inlineScripts("<script>a()"), /unterminated/);
+  // Every start tag counts, in any case and with any attributes; end tags do not.
+  assert.equal(scriptTagCount(`<SCRIPT defer src=x></SCRIPT><script>a()</script><Script type=module>`), 3);
 });

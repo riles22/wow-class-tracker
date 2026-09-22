@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtemp, mkdir, readFile, writeFile, rm, copyFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { catalystGuide, compareEvidence, currentVerification, digest, itemScope, tierBonuses,
+import { catalystGuide, compareEvidence, currentVerification, digest, itemScope, plain, tierBonuses,
   validateReport, verifySources } from "../src/verify-sources.mjs";
 import { getText } from "../src/lib-wowhead.mjs";
 import { jsonForHtml } from "../src/lib-html.mjs";
@@ -32,6 +32,11 @@ test("tier parser covers exactly both bonuses for each current class specializat
   const html = tier.sets[0].items[0].html;
   assert.throws(() => tierBonuses(html + html, tier.sets[0].class, specs), /Incomplete/);
   assert.throws(() => tierBonuses(html.replace("Set Blood:", "Set Invented:"), tier.sets[0].class, specs), /Unrecognized/);
+});
+
+test("plain() decodes each entity once, with &amp; last (CodeQL js/double-escaping)", () => {
+  assert.equal(plain("<p>Fish &amp;quot;n&amp;quot; chips</p>"), "Fish &quot;n&quot; chips");
+  assert.equal(plain("<b>A&amp;B</b> &quot;C&quot; &#39;D&#39;&nbsp;E"), `A&B "C" 'D' E`);
 });
 
 test("Catalyst scope rejects challenges and ignores comments and cosmetic tables", () => {

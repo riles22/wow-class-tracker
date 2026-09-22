@@ -1367,7 +1367,8 @@ const CLASS_COLOR_TEXT = { ...CLASS_COLOR,
 const CLASS_ORDER = Object.keys(CLASS_COLOR);
 
 const VERDICT_RANK = { "Positive":0, "Mixed":1, "Negative":2, "—":3 };
-const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// The one escape (src/html-safety.mjs ESC_SOURCE; test/escaping.test.mjs pins this copy).
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 /* Defense-in-depth for data-derived link targets: validation already enforces https://
    at merge time, but a URL that somehow reaches the page under another scheme
    (javascript:, data:) must render inert, not clickable. */
@@ -2257,14 +2258,21 @@ function sparkCell(s){
    367 of 407 title= attributes inside the grid, where touch can never reach them. */
 function noteCell(s){
   const bits = [];
+  // The same line as plain text, for the title. It is built alongside the markup rather than
+  // by stripping tags from it: a regex tag strip is not a sanitizer, and it left esc()'s
+  // entities in place to be escaped a second time (CodeQL triage 2026-09-22).
+  const text = [];
   const full = [];
+  const str = v => v == null ? "" : String(v);   // esc()'s null rule, without the escaping
   const projView = state.source === "projection" && state.era !== "live";
   const showMv = !state.fight && (state.source === "consensus" || projView);
   for(const b of ["raid","mplus"]){
     const mv = showMv ? (projView ? s.projMovement?.[b] : s.movement?.[b]) : null;
     if(!mv) continue;
     const cls = mv.delta > 0 ? "nup" : "ndown";
-    bits.push(`<span class="${cls}">${b==="raid"?"raid":"m+"} ${esc(mv.was)}→${esc(ratingFor(s,b).tier)}</span>`);
+    const label = b==="raid"?"raid":"m+", now = ratingFor(s,b).tier;
+    bits.push(`<span class="${cls}">${label} ${esc(mv.was)}→${esc(now)}</span>`);
+    text.push(`${label} ${str(mv.was)}→${str(now)}`);
   }
   if(!bits.length && !state.fight){
     for(const b of ["raid","mplus"]){
@@ -2274,18 +2282,19 @@ function noteCell(s){
       if(rated.length < 2) continue;
       const byScore = [...rated].sort((a,b) => b.score - a.score);
       const hi = byScore[0], lo = byScore[byScore.length - 1];
-      const name = p => esc(p.label || p.source);
-      bits.push(`<span class="ndiv">±</span> ${b==="raid"?"raid":"m+"} — ${name(hi)} ${esc(hi.tier)} ↔ ${name(lo)} ${esc(lo.tier)}`);
+      const label = b==="raid"?"raid":"m+";
+      const name = p => str(p.label || p.source);
+      bits.push(`<span class="ndiv">±</span> ${label} — ${esc(name(hi))} ${esc(hi.tier)} ↔ ${esc(name(lo))} ${esc(lo.tier)}`);
+      text.push(`± ${label} — ${name(hi)} ${hi.tier} ↔ ${name(lo)} ${lo.tier}`);
       // the full list stays reachable — the visible line is the spread, the title is the roll-call
-      full.push(`${b==="raid"?"raid":"m+"}: ` + rated.map(p => `${p.label || p.source} ${p.tier}`).join(", "));
+      full.push(`${label}: ` + rated.map(p => `${name(p)} ${p.tier}`).join(", "));
       break;
     }
   }
   if(!bits.length) return '<span class="notecell"></span>';
-  const html = bits.join(" · ");
-  const plain = html.replace(/<[^>]+>/g, "");
-  const tip = full.length ? `${plain} — all sources · ${full.join(" · ")}` : plain;
-  return `<span class="notecell" title="${esc(tip)}">${html}</span>`;
+  const line = text.join(" · ");
+  const tip = full.length ? `${line} — all sources · ${full.join(" · ")}` : line;
+  return `<span class="notecell" title="${esc(tip)}">${bits.join(" · ")}</span>`;
 }
 
 function rowHTML(s, idx, simBar, rank, quals){

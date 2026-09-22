@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { validateCreatorPredictions, captureCreatorPredictions } from '../src/creator-predictions.mjs';
+import { validateCreatorPredictions, captureCreatorPredictions, creatorPredictionResource,
+  creatorPredictionUrlAllowed } from '../src/creator-predictions.mjs';
 import { predictionSeason } from '../src/snapshot.mjs';
 
 const options = { specs: [{ class: 'Mage', spec: 'Arcane', role: 'DPS' }],
@@ -52,4 +53,17 @@ test('forecast target resolves the next PTR label with or without its display su
     seasonLabels: { s2: '12.1', s3: '12.2' } }), 's3');
   assert.equal(predictionSeason({ liveSeason: 's2', ptr: null }), 's2');
   assert.throws(() => predictionSeason({ ptr: { label: 'Unknown' }, seasonLabels: {} }), /resolve uniquely/);
+});
+
+test('video identity uses exact YouTube host names, never a suffix match', () => {
+  assert.equal(creatorPredictionResource('https://www.youtube.com/watch?v=abc&t=5'), 'youtube:abc');
+  assert.equal(creatorPredictionResource('https://youtube.com/watch?v=abc'), 'youtube:abc');
+  assert.equal(creatorPredictionResource('https://m.youtube.com/shorts/xyz'), 'youtube:xyz');
+  assert.equal(creatorPredictionResource('https://youtu.be/abc?t=100'), 'youtube:abc');
+  assert.equal(creatorPredictionResource('https://hackmd.io/@author/notes#s2'), 'https://hackmd.io/@author/notes');
+  // "evil-youtube.com" ends with "youtube.com"; exact names refuse it (CodeQL #80, 2026-09-22)
+  for (const url of ['https://evil-youtube.com/watch?v=abc', 'https://youtube.com.evil.example/watch?v=abc']) {
+    assert.equal(creatorPredictionUrlAllowed(url), false, url);
+    assert.equal(creatorPredictionResource(url), null, url);
+  }
 });

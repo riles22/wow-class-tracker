@@ -156,3 +156,80 @@ test("gearing: parsed and fallback-updated item rows retain keyboard tooltip acc
       }
     } finally { await browser.close(); }
   });
+
+/* Tooltip markup is Wowhead's, captured at harvest: third-party HTML. showTip copies an
+   allowlist out of an inert DOMParser document instead of assigning innerHTML (CodeQL
+   triage 2026-09-22). Two halves: every harvested tooltip must survive the copy with its
+   text, elements and classes intact, and a hostile one must lose everything else. */
+test("gearing: item tooltips copy only allowlisted markup out of captured third-party HTML",
+  reason ? { skip: reason } : {}, async () => {
+    const executablePath = engine === "chromium" && process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+    const browser = await browserType.launch(executablePath ? { executablePath } : {});
+    try {
+      const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+      const errors = [];
+      page.on("pageerror", error => errors.push(error.message));
+      await page.goto(artifact.href + "#spec=mage-frost");
+      await page.waitForFunction(() => document.querySelector("#spec").value === "Mage|Frost");
+
+      const fidelity = await page.evaluate(() => {
+        const shape = root => [...root.querySelectorAll("*")]
+          .filter(el => TIP_TAGS.has(el.tagName.toLowerCase()))
+          .map(el => [el.tagName.toLowerCase(), ...el.classList].join("."));
+        const lost = [];
+        let checked = 0;
+        for (const it of Object.values(BY_ID)) {
+          if (!it.html) continue;
+          checked++;
+          const ref = new DOMParser().parseFromString(it.html, "text/html").body;
+          const box = document.createElement("div");
+          box.appendChild(safeTooltip(it.html));
+          if (box.textContent !== ref.textContent || shape(box).join() !== shape(ref).join()) lost.push(it.id);
+        }
+        return { checked, lost };
+      });
+      assert.ok(fidelity.checked >= 50, `expected the harvested tooltip corpus, checked ${fidelity.checked}`);
+      assert.deepEqual(fidelity.lost, [], "a harvested tooltip lost text, elements or classes in the copy");
+
+      const hostile = '<table width="100%"><tr><td><b class="q4">Probe Blade</b><br>'
+        + '<span style="color: #00FF00">Equip: kept colour</span><br>'
+        + '<a href="javascript:window.__pwned=1" target="_blank" class="q2 finder-ov" style="position:fixed;inset:0">Click me</a>'
+        + '<img src="x" onerror="window.__pwned=1"><script>window.__pwned=1</script><style>body{display:none}</style>'
+        + '<div class="whtt-extra" onclick="window.__pwned=1" id="spoof"><!-- note -->Visible stat line</div>'
+        + '<span style="position:fixed;inset:0;background:red">Overlay text</span>'
+        + '<svg><script>window.__pwned=1</script><a href="javascript:void 0">svg link</a></svg>'
+        + '<form action="https://example.invalid/"><input name="password"></form></td></tr></table>';
+      const shown = await page.evaluate(async html => {
+        const row = [...document.querySelectorAll(".row[data-id]")].find(r => BY_ID[r.getAttribute("data-id")]?.html);
+        BY_ID[row.getAttribute("data-id")].html = html;
+        showTip(row, null);
+        await new Promise(resolve => setTimeout(resolve, 300));   // time for an onerror to fire, if one could
+        const tip = document.getElementById("tip");
+        const els = [...tip.querySelectorAll("*")];
+        const result = {
+          pwned: window.__pwned ?? null,
+          visible: getComputedStyle(tip).display,
+          tags: [...new Set(els.map(el => el.tagName.toLowerCase()))].sort(),
+          attrs: els.flatMap(el => [...el.attributes].map(a => `${el.tagName.toLowerCase()}@${a.name}=${a.value}`)).sort(),
+          comments: document.createTreeWalker(tip, NodeFilter.SHOW_COMMENT).nextNode() ? 1 : 0,
+          text: tip.textContent,
+          source: document.getElementById("tip-src")?.textContent ?? null,
+        };
+        hideTip();
+        return result;
+      }, hostile);
+      assert.equal(shown.pwned, null, "no handler or script from tooltip markup may run");
+      assert.equal(shown.visible, "block");
+      assert.deepEqual(shown.tags, ["a", "b", "br", "div", "span", "table", "tbody", "td", "tr"]);
+      assert.deepEqual(shown.attrs, ["a@class=q2", "b@class=q4", "div@class=whtt-extra", "div@id=tip-src",
+        "span@style=color: #00FF00", "table@width=100%"]);
+      assert.equal(shown.comments, 0);
+      for (const kept of ["Probe Blade", "Equip: kept colour", "Click me", "Visible stat line", "Overlay text", "svg link"])
+        assert.ok(shown.text.includes(kept), `tooltip text lost: ${kept}`);
+      assert.ok(!shown.text.includes("__pwned") && !shown.text.includes("display:none"),
+        "script and style bodies must not become visible text");
+      assert.match(shown.source, / · /);
+      assert.doesNotMatch(shown.source, /&[a-z]+;/, "the source line is plain text, so it carries no entities");
+      assert.deepEqual(errors, []);
+    } finally { await browser.close(); }
+  });
