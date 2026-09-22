@@ -11,6 +11,7 @@ import { buildPayload, publicationPayload, PHASES } from "./render.mjs";
 import { renderSeasonArchive } from "./render-season-archive.mjs";
 import { loadSnapshots } from "./report-card.mjs";
 import { createForecastReport, renderForecastReport } from "./render-forecast-report.mjs";
+import { esc, inlineScripts, scriptTagCount } from "./html-safety.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
@@ -90,7 +91,7 @@ export async function build(root = ROOT) {
       const archive = JSON.parse(await readFile(path.join(archiveDir, file), "utf8"));
       const page = await renderSeasonArchive(archive, { root });
       archivePages.push({ name: file.replace(/\.json$/, ".html"), page });
-      links.push(`<a href="${archive.season}.html">${archive.seasonName} (${archive.label}) — final standings</a>`);
+      links.push(`<a href="${esc(archive.season)}.html">${esc(archive.seasonName)} (${esc(archive.label)}) — final standings</a>`);
     }
     if (links.length) {
       archiveLinks = `<p class="fine" style="margin-top:10px">Past seasons: ${links.join(" · ")} <span style="opacity:.75">(frozen records — no longer updated)</span></p>`;
@@ -106,11 +107,19 @@ export async function build(root = ROOT) {
   html = html.replace(/\r\n?/g, "\n");
 
   // Content-Security-Policy, hashed at build time so only the exact inline script(s) this
-  // build produced can execute — a smuggled <script> (e.g. via poisoned nightly data that
-  // slipped past validation + esc()) is refused by the browser. Style stays 'unsafe-inline'
-  // (the page uses inline style attributes throughout); fonts are the only external origin.
-  const scriptHashes = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)]
-    .map(m => "'sha256-" + createHash("sha256").update(m[1], "utf8").digest("base64") + "'");
+  // build produced can execute. Style stays 'unsafe-inline' (the page uses inline style
+  // attributes throughout); fonts are the only external origin. Only the script blocks the
+  // template authored are hashed: hashing every <script> in the output would also bless one
+  // smuggled in by poisoned data that slipped past validation + esc(), so the build refuses
+  // an output with more script start tags, in any case or attribute form, than the template
+  // has (CodeQL triage 2026-09-22; see src/html-safety.mjs for why this is regex-free).
+  const scripts = inlineScripts(html);
+  if (scriptTagCount(html) !== scriptTagCount(template) || scripts.length !== scriptTagCount(html)) {
+    throw new Error(`dist/index.html has ${scriptTagCount(html)} script start tag(s) and ${scripts.length} bare inline ` +
+      `script block(s), but src/template.html authors ${scriptTagCount(template)}; refusing to hash an unexpected script`);
+  }
+  const scriptHashes = scripts
+    .map(body => "'sha256-" + createHash("sha256").update(body, "utf8").digest("base64") + "'");
   // The brand mark has an inline data: fallback plus same-origin PNGs for shortcut and
   // touch launchers. Network images remain refused; the masthead copy is inline SVG DOM.
   const csp = `default-src 'none'; script-src ${scriptHashes.join(" ")}; ` +

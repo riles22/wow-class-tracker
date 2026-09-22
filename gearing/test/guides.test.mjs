@@ -31,6 +31,14 @@ test("name joins absorb apostrophe placement, entities, and leading articles", (
   assert.equal(normApostrophes("Nek’zali"), "Nek'zali");
 });
 
+test("entity decoding is single-pass: an escaped entity stays text (CodeQL js/double-escaping)", () => {
+  // &amp; is decoded last, so "&amp;lt;" is the TEXT "&lt;" and never becomes a "<".
+  assert.equal(decodeEntities("&amp;lt;b&amp;gt;"), "&lt;b&gt;");
+  assert.equal(decodeEntities("&amp;quot;x&amp;quot; &amp;rsquo;"), "&quot;x&quot; &rsquo;");
+  assert.equal(decodeEntities("&amp;#60;"), "&#60;");
+  assert.equal(decodeEntities("Salt &amp; Pepper &lt;3 &quot;hi&quot;"), 'Salt & Pepper <3 "hi"');
+});
+
 test("drop-source classification: joins, kinds, decorations, and the hard error", () => {
   assert.equal(normalizeDropSource("Ula’tek — The Venomous Abyss", rosters).boss, "Ula'tek");
   assert.equal(normalizeDropSource("King's Rest", rosters).dungeon, "Kings' Rest");

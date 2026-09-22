@@ -13,9 +13,11 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const run = promisify(execFile);
 const json = async (path) => JSON.parse(await readFile(path, "utf8"));
 export const digest = (value) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
+// &amp; is decoded last so "&amp;quot;" stays the text "&quot;" (no double decoding).
 export const plain = (html) => html.replace(/<[^>]*>/g, " ").replace(/&#(\d+);/g,
-  (_, n) => String.fromCodePoint(Number(n))).replace(/&nbsp;/g, " ").replace(/&amp;/g, "&")
-  .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/\s+/g, " ").trim();
+  (_, n) => String.fromCodePoint(Number(n))).replace(/&nbsp;/g, " ")
+  .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&amp;/g, "&")
+  .replace(/\s+/g, " ").trim();
 
 export function tierBonuses(html, className, specs) {
   const out = [];

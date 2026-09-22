@@ -1426,7 +1426,9 @@ test("the FROZEN forecast column renders in the post-flip live view, labelled as
     data.meta.frozenForecast = { date: "2026-08-11", declaredPhase: "12.1-ptr", projectionVersion: 13, gitSha: null };
     data.meta.phases = { ...data.meta.phases, ptr: null };   // post-flip: no PTR era exists
 
-    const json = JSON.stringify(data).replace(/</g, "\u003c");
+    // Same escape as src/build.mjs: the six characters \u003c, not "<". A JS "\u003c" literal
+    // IS "<", so this used to be an identity replace (CodeQL js/identity-replacement, 2026-09-22).
+    const json = JSON.stringify(data).replace(/</g, "\\u003c");
     const doctored = (html.slice(0, i) + "const DATA = " + json + ";" + html.slice(j))
       .replace(/<meta http-equiv="Content-Security-Policy"[^>]*>\n?/, "");
     const fixture = path.join(dir, "frozen.html");

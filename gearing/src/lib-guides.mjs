@@ -10,16 +10,18 @@
 //      them; the raw label is always kept verbatim beside anything parsed from it.
 
 /** Decode the HTML entities the three sources actually emit (Method uses &rsquo; for its
- *  typographic apostrophes — there is NO raw U+2019 on its pages, recon 2026-08-18). */
+ *  typographic apostrophes — there is NO raw U+2019 on its pages, recon 2026-08-18).
+ *  &amp; is decoded LAST, so an escaped entity such as "&amp;lt;" becomes the text "&lt;"
+ *  and is never decoded twice into "<" (CodeQL js/double-escaping, 2026-09-22). */
 export const decodeEntities = (s) => String(s ?? "")
   .replace(/&rsquo;|&#8217;|&lsquo;|&#8216;/gi, "'")
   .replace(/&rdquo;|&#8221;|&ldquo;|&#8220;/gi, '"')
   .replace(/&ndash;|&#8211;|&mdash;|&#8212;/gi, "—")
   .replace(/&nbsp;|&#160;/gi, " ")
-  .replace(/&amp;/gi, "&")
   .replace(/&lt;/gi, "<").replace(/&gt;/gi, ">")
   .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-  .replace(/&quot;/gi, '"');
+  .replace(/&quot;/gi, '"')
+  .replace(/&amp;/gi, "&");
 
 /** Straighten typographic apostrophes/quotes and collapse whitespace (entities first). */
 export const normApostrophes = (s) => decodeEntities(s)

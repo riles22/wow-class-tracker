@@ -693,7 +693,8 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   // Adversarial-review pins (2026-08-18, wf_3b2d327a-5ee — each was a shipped-state HIGH):
   // (1) Weapon-slot guide-only picks render: Frost Mage's crafted off-hand pick appears
   //     in the Weapons guide-picks card (74/265 picks previously rendered NOWHERE).
-  assert.match(document.ids.get("bis").innerHTML, /Aln'hara Lantern/);
+  //     The fake DOM keeps raw markup, and esc() escapes ' since the CodeQL triage (2026-09-22).
+  assert.match(document.ids.get("bis").innerHTML, /Aln&#39;hara Lantern/);
   assert.match(document.ids.get("bis").innerHTML, /Weapons &mdash; guide picks without drop data/);
   // (2) Guide-only trinkets RANK: Wavecaller's Seastone (3/3 world) must carry a rank
   //     number, sharing rank 1 with the 3/3 catalog trinket — not dangle unranked.

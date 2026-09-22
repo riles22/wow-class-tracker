@@ -13,6 +13,7 @@ import { validateData } from "./validate-data.mjs";
 import { buildGuidePayload } from "./lib-guides.mjs";
 import { currentVerification } from "./verify-sources.mjs";
 import { jsonForHtml } from "./lib-html.mjs";
+import { inlineScripts, scriptTagCount } from "../../src/html-safety.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const readData = async (f) => JSON.parse(await readFile(join(ROOT, "data", f), "utf8"));
@@ -75,10 +76,16 @@ out = out.replace(/\r\n?/g, "\n");
 // The template carries no inline event handlers and no <form>, so hash-only script-src
 // and form-action 'none' hold. style-src needs 'unsafe-inline' for the <style> block and
 // the inline style= attributes the renderer writes.
-const scriptHashes = [...out.matchAll(/<script>([\s\S]*?)<\/script>/g)]
-  .map((m) => "'sha256-" + createHash("sha256").update(m[1], "utf8").digest("base64") + "'");
 // The <script id="data" type="application/json"> blob is not executable and is correctly
-// skipped by the bare-<script> match above; exactly one app script should remain.
+// skipped by inlineScripts(), which takes only bare <script> blocks; exactly one app script
+// should remain. Any script start tag the template did not author (any case, any
+// attributes) means injected markup got through, so the build refuses rather than hashing
+// around it (CodeQL triage 2026-09-22; see src/html-safety.mjs for why this is regex-free).
+if (scriptTagCount(out) !== scriptTagCount(template)) {
+  throw new Error(`output has ${scriptTagCount(out)} script start tag(s) but the template authors ${scriptTagCount(template)}`);
+}
+const scriptHashes = inlineScripts(out)
+  .map((body) => "'sha256-" + createHash("sha256").update(body, "utf8").digest("base64") + "'");
 if (scriptHashes.length !== 1) {
   throw new Error(`expected exactly 1 inline app script to hash, found ${scriptHashes.length}`);
 }
