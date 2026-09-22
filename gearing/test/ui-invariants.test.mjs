@@ -69,6 +69,9 @@ test("gearing: phone starts with a complete recommendation and readable contextu
           await page.locator("#bis-note summary").click();
           assert.match(await page.locator("#bis-note").innerText(), /never summed/);
           assert.match(await page.locator("#bis-note").innerText(), /View the source/);
+          // The active Build's own guide page, never its bare source key (href="icyveins" until 2026-09-22).
+          assert.match(await page.locator("#bis-note a", { hasText: "View the source" }).getAttribute("href"),
+            /^https:\/\/www\.(?:icy-veins\.com|wowhead\.com|method\.gg)\//);
           const contrast = await page.locator(".sname").first().evaluate(el => {
             const luminance = color => {
               const rgb = color.match(/[\d.]+/g).slice(0, 3).map(Number).map(n => {
