@@ -16,6 +16,21 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-09-23 (nightly) — 44 feeds, **0 failures**, 357 unseen; **5 queued**, 0 takes, 0 metaNotes (the queue was empty when the transcript step ran)
+
+- **Seen-set from structured data only: 1,293 ids** = `seen[]` 550 + `skipped[]` 441 + `videos[]` 0 + **302 distinct `youtu.be/<id>`** cited by takes and metaNotes. No prose was regexed.
+- **44 distinct channel feeds polled** (79 registry entries collapse to 44 channelIds — creators registered under several classes share one channel), up to 3 attempts with backoff each, **0 feed failures**. 357 unseen videos, **0 pre-cycle**.
+- **Nightly lane ⇒ keyword filter KEPT and the queue stays narrow** (Supadata drains it at `PER_RUN_CAP` 25). Of the 357: **61 are WoW: Forever / Classic** content outside this tracker’s scope (the beta launched this week and it dominates the feeds), 10 PvP-framed, 40 stream/reset-day VOD titles, **152 pass the keyword cut**.
+- **5 queued**, each chosen for a plausible spec-strength or meta read INSIDE the creator’s registered scope, and each cross-checked against its `media:description` before queueing:
+  · `9pmu8UGX7TM` **Obli** — “Unholy DK COULD be 15% stronger… if Blightfall wasn’t broken.” Description confirms a changes breakdown plus an explicit Frost-vs-Unholy raid comparison; Obli’s scope is Frost/Unholy DK. Highest-value item tonight.
+  · `yDyEKvcZ3VM` **izen** — “Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5”. Chapter list (M+ Healers / M+ Tanks / Guardian Growth / Popular DPS & Ret / Fall of Demo / Biggest Grower / Best Picks / Incoming Tuning) confirms per-spec reads. **generalCreator ⇒ metaNotes lane only, never `takes[]`.**
+  · `Xs9g7fYCbCU` **YoDaTV** — “ANOTHER Blood DK Nerf? Is it Over?”, in scope (Blood). Description is a bare Twitch link, which is the restream shape, so it may well end up a verified skip — that answer is durable and costs one request once.
+  · `gUa2OZ2awWE` **Shadarek** — “Quick Guide to Aldrachi Reaver for Havoc Demon Hunter”. Guide-shaped, so the prior is `skipped[]`, but the AR buffs landed the day before and his previous video asked “Is Havoc entering an Aldrachi Reaver Season?”, so it is worth settling BY TRANSCRIPT rather than by title.
+  · `UW8ADRksKps` **AutomaticJak** — “DISC BUFFS ARE IN - 19+ Disc Keys”, in scope (Discipline/Holy Priest).
+- **The other 147 keyword-passing videos were deliberately left UNSEEN, not marked `seen[]`.** They are a budget cut, not a durable judgment, so the next run reconsiders them. Same reasoning for the shorts-shaped `Ljq_r4zAa0g` (LBNinja7, “They did it… Mistweaver BUFFED!!”, empty description): a sub-minute duration would be a durable `seen[]` fact, but **duration could not be measured tonight**, so it stays unexamined.
+- **No take or metaNote added, and that is not a miss.** `transcript-fetch/summary.json` reads verdict `ok`, requested 0 / fetched 0 / cached 0 — the queue was **empty** when the deterministic step ran (the 09-22 local run drained it), so there was no transcript to distil. Nothing was removed from any lane.
+- **yt-dlp: one metadata probe, then stop.** `--print` on `9pmu8UGX7TM` returned the settled datacenter bot wall (“Sign in to confirm you’re not a bot”). Backed off immediately; the pinned version was not touched and no caption request was made. Consequence worth knowing: on the runner there is **no duration/live_status signal at all**, so the live/short triage has to run on title + `media:description` alone.
+
 ## 2026-09-22 (local, scheduled) — queue **3 → 0** drained at home (3/3 captions, no 429); **1 take, 0 metaNotes**; two videos verified-skipped — run AFTER the nightly, which today started 4.5 h late at 15:08Z
 
 - **Ordering: the nightly had NOT pushed when this run started.** Its schedule event fired at

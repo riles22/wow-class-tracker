@@ -5,16 +5,782 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-22T15:10:14.189Z",
-      "removedSections": [],
+      "checkedAt": "2026-09-23T15:11:48.785Z",
+      "removedSections": [
+        {
+          "id": "2336376:1:2026-08-18:classes:death-knight:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Death Knight",
+          "specKeys": [
+            "Death Knight|Blood",
+            "Death Knight|Frost"
+          ],
+          "sha256": "a5890cfdcd98bd557a3b68d2238138df3ebcabce299a856d3cb415b8cc884cf1",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:demon-hunter:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Demon Hunter",
+          "specKeys": [
+            "Demon Hunter|Devourer"
+          ],
+          "sha256": "c13eb2814159d6cd5d67dd3618bda31a57c720e01c95e645300c0506bf70c173",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:druid:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Druid",
+          "specKeys": [
+            "Druid|Restoration"
+          ],
+          "sha256": "a1305ca6118b60101f31fb3de0b6785bfe057bda287ec18f1665b60418d8aebd",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:hunter:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Hunter",
+          "specKeys": [
+            "Hunter|Beast Mastery",
+            "Hunter|Marksmanship",
+            "Hunter|Survival"
+          ],
+          "sha256": "ecdbb1c0863fdc2ba546225dcb8a4301159583bfc7a015f8cc4b39e4ad21361e",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:mage:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Mage",
+          "specKeys": [
+            "Mage|Arcane"
+          ],
+          "sha256": "f49c2b60b402dafac8661484e1ef8cbb1ec729fa779bb70ec28c58aa1d32da5e",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:monk:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Monk",
+          "specKeys": [
+            "Monk|Mistweaver"
+          ],
+          "sha256": "164dc733f1c0bd511bb0d2ff284dee60c2b4541ea1afa9142c86544137e3b034",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:paladin:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Paladin",
+          "specKeys": [
+            "Paladin|Retribution"
+          ],
+          "sha256": "a609c338237b9ff9c5ad99065ce51eceea3fc9679b0b015418d220b643af4250",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:priest:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Priest",
+          "specKeys": [
+            "Priest|Discipline",
+            "Priest|Holy"
+          ],
+          "sha256": "199186b33b5c13866c5b47b7ef409e7ecd7cfc35b0f57efccfa1f251f75000b5",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:rogue:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Rogue",
+          "specKeys": [
+            "Rogue|Assassination",
+            "Rogue|Subtlety"
+          ],
+          "sha256": "f68a94cecee83cf64068c0a6d00285a7e8c4669d83f7685763781b4ed76ed0f1",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:shaman:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Shaman",
+          "specKeys": [
+            "Shaman|Elemental",
+            "Shaman|Enhancement"
+          ],
+          "sha256": "d98c24c52bb06e2be4f6f2ff675cf69968d8bc60451a1442d6603678f862d6d2",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:warlock:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Warlock",
+          "specKeys": [
+            "Warlock|Affliction",
+            "Warlock|Demonology",
+            "Warlock|Destruction"
+          ],
+          "sha256": "03e849a40590a5520c8db57200dacd7c301ce40cdfb7edac63d7f1817dfb7628",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:classes:warrior:1",
+          "date": "2026-08-18",
+          "category": "Classes",
+          "class": "Warrior",
+          "specKeys": [
+            "Warrior|Arms",
+            "Warrior|Fury",
+            "Warrior|Protection"
+          ],
+          "sha256": "0f1face81ddce7c96565f1ffa07cca0773423842a4e1da3c63950bdbd1df9dac",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section was already excluded from reapplication because its scoped changes were carried by the feed entries dated 2026-08-15/2026-08-18, so nothing was ever applied from it and the retained feed entries stand on their own cited sources, unchanged by the removal. Excluded; tombstone preserved."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:player-versus-player:demon-hunter:1",
+          "date": "2026-08-18",
+          "category": "Player versus Player",
+          "class": "Demon Hunter",
+          "specKeys": [
+            "Demon Hunter|Devourer"
+          ],
+          "sha256": "706aabc1b371a536a3b188355b66893350eb52daa2f98747a4b1fb5724bdd9d8",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:player-versus-player:druid:1",
+          "date": "2026-08-18",
+          "category": "Player versus Player",
+          "class": "Druid",
+          "specKeys": [
+            "Druid|Restoration"
+          ],
+          "sha256": "910482268d6b73525b7f221f68847b96c5d2abe1a1ca03eb78bab5c049eebd18",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:player-versus-player:mage:1",
+          "date": "2026-08-18",
+          "category": "Player versus Player",
+          "class": "Mage",
+          "specKeys": [
+            "Mage|Fire"
+          ],
+          "sha256": "c9610958e2cb852cf3c8f848396613caf55ca1f65aa8a93e973c82378b434c37",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:player-versus-player:paladin:1",
+          "date": "2026-08-18",
+          "category": "Player versus Player",
+          "class": "Paladin",
+          "specKeys": [
+            "Paladin|Holy",
+            "Paladin|Retribution"
+          ],
+          "sha256": "46d484162f6f4700cd20a202ce569d687b84959db9a3c7f7aa69f920accd48e2",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:player-versus-player:shaman:1",
+          "date": "2026-08-18",
+          "category": "Player versus Player",
+          "class": "Shaman",
+          "specKeys": [
+            "Shaman|Restoration"
+          ],
+          "sha256": "5cb98ff076fbadfc8b0ae0afe52648249eab8c6f1330c24b9ed8d7110742735b",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-18:player-versus-player:warlock:1",
+          "date": "2026-08-18",
+          "category": "Player versus Player",
+          "class": "Warlock",
+          "specKeys": [
+            "Warlock|Destruction"
+          ],
+          "sha256": "bd648fcf2e8f8e4cb8c815430b43ef3b961dbabb3f59c427193e9b015e184b7e",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-17:classes:hunter:1",
+          "date": "2026-08-17",
+          "category": "Classes",
+          "class": "Hunter",
+          "specKeys": [
+            "Hunter|Beast Mastery"
+          ],
+          "sha256": "4f50a6ef9942ab7d68f3f015d1d13dc52caf4ec7215cbb78809164024029bb58",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-17:classes:priest:1",
+          "date": "2026-08-17",
+          "category": "Classes",
+          "class": "Priest",
+          "specKeys": [
+            "Priest|Holy"
+          ],
+          "sha256": "c694c3d092566e07a27af5c6e45a10f582f58bb2dcbf0bb30532e65110d5645d",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-17:classes:shaman:1",
+          "date": "2026-08-17",
+          "category": "Classes",
+          "class": "Shaman",
+          "specKeys": [
+            "Shaman|Elemental",
+            "Shaman|Enhancement",
+            "Shaman|Restoration"
+          ],
+          "sha256": "797485d3a0d7ee1f61af5ef2b4fdb712fb655f9fe07b2fb58c7146cb8a3c1d2c",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-17:classes:warlock:1",
+          "date": "2026-08-17",
+          "category": "Classes",
+          "class": "Warlock",
+          "specKeys": [
+            "Warlock|Destruction"
+          ],
+          "sha256": "ac9b9712d6d1301b48c93a0af9874735f874f3e67b73c31a5784a3e0845aa540",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-14:classes:evoker:1",
+          "date": "2026-08-14",
+          "category": "Classes",
+          "class": "Evoker",
+          "specKeys": [
+            "Evoker|Devastation"
+          ],
+          "sha256": "ee9330bbbf35ccb02b7e8ac9ebdcb77205378b091e03b6425bb3a32da63b9ba8",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-14:classes:warrior:1",
+          "date": "2026-08-14",
+          "category": "Classes",
+          "class": "Warrior",
+          "specKeys": [
+            "Warrior|Arms",
+            "Warrior|Fury",
+            "Warrior|Protection"
+          ],
+          "sha256": "3dfaf84003b28d5d9996330707cae6a9ed678a436423b3a164232d9ff66c30b2",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-14:classes:warlock:1",
+          "date": "2026-08-14",
+          "category": "Classes",
+          "class": "Warlock",
+          "specKeys": [
+            "Warlock|Affliction",
+            "Warlock|Demonology",
+            "Warlock|Destruction"
+          ],
+          "sha256": "c92b13fed756c9155188fc505dece3718f70f0cee5bfc0e83c11ad5191ab3d45",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-13:classes:spirit-walk-in-the-vaults-of-atal-utek-should-now-apply-to-pets:1",
+          "date": "2026-08-13",
+          "category": "Classes",
+          "class": "Spirit Walk in the Vaults of Atal’utek should now apply to pets.",
+          "specKeys": [],
+          "sha256": "01a3eca7597b2ec4adf557a58df14de6697e7b1cd8109c8c437ea39557af182c",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        },
+        {
+          "id": "2336376:1:2026-08-13:classes:warlock:1",
+          "date": "2026-08-13",
+          "category": "Classes",
+          "class": "Warlock",
+          "specKeys": [
+            "Warlock|Affliction"
+          ],
+          "sha256": "a3232fa1882b0dbc42c60522528a5acdd33d574cfd28737729d40a3e989797f2",
+          "removedAt": "2026-09-23T15:11:48.785Z",
+          "resolution": {
+            "disposition": "irrelevant",
+            "reason": "Removed from the official compilation between version 42 and version 44: Blizzard trimmed the August 13–18 blocks when the September 22 block was added (confirmed 2026-09-23 against an independent fetch of topic 2336376, which no longer contains them). Reviewed against the retained tracker facts: this section sat in the pre-2026-09-04 historical baseline, was never applied, and no stored writeup, tier set or feed entry derives from it, so its disappearance changes no retained fact. Excluded; tombstone preserved. This remains no claim of exhaustive historical backfill."
+          }
+        }
+      ],
       "posts": [
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 42,
-          "updatedAt": "2026-09-22T00:51:27.431Z",
-          "bodySha256": "b25facd061bf788421d8d7849bfbf5178fcada6ac663f4b55a0d28efda863194",
+          "version": 44,
+          "updatedAt": "2026-09-22T23:24:01.722Z",
+          "bodySha256": "ca0844b209b82f3ed34825b000fbf6190167f5db2a7447cee38d5c8769ec4c78",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-22:classes:death-knight:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Blood",
+                "Death Knight|Frost",
+                "Death Knight|Unholy"
+              ],
+              "sha256": "d8399549f51f91ec3176fd56f2d7c22e9db98619f07f262f1b60b862a4da1b8f",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Blood (aura −6%, Death Strike +15%, Deadly Reach 60% was 75%, six Deathbringer buffs), Frost (Frostreaper +100%, Obliterate +10%, both PvE-only) and Unholy (Scourging 65%/100%, Blightfall 200%, three San'layn buffs) — matched line for line against the 09-18 entry's three Death Knight highlights, including the v3 Death Strike value of 15%. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:demon-hunter:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer",
+                "Demon Hunter|Havoc",
+                "Demon Hunter|Vengeance"
+              ],
+              "sha256": "53292b6adf97b4853c5b051ed83cd2f0e7fa0e0f11a5da9beb327773a965ec1b",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Devourer (Collapsing Star primary +25%, Consume/Devour +8%), Havoc and Vengeance (Aldrachi Reaver — Art of the Glaive 15%/30%, Reaver's Glaive +25%, Reaver's Mark 7% resp. 8%, and for Havoc Broken Spirit 20%) — matched line for line against the 09-18 entry's three Demon Hunter highlights, including the v3 Vengeance Reaver's Glaive value of 25%. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:druid:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Balance",
+                "Druid|Feral",
+                "Druid|Guardian",
+                "Druid|Restoration"
+              ],
+              "sha256": "516bdece2c8e56f0d6a6fff4248e8f29297829aee57661bd9e7cc94f5dfd21a2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: the Wildstalker hero-talent Bursting Growth +15% sits under a bare Hero Talents block that is a sibling of the spec blocks, so it is class-wide (which is also why this section's computed spec scope lists all four Druid specs); Feral's own Wildstalker line (Patient Custodian 10%, was 8%); and Restoration (all healing +4%, Photosynthesis fix). All three are carried by the 09-18 entry's “Druid (class-wide)”, “Feral Druid” and “Restoration Druid” highlights. Balance and Guardian carry no line of their own here. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:evoker:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Devastation"
+              ],
+              "sha256": "10eee5b704290840ccc4289a1ba945ddc498bcbff9d3313b4d12aa9fff3803b9",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Augmentation (Eruption +15%, Fire Breath +60%, Upheaval +40%, Blistering Scales +100%) and Devastation (Pyre +10%, Unbound Flame +25%, Fire Breath +5%, Azure Strike +50%, Azure Sweep +50%, Shattering Star +10%, all PvE-only) — matched against the 09-18 entry's two Evoker highlights. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:hunter:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship",
+                "Hunter|Survival"
+              ],
+              "sha256": "1c8ae1f433ce8ea66dbe533c65a4a01ccd9da7b037d658cab1645fed51cf155d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Marksmanship (Trick Shots 75%, was 60%; Volley +10%) and Survival (Wildfire Bomb +20% with the primary-target bonus cut to 50% from 80%) — matched against the 09-18 entry's two Hunter highlights. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:mage:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Arcane",
+                "Mage|Fire",
+                "Mage|Frost"
+              ],
+              "sha256": "1c106be57084eb1499136f25ab16283eca637880b80142622bd7acd92d4be947",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Fire (Meteor DoT +100% PvE-only, Frostfire Dualcasting Adept 15% was 10%, Sunfury Burden of Power 6% was 3%) and Frost (Frozen Orb +15%, Comet Storm +50% PvE-only, Frostbite's Shatter +10%, Glacial Assault +50%) — matched against the 09-18 entry's two Mage highlights. Arcane appears in this section's computed spec scope only because the block opens with a class-level developers' note; it carries no line of its own here. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:monk:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Mistweaver",
+                "Monk|Windwalker"
+              ],
+              "sha256": "7421cf2cef6aa4561c361b5fb5eb3f00778792798c69fd1e4b85ab2aeb8ca428",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Mistweaver (all healing +5%, Vivify +15%, Sheilun's Gift +15%) and Windwalker (melee auto-attack +25%, Dual Threat +20%, Rising Sun Kick +8%), all PvE-only — matched against the 09-18 entry's two Monk highlights. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:paladin:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Protection",
+                "Paladin|Retribution"
+              ],
+              "sha256": "60aaeb98da68cf785c30586161b144a99d69706261b58cf6d8319addb2ee6b47",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Protection (all ability damage +6%, PvE-only) and Retribution (Templar — Hammer of Light +50% PvE-only, Empyrean Hammer +12%) — matched against the 09-18 entry's two Paladin highlights. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:priest:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Shadow"
+              ],
+              "sha256": "1761752dc5b6e3ad1dc9af4f791759dd4200ab9bee1d47b0eb73f6a6781c9e02",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: Discipline (Atonement +40% outside raid and battleground instances, Penance mana −20%) and Shadow (six +15% single-target buffs against Psychic Link 20% from 25% and Shadeburst −5%) — matched against the 09-18 entry's two Priest highlights. The separate Discipline line removing the 40% PvP Atonement bonus lives in this post's Player versus Player section and is out of scope there. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:rogue:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Subtlety"
+              ],
+              "sha256": "1da662d204c431a870268c0a349856ae2ee5ea7dfc2287692a8171bb97aa5af6",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped change: Subtlety's Trickster buffs (Unseen Blade +50%, Coup de Grace +30%, both PvE-only) — matched against the 09-18 entry's Subtlety Rogue highlight. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:classes:warrior:1",
+              "date": "2026-09-22",
+              "category": "Classes",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "9e4b8d923b7c9b6c32430f6b17825278c65040ff680ce9fb2c8dd7bfd106cde3",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). Scoped changes: the Mountain Thane buffs for Fury and Protection (Lightning Strike +50%, Ground Current +50%, both carrying the v3 “Does not apply to PvP combat” qualifier) — matched against the 09-18 entry's two Warrior highlights. Arms appears in this section's computed spec scope only because the block opens with a class-level developers' note; its only change this week is in the PvP section. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-09-18 — “Class Tuning Incoming -- September 22” (Linxy, official topic 2354340, post 1, read at version 3), the announcement of the scheduled pass that took effect with the September 22 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-08-18 / 2026-08-15 precedent in this ledger). Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:death-knight:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Unholy"
+              ],
+              "sha256": "c88c5c2682085766e50a67c3ba95ebab8132e9b6b2037db810d4168c69a12dce",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Unholy's San'layn Inevitable and Vampiric Strike buffs are both written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:druid:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Feral",
+                "Druid|Restoration"
+              ],
+              "sha256": "9e69ca797e65929034226d40b61965435817782490699129c6486e0677453517",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Feral's three Druid of the Claw lines are “in PvP combat”; Restoration's Swiftmend cut is “in PvP combat” and the Call of Ohn'ahra change lengthens the cooldown of a PvP-talent interaction in the same PvP block. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:evoker:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "8e8dc6d2090a23644340c6d627380ecd1f01374b2a9557b03193b3c77db3c6dd",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Augmentation's Ebon Might and Preservation's Consume Flame lines are both written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:hunter:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Survival"
+              ],
+              "sha256": "f6eaf320b22a9bd8cb3db1098aa1194969c2e99abcac6e421e10b62a4bb0da7d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Beast Mastery's Black Arrow buff and Survival's three Takedown/Moonlight Chakram cuts are all written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:mage:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire"
+              ],
+              "sha256": "a5e8415c6145f835dd3ab6d314b71f60cda36993463043d3134e2027ac72af11",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Fire's Pyroclasm reduction is written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:monk:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Windwalker"
+              ],
+              "sha256": "e4927946a012d6640d4f760bdf7755b338a7ca009fea19a0840f62525fedb3d2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Windwalker's Celestial Conduit buff and Flurry Strikes cut are both written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:paladin:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Retribution"
+              ],
+              "sha256": "21314ef0bf59d3e4a5ed03e4036b7fa7164a6c3f6ae54923c70bf248d322200e",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Retribution's Hammer of Light +20% carries no explicit PvP qualifier in its own line, but it sits under the Player versus Player heading and its developers' note says explicitly that it raises Templar's performance “also in PvP” — the PvE Hammer of Light change is the separate +50% already carried by the 09-18 feed entry, so reading this line as PvE would double-count and misstate the value. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:priest:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Holy",
+                "Priest|Shadow"
+              ],
+              "sha256": "2953a3f72d53d5e5670cf3b4de93cd85839f42f6a83de36e2c9b2da2357f1e06",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Holy's three Archon lines are “in PvP combat”, Shadow's Shadow Word: Death buff is “in PvP combat”, Discipline's line removes a PvP-only Atonement bonus, and the class-wide Mindgames buff is a PvP talent inside the PvP block (the same exclusion the 09-18 entry recorded for it). PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:rogue:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Outlaw"
+              ],
+              "sha256": "111a67991e176b4290ee420784e716a48f230229f7d2b534c18af0c1635d57c7",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Assassination's and Outlaw's aura changes are both written “in PvP combat”; the Deathmark raid-frame aura is a user-interface change with no throughput effect. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:shaman:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Enhancement"
+              ],
+              "sha256": "9279540c5e1ec839ae69125faa005407b4aae1cdefc25e528e9ba6e659f1d9dd",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: All four Elemental lines and Enhancement's aura buff are written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:warlock:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction"
+              ],
+              "sha256": "70a10cd70756ed78e7a427ed002fb7796dec9c81e75d79899e5da170623e543a",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Affliction's Agony and Unstable Affliction buffs are both written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-22:player-versus-player:warrior:1",
+              "date": "2026-09-22",
+              "category": "Player versus Player",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms"
+              ],
+              "sha256": "4827b74874210f2431a577e001d4c62a99b05696ff9b645cda3ad38a4eec9f65",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-23 against official hotfix topic 2336376, post 1, version 44 (updated 2026-09-22T23:24:01Z; the trusted receipt's body sha256 ca0844b2… was reproduced byte-for-byte from an independent fetch of the topic JSON this run). This is the post's Player versus Player section and every line in it is PvP-only combat tuning: Arms' three Colossus lines are all written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected."
+              }
+            },
             {
               "id": "2336376:1:2026-09-21:classes:evoker:1",
               "date": "2026-09-21",
@@ -1474,399 +2240,6 @@
                 "disposition": "irrelevant",
                 "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-19 for this section's scoped changes (Restoration Shaman); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
               }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:death-knight:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Death Knight",
-              "specKeys": [
-                "Death Knight|Blood",
-                "Death Knight|Frost"
-              ],
-              "sha256": "a5890cfdcd98bd557a3b68d2238138df3ebcabce299a856d3cb415b8cc884cf1",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-18 and build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Blood Death Knight; Frost Death Knight); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:demon-hunter:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Demon Hunter",
-              "specKeys": [
-                "Demon Hunter|Devourer"
-              ],
-              "sha256": "c13eb2814159d6cd5d67dd3618bda31a57c720e01c95e645300c0506bf70c173",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Devourer Demon Hunter); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:druid:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Druid",
-              "specKeys": [
-                "Druid|Restoration"
-              ],
-              "sha256": "a1305ca6118b60101f31fb3de0b6785bfe057bda287ec18f1665b60418d8aebd",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Restoration Druid); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:hunter:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Hunter",
-              "specKeys": [
-                "Hunter|Beast Mastery",
-                "Hunter|Marksmanship",
-                "Hunter|Survival"
-              ],
-              "sha256": "ecdbb1c0863fdc2ba546225dcb8a4301159583bfc7a015f8cc4b39e4ad21361e",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Beast Mastery Hunter); the Hydra pet-size reduction is cosmetic and excluded from the PvE performance feed. Other scoped changes are excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:mage:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Mage",
-              "specKeys": [
-                "Mage|Arcane"
-              ],
-              "sha256": "f49c2b60b402dafac8661484e1ef8cbb1ec729fa779bb70ec28c58aa1d32da5e",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Arcane Mage); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:monk:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Monk",
-              "specKeys": [
-                "Monk|Mistweaver"
-              ],
-              "sha256": "164dc733f1c0bd511bb0d2ff284dee60c2b4541ea1afa9142c86544137e3b034",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Mistweaver Monk); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:paladin:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Paladin",
-              "specKeys": [
-                "Paladin|Retribution"
-              ],
-              "sha256": "a609c338237b9ff9c5ad99065ce51eceea3fc9679b0b015418d220b643af4250",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Retribution Paladin); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:priest:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Priest",
-              "specKeys": [
-                "Priest|Discipline",
-                "Priest|Holy"
-              ],
-              "sha256": "199186b33b5c13866c5b47b7ef409e7ecd7cfc35b0f57efccfa1f251f75000b5",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Discipline Priest; Holy Priest); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:rogue:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Rogue",
-              "specKeys": [
-                "Rogue|Assassination",
-                "Rogue|Subtlety"
-              ],
-              "sha256": "f68a94cecee83cf64068c0a6d00285a7e8c4669d83f7685763781b4ed76ed0f1",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-18 and build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Subtlety Rogue; Assassination Rogue); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:shaman:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Shaman",
-              "specKeys": [
-                "Shaman|Elemental",
-                "Shaman|Enhancement"
-              ],
-              "sha256": "d98c24c52bb06e2be4f6f2ff675cf69968d8bc60451a1442d6603678f862d6d2",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-18 and build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Elemental Shaman; Enhancement Shaman); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:warlock:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Warlock",
-              "specKeys": [
-                "Warlock|Affliction",
-                "Warlock|Demonology",
-                "Warlock|Destruction"
-              ],
-              "sha256": "03e849a40590a5520c8db57200dacd7c301ce40cdfb7edac63d7f1817dfb7628",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-18 and build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Demonology Warlock; Affliction Warlock; Destruction Warlock; Warlock (Hellcaller hero talents)); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:classes:warrior:1",
-              "date": "2026-08-18",
-              "category": "Classes",
-              "class": "Warrior",
-              "specKeys": [
-                "Warrior|Arms",
-                "Warrior|Fury",
-                "Warrior|Protection"
-              ],
-              "sha256": "0f1face81ddce7c96565f1ffa07cca0773423842a4e1da3c63950bdbd1df9dac",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-18 and build entry dated 2026-08-15 (official topic 2336820, post 1; scheduled tuning effective 2026-08-18) for this section's scoped changes (Protection Warrior; Fury Warrior); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:player-versus-player:demon-hunter:1",
-              "date": "2026-08-18",
-              "category": "Player versus Player",
-              "class": "Demon Hunter",
-              "specKeys": [
-                "Demon Hunter|Devourer"
-              ],
-              "sha256": "706aabc1b371a536a3b188355b66893350eb52daa2f98747a4b1fb5724bdd9d8",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:player-versus-player:druid:1",
-              "date": "2026-08-18",
-              "category": "Player versus Player",
-              "class": "Druid",
-              "specKeys": [
-                "Druid|Restoration"
-              ],
-              "sha256": "910482268d6b73525b7f221f68847b96c5d2abe1a1ca03eb78bab5c049eebd18",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:player-versus-player:mage:1",
-              "date": "2026-08-18",
-              "category": "Player versus Player",
-              "class": "Mage",
-              "specKeys": [
-                "Mage|Fire"
-              ],
-              "sha256": "c9610958e2cb852cf3c8f848396613caf55ca1f65aa8a93e973c82378b434c37",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:player-versus-player:paladin:1",
-              "date": "2026-08-18",
-              "category": "Player versus Player",
-              "class": "Paladin",
-              "specKeys": [
-                "Paladin|Holy",
-                "Paladin|Retribution"
-              ],
-              "sha256": "46d484162f6f4700cd20a202ce569d687b84959db9a3c7f7aa69f920accd48e2",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:player-versus-player:shaman:1",
-              "date": "2026-08-18",
-              "category": "Player versus Player",
-              "class": "Shaman",
-              "specKeys": [
-                "Shaman|Restoration"
-              ],
-              "sha256": "5cb98ff076fbadfc8b0ae0afe52648249eab8c6f1330c24b9ed8d7110742735b",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-18:player-versus-player:warlock:1",
-              "date": "2026-08-18",
-              "category": "Player versus Player",
-              "class": "Warlock",
-              "specKeys": [
-                "Warlock|Destruction"
-              ],
-              "sha256": "bd648fcf2e8f8e4cb8c815430b43ef3b961dbabb3f59c427193e9b015e184b7e",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-17:classes:hunter:1",
-              "date": "2026-08-17",
-              "category": "Classes",
-              "class": "Hunter",
-              "specKeys": [
-                "Hunter|Beast Mastery"
-              ],
-              "sha256": "4f50a6ef9942ab7d68f3f015d1d13dc52caf4ec7215cbb78809164024029bb58",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-17:classes:priest:1",
-              "date": "2026-08-17",
-              "category": "Classes",
-              "class": "Priest",
-              "specKeys": [
-                "Priest|Holy"
-              ],
-              "sha256": "c694c3d092566e07a27af5c6e45a10f582f58bb2dcbf0bb30532e65110d5645d",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-17:classes:shaman:1",
-              "date": "2026-08-17",
-              "category": "Classes",
-              "class": "Shaman",
-              "specKeys": [
-                "Shaman|Elemental",
-                "Shaman|Enhancement",
-                "Shaman|Restoration"
-              ],
-              "sha256": "797485d3a0d7ee1f61af5ef2b4fdb712fb655f9fe07b2fb58c7146cb8a3c1d2c",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-17:classes:warlock:1",
-              "date": "2026-08-17",
-              "category": "Classes",
-              "class": "Warlock",
-              "specKeys": [
-                "Warlock|Destruction"
-              ],
-              "sha256": "ac9b9712d6d1301b48c93a0af9874735f874f3e67b73c31a5784a3e0845aa540",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-14:classes:evoker:1",
-              "date": "2026-08-14",
-              "category": "Classes",
-              "class": "Evoker",
-              "specKeys": [
-                "Evoker|Devastation"
-              ],
-              "sha256": "ee9330bbbf35ccb02b7e8ac9ebdcb77205378b091e03b6425bb3a32da63b9ba8",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-14:classes:warrior:1",
-              "date": "2026-08-14",
-              "category": "Classes",
-              "class": "Warrior",
-              "specKeys": [
-                "Warrior|Arms",
-                "Warrior|Fury",
-                "Warrior|Protection"
-              ],
-              "sha256": "3dfaf84003b28d5d9996330707cae6a9ed678a436423b3a164232d9ff66c30b2",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-14:classes:warlock:1",
-              "date": "2026-08-14",
-              "category": "Classes",
-              "class": "Warlock",
-              "specKeys": [
-                "Warlock|Affliction",
-                "Warlock|Demonology",
-                "Warlock|Destruction"
-              ],
-              "sha256": "c92b13fed756c9155188fc505dece3718f70f0cee5bfc0e83c11ad5191ab3d45",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-13:classes:spirit-walk-in-the-vaults-of-atal-utek-should-now-apply-to-pets:1",
-              "date": "2026-08-13",
-              "category": "Classes",
-              "class": "Spirit Walk in the Vaults of Atal’utek should now apply to pets.",
-              "specKeys": [],
-              "sha256": "01a3eca7597b2ec4adf557a58df14de6697e7b1cd8109c8c437ea39557af182c",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
-            },
-            {
-              "id": "2336376:1:2026-08-13:classes:warlock:1",
-              "date": "2026-08-13",
-              "category": "Classes",
-              "class": "Warlock",
-              "specKeys": [
-                "Warlock|Affliction"
-              ],
-              "sha256": "a3232fa1882b0dbc42c60522528a5acdd33d574cfd28737729d40a3e989797f2",
-              "resolution": {
-                "disposition": "irrelevant",
-                "reason": "Historical baseline before revision tracking began on 2026-09-04; existing feed retained. This exclusion is not a claim of exhaustive historical application. Any later section edit requires a fresh review."
-              }
             }
           ]
         }
@@ -1876,7 +2249,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-22T15:10:14.189Z",
+      "checkedAt": "2026-09-23T15:11:48.785Z",
       "removedSections": [],
       "posts": [
         {
@@ -2111,6 +2484,14 @@
               }
             }
           ]
+        },
+        {
+          "id": 30157204,
+          "postNumber": 5,
+          "version": 1,
+          "updatedAt": "2026-09-22T21:31:41.509Z",
+          "bodySha256": "57bbb75540f5eb5c06d0b5615219256a6c5c1901061cda630a5c958f4cef661c",
+          "sections": []
         }
       ]
     }
