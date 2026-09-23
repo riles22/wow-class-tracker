@@ -898,29 +898,40 @@ ui("current WCL comparisons select one encounter and keep historical aggregates 
   assert.equal(await page.locator('.cmp-table').getByText('Historical WCL raid aggregate',{exact:true}).count(),1);
 });
 
+// The committed receipt holds only what the last nightly collected (every raid cut has read
+// failed since 2026-09-17), so the WCL status invariants set each status in the page, in the
+// shape src/wcl-coverage.mjs writes: a failed cut carries no entry count and no check time.
+function setWclStatus([where,status]){
+  for(const cut of WCL_CUTS.values()) if(Object.entries(where).every(([k,v])=>cut[k]===v)){
+    const failed=status==='failed';
+    cut.status=status; cut.checkedAt=failed?null:DATA.wclCoverage.checkedAt;
+    if(failed) delete cut.entries; else cut.entries=3; // insufficient: fewer than 10 ranked entries
+  }
+}
+
 ui("WCL coverage distinguishes insufficient logs, failed collection, and retained measurements", async page => {
   const data=payload();
+  const cut=data.wclCoverage.cuts.find(c=>data.specs.some(s=>s.class===c.class && s.spec===c.spec
+    && s.metrics.some(m=>m.bracket===c.bracket && m.sample?.kind==='leaderboard-entries' && m.sample.encounterId===c.encounterId && m.rank)));
+  assert.ok(cut,'fixture has a ranked leaderboard sample');
+  const where={class:cut.class,spec:cut.spec,bracket:cut.bracket,encounterId:cut.encounterId};
   await page.click('#allbtn');
-  const sparse=data.wclCoverage.cuts.find(c=>c.status==='insufficient' && c.bracket==='raid');
-  assert.ok(sparse,'fixture has a verified sparse raid cut');
-  await page.selectOption('#all-encounter',String(sparse.encounterId));
+  await page.click(`#all-bkt [data-bkt="${cut.bracket}"]`);
+  await page.evaluate(setWclStatus,[where,'insufficient']);
+  await page.selectOption('#all-encounter',String(cut.encounterId));
   assert.match(await page.locator('#all-ov .wcl-coverage:not(.wcl-legend) summary').textContent(),/insufficient logs/);
-  const success=data.wclCoverage.cuts.find(c=>c.status==='success' && c.bracket==='raid');
-  await page.evaluate(cut=>{
-    const current=DATA.wclCoverage.cuts.find(c=>c.class===cut.class && c.spec===cut.spec && c.bracket===cut.bracket && c.encounterId===cut.encounterId);
-    current.status='failed'; current.checkedAt=null; delete current.entries;
-  },success);
-  await page.selectOption('#all-encounter',String(success.encounterId));
+  await page.evaluate(setWclStatus,[where,'failed']);
+  await page.selectOption('#all-encounter',String(cut.encounterId));
   const cell=await page.evaluate(cut=>{
     const row=[...document.querySelectorAll('table.alltab tbody tr')].find(r=>r.dataset.cls===cut.class && r.dataset.spec===cut.spec);
     const col=[...document.querySelectorAll('table.alltab thead tr:first-child th')].findIndex(h=>h.dataset.k==='m:wcl');
     return row.children[col].textContent;
-  },success);
+  },cut);
   assert.match(cell,/Collection failed · historical data retained/);
   assert.match(cell,/#\d+/,'the last verified sample remains visible');
   assert.match(cell,/Last sample checked .*Latest log/,'a failed collection keeps the old sample check date explicitly labeled');
-  await page.evaluate(cut=>WCL_CUTS.delete(`${cut.class}|${cut.spec}|${cut.bracket}|${cut.encounterId}`),success);
-  await page.selectOption('#all-encounter',String(success.encounterId));
+  await page.evaluate(cut=>WCL_CUTS.delete(`${cut.class}|${cut.spec}|${cut.bracket}|${cut.encounterId}`),cut);
+  await page.selectOption('#all-encounter',String(cut.encounterId));
   assert.match(await page.locator('#all-ov .wcl-coverage:not(.wcl-legend) summary').textContent(),/collection status unavailable/,
     'a missing receipt never implies a verified current sample');
 });
@@ -939,11 +950,18 @@ ui("the Ladder defaults to current WCL and keeps empty encounters selectable", a
   }
   const empty=data.wclCoverage.encounters.raid.find(encounter=>!data.specs.some(s=>s.role==='DPS' && s.metrics.some(m=>m.bracket==='raid' && m.sample?.encounterId===encounter.id)));
   if(empty){
+    // An empty encounter stays selectable so it can say why it is empty; each status is set in
+    // the page before the encounter is drawn, whatever the last nightly recorded.
     await page.click('#ladder-bkt [data-bkt="raid"]');
-    await page.getByRole('button',{name:`${empty.name} · DPS`,exact:true}).click();
-    assert.equal(await page.locator('#ladder-chart .ladderrow').count(),0);
-    assert.match(await page.locator('#ladder-chart').textContent(),/insufficient logs/);
-    assert.match(await page.locator('#ladder-chart').textContent(),/No usable leaderboard samples/);
+    for(const [status,label,other] of [['insufficient',/insufficient logs/,/collection failed/],['failed',/collection failed/,/insufficient logs/]]){
+      await page.evaluate(setWclStatus,[{bracket:'raid',encounterId:empty.id},status]);
+      await page.getByRole('button',{name:`${empty.name} · DPS`,exact:true}).click();
+      assert.equal(await page.locator('#ladder-chart .ladderrow').count(),0);
+      const text=await page.locator('#ladder-chart').textContent();
+      assert.match(text,label);
+      assert.doesNotMatch(text,other);
+      assert.match(text,/No usable leaderboard samples/);
+    }
   }
 });
 
