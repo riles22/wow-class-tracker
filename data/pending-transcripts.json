@@ -2,25 +2,32 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "yDyEKvcZ3VM",
+      "id": "kB0bop0aUpI",
+      "creator": "Obli",
+      "title": "Single target damage is INSANE / Unholy DK Midnight Season 2 update",
+      "published": "2026-09-24",
+      "queuedAt": "2026-09-24"
+    },
+    {
+      "id": "mYt-nBOsKus",
       "creator": "izen (Izenhart)",
-      "title": "Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5",
-      "published": "2026-09-22",
-      "queuedAt": "2026-09-23"
-    },
-    {
-      "id": "Xs9g7fYCbCU",
-      "creator": "YoDaTV",
-      "title": "ANOTHER Blood DK Nerf? Is it Over?",
-      "published": "2026-09-22",
-      "queuedAt": "2026-09-23"
-    },
-    {
-      "id": "gUa2OZ2awWE",
-      "creator": "Shadarek",
-      "title": "Quick Guide to Aldrachi Reaver for Havoc Demon Hunter",
+      "title": "How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects",
       "published": "2026-09-23",
-      "queuedAt": "2026-09-23"
+      "queuedAt": "2026-09-24"
+    },
+    {
+      "id": "dtQ0MnB9FxI",
+      "creator": "YoDaTV",
+      "title": "Is Deathbringer BETTER Than San’layn Now?",
+      "published": "2026-09-23",
+      "queuedAt": "2026-09-24"
+    },
+    {
+      "id": "UZrdIj5WLIw",
+      "creator": "Shadarek",
+      "title": "Return of Aldrachi Reaver’s Mark Bug",
+      "published": "2026-09-24",
+      "queuedAt": "2026-09-24"
     }
   ],
   "skipped": [

@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-23T15:11:48.785Z",
+      "checkedAt": "2026-09-24T15:30:09.750Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -432,10 +432,52 @@
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 44,
-          "updatedAt": "2026-09-22T23:24:01.722Z",
-          "bodySha256": "ca0844b209b82f3ed34825b000fbf6190167f5db2a7447cee38d5c8769ec4c78",
+          "version": 47,
+          "updatedAt": "2026-09-24T00:12:25.841Z",
+          "bodySha256": "2b8d54576f086aee3d1b8c8c584be5dfbe813b939ab2d8cec01564f182a9138d",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-23:classes:death-knight:1",
+              "date": "2026-09-23",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Unholy"
+              ],
+              "sha256": "5ce7cd6a8528a43332d9aaf90b6be3f45e11708b9b9127e2b0238c2fb952868b",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-24 (nightly) against official hotfix topic 2336376, post 1, version 47 (last edited 2026-09-24T00:12:25.841Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383075 (published 2026-09-24T00:24:51Z). Unholy spec heading under Death Knight: a single Blightfall bug fix restoring the intended damage of the 2026-09-18 tuning, with no new tuning value stated by Blizzard, logged as one spec line in the new 2026-09-23 hotfix feed entry. Wowhead's “12% single target / 6% AoE” figures are that outlet's derived estimate and are deliberately NOT written into the highlight as official values. No set bonus is touched, so Unholy Death Knight's spec.tierSet date does not advance.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-23",
+                    "highlight": "Unholy Death Knight — Resolved an issue with Blightfall doing less damage as more time passes since the plague was applied."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-23:classes:monk:1",
+              "date": "2026-09-23",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Windwalker"
+              ],
+              "sha256": "ff37a9696c5d7ab74f1e6de19704faed7946c0c90f9b5ab4a99326d02fc5a382",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-24 (nightly) against official hotfix topic 2336376, post 1, version 47 (last edited 2026-09-24T00:12:25.841Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383075 (published 2026-09-24T00:24:51Z). Windwalker spec heading under Monk. This is IN PvE scope despite naming PvP (rule 3c covers changes that only alter PvP combat): the fix stops PvP adjustments to Celestial Conduit and Flurry Strikes from applying in PvE, so its effect is on PvE Windwalker. Logged as one spec line in the new 2026-09-23 hotfix feed entry; Blizzard states no tuning value, so the line casts no outlook vote. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-09-23",
+                    "highlight": "Windwalker Monk — Fixed an issue that caused PvP adjustments to Windwalker’s Celestial Conduit and Flurry Strikes to apply in PvE as well."
+                  }
+                ]
+              }
+            },
             {
               "id": "2336376:1:2026-09-22:classes:death-knight:1",
               "date": "2026-09-22",
@@ -2249,7 +2291,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-23T15:11:48.785Z",
+      "checkedAt": "2026-09-24T15:30:09.750Z",
       "removedSections": [],
       "posts": [
         {
