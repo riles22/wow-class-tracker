@@ -2,13 +2,6 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "9pmu8UGX7TM",
-      "creator": "Obli",
-      "title": "Unholy DK COULD be 15% stronger... if Blightfall wasn't broken.",
-      "published": "2026-09-23",
-      "queuedAt": "2026-09-23"
-    },
-    {
       "id": "yDyEKvcZ3VM",
       "creator": "izen (Izenhart)",
       "title": "Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5",
@@ -27,13 +20,6 @@
       "creator": "Shadarek",
       "title": "Quick Guide to Aldrachi Reaver for Havoc Demon Hunter",
       "published": "2026-09-23",
-      "queuedAt": "2026-09-23"
-    },
-    {
-      "id": "UW8ADRksKps",
-      "creator": "AutomaticJak",
-      "title": "DISC BUFFS ARE IN - 19+ Disc Keys | UI in description!",
-      "published": "2026-09-22",
       "queuedAt": "2026-09-23"
     }
   ],

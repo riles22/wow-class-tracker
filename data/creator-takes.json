@@ -6428,7 +6428,7 @@
       "patchContext": "Season 2 live — \"This NEW Holy Priest Build Dominates\", published 2026-08-26. A solo update video on his own channel (he opens naming himself and cites his own Wowhead guides and his own logs), arguing an Oracle Holy Priest build off the first week of Venomous Abyss, in which he had killed two Mythic bosses at the time of recording.",
       "url": "https://youtu.be/l1qKWWYZGZE?t=27",
       "claim": "Discipline comes off worse in the same comparison: he says he would recommend Holy over Disc for almost everyone on the Venomous Abyss fights encountered so far, and that Holy is much safer and less stressful to play in this raid. He closes by asking Blizzard directly to buff Disc — specifically to add an Atonement modifier for dungeons as existed when Disc was strong there last expansion — which is a statement about where he thinks the spec currently sits rather than a build note. He gives no throughput figure for Disc, so this is a relative placement read against Holy, not a measurement.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -7341,7 +7341,7 @@
       "patchContext": "Season 2 live — his updated Season 2 Mythic+ healer tier list a few weeks into the season, Discipline Priest placed C",
       "claim": "Discipline Priest sits at the bottom of his tier list, in his words by far the worst healer in M+ this season and its worst M+ position in a long time. The 20% Shadow Mend mana-cost reduction has not fixed a mana economy he calls miles worse than every other healer's; Shadowfiend is a terrible talent; the spec tree has been repeatedly nerfed; and Atonement is undertuned in dungeons yet would be too strong in raid if buffed. He attributes this to the removal of last expansion's dungeon-specific Atonement modifier in favour of the 5-to-20-Atonement back-end scaling, which has not worked for M+ at all, leaving weak Atonement healing, deliberately weakened shields, and expensive Shadow Mend casts that run the spec out of mana. He contrasts this with his own Mythic-progression raid healing, which he calls great.",
       "url": "https://youtu.be/4SH6SUfKxpM?t=819",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -8124,7 +8124,7 @@
       "claim": "Obli says Frost is already probably one of the best melee specs in Mythic+ — it was played in the MDI and was already good there — and after the single-target buffs \"it's just going to be insane\", a go-to melee pick with really decent priority damage."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Unholy",
       "creator": "Obli",
@@ -8145,6 +8145,42 @@
       "patchContext": "Live 12.1 — his read of the September 22 weekly-reset class tuning for Devourer (Collapsing Star primary-target damage +25%, Consume/Devour damage +8%, both PvE only), the pass logged in this tracker's 2026-09-18 build entry. Supersedes his 2026-08-17 post-sim Season 2 read.",
       "url": "https://youtu.be/sYjd851J9Ow?t=65",
       "claim": "He reads the September 22 pass as a genuine buff to Devourer that lands almost entirely on the Annihilator hero tree. The Collapsing Star line he frames as restoring a 25% primary-target increase that was in the patch notes but never actually made it into the game, which he says was one of the main reasons Collapsing Star felt weak on the main target; combined with the 8% Consume/Devour increase he calls it a very good buff for Annihilator and reads the developers' stated intent — raid and single-target performance — as exactly what landed. He is careful not to over-read it for raid: Annihilator is now fully viable and the gap is much closer, but he still wants Void-Scarred on a lot of the earlier fights, with Annihilator probably just easier to play and losing less damage on roughly the last three bosses. For Mythic+ he goes further: the extra Collapsing Star and Consume/Devour damage closes what had been Void-Scarred's edge in priority damage through Devour's Bite against Annihilator's stronger mass AoE, so he says everyone is simply going to be playing Annihilator in Mythic+ from now on and calls it the best damage there for the rest of the season barring further changes. He adds that Collapsing Star is still not worth pressing for Void-Scarred, attributing that to the talent tree not affording the points rather than to the damage, and that nothing has changed rotationally since Season 1.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Unholy DK COULD be 15% stronger... if Blightfall wasn't broken.\" (published 2026-09-23), a short solo read of the September 22 DK tuning the day after it went live, built on the estimated DPS changes Wowhead posted. Supersedes his 2026-09-19 pre-live Unholy raid read.",
+      "claim": "With the changes live, Obli reads Unholy's realistic gain as roughly 3-4% single target and about 1% AoE, all of it from lines unrelated to Blightfall. Blightfall itself he calls so bugged that its disease-eruption damage can sometimes do nothing at all, which in his view costs Unholy a whole defining section of the tree; fixed, this week's changes could be worth around 15% single target and 7% AoE when playing it. Even so he doubts a fix would change much, because Unholy's core problem is AoE on low and spread-out target counts, which he says it suffers from worst of the melee. He recommends Frost for bosses — Unholy fights feel noticeably longer — and says he is committing to Frost himself; on keys he says it hardly matters which DK you play.",
+      "url": "https://youtu.be/9pmu8UGX7TM?t=42",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-09-22",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"DISC BUFFS ARE IN - 19+ Disc Keys\" (published 2026-09-22), a ~5.7-hour stream VOD of Discipline keys on the day the dungeon-only Atonement buffs went live; the read is his own end-of-stream verdict after timing 20s on both hero trees.",
+      "claim": "After a day of keys on the new dungeon-only Atonement buff (he cites it as 40%), he calls both Discipline builds massively better than before: Voidweaver beats Oracle — better on mana and more reliable AoE Atonement healing — and he timed four 20s as Disc, three on Voidweaver and one on Oracle. For most players in roughly 13s to 18s he says Disc will now be fine, and the top 1% is reachable where he did not think it was before. But he still ranks Holy Priest above both Disc builds — Holy heals itself far more and feels tankier — and says Disc is not yet level with the other healers at the very top end: title would be very hard; he endorses a fellow player's point that Voidweaver's healing has no layers to fall back on beyond mana-hungry Shadow Mends; and he wants Atonement a little stronger still. His summary: Disc is good, but not insane and not meta.",
+      "url": "https://youtu.be/UW8ADRksKps?t=19564",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "AutomaticJak",
+      "date": "2026-09-22",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"DISC BUFFS ARE IN - 19+ Disc Keys\" (published 2026-09-22), a ~5.7-hour stream VOD of Discipline keys on the day the dungeon-only Atonement buffs went live; the read is his own end-of-stream verdict after timing 20s on both hero trees.",
+      "claim": "Asked mid-stream whether to switch back to Disc for raid, he notes that the September 22 buffs did nothing for raid — they are M+ only — but says Disc is good in raid regardless, pointing to his own Mythic progression where he healed seven of eight bosses as Disc. The exception he names is a fight with long stretches where there is no mob to hit while heavy healing is needed, where Atonement healing simply does not work.",
+      "url": "https://youtu.be/UW8ADRksKps?t=6141",
       "superseded": false
     }
   ],
