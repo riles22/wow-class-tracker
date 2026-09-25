@@ -16,7 +16,12 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
-## 2026-09-24 (nightly) — 3 queued transcripts drained: **5 takes + 12 metaNotes**, 5 takes and 12 metaNotes superseded; 44/44 feeds polled; 4 videos queued
+## 2026-09-25 (local, scheduled) — queue **4 → 4** (0/4 captions: persistent 429); 0 takes, 0 metaNotes; run BEFORE today's nightly, which had not fired by 15:25Z
+
+- **Captions: 0 of 4.** The first id, `kB0bop0aUpI` (Obli), drew HTTP 429 on the caption download while the webpage and player fetches succeeded. **Caption traffic stopped there**, as this skill requires (yesterday's run did not stop). One paced retry 20 s later, without `player_client=android` and at `--sleep-requests 3`, also returned 429. That is the persistent timedtext shape (2026-08-23/24), now on a second consecutive day. The other three (`mYt-nBOsKus` izen, `dtQ0MnB9FxI` YoDaTV, `UZrdIj5WLIw` Shadarek) were not attempted.
+- All four **stay in `videos[]`** for the nightly's Supadata lane: a transport failure is not a durable judgment. `data/` untouched.
+- No authenticated fallback: this was an unattended run, and that lane needs a cookies.txt from Riley.
+- No breadth sweep. It needs the same caption endpoint.
 
 - **Transcript step:** `transcript-fetch/summary.json` verdict **`ok`**, 3 of 3 requested fetched natively (`yDyEKvcZ3VM` 576 chunks, `Xs9g7fYCbCU` 91, `gUa2OZ2awWE` 410), 19 counted requests in the 30-day window, no limit configured. No YouTube or transcript-API request was made agent-side.
 - **YoDaTV — “ANOTHER Blood DK Nerf? Is it Over?” (Xs9g7fYCbCU, 2026-09-22) → 3 M+ takes.** Blood DK `nerf`: the 09-21 revision (Death Strike +15% rather than the posted +25%) is a nerf against the first announcement, ST ~0.1%, priority flat, 5-/10-target AoE down 5–6%, but “the important damage is not really going down” and it will not change the meta. Vengeance `mixed`: the Aldrachi buff was trimmed too, and with ~6% off Blood the damage gap closes a lot (his scuffed Temple +20 at 217–218k, ~250k with Chaos Brand, against a rank-one 284k) — he still keeps Blood ahead and stays on Annihilator. Guardian `neutral`: “not a bear believer”, below both even after the nerfs. Superseded his three 2026-09-19 M+ takes on the same specs; his 09-19 tier-list **predictions ledger entry is untouched** (this video publishes no list).
