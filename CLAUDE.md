@@ -1039,7 +1039,8 @@ and the page's own `published` date rides alongside `snapshot`.
    provenance. Run `node src/check-wcl-metrics.mjs` before finishing; publication checks
    against the independent pre-agent artifact. These numeric series never feed letters.
    The fixed recipe covers 8 raid bosses (zone 53, partition 1, Mythic difficulty 5,
-   size 20; excludes world boss Nymrissa 3379) and 8 dungeons (zone 55, partition 1,
+   size 20; excludes world boss Nymrissa 3379 and, until 12.1.5 is live, Kith'ix 3513,
+   which WCL registered in zone 53 during PTR testing) and 8 dungeons (zone 55, partition 1,
    difficulty 10, size 5, exactly +10). WCL bracket **9** selects +10; bracket 10 selects
    +11. Validate the source bracket metadata AND returned key levels every run.
    It reads page 1, up to 100 ranked ENTRIES per spec per encounter, with at least 10
