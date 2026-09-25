@@ -19,7 +19,11 @@ export const LIVE_LEADERBOARDS = {
       ],
       // WCL lists this world boss in the raid zone and even returns Mythic-filtered
       // rankings for it. Successful API output alone cannot establish raid membership.
-      excludedEncounters: [{ id: 3379, name: "Nymrissa Wavecaller" }],
+      // Kith'ix (The Unbinding of Kith'ix) is the patch 12.1.5 boss. WCL registered it
+      // in this zone during PTR testing (first seen 2026-09-17), and since then the
+      // unknown id has made zone validation refuse every raid cut. It is excluded until
+      // 12.1.5 is live; moving it into `encounters` then is a reviewed recipe change.
+      excludedEncounters: [{ id: 3379, name: "Nymrissa Wavecaller" }, { id: 3513, name: "Kith'ix" }],
     },
     { key: "wcl-leaderboard-mplus", bracket: "mplus", zoneId: 55, zoneName: "Mythic+ Season 2",
       partition: 1, partitionName: "Season 2", difficulty: 10, size: 5, minRows: 280,
