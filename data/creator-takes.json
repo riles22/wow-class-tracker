@@ -7497,7 +7497,7 @@
       "patchContext": "Season 2 live — \"What changes does Unholy DK need to be good? / Midnight 12.1 Season 2\", published 2026-09-17: a talk-through of Unholy's raid standing argued from the Warcraft Logs 95th-percentile spec rankings over the past one and two weeks, per-boss breakdowns, and his own Twin Fangs kills on both Death Knights, followed by his tuning wish list (Necrotic Coil, Dread Plague, a two-target Death Coil talent). The Mythic+ read is a short aside bracketing the raid case. Supersedes his 2026-08-28 M+ read.",
       "url": "https://youtu.be/u2JZWKphGfM?t=441",
       "claim": "On keys he is brief and untroubled: Unholy is 'not so bad in Mythic+ — actually pretty decent', and in closing 'absolutely fine, there's no issues for Mythic+'; it is raid alone where the spec falls down. This is a genuine steady read rather than a placeholder, but it is quieter than his 08-28 'very good, does more than Frost' and carries no Frost comparison this time — his 09-14 Frost M+ read, which puts Frost slightly ahead, is the newer word on that.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8157,7 +8157,7 @@
       "patchContext": "Season 2 live — \"Unholy DK COULD be 15% stronger... if Blightfall wasn't broken.\" (published 2026-09-23), a short solo read of the September 22 DK tuning the day after it went live, built on the estimated DPS changes Wowhead posted. Supersedes his 2026-09-19 pre-live Unholy raid read.",
       "claim": "With the changes live, Obli reads Unholy's realistic gain as roughly 3-4% single target and about 1% AoE, all of it from lines unrelated to Blightfall. Blightfall itself he calls so bugged that its disease-eruption damage can sometimes do nothing at all, which in his view costs Unholy a whole defining section of the tree; fixed, this week's changes could be worth around 15% single target and 7% AoE when playing it. Even so he doubts a fix would change much, because Unholy's core problem is AoE on low and spread-out target counts, which he says it suffers from worst of the melee. He recommends Frost for bosses — Unholy fights feel noticeably longer — and says he is committing to Frost himself; on keys he says it hardly matters which DK you play.",
       "url": "https://youtu.be/9pmu8UGX7TM?t=42",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -8242,6 +8242,30 @@
       "patchContext": "Season 2 live — his Aldrachi Reaver guide for Havoc after the September 22 buffs (\"Quick Guide to Aldrachi Reaver for Havoc Demon Hunter\", published 2026-09-23), built on his own sims and raid-reclear logs; he states he has not yet played it in real keys.",
       "url": "https://youtu.be/gUa2OZ2awWE?t=265",
       "claim": "Shadarek is blunt that the buff does not fix the AoE: \"this is not a good overall DPS spec\" and \"it simply is not a good AoE spec — you will lose to basically everything in Mythic Plus, at least at similar skill level.\" What is insane, and was particularly buffed, is funnel and priority damage. The key build is the same single-target build with Trail of Ruin and Preemptive Strike, and he is explicit that you do NOT opt into the AoE talents (Immolation Aura talents are worth over double on Fel-Scarred and the throw-glaive and Essence Break points are mandatory). He has not yet run real keys with it and only suspects it will do pretty well."
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-09-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Single target damage is INSANE / Unholy DK Midnight Season 2 update\" (published 2026-09-24), a short Warcraft Logs read-through recorded the day after Blizzard fixed the Blightfall bug he had spent two videos reporting. Everything in it is read off the first ~24 hours of logs, a limit he states repeatedly himself. Supersedes his 2026-09-23 Unholy raid read, which was written while the bug was still live.",
+      "url": "https://youtu.be/kB0bop0aUpI?t=92",
+      "claim": "The bug fix flips Obli's Unholy raid read from mixed to strongly positive: Blightfall is now \"the build everywhere\", and on single-target bosses he reads the top Unholy logs roughly 10% clear of the nearest Frost (242k against 227k on one, a similar gap on another), calling a spec that was \"dog water single target\" now the best in the bracket at it \"not even by a little bit\". He bounds the claim himself in three ways: it is single target only — on any cleave or two-target fight Frost is instantly ahead again, and there are bosses where Frost is still far better; the pets build is not far behind Blightfall; and the sample is under 24 hours and skewed by Asian-server rank-chasing, since the small pool of players on the new build makes rank ones easy. He expects Blizzard to over-nerf it within days — \"enjoy it while it lasts\" — and says he will not even get to play it on Mythic before then. Raid-wise his recommendation is Unholy for single target and Frost for everything else.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-09-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Single target damage is INSANE / Unholy DK Midnight Season 2 update\" (published 2026-09-24), a short Warcraft Logs read-through recorded the day after Blizzard fixed the Blightfall bug he had spent two videos reporting. Everything in it is read off the first ~24 hours of logs, a limit he states repeatedly himself. Supersedes his 2026-09-17 Unholy M+ read.",
+      "url": "https://youtu.be/kB0bop0aUpI?t=328",
+      "claim": "On keys he declines to call it: Unholy and Frost are \"kind of a bit neck and neck\", with some dungeons favouring each, and he says a sample of less than 24 hours is not a basis for deciding which is better. He argues the buff should help — the faster boss pulls from Unholy's single target speed a key up — but notes Frost was already matching Unholy's numbers before it, so there is no reason Frost cannot keep doing so. His conclusion is explicitly permissive rather than directional: \"key-wise, play what you want, doesn't really matter\". He also cautions against reading the top M+ logs as spec evidence at all, since the Unholy names at the top are strong key players whose routes and groups carry the number.",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -13686,7 +13710,7 @@
       "note": "The first line reads like a nerf, but he places it against the state of play: Blood's lead over every other tank in damage was its San'layn damage, and after the Deathbringer buffs the two hero talents sit closer while San'layn stays ahead across all target counts. Tankiness is untouched — Blood DK is not being nerfed this reset.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=41",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -13710,7 +13734,7 @@
       "note": "The Unholy buffs are \"a bit more of a question mark\": fine in principle given San'layn is what you play in Mythic+, but the Blightfall side lands on a build that is still bugged in game. He expects a similar 3–4% range to Frost, with Frost still ahead and both specs still reasonably weak.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=166",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -13722,7 +13746,7 @@
       "note": "Devourer was expected to be very powerful and is instead dead last in raid performance, and its Mythic+ representation has collapsed to the point that Havoc passed it in play rate over the past week — partly because the playstyle is hard on the later raid bosses and even Zoroak. The Collapsing Star and Consume Devour buffs are about 5% for Annihilator single target and 3–4% in AoE, pushing Annihilator further ahead of Void-Scarred in keys; good, but he thinks Havoc will still be played over Devourer.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=213",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -13734,7 +13758,7 @@
       "note": "The Aldrachi Reaver buffs address the hero talent nobody has played all season, but he expects it to keep losing to Fel-Scarred: Aldrachi's AoE weakness remains, while Fel-Scarred's very high flat AoE — a weak profile with little priority damage, but high — is what Havoc has been living on.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=308",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -13758,7 +13782,7 @@
       "note": "The 4% healing buff compensates for the Photosynthesis fix (Lifebloom no longer triggered by other players' HoTs), which was worth less than 4%, so it is a net buff — and a relevant one, because Resto's raid HPS has been ramping up to within about 1.1% (~3,700 HPS) of Preservation Evoker over the last week. Buffed by more than that gap, he expects Resto to move ahead of Preservation in the raid.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=388",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -13770,7 +13794,7 @@
       "note": "Across-the-board buffs with two he singles out: Azure Strike +50% makes a button evokers had abandoned worth pressing again (and the Azure Sweep loop with it), and Flameshaper's burst windows may now beat Scalecommander in single target and perhaps even in Mythic+ on burst-heavy pulls. He would welcome that, because Scalecommander's Mass Disintegrate is an anti-funnel — 10% more damage per missing target means the big mob takes less once two small adds are beamed — a poor Mythic+ damage profile on top of the spec's lack of priority damage.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=602",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -13782,7 +13806,7 @@
       "note": "Minor changes: more Flamestrike buffing (awkward, since Flamestrike is already how Fire plays AoE) and Meteor's DoT doubled, so mostly the AoE portion. Warranted in his view, because Fire is not doing too well and its overall AoE is still weaker than a good number of specs.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=840",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -13794,7 +13818,7 @@
       "note": "The headline numbers mislead: Comet Storm +50% is a 0% gain because nobody is talented into it, and Glacial Assault +50% is worth about 0.7%. The only buffs to things Frost actually uses are the Frostbite shatter (+10%) and Frozen Orb (+15%) — much smaller than the list reads.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=881",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -13818,7 +13842,7 @@
       "note": "Another flat 5% healing increase plus Vivify and Sheilun's Gift buffs, so single-target buttons on top of the throughput. His estimate is that Mistweaver needs about 15% more healing before it starts to look viable, so this round gets it slightly less than halfway there.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=954",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -13830,7 +13854,7 @@
       "note": "Another tank round that only touches damage: Protection Paladin gets a flat 6% — \"we have established they're not doing good damage\" — which he calls okay and takeable, without anything for survivability.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=1097",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -13854,7 +13878,7 @@
       "note": "Arguably the largest buff of the round: Atonement healing +40% outside raids and battlegrounds plus a 20% Penance mana cut. Warranted, because Discipline has been stuck one to three key levels behind the top keys with very lackluster HPS — Atonement had become so weak that Void Shield and even Shadow Mend competed with it, and with only five targets it could not match its raid spread. He expects Atonement to become the largest source of healing in dungeons (especially as Voidweaver) and Disc's HPS to rise in general; not a raid change, where it was already doing okay.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=1163",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -13998,6 +14022,270 @@
       "note": "Arms has likewise kept its level since the season began. He singles out its uniqueness: Sweeping Strikes for two-target damage and, with Assassination, one of only two specs in the meta with a severe execute damage window — which is why it remains in the most popular comp even as Elemental passes it in raw representation.",
       "patchContext": "Season 2 live — M+ outlook, his weekly Mythic+ meta and performance recap for the end of week five (\"Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5\", published 2026-09-22), read off live representation and average-score data at 15+ and 20+ keys, with the September 22 tuning landing the same day and its effects explicitly not yet measured.",
       "url": "https://youtu.be/yDyEKvcZ3VM?t=929",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "note": "He reads the Blood change as the round's only nerf and as immaterial: the aura cut is \"technically the only on record slight nerf\" to San'layn's AoE damage, and Blood remains \"the tank with the most damage across all other tanks right now\". His framing of the two DPS Death Knights is set against it — they were having a worse time than the tank, and growing past a Blood that popular and that strong is the hard part.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=170",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "note": "The Blightfall doubling is, in his words, wishful thinking until the bugs go: most of Unholy's own damage amplifiers were not modifying Blightfall at all, so doubling the talent leaves it \"still remaining mostly bugged\", and he says there is no reasonable proof yet of significant bug fixing around it. Conditional on a fix he is bullish — roughly a 15% single-target gain would go \"a pretty good way of bringing you much higher up\", in both Mythic+ and the raid, where he says Unholy has not been having a good time — but he closes by listing Blightfall as the biggest asterisk of the week and the least likely of the changes to actually pay out. (Recorded before Blizzard's September 23 bug fix.)",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=92",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "note": "He calls the Havoc buff misleading. The 9% and 7% figures look large but land on Aldrachi Reaver, which was not the talent Havoc was picking in either bracket — Fel-Scarred was, and still is. The buff makes Aldrachi arguably better and closes most of the gap, especially in single target, but in his read it equalises the two hero talents rather than lifting the spec against its competition. He is explicit that Havoc was not doing terribly to begin with in either the raid or Mythic+.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=184",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "note": "The Devour buffs land on Annihilator, which he says is already the de facto Collapsing Star setup. In Mythic+ that is where Devourer was already playing Annihilator, so the buff makes an existing build slightly better — a real but small gain. In the raid it may finally push Annihilator past Fel-Scarred, which is new, but he immediately qualifies it: Devourer's raid performance has not been particularly good to begin with, so he expects an improvement \"but not that great\", and more competitiveness in keys than in the raid.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=237",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "note": "The Druid changes are, in his words, not particularly relevant to Restoration's healing in either bracket — and he notes that as interesting precisely because Restoration Druid is \"pretty strong right now in the raid\" without them. The read is about the spec's current standing, not about the tuning.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=308",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "note": "He reads the Evoker buffs against how poorly Augmentation has done across the expansion. The increases skew towards AoE, and his positive is structural rather than numeric: Augmentation had far more room to improve on the later, harder raid bosses, and being higher up on the last few bosses of a tier is worth more in general, so he calls the raid side good for it. He does not claim the buffs are large.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=322",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "note": "On keys he is flat: Augmentation has been doing poorly across the expansion and \"especially in Mythic+\", and \"the hopes of anything changing in Mythic+ for these two specs is pretty much nothing\".",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=352",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "note": "Same read as he gives Augmentation, and delivered jointly: the buffs skew AoE, Devastation has been poor across the expansion, but it had more room to do better on the later and harder raid bosses, which is where being higher up matters most — so he calls the raid side good for it without claiming the numbers are large.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=322",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "note": "On keys he groups it with Augmentation and writes it off: both have been poor across the expansion and especially in Mythic+, and \"the hopes of anything changing in Mythic+ for these two specs is pretty much nothing\".",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=352",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "note": "Marksmanship gets the larger AoE buff of the two — Volley and the Trick Shots ricochet — and he says it is needed: it has been slipping further down the overall Mythic+ damage results even in the better-populated previous week, and is \"currently hanging out towards the very bottom\". His conclusion is that the current state is so low that the buff \"won't really be changing much\", and that not much should be expected from it in keys.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=401",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "note": "The raid is \"a very different situation\": he says Marksmanship is better at single target and at lower-target-count cleave, which makes it \"way more valuable in the raid than they are in Mythic+\". He is careful that the buff itself is a weaker fit here — the Volley increase is not worth much in the raid — but the extra Trick Shots ricochet is fine on two to three targets and works on real add packs in the tier, so he reads more value from it in the raid than in keys.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=416",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "note": "He reads Survival's change as a straight profile shift — the primary-target bonus on Wildfire Bomb cut to pay for a flat AoE increase — and places the spec alongside Marksmanship as having slipped further down the Mythic+ results compared with Beast Mastery, near the bottom. As with Marksmanship he expects the AoE buff not to change much from that position.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=367",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "both",
+      "note": "He says it is hard to get excited about the Fire buffs because of how far behind Arcane the spec is. The Meteor and Flamestrike increases are AoE, and AoE is the less relevant axis in the raid where Fire is already low down; in Mythic+ it remains very far behind Arcane. His summary is that Fire is weak right now and this is a buff that will not have much impact.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=455",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "both",
+      "note": "Delivered jointly with Fire and with the same conclusion: the Frozen Orb, Comet Storm, Shatter and Glacial Assault increases are all splash AoE, which is the less relevant axis in the raid where the spec is already low, and in Mythic+ Frost stays very far behind Arcane. \"You are pretty weak right now\", so he does not expect the buff to have much impact.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=487",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "note": "He calls Mistweaver \"routinely the least valuable healer since the beginning of this season\" in raid terms, and reads the flat 5% all-healing increase plus the Vivify and Sheilun's Gift buffs as more relevant in the raid than in keys — single-target healing is worth more there — while still leaving the spec \"overall quite poor\".",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=524",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "note": "On keys he puts Mistweaver in a slightly better position than in the raid: it was the meta healer last season on the strength of Chi fistweaving, and although that has been nerfed repeatedly it has not been reduced to awful. The buff is flat and helps, but he reads it as worth less in Mythic+ than in the raid.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=537",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "note": "Windwalker is the change he rates most for keys. He tracks it from week one to now as having \"parked itself in the top third, maybe even top fourth\" of Mythic+ results on AoE damage and average score, with representation improving sharply as key level rises. Its two weaknesses are being the squishiest DPS and having very low priority and focused damage — and the buff is precisely single target (auto-attack, Dual Threat, Rising Sun Kick), so he reads it as hitting the real gap rather than padding the strength.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=568",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "note": "The raid is where he says Windwalker suffers more: its overall throughput comes from blowing up add packs, so it finds value on the add-heavy fights and does much worse on the pure single-target ones. He reads the single-target buff as good for it on exactly those fights, without claiming it changes the spec's raid standing.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=634",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "note": "He reads the Protection Paladin damage buff as close to irrelevant: damage is not where a tank's problem lies, and in this case its main issue is squishiness, which the pass does not touch. He allows that the spec was not doing much damage and that the buff is therefore fine, but says it is \"not really going to be amounting to much\".",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=723",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "note": "He calls the Discipline atonement buff \"the biggest buff of the season\" and works out why it is larger than it reads: Discipline players in keys had abandoned Voidweaver for Oracle precisely because atonement was too weak, so a 40% atonement increase both raises the healing and restores the hero talent built around it, compounding to something like a 20-25% healing increase in Mythic+. He then argues the other side at length — Discipline is not doing well now, sits about 300 average score behind Holy Paladin with its best key two levels lower and roughly an eighth of the players, and raw HPS is not the binding constraint in keys anyway — so his conclusion is a genuine question mark, \"a long climb\" and \"still a very long shot\", with the upside that it could potentially be an S-tier spec.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=793",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "note": "His Holy Paladin read is the counterpart to the Discipline one: it is getting by right now by being more offensive, playing Lightsmith over Herald of the Sun, with stronger single-target healing and absorbs. But he repeats a standing view that its weakness appears at very high key levels, where consistent HPS requirements may outrun Lightsmith and force a switch back to Herald that costs what Lightsmith was good at — which is the niche he thinks a buffed Discipline might take.",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=930",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-23",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "note": "He reads the Shadow changes as a large-looking set that amounts to a single-target buff, and compares it directly to Windwalker's: a spec that was weaker in the raid and weaker in single target getting exactly that fixed. He calls the paired AoE cut odd, because Shadow's AoE was nowhere near the level that justified compensation, and concludes that Shadow should do better in the raid on the stronger single target. (He adds that in Mythic+ it was never that high to begin with.)",
+      "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
+      "url": "https://youtu.be/mYt-nBOsKus?t=983",
       "superseded": false
     }
   ]
