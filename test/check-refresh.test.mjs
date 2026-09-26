@@ -802,6 +802,23 @@ test("label-flip gate: the real constants are well-formed and today's state is i
   }
 });
 
+test("heartbeat: every pipeline and owner-deadline key reds the run every day it persists", async () => {
+  /* freshness.yml colours the run red on a NEW key, and every day only for keys matching
+     PIPELINE_KEYS. A dated owner gate missing from that pattern would red once, then pass
+     with a warning while its deadline stayed missed. Nothing tied the two files together
+     until 2026-09-26, when live-patch-label arrived after the pattern was written. A new
+     one-shot gate in checkFreshness belongs in this list and in PIPELINE_KEYS. */
+  const yml = await readFile(new URL("../.github/workflows/freshness.yml", import.meta.url), "utf8");
+  const m = yml.match(/^\s*PIPELINE_KEYS:\s*"([^"]+)"/m);
+  assert.ok(m, "freshness.yml no longer declares PIPELINE_KEYS as a quoted env value");
+  const pipeline = new RegExp(m[1]);
+  for (const key of ["run-age", "snapshot-phase", "min-sources-floor", LABEL_KEY]) {
+    assert.ok(pipeline.test(key), `PIPELINE_KEYS ${m[1]} does not match "${key}"`);
+  }
+  // Anchored: a source key that merely contains one of these words stays a news-only key.
+  assert.ok(!pipeline.test(`x-${LABEL_KEY}`) && !pipeline.test("run-age-x"), `PIPELINE_KEYS ${m[1]} is not anchored`);
+});
+
 /* ---------- the published-date gate (docs/published-gate-scope.md, 2026-08-04) ---------- */
 
 const pubConfig = { requirements: [

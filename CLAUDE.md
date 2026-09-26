@@ -1512,8 +1512,8 @@ problems + weekly" — a failed scheduled run is what emails the owner, and red 
 stale day hid a new problem inside an already-red signal). The run fails only when:
 a fingerprint key is NEW (absent from the issue's previous fingerprint; no readable
 previous fingerprint counts every key as new); a pipeline key is present (`run-age`,
-which also annotates `NIGHTLY MISSED`, `snapshot-phase`, `min-sources-floor` — red every
-day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
+which also annotates `NIGHTLY MISSED`, `snapshot-phase`, `min-sources-floor`,
+`live-patch-label` — red every day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
 fingerprint — fail closed); or it is Monday (UTC) and any key outside the workflow's
 single `ACCEPTED_KEYS` pattern remains. Accepted: every `archon-*` key and
 `wcl-live-raid`/`wcl-live-mplus`; `wowmeta` deliberately is not. Otherwise a stale run
