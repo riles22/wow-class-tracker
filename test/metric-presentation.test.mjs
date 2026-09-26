@@ -31,9 +31,9 @@ test("leaderboard samples visibly disclose scope, repeated players, log dates, f
 });
 
 test("a reviewed partition shows its WCL name for its own zone only; an unknown id stays a number", () => {
-  const named = new Function("SOURCES", "META", "PHASE", "esc", "eraOk", "metricEra", "seasonChip", "DATA", `${functions}; return metricsHTML;`)(
+  const named = new Function("SOURCES", "META", "PHASE", "esc", "eraOk", "metricEra", "seasonChip", "seasonNameOf", "DATA", `${functions}; return metricsHTML;`)(
     [{ id: "warcraftlogs", name: "Warcraft Logs" }], { wclPartitions: [{ zoneId: 55, id: 2, name: "<b>Fixture</b>" }, { zoneId: 53, id: 3, name: "Other zone" }] },
-    { liveLabel: "live patch" }, esc, () => true, m => m.era ?? "live", () => "", { wclCoverage: null });
+    { liveLabel: "live patch" }, esc, () => true, m => m.era ?? "live", () => "", () => null, { wclCoverage: null });
   const visible = html => html.replace(/<[^>]*>/g, " ");
   assert.match(visible(named({ role: "DPS", metrics: [metric()] })), /entries per spec; partition “&lt;b&gt;Fixture&lt;\/b&gt;” bests/);
   const other = metric(); other.sample.partition = 3;

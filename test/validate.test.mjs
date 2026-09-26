@@ -1155,7 +1155,7 @@ test("ptr-builds: patch-notes must record a patch no newer than the displayed li
   const early = errs({ ...notes, patch: newer });
   assert.ok(early.some(e => e.includes(`"${newer}" is newer than the displayed live patch "${live}"`)), early.join("\n"));
   assert.ok(early.some(e => e.includes("run report")));
-  // a later livePatch display label moves the ceiling; read defensively, absent on this branch
+  // a set livePatch display label (null until 12.1.5 ships) moves the ceiling
   const had = Object.prototype.hasOwnProperty.call(PHASES, "livePatch"), before = PHASES.livePatch;
   PHASES.livePatch = { label: newer };
   try {
