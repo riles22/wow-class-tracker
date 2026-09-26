@@ -2162,3 +2162,165 @@ ui("official previews keep their attribution and not-live label in mobile spec d
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth), 390);
   }
 });
+
+/* Build-feed lanes follow REALM, not kind (2026-09-26, 12.1.5 plan step 4). Kind describes
+   the citation, so placing by it filed the 07-16 PTR hotfix round under the live heading and
+   the 08-15 live "Class Tuning Incoming" post under "PTR development notes". Real data, real
+   drawer: both entries are located by their own fresh-item id and must sit under the right
+   lane heading. Appended at the end, like every invariant added since the NEW-badge pair. */
+ui("build-feed lanes: the 07-16 PTR hotfix sits in the PTR lane and the 08-15 live tuning post in the live lane", async page => {
+  const data = payload();
+  const phases = data.meta.phases;
+  const seasonName = `Season ${(phases.seasonOrder ?? []).indexOf(phases.liveSeason) + 1}`;
+  const has = (s, date, kind) => (s.buildChanges ?? []).findIndex(b => b.date === date && (b.kind ?? "build") === kind);
+  const index = data.specs.findIndex(s => has(s, "2026-07-16", "hotfix") >= 0 && has(s, "2026-08-15", "build") >= 0);
+  assert.ok(index >= 0, "fixture must hold a spec carrying both the 07-16 hotfix and the 08-15 tuning post — if none exists the invariant is vacuous");
+  const target = data.specs[index];
+  const ptrIdx = has(target, "2026-07-16", "hotfix"), liveIdx = has(target, "2026-08-15", "build");
+  assert.equal(target.buildChanges[ptrIdx].realm, "ptr", "the payload resolves the 07-16 hotfix to the PTR realm");
+  assert.equal(target.buildChanges[liveIdx].realm, "live", "the payload resolves the 08-15 post to the live realm");
+
+  // A DOM click, not a pointer click: at desktop width rows are content-visibility:auto, and
+  // in WebKit the layout shifts after scrollIntoViewIfNeeded so a pointer click landed on
+  // #matrix instead of the row (5 of 8 local WebKit runs timed out, 2026-09-26). This
+  // invariant is about lane placement, not about hit-testing; the neighbouring
+  // between-cycles invariant opens its drawer the same way.
+  await page.evaluate(index => document.querySelector(`.row[data-idx="${index}"] .spec-txt`).click(), index);
+  await page.waitForFunction(index => document.querySelector(`.row[data-idx="${index}"]`)?.classList.contains("open"), index, { timeout: 5000 });
+  const seen = await page.evaluate(([index, ptrIdx, liveIdx]) => {
+    const s = SPECS[index];
+    const laneOf = i => {
+      const el = document.getElementById(freshTargetId(s, "tuning", i));
+      const sec = el?.closest(".d-sec");
+      return sec ? { heading: sec.querySelector(".d-h")?.textContent.trim() ?? "", live: sec.classList.contains("shipsec"),
+        // the COLLAPSED accordion line, which foldDrawerColumn cuts at the first " ·"/" —"/" ("
+        summary: sec.closest("details.dfold")?.querySelector(":scope > summary")?.textContent.trim() ?? "" } : null;
+    };
+    const drawer = document.querySelector(`.row[data-idx="${index}"] .drawer`);
+    const metricHeads = [...(drawer?.querySelectorAll(".metrics > .d-h, .metrics .d-h") ?? [])]
+      .map(h => h.textContent.trim()).filter(t => t.startsWith("Current numbers"));
+    return { ptr: laneOf(ptrIdx), live: laneOf(liveIdx), metricHeads,
+      stamp: document.getElementById("stamp-snapshot")?.textContent ?? "",
+      footer: document.getElementById("officialnotes")?.textContent ?? "" };
+  }, [index, ptrIdx, liveIdx]);
+  assert.ok(seen.ptr, "the 07-16 hotfix entry must render in the drawer");
+  assert.ok(seen.live, "the 08-15 tuning entry must render in the drawer");
+  assert.match(seen.ptr.heading, /^How it got here — PTR development notes/, `07-16 PTR hotfix sits under "${seen.ptr.heading}"`);
+  assert.equal(seen.ptr.live, false);
+  assert.match(seen.live.heading, /^Live .* tuning/, `08-15 live tuning post sits under "${seen.live.heading}"`);
+  assert.ok(seen.live.heading.startsWith(`Live ${seasonName} tuning`), `the live lane names the season: "${seen.live.heading}"`);
+  assert.ok(seen.live.heading.includes("class tuning"), "the live lane's chip says it holds class tuning, not only hotfixes");
+  // The collapsed summary must name every kind the lane holds. A draft of this lane joined
+  // its chip with " · ", the fold cut the summary there, and 37 of 40 drawers read "Live
+  // Season 2 tuning class tuning" with the hotfixes dropped (measured 2026-09-26).
+  const liveKinds = new Set(target.buildChanges.filter(b => b.kind !== "patch-notes" && b.realm === "live")
+    .map(b => b.kind === "hotfix" ? "hotfixes" : "class tuning"));
+  assert.ok(seen.live.summary.startsWith(`Live ${seasonName} tuning`), `live lane summary: "${seen.live.summary}"`);
+  for (const k of liveKinds) assert.ok(seen.live.summary.includes(k), `the collapsed live lane summary names "${k}": "${seen.live.summary}"`);
+  assert.doesNotMatch(seen.live.summary, /tuning class tuning/, `the summary must not stutter: "${seen.live.summary}"`);
+  // Metric headings name the live SEASON, never the patch label.
+  for (const h of seen.metricHeads) assert.match(h, new RegExp(`^Current numbers · (Raid|M\\+) \\(${seasonName}\\)$`), h);
+  // Masthead stamp follows the newest entry's realm.
+  const latest = data.meta.latestBuildKind, realm = data.meta.latestBuildRealm;
+  assert.ok(["live", "ptr"].includes(realm), "the payload states the newest feed entry's realm");
+  if (latest === "hotfix") assert.match(seen.stamp, realm === "live" ? /Latest live hotfixes:/ : /Latest PTR hotfixes:/);
+  else if (latest !== "patch-notes") assert.match(seen.stamp, realm === "live" ? /Latest class tuning:/ : /Latest PTR build:/);
+  // The compilation-mode live thread is named for the expansion, not its patch identity field.
+  const compilation = (data.officialNotes?.sources ?? []).filter(s => s.mode === "compilation");
+  for (const s of compilation) {
+    assert.ok(seen.footer.includes("Midnight live hotfixes"), "compilation source renders as Midnight live hotfixes");
+    assert.ok(!seen.footer.includes(`${s.patch} live hotfixes`), `compilation source must not render as "${s.patch} live hotfixes"`);
+  }
+});
+
+/* One "Shipped in {patch}" block per patch, newest patch first; every block but the newest
+   says the newer notes supersede it. Fixture-driven (a second patch's notes cannot exist in
+   real data until that patch is live), with PHASE.livePatch set the way a later patch's
+   display label would be. Also pins the NEW badge's realm wording. */
+ui("build-feed: two patches' notes render as ordered Shipped blocks and NEW labels by realm", async page => {
+  const seen = await page.evaluate(() => {
+    Date.now = () => Date.parse("2030-01-15T12:00:00Z");
+    PHASE.livePatch = { label: "12.1.5" };
+    const s = SPECS[0];
+    const lines = t => [{ text: t, classWide: false }];
+    // Older patch FIRST in the array, so the order below is the renderer's, not the feed's.
+    s.buildChanges = [
+      { kind: "patch-notes", patch: "12.1", date: "2026-08-06", forumUrl: "https://example.com/notes-121", lines: lines("Older patch change") },
+      { kind: "build", realm: "ptr", date: "2029-12-01", forumUrl: "https://example.com/ptr", lines: lines("PTR build change") },
+      { kind: "patch-notes", patch: "12.1.5", date: "2030-01-10", forumUrl: "https://example.com/notes-1215", lines: lines("Newer patch change") },
+      { kind: "hotfix", realm: "live", date: "2030-01-12", wowheadUrl: "https://www.wowhead.com/news=1", lines: lines("Live hotfix change") },
+    ];
+    const box = document.createElement("div");
+    box.innerHTML = buildChangesHTML(s);
+    const secs = [...box.querySelectorAll(":scope > .d-sec")].map(sec => ({
+      heading: sec.querySelector(".d-h")?.textContent.trim() ?? "",
+      note: [...sec.querySelectorAll(".mnote")].map(n => n.textContent).join(" "),
+      text: sec.textContent,
+    }));
+    const label = entries => { s.buildChanges = entries; return newInfoFor(s)?.label ?? null; };
+    const one = e => [{ ...e, date: "2030-01-15", forumUrl: "https://example.com/x", lines: lines("x") }];
+    const labels = {
+      liveBuild: label(one({ kind: "build", realm: "live" })),
+      ptrBuild: label(one({ kind: "build", realm: "ptr" })),
+      liveHotfix: label(one({ kind: "hotfix", realm: "live" })),
+      ptrHotfix: label(one({ kind: "hotfix", realm: "ptr" })),
+      notes: label(one({ kind: "patch-notes", patch: "12.1.5" })),
+      defaultBuild: label(one({ kind: "build" })),
+    };
+    delete PHASE.livePatch;
+    return { secs, labels };
+  });
+  const heads = seen.secs.map(s => s.heading);
+  assert.equal(heads.length, 4, heads.join(" | "));
+  assert.match(heads[0], /^Live .* tuning/);
+  assert.match(heads[1], /^Shipped in 12\.1\.5\b/);
+  assert.match(heads[2], /^Shipped in 12\.1\b(?!\.)/);
+  assert.match(heads[3], /^How it got here — PTR development notes/);
+  assert.ok(seen.secs[1].text.includes("Newer patch change") && !seen.secs[1].text.includes("Older patch change"));
+  assert.ok(seen.secs[2].text.includes("Older patch change") && !seen.secs[2].text.includes("Newer patch change"));
+  const SUPERSEDED = "superseded by the newer patch notes where they touch the same values";
+  assert.ok(seen.secs[2].note.includes(SUPERSEDED), "the older patch's block carries the supersession note");
+  assert.ok(!seen.secs[1].note.includes(SUPERSEDED), "the newest patch's block is not superseded by anything");
+  assert.ok(seen.secs[3].note.includes("The outlook tally counts these lines"), "the tally wording is patch-neutral");
+  assert.ok(!seen.secs.some(s => /12\.1 outlook tally/.test(s.note)));
+  assert.deepEqual(seen.labels, {
+    liveBuild: "live class tuning", ptrBuild: "PTR development notes",
+    liveHotfix: "live hotfix", ptrHotfix: "PTR hotfix",
+    notes: "official 12.1.5 patch notes", defaultBuild: "PTR development notes",
+  });
+});
+
+/* The masthead stamp reads the newest entry's REALM, with the phase only as the fallback
+   for a payload without one. With today's feed (a live hotfix, no PTR cycle) the realm and
+   the phase fallback give the same answer, so the lanes invariant's stamp check passed with
+   the realm read deleted (repair-round mutation, 2026-09-26). Driving buildStampLabel with
+   the phase set AGAINST the realm is what tells the two rules apart. */
+ui("the masthead stamp follows the newest feed entry's realm, not the phase", async page => {
+  const seen = await page.evaluate(() => {
+    const was = PHASE.ptr;
+    const run = (ptr, kind, realm) => { PHASE.ptr = ptr; try { return buildStampLabel(kind, realm); } finally { PHASE.ptr = was; } };
+    const cycle = { marker: "test-ptr", label: "Test PTR" };
+    return {
+      rendered: document.getElementById("stamp-snapshot")?.textContent ?? "",
+      current: buildStampLabel(META.latestBuildKind, META.latestBuildRealm),
+      // realm against the phase, both directions
+      ptrHotfixBetweenCycles: run(null, "hotfix", "ptr"),
+      liveTuningMidCycle: run(cycle, "build", "live"),
+      liveHotfixMidCycle: run(cycle, "hotfix", "live"),
+      ptrBuildBetweenCycles: run(null, "build", "ptr"),
+      // the phase decides only when the payload carries no realm
+      noRealmMidCycle: run(cycle, "build", null),
+      noRealmBetweenCycles: run(null, "build", null),
+      notes: run(cycle, "patch-notes", "live"),
+    };
+  });
+  const data = payload();
+  if (data.meta.latestPtrBuild) assert.ok(seen.rendered.includes(`${seen.current} ${data.meta.latestPtrBuild}`), `stamp: "${seen.rendered}"`);
+  assert.equal(seen.ptrHotfixBetweenCycles, "Latest PTR hotfixes:");
+  assert.equal(seen.liveTuningMidCycle, "Latest class tuning:");
+  assert.equal(seen.liveHotfixMidCycle, "Latest live hotfixes:");
+  assert.equal(seen.ptrBuildBetweenCycles, "Latest PTR build:");
+  assert.equal(seen.noRealmMidCycle, "Latest PTR build:");
+  assert.equal(seen.noRealmBetweenCycles, "Latest class tuning:");
+  assert.equal(seen.notes, "Launch notes:");
+});

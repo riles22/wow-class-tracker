@@ -1917,11 +1917,13 @@ function metricsHTML(s){
   // gets the muted "stale" treatment so a mid-outage 07-09 median reads as visibly old.
   const boxLatest = list.map(m=>m.asOf).filter(Boolean).sort().slice(-1)[0] || null;
   const staleGap = (from,to) => Math.round((Date.parse(to)-Date.parse(from))/86400000);
-  /* The section heading stamps liveLabel over every era:"live" row, but through a season
-     transition the box MIXES prior-season cuts (frozen WCL zones, held-back ceilings)
-     with genuine new-season rows under that one banner (2026-08-19 audit, B2). Every live
-     row now states its own season in visible text — see seasonChip(); the prior-season
-     ones fade back to muted by themselves as each series refreshes. */
+  /* The section heading names the live SEASON over every era:"live" row (2026-09-26; it
+     stamped the liveLabel patch until then, which reads wrong once a second patch of the
+     season is live — the same patch-label-on-a-season-test trap seasonNameOf records).
+     Through a season transition the box still MIXES prior-season cuts (frozen WCL zones,
+     held-back ceilings) with genuine new-season rows under that one banner (2026-08-19
+     audit, B2), so every live row also states its own season in visible text — see
+     seasonChip(); the prior-season ones fade back to muted as each series refreshes. */
   const row = m => {
     const leaderboard = m.sample?.kind === "leaderboard-entries";
     const src = SOURCES.find(x=>x.id===m.source);
@@ -1942,11 +1944,12 @@ function metricsHTML(s){
   };
   const section = (label, items) => items.length ? `<p class="d-h">${label}</p><div class="setbox">${items.map(row).join("")}</div>` : "";
   const live = m => metricEra(m)==="live", ptr = m => metricEra(m)==="ptr";
+  const liveSeasonName = seasonNameOf(PHASE.liveSeason) ?? PHASE.liveLabel;
   const historicalWcl = m=>live(m) && m.source==="warcraftlogs" && m.sample?.kind!=="leaderboard-entries";
   return `<div class="metrics">
     ${list.some(m=>m.sample?.kind === "leaderboard-entries")?`<p class="mnote">${leaderboardExplanation()}</p>`:""}
-    ${section(`Current numbers · Raid (${PHASE.liveLabel})`, list.filter(m=>m.bracket==="raid" && live(m) && !historicalWcl(m)))}
-    ${section(`Current numbers · M+ (${PHASE.liveLabel})`, list.filter(m=>m.bracket==="mplus" && live(m) && !historicalWcl(m)))}
+    ${section(`Current numbers · Raid (${esc(liveSeasonName)})`, list.filter(m=>m.bracket==="raid" && live(m) && !historicalWcl(m)))}
+    ${section(`Current numbers · M+ (${esc(liveSeasonName)})`, list.filter(m=>m.bracket==="mplus" && live(m) && !historicalWcl(m)))}
     ${section("Historical WCL aggregates · retained archive",list.filter(historicalWcl))}
     ${section("PTR numbers · Raid (12.1 testing)", list.filter(m=>m.bracket==="raid" && ptr(m)))}
     ${section("PTR numbers · M+ (12.1 testing)", list.filter(m=>m.bracket==="mplus" && ptr(m)))}
@@ -2063,7 +2066,12 @@ function drawerHTML(s){
      on a toggle that no longer exists made them permanently invisible while the masthead
      promised "patch changes" on every row. Deliberately NOT applied to the ptr writeup
      lane (the decided flip consequence — see the baseline-view branch below) or to
-     ptrDummy (genuinely PTR data, sunset with the cycle). */
+     ptrDummy (genuinely PTR data, sunset with the cycle).
+     Known gap since realm placement (2026-09-26), dormant while PHASE.ptr is null: the
+     feed can now hold LIVE-realm entries during a cycle too, and this gate still hides the
+     whole feed — live lane and Shipped blocks included — in the live-only view. Whether
+     live-realm entries should escape it is an owner question, not a silent change; the
+     between-cycles invariant pins the current design. */
   const showCycle = showPtr || !PHASE.ptr;
   // Hover-only info (outlook basis, movement history) restated as text so touch and
   // keyboard users can reach what mouse users see in tooltips. Additive.
@@ -2121,35 +2129,57 @@ function buildEntryHTML(b, s){
   return `<div class="fresh-item" id="${freshTargetId(s,"tuning",s.buildChanges.indexOf(b))}" tabindex="-1" role="group" aria-label="Official ${esc(b.kind||"build")} notes · ${esc(b.date)}"><p class="d-h" style="margin:10px 0 4px;text-transform:none;letter-spacing:0">${esc(fmtDate(b.date))}${b.kind==="hotfix"?` · <span class="cwchip">hotfix</span>`:""}${b.forumUrl?` · <a href="${esc(safeHref(b.forumUrl))}" target="_blank" rel="noopener">${b.kind==="patch-notes"?"patch notes":`forum post${b.forumPostNumber!=null?` #${esc(String(b.forumPostNumber))}`:""}`}</a>`:b.wowheadUrl?` · <a href="${esc(safeHref(b.wowheadUrl))}" target="_blank" rel="noopener">${b.kind==="patch-notes"?"patch notes":"hotfix round-up"}</a>`:""}</p>
     <ul class="d-list">${b.lines.map(l=>`<li${l.classWide?' class="cw"':''}>${l.classWide?'<span class="cwchip">class-wide</span>':''}${esc(l.text)}</li>`).join("")}</ul></div>`;
 }
+/* Where an entry happened. The payload resolves it (render.mjs buildRealmOf: an explicit
+   `realm`, else the kind default — build → ptr, anything else → live); this mirror only
+   serves entries assembled in the browser without one. */
+const realmOf = b => b.realm ?? ((b.kind ?? "build") === "build" ? "ptr" : "live");
+/* Dotted patch versions compared numerically ("12.1" < "12.1.5" < "12.10") — the client
+   copy of render.mjs comparePatchVersions, used only to order the Shipped blocks. */
+const patchCmp = (a, b) => { const x = String(a).split(".").map(Number), y = String(b).split(".").map(Number);
+  for(let i=0;i<Math.max(x.length,y.length);i++){ const d=(x[i]??0)-(y[i]??0); if(d) return d<0?-1:1; } return 0; };
 function buildChangesHTML(s){
   const bc = s.buildChanges || [];
   if(!bc.length) return "";
-  /* Three lanes, newest authority first (2026-08-19 audit, A1). Live hotfix rounds used
-     to fall into the "PTR development notes" bucket — a live-realm event filed under a
-     test realm — and post-launch they are the newest word on current tuning, so they
-     lead. The patch label is the CYCLE's patch: the ptr label during a cycle, the live
-     label between cycles (pre-flip this heading hardcoded "12.1" — same value, now
-     derived so the 12.2 cycle inherits it). */
-  const cyclePatch = PHASE.ptr?.label ?? PHASE.liveLabel;
+  /* Three lanes, newest authority first (2026-08-19 audit, A1; realm-placed 2026-09-26).
+     Lanes follow the entry's REALM, not its kind: kind describes the citation, so placing
+     by it filed the 07-16/07-31 PTR hotfixes under the live heading and the live "Class
+     Tuning Incoming" posts (kind build) under "PTR development notes". The live heading
+     names the SEASON (seasonNameOf) — it holds every live patch of that season, so a patch
+     number there would be wrong for part of it. Patch notes are the one lane still keyed
+     on kind: each patch's notes get their own "Shipped in {patch}" block, newest first. */
+  const liveName = seasonNameOf(PHASE.liveSeason) ?? PHASE.liveLabel;
   const ships = bc.filter(b=>b.kind==="patch-notes");
-  const hotfixes = bc.filter(b=>b.kind==="hotfix");
-  const history = bc.filter(b=>b.kind!=="patch-notes" && b.kind!=="hotfix");
-  const hotfixBlock = hotfixes.length ? `<div class="d-sec shipsec">
-      <p class="d-h">Live ${esc(cyclePatch)} tuning <span class="shipchip">hotfixes</span></p>
-      ${hotfixes.map(b=>buildEntryHTML(b,s)).join("")}
-      <p class="mnote">Live-realm hotfix rounds — the newest word on current tuning. Where these differ from the ${ships.length?"launch notes":"builds"} below, these are what is live.</p>
+  const live = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)==="live");
+  const history = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)!=="live");
+  /* Joined with " and ", never " · ": foldDrawerColumn cuts every collapsed summary at the
+     first " ·"/" —"/" (", so a " · " join kept only the first kind and dropped the rest.
+     Hotfixes come first, so a lane holding both reads "Live … tuning hotfixes and class
+     tuning". A lane holding ONLY class-tuning posts still reads "Live … tuning class tuning"
+     in its plain-text summary — the expanded heading shows the kind as a chip, the summary
+     cannot. */
+  const liveKinds = ["hotfixes","class tuning"].filter(k => live.some(b => (b.kind==="hotfix"?"hotfixes":"class tuning")===k));
+  const liveBlock = live.length ? `<div class="d-sec shipsec">
+      <p class="d-h">Live ${esc(liveName)} tuning <span class="shipchip">${esc(liveKinds.join(" and "))}</span></p>
+      ${live.map(b=>buildEntryHTML(b,s)).join("")}
+      <p class="mnote">Live-realm hotfix rounds and class-tuning passes, newest first — the newest word on current tuning.${ships.length?" Where one of these and a patch's notes below touch the same value, whichever took effect later is what is live.":""}</p>
     </div>` : "";
-  const shipBlock = ships.length ? `<div class="d-sec shipsec">
-      <p class="d-h">${PHASE.ptr?"Shipping":"Shipped"} in ${esc(cyclePatch)} <span class="shipchip">official patch notes</span></p>
-      ${ships.map(b=>buildEntryHTML(b,s)).join("")}
-      <p class="mnote">Blizzard's consolidated launch notes — the authoritative statement of what ${PHASE.ptr?"goes":"went"} live at launch${hotfixes.length?" (live hotfixes above supersede these where they touch the same values)":""}. Where these differ from a PTR build below, these are what ${PHASE.ptr?"ships":"shipped"}.</p>
-    </div>` : "";
+  // One block per patch, newest patch first; a notes entry without a recorded patch (only
+  // possible for an entry built in the browser — validation requires it) reads as liveLabel.
+  const patchOf = b => b.patch ?? PHASE.liveLabel;
+  const patches = [...new Set(ships.map(patchOf))].sort((a,b)=>-patchCmp(a,b));
+  const shipBlocks = patches.map((patch, i) => `<div class="d-sec shipsec">
+      <p class="d-h">Shipped in ${esc(patch)} <span class="shipchip">official patch notes</span></p>
+      ${ships.filter(b=>patchOf(b)===patch).map(b=>buildEntryHTML(b,s)).join("")}
+      <p class="mnote">${i===0
+        ? `Blizzard's consolidated launch notes for ${esc(patch)} — the authoritative statement of what went live at launch${live.length?" (later live tuning above supersedes these where it touches the same values)":""}. Where these differ from a PTR build below, these are what shipped.`
+        : `Blizzard's consolidated launch notes for ${esc(patch)} — superseded by the newer patch notes where they touch the same values.`}</p>
+    </div>`).join("");
   const histBlock = history.length ? `<div class="d-sec">
       <p class="d-h">How it got here — PTR development notes, by build</p>
       ${history.map(b=>buildEntryHTML(b,s)).join("")}
-      <p class="mnote">Verbatim PTR notes in date order. These are the development path${ships.length?", and their figures are intermediate — superseded by the patch notes above":", not a statement of final values"}. The 12.1 outlook tally counts these lines, not the consolidated notes.</p>
+      <p class="mnote">Verbatim PTR notes in date order. These are the development path${ships.length?", and their figures are intermediate — superseded by the patch notes above":", not a statement of final values"}. The outlook tally counts these lines${live.length?" and the live entries above":""}, not the consolidated notes.</p>
     </div>` : "";
-  return hotfixBlock + shipBlock + histBlock;
+  return liveBlock + shipBlocks + histBlock;
 }
 
 /* "New" freshness cue — is there fresh info for this spec within the last few days of the
@@ -2175,17 +2205,25 @@ function newInfoFor(s){
     consider(t.date, `${t.creator} take`, "take", freshTargetId(s,"take",CREATOR_TAKES.indexOf(t)), [t.url,t.creator,t.claim,t.patchContext]);
   for(const [index,b] of (s.buildChanges||[]).entries()){
     if(!b.lines?.length) continue;
-    const label = {hotfix:"live hotfix", "patch-notes":"official patch notes", build:"PTR development notes"}[b.kind] || "tuning notes";
+    // Labelled by REALM (2026-09-26) — the client copy of render.mjs feedEntryLabel. By kind
+    // alone a live "Class Tuning Incoming" pass announced itself as "PTR development notes".
+    const kind = b.kind ?? "build", onLive = realmOf(b) === "live";
+    const label = kind === "patch-notes" ? (b.patch ? `official ${b.patch} patch notes` : "official patch notes")
+      : kind === "hotfix" ? (onLive ? "live hotfix" : "PTR hotfix")
+      : (onLive ? "live class tuning" : "PTR development notes");
     consider(b.date, label, "tuning", freshTargetId(s,"tuning",index), [b.forumUrl,b.wowheadUrl,b.forumPostNumber,b.kind,b.lines]);
   }
   return best;
 }
 function newBadgeHTML(s){
   /* Era-gated ONLY while a PTR cycle is running (audit 2026-08-14, amended 2026-08-19
-     audit A3). During a cycle both of newInfoFor's inputs — creator takes and the build
-     feed — are next-patch content, so a live-only view rightly hides the badge. Between
-     cycles the same inputs are LIVE-season content arriving daily (hotfix rounds, fresh
-     takes), and the permanent live-pin was silencing the freshness cue forever. */
+     audit A3). The gate was written when, during a cycle, both of newInfoFor's inputs —
+     creator takes and the build feed — were next-patch content, so a live-only view hid
+     the badge. Between cycles the same inputs are LIVE-season content arriving daily
+     (hotfix rounds, fresh takes), and the permanent live-pin was silencing the freshness
+     cue forever. Since realm placement (2026-09-26) the feed can also carry live-realm
+     entries DURING a cycle, which this gate still hides in the live-only view — the same
+     dormant, owner-level question as drawerHTML's showCycle gate. */
   if(state.era === "live" && PHASE.ptr) return "";
   const ni = newInfoFor(s);
   return ni ? `<button type="button" class="newbadge" data-fresh-target="${ni.targetId}" aria-controls="drawer-${slugOf(s)}" title="Show new — ${esc(ni.label)} · ${esc(ni.date)}" aria-label="Show new information for ${esc(s.spec)} ${esc(s.class)}: ${esc(ni.label)} · ${esc(ni.date)}">NEW</button>` : "";
@@ -2882,16 +2920,26 @@ function syncSrcControls(){
    No "Sources:" list here — the interactive source toggle directly below IS the live
    list; no "Tracked:" either — the legend count carries it and doubles as filter
    feedback. The stamp keeps only what nothing else shows: the data freshness dates. */
+/* Label for the newest feed entry. It follows the entry's KIND — post-launch that entry is
+   a live-realm hotfix round-up, and "Latest PTR build: <live date>" was a liveness mislabel
+   (2026-08-19 audit, B1) — and its REALM. The kind vocabulary has no value for a
+   post-launch tuning post, so a live class-tuning announcement is kind "build" and used to
+   stamp "Latest PTR build:" four days after launch — the exact mislabel render.mjs's
+   residue note exists to catch (audit 2026-08-22); the phase decided until 2026-09-26.
+   Since then the payload's resolved realm decides (META.latestBuildRealm: the entry's
+   recorded realm, else the kind default — the same resolution the drawer lanes use): kind
+   alone called a PTR hotfix round "live hotfixes", and the phase fallback would call a live
+   tuning pass logged mid-cycle a "PTR build". The phase remains the fallback only for a
+   payload that predates the realm field. A named function so the invariants can drive it
+   with a realm the real feed does not currently hold. */
+function buildStampLabel(kind, realmOrNull){
+  const realm = realmOrNull ?? (PHASE.ptr ? "ptr" : "live");
+  return kind === "patch-notes" ? "Launch notes:"
+    : kind === "hotfix" ? (realm === "live" ? "Latest live hotfixes:" : "Latest PTR hotfixes:")
+    : (realm === "live" ? "Latest class tuning:" : "Latest PTR build:");
+}
 if(META.latestSnapshot){
-  // Label follows the newest feed entry's KIND — post-launch that entry is a live-realm
-  // hotfix round-up, and "Latest PTR build: <live date>" was a liveness mislabel
-  // (2026-08-19 audit, B1).
-  /* The kind vocabulary has no value for a post-launch tuning post, so a live class-tuning
-     announcement falls back to kind "build" and used to stamp "Latest PTR build:" four days
-     after launch — the exact mislabel render.mjs's residue note exists to catch (audit
-     2026-08-22). Between cycles there IS no PTR, so the phase decides, not the kind. */
-  const buildLabel = { hotfix: "Latest live hotfixes:", "patch-notes": "Launch notes:" }[META.latestBuildKind]
-    || (PHASE.ptr ? "Latest PTR build:" : "Latest class tuning:");
+  const buildLabel = buildStampLabel(META.latestBuildKind, META.latestBuildRealm);
   document.getElementById('stamp-snapshot').innerHTML = `<b>Latest snapshot:</b> ${esc(META.latestSnapshot)}`
     + (META.latestPtrBuild ? ` <b style="margin-left:14px">${esc(buildLabel)}</b> ${esc(META.latestPtrBuild)}` : "");
 }
@@ -3133,6 +3181,12 @@ document.getElementById('buildfeed').insertAdjacentHTML('beforeend',
 
 /* A notes-only preview and revision queue remain separate from the live patch
    feed. Historical baseline exclusions are disclosed, never counted as applied. */
+/* A compilation-mode source is the expansion-wide live hotfix thread, which keeps
+   collecting rounds across every live patch — so it is named for the expansion, never
+   for its `patch` field (an identity field the ledger pins, not a display label; read as
+   a label it would call 12.1.5's hotfixes "12.1 live hotfixes"). Mirrors digest.mjs. */
+const noteSourceLabel = s => s.mode === "compilation" ? "Midnight live hotfixes"
+  : `${s.patch} ${s.era === "ptr" ? "PTR notes" : "live hotfixes"}`;
 {
   const el = document.getElementById('officialnotes');
   if(OFFICIAL_NOTES.sources.length){
@@ -3143,7 +3197,7 @@ document.getElementById('buildfeed').insertAdjacentHTML('beforeend',
     const unresolved = OFFICIAL_NOTES.unresolved;
     el.innerHTML = previewHTML + `<details class="feedfold"${unresolved.length?' open':''}><summary>Official-note review · ${unresolved.length} unresolved section${unresolved.length===1?'':'s'}</summary>
       <p class="mnote">${OFFICIAL_NOTES.applied ?? 0} applied sections; ${OFFICIAL_NOTES.irrelevant ?? 0} excluded sections, including the historical baseline. Tracking checks edits to older sections as well as newly dated notes.</p>
-      ${OFFICIAL_NOTES.sources.map(s=>`<p class="mnote"><a href="${esc(safeHref(s.url))}" target="_blank" rel="noopener">${esc(s.patch)} ${s.era==='ptr'?'PTR notes':'live hotfixes'}</a> · checked ${esc(s.checkedAt.slice(0,10))}</p>`).join('')}
+      ${OFFICIAL_NOTES.sources.map(s=>`<p class="mnote"><a href="${esc(safeHref(s.url))}" target="_blank" rel="noopener">${esc(noteSourceLabel(s))}</a> · checked ${esc(s.checkedAt.slice(0,10))}</p>`).join('')}
       ${unresolved.map(n=>`<p class="mnote"><a href="${esc(safeHref(n.url))}" target="_blank" rel="noopener">${esc(n.date)} · ${esc(n.class)}</a> — ${esc(n.reason)}</p>`).join('')}
       </details>`;
   }

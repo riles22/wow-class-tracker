@@ -382,6 +382,46 @@ export function classifyHighlight(h) {
    hero talent tree — and must not be read as class-wide. */
 const CLASS_WIDE = /\((?:class-wide|all specs)\)/;
 
+/* WHERE a feed entry happened, recorded rather than inferred (2026-09-26, 12.1.5 prep).
+   The drawer used to pick a lane from `kind` alone — hotfix → live, build → PTR — and kind
+   cannot answer the question: it describes the citation, not the realm. Six entries were
+   filed in the wrong lane that way, both directions: the 07-16 and 07-31 PTR hotfixes sat
+   under the live heading, and the four live "Class Tuning Incoming" posts of 08-15, 08-22,
+   08-28 and 09-18 (kind "build", because each has a citable forum post) sat under "PTR
+   development notes". `realm` is now an explicit field, required on new entries by
+   validate.mjs; those six carry it, and every older entry keeps the kind-based reading it
+   always had, which is right for each of them. This function IS that default — the
+   template's client-side realmOf mirrors it only for entries built in the browser. */
+export const BUILD_REALMS = Object.freeze(["live", "ptr"]);
+export function buildRealmOf(build) {
+  if (build?.realm != null) return build.realm;
+  return (build?.kind ?? "build") === "build" ? "ptr" : "live";
+}
+
+/* The reader-facing name of one feed entry, by kind and realm. The digest uses it; the
+   template's NEW badge (newInfoFor) carries a client-side copy of the same vocabulary. */
+export function feedEntryLabel(build) {
+  const kind = build?.kind ?? "build";
+  if (kind === "patch-notes") return build.patch ? `official ${build.patch} patch notes` : "official patch notes";
+  const live = buildRealmOf(build) === "live";
+  if (kind === "hotfix") return live ? "live hotfix" : "PTR hotfix";
+  return live ? "live class tuning" : "PTR development notes";
+}
+
+/* Dotted patch versions ("12.1", "12.1.5"), compared numerically segment by segment with
+   missing segments read as 0 — so "12.1" < "12.1.5" < "12.2", and "12.10" > "12.9", which
+   a string compare gets wrong. Callers check PATCH_VERSION first; a malformed value is
+   never ordered. */
+export const PATCH_VERSION = /^\d+(?:\.\d+)+$/;
+export function comparePatchVersions(a, b) {
+  const x = String(a).split(".").map(Number), y = String(b).split(".").map(Number);
+  for (let i = 0; i < Math.max(x.length, y.length); i++) {
+    const d = (x[i] ?? 0) - (y[i] ?? 0);
+    if (d) return d < 0 ? -1 : 1;
+  }
+  return 0;
+}
+
 export function specBuildChanges(spec, ptrBuilds) {
   const prefix = `${spec.spec} ${spec.class} `;
   const full = `${spec.spec} ${spec.class}`;
@@ -406,7 +446,10 @@ export function specBuildChanges(spec, ptrBuilds) {
       if (CLASS_WIDE.test(h) ? touchesSpec : namedHere) lines.push({ text: h, classWide: true });
     }
     if (lines.length) {
-      out.push({ date: b.date, kind: b.kind ?? "build", forumPostNumber: b.forumPostNumber ?? null,
+      // `realm` is resolved here (explicit, else the kind default) so the drawer places
+      // lanes from one rule; `patch` rides along only where recorded (patch-notes).
+      out.push({ date: b.date, kind: b.kind ?? "build", realm: buildRealmOf(b),
+        ...(b.patch != null ? { patch: b.patch } : {}), forumPostNumber: b.forumPostNumber ?? null,
         forumUrl: b.forumUrl ?? null, wowheadUrl: b.wowheadUrl ?? null, lines });
     }
   }
@@ -1947,6 +1990,9 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
      the liveness mislabel the flip runbook's residue sweep exists to catch (2026-08-19
      audit, B1). Default "build" keeps the old label for undated/legacy entries. */
   const latestBuildKind = ptrBuilds?.builds?.[0]?.kind ?? "build";
+  // …and its REALM (2026-09-26): kind alone cannot tell a live class-tuning post from a
+  // PTR build, which is why the stamp once had to fall back on the phase instead.
+  const latestBuildRealm = ptrBuilds?.builds?.[0] ? buildRealmOf(ptrBuilds.builds[0]) : null;
   // notes-feed pages track build posts, not page snapshots — stamp them from the feed
   const stampedSources = sources.map(source => source.kind !== "notes-feed" ? source : {
     ...source,
@@ -1971,6 +2017,7 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       latestSnapshot: latestSnapshot(sources),
       latestPtrBuild: latestBuild,
       latestBuildKind,
+      latestBuildRealm,
       movementSince: baseline?.date ?? null,
       /* WHICH LANES THE BASELINE CAN NARRATE (2026-08-15). "No arrows" has two completely
          different meanings and the client could not tell them apart: either nothing moved —
@@ -1986,9 +2033,11 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
         ranks: ranksComparableWith(baseline),
         projection: projComparableWith(baseline),
       } : null,
-      /* livePatch is build-time display only (build.mjs eraTokensFor: chip, phone chip,
-         "Live:" stamp). Every client-side label names the season's DATA and reads
-         liveLabel, so the field is kept out of the page entirely rather than left for
+      /* On the page, livePatch is build-time display only (build.mjs eraTokensFor: chip,
+         phone chip, "Live:" stamp); off it, validate.mjs reads it as the feed's patch
+         ceiling. Every client-side label names the season's DATA and reads liveLabel or
+         the season's name (the drawer headings since 2026-09-26, via seasonOrder), never
+         the patch, so the field is kept out of the page entirely rather than left for
          some later prose to pick up. It also keeps the launch edit off the payload. */
       phases: (({ livePatch, ...shipped }) => shipped)(PHASES),
       /* Present ONLY while the frozen artifact is the forecast column's render source

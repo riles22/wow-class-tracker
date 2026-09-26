@@ -88,9 +88,52 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
   announcement — plus step 3's feed logging and step 4's writeup flagging. The official
   revision-ledger step above also runs every time. Live tuning
   logs as `kind: "hotfix"` (Wowhead round-up = citation, NO forumUrl/forumPostNumber)
-  or `kind: "build"` when a scheduled pass has a citable forum post. The `specsAffected`
-  ↔ `highlights` coverage gate and the tierSet upkeep gate apply to these exactly as
-  they did to PTR builds.
+  or `kind: "build"` when a scheduled pass has its own citable Blizzard forum topic (a
+  "Class Tuning Incoming" post; `forumUrl` = that topic) — and **either way
+  with `realm: "live"`**. Kind names the citation, not the realm; `realm` is what places
+  the entry in the drawer's live lane (2026-09-26 — six entries were misfiled by kind
+  before it existed). The `specsAffected` ↔ `highlights` coverage gate and the tierSet
+  upkeep gate apply to these exactly as they did to PTR builds.
+- **Every new feed entry records `realm`** (`"live"` | `"ptr"`), and every new
+  `realm: "ptr"` entry also records `patch` — the patch under test, read off the post:
+  validate.mjs fails any entry dated on or after its `BUILD_REALM_REQUIRED_FROM` cutoff
+  without them. Read the realm off the source, never off the kind — during an open
+  forecast cycle a hotfix round pushed to the PTR is `kind: "hotfix", realm: "ptr"`, and
+  a live "Class Tuning Incoming" post is always `kind: "build", realm: "live"`.
+- **While `PHASES.ptr` is null, PTR material never enters `data/ptr-builds.json`.**
+  12.1.5 is an in-season patch on the PTR, not a forecast cycle, so its PTR builds,
+  development-notes posts and PTR hotfix rounds are not logged as feed entries of ANY
+  kind or realm (the nightly prompts forbid it too; this rule is what binds a local run).
+  Record each one in the run report and this skill's `log.md` (URL, date, what it
+  covers). Staff posts in the configured 12.1.5 development-notes thread (topic 2344395)
+  reach the site through the notes-only preview lane above; anything outside that thread
+  (a Wowhead PTR hotfix round-up, a standalone blue post) does not reach the site before
+  launch, and that is intended. Every `realm: "ptr"` instruction in steps 3, 3a and 3b
+  below applies only once the owner opens a forecast cycle (`PHASES.ptr` set).
+- **Consolidated 12.1.5 patch notes posted before 12.1.5 is live go in the RUN REPORT,
+  never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`
+  and is always `realm: "live"`; a new `realm: "ptr"` entry must carry `patch` too; and
+  validation refuses a `patch` newer than the displayed live patch
+  (`PHASES.livePatch?.label ?? liveLabel` between cycles; normalize.mjs
+  `displayedLivePatch`) on EVERY kind, except that a `realm: "ptr"`
+  entry may name the upcoming patch while a PTR cycle is open (`PHASES.ptr` set; the
+  ceiling is then `PHASES.ptr.label` with a trailing " PTR" stripped, so "12.2 PTR" and
+  "12.2" both mean 12.2) — and 12.1.5 is a notes-only preview, not a cycle. So logging
+  them early, as patch notes or as a PTR build, reds the run — as long as the entry names
+  the patch its source names. Validation checks the labels, never the content: `realm` and
+  `patch` are read off the post by you and never verified, so any mislabel to an accepted
+  value validates with 0 errors — a PTR entry that names the live patch for next-patch
+  material, or a `realm: "live"` build or hotfix carrying next-patch material with no
+  `patch` (optional on live entries) or naming the live patch, each of which votes in the
+  outlook tally; and early 12.1.5 notes logged as `kind: "patch-notes"` naming the live
+  patch, which render as shipped 12.1 content (patch notes never vote in the tally).
+  All are on you. Record the post (URL, date,
+  what it covers) in the run report and this skill's `log.md`. Nothing carries their
+  per-spec content onto the site before launch: the notes-only preview lane above reads only staff posts
+  in the 12.1.5 development-notes thread (topic 2344395), and 12.1's consolidated notes
+  were a standalone topic (2333514), not a reply there. They enter the feed as a
+  `kind: "patch-notes"` entry once the displayed live patch has moved, which is not an
+  agent action.
 - **Dormant lanes (skip; do NOT mark them unreachable in the manifest — their contract
   rows were removed at the flip):** steps 5–7b, the four WCL PTR zone sweeps. Their
   recipes below are kept verbatim for the 12.2 cycle — transport lessons cost weeks to
@@ -132,8 +175,16 @@ posture above.
    (thread URL in `data/ptr-builds.json` + `.json`) and read `post_stream.posts` for
    new Linxy posts.
 3. **For each new build**: add an entry to `data/ptr-builds.json` (newest first):
-   `{date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl, specsAffected[],
-   highlights[]}` — highlights are verbatim tuning lines naming the spec, in practice
+   `{date, kind, realm, patch?, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl,
+   specsAffected[], highlights[]}` — `kind` is `build` | `hotfix` | `patch-notes` (the
+   citation it has), `realm` is `live` | `ptr` (where it happened; required on every
+   entry dated on or after validate.mjs's `BUILD_REALM_REQUIRED_FROM`), and `patch` is
+   required on a `patch-notes` entry and on every new `realm: "ptr"` entry (a dotted
+   version in one spelling — `"12.1"`, never `"12.1.0"` — no newer than the displayed
+   live patch, or, for a PTR entry during an open cycle, than the cycle's patch:
+   `PHASES.ptr.label` with a trailing " PTR" stripped; see the posture block above).
+   While `PHASES.ptr` is null a PTR build is not an entry at all — it goes in the run
+   report (posture block). Highlights are verbatim tuning lines naming the spec, in practice
    as a "Spec Class — …" prefix (the older "(Class — Spec)" suffix is also accepted;
    the tier-set gate below matches either form).
    **Tier-set changes are NEVER optional highlights** (2026-07-21 audit: three builds of
@@ -165,7 +216,13 @@ posture above.
    (confirmed case: Ride the Lightning +59%, Wowhead news=382321, 2026-07-31). Before
    logging one, check whether it sits under a bare CLASS heading with no spec qualifier —
    that one does, so attributing it to Elemental is inference. It belongs as a
-   `Class (class-wide)` line or not at all.
+   `Class (class-wide)` line or not at all. **Only during an open forecast cycle**
+   (`PHASES.ptr` set) log a PTR hotfix round, as `kind: "hotfix", realm: "ptr"` with the
+   `patch` it was pushed to — without the realm the kind default files it in the drawer's
+   LIVE lane (the 07-31 round sat there until 2026-09-26). While `PHASES.ptr` is null
+   (now: 12.1.5 is an in-season patch on the PTR, not a cycle) a PTR hotfix round is NOT
+   logged in `data/ptr-builds.json`; record it in the run report and `log.md` (posture
+   block).
 
 3b. **The development-notes thread is not the only Blizzard channel** (2026-08-02).
    Blizzard also posts class tuning as **standalone blue posts** in other forum topics —
@@ -178,10 +235,24 @@ posture above.
      this one reads "(Patch 12.0.7)" while the body says "hotfixes to the PTR … in Curse
      of Ula'tek". **Trust the body, not the tag.** Getting this backwards either drops
      real 12.1 data or files live-realm tuning as PTR.
-   - Log it `kind: "hotfix"`. It has a forum origin but no post number in the tracked
-     thread, and `forumUrl` is validated as the dev-notes-thread citation — cite the
-     blue-tracker mirror via `wowheadUrl` and say in the `label` that it was a
-     standalone blue post.
+   - Log it by what the post is and the realm its BODY names:
+     · a **live tuning pass with its own citable Blizzard forum topic** (the "Class
+       Tuning Incoming" posts — exactly the 08-15, 08-22, 08-28 and 09-18 entries) is
+       `kind: "build", realm: "live"`, `forumUrl` = that topic, `forumPostNumber: 1`, with
+       the Wowhead article as `wowheadUrl`;
+     · a **live hotfix round with no forum topic of its own** (a Wowhead round-up or the
+       blue-tracker mirror only) is `kind: "hotfix", realm: "live"`, cited via
+       `wowheadUrl`;
+     · **hotfixes to the PTR** (this one) are PTR material: while `PHASES.ptr` is null
+       they are not logged at all (posture block). During an open cycle the precedent is
+       `kind: "hotfix", realm: "ptr"` plus the `patch` under test, citing the blue-tracker
+       mirror via `wowheadUrl` and saying in the `label` that it was a standalone blue
+       post — validation refuses a `forumUrl` or `forumPostNumber` on any hotfix. (Beyond
+       that, a `forumUrl` is required only on a build and host-checked against the
+       Blizzard forums; nothing ties it to the development-notes thread.)
+     The kind default reads every hotfix as live, which is how this very post sat in the
+     live lane until 2026-09-26; new entries fail validation without a realm, and new PTR
+     ones without a patch.
 
 3c. **PvP-only changes are OUT OF SCOPE** — this tracker rates PvE. A change that only
    alters PvP combat must never be written as a `Spec Class ...` highlight: it would let a
@@ -387,6 +458,10 @@ posture above.
 - Separate **live hotfix** notes from **PTR build** notes — only PTR builds go in the
   feed. PTR testing windows are scheduled by Blizzard; zone 54 having zero new parses
   for weeks is expected, not an error.
+  *(Corrected 2026-09-26: the "only PTR builds" half is superseded — since the 12.1
+  launch the feed also carries live hotfix rounds and live tuning passes, and the
+  separation now lives in each entry's `realm` field rather than in what is left out.
+  See the between-cycles posture block. The zone-54 half is unchanged.)*
 - Do not rewrite existing spec `ptr` writeups wholesale on tuning-only changes — append
   to `changes[]` / adjust `watch`, and only flip `verdict` when the picture genuinely
   changed (state why in the diff).

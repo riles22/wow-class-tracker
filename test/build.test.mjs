@@ -168,19 +168,49 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
   }
 });
 
+test("the build feed's live-patch ceiling is the patch the Live: stamp names", async () => {
+  /* validate.mjs bounds live feed entries by normalize.mjs displayedLivePatch; the page
+     says which patch is live in build.mjs's "Live:" stamp. They are separate code, so this
+     holds them in step in every state the stamp reads "Live:" — between cycles, with a
+     mid-season livePatch, and a cycle whose label dropped " PTR" at launch (24532b5 ran
+     label "12.1" beside liveLabel "12.0.7" for seven days). While the label carries " PTR"
+     the stamp reads "PTR:" and the live patch stays livePatch, else liveLabel. */
+  const { PHASES, displayedLivePatch } = await import("../src/normalize.mjs");
+  const { eraTokensFor } = await import("../src/build.mjs");
+  const livePatch = { label: "12.1.5", since: "2026-12-01" };
+  const states = [
+    { ...PHASES, ptr: null, livePatch: null },
+    { ...PHASES, ptr: null, livePatch },
+    { ...PHASES, ptr: { marker: "12.2 PTR", label: "12.2" }, livePatch: null },
+    { ...PHASES, ptr: { marker: "12.2 PTR", label: "12.2" }, livePatch },
+  ];
+  for (const s of states) {
+    const stamp = /^<b>Live:<\/b> (\S+) /.exec(eraTokensFor(s).__ERA_TRACKED_STAMP__);
+    assert.ok(stamp, `the stamp reads "Live:" in ${JSON.stringify({ ptr: s.ptr, livePatch: s.livePatch })}`);
+    assert.equal(displayedLivePatch(s), stamp[1]);
+  }
+  for (const p of [null, livePatch]) {
+    const open = { ...PHASES, ptr: { marker: "12.2 PTR", label: "12.2 PTR" }, livePatch: p };
+    assert.match(eraTokensFor(open).__ERA_TRACKED_STAMP__, /^<b>PTR:<\/b> 12\.2 /);
+    assert.equal(displayedLivePatch(open), p?.label ?? PHASES.liveLabel);
+  }
+});
+
 test("the gearing page's chip names the same live patch as the tracker", async () => {
   /* The two pages' bars mirror each other BY HAND (CLAUDE.md, "Gearing carries the same
      bar"), and gearing's chip is a literal in its own template, so setting PHASES.livePatch
      does not move it. Without this, the launch commit would leave the two site tabs naming
-     different patches (2026-09-25 review). Compared with the LIVE patch (livePatch, else
-     liveLabel), not with the tracker's chip, because an open PTR cycle takes the tracker's
-     chip over while gearing stays about the live season's gear. The launch commit that sets
-     livePatch edits gearing's chip too and runs `npm run gearing:build`, or reds here. */
-  const { PHASES } = await import("../src/normalize.mjs");
+     different patches (2026-09-25 review). Compared with the patch the page shows as live
+     (normalize.mjs displayedLivePatch), not with the tracker's chip, because an open PTR
+     cycle takes the tracker's chip over while gearing stays about the live season's gear;
+     once a cycle's label drops " PTR" at launch, gearing's chip follows it (24532b5 edited
+     both). The launch commit that sets livePatch edits gearing's chip too and runs
+     `npm run gearing:build`, or reds here. */
+  const { PHASES, displayedLivePatch } = await import("../src/normalize.mjs");
   const tpl = await readFile(path.join(ROOT, "gearing", "src", "app.template.html"), "utf8");
   const chip = /<span class="patchchip"><span class="pc-full">([^<]*)<\/span><span class="pc-short">([^<]*)<\/span><\/span>/.exec(tpl);
   assert.ok(chip, "gearing's patch chip markup must be findable");
-  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  const live = displayedLivePatch(PHASES);
   assert.equal(chip[2], live, "gearing's phone chip must name the live patch");
   assert.equal(chip[1].replaceAll("&mdash;", "—"), `${live} — ${PHASES.patchName.toUpperCase()}`,
     "gearing's full chip must name the live patch and the patch name");
@@ -277,4 +307,18 @@ test("payload decorates every spec with consensus for both brackets", async () =
   assert.equal(payload.meta.trackedCount, data.specs.filter(s => s.ptr).length);
   assert.ok(payload.meta.latestSnapshot >= "2026-06-15");
   assert.ok(Number.isInteger(payload.meta.projectionVersion) && payload.meta.projectionVersion >= 1);
+});
+
+test("meta.latestBuildRealm is the newest feed entry's resolved realm (recorded, else the kind default)", async () => {
+  const data = await loadData(ROOT);
+  const meta = newest => buildPayload({ ...data, ptrBuilds: { ...data.ptrBuilds, builds: [newest, ...data.ptrBuilds.builds] } }).meta;
+  const at = { date: "2099-01-01", label: "x", specsAffected: [], highlights: [] };
+  // recorded realm wins over the kind default, both directions
+  const pair = m => [m.latestBuildKind, m.latestBuildRealm];
+  assert.deepEqual(pair(meta({ ...at, kind: "build", realm: "live" })), ["build", "live"]);
+  assert.deepEqual(pair(meta({ ...at, kind: "hotfix", realm: "ptr" })), ["hotfix", "ptr"]);
+  // no realm: the kind default (build → ptr, hotfix → live)
+  assert.equal(meta({ ...at, kind: "build" }).latestBuildRealm, "ptr");
+  assert.equal(meta({ ...at, kind: "hotfix" }).latestBuildRealm, "live");
+  assert.equal(buildPayload({ ...data, ptrBuilds: { ...data.ptrBuilds, builds: [] } }).meta.latestBuildRealm, null);
 });

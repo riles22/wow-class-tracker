@@ -31,9 +31,11 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
   data is shown as figures and never converted to grades — Warcraft Logs median rDPS/HPS,
   Archon 95th-percentile throughput and M+ score, Murlok top-50 rating ceilings, and
   Bloodmallet fight profiles (ST / cleave / AoE percentiles).
-- **Patch layer** — per-spec official tuning in three honest lanes: live hotfix rounds on
-  top, the consolidated "Shipped in 12.1" launch notes as the authority beneath, and the
-  PTR development history that led there — plus the Season 2 tier-set bonuses as fact.
+- **Patch layer** — per-spec official tuning in three honest lanes, placed by the realm
+  each entry happened on: live hotfix rounds and class-tuning passes on top, each patch's
+  consolidated "Shipped in {patch}" launch notes as the authority beneath (newest patch
+  first), and the PTR development history that led there — plus the Season 2 tier-set
+  bonuses as fact.
 - **"Ours: 12.1" forecast — a FROZEN record** — the tracker's own pre-launch forecast
   tier list (raid + M+), declared frozen 2026-08-11 and rendered as a record: live
   consensus baseline blended with PTR testing percentiles and Dummy Dome composites,
@@ -92,7 +94,11 @@ presentation-only `src/template.html` into a single `dist/index.html`.
 - `data/sources.json` — source registry (tier lists, metrics sources, the PTR notes feed)
 - `data/scales.json` — each source's tier scale mapped onto the shared 0–100 axis that
   produces the consensus
-- `data/ptr-builds.json` — the dated 12.1 PTR build feed from Blizzard's official dev-notes thread
+- `data/ptr-builds.json` — the dated patch feed: 12.1 PTR builds from Blizzard's official
+  dev-notes thread, live tuning passes and hotfix rounds, and the consolidated patch notes
+  (each recording its patch). New entries record their realm (live or PTR), and new PTR
+  entries their patch; older ones follow the kind default (a build post is PTR, anything
+  else live), apart from six corrected entries that record it explicitly
 - `data/creator-takes.json` — the cited creator-take layer
 - `data/encounter-tiers.json` — Archon's per-boss (throughput) and per-dungeon (score)
   tiers, behind the Fight selector

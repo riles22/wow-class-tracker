@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { validateData, loadData } from "../src/validate.mjs";
+import { validateData, loadData, BUILD_REALM_REQUIRED_FROM } from "../src/validate.mjs";
 import { PHASES } from "../src/normalize.mjs";
 import { LIVE_LEADERBOARDS } from "../src/wcl-live.mjs";
 
@@ -1055,4 +1055,257 @@ test("partition guard: leaderboard provenance comes from the reviewed recipe, an
     assert.deepEqual(provenance(validateData(followed)), []);
   } finally { raid.size = saved; }
   assert.deepEqual(provenance(validateData(structuredClone(data))), []);
+});
+
+test("ptr-builds: realm is required from the cutoff and must be live or ptr", async () => {
+  const data = await loadData(ROOT);
+  // Kind cannot say where an entry happened: the live "Class Tuning Incoming" posts are
+  // kind "build" and the 07-16/07-31 PTR hotfix rounds are kind "hotfix", so the kind
+  // default misfiled six entries (2026-09-26). New entries must record realm.
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  // Fixtures sit AT the cutoff and the day before it, derived from the one constant, so
+  // moving the landing date is a one-line change in validate.mjs.
+  const dayBefore = new Date(Date.parse(`${BUILD_REALM_REQUIRED_FROM}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
+  const hotfix = {
+    date: BUILD_REALM_REQUIRED_FROM, kind: "hotfix", label: "x",
+    wowheadUrl: "https://www.wowhead.com/news=1",
+    specsAffected: ["Shaman (class-wide)"],
+    highlights: ["Shaman (class-wide) something happened."]
+  };
+  const realmErr = e => e.includes("must record realm");
+  // missing on or after the cutoff: fails, and names why the kind cannot stand in
+  const missing = errs(hotfix);
+  assert.ok(missing.some(realmErr), "a hotfix dated at the cutoff without realm must fail");
+  assert.ok(missing.some(e => realmErr(e) && e.includes("kind cannot say")));
+  // recorded: passes, for either realm (a PTR entry also names its patch — next test)
+  assert.deepEqual(errs({ ...hotfix, realm: "live" }), []);
+  assert.deepEqual(errs({ ...hotfix, realm: "ptr", patch: PHASES.livePatch?.label ?? PHASES.liveLabel }), []);
+  // an unknown value fails rather than defaulting
+  assert.ok(errs({ ...hotfix, realm: "beta" }).some(e => e.includes('unknown realm "beta"')));
+  assert.ok(errs({ ...hotfix, date: "2026-07-31", realm: "Live" }).some(e => e.includes('unknown realm "Live"')));
+  // before the cutoff the kind default still stands, so history is not rewritten
+  assert.ok(!errs({ ...hotfix, date: dayBefore }).some(realmErr));
+  // the real feed carries realm on every entry that needs one
+  assert.ok(!validateData(data).some(realmErr));
+});
+
+test("ptr-builds: a PTR entry from the cutoff names its patch, so early notes cannot pass as a PTR build", async () => {
+  const data = await loadData(ROOT);
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  const dayBefore = new Date(Date.parse(`${BUILD_REALM_REQUIRED_FROM}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
+  // The shape a PTR build is logged in (no `patch`), carrying a tuning line that votes in
+  // the outlook tally — the review probe that found this validated it with 0 errors.
+  const early = {
+    date: BUILD_REALM_REQUIRED_FROM, kind: "build", realm: "ptr", label: "consolidated notes for the next patch",
+    forumPostNumber: 1, forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1",
+    specsAffected: ["Protection Warrior"], highlights: ["Protection Warrior Shield Slam damage increased by 30%."]
+  };
+  const patchErr = e => e.includes('is realm "ptr" and must record patch');
+  const hadPtr = PHASES.ptr;
+  PHASES.ptr = null;
+  try {
+    assert.ok(errs(early).some(patchErr), "a PTR build without patch must fail from the cutoff");
+    // naming the next patch reds on the ceiling instead (no PTR cycle is open)
+    const named = errs({ ...early, patch: `${live}.9` });
+    assert.ok(!named.some(patchErr) && named.some(e => e.includes("only while a PTR cycle is open")), named.join("\n"));
+    // a PTR hotfix is held to the same rule
+    const { forumPostNumber, forumUrl, ...rest } = early;
+    assert.ok(errs({ ...rest, kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1" }).some(patchErr));
+    // live entries and entries before the cutoff are not asked for a patch
+    assert.ok(!errs({ ...early, realm: "live" }).some(patchErr));
+    assert.ok(!errs({ ...early, date: dayBefore }).some(patchErr));
+    // during an open cycle a PTR entry names the patch under test and passes (an open
+    // cycle's label carries " PTR"; the dotted label is the launched shape)
+    PHASES.ptr = { marker: `${live}.9 PTR`, label: `${live}.9 PTR` };
+    assert.deepEqual(errs({ ...early, patch: `${live}.9` }), []);
+    assert.ok(errs(early).some(patchErr), "an open cycle does not waive the patch");
+  } finally {
+    PHASES.ptr = hadPtr;
+  }
+});
+
+test("ptr-builds: patch-notes must record a patch no newer than the displayed live patch", async () => {
+  const data = await loadData(ROOT);
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const notes = {
+    date: "2026-08-06", kind: "patch-notes", label: "x",
+    forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1",
+    specsAffected: ["Shaman (class-wide)"],
+    highlights: ["Shaman (class-wide) something happened."]
+  };
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  // each patch's notes render as their own "Shipped in {patch}" block, so patch is required
+  assert.ok(errs(notes).some(e => e.includes("must record patch")));
+  assert.deepEqual(errs({ ...notes, patch: live }), []);
+  // not a dotted version: fails on any entry kind
+  assert.ok(errs({ ...notes, patch: "Patch 12.1" }).some(e => e.includes("must be a dotted version")));
+  assert.ok(errs({ ...notes, patch: 12.1 }).some(e => e.includes("must be a dotted version")));
+  // newer than the displayed live patch: consolidated notes posted before launch belong in
+  // the run report, not the feed
+  const newer = `${live}.9`;
+  const early = errs({ ...notes, patch: newer });
+  assert.ok(early.some(e => e.includes(`"${newer}" is newer than the displayed live patch "${live}"`)), early.join("\n"));
+  assert.ok(early.some(e => e.includes("run report")));
+  // a set livePatch display label (null until 12.1.5 ships) moves the ceiling
+  const had = Object.prototype.hasOwnProperty.call(PHASES, "livePatch"), before = PHASES.livePatch;
+  PHASES.livePatch = { label: newer };
+  try {
+    assert.deepEqual(errs({ ...notes, patch: newer }), []);
+    assert.ok(errs({ ...notes, patch: `${newer}.1` }).some(e => e.includes("is newer than the displayed live patch")));
+  } finally {
+    if (had) PHASES.livePatch = before; else delete PHASES.livePatch;
+  }
+  // the real feed's launch notes carry their patch
+  assert.ok(data.ptrBuilds.builds.filter(b => b.kind === "patch-notes").every(b => typeof b.patch === "string"));
+});
+
+test("ptr-builds: patch notes are live, one spelling per patch, and the patch ceiling binds every kind", async () => {
+  const data = await loadData(ROOT);
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const base = { date: BUILD_REALM_REQUIRED_FROM, label: "x", specsAffected: ["Shaman (class-wide)"], highlights: ["Shaman (class-wide) something happened."] };
+  const notes = { ...base, kind: "patch-notes", forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1" };
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  const newer = `${live}.9`;
+  const dayBefore = new Date(Date.parse(`${BUILD_REALM_REQUIRED_FROM}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
+  // Patch notes are the SHIPPED notes: the drawer renders them as "Shipped in", so a ptr
+  // realm on one is a contradiction. From the cutoff their realm must be RECORDED as
+  // "live"; only an entry dated before it may omit the realm (the kind default reads live).
+  const ptrRealm = errs({ ...notes, realm: "ptr", patch: live });
+  assert.ok(ptrRealm.some(e => e.includes('carries realm "ptr"')));
+  assert.ok(!ptrRealm.some(e => e.includes("(or omitted)")), "omitting the realm is not an option from the cutoff");
+  // patch notes' patch rule is their own (every date); the PTR-entry patch rule never fires on them
+  const ptrRealmNoPatch = errs({ ...notes, realm: "ptr" });
+  assert.ok(ptrRealmNoPatch.some(e => e.includes("patch-notes") && e.includes("must record patch")), ptrRealmNoPatch.join("\n"));
+  assert.ok(!ptrRealmNoPatch.some(e => e.includes('is realm "ptr" and must record patch')), ptrRealmNoPatch.join("\n"));
+  assert.deepEqual(errs({ ...notes, realm: "live", patch: live }), []);
+  const omitted = errs({ ...notes, patch: live });
+  assert.ok(omitted.some(e => e.includes('must record realm "live"')), omitted.join("\n"));
+  assert.ok(!omitted.some(e => e.includes("kind cannot say")), "for patch notes the kind DOES say the realm");
+  assert.deepEqual(errs({ ...notes, date: dayBefore, patch: live }), []);
+  // One spelling per patch: "12.1" and "12.1.0" compare equal but would render as two blocks.
+  const trailing = errs({ ...notes, realm: "live", patch: `${live}.0` });
+  assert.ok(trailing.some(e => e.includes(`must be written "${live}"`)), trailing.join("\n"));
+  assert.ok(errs({ ...notes, realm: "live", patch: "12.01" }).some(e => e.includes('must be written "12.1"')));
+  // "12.0" is a minor version, not a trailing zero — valid spelling (and not newer than live).
+  assert.ok(!errs({ ...notes, realm: "live", patch: "12.0" }).some(e => e.includes("must be written")));
+  // The ceiling binds every kind. A live entry cannot belong to a patch that is not live yet…
+  const build = { ...base, kind: "build", forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1" };
+  const hotfix = { ...base, kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1" };
+  assert.ok(errs({ ...build, realm: "live", patch: newer }).some(e => e.includes("a live entry cannot belong")));
+  assert.ok(errs({ ...hotfix, realm: "live", patch: newer }).some(e => e.includes("a live entry cannot belong")));
+  assert.deepEqual(errs({ ...hotfix, realm: "live", patch: live }), []);
+  // …and a PTR entry may name the upcoming patch only while a PTR cycle is open. Logging
+  // early consolidated notes as a PTR "build" therefore reds exactly like logging them as
+  // patch notes would.
+  const hadPtr = PHASES.ptr;
+  PHASES.ptr = null;
+  try {
+    assert.ok(errs({ ...build, realm: "ptr", patch: newer }).some(e => e.includes("only while a PTR cycle is open")));
+    // An OPEN cycle's label carries " PTR" (the stamp reads "PTR:"). This fixture used the
+    // dotted label until 2026-09-26, but a dotted label is the LAUNCHED shape (the stamp
+    // reads "Live:"), which is how it hid the raw-label ceiling bug; see the next test.
+    PHASES.ptr = { marker: `${newer} PTR`, label: `${newer} PTR` };
+    assert.deepEqual(errs({ ...build, realm: "ptr", patch: newer }), []);
+    assert.ok(errs({ ...build, realm: "ptr", patch: `${newer}.1` }).some(e => e.includes(`newer than the open PTR cycle's patch "${newer}"`)));
+    // an open cycle never lifts the ceiling for live entries or patch notes
+    assert.ok(errs({ ...build, realm: "live", patch: newer }).some(e => e.includes("a live entry cannot belong")));
+    assert.ok(errs({ ...notes, patch: newer }).some(e => e.includes("is newer than the displayed live patch")));
+  } finally {
+    PHASES.ptr = hadPtr;
+  }
+});
+
+test("ptr-builds: an open cycle's ceiling is its label with the trailing \" PTR\" stripped", async () => {
+  /* The project's convention while a patch is on the PTR is a label that CARRIES " PTR":
+     build.mjs's "Live:"/"PTR:" stamp keys on exactly that, the build and render fixtures
+     use { marker: "12.2 PTR", label: "12.2 PTR" }, and the 12.1 cycle ran with label
+     "12.1 PTR" until launch. The first draft of the ceiling tested the raw label, which
+     matched no dotted version, so every PTR entry of an open cycle was refused with an
+     error saying no cycle was open. The cycle's patch is derived from the live one, so
+     this holds after later flips. */
+  const data = await loadData(ROOT);
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  const [major, minor] = live.split(".").map(Number);
+  const next = `${major}.${minor + 1}`;
+  const build = {
+    date: BUILD_REALM_REQUIRED_FROM, kind: "build", realm: "ptr", label: "x",
+    forumPostNumber: 1, forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1",
+    specsAffected: ["Shaman (class-wide)"], highlights: ["Shaman (class-wide) something happened."]
+  };
+  const { forumPostNumber, forumUrl, ...rest } = build;
+  const hotfix = { ...rest, kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1" };
+  const saysNoCycle = e => e.includes("no PTR cycle is open") || e.includes("only while a PTR cycle is open");
+  const hadPtr = PHASES.ptr;
+  try {
+    PHASES.ptr = { marker: `${next} PTR`, label: `${next} PTR` };
+    assert.deepEqual(errs({ ...build, patch: next }), [], "a PTR build naming the cycle's patch passes");
+    assert.deepEqual(errs({ ...hotfix, patch: next }), [], "so does a PTR hotfix");
+    const over = errs({ ...build, patch: `${next}.5` });
+    assert.ok(over.some(e => e.includes(`newer than the open PTR cycle's patch "${next}"`)), over.join("\n"));
+    assert.ok(!over.some(saysNoCycle), "a cycle IS open, so the error must not say otherwise");
+    assert.ok(errs(build).some(e => e.includes('is realm "ptr" and must record patch')), "no patch still fails");
+    // the open cycle does not lift the ceiling for a live entry or patch notes
+    assert.ok(errs({ ...build, realm: "live", patch: next }).some(e => e.includes("a live entry cannot belong")));
+    const notes = { ...rest, kind: "patch-notes", realm: "live", forumUrl, patch: next };
+    assert.ok(errs(notes).some(e => e.includes("is newer than the displayed live patch")));
+    // the live-entry error points at realm "ptr" only when that would pass: material newer
+    // than the cycle's patch belongs in the run report, not the PTR lane
+    const liveNext = errs({ ...build, realm: "live", patch: next });
+    assert.ok(liveNext.some(e => e.includes(`logged with realm "ptr"`)), liveNext.join("\n"));
+    const liveBeyond = errs({ ...build, realm: "live", patch: `${next}.5` });
+    assert.ok(liveBeyond.some(e => e.includes("a live entry cannot belong") && e.includes("run report")), liveBeyond.join("\n"));
+    assert.ok(!liveBeyond.some(e => e.includes(`logged with realm "ptr"`)), "following the hint would fail again");
+    // an entry that has not recorded its realm gets the realm error, not a ceiling error
+    // asserting a realm the entry does not state
+    const { realm: _r, ...noRealm } = build;
+    const unrecorded = errs({ ...noRealm, patch: `${next}.5` });
+    assert.ok(unrecorded.some(e => e.includes("must record realm")), unrecorded.join("\n"));
+    assert.ok(!unrecorded.some(e => e.includes("is newer than")), unrecorded.join("\n"));
+    // …and the same for a realm outside the vocabulary, which is neither lane
+    const unknownRealm = errs({ ...build, realm: "beta", patch: `${next}.5` });
+    assert.ok(unknownRealm.some(e => e.includes('unknown realm "beta"')), unknownRealm.join("\n"));
+    assert.ok(!unknownRealm.some(e => e.includes("is newer than")), unknownRealm.join("\n"));
+    // the spelling rule does not depend on the realm, so both errors arrive in one pass
+    const unrecordedSpelling = errs({ ...noRealm, patch: `${next}.0` });
+    assert.ok(unrecordedSpelling.some(e => e.includes("must record realm")), unrecordedSpelling.join("\n"));
+    assert.ok(unrecordedSpelling.some(e => e.includes(`must be written "${next}"`)), unrecordedSpelling.join("\n"));
+    // The dotted label is the LAUNCHED shape — 24532b5 ran label "12.1" for the seven days
+    // between 12.1's launch and the season flip, and the stamp reads "Live: 12.1" then. The
+    // PTR lane keeps the same ceiling, and the displayed live patch IS that label, so live
+    // tuning and the launched patch's notes name it without error.
+    PHASES.ptr = { marker: `${next} PTR`, label: next };
+    assert.deepEqual(errs({ ...build, patch: next }), []);
+    assert.ok(errs({ ...build, patch: `${next}.5` }).some(e => e.includes(`newer than the open PTR cycle's patch "${next}"`)));
+    assert.deepEqual(errs({ ...hotfix, realm: "live", patch: next }), [], "live tuning for the launched patch");
+    assert.deepEqual(errs(notes), [], "the launched patch's notes");
+    const launchedBeyond = errs({ ...hotfix, realm: "live", patch: `${next}.5` });
+    assert.ok(launchedBeyond.some(e => e.includes(`displayed live patch "${next}"`) && e.includes("run report")), launchedBeyond.join("\n"));
+    // a cycle whose label names no version is uncheckable — never reported as no cycle
+    PHASES.ptr = { marker: "Next PTR", label: "Next PTR" };
+    const garbled = errs({ ...build, patch: next });
+    assert.ok(garbled.some(e => e.includes("a PTR cycle is open, but its label")), garbled.join("\n"));
+    assert.ok(!garbled.some(saysNoCycle));
+    // …and a live entry is never told to log under an unreadable cycle's empty patch name
+    const garbledLive = errs({ ...build, realm: "live", patch: next });
+    assert.ok(!garbledLive.some(e => e.includes(`patch ""`)), garbledLive.join("\n"));
+  } finally {
+    PHASES.ptr = hadPtr;
+  }
 });

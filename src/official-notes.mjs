@@ -206,7 +206,7 @@ export function officialNotesView(ledger) {
   let applied = 0, irrelevant = 0;
   for (const config of OFFICIAL_NOTE_SOURCES) {
     const source = ledger.sources?.[config.id]; if (!source) continue;
-    sources.push({ id: config.id, patch: config.patch, era: config.era, checkedAt: source.checkedAt, url: noteUrl(config) });
+    sources.push({ id: config.id, patch: config.patch, era: config.era, mode: config.mode, checkedAt: source.checkedAt, url: noteUrl(config) });
     for (const section of source.removedSections ?? []) {
       if (section.resolution?.disposition === "unresolved") unresolved.push({ patch: config.patch, era: config.era, date: section.date, class: section.class,
         url: noteUrl(config), reason: section.resolution.reason });

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown, officialNoteChanges } from "../src/digest.mjs";
+import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown, officialNoteChanges, forumTopicOf } from "../src/digest.mjs";
 
 const spec = (cls, sp, over = {}) => ({ class: cls, spec: sp, ...over });
 const payload = (specs, extra = {}) => ({
@@ -266,7 +266,10 @@ test("official-note digest includes live amendments, historical patch attributio
   const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: old }), newPayload: payload([],{ officialNotesLedger: next }) });
   assert.match(text, /Official-note changes \(2\)/);
   assert.match(text, /12\.1\.5 PTR preview/);
-  assert.match(text, /12\.1 live/);
+  // The compilation-mode live thread is named for the expansion, not its patch identity
+  // field (approved 12.1.5 plan, step 4e — this assertion read /12\.1 live/ until then).
+  assert.match(text, /Midnight live hotfixes/);
+  assert.doesNotMatch(text, /12\.1 live/);
   assert.match(text, /Previously: Fire Mage: Old/);
   assert.match(text, /→ Now: Fire Mage: New summary\./);
   assert.match(text, /Corrected damage/);
@@ -293,4 +296,54 @@ test("official-note ordering changes do not invent edits and section identity di
   second.sources["ptr-preview"].posts[0].sections.push(another);
   assert.equal(officialNoteChanges(first, second).length, 1);
   assert.equal(officialNoteChanges(first, second)[0].kind, "added");
+});
+
+test("new patch-feed entries are announced by realm, never all as PTR builds", () => {
+  const oldP = payload([]);
+  const newP = payload([], { ptrBuilds: { builds: [
+    { date: "2026-09-24", kind: "hotfix", label: "Live hotfix round", highlights: [] },
+    // the real live-tuning shape: post 1 of its own topic
+    { date: "2026-09-18", kind: "build", realm: "live", label: "Class tuning pass", forumPostNumber: 1, forumUrl: "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-september-22/2354340", highlights: [] },
+    { date: "2026-07-16", kind: "hotfix", realm: "ptr", label: "PTR hotfix round", highlights: [] },
+    { date: "2026-07-09", kind: "build", label: "PTR build", forumPostNumber: 9, highlights: [] },
+    { date: "2026-08-06", kind: "patch-notes", patch: "12.1", label: "Launch notes", forumPostNumber: 1, highlights: [] },
+  ] } });
+  const text = digestMarkdown({ oldPayload: oldP, newPayload: newP });
+  assert.match(text, /\*\*New patch-feed entries:\*\*/);
+  assert.doesNotMatch(text, /New PTR build/);
+  assert.match(text, /2026-09-24 — live hotfix — Live hotfix round/);
+  assert.match(text, /2026-09-18 — live class tuning — Class tuning pass/);
+  assert.match(text, /2026-07-16 — PTR hotfix — PTR hotfix round/);
+  assert.match(text, /2026-07-09 — PTR development notes — PTR build/);
+  assert.match(text, /2026-08-06 — official 12\.1 patch notes — Launch notes/);
+  const one = digestMarkdown({ oldPayload: oldP, newPayload: payload([], { ptrBuilds: { builds: [newP.ptrBuilds.builds[0]] } }) });
+  assert.match(one, /\*\*New patch-feed entry:\*\*/);
+});
+
+test("a new live tuning post is announced even though every such post is post 1 of its own topic", () => {
+  // Shaped like the real feed: two live "Class Tuning Incoming" passes, each post 1 of a
+  // standalone topic, beside replies in the PTR development-notes thread.
+  const tuning = (date, topic) => ({ date, kind: "build", realm: "live", label: `Class tuning ${date}`, forumPostNumber: 1,
+    forumUrl: `https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-${date}/${topic}`, highlights: [] });
+  const reply = n => ({ date: "2026-07-31", kind: "build", label: `PTR build ${n}`, forumPostNumber: n,
+    forumUrl: `https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/${n}`, highlights: [] });
+  const oldFeed = [tuning("2026-09-18", 2354340), reply(19), { ...reply(1), forumUrl: "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811" }];
+  const fresh = tuning("2026-10-02", 2360000);
+  const text = digestMarkdown({ oldPayload: payload([], { ptrBuilds: { builds: oldFeed } }),
+    newPayload: payload([], { ptrBuilds: { builds: [fresh, ...oldFeed] } }) });
+  assert.match(text, /\*\*New patch-feed entry:\*\*/);
+  assert.match(text, /2026-10-02 — live class tuning — Class tuning 2026-10-02/);
+  // A relabelled entry is still the same post: not re-announced.
+  const relabelled = digestMarkdown({ oldPayload: payload([], { ptrBuilds: { builds: oldFeed } }),
+    newPayload: payload([], { ptrBuilds: { builds: oldFeed.map(b => ({ ...b, label: `${b.label} (amended)` })) } }) });
+  assert.doesNotMatch(relabelled, /patch-feed entr/);
+});
+
+test("forumTopicOf keys a forum citation by host and topic id", () => {
+  assert.equal(forumTopicOf("https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-august-18/2336820"), "us.forums.blizzard.com/t/2336820");
+  assert.equal(forumTopicOf("https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811/19"), "us.forums.blizzard.com/t/2317811");
+  assert.equal(forumTopicOf("https://us.forums.blizzard.com/en/wow/t/2317811/19"), "us.forums.blizzard.com/t/2317811");
+  // the EU forum numbers its topics separately
+  assert.notEqual(forumTopicOf("https://eu.forums.blizzard.com/en/wow/t/x/626484"), forumTopicOf("https://us.forums.blizzard.com/en/wow/t/x/626484"));
+  assert.equal(forumTopicOf(null), "");
 });
