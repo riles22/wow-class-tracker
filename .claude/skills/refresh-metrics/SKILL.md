@@ -176,9 +176,21 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     receipt records `sourceAsOf: null` and `dateBasis: observed-undated-source` rather
     than inventing a publication date. Changed/new observations use the fetch date;
     identical values keep their existing `asOf`. If a source-owned update timestamp
-    or Last-Modified date becomes available, it is preserved. Missing chart specs get no fabricated zero:
-    an existing zero is left with its original date, while an omitted nonzero stored
-    share holds the provider for review so it cannot add phantom share to the new cut.
+    or Last-Modified date becomes available, it is preserved. Missing chart specs get no fabricated zero,
+    and no stored share is carried into a period that did not print it. **Owner decision
+    (Riley, 2026-09-25): "Show those specs as blank."** An omitted spec whose stored share
+    is at most `MYTHICSTATS_RETIRE_MAX_SHARE` (0.5 percentage points, defined once in
+    `src/fetch-stable-metrics.mjs`), a stored 0 included, is RETIRED: the collector lists
+    it under `updates.retire` and `receipt.retiredSpecs`, `apply-metrics.mjs` removes that
+    one row, and the rest of the period lands. The drawer then lists no Mythicstats line
+    for that spec and Compare all shows "—" (its tooltip still says "pending fetch"). An omitted stored
+    share ABOVE the bound still holds the whole provider for review (`partial`, 0 rows),
+    exactly as the 2026-09-05 rule did for every nonzero share. `apply-metrics.mjs` accepts
+    `retire` for the Mythicstats representation series only and refuses a stored share
+    above the bound; `check-stable-metrics.mjs` re-derives the required set from Git HEAD
+    and accepts exactly that set, never a zero written in its place and never any other spec.
+    Report retired specs in the run log. A retired spec returns by itself when a later
+    period prints it again.
 - **Robydoby PTR raid sheets** (community Google Sheets, no auth — public CSV export;
   registered 2026-07-23, owner-approved): per-boss tabs of curated WCL zone-54
   testing parses with per-spec 90/95/99th-pct raw DPS. Fetch

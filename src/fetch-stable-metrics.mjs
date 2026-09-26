@@ -18,6 +18,14 @@ export const STABLE_URLS = Object.freeze({
   ],
   mythicstats: [{ role: "All", url: "https://mythicstats.com/period/latest" }],
 });
+/* Owner decision (Riley, 2026-09-25: "Show those specs as blank"). When a Mythicstats period
+   omits a spec whose STORED share is at most this bound (percentage points of the
+   top-2000-keys representation series, unit "%"), that stored row is RETIRED: removed, so
+   the spec reads blank, never a made-up 0. A stored 0 is retired too. A larger stored share
+   going missing still holds the whole provider for review (the 2026-09-05 rule, now scoped
+   to shares above this bound). The ONE definition: the collector and the publish-side
+   checker (check-stable-metrics.mjs) and apply-metrics.mjs all read it from here. */
+export const MYTHICSTATS_RETIRE_MAX_SHARE = 0.5;
 export function storedSeries(roster, source) {
   return roster.flatMap(spec => (spec.metrics ?? []).filter(m => m.source === source)
     .map(m => ({ class: spec.class, spec: spec.spec, ...m })))
@@ -79,7 +87,7 @@ export async function fetchMetricPage(url, { fetchImpl = fetch, pause = sleep, t
 export async function collectStableMetrics({ roster, liveSeason = PHASES.liveSeason, checkedAt = new Date().toISOString(), ...transport }) {
   validateRoster(roster);
   if (!/^\d{4}-\d{2}-\d{2}T/.test(checkedAt) || Number.isNaN(Date.parse(checkedAt))) throw new Error("Invalid collection timestamp");
-  const evidence = { schemaVersion: 1, checkedAt, liveSeason, sources: {} }, updates = { metrics: [] };
+  const evidence = { schemaVersion: 1, checkedAt, liveSeason, sources: {} }, updates = { metrics: [] }, retired = [];
   for (const source of Object.keys(STABLE_URLS)) {
     const receipt = { status: "pending", pages: [], rows: 0, sourceAsOf: null, omittedSpecs: [], baselineSha256: digest(storedSeries(roster, source)) };
     evidence.sources[source] = receipt;
@@ -101,16 +109,20 @@ export async function collectStableMetrics({ roster, liveSeason = PHASES.liveSea
         Object.assign(receipt.pages.at(-1), { sourceDate: result.sourceAsOf, sourceTimestamp: result.sourceTimestamp ?? null, dateBasis: result.dateBasis });
         parsed.push(result);
       }
-      let rows = parsed.flatMap(p => p.rows);
+      let rows = parsed.flatMap(p => p.rows), retire = [];
       if (source === "mythicstats") {
         Object.assign(receipt, { periodId: parsed[0].periodId, roleTotals: parsed[0].roleTotals, printedTotals: parsed[0].printedTotals, sum: parsed[0].sum,
           omittedSpecs: parsed[0].omittedSpecs, dateBasis: parsed[0].dateBasis });
-        // A genuine omitted chart entry is not a made-up zero. A retained nonzero
-        // would add phantom share to the new period, so require review instead.
-        for (const missing of receipt.omittedSpecs) {
-          const previous = storedSeries(roster, source).find(m => metricKey(m) === missing && m.name === STABLE_SERIES[source].name);
-          if (previous && previous.value !== 0) throw new Error(`Omitted ${missing} has a nonzero stored share; source held for review`);
-        }
+        // A genuine omitted chart entry is not a made-up zero, and a retained share would
+        // be carried into a period that did not print it. Up to MYTHICSTATS_RETIRE_MAX_SHARE
+        // the stored row is RETIRED (the spec reads blank) and the rest of the period lands;
+        // above it the whole provider is still held for review.
+        const omittedStored = receipt.omittedSpecs.flatMap(missing => storedSeries(roster, source)
+          .filter(m => metricKey(m) === missing && m.name === STABLE_SERIES[source].name));
+        const blocking = omittedStored.filter(m => !(m.value <= MYTHICSTATS_RETIRE_MAX_SHARE));
+        if (blocking.length) throw new Error(`Omitted ${blocking.map(m => `${metricKey(m)} (${m.value}%)`).join(", ")} has a stored share above the ${MYTHICSTATS_RETIRE_MAX_SHARE}% retirement bound; source held for review`);
+        retire = omittedStored.map(m => ({ class: m.class, spec: m.spec, source, bracket: m.bracket, name: m.name }));
+        receipt.retiredSpecs = retire.map(metricKey);
         if (parsed[0].sourceAsOf === null) rows = rows.map(row => {
           const previous = existingMetric(roster, row);
           return previous?.value === row.value && validDate(previous.asOf) ? { ...row, asOf: previous.asOf } : row;
@@ -126,12 +138,17 @@ export async function collectStableMetrics({ roster, liveSeason = PHASES.liveSea
         metricAsOf: { oldest: rows.map(r => r.asOf).sort()[0], newest: rows.map(r => r.asOf).sort().at(-1) },
         metricsSha256: digest(rows) });
       updates.metrics.push(...rows);
+      retired.push(...retire);
     } catch (error) {
       if (!["unreachable", "pending"].includes(receipt.status) || receipt.pages.every(p => p.httpStatus === 200)) receipt.status = /Partial|incomplete|Omitted|Missing|Missing or ambiguous/i.test(error.message) ? "partial" : "invalid";
       receipt.details = String(error.message).slice(0, 500);
       receipt.rows = 0;
+      // A provider that did not succeed retires nothing either.
+      if (receipt.retiredSpecs) receipt.retiredSpecs = [];
     }
   }
+  // The key exists only when something is retired, so an ordinary night's updates keep their shape.
+  if (retired.length) updates.retire = retired;
   evidence.updatesSha256 = digest(updates);
   return { evidence, updates };
 }
@@ -151,6 +168,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     const args = process.argv.slice(2);
     if (args.length && !(args.length === 2 && args[0] === "--output-dir")) throw new Error("Usage: node src/fetch-stable-metrics.mjs [--output-dir <directory>]");
     const { evidence } = await runStableMetrics(args.length ? { outputDir: path.resolve(args[1]) } : {});
-    for (const [id, source] of Object.entries(evidence.sources)) console.log(`${id}: ${source.status}; ${source.rows} rows; source date ${source.sourceAsOf ?? "unpublished"}${source.details ? `; ${source.details}` : ""}`);
+    for (const [id, source] of Object.entries(evidence.sources)) {
+      const retired = source.retiredSpecs?.length ? `; retired ${source.retiredSpecs.join(", ")}` : "";
+      console.log(`${id}: ${source.status}; ${source.rows} rows${retired}; source date ${source.sourceAsOf ?? "unpublished"}${source.details ? `; ${source.details}` : ""}`);
+    }
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

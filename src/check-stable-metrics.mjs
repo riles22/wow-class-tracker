@@ -7,7 +7,7 @@ import { isDeepStrictEqual } from "node:util";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { PHASES } from "./normalize.mjs";
-import { digest, storedSeries, STABLE_URLS } from "./fetch-stable-metrics.mjs";
+import { digest, storedSeries, STABLE_URLS, MYTHICSTATS_RETIRE_MAX_SHARE } from "./fetch-stable-metrics.mjs";
 import { STABLE_SERIES, ROLE_COUNTS, metricKey, validateRoster, validDate } from "./stable-metric-parsers.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -23,7 +23,10 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
     validateRoster(baseline); validateRoster(current);
     if (!evidence || evidence.schemaVersion !== 1 || evidence.liveSeason !== liveSeason || !date(evidence.checkedAt)
       || Date.parse(evidence.checkedAt) > +now || +now - Date.parse(evidence.checkedAt) > maxAgeHours * 3600_000) throw new Error("Missing, stale, future, or wrong-season stable-metric evidence");
-    if (!updates || Object.keys(updates).join() !== "metrics" || !Array.isArray(updates.metrics)
+    // `retire` is present only when the collector retired something (never an empty list).
+    const updateKeys = updates && typeof updates === "object" ? Object.keys(updates).join() : "";
+    if (!["metrics", "metrics,retire"].includes(updateKeys) || !Array.isArray(updates.metrics)
+      || (updateKeys === "metrics,retire" && (!Array.isArray(updates.retire) || !updates.retire.length || updates.retire.length > 40))
       || updates.metrics.length > 80 || !hash(evidence.updatesSha256) || digest(updates) !== evidence.updatesSha256) throw new Error("Stable-metric updates do not match their trusted receipt");
     if (!evidence.sources || !isDeepStrictEqual(Object.keys(evidence.sources).sort(), Object.keys(STABLE_SERIES).sort())) throw new Error("Stable-metric receipt must include both providers");
     if (manifest !== undefined && (!manifest || !Array.isArray(manifest.sources))) throw new Error("Stable-metric manifest must contain source rows");
@@ -38,8 +41,18 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
         || seen.has(tuple(row))) throw new Error("Invalid or duplicated stable-metric update tuple/value/date");
       seen.add(tuple(row));
     }
+    // A retirement names one stored Mythicstats observation to remove. It carries no value,
+    // and one tuple cannot be both upserted and retired.
+    const retired = updates.retire ?? [];
+    for (const row of retired) {
+      if (row?.source !== "mythicstats" || !byKey.has(metricKey(row)) || row.bracket !== "mplus" || row.name !== STABLE_SERIES.mythicstats.name
+        || !isDeepStrictEqual(Object.keys(row).sort(), ["class", "spec", "source", "bracket", "name"].sort())
+        || seen.has(tuple(row))) throw new Error("Invalid, duplicated or non-Mythicstats stable-metric retirement");
+      seen.add(tuple(row));
+    }
     for (const [source, allowedPages] of Object.entries(STABLE_URLS)) {
       const receipt = evidence.sources[source], rows = updates.metrics.filter(r => r.source === source);
+      const retiring = retired.filter(r => r.source === source);
       const before = storedSeries(baseline, source), after = storedSeries(current, source);
       if (!receipt || !["success", "partial", "pending", "invalid", "unreachable"].includes(receipt.status)
         || !hash(receipt.baselineSha256) || digest(before) !== receipt.baselineSha256) throw new Error(`${source}: receipt baseline does not match trusted Git data`);
@@ -58,7 +71,7 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
           || (page.httpStatus === 200 && (!hash(page.bodySha256) || !Number.isInteger(page.bytes) || page.bytes <= 0 || page.bytes > 2 * 1024 * 1024))) throw new Error(`${source}: invalid source-page provenance`);
       }
       if (receipt.status !== "success") {
-        if (rows.length || receipt.rows !== 0 || !isDeepStrictEqual(after, before)) throw new Error(`${source}: failed/partial source must leave all canonical rows unchanged`);
+        if (rows.length || retiring.length || receipt.retiredSpecs?.length || receipt.rows !== 0 || !isDeepStrictEqual(after, before)) throw new Error(`${source}: failed/partial source must leave all canonical rows unchanged`);
         if (sourcePagesBefore && sourcePagesAfter && !isDeepStrictEqual(sourcePagesBefore.find(s => s.id === source), sourcePagesAfter.find(s => s.id === source))) throw new Error(`${source}: failed/partial source registry was changed`);
         continue;
       }
@@ -69,7 +82,7 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
       const dates = rows.map(row => row.asOf).sort();
       if (!isDeepStrictEqual(receipt.metricAsOf, { oldest: dates[0], newest: dates.at(-1) })) throw new Error(`${source}: data dates differ from evidence`);
       if (source === "murlok") {
-        if (!isDeepStrictEqual(roleCounts, ROLE_COUNTS) || receipt.omittedSpecs?.length || receipt.dateBasis !== "source-time-datetime"
+        if (!isDeepStrictEqual(roleCounts, ROLE_COUNTS) || receipt.omittedSpecs?.length || receipt.retiredSpecs?.length || receipt.dateBasis !== "source-time-datetime"
           || receipt.sourceAsOf !== receipt.pages.map(p => p.sourceDate).sort()[0]) throw new Error("Murlok: incomplete coverage or invalid date basis");
         for (const page of receipt.pages) {
           if (page.finalUrl !== page.url || page.dateBasis !== "source-time-datetime" || !date(page.sourceTimestamp)
@@ -91,7 +104,15 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
         }
         if (Math.abs(receipt.printedTotals.Tank - 20) > 0.1 || Math.abs(receipt.printedTotals.Healer - 20) > 0.1
           || Math.abs(receipt.printedTotals.Melee + receipt.printedTotals.Ranged - 60) > 0.2) throw new Error("Mythicstats: role composition is not the top-2000 representation series");
-        for (const missing of omitted) if (before.some(row => metricKey(row) === missing && row.value !== 0)) throw new Error("Mythicstats: an omitted nonzero share cannot be carried forward");
+        // Owner decision 2026-09-25, enforced here independently of the collector: an omitted
+        // spec's stored share is never carried forward and never zeroed. At or below
+        // MYTHICSTATS_RETIRE_MAX_SHARE it must be retired; above it nothing may land at all.
+        const omittedStored = before.filter(row => omitted.includes(metricKey(row)) && row.name === STABLE_SERIES.mythicstats.name);
+        if (omittedStored.some(row => !(row.value <= MYTHICSTATS_RETIRE_MAX_SHARE))) throw new Error(`Mythicstats: an omitted share above the ${MYTHICSTATS_RETIRE_MAX_SHARE}% retirement bound can be neither carried forward nor retired`);
+        const mustRetire = omittedStored.map(metricKey).sort();
+        // `?? []`: receipts written before retirement existed carry no retiredSpecs field.
+        if (!isDeepStrictEqual(retiring.map(metricKey).sort(), mustRetire)
+          || !isDeepStrictEqual([...(receipt.retiredSpecs ?? [])].sort(), mustRetire)) throw new Error("Mythicstats: retirements must be exactly the omitted specs with a stored share at or below the retirement bound");
         if (receipt.dateBasis === "observed-undated-source" && (receipt.sourceAsOf !== null || page.sourceDate !== null)) throw new Error("Mythicstats: undated source was given a publication date");
         if (receipt.dateBasis === "source-last-modified" && (!validDate(page.sourceDate) || receipt.sourceAsOf !== page.sourceDate
           || !Number.isFinite(Date.parse(page.lastModified)) || Date.parse(page.lastModified) > Date.parse(evidence.checkedAt)
@@ -111,6 +132,7 @@ export function checkStableMetrics({ baseline, current, evidence, updates, sourc
         if (old?.asOf && row.asOf < old.asOf) throw new Error(`${source}: canonical source date regressed`);
       }
       const expected = new Map(before.map(row => [tuple(row), row]));
+      for (const row of retiring) if (!expected.delete(tuple(row))) throw new Error(`${source}: retirement names no stored observation`);
       for (const row of rows) expected.set(tuple(row), row);
       if (!isDeepStrictEqual(sorted([...expected.values()]), sorted(after))) throw new Error(`${source}: canonical data differs from the trusted collected rows`);
       if (sourcePagesBefore && sourcePagesAfter) {

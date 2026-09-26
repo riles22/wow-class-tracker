@@ -58,6 +58,26 @@ test("metrics upsert by (source, bracket, name) — replaces without duplicating
   assert.equal(rows[0].era, "ptr", "era must survive the merge (regression: was silently dropped)");
 });
 
+test("retire removes one stored Mythicstats share at or below the bound (blank, not zeroed) and refuses every other shape (owner decision 2026-09-25)", async () => {
+  const series = { source: "mythicstats", bracket: "mplus", name: "Top-2000 keys representation" };
+  const share = (spec, value) => ({ class: "Rogue", spec, ...series, unit: "%", value, asOf: "2026-09-20" });
+  const tuple = spec => ({ class: "Rogue", spec, ...series });
+  await applyMetrics(await input({ metrics: [share("Outlaw", 0.5), share("Assassination", 0.6)] }), root);
+  assert.equal((await applyMetrics(await input({ retire: [tuple("Outlaw")] }), root)).metricsRetired, 1);
+  const specs = await readSpecs(), rogue = spec => specs.find(s => s.class === "Rogue" && s.spec === spec);
+  assert.ok(!rogue("Outlaw").metrics.some(m => m.source === "mythicstats"), "absent, not zeroed");
+  assert.equal(rogue("Assassination").metrics.find(m => m.source === "mythicstats").value, 0.6, "only the named tuple goes");
+  assert.equal((await applyMetrics(await input({ retire: [tuple("Outlaw")] }), root)).metricsRetired, 0, "an already-absent tuple is a no-op");
+  const before_ = await readFile(specsPath(), "utf8");
+  await assert.rejects(applyMetrics(await input({ retire: [tuple("Assassination")] }), root), /stores 0\.6%, above the 0\.5% retirement bound — nothing written/);
+  for (const other of [{ source: "murlok" }, { source: "warcraftlogs", bracket: "raid", name: "Retire probe" }, { name: "Meta presence" }, { bracket: "raid" }]) {
+    await assert.rejects(applyMetrics(await input({ retire: [{ ...tuple("Assassination"), ...other }] }), root), /only the Mythicstats "Top-2000 keys representation" M\+ series can be retired; nothing written/);
+  }
+  await assert.rejects(applyMetrics(await input({ retire: [tuple("Swashbuckler")] }), root), /did not match any spec — nothing written/);
+  await assert.rejects(applyMetrics(await input({ metrics: [share("Outlaw", 0.4)], retire: [tuple("Outlaw")] }), root), /also upserted — nothing written/);
+  assert.equal(await readFile(specsPath(), "utf8"), before_);
+});
+
 test("ptrdummy merge replaces spec.ptrDummy wholesale with defaults applied", async () => {
   await applyMetrics(await input({ ptrdummy: [
     { class: "Rogue", spec: "Outlaw", asOf: "2026-07-06", targets: { "1": 111111, "5": 333333 } }
