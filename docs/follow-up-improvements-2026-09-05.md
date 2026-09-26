@@ -26,12 +26,14 @@ zero remains unchanged. Undated unchanged observations retain their previous dat
 > **Amendment (Riley, 2026-09-25): "Show those specs as blank."** The block above
 > now applies only to an omitted spec whose stored share is above 0.5 percentage
 > points. At or below that bound, a stored 0 included, the stored observation is
-> retired: removed, so the spec reads blank and never as a made-up 0, while the
-> rest of the period lands. Measured from the committed run manifests, the hold
-> fired on 9 of the 13 nightly runs from 2026-09-13 to 2026-09-25 (2 landed; 2
-> failed for other reasons, 09-16 invalid and 09-23 incomplete), each time
-> withholding a whole period of current shares. On all 9, the largest stored
-> share among the specs the manifest names as omitted was 0.2.
+> retired: removed, so the drawer drops that spec's Mythicstats line and Compare
+> all shows "—" (never a made-up 0), while the rest of the period lands. Measured
+> from the committed run manifests, 2026-09-13 to 2026-09-25 holds 14 nightly
+> runs over 13 dates (09-15 published twice). The hold fired on 10 of those runs,
+> on 9 dates; 2 runs landed (09-17, 09-24) and 2 failed for other reasons (09-16
+> invalid, 09-23 incomplete). Each hold withheld a whole period of current shares.
+> On every held run, the largest stored share among the specs its manifest names
+> as omitted was at most 0.2 (0.2 on 2 runs, 0.1 on the other 8).
 > The bound is `MYTHICSTATS_RETIRE_MAX_SHARE` in `src/fetch-stable-metrics.mjs`;
 > the collector, `apply-metrics.mjs` and the publish-side
 > `check-stable-metrics.mjs` all read it, and the checker re-derives the required

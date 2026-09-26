@@ -182,7 +182,8 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     is at most `MYTHICSTATS_RETIRE_MAX_SHARE` (0.5 percentage points, defined once in
     `src/fetch-stable-metrics.mjs`), a stored 0 included, is RETIRED: the collector lists
     it under `updates.retire` and `receipt.retiredSpecs`, `apply-metrics.mjs` removes that
-    one row, and the spec reads blank while the rest of the period lands. An omitted stored
+    one row, and the rest of the period lands. The drawer then lists no Mythicstats line
+    for that spec and Compare all shows "—" (its tooltip still says "pending fetch"). An omitted stored
     share ABOVE the bound still holds the whole provider for review (`partial`, 0 rows),
     exactly as the 2026-09-05 rule did for every nonzero share. `apply-metrics.mjs` accepts
     `retire` for the Mythicstats representation series only and refuses a stored share
