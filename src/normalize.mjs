@@ -102,7 +102,13 @@ export const PHASES = {
      is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
      page's chip is a hand-kept literal that must name the same live patch; a root build
      test compares the two. */
-  livePatch: null,
+  /* FIXTURE DATE, NOT A RELEASE DATE. Pre-staged 2026-09-26 before Blizzard announced the
+     12.1.5 release date, so `since` holds the placeholder "2099-01-01". The owner replaces
+     it with the real US release date on launch morning, here AND in the literal pin in
+     test/normalize.test.mjs, and deletes this comment (docs/1215-launch-runbook.md,
+     Phase B). Left in place, the skills that read `since` (the Bloodmallet adoption
+     hold, the creator-take framing) would wait for 2099, and no gate would object. */
+  livePatch: { label: "12.1.5", since: "2099-01-01" },
   seasonOrder: ["s1", "s2"],
   seasonLabels: { s1: "12.0.7", s2: "12.1" },
 };
