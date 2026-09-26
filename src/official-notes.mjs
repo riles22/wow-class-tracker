@@ -15,7 +15,17 @@ const decode = value => value.replace(/&(?:#(x[\da-f]+|\d+)|([a-z]+));/gi, (all,
   if (code) { const n = code[0].toLowerCase() === "x" ? parseInt(code.slice(1), 16) : +code; return n > 0 && n <= 0x10ffff ? String.fromCodePoint(n) : all; }
   return ({ amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", rsquo: "’", lsquo: "‘", ndash: "–", mdash: "—" })[name.toLowerCase()] ?? all;
 });
-const textOf = node => typeof node === "string" ? decode(node) : node.children.map(textOf).join(" ").replace(/\s+/g, " ").trim();
+// Struck text is a WITHDRAWN change, not a current one: post 4 of the 12.1.5 thread
+// strikes two Protection Execute lines first published on 2026-09-03 and keeps only
+// the new +30% line. Flattening
+// <s>/<del>/<strike> read the withdrawn lines as current, so they are kept but marked
+// with an explicit, delimited "[reverted: ...]" — dropping them would hide the reversal.
+const STRUCK = new Set(["s", "del", "strike"]);
+const textOf = node => {
+  if (typeof node === "string") return decode(node);
+  const text = node.children.map(textOf).join(" ").replace(/\s+/g, " ").trim();
+  return STRUCK.has(node.tag) && text ? `[reverted: ${text}]` : text;
+};
 
 // A small structural reader, not a sanitizer or general HTML parser. Discourse's
 // cooked lists are balanced; preserving nesting prevents a class's nested spec or

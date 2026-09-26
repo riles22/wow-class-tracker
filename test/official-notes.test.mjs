@@ -41,6 +41,47 @@ test("official notes preserve class/spec/hero nesting, dates, entities, and cate
   assert.notEqual(sections[0].sha256, sections[1].sha256);
 });
 
+// Verbatim Warrior block of topic 2344395 post 4 (version 1, 2026-09-15): two of the
+// 09-03 Execute lines are struck through as withdrawn and only the +30% line stands.
+const struckWarriorHTML = `<h2><strong>CLASSES</strong></h2>
+<ul>
+<li><strong>WARRIOR</strong>
+<ul>
+<li><strong>Protection</strong>
+<ul>
+<li><em>Developers’ notes: Last week’s changes to Execute were not sufficient to accomplish our goals, and we believe that the scope of changes necessary for those goals are better suited to a major update, so we’re restoring Execute to it’s previous functionality with a damage boost in 12.1.5, and are refocusing on 12.2 and 13.0 for further Protection changes.</em></li>
+<li><s>Execute no longer consumes additional Rage for additional damage.</s></li>
+<li><s>Execute damage increased by 100%.</s></li>
+<li>Execute damage increased by 30%.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>`;
+
+test("struck-through lines are marked reverted, never read as current; live lines are unchanged", () => {
+  const source = OFFICIAL_NOTE_SOURCES[1], [section] = sectionsForPost(post(source, struckWarriorHTML, 4), source, roster);
+  const struck = ["Execute no longer consumes additional Rage for additional damage.", "Execute damage increased by 100%."];
+  assert.deepEqual(section.specKeys, ["Warrior|Protection"]);
+  assert.equal(section.text, [
+    "- WARRIOR",
+    "  - Protection",
+    "    - Developers’ notes: Last week’s changes to Execute were not sufficient to accomplish our goals, and we believe that the scope of changes necessary for those goals are better suited to a major update, so we’re restoring Execute to it’s previous functionality with a damage boost in 12.1.5, and are refocusing on 12.2 and 13.0 for further Protection changes.",
+    `    - [reverted: ${struck[0]}]`,
+    `    - [reverted: ${struck[1]}]`,
+    "    - Execute damage increased by 30%.",
+  ].join("\n"));
+  // Each withdrawn line occurs exactly once, and only inside its marker.
+  for (const line of struck) assert.equal(section.text.split(line).length - 1, 1);
+  // Removing the struck items leaves every live line byte-identical.
+  const live = sectionsForPost(post(source, struckWarriorHTML.replace(/<li><s>.*?<\/s><\/li>\n/g, ""), 4), source, roster)[0].text;
+  assert.equal(live, section.text.split("\n").filter(l => !l.includes("[reverted: ")).join("\n"));
+  assert.doesNotMatch(live, /reverted/);
+  // <del>/<strike> read the same way; an inline strike is delimited so the kept value stays readable.
+  const inline = `<p><strong>Classes</strong></p><ul><li><strong>Mage</strong><ul><li><strong>Fire</strong><ul><li>Damage increased by <del>10%</del> 15%.</li><li><strike>Old line.</strike></li><li>Kept<s> </s> line.</li></ul></li></ul></li></ul>`;
+  assert.match(sectionsForPost(post(source, inline), source, roster)[0].text, /- Damage increased by \[reverted: 10%\] 15%\.\n\s+- \[reverted: Old line\.\]\n\s+- Kept line\.$/);
+});
+
 test("unknown Classes items are reviewable; layout loss and non-staff posts fail closed", () => {
   const source = OFFICIAL_NOTE_SOURCES[0];
   const unknown = sectionsForPost(post(source, `<h3>Classes</h3><ul><li>Unexpected new category<ul><li>A change</li></ul></li></ul>`), source, roster);
