@@ -129,11 +129,12 @@ heartbeat to go red honestly.
 > `wcl-leaderboard-raid` and `wcl-leaderboard-mplus` (2-day threshold), are not accepted:
 > they go red on the day they turn stale and again on every Monday while they stay stale.
 > The cron moved from 17:23 to **19:23 UTC** after the
-> nightly's September scheduled runs recorded manifest `startedAt` 13:46–16:47 UTC. At
-> 19:23 with the 28h threshold, a single missed night is caught when the previous day's
-> NEWEST manifest (a same-day re-dispatch counts) started before 15:23 UTC. Replayed
-> against September's real manifest history, that held after 12 of those 24 nights; at
-> 17:23 it held after 0 of 24. The recomputed arithmetic is in CLAUDE.md.
+> nightly's September scheduled runs recorded manifest `startedAt` 13:46–16:47 UTC, and
+> `maxRunAgeHours` was lowered from 28 to **26h** (owner decision 2026-09-26). At 19:23
+> with 26h, a single missed night is caught when the previous day's NEWEST manifest (a
+> same-day re-dispatch counts) started before 17:23 UTC. Replayed against September's real
+> manifest history, that held after 22 of those 24 nights (19:23 with 28h: 12; the old
+> 17:23 with 28h: 0). The recomputed arithmetic is in CLAUDE.md.
 
 ### 7. Validation improvements — **addressed**
 

@@ -127,7 +127,9 @@ test("CLAUDE.md: the heartbeat threshold matches data/required-sources.json", ()
      number", which is exactly the kind of claim that rots silently. */
   /* \s+ not a literal space: CLAUDE.md hard-wraps, and this claim happens to straddle
      a line break. Every pattern here must survive rewrapping. */
-  const stated = claim(/\((\d+)h since\s+2026-07-25/, "maxRunAgeHours");
+  /* The date is matched, not pinned: the threshold moved (36 -> 30 -> 28 -> 26), and the
+     claim re-anchors on each change's date. The NUMBER is what this test holds. */
+  const stated = claim(/\((\d+)h since\s+\d{4}-\d{2}-\d{2}/, "maxRunAgeHours");
   assert.equal(
     stated.value,
     required.maxRunAgeHours,
