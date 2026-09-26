@@ -23,7 +23,11 @@ name: Data freshness heartbeat
 #   fail-closed  check-refresh crashed or exited without a usable report, or reported
 #                stale with an empty or "clean" fingerprint.
 #   weekly       a Monday (UTC, `date -u +%u` = 1) run with any key outside
-#                ACCEPTED_KEYS below.
+#                ACCEPTED_KEYS below. The weekday is read when the run EXECUTES, not
+#                for its cron slot: 2 of this heartbeat's 74 scheduled runs since
+#                2026-07-14 (the 08-27 and 08-28 slots) started 8h09m and 7h37m late,
+#                which from 19:23 crosses UTC midnight, and Monday 08-31 started 4h33m
+#                late. A Monday run delayed past midnight skips that week's reminder.
 # Otherwise a stale run SUCCEEDS with a ::warning:: and the full report in its log.
 
 on:

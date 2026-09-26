@@ -1472,18 +1472,24 @@ The A1 blind spot is FIXED (2026-07-24 audit): the history-snapshot
 proof-of-life signal now counts only when strictly newer than the manifest date, so a
 same-dated snapshot can no longer cap the measured age at 24h and mask a missed night.
 **Margin, recomputed 2026-09-25 for the 19:23 UTC cron** (it was 17:23): a single missed
-night is caught only when 24h + (heartbeat time − the previous nightly's manifest
-`startedAt`) exceeds 28h, i.e. that `startedAt` was before 15:23 UTC. September's 24
-scheduled nightlies recorded `startedAt` 13:46–16:47 UTC, so at 19:23 a healthy night
-reads 2.6–5.6h and a single miss 26.6–29.6h: caught after 15 of the 24, missed after
-the 9 that started after 15:23 (at the old 17:23 cron: caught after 0 of 24). One of
-those 9 came right before the only September day with no published manifest: 09-01
-started 15:29:36 and the 09-02 scheduled run failed, so a 19:23 read on 09-02 would have
-aged 27.9h and not fired `run-age`. GitHub
-started the heartbeat 1h54m–3h45m after its cron over its last 20 runs, which has
-widened the window in practice but is not guaranteed; two consecutive misses are always
-caught. Catching every single miss at those start times needs the heartbeat after
-~20:47 UTC or `maxRunAgeHours` at 26 — owner calls, not made here. The agent step's only secret is
+night is caught only when 24h + (heartbeat time − the NEWEST manifest `startedAt` of the
+day before) exceeds 28h, i.e. that `startedAt` was before 15:23 UTC. A same-day
+re-dispatch counts, because the heartbeat reads whichever manifest is newest. The 24
+September scheduled nightlies that published recorded `startedAt` 13:46–16:47 UTC, so at
+19:23 a healthy night reads at most 5.6h. Replayed against the real manifest history
+(re-dispatches started as late as 20:08:50 on 09-05, 19:45:51 on 09-06 and 16:06:50 on
+09-15), a single miss the next day would have read 23.2–29.6h: caught after 12 of the 24
+nights, missed after the other 12 (at the old 17:23 cron: caught after 0 of 24). The one
+September day with no published nightly, 09-02 (its scheduled run failed), never aged
+at all: a local run committed history snapshot 2026-09-02 at 14:04 UTC, and a snapshot
+dated after the newest manifest reads 0h (the real heartbeat that day had no `run-age`).
+GitHub started the heartbeat 1h54m–3h45m after its cron over its last 20 runs; 2 of its
+74 scheduled runs since 2026-07-14 (08-27, 08-28) started over 7.5h late. That delay has
+widened the window in practice but is not guaranteed. Two consecutive misses are always
+caught. Neither lever catches the single misses after a late re-dispatch: `maxRunAgeHours`
+26 at 19:23 catches 22 of the 24 (missed after 09-05, 09-06), and a 20:47 cron at 28h
+catches 21 (also 09-14, which reads 28.0h, on the boundary) — owner calls, not made
+here. The agent step's only secret is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew), the documented inherent
 residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
