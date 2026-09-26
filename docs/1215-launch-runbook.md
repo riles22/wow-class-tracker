@@ -74,7 +74,9 @@ say nine); the check follows the list.
    (`fddd2a6`): comments only; `src/validate.mjs`, `test/build.test.mjs` and
    `test/validate.test.mjs` stop describing 12.1.5 as a notes-only preview.
 9. `12.1.5 launch (pre-staged): paste-discord writes spec.ptr only during an open cycle`
-   (`027fcb9`): the paste-discord skill gets the same open-cycle-only limit as ptr-watch.
+   (`d911aed`, which is `027fcb9` amended with skill prose only: ptr-watch step 4 now names
+   provenance repair as its second between-cycles exception, and its stale "29" count is
+   gone): the paste-discord skill gets the same open-cycle-only limit as ptr-watch.
    While `PHASES.ptr` is null a paste never writes `spec.ptr`; a live read goes to
    `takes[]` (a registered specialist, with a link on a `TAKE_HOSTS` host), to
    `metaNotes[]` (a `generalCreators` author with such a link), or to the run report.
@@ -713,7 +715,9 @@ verification and loot-age rows. The floor stays 5 until 2026-11-01.
 
 Verified during staging (2026-09-26 UTC, in scratch worktrees, never on master):
 
-The counts below are dated measurements of the 9-commit branch (head `027fcb9`). Pass totals
+The counts below are dated measurements of the 9-commit branch at head `027fcb9`. The current
+head `d911aed` differs from it only in two SKILL.md files' prose, which no test reads
+except `instructions:check` (re-run on `d911aed`: passes). Pass totals
 will differ once master gains tests; the fail counts are the part that matters.
 
 - Launch branch alone: `instructions:check` passes; `test:quiet` 701 tests, 673 pass,
