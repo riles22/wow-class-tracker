@@ -81,10 +81,10 @@ export function verdictChanges(oldPayload, newPayload) {
    checkedAt: editing an unrelated section must not announce every note again.
    Keep the full ledger outside the browser payload so removed summaries still
    have their previous text and attribution in the digest. */
-export function officialNoteChanges(oldLedger, newLedger) {
+export function officialNoteChanges(oldLedger, newLedger, sources = OFFICIAL_NOTE_SOURCES) {
   const summaries = ledger => {
     const rows = new Map();
-    for (const config of OFFICIAL_NOTE_SOURCES) {
+    for (const config of sources) {
       const source = ledger?.sources?.[config.id];
       for (const post of source?.posts ?? []) {
         for (const section of post.sections ?? []) {
@@ -168,7 +168,7 @@ const md = s => String(s ?? "")
   .replace(/@|#(?=\d)/g, "$&\u200B")
   .trim();
 
-export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null, skillLogs = [] }) {
+export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null, noteSources = OFFICIAL_NOTE_SOURCES, skillLogs = [] }) {
   const takeId = t => `${t.creator}|${t.spec}|${t.url}`;
   const noteId = n => `${n.creator}|${n.spec}|${n.patchContext}|${n.url}`;
   /* A post number is unique only WITHIN its topic. Every live "Class Tuning Incoming" pass is
@@ -184,7 +184,7 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
   const notes = notesAll.filter(n => !n.superseded);
   const builds = newEntries(oldPayload.ptrBuilds?.builds, newPayload.ptrBuilds?.builds, buildId);
   const verdicts = verdictChanges(oldPayload, newPayload);
-  const officialChanges = officialNoteChanges(oldPayload.officialNotesLedger, newPayload.officialNotesLedger);
+  const officialChanges = officialNoteChanges(oldPayload.officialNotesLedger, newPayload.officialNotesLedger, noteSources);
 
   const lines = [];
   if (manifest?.summary) lines.push(`> ${md(manifest.summary)}`);

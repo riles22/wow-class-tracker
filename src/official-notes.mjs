@@ -2,6 +2,10 @@
    preview summaries nor dispositions are inputs to consensus or projections. */
 import { createHash } from "node:crypto";
 
+/* Every consumer below (and the collector, gate and digest) iterates a source list that
+   defaults to this config. The optional `sources` argument exists for tests only: it lets
+   them exercise a lane no configured source uses at the moment (between PTR cycles, the
+   era "ptr" staff-posts preview) without re-adding a retired row to the real config. */
 export const OFFICIAL_NOTE_SOURCES = Object.freeze([
   { id: "live-hotfixes", topicId: 2336376, slug: "world-of-warcraft-midnight-hotfixes", patch: "12.1", era: "live", mode: "compilation", since: "2026-08-18" },
   { id: "ptr-preview", topicId: 2344395, slug: "midnight-1215-ptr-development-notes", patch: "12.1.5", era: "ptr", mode: "staff-posts" },
@@ -108,10 +112,10 @@ export function postReceipt(post, source, roster) {
 export const sectionIdentity = section => Object.fromEntries(["id", "date", "category", "class", "specKeys", "sha256"].map(k => [k, section[k]]));
 export const postIdentity = post => ({ id: post.id, postNumber: post.postNumber, version: post.version, updatedAt: post.updatedAt, bodySha256: post.bodySha256, sections: post.sections.map(sectionIdentity) });
 
-export function pendingLedger(evidence, previous = { schemaVersion: 1, sources: {} }) {
+export function pendingLedger(evidence, previous = { schemaVersion: 1, sources: {} }, sources = OFFICIAL_NOTE_SOURCES) {
   const ledger = structuredClone(previous);
   ledger.schemaVersion = 1; ledger.sources ??= {};
-  for (const config of OFFICIAL_NOTE_SOURCES) {
+  for (const config of sources) {
     const receipt = evidence.sources[config.id];
     if (receipt?.status !== "success") continue;
     const old = new Map((ledger.sources[config.id]?.posts ?? []).flatMap(p => p.sections).map(s => [s.id, s]));
@@ -145,14 +149,14 @@ function buildRefCovers(ref, key, ptrBuilds, section, config) {
     || (ref.highlight.startsWith(`${cls} (`) && build.specsAffected?.some(s => s === `${spec} ${cls}` || s.startsWith(`${cls} (`)));
 }
 
-export function validateOfficialNotes(ledger, { specs = [], ptrBuilds, requireResolved = false, now = Date.now() } = {}) {
+export function validateOfficialNotes(ledger, { specs = [], ptrBuilds, requireResolved = false, now = Date.now(), sources = OFFICIAL_NOTE_SOURCES } = {}) {
   if (ledger == null) return [];
   const errors = [], roster = new Set(specs.map(s => `${s.class}|${s.spec}`)), ids = new Set();
   const error = message => errors.push(`official-notes.json: ${message}`);
   const validTime = value => typeof value === "string" && Number.isFinite(Date.parse(value)) && Date.parse(value) <= +now + 300000;
   if (ledger.schemaVersion !== 1 || !ledger.sources || Array.isArray(ledger.sources)) return ["official-notes.json: unsupported schema"];
-  for (const key of Object.keys(ledger.sources)) if (!OFFICIAL_NOTE_SOURCES.some(s => s.id === key)) error(`unknown source ${key}`);
-  for (const config of OFFICIAL_NOTE_SOURCES) {
+  for (const key of Object.keys(ledger.sources)) if (!sources.some(s => s.id === key)) error(`unknown source ${key}`);
+  for (const config of sources) {
     const source = ledger.sources[config.id];
     if (!source) { error(`missing ${config.id}`); continue; }
     if (source.topicId !== config.topicId || source.patch !== config.patch || source.era !== config.era) error(`${config.id} source identity changed`);
@@ -200,11 +204,11 @@ export function validateOfficialNotes(ledger, { specs = [], ptrBuilds, requireRe
   return errors;
 }
 
-export function officialNotesView(ledger) {
+export function officialNotesView(ledger, configs = OFFICIAL_NOTE_SOURCES) {
   if (!ledger) return null;
   const previews = [], unresolved = [], sources = [];
   let applied = 0, irrelevant = 0;
-  for (const config of OFFICIAL_NOTE_SOURCES) {
+  for (const config of configs) {
     const source = ledger.sources?.[config.id]; if (!source) continue;
     sources.push({ id: config.id, patch: config.patch, era: config.era, mode: config.mode, checkedAt: source.checkedAt, url: noteUrl(config) });
     for (const section of source.removedSections ?? []) {

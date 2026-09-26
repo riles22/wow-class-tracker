@@ -4,13 +4,15 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { OFFICIAL_NOTE_SOURCES, postIdentity, sectionIdentity, pendingLedger, validateOfficialNotes } from "./official-notes.mjs";
 
-export function checkOfficialNotes({ ledger, evidence, baseLedger, specs, ptrBuilds, now = Date.now() }) {
-  const errors = validateOfficialNotes(ledger, { specs, ptrBuilds, requireResolved: true, now }), warnings = [];
+export function checkOfficialNotes({ ledger, evidence, baseLedger, specs, ptrBuilds, now = Date.now(), sources = OFFICIAL_NOTE_SOURCES }) {
+  const errors = validateOfficialNotes(ledger, { specs, ptrBuilds, requireResolved: true, now, sources }), warnings = [];
   if (!ledger) errors.push("Official-note ledger is missing");
   const stamp = Date.parse(evidence?.checkedAt);
   if (evidence?.schemaVersion !== 1 || !evidence.sources || !Number.isFinite(stamp) || stamp > +now + 300000 || +now - stamp > 36 * 3600000) return { errors: [...errors, "Official-note evidence is missing, stale, or from the future"], warnings };
-  if (Object.keys(evidence.sources).length !== OFFICIAL_NOTE_SOURCES.length) errors.push("Official-note evidence source inventory differs");
-  for (const config of OFFICIAL_NOTE_SOURCES) {
+  if (Object.keys(evidence.sources).length !== sources.length) errors.push("Official-note evidence source inventory differs");
+  // Only configured sources are compared, so a base ledger that still carries a retired
+  // source cannot fail this gate; validateOfficialNotes refuses it in the CURRENT ledger.
+  for (const config of sources) {
     const receipt = evidence.sources[config.id], current = ledger?.sources?.[config.id];
     if (!receipt || receipt.topicId !== config.topicId || receipt.patch !== config.patch || receipt.era !== config.era || !["success", "unreachable", "invalid"].includes(receipt.status)) { errors.push(`${config.id}: evidence identity/status invalid`); continue; }
     if (receipt.status !== "success") {
@@ -20,7 +22,7 @@ export function checkOfficialNotes({ ledger, evidence, baseLedger, specs, ptrBui
       continue;
     }
     if (current?.checkedAt !== evidence.checkedAt || !Array.isArray(receipt.posts) || !receipt.posts.length || JSON.stringify(current?.posts?.map(postIdentity)) !== JSON.stringify(receipt.posts.map(postIdentity))) errors.push(`${config.id}: ledger does not match trusted current source revision/section inventory`);
-    const expected = pendingLedger(evidence, baseLedger ?? undefined).sources[config.id];
+    const expected = pendingLedger(evidence, baseLedger ?? undefined, sources).sources[config.id];
     const removals = source => (source?.removedSections ?? []).map(s => ({ ...sectionIdentity(s), removedAt: s.removedAt }));
     if (JSON.stringify(removals(current)) !== JSON.stringify(removals(expected))) errors.push(`${config.id}: removed-section review inventory differs from committed history`);
   }
