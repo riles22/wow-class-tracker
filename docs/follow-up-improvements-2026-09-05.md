@@ -23,6 +23,21 @@ the representation chart from `/period/latest`, with period/season, role-share a
 roster checks. Omitted nonzero observations block replacement; an existing omitted
 zero remains unchanged. Undated unchanged observations retain their previous dates.
 
+> **Amendment (Riley, 2026-09-25): "Show those specs as blank."** The block above
+> now applies only to an omitted spec whose stored share is above 0.5 percentage
+> points. At or below that bound, a stored 0 included, the stored observation is
+> retired: removed, so the spec reads blank and never as a made-up 0, while the
+> rest of the period lands. Measured from the committed run manifests, the hold
+> fired on 9 of the 13 nightly runs from 2026-09-13 to 2026-09-25 (2 landed; 2
+> failed for other reasons, 09-16 invalid and 09-23 incomplete), each time
+> withholding a whole period of current shares. On all 9, the largest stored
+> share among the specs the manifest names as omitted was 0.2.
+> The bound is `MYTHICSTATS_RETIRE_MAX_SHARE` in `src/fetch-stable-metrics.mjs`;
+> the collector, `apply-metrics.mjs` and the publish-side
+> `check-stable-metrics.mjs` all read it, and the checker re-derives the required
+> retirements from Git rather than trusting the receipt. The paragraph above is
+> kept as the original record.
+
 Live verification at 18:03 UTC reproduced 40 Murlok observations and 39 Mythicstats
 observations (period 1079, printed shares totaling 99.9% after rounding). All values
 and dates already matched published data, so no numeric data was rewritten. Murlok's

@@ -4,7 +4,7 @@ import { readFile, mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { parseMurlok, parseMythicstats, STABLE_SERIES, metricKey } from "../src/stable-metric-parsers.mjs";
-import { collectStableMetrics, fetchMetricPage, runStableMetrics, STABLE_URLS, digest } from "../src/fetch-stable-metrics.mjs";
+import { collectStableMetrics, fetchMetricPage, runStableMetrics, STABLE_URLS, digest, storedSeries, MYTHICSTATS_RETIRE_MAX_SHARE } from "../src/fetch-stable-metrics.mjs";
 import { checkStableMetrics } from "../src/check-stable-metrics.mjs";
 
 // Only taxonomy comes from the project. Receipt tests must not start failing when
@@ -18,7 +18,9 @@ const mythicOptions = { ...options, finalUrl: "https://mythicstats.com/period/10
 const baselineRows = [
   ...["DPS", "Healer", "Tank"].flatMap(role => parseMurlok(fixtures[`murlok-${role.toLowerCase()}`], { ...options, role }).rows),
   ...parseMythicstats(fixtures["mythicstats-1079"], mythicOptions).rows,
-  // Synthetic retained zero exercises the source's real missing-Fire entry.
+  // Synthetic stored zero for the source's real missing-Fire entry. Since the 2026-09-25 owner
+  // decision an omitted stored share at or below the bound is retired, so every default
+  // collection below also exercises the retirement lane end to end.
   { class: "Mage", spec: "Fire", source: "mythicstats", bracket: "mplus", ...STABLE_SERIES.mythicstats, value: 0, asOf: "2026-09-04" },
 ];
 for (const row of baselineRows) {
@@ -35,6 +37,11 @@ function mergeRows(baseline, updates) {
     const { class: _class, spec: _spec, ...metric } = row;
     const i = spec.metrics.findIndex(m => m.source === row.source && m.bracket === row.bracket && m.name === row.name);
     if (i < 0) spec.metrics.push(metric); else spec.metrics[i] = metric;
+  }
+  for (const row of updates.retire ?? []) { // mirrors apply-metrics.mjs's Mythicstats retire lane
+    const spec = result.find(s => metricKey(s) === metricKey(row));
+    const i = spec.metrics.findIndex(m => m.source === row.source && m.bracket === row.bracket && m.name === row.name);
+    if (i >= 0) spec.metrics.splice(i, 1);
   }
   return result;
 }
@@ -132,14 +139,100 @@ test("collector keeps source time and unchanged undated observations; genuine ab
   assert.deepEqual(verify(aged, { baseline: old, current: mergeRows(old, aged.updates) }), []);
 });
 
-test("missing previously nonzero Mythicstats share holds the whole provider atomically", async () => {
+const FIRE = { class: "Mage", spec: "Fire", source: "mythicstats", bracket: "mplus", name: STABLE_SERIES.mythicstats.name };
+function withMageShares(shares) {
   const baseline = structuredClone(roster);
-  baseline.find(s => s.class === "Mage" && s.spec === "Fire").metrics.find(m => m.source === "mythicstats").value = 1.5;
-  const result = await collect({ roster: baseline });
-  assert.equal(result.evidence.sources.mythicstats.status, "partial");
-  assert.match(result.evidence.sources.mythicstats.details, /nonzero/);
-  assert.equal(result.updates.metrics.length, 40);
-  assert.deepEqual(verify(result, { baseline, current: mergeRows(baseline, result.updates) }), []);
+  for (const [spec, value] of Object.entries(shares)) baseline.find(s => metricKey(s) === `Mage|${spec}`).metrics.find(m => m.source === "mythicstats").value = value;
+  return baseline;
+}
+function withoutFireShare() {
+  const baseline = structuredClone(roster), fire = baseline.find(s => metricKey(s) === "Mage|Fire");
+  fire.metrics = fire.metrics.filter(m => m.source !== "mythicstats");
+  return baseline;
+}
+// The fixture prints Frost Mage as 0.0, so dropping its entry leaves every printed total intact.
+const frostlessFetch = async url => url.endsWith("/period/1079")
+  ? new Response(fixtures["mythicstats-1079"].replace(/<li\b[^>]*>(?:(?!<\/li>)[\s\S])*alt="frost mage"(?:(?!<\/li>)[\s\S])*<\/li>/, ""))
+  : fakeFetch(url);
+
+test("an omitted Mythicstats spec with a stored share at or below the bound is retired to blank, never zeroed or carried forward (owner decision 2026-09-25)", async () => {
+  assert.equal(MYTHICSTATS_RETIRE_MAX_SHARE, 0.5, "the owner's bound, in percentage points of the representation series");
+  for (const value of [0, 0.1, 0.5]) {
+    const baseline = withMageShares({ Fire: value });
+    const result = await collect({ roster: baseline }), receipt = result.evidence.sources.mythicstats;
+    assert.equal(receipt.status, "success", `stored ${value}`);
+    assert.deepEqual(receipt.omittedSpecs, ["Mage|Fire"]); assert.deepEqual(receipt.retiredSpecs, ["Mage|Fire"]);
+    assert.deepEqual(result.updates.retire, [FIRE]);
+    assert.equal(result.updates.metrics.length, 79, "the rest of the period still lands");
+    assert.ok(!result.updates.metrics.some(r => r.source === "mythicstats" && metricKey(r) === "Mage|Fire"), "never a made-up zero");
+    const current = mergeRows(baseline, result.updates);
+    assert.ok(!current.find(s => metricKey(s) === "Mage|Fire").metrics.some(m => m.source === "mythicstats"), "absent, so the page shows it blank");
+    assert.deepEqual(verify(result, { baseline, current }), []);
+  }
+  const both = await collect({ fetchImpl: frostlessFetch });
+  assert.equal(both.evidence.sources.mythicstats.status, "success");
+  assert.deepEqual(both.evidence.sources.mythicstats.retiredSpecs.toSorted(), ["Mage|Fire", "Mage|Frost"]);
+  assert.deepEqual(verify(both), []);
+  // A retired spec comes back by itself, dated by this observation, once a period prints it again.
+  const afterRetire = mergeRows(roster, both.updates), back = await collect({ roster: afterRetire });
+  const frost = back.updates.metrics.find(r => r.source === "mythicstats" && metricKey(r) === "Mage|Frost");
+  assert.deepEqual([frost.value, frost.asOf], [0, checkedAt.slice(0, 10)]);
+  assert.deepEqual(back.evidence.sources.mythicstats.retiredSpecs, [], "Fire is already absent: nothing left to retire");
+  assert.deepEqual(verify(back, { baseline: afterRetire, current: mergeRows(afterRetire, back.updates) }), []);
+  // Nothing stored for the omitted spec: nothing to retire, and updates keep their ordinary shape.
+  const bare = withoutFireShare(), none = await collect({ roster: bare });
+  assert.equal(none.evidence.sources.mythicstats.status, "success");
+  assert.deepEqual(none.evidence.sources.mythicstats.retiredSpecs, []); assert.deepEqual(Object.keys(none.updates), ["metrics"]);
+  assert.deepEqual(verify(none, { baseline: bare, current: mergeRows(bare, none.updates) }), []);
+});
+
+test("an omitted Mythicstats spec with a stored share above the bound still holds the whole provider for review", async () => {
+  const above = withMageShares({ Fire: 0.6 });
+  const held = await collect({ roster: above }), receipt = held.evidence.sources.mythicstats;
+  assert.equal(receipt.status, "partial");
+  assert.match(receipt.details, /^Omitted Mage\|Fire \(0\.6%\) has a stored share above the 0\.5% retirement bound; source held for review$/);
+  assert.equal(held.updates.metrics.length, 40); assert.deepEqual(Object.keys(held.updates), ["metrics"]);
+  assert.deepEqual(receipt.retiredSpecs ?? [], []);
+  assert.deepEqual(verify(held, { baseline: above, current: mergeRows(above, held.updates) }), []);
+  // One share above the bound holds the period even while another omitted spec could retire.
+  const mixed = await collect({ roster: above, fetchImpl: frostlessFetch });
+  assert.equal(mixed.evidence.sources.mythicstats.status, "partial"); assert.deepEqual(Object.keys(mixed.updates), ["metrics"]);
+  assert.match(mixed.evidence.sources.mythicstats.details, /Omitted Mage\|Fire \(0\.6%\) has/);
+  assert.deepEqual(verify(mixed, { baseline: above, current: mergeRows(above, mixed.updates) }), []);
+});
+
+test("the publish-side checker re-derives the retirement set and bound from Git instead of trusting the receipt", async () => {
+  const result = await collect(); // default roster: the omitted Fire stores 0, so it retires
+  const check = forged => verify(rebind(forged), { current: mergeRows(roster, forged.updates) }).join();
+  assert.match(verify(result, { current: mergeRows(roster, { metrics: result.updates.metrics }) }).join(), /canonical data differs/, "collected but not applied");
+  const dropped = structuredClone(result); delete dropped.updates.retire; dropped.evidence.sources.mythicstats.retiredSpecs = [];
+  assert.match(check(dropped), /retirements must be exactly/);
+  const receiptOnly = structuredClone(result); receiptOnly.evidence.sources.mythicstats.retiredSpecs = [];
+  assert.match(check(receiptOnly), /retirements must be exactly/);
+  const printed = structuredClone(result); printed.updates.retire.push({ ...FIRE, spec: "Arcane" });
+  assert.match(check(printed), /duplicated or non-Mythicstats/, "a spec the chart still prints");
+  const murlok = structuredClone(result); murlok.updates.retire[0].source = "murlok";
+  assert.match(check(murlok), /non-Mythicstats/);
+  const valued = structuredClone(result); valued.updates.retire[0].value = 0;
+  assert.match(check(valued), /stable-metric retirement/);
+  const empty = structuredClone(result); empty.updates.retire = [];
+  assert.match(check(empty), /trusted receipt/);
+  // The same receipt against a Git baseline that stores 0.6 fails whether it retires or carries.
+  const above = withMageShares({ Fire: 0.6 }), forged = structuredClone(result);
+  forged.evidence.sources.mythicstats.baselineSha256 = digest(storedSeries(above, "mythicstats")); rebind(forged);
+  assert.match(verify(forged, { baseline: above, current: mergeRows(above, forged.updates) }).join(), /above the 0\.5% retirement bound/);
+  assert.match(verify(forged, { baseline: above, current: mergeRows(above, { metrics: forged.updates.metrics }) }).join(), /above the 0\.5% retirement bound/);
+  // A provider that did not succeed may retire nothing.
+  const pending = await collect({ fetchImpl: async url => url.endsWith("/period/1079") ? new Response("not found", { status: 404 }) : fakeFetch(url) });
+  assert.equal(pending.evidence.sources.mythicstats.status, "pending"); assert.deepEqual(Object.keys(pending.updates), ["metrics"]);
+  pending.updates.retire = structuredClone(result.updates.retire);
+  assert.match(check(pending), /failed\/partial source must leave/);
+  // A receipt written before retirement existed has no retiredSpecs field: fine with nothing to retire, refused otherwise.
+  const bare = withoutFireShare(), legacy = await collect({ roster: bare });
+  delete legacy.evidence.sources.mythicstats.retiredSpecs;
+  assert.deepEqual(verify(legacy, { baseline: bare, current: mergeRows(bare, legacy.updates) }), []);
+  const legacyRetiring = structuredClone(result); delete legacyRetiring.evidence.sources.mythicstats.retiredSpecs;
+  assert.match(check(legacyRetiring), /retirements must be exactly/);
 });
 
 test("individual provider failure and a half-landed weekly period leave prior rows intact", async () => {

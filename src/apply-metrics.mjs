@@ -10,6 +10,14 @@
                   bloodmallet (validate.mjs's SIM_TIER_REQUIRED). It was implemented here but
                   missing from this list, which is how a whole harvest came to omit it and left
                   the sim-tier guard passing vacuously until 2026-08-20.
+     "retire":   [{ "class", "spec", "source": "mythicstats", "bracket": "mplus", "name" }]
+                  MYTHICSTATS ONLY — the stable-metric collector's lane for a spec that
+                  dropped off a Mythicstats period with a stored share at or below
+                  MYTHICSTATS_RETIRE_MAX_SHARE (owner decision 2026-09-25): that one stored
+                  row is removed so the spec reads blank, never a made-up 0. Any other
+                  source, series or bracket, a stored share above the bound, or a tuple also
+                  present in "metrics" refuses the whole merge; this is not a general delete
+                  path. A tuple with no stored row is a no-op.
    Metrics upsert by (source, bracket, name); profiles replace fightProfile.
    Exact class+spec matching; refuses to write on any unmatched row or
    validation failure. */
@@ -18,6 +26,8 @@ import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { validateData, loadData } from "./validate.mjs";
+import { MYTHICSTATS_RETIRE_MAX_SHARE } from "./fetch-stable-metrics.mjs";
+import { STABLE_SERIES } from "./stable-metric-parsers.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -41,6 +51,28 @@ export async function applyMetrics(dataPath, root = ROOT) {
     if (row.sample != null) entry.sample = structuredClone(row.sample); // reviewed WCL leaderboard provenance
     if (existing >= 0) spec.metrics[existing] = entry; else spec.metrics.push(entry);
     metricsApplied++;
+  }
+
+  // Mythicstats retirement only (see the header). Every refusal throws before anything is written.
+  let metricsRetired = 0;
+  const upserted = new Set((input.metrics ?? []).map(row => `${row.class}|${row.spec}|${row.source}|${row.bracket}|${row.name}`));
+  for (const row of input.retire ?? []) {
+    const label = `retire: ${row?.class} / ${row?.spec} (${row?.source})`;
+    if (row?.source !== "mythicstats" || row.bracket !== "mplus" || row.name !== STABLE_SERIES.mythicstats.name) {
+      throw new Error(`${label} — only the Mythicstats "${STABLE_SERIES.mythicstats.name}" M+ series can be retired; nothing written`);
+    }
+    const spec = byKey.get(`${row.class}|${row.spec}`);
+    if (!spec) { unmatched.push(label); continue; }
+    if (upserted.has(`${row.class}|${row.spec}|${row.source}|${row.bracket}|${row.name}`)) {
+      throw new Error(`${label} is also upserted — nothing written`);
+    }
+    const i = (spec.metrics ?? []).findIndex(m => m.source === row.source && m.bracket === row.bracket && m.name === row.name);
+    if (i < 0) continue;
+    if (!(spec.metrics[i].value <= MYTHICSTATS_RETIRE_MAX_SHARE)) {
+      throw new Error(`${label} stores ${spec.metrics[i].value}%, above the ${MYTHICSTATS_RETIRE_MAX_SHARE}% retirement bound — nothing written`);
+    }
+    spec.metrics.splice(i, 1);
+    metricsRetired++;
   }
 
   for (const row of input.profiles ?? []) {
@@ -130,7 +162,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
   }
 
   await writeFile(path.join(root, "data", "specs.json"), JSON.stringify(data.specs, null, 2) + "\n");
-  return { metricsApplied, profilesApplied, survivabilityApplied, playstyleApplied, ptrDummyApplied, tierSetsApplied };
+  return { metricsApplied, metricsRetired, profilesApplied, survivabilityApplied, playstyleApplied, ptrDummyApplied, tierSetsApplied };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -146,6 +178,7 @@ if (isMain) {
       `${result.metricsApplied} metric(s)`, `${result.profilesApplied} fight profile(s)`,
       `${result.survivabilityApplied} survivability tier(s)`, `${result.playstyleApplied} playstyle(s)`,
     ];
+    if (result.metricsRetired) parts.push(`${result.metricsRetired} Mythicstats row(s) retired`);
     if (result.ptrDummyApplied) parts.push(`${result.ptrDummyApplied} Dummy Dome`);
     if (result.tierSetsApplied) parts.push(`${result.tierSetsApplied} tier set(s)`);
     console.log(`✓ applied ${parts.join(", ")} → data/specs.json`);

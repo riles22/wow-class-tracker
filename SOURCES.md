@@ -115,8 +115,12 @@ datetime>` value, never its relative age label. Mythicstats reads only the
 "Spec representation in top keys" section, checks roster and role totals, and
 distinguishes visible percentages from bar geometry. An undated unchanged
 observation keeps its original `asOf`; changed values get an explicitly
-observation-based date. Omitted zero-share specs stay absent or retain a previously
-verified zero; an omitted nonzero share blocks that source. No failed or partial
+observation-based date. A spec the period omits never gets a made-up zero. Since
+the owner decision of 2026-09-25 ("Show those specs as blank"), an omitted spec whose
+stored share is at most 0.5 percentage points (a stored 0 included) has that stored row
+retired, so it reads blank while the rest of the period lands; an omitted share above
+0.5 still blocks that source for review, as every nonzero share did under the
+2026-09-05 rule. No failed or partial
 source replaces published data. Receipts and prepared updates travel in a
 separate pre-agent artifact, checked by `src/check-stable-metrics.mjs` at publish.
 
