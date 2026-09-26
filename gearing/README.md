@@ -108,7 +108,11 @@ docs/adr-simc-curated-profiles.md remain as the design record, marked Retired.
 ## Ground rules (carried over from the standalone project)
 
 - **Nothing is inferred.** Item fields come from the item's own tooltip; absent fields stay
-  null. Values only the community sheet has are marked provisional in the UI.
+  null. The Item levels panel labels the Venomstone rows **pre-launch est.** in visible text:
+  they are pre-launch estimates carried from the prior community sheet (2026-09-26, owner
+  decision; `ESTIMATE_KEYS` in the template, test-pinned to the `authorCaveats` line in
+  `data/sheet-rewards.json`). The broader provisional tags on every sheet-only column were
+  retired 2026-08-18 at Riley's request.
 - **`data/weapon-proficiency.json` and `data/stat-priority-overrides.json` are curated,
   not scraped** — their provenance headers say exactly where each fact came from.
 - Harvesters refuse to overwrite data on unexplained loot-set changes
