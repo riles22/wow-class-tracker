@@ -171,12 +171,15 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
      appears. The take/era machinery reads as closed (expertRead null, PTR_METRIC_NAMES
      null) and the frozen forecast (B6) carries the pre-launch read through the window. */
   assert.equal(PHASES.ptr, null);
-  /* The in-season patch (12.1.5 inside Season 2) is DORMANT until it ships: display-only on
+  /* The in-season patch (12.1.5 inside Season 2), set by the launch commit: display-only on
      the page, where three build-time era tokens read it and nothing else (off the page,
      validate.mjs's feed patch ceiling and the label-flip gate). A literal pin for the same reason
-     as the lines around it — setting it is the owner's launch edit, and that commit
-     updates this line to the { label, since } it sets, or fails here first. */
-  assert.equal(PHASES.livePatch, null);
+     as the lines around it — any later edit to it is deliberate and fails here first. */
+  /* FIXTURE DATE: "2099-01-01" is the pre-staged placeholder (the release date was not
+     announced when this was staged). The launch-morning edit replaces it with the real US
+     release date here and in src/normalize.mjs together, and deletes this comment
+     (docs/1215-launch-runbook.md). */
+  assert.deepEqual(PHASES.livePatch, { label: "12.1.5", since: "2099-01-01" });
   assert.equal(PHASES.patchName, "Curse of Ula'tek");
   /* liveSince is the flip date (2026-08-19 audit, B2): drawer metric rows older than it
      get a visible previous-season tag. It must move WITH liveSeason at every flip, so it
