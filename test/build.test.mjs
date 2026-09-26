@@ -71,8 +71,9 @@ test("build produces the tracker and fetchable launcher icons", async () => {
     "…and its phone form must carry the era too, so attribution survives a mobile screenshot");
   assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
   /* The feed heading: an open PTR cycle's build feed carries its patch label; between
-     cycles it is named for the SEASON (2026-09-25), because within a season the list
-     spans more than one patch. This expectation changed with that decision. */
+     cycles it is named for the SEASON (2026-09-25), because the list is the season's feed
+     and 12.1.5's entries join 12.1's in it after launch. This expectation changed with that
+     decision. */
   const feedHeading = PHASES.ptr ? `${eraDisplay} build feed` : `${seasonName(PHASES.liveSeason)} patch feed`;
   assert.ok(html.includes(`>${feedHeading}<`), `patch-feed heading must read "${feedHeading}"`);
   assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
@@ -81,12 +82,19 @@ test("build produces the tracker and fetchable launcher icons", async () => {
 test("a mid-season livePatch moves the chip, its phone form and the Live: stamp, nothing else", async () => {
   /* PHASES.livePatch is dormant (null) until 12.1.5 ships; this is the launch state, built
      now so the launch edit is a known quantity. `since` is a FIXTURE date, not a release
-     date: the build never reads it. */
+     date: the build never reads it.
+     Both sides are fixtures with ptr AND livePatch forced, never the real PHASES as-is.
+     Built from the real object, "dormant" and "launched" become the same thing once the
+     launch commit sets livePatch (nothing would move, 2026-09-25 review), and a later PTR
+     cycle's ptr would outrank the fixture. Forced, this proves the same thing before the
+     launch commit, after it and during a PTR cycle, so this test needs no edit at launch
+     (the launch commit's deliberate edits are listed beside livePatch in CLAUDE.md). */
   const { PHASES } = await import("../src/normalize.mjs");
   const { eraTokensFor } = await import("../src/build.mjs");
   const livePatch = { label: "12.1.5", since: "2026-12-01" };
-  const dormant = eraTokensFor(PHASES);
-  const launched = eraTokensFor({ ...PHASES, livePatch });
+  const between = { ...PHASES, ptr: null, livePatch: null };
+  const dormant = eraTokensFor(between);
+  const launched = eraTokensFor({ ...between, livePatch });
 
   assert.equal(launched.__ERA_CHIP__, `12.1.5 — ${PHASES.patchName.toUpperCase()}`);
   assert.equal(launched.__ERA_SHORT__, "12.1.5");
@@ -99,14 +107,26 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
     "only the three patch-naming tokens may read livePatch");
   // An open PTR cycle still outranks it, exactly as before livePatch existed.
   const ptr = { marker: "12.2 PTR", label: "12.2 PTR" };
-  assert.deepEqual(eraTokensFor({ ...PHASES, ptr, livePatch }), eraTokensFor({ ...PHASES, ptr }));
+  assert.deepEqual(eraTokensFor({ ...between, ptr, livePatch }), eraTokensFor({ ...between, ptr }));
 
-  /* The whole page. Set the REAL PHASES.livePatch (the launch edit's exact effect: the
-     payload builder sees it too) and build into a temp root, never the shared dist/. With
-     the three tokens swapped back, the page must be byte-identical to the dormant build:
-     same payload, so the same column qualifiers, drawer headings and frozen-forecast
-     qualifier ("12.1 forecast — frozen <date>", computed client-side from the payload), and
-     the same CSP hashes. */
+  /* The whole page. Build into a temp root, never the shared dist/, twice: with the REAL
+     PHASES.livePatch forced to null, then set to the fixture (the launch edit's exact
+     effect: the payload builder sees it too). PHASES.ptr stays as it really is, so the
+     expected swaps come from the real ptr state: the three tokens between cycles, none at
+     all while a PTR cycle is open (it outranks livePatch, so the page must not move). With
+     those swapped back, the page must be byte-identical to the dormant build: same
+     payload, so the same column qualifiers, drawer headings and frozen-forecast qualifier
+     ("12.1 forecast — frozen <date>", computed client-side from the payload), and the same
+     CSP hashes. */
+  const pageDormant = eraTokensFor({ ...PHASES, livePatch: null });
+  const pageLaunched = eraTokensFor({ ...PHASES, livePatch });
+  const pageMoved = Object.keys(pageLaunched).filter(k => pageLaunched[k] !== pageDormant[k]).sort();
+  assert.deepEqual(pageMoved, PHASES.ptr ? [] : moved);
+  const markup = {
+    __ERA_CHIP__: v => `<span class="pc-full">${v}</span>`,
+    __ERA_SHORT__: v => `<span class="pc-short">${v}</span>`,
+    __ERA_TRACKED_STAMP__: v => `<span>${v}</span>`,
+  };
   const { mkdtemp, cp, rm } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
   const root = await mkdtemp(path.join(tmpdir(), "tracker-livepatch-"));
@@ -114,16 +134,13 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
   try {
     await cp(path.join(ROOT, "data"), path.join(root, "data"), { recursive: true });
     await cp(path.join(ROOT, "src"), path.join(root, "src"), { recursive: true });
+    PHASES.livePatch = null;
     const before = await readFile((await build(root)).outPath, "utf8");
     PHASES.livePatch = livePatch;
     const after = await readFile((await build(root)).outPath, "utf8");
     PHASES.livePatch = saved;
 
-    const swaps = [
-      [`<span class="pc-full">${launched.__ERA_CHIP__}</span>`, `<span class="pc-full">${dormant.__ERA_CHIP__}</span>`],
-      [`<span class="pc-short">${launched.__ERA_SHORT__}</span>`, `<span class="pc-short">${dormant.__ERA_SHORT__}</span>`],
-      [`<span>${launched.__ERA_TRACKED_STAMP__}</span>`, `<span>${dormant.__ERA_TRACKED_STAMP__}</span>`],
-    ];
+    const swaps = pageMoved.map(k => [markup[k](pageLaunched[k]), markup[k](pageDormant[k])]);
     let restored = after;
     for (const [from, to] of swaps) {
       assert.equal(after.split(from).length - 1, 1, `the launched page must carry ${from} exactly once`);
@@ -149,6 +166,24 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
     PHASES.livePatch = saved;
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("the gearing page's chip names the same live patch as the tracker", async () => {
+  /* The two pages' bars mirror each other BY HAND (CLAUDE.md, "Gearing carries the same
+     bar"), and gearing's chip is a literal in its own template, so setting PHASES.livePatch
+     does not move it. Without this, the launch commit would leave the two site tabs naming
+     different patches (2026-09-25 review). Compared with the LIVE patch (livePatch, else
+     liveLabel), not with the tracker's chip, because an open PTR cycle takes the tracker's
+     chip over while gearing stays about the live season's gear. The launch commit that sets
+     livePatch edits gearing's chip too and runs `npm run gearing:build`, or reds here. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  const tpl = await readFile(path.join(ROOT, "gearing", "src", "app.template.html"), "utf8");
+  const chip = /<span class="patchchip"><span class="pc-full">([^<]*)<\/span><span class="pc-short">([^<]*)<\/span><\/span>/.exec(tpl);
+  assert.ok(chip, "gearing's patch chip markup must be findable");
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  assert.equal(chip[2], live, "gearing's phone chip must name the live patch");
+  assert.equal(chip[1].replaceAll("&mdash;", "—"), `${live} — ${PHASES.patchName.toUpperCase()}`,
+    "gearing's full chip must name the live patch and the patch name");
 });
 
 test("the frozen forecast artifact loads, and a phase-MATCHED artifact is INERT", async () => {

@@ -85,8 +85,10 @@ export const PHASES = {
      (render.mjs `meta.phases`), so no client-side prose can start reading it by accident.
      That is why liveLabel, seasonLabels.s2 and LIVE_LEADERBOARDS.label (wcl-live.mjs)
      never move within a season. `since` is the one recorded launch date; the Bloodmallet
-     adoption rule (refresh-metrics skill) and the creator-take framing rule
-     (watch-creators skill) read it. */
+     adoption rule (refresh-metrics skill, which holds on LABEL_FLIP_DUE below until this
+     is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
+     page's chip is a hand-kept literal that must name the same live patch; a root build
+     test compares the two. */
   livePatch: null,
   seasonOrder: ["s1", "s2"],
   seasonLabels: { s1: "12.0.7", s2: "12.1" },
@@ -97,11 +99,14 @@ export const PHASES = {
    missed. If 12.1.5 ships and PHASES.livePatch is never set, the chip keeps announcing
    "12.1" under a patch that has moved on, and no gate, test or data check objects.
    `check-refresh --age` reports `live-patch-label` from LABEL_FLIP_DUE onwards (that date
-   INCLUSIVE) while PHASES.livePatch?.label is not LABEL_FLIP_EXPECTED.
+   INCLUSIVE) while the live patch the chip names (PHASES.livePatch?.label, else liveLabel)
+   is still OLDER than LABEL_FLIP_EXPECTED.
    INERT while LABEL_FLIP_DUE is null. OWNER ACTION: when Blizzard announces the release
-   date, set LABEL_FLIP_DUE to the first date an unflipped chip should count as a
-   violation. The gate keys on the LABEL VALUE, so setting livePatch silences it for good;
-   it cannot become a standing nag. */
+   date, set LABEL_FLIP_DUE to that date. It is then the recorded release date: the
+   violation text calls it that, and the Bloodmallet hold keys on it until livePatch.since
+   exists. The gate asks "older", not "different", so it stays silent once the chip reaches
+   12.1.5, at a later in-season patch and after the next season flip (livePatch back to
+   null, liveLabel moved on); nothing needs retiring (check-refresh.mjs `labelFlipViolation`). */
 export const LABEL_FLIP_EXPECTED = "12.1.5";
 export const LABEL_FLIP_DUE = null;
 

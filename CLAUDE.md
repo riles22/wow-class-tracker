@@ -379,23 +379,34 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label, DORMANT (`null`)
   until 12.1.5 ships** (added 2026-09-25). 12.1.5 is a mid-season patch inside Season 2,
   not a new season: `liveSeason`, `liveLabel` "12.1", `liveSince`, `SNAPSHOT_PHASE`,
-  `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. The owner launch
-  commit sets `livePatch = { label: "12.1.5", since: "<launch date>" }` and updates its
-  literal pin in `test/normalize.test.mjs`. It is **display-only**: `eraTokensFor`
+  `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. **The owner launch
+  commit makes three edits:** it sets `livePatch = { label: "12.1.5", since: "<launch
+  date>" }`, updates the literal pin in `test/normalize.test.mjs`, and changes the gearing
+  page's chip (`pc-full`/`pc-short` in `gearing/src/app.template.html`, then
+  `npm run gearing:build`). Gearing's chip is a hand-kept literal, like the rest of the
+  mirrored bar, so `livePatch` does not reach it; a root build test compares it with the
+  live patch and reds until it matches. It is **display-only**: `eraTokensFor`
   (build.mjs) reads it for exactly three tokens, the masthead chip (`__ERA_CHIP__`), its
   phone form (`__ERA_SHORT__`) and the "Live:" stamp. `__ERA_BASELINE__` stays on
   `liveLabel` because it names the consensus season, and `meta.phases` strips the field, so
   no client-side label can read it. A build test sets it and proves the page changes in
-  those three places and nowhere else. `since` is the one recorded launch date; the
-  refresh-metrics Bloodmallet adoption rule and the watch-creators framing rule read it.
+  those three places and nowhere else; its fixtures force `ptr` and `livePatch`, so it
+  proves the same thing after the launch commit. `since` is the one recorded launch date;
+  the watch-creators framing rule reads it, and so does the refresh-metrics Bloodmallet
+  adoption rule, which holds on `LABEL_FLIP_DUE` until `since` exists.
   **Label-flip heartbeat** (owner decision for 12.1.5): `check-refresh --age` reports the
-  fingerprint key **`live-patch-label`** from `LABEL_FLIP_DUE` (inclusive) while
-  `PHASES.livePatch?.label` is not `LABEL_FLIP_EXPECTED` ("12.1.5"). Both constants sit
-  beside `PHASES` in `normalize.mjs`, and `LABEL_FLIP_DUE` is `null`, which keeps the gate
-  inert. **Owner action, one line: when Blizzard announces the release date, set
-  `LABEL_FLIP_DUE` in `src/normalize.mjs` to the first date an unflipped chip should count
-  as a violation.** The gate keys on the label VALUE, so setting `livePatch` silences it
-  permanently; if the release slips, move the date.
+  fingerprint key **`live-patch-label`** from `LABEL_FLIP_DUE` (inclusive) while the live
+  patch the chip names (`PHASES.livePatch?.label`, else `liveLabel`) is still OLDER than
+  `LABEL_FLIP_EXPECTED` ("12.1.5"). Dotted labels compare segment by segment; a label that is
+  not purely dotted numbers falls back to exact equality. Both constants sit beside `PHASES`
+  in `normalize.mjs`, and `LABEL_FLIP_DUE` is `null`, which keeps the gate inert. **Owner
+  action, one line: when Blizzard announces the release date, set `LABEL_FLIP_DUE` in
+  `src/normalize.mjs` to that date**; if the release slips, move it. The heartbeat runs
+  daily at 17:23 UTC (`freshness.yml`), so a launch commit that lands later than that on
+  release day costs one red run. Because the gate tests "older" rather than "different",
+  it goes quiet once the chip reaches 12.1.5 and stays quiet at later in-season patches and
+  after the next season flip (`livePatch` back to `null`, `liveLabel` moved on). Nothing
+  needs retiring.
 - **`dataHealth()` (`render.mjs`)** computes the frozen-series banner: every metric,
   `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
   announced as a Warcraft Logs outage. Staleness is relative to the data's own newest
@@ -702,7 +713,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   is no PTR (a live tuning post falls back to `kind: "build"`, so the kind alone could not
   tell — this was the mislabel render.mjs's own residue note exists to catch); the footer
   heading is a **"patch feed"** between cycles, named for the season since 2026-09-25
-  (**"Season 2 patch feed"**, because one season's list spans 12.1 and 12.1.5); the
+  (**"Season 2 patch feed"**: it is the season's one list, and 12.1.5's entries join
+  12.1's there after launch); the
   **"PTR verdict" sort option hides** when
   the era filter is rendering no verdict chips; the lede states **both bracket counts** when
   the consensus is split, because a single figure contradicted the toolbar two rows below it;

@@ -45,8 +45,8 @@ export function eraTokensFor(phases) {
     __ERA_PTR_BTN__: phases.ptr?.label ?? "",
     // "build feed" is PTR vocabulary. Between cycles the same list is mostly live
     // hotfixes and class-tuning posts, so it is a patch feed (audit 2026-08-22). Named for
-    // the SEASON since 2026-09-25: within a season the list spans more than one patch
-    // (12.1, then 12.1.5), so a patch label would misattribute half of it.
+    // the SEASON since 2026-09-25: it is the season's one list, and 12.1.5's entries join
+    // 12.1's after launch, so a single patch label would misattribute the other patch's.
     __ERA_FEED_HEADING__: phases.ptr ? `${eraDisplay} build feed` : `${seasonName(phases.liveSeason)} patch feed`,
     // __ERA_FOOTCOVER__ retired 2026-08-18: the footer identity block it fed was
     // removed at Riley's request; the masthead chip + baseline carry the same era info.

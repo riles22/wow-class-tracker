@@ -721,17 +721,20 @@ test("age gate: once flipped, the check goes quiet forever", async () => {
 /* ---- the in-season label flip (12.1.5 owner decision 6) ----
    Same one-shot shape as the two gates above: a dated owner action (set PHASES.livePatch
    when 12.1.5 ships) that nothing else notices being missed. Dormant until the owner
-   records a release date in LABEL_FLIP_DUE. */
+   records the release date in LABEL_FLIP_DUE. Every fixture names its own liveLabel, so a
+   later season flip in the real PHASES cannot change what these tests exercise. */
 
 const LABEL_KEY = "live-patch-label";
-const labelFlipAt = (now, labelFlip) => checkFreshness(config, goodManifest(), freshData(), now, null, { labelFlip });
+const SEASON_OPENING = "12.1"; // fixture: the season's opening label, which a mid-season patch leaves in place
+const labelFlipAt = (now, labelFlip) => checkFreshness(config, goodManifest(), freshData(), now, null,
+  { labelFlip: { liveLabel: SEASON_OPENING, ...labelFlip } });
 
 test("label-flip gate: inert while no due date is recorded, at any date", () => {
   for (const now of ["2026-09-25", "2027-06-01"]) {
     const r = labelFlipAt(now, { due: null, livePatch: null });
     assert.ok(!r.fingerprint.includes(LABEL_KEY), r.violations.join("\n"));
   }
-  assert.equal(labelFlipViolation("2027-06-01", { due: null, livePatch: null }), null);
+  assert.equal(labelFlipViolation("2027-06-01", { due: null, livePatch: null, liveLabel: SEASON_OPENING }), null);
 });
 
 test("label-flip gate: due and unflipped is a violation from the due date itself", () => {
@@ -743,11 +746,12 @@ test("label-flip gate: due and unflipped is a violation from the due date itself
     const r = labelFlipAt(now, { due, livePatch: null });
     assert.ok(r.fingerprint.split(",").includes(LABEL_KEY), `fingerprint ${r.fingerprint}`);
     const v = r.violations.find(x => x.includes("PHASES.livePatch"));
-    assert.match(v, /is unset on or after 2026-10-20/);
+    assert.match(v, /is unset on or after 2026-10-20 \(LABEL_FLIP_DUE, the recorded 12\.1\.5 release date\)/);
+    assert.match(v, /still names 12\.1 as the live patch/);
     assert.match(v, /src\/normalize\.mjs/);
   }
-  // A livePatch naming some OTHER patch is not the flip the gate is waiting for.
-  assert.match(labelFlipViolation("2026-10-21", { due, expected: "12.1.5", livePatch: { label: "12.1", since: "2026-08-18" } }),
+  // A livePatch naming an OLDER patch is not the flip the gate is waiting for.
+  assert.match(labelFlipViolation("2026-10-21", { due, expected: "12.1.5", livePatch: { label: "12.1", since: "2026-08-18" }, liveLabel: SEASON_OPENING }),
     /is "12\.1" on or after/);
 });
 
@@ -760,6 +764,24 @@ test("label-flip gate: flipped is clean at every date, so setting livePatch sile
   }
 });
 
+test("label-flip gate: one-shot, so later patches and the next season never re-arm it", () => {
+  /* The gate asks whether the live patch is still OLDER than the expected one. A test for
+     "different" would fire again the moment livePatch moved on, including the null that the
+     field's own contract requires at the next season flip. The labels below are FIXTURES,
+     not claims about future patches. */
+  const due = "2026-10-20", expected = "12.1.5";
+  const quiet = (now, livePatch, liveLabel) => labelFlipViolation(now, { due, expected, livePatch, liveLabel });
+  assert.equal(quiet("2027-01-15", { label: "12.1.7", since: "2027-01-12" }, SEASON_OPENING), null,
+    "a later in-season patch has passed the expected one");
+  assert.equal(quiet("2027-06-01", null, "12.2"), null,
+    "next season: livePatch back to null and liveLabel moved on");
+  assert.equal(quiet("2027-06-01", { label: "13.0.5", since: "2027-05-01" }, "13.0"), null);
+  // Still older is still red, at any distance past the due date.
+  assert.match(quiet("2027-06-01", null, SEASON_OPENING), /is unset on or after/);
+  // A label that is not purely dotted numbers cannot be ordered: exact equality decides.
+  assert.match(quiet("2026-10-21", { label: "12.1.5 hotfix", since: "2026-10-20" }, SEASON_OPENING), /is "12\.1\.5 hotfix"/);
+});
+
 test("label-flip gate: a malformed due date is reported, never string-compared", () => {
   const r = labelFlipAt("2026-09-25", { due: "Oct 20", livePatch: null });
   assert.ok(r.fingerprint.split(",").includes(LABEL_KEY));
@@ -770,7 +792,8 @@ test("label-flip gate: the real constants are well-formed and today's state is i
   // Shape only, NOT a value pin: recording the release date is the owner's one-line
   // edit to LABEL_FLIP_DUE and must not need a test edit alongside it.
   assert.equal(typeof LABEL_FLIP_EXPECTED, "string");
-  assert.ok(LABEL_FLIP_EXPECTED.length > 0);
+  // Dotted numbers, or the gate can only test equality and stops being one-shot.
+  assert.match(LABEL_FLIP_EXPECTED, /^\d+(\.\d+)*$/);
   assert.ok(LABEL_FLIP_DUE === null || /^\d{4}-\d{2}-\d{2}$/.test(LABEL_FLIP_DUE), `LABEL_FLIP_DUE ${LABEL_FLIP_DUE}`);
   if (LABEL_FLIP_DUE === null) {
     // No fixture: the module's own constants and PHASES, as the heartbeat runs them.

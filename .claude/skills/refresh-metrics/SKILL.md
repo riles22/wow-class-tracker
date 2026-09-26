@@ -353,21 +353,32 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     row-drop gate (25%) still bound every merge.
   - **12.1.5 keeps the tier, so the tier gate cannot see a patch mix** (added 2026-09-25).
     Measured that day: all **24** stored bloodmallet profiles read `MID2` (every `asOf`
-    2026-09-23), and the SimC `midnight` branch's `profiles/` holds only `MID1` and `MID2`, so
-    no `MID3` exists to move to. Treat the tier as unchanged across 12.1.5: a pool mixing
-    12.1 and 12.1.5 sims passes the uniformity gate while `fightLabels` publishes which specs
-    were re-simmed as if it were spec strength (the defect described above).
-    **The rule, keyed on `PHASES.livePatch` (src/normalize.mjs):** while it is null, nothing
-    changes (merge current charts as above). Once it is set, read the date part of every
-    chart's own `timestamp`. **Adopt re-sims wholesale only when every chart's date is on or
-    after `PHASES.livePatch.since`.** "Every chart" means every spec in the stored pool; a
+    2026-09-23), and the only tier directories in the SimC `midnight` branch's `profiles/`
+    are `MID1` and `MID2`, so no `MID3` exists to move to. Treat the tier as unchanged across
+    12.1.5: a pool mixing 12.1 and 12.1.5 sims passes the uniformity gate while `fightLabels`
+    publishes which specs were re-simmed as if it were spec strength (the defect described
+    above).
+    **The rule keys on the 12.1.5 release date**: `PHASES.livePatch.since` once it is set,
+    and before that `LABEL_FLIP_DUE` once today is on or after it (both in
+    src/normalize.mjs; `LABEL_FLIP_DUE` is the announced release date the owner records).
+    The fallback matters because the patch can go live before the owner's launch commit
+    sets `livePatch`. Keyed on that commit alone, a night in the gap would merge a partial
+    re-sim, which is the mix this rule exists to prevent. If the run's own evidence says
+    12.1.5 is live while neither date applies (none recorded yet, or the release came
+    before the recorded date), hold as below and name that evidence in the row's detail;
+    holding costs only freshness. While neither date applies and nothing says the patch is
+    live, nothing changes (merge current charts as above). Otherwise read the date part of
+    every chart's own `timestamp`. **Adopt re-sims wholesale only when every chart's date is
+    on or after that release date.** "Every chart" means every spec in the stored pool; a
     spec whose chart still returns the error body has not been re-simmed. Until then, **hold
     the whole stored pool** (merge nothing, not even the charts already dated after the
-    launch) and write the manifest row `partial`, with how many charts are dated on or after
-    `since` and how many before. Dropping a never-re-simmed spec to complete an adoption is an
-    owner call in a reviewed local run (the 2026-09-03 precedent), never a nightly decision.
-    The adoption itself may need the human `value_move_ack`, as the MID2 adoption did; the row
-    floor and row-drop gate still bound it.
+    release) and write the manifest row `partial`, with the date the hold used and how many
+    charts are dated on or after it and how many before. If an earlier night already merged
+    part of a re-sim, the pool is mixed; the wholesale adoption replaces it, and until then
+    the row stays `partial` and says so. Dropping a never-re-simmed spec to complete an
+    adoption is an owner call in a reviewed local run (the 2026-09-03 precedent), never a
+    nightly decision. The adoption itself may need the human `value_move_ack`, as the MID2
+    adoption did; the row floor and row-drop gate still bound it.
   - Why this is written down (2026-08-08): for a month every run stamped `asOf` with the RUN
     date while the sim values sat byte-identical. That defeats the staleness alarm *precisely* —
     `required-sources.json` measures bloodmallet via `date.type "fightProfiles"`, i.e. off
