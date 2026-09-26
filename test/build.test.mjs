@@ -98,9 +98,9 @@ test("build produces the tracker and fetchable launcher icons", async () => {
 });
 
 test("a mid-season livePatch moves the chip, its phone form and the Live: stamp, nothing else", async () => {
-  /* PHASES.livePatch is dormant (null) until 12.1.5 ships; this is the launch state, built
-     now so the launch edit is a known quantity. `since` is a FIXTURE date, not a release
-     date: the build never reads it.
+  /* PHASES.livePatch was dormant (null) until the 12.1.5 launch commit set it; this test
+     was built before that commit so the launch edit was a known quantity. `since` below is
+     a test fixture date, not a release date: the build never reads it.
      Both sides are fixtures with ptr AND livePatch forced, never the real PHASES as-is.
      Built from the real object, "dormant" and "launched" become the same thing once the
      launch commit sets livePatch (nothing would move, 2026-09-25 review), and a later PTR
