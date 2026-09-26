@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-25T15:32:41.989Z",
+      "checkedAt": "2026-09-26T02:06:41.213Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -432,10 +432,56 @@
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 47,
-          "updatedAt": "2026-09-24T00:12:25.841Z",
-          "bodySha256": "2b8d54576f086aee3d1b8c8c584be5dfbe813b939ab2d8cec01564f182a9138d",
+          "version": 49,
+          "updatedAt": "2026-09-25T17:19:59.285Z",
+          "bodySha256": "a4f0797c6b1c39fdbede4986586be3aa1ad25ae61d54db9c9ee6347479d9162c",
           "sections": [
+            {
+              "id": "2336376:1:2026-09-24:player-versus-player:hunter:1",
+              "date": "2026-09-24",
+              "category": "Player versus Player",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Marksmanship",
+                "Hunter|Survival"
+              ],
+              "sha256": "0267add185f0894542581ced3d545f0d8541a8eaec549544c4f3e0a5d06f9261",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-26 (local run) against official hotfix topic 2336376, post 1, version 49 (last edited 2026-09-25T17:19:59.285Z), read from the deterministic receipt text with its list nesting intact. This is the post's September 24 Player versus Player section and every line in it is PvP-only combat tuning, under the block's developers' note about further adjustments to movement speed reduction effects: Wing Clip's 40% movement-speed reduction and Improved Snaring's additional 10% on Wing Clip are both written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. The existing 2026-09-24 feed entry already logged these exact lines, under its PvP-only prefix, from the EU mirror before this compilation received them, and said this obligation would follow once it did. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-24:player-versus-player:mage:1",
+              "date": "2026-09-24",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Arcane"
+              ],
+              "sha256": "a480d06528334f0eef703afe98390c8149bce23c1d50b43492ab33bb6ffad11b",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-26 (local run) against official hotfix topic 2336376, post 1, version 49 (last edited 2026-09-25T17:19:59.285Z), read from the deterministic receipt text with its list nesting intact. This is the post's September 24 Player versus Player section and every line in it is PvP-only combat tuning, under the block's developers' note about further adjustments to movement speed reduction effects: Arcane's Chrono Shift is a PvP Talent, and its movement-speed reduction (30%, was 50%) is written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. The existing 2026-09-24 feed entry already logged these exact lines, under its PvP-only prefix, from the EU mirror before this compilation received them, and said this obligation would follow once it did. No PvE fact is affected."
+              }
+            },
+            {
+              "id": "2336376:1:2026-09-24:player-versus-player:paladin:1",
+              "date": "2026-09-24",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy",
+                "Paladin|Protection",
+                "Paladin|Retribution"
+              ],
+              "sha256": "87808bc6de616b92a5b7b7bb974a6ba7ca91002caa1292a8d26563b9779cdd45",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-26 (local run) against official hotfix topic 2336376, post 1, version 49 (last edited 2026-09-25T17:19:59.285Z), read from the deterministic receipt text with its list nesting intact. This is the post's September 24 Player versus Player section and every line in it is PvP-only combat tuning, under the block's developers' note about further adjustments to movement speed reduction effects: Consecrated Ground's movement-speed reduction (20%, was 50%) is written “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. The existing 2026-09-24 feed entry already logged these exact lines, under its PvP-only prefix, from the EU mirror before this compilation received them, and said this obligation would follow once it did. No PvE fact is affected."
+              }
+            },
             {
               "id": "2336376:1:2026-09-23:classes:death-knight:1",
               "date": "2026-09-23",
@@ -2291,7 +2337,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-25T15:32:41.989Z",
+      "checkedAt": "2026-09-26T02:06:41.213Z",
       "removedSections": [],
       "posts": [
         {
@@ -2513,14 +2559,14 @@
               "specKeys": [
                 "Warrior|Protection"
               ],
-              "sha256": "468c0ef344e137cd6cb059da6084ac4dd72a0120c0a8a329d43f587ff73c466d",
+              "sha256": "c389299e5c6f85a5cec5fa1934fb834a2a057a520aa94f92f38aaadc22d71987",
               "resolution": {
                 "disposition": "applied",
-                "reason": "Reviewed 2026-09-16 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1), read from the deterministic receipt text with its heading nesting intact and cross-checked against the Wowhead mirror news=382916. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "reason": "Re-reviewed 2026-09-26 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1; the post is unedited since the 2026-09-16 review). The section reopened because the receipt parser now renders struck-through text (<s>/<del>/<strike>) as an explicit “[reverted: …]” marker instead of flattening it into current text. Read from the new receipt text: two of the section's lines (Execute no longer consuming additional Rage for additional damage, and Execute damage increased by 100%) are struck through as withdrawn, and only Execute damage increased by 30% stands. The 2026-09-16 summary had read the struck lines as current and asserted all three changes; it is corrected here, and scoped to this post's own lines, because post 4 neither strikes nor mentions the September 3 Colossus Practiced Strikes change. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
                 "notes": [
                   {
                     "specKey": "Warrior|Protection",
-                    "summary": "Execute is restored to its previous functionality with a damage boost: it no longer consumes additional Rage for additional damage, and its damage is increased by 100% and then by a further 30%. Blizzard says last week's Execute changes did not meet their goals, the scope needed is better suited to a major update, and further Protection changes are being refocused on 12.2 and 13.0."
+                    "summary": "Blizzard is restoring Execute to its previous functionality with a damage boost. Of this post's three Execute lines, two are struck through as reverted — Execute no longer consuming additional Rage for additional damage, and Execute damage increased by 100%, both first published in the September 3 notes — and the one that stands is Execute damage increased by 30%. Blizzard says last week's Execute changes did not accomplish their goals and the scope needed is better suited to a major update, so further Protection changes are being refocused on 12.2 and 13.0. This post neither strikes nor mentions the September 3 Colossus change (Practiced Strikes reducing the Rage cost of Execute and Revenge by 10), so it does not say whether that change stands."
                   }
                 ]
               }
