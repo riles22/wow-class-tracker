@@ -1,6 +1,6 @@
 ---
 name: ptr-watch
-description: Watch live patch tuning and the isolated 12.1.5 PTR notes preview, with revision receipts and a section review ledger. The closed 12.1 forecast and old WCL PTR zones stay dormant. Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
+description: Watch live patch tuning (12.1.5, live inside Season 2) and the official live hotfix compilation, with revision receipts and a section review ledger. The closed 12.1 forecast and old WCL PTR zones stay dormant. Use when the user says "check the PTR", "any new builds?", "ptr watch", or on a scheduled/loop run.
 ---
 
 # PTR watch — the constant-updates loop
@@ -8,7 +8,7 @@ description: Watch live patch tuning and the isolated 12.1.5 PTR notes preview, 
 Idempotent check for new patch developments since the last run. If nothing is new, say
 so and change nothing.
 
-## Official revision ledger and notes-only preview (2026-09-05)
+## Official revision ledger (2026-09-05; the notes-only preview retired at the 12.1.5 launch)
 
 **Run this before the RSS/date sweep.** A post can be edited without acquiring a new
 date or reply. The missed September 4 Enhancement set fix was such an omission; the
@@ -17,10 +17,17 @@ ledger inventories every class section rather than trusting the latest feed date
 1. Read `official-notes/evidence.json` and `official-notes/pending.json`, produced by
    the trusted pre-agent `node src/fetch-official-notes.mjs` step. In an interactive
    local run, run that command first. Do not overwrite a nightly's trusted receipts.
-   The configured sources are Blizzard's running live hotfix compilation (topic
-   2336376, post 1) and the 12.1.5 development thread (topic 2344395, every nonempty
-   staff post). Public replies are excluded. Source IDs and patch identity are pinned
+   The configured source is Blizzard's running live hotfix compilation (topic
+   2336376, post 1). The 12.1.5 development thread (topic 2344395, the `ptr-preview`
+   source) was retired at the 12.1.5 launch together with its ledger block and its
+   contract entry. Public replies are excluded. Source IDs and patch identity are pinned
    in code; a new topic or forecast cycle is an owner configuration change.
+   **Watch for a NEW "Midnight Hotfixes" compilation topic** every run (blue tracker,
+   Wowhead news, the forum's hotfix listings). Topic 2336376 still passes the title check,
+   so if Blizzard opens a fresh compilation for 12.1.5 the collector keeps reading the old
+   one and nothing reds. Report a new topic in the run report and `log.md` (URL, first
+   post date); adding it is a new `OFFICIAL_NOTE_SOURCES` row plus its
+   `required-sources.json` entry, one owner edit, never an agent edit.
 2. Compare pending sections against `data/official-notes.json`. Each source records
    its check time and every official post's revision/updated time/body hash. Each
    class section preserves date, category, class/spec scope, and its own outline hash.
@@ -45,9 +52,11 @@ ledger inventories every class section rather than trusting the latest feed date
      current live coverage. Every spec explicitly covered by the section must reach a referenced
      highlight. Class-wide notes retain class-wide attribution. An existing reference
      that no longer resolves fails the publish check.
-   - **Applied 12.1.5 preview:** record `notes: [{specKey:"Class|Spec", summary}]` with
+   - **Applied preview (DORMANT: no era "ptr" source is configured since the 12.1.5
+     launch; this applies again only if the owner configures one):** record
+     `notes: [{specKey:"Class|Spec", summary}]` with
      concise, faithful paraphrases of the fetched official notes. Cover the section's
-     spec scope. These summaries render as **12.1.5 PTR preview — not live** only in
+     spec scope. These summaries render as **<patch> PTR preview — not live** only in
      the affected drawers and footer. They never enter `ptr-builds.builds`, `spec.ptr`,
      tier sets, live ratings, or model inputs. Keep `PHASES.ptr` null: this is not a new
      forecast cycle, and the frozen 12.1 forecast stays unchanged.
@@ -78,14 +87,22 @@ ledger inventories every class section rather than trusting the latest feed date
 
 ## ⚑ BETWEEN-CYCLES POSTURE (2026-08-18, the 12.1 launch — read this first)
 
+**12.1.5 is LIVE inside Season 2** (since `PHASES.livePatch.since`, set by the owner
+launch commit). It is a mid-season patch, not a forecast cycle: `PHASES.ptr` stays null
+and the frozen forecast stays closed. Its notes and hotfixes are LIVE material now: log
+them per steps 2-3 with `realm: "live"`. The rules below that kept 12.1.5 out of the
+feed applied before its launch; the same rules still bind the NEXT in-season patch while
+it is on the PTR.
+
 **The 12.1 PTR cycle is CLOSED, not quiet.** 12.1 went live 2026-08-18; the PTR realm,
 its forum thread, and its WCL zones (54 raid / 52 Dummy Dome / 56 M+ / 57 grotto) are
-history. The separately approved 12.1.5 notes preview above is active; it does not
-reopen those historical lanes. Until a new forecast cycle is explicitly configured:
+history. The 12.1.5 notes-only preview (2026-09-05 until the 12.1.5 launch) is retired
+too; it never reopened those historical lanes. Until a new forecast cycle is explicitly
+configured:
 
-- **Live lanes (run every time):** step 2's RSS sweep — now filtered for LIVE 12.1
-  tuning ("Class Tuning", "Hotfixes", tuning round-ups) and for the 12.2 PTR
-  announcement — plus step 3's feed logging and step 4's writeup flagging. The official
+- **Live lanes (run every time):** step 2's RSS sweep — now filtered for LIVE 12.1.5
+  tuning ("Class Tuning", "Hotfixes", tuning round-ups, the consolidated 12.1.5 notes)
+  and for the 12.2 PTR announcement — plus step 3's feed logging and step 4's writeup flagging. The official
   revision-ledger step above also runs every time. Live tuning
   logs as `kind: "hotfix"` (Wowhead round-up = citation, NO forumUrl/forumPostNumber)
   or `kind: "build"` when a scheduled pass has its own citable Blizzard forum topic (a
@@ -101,37 +118,44 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
   forecast cycle a hotfix round pushed to the PTR is `kind: "hotfix", realm: "ptr"`, and
   a live "Class Tuning Incoming" post is always `kind: "build", realm: "live"`.
 - **While `PHASES.ptr` is null, PTR material never enters `data/ptr-builds.json`.**
-  12.1.5 is an in-season patch on the PTR, not a forecast cycle, so its PTR builds,
-  development-notes posts and PTR hotfix rounds are not logged as feed entries of ANY
-  kind or realm (the nightly prompts forbid it too; this rule is what binds a local run).
+  An in-season patch on the PTR (12.1.5 was one until its launch) is not a forecast
+  cycle, so its PTR builds, development-notes posts and PTR hotfix rounds are not logged
+  as feed entries of ANY kind or realm (this rule binds nightly and local runs alike).
   Record each one in the run report and this skill's `log.md` (URL, date, what it
-  covers). Staff posts in the configured 12.1.5 development-notes thread (topic 2344395)
-  reach the site through the notes-only preview lane above; anything outside that thread
-  (a Wowhead PTR hotfix round-up, a standalone blue post) does not reach the site before
-  launch, and that is intended. Every `realm: "ptr"` instruction in steps 3, 3a and 3b
+  covers). No preview source is configured since the 12.1.5 launch, so that material
+  does not reach the site before its patch is live, and that is intended. Every `realm: "ptr"` instruction in steps 3, 3a and 3b
   below applies only once the owner opens a forecast cycle (`PHASES.ptr` set).
-- **Consolidated 12.1.5 patch notes posted before 12.1.5 is live go in the RUN REPORT,
-  never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`
+- **12.1.5's consolidated patch notes are LOGGABLE now** (the displayed live patch is
+  12.1.5). Log them once, newest first, as `kind: "patch-notes"`, `patch: "12.1.5"`,
+  `realm: "live"`, citing a us/eu Blizzard forums `forumUrl` or a Wowhead `wowheadUrl`;
+  never worldofwarcraft.blizzard.com, which the host allowlist refuses (widening it is a
+  reviewed code edit, not a data workaround). `specsAffected` and `highlights` must agree
+  (Midnight roster names, Devourer included), and a set-bonus line bumps `tierSet` and
+  syncs the gearing mirror as in step 3. Never distil hotfix posts into a patch-notes
+  entry. If the notes are not posted yet, say so in the run report and log them later.
+- **Consolidated notes for a FUTURE in-season patch posted before it is live go in the
+  RUN REPORT, never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`
   and is always `realm: "live"`; a new `realm: "ptr"` entry must carry `patch` too; and
   validation refuses a `patch` newer than the displayed live patch
   (`PHASES.livePatch?.label ?? liveLabel` between cycles; normalize.mjs
   `displayedLivePatch`) on EVERY kind, except that a `realm: "ptr"`
   entry may name the upcoming patch while a PTR cycle is open (`PHASES.ptr` set; the
   ceiling is then `PHASES.ptr.label` with a trailing " PTR" stripped, so "12.2 PTR" and
-  "12.2" both mean 12.2) — and 12.1.5 is a notes-only preview, not a cycle. So logging
+  "12.2" both mean 12.2) — and an in-season patch on the PTR is not a cycle. So logging
   them early, as patch notes or as a PTR build, reds the run — as long as the entry names
   the patch its source names. Validation checks the labels, never the content: `realm` and
   `patch` are read off the post by you and never verified, so any mislabel to an accepted
   value validates with 0 errors — a PTR entry that names the live patch for next-patch
   material, or a `realm: "live"` build or hotfix carrying next-patch material with no
   `patch` (optional on live entries) or naming the live patch, each of which votes in the
-  outlook tally; and early 12.1.5 notes logged as `kind: "patch-notes"` naming the live
-  patch, which render as shipped 12.1 content (patch notes never vote in the tally).
+  outlook tally; and early notes logged as `kind: "patch-notes"` naming the live
+  patch, which render as shipped content of the live patch (patch notes never vote in the
+  tally).
   All are on you. Record the post (URL, date,
   what it covers) in the run report and this skill's `log.md`. Nothing carries their
-  per-spec content onto the site before launch: the notes-only preview lane above reads only staff posts
-  in the 12.1.5 development-notes thread (topic 2344395), and 12.1's consolidated notes
-  were a standalone topic (2333514), not a reply there. They enter the feed as a
+  per-spec content onto the site before launch (no preview source is configured, and
+  12.1's consolidated notes were a standalone topic, 2333514, not a dev-thread reply).
+  They enter the feed as a
   `kind: "patch-notes"` entry once the displayed live patch has moved, which is not an
   agent action.
 - **Dormant lanes (skip; do NOT mark them unreachable in the manifest — their contract
@@ -140,7 +164,7 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
   learn. Stored zone-52/54/56 rows in specs.json are the closed cycle's final receipts;
   never refresh or delete them.
 - **The old thread-rediscovery gotcha is SUSPENDED**: the 12.1 thread going quiet is not a
-  lost thread. The isolated 12.1.5 preview uses its own configured source. When the 12.2
+  lost thread. The 12.1.5 preview source was retired at its launch. When the 12.2
   PTR opens, starting the new forecast cycle is
   an OWNER action (new `PHASES.ptr` entry, new thread key, contract rows, zone probe via
   `node src/wcl-probe.mjs`), not an agent-side thread-key update.
@@ -219,7 +243,7 @@ posture above.
    (`PHASES.ptr` set) log a PTR hotfix round, as `kind: "hotfix", realm: "ptr"` with the
    `patch` it was pushed to — without the realm the kind default files it in the drawer's
    LIVE lane (the 07-31 round sat there until 2026-09-26). While `PHASES.ptr` is null
-   (now: 12.1.5 is an in-season patch on the PTR, not a cycle) a PTR hotfix round is NOT
+   (as for 12.1.5 before its launch: an in-season patch on the PTR is not a cycle) a PTR hotfix round is NOT
    logged in `data/ptr-builds.json`; record it in the run report and `log.md` (posture
    block).
 
