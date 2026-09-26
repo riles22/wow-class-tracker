@@ -1,7 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE } from "../src/check-refresh.mjs";
+import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE, labelFlipViolation } from "../src/check-refresh.mjs";
+import { LABEL_FLIP_DUE, LABEL_FLIP_EXPECTED } from "../src/normalize.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
    probe-less feed requirement — enough to exercise every gate rule without the repo's
@@ -715,6 +716,67 @@ test("age gate: once flipped, the check goes quiet forever", async () => {
   const src = await readFile(new URL("../src/check-refresh.mjs", import.meta.url), "utf8");
   assert.match(src, /SNAPSHOT_PHASE === "12\.1-ptr" && dateOf\(nowDate\) > PHASE_FLIP_DUE/,
     "the gate must test the phase VALUE, so flipping it silences the check permanently");
+});
+
+/* ---- the in-season label flip (12.1.5 owner decision 6) ----
+   Same one-shot shape as the two gates above: a dated owner action (set PHASES.livePatch
+   when 12.1.5 ships) that nothing else notices being missed. Dormant until the owner
+   records a release date in LABEL_FLIP_DUE. */
+
+const LABEL_KEY = "live-patch-label";
+const labelFlipAt = (now, labelFlip) => checkFreshness(config, goodManifest(), freshData(), now, null, { labelFlip });
+
+test("label-flip gate: inert while no due date is recorded, at any date", () => {
+  for (const now of ["2026-09-25", "2027-06-01"]) {
+    const r = labelFlipAt(now, { due: null, livePatch: null });
+    assert.ok(!r.fingerprint.includes(LABEL_KEY), r.violations.join("\n"));
+  }
+  assert.equal(labelFlipViolation("2027-06-01", { due: null, livePatch: null }), null);
+});
+
+test("label-flip gate: due and unflipped is a violation from the due date itself", () => {
+  const due = "2026-10-20";
+  // The day before: legitimately not live yet, no nag.
+  assert.ok(!labelFlipAt("2026-10-19", { due, livePatch: null }).fingerprint.includes(LABEL_KEY));
+  // On the due date (inclusive) and after: red, with the owner action in the text.
+  for (const now of [due, "2026-10-21T17:23:00Z"]) {
+    const r = labelFlipAt(now, { due, livePatch: null });
+    assert.ok(r.fingerprint.split(",").includes(LABEL_KEY), `fingerprint ${r.fingerprint}`);
+    const v = r.violations.find(x => x.includes("PHASES.livePatch"));
+    assert.match(v, /is unset on or after 2026-10-20/);
+    assert.match(v, /src\/normalize\.mjs/);
+  }
+  // A livePatch naming some OTHER patch is not the flip the gate is waiting for.
+  assert.match(labelFlipViolation("2026-10-21", { due, expected: "12.1.5", livePatch: { label: "12.1", since: "2026-08-18" } }),
+    /is "12\.1" on or after/);
+});
+
+test("label-flip gate: flipped is clean at every date, so setting livePatch silences it", () => {
+  const due = "2026-10-20";
+  const livePatch = { label: LABEL_FLIP_EXPECTED, since: "2026-10-20" };
+  for (const now of [due, "2027-06-01"]) {
+    const r = labelFlipAt(now, { due, livePatch });
+    assert.ok(!r.fingerprint.includes(LABEL_KEY), r.violations.join("\n"));
+  }
+});
+
+test("label-flip gate: a malformed due date is reported, never string-compared", () => {
+  const r = labelFlipAt("2026-09-25", { due: "Oct 20", livePatch: null });
+  assert.ok(r.fingerprint.split(",").includes(LABEL_KEY));
+  assert.ok(r.violations.some(v => /LABEL_FLIP_DUE is "Oct 20", not an ISO date/.test(v)), r.violations.join("\n"));
+});
+
+test("label-flip gate: the real constants are well-formed and today's state is inert", () => {
+  // Shape only, NOT a value pin: recording the release date is the owner's one-line
+  // edit to LABEL_FLIP_DUE and must not need a test edit alongside it.
+  assert.equal(typeof LABEL_FLIP_EXPECTED, "string");
+  assert.ok(LABEL_FLIP_EXPECTED.length > 0);
+  assert.ok(LABEL_FLIP_DUE === null || /^\d{4}-\d{2}-\d{2}$/.test(LABEL_FLIP_DUE), `LABEL_FLIP_DUE ${LABEL_FLIP_DUE}`);
+  if (LABEL_FLIP_DUE === null) {
+    // No fixture: the module's own constants and PHASES, as the heartbeat runs them.
+    const r = checkFreshness(config, goodManifest(), freshData(), "2027-06-01");
+    assert.ok(!r.fingerprint.includes(LABEL_KEY), r.violations.join("\n"));
+  }
 });
 
 /* ---------- the published-date gate (docs/published-gate-scope.md, 2026-08-04) ---------- */

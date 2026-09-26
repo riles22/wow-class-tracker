@@ -63,16 +63,92 @@ test("build produces the tracker and fetchable launcher icons", async () => {
      page announces always matching the era vocabulary that governs the data. */
   const { PHASES } = await import("../src/normalize.mjs");
   const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
-  const eraDisplay = PHASES.ptr ? PHASES.ptr.label : PHASES.liveLabel;
+  const eraDisplay = PHASES.ptr ? PHASES.ptr.label : (PHASES.livePatch?.label ?? PHASES.liveLabel);
   // the chip carries a full and a short form since the 2026-08-22 bar compression
   assert.ok(html.includes(`<span class="pc-full">${eraDisplay} — ${PHASES.patchName.toUpperCase()}</span>`),
     "masthead chip must carry the PHASES-derived era");
   assert.ok(html.includes(`<span class="pc-short">${eraDisplay}</span>`),
     "…and its phone form must carry the era too, so attribution survives a mobile screenshot");
   assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
-  assert.ok(html.includes(`>${eraDisplay} build feed<`) || html.includes(`>${eraDisplay} patch feed<`),
-    "patch-feed heading must carry the era display label");
+  /* The feed heading: an open PTR cycle's build feed carries its patch label; between
+     cycles it is named for the SEASON (2026-09-25), because within a season the list
+     spans more than one patch. This expectation changed with that decision. */
+  const feedHeading = PHASES.ptr ? `${eraDisplay} build feed` : `${seasonName(PHASES.liveSeason)} patch feed`;
+  assert.ok(html.includes(`>${feedHeading}<`), `patch-feed heading must read "${feedHeading}"`);
   assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
+});
+
+test("a mid-season livePatch moves the chip, its phone form and the Live: stamp, nothing else", async () => {
+  /* PHASES.livePatch is dormant (null) until 12.1.5 ships; this is the launch state, built
+     now so the launch edit is a known quantity. `since` is a FIXTURE date, not a release
+     date: the build never reads it. */
+  const { PHASES } = await import("../src/normalize.mjs");
+  const { eraTokensFor } = await import("../src/build.mjs");
+  const livePatch = { label: "12.1.5", since: "2026-12-01" };
+  const dormant = eraTokensFor(PHASES);
+  const launched = eraTokensFor({ ...PHASES, livePatch });
+
+  assert.equal(launched.__ERA_CHIP__, `12.1.5 — ${PHASES.patchName.toUpperCase()}`);
+  assert.equal(launched.__ERA_SHORT__, "12.1.5");
+  assert.equal(launched.__ERA_TRACKED_STAMP__, `<b>Live:</b> 12.1.5 “${PHASES.patchName}”`);
+  // The baseline names the consensus SEASON, which a mid-season patch does not restart.
+  assert.equal(launched.__ERA_BASELINE__, `${PHASES.liveLabel} / Season ${PHASES.seasonOrder.indexOf(PHASES.liveSeason) + 1}`);
+  assert.ok(!launched.__ERA_BASELINE__.includes(livePatch.label), "the baseline must stay on liveLabel");
+  const moved = Object.keys(launched).filter(k => launched[k] !== dormant[k]).sort();
+  assert.deepEqual(moved, ["__ERA_CHIP__", "__ERA_SHORT__", "__ERA_TRACKED_STAMP__"],
+    "only the three patch-naming tokens may read livePatch");
+  // An open PTR cycle still outranks it, exactly as before livePatch existed.
+  const ptr = { marker: "12.2 PTR", label: "12.2 PTR" };
+  assert.deepEqual(eraTokensFor({ ...PHASES, ptr, livePatch }), eraTokensFor({ ...PHASES, ptr }));
+
+  /* The whole page. Set the REAL PHASES.livePatch (the launch edit's exact effect: the
+     payload builder sees it too) and build into a temp root, never the shared dist/. With
+     the three tokens swapped back, the page must be byte-identical to the dormant build:
+     same payload, so the same column qualifiers, drawer headings and frozen-forecast
+     qualifier ("12.1 forecast — frozen <date>", computed client-side from the payload), and
+     the same CSP hashes. */
+  const { mkdtemp, cp, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const root = await mkdtemp(path.join(tmpdir(), "tracker-livepatch-"));
+  const saved = PHASES.livePatch;
+  try {
+    await cp(path.join(ROOT, "data"), path.join(root, "data"), { recursive: true });
+    await cp(path.join(ROOT, "src"), path.join(root, "src"), { recursive: true });
+    const before = await readFile((await build(root)).outPath, "utf8");
+    PHASES.livePatch = livePatch;
+    const after = await readFile((await build(root)).outPath, "utf8");
+    PHASES.livePatch = saved;
+
+    const swaps = [
+      [`<span class="pc-full">${launched.__ERA_CHIP__}</span>`, `<span class="pc-full">${dormant.__ERA_CHIP__}</span>`],
+      [`<span class="pc-short">${launched.__ERA_SHORT__}</span>`, `<span class="pc-short">${dormant.__ERA_SHORT__}</span>`],
+      [`<span>${launched.__ERA_TRACKED_STAMP__}</span>`, `<span>${dormant.__ERA_TRACKED_STAMP__}</span>`],
+    ];
+    let restored = after;
+    for (const [from, to] of swaps) {
+      assert.equal(after.split(from).length - 1, 1, `the launched page must carry ${from} exactly once`);
+      restored = restored.replace(from, to);
+    }
+    if (restored !== before) {
+      let i = 0;
+      while (i < before.length && restored[i] === before[i]) i++;
+      assert.fail(`with livePatch set, nothing but the three patch-naming surfaces may change; first difference at ` +
+        `${i}: ${JSON.stringify(before.slice(Math.max(0, i - 80), i + 80))} vs ${JSON.stringify(restored.slice(Math.max(0, i - 80), i + 80))}`);
+    }
+    const payloadOf = h => JSON.parse(h.split("\n").find(l => l.includes("const DATA =")).match(/const DATA = (.*);$/)[1]);
+    const published = payloadOf(after);
+    assert.ok(!("livePatch" in published.meta.phases), "livePatch is display-only and never ships to the page");
+    assert.equal(published.meta.phases.liveLabel, PHASES.liveLabel);
+    // Spelled out for the frozen-forecast qualifier: its inputs are the payload's frozen
+    // date and a template literal, and both are what the dormant page carries.
+    assert.deepEqual(published.meta.frozenForecast, payloadOf(before).meta.frozenForecast);
+    if (published.meta.frozenForecast) {
+      assert.ok(after.includes("`12.1 forecast — frozen ${FROZEN_FC.date}`"), "the frozen qualifier's expression must be unchanged");
+    }
+  } finally {
+    PHASES.livePatch = saved;
+    await rm(root, { recursive: true, force: true });
+  }
 });
 
 test("the frozen forecast artifact loads, and a phase-MATCHED artifact is INERT", async () => {

@@ -351,6 +351,23 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     whatever charts are current (their tier matches), records the specs still returning the
     error body, and needs no ack; a returning spec joins on its night. The row floor (15) and
     row-drop gate (25%) still bound every merge.
+  - **12.1.5 keeps the tier, so the tier gate cannot see a patch mix** (added 2026-09-25).
+    Measured that day: all **24** stored bloodmallet profiles read `MID2` (every `asOf`
+    2026-09-23), and the SimC `midnight` branch's `profiles/` holds only `MID1` and `MID2`, so
+    no `MID3` exists to move to. Treat the tier as unchanged across 12.1.5: a pool mixing
+    12.1 and 12.1.5 sims passes the uniformity gate while `fightLabels` publishes which specs
+    were re-simmed as if it were spec strength (the defect described above).
+    **The rule, keyed on `PHASES.livePatch` (src/normalize.mjs):** while it is null, nothing
+    changes (merge current charts as above). Once it is set, read the date part of every
+    chart's own `timestamp`. **Adopt re-sims wholesale only when every chart's date is on or
+    after `PHASES.livePatch.since`.** "Every chart" means every spec in the stored pool; a
+    spec whose chart still returns the error body has not been re-simmed. Until then, **hold
+    the whole stored pool** (merge nothing, not even the charts already dated after the
+    launch) and write the manifest row `partial`, with how many charts are dated on or after
+    `since` and how many before. Dropping a never-re-simmed spec to complete an adoption is an
+    owner call in a reviewed local run (the 2026-09-03 precedent), never a nightly decision.
+    The adoption itself may need the human `value_move_ack`, as the MID2 adoption did; the row
+    floor and row-drop gate still bound it.
   - Why this is written down (2026-08-08): for a month every run stamped `asOf` with the RUN
     date while the sim values sat byte-identical. That defeats the staleness alarm *precisely* —
     `required-sources.json` measures bloodmallet via `date.type "fightProfiles"`, i.e. off
@@ -394,7 +411,7 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   `targets` chart type and `hecticaddcleave` fight style return errors — use
   `talent_target_scaling`. Read `simc_settings.tier` off every chart and carry it through
   (see the tier-uniformity rule above) — do not assert a specific expected value, it moves
-  each season.
+  each season. It does NOT move for a mid-season patch; see the 12.1.5 rule above.
 - **WCL fetching**: pull each cut fresh every run — no at-most-daily cap (policy
   2026-07-08: pull everything every run). The server replies "Use the API … instead of
   scraping HTML" without the XHR header, so always send the XHR header + browser UA +

@@ -376,6 +376,26 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the forecast report card grades the frozen pre-launch projection against, so nothing
   downstream can infer the boundary if this is missed. Recorded here because a code
   comment is invisible to whoever notices 12.1 going live (2026-07-24 audit, X3).
+- **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label, DORMANT (`null`)
+  until 12.1.5 ships** (added 2026-09-25). 12.1.5 is a mid-season patch inside Season 2,
+  not a new season: `liveSeason`, `liveLabel` "12.1", `liveSince`, `SNAPSHOT_PHASE`,
+  `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. The owner launch
+  commit sets `livePatch = { label: "12.1.5", since: "<launch date>" }` and updates its
+  literal pin in `test/normalize.test.mjs`. It is **display-only**: `eraTokensFor`
+  (build.mjs) reads it for exactly three tokens, the masthead chip (`__ERA_CHIP__`), its
+  phone form (`__ERA_SHORT__`) and the "Live:" stamp. `__ERA_BASELINE__` stays on
+  `liveLabel` because it names the consensus season, and `meta.phases` strips the field, so
+  no client-side label can read it. A build test sets it and proves the page changes in
+  those three places and nowhere else. `since` is the one recorded launch date; the
+  refresh-metrics Bloodmallet adoption rule and the watch-creators framing rule read it.
+  **Label-flip heartbeat** (owner decision for 12.1.5): `check-refresh --age` reports the
+  fingerprint key **`live-patch-label`** from `LABEL_FLIP_DUE` (inclusive) while
+  `PHASES.livePatch?.label` is not `LABEL_FLIP_EXPECTED` ("12.1.5"). Both constants sit
+  beside `PHASES` in `normalize.mjs`, and `LABEL_FLIP_DUE` is `null`, which keeps the gate
+  inert. **Owner action, one line: when Blizzard announces the release date, set
+  `LABEL_FLIP_DUE` in `src/normalize.mjs` to the first date an unflipped chip should count
+  as a violation.** The gate keys on the label VALUE, so setting `livePatch` silences it
+  permanently; if the release slips, move the date.
 - **`dataHealth()` (`render.mjs`)** computes the frozen-series banner: every metric,
   `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
   announced as a Warcraft Logs outage. Staleness is relative to the data's own newest
@@ -681,7 +701,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
   is no PTR (a live tuning post falls back to `kind: "build"`, so the kind alone could not
   tell — this was the mislabel render.mjs's own residue note exists to catch); the footer
-  heading is a **"patch feed"** between cycles; the **"PTR verdict" sort option hides** when
+  heading is a **"patch feed"** between cycles, named for the season since 2026-09-25
+  (**"Season 2 patch feed"**, because one season's list spans 12.1 and 12.1.5); the
+  **"PTR verdict" sort option hides** when
   the era filter is rendering no verdict chips; the lede states **both bracket counts** when
   the consensus is split, because a single figure contradicted the toolbar two rows below it;
   and the movers strip reframes from "Into 12.1" to **"Forecast vs. live consensus"** once the

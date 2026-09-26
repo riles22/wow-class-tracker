@@ -17,6 +17,50 @@ import { leaderboardPartitions } from "./wcl-live.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
 
+/* ERA TOKENS (2026-08-11, docs/era-prose-scope.md item 1). The static masthead/footer
+   prose used to hardcode "12.1 PTR" and "12.0.7 / Season 1" — era literals, which are
+   DATA, in a template CLAUDE.md rule 4 says holds none. Substituting them at build time
+   from PHASES means the 22:00 UTC launch flip is one edit to `ptr.label` and the 08-18
+   season flip needs no template edit at all. Client-side JS prose reads PHASE directly;
+   these tokens exist for the static HTML that renders before boot.
+   A pure function of the phases object (2026-09-25) so a test can hand it a launch-state
+   fixture instead of editing the real PHASES. */
+export function eraTokensFor(phases) {
+  const seasonName = s => `Season ${phases.seasonOrder.indexOf(s) + 1}`;
+  /* The PATCH a visitor is on, as opposed to the SEASON the data describes. A mid-season
+     patch (PHASES.livePatch, e.g. 12.1.5 inside Season 2) moves only the three surfaces
+     that name the patch: the chip, its phone form and the "Live:" stamp. The baseline
+     names the consensus season and stays on liveLabel, as does every client-side data
+     label (the payload never carries livePatch). An open PTR cycle still wins. */
+  const eraDisplay = phases.ptr ? phases.ptr.label : (phases.livePatch?.label ?? phases.liveLabel);
+  return {
+    // masthead chip: "12.1 PTR — CURSE OF ULA'TEK" while a cycle's PTR was open, "12.1 — …"
+    // off liveLabel once the ptr lane sunset, and the in-season patch once livePatch is set.
+    __ERA_CHIP__: `${eraDisplay} — ${phases.patchName.toUpperCase()}`,
+    // the phone form of the same chip: the era without the patch name, which is 192px wide
+    // and forced its own row in the compressed bar (2026-08-22)
+    __ERA_SHORT__: eraDisplay,
+    __ERA_BASELINE__: `${phases.liveLabel} / ${seasonName(phases.liveSeason)}`,
+    // static fallback only — boot overwrites it from PHASE.ptr.label (template ~:1239)
+    __ERA_PTR_BTN__: phases.ptr?.label ?? "",
+    // "build feed" is PTR vocabulary. Between cycles the same list is mostly live
+    // hotfixes and class-tuning posts, so it is a patch feed (audit 2026-08-22). Named for
+    // the SEASON since 2026-09-25: within a season the list spans more than one patch
+    // (12.1, then 12.1.5), so a patch label would misattribute half of it.
+    __ERA_FEED_HEADING__: phases.ptr ? `${eraDisplay} build feed` : `${seasonName(phases.liveSeason)} patch feed`,
+    // __ERA_FOOTCOVER__ retired 2026-08-18: the footer identity block it fed was
+    // removed at Riley's request; the masthead chip + baseline carry the same era info.
+    __ERA_LIVE_LABEL__: phases.liveLabel,
+    // the masthead stamp: which patch this tracker is ABOUT and whether it has shipped.
+    // The label itself is the tell — it carries " PTR" only while the patch is on the PTR.
+    __ERA_TRACKED_STAMP__: phases.ptr
+      ? (phases.ptr.label.includes("PTR")
+        ? `<b>PTR:</b> ${phases.ptr.label.replace(/\s*PTR$/, "")} “${phases.patchName}”`
+        : `<b>Live:</b> ${phases.ptr.label} “${phases.patchName}”`)
+      : `<b>Live:</b> ${eraDisplay} “${phases.patchName}”`,
+  };
+}
+
 export async function build(root = ROOT) {
   const data = await loadData(root);
   const errors = validateData(data, { fullRoster: true });
@@ -42,39 +86,7 @@ export async function build(root = ROOT) {
   const json = JSON.stringify(publicationPayload(payload)).replace(/</g, "\\u003c");
   let html = template.replace("__DATA_JSON__", () => json);
 
-  /* ERA TOKENS (2026-08-11, docs/era-prose-scope.md item 1). The static masthead/footer
-     prose used to hardcode "12.1 PTR" and "12.0.7 / Season 1" — era literals, which are
-     DATA, in a template CLAUDE.md rule 4 says holds none. Substituting them at build time
-     from PHASES means the 22:00 UTC launch flip is one edit to `ptr.label` and the 08-18
-     season flip needs no template edit at all. Client-side JS prose reads PHASE directly;
-     these tokens exist for the static HTML that renders before boot. */
-  const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
-  const eraDisplay = PHASES.ptr ? PHASES.ptr.label : PHASES.liveLabel;
-  const eraTokens = {
-    // masthead chip: "12.1 PTR — CURSE OF ULA'TEK" now, "12.1 — …" once the patch ships,
-    // and identical off liveLabel after the ptr lane sunsets.
-    __ERA_CHIP__: `${eraDisplay} — ${PHASES.patchName.toUpperCase()}`,
-    // the phone form of the same chip: the era without the patch name, which is 192px wide
-    // and forced its own row in the compressed bar (2026-08-22)
-    __ERA_SHORT__: eraDisplay,
-    __ERA_BASELINE__: `${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`,
-    // static fallback only — boot overwrites it from PHASE.ptr.label (template ~:1239)
-    __ERA_PTR_BTN__: PHASES.ptr?.label ?? "",
-    // "build feed" is PTR vocabulary. Between cycles the same list is mostly live
-    // hotfixes and class-tuning posts, so it is a patch feed (audit 2026-08-22).
-    __ERA_FEED_HEADING__: PHASES.ptr ? `${eraDisplay} build feed` : `${eraDisplay} patch feed`,
-    // __ERA_FOOTCOVER__ retired 2026-08-18: the footer identity block it fed was
-    // removed at Riley's request; the masthead chip + baseline carry the same era info.
-    __ERA_LIVE_LABEL__: PHASES.liveLabel,
-    // the masthead stamp: which patch this tracker is ABOUT and whether it has shipped.
-    // The label itself is the tell — it carries " PTR" only while the patch is on the PTR.
-    __ERA_TRACKED_STAMP__: PHASES.ptr
-      ? (PHASES.ptr.label.includes("PTR")
-        ? `<b>PTR:</b> ${PHASES.ptr.label.replace(/\s*PTR$/, "")} “${PHASES.patchName}”`
-        : `<b>Live:</b> ${PHASES.ptr.label} “${PHASES.patchName}”`)
-      : `<b>Live:</b> ${PHASES.liveLabel} “${PHASES.patchName}”`,
-  };
-  for (const [token, value] of Object.entries(eraTokens)) {
+  for (const [token, value] of Object.entries(eraTokensFor(PHASES))) {
     if (!html.includes(token)) throw new Error(`src/template.html is missing the ${token} placeholder`);
     html = html.replaceAll(token, value);
   }

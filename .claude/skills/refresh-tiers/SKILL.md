@@ -29,6 +29,15 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
    gate the letter consensus (2026-08-19 audit, C1) — never add or remove that flag in a
    run; it is Gate-0 registry structure.
    lists. Unverifiable → skip that source, never guess.
+   **A patch inside the season does not change the season** (added 2026-09-25, for
+   12.1.5). A live list retitled "12.1.5" (or "Patch 12.1.5") that still ranks Season 2
+   records `seasonVerified: "s2"`, exactly as its "12.1" title did — `PHASES.liveSeason`
+   does not move for a mid-season patch, and reading the new number as a new season would
+   drop the outlet from the consensus. A list labelled **"12.1.5 PTR"** (or any pre-launch
+   12.1.5 preview) is not a live ranking: never write its letters as that source's live
+   ratings, and never take `snapshot` or `published` from it. If a registered URL serves only
+   such a preview, that page is unverifiable for this run: skip it and give the reason in the
+   manifest row.
    **Except any era-gated source** (`era: "ptr"` in the registry — currently NONE:
    `icyveins-ptr` was retired at the 2026-08-18 flip, its letters superseded by the live
    Icy Veins S2 pages): such a source must era-verify the OTHER way, as the NEXT patch,
