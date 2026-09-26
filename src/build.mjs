@@ -30,8 +30,9 @@ export function eraTokensFor(phases) {
   /* The PATCH a visitor is on, as opposed to the SEASON the data describes. A mid-season
      patch (PHASES.livePatch, e.g. 12.1.5 inside Season 2) moves only the three surfaces
      that name the patch: the chip, its phone form and the "Live:" stamp. The baseline
-     names the consensus season and stays on liveLabel, as does every client-side data
-     label (the payload never carries livePatch). An open PTR cycle still wins. */
+     names the consensus season and stays on liveLabel; every client-side data label reads
+     liveLabel or the season's name, never the patch (the payload never carries livePatch).
+     An open PTR cycle still wins. */
   const eraDisplay = phases.ptr ? phases.ptr.label : (phases.livePatch?.label ?? phases.liveLabel);
   return {
     // masthead chip: "12.1 PTR — CURSE OF ULA'TEK" while a cycle's PTR was open, "12.1 — …"

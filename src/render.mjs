@@ -2033,9 +2033,11 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
         ranks: ranksComparableWith(baseline),
         projection: projComparableWith(baseline),
       } : null,
-      /* livePatch is build-time display only (build.mjs eraTokensFor: chip, phone chip,
-         "Live:" stamp). Every client-side label names the season's DATA and reads
-         liveLabel, so the field is kept out of the page entirely rather than left for
+      /* On the page, livePatch is build-time display only (build.mjs eraTokensFor: chip,
+         phone chip, "Live:" stamp); off it, validate.mjs reads it as the feed's patch
+         ceiling. Every client-side label names the season's DATA and reads liveLabel or
+         the season's name (the drawer headings since 2026-09-26, via seasonOrder), never
+         the patch, so the field is kept out of the page entirely rather than left for
          some later prose to pick up. It also keeps the launch edit off the payload. */
       phases: (({ livePatch, ...shipped }) => shipped)(PHASES),
       /* Present ONLY while the frozen artifact is the forecast column's render source

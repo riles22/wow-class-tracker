@@ -50,7 +50,8 @@ export function consensusTier(score, scales) {
                      of NEXT-season letters can be labelled with its own patch instead of
                      inheriting the live one.
      · livePatch   — a patch released INSIDE the live season (12.1.5 inside Season 2):
-                     display-only, null until it ships. See the field below. Every season
+                     display-only on the page (validate.mjs also reads it as the feed's
+                     patch ceiling), null until it ships. See the field below. Every season
                      flip resets it to null (pinned: its `since` must postdate liveSince).
    At 12.1 launch: liveSeason -> "s2", liveLabel -> "12.1", ptr -> null (until the 12.2
    thread appears), alongside the SNAPSHOT_PHASE flip in render.mjs. */
@@ -61,8 +62,12 @@ export const PHASES = {
      PTR thread appears — a null ptr hides the Era toggle, era-gates every PTR surface out
      of the page, and IS the PTR sunset (DECISION 3 as amended 2026-08-12; the old
      `ptrSunset` flag is deleted rather than flipped). When the 12.2 cycle opens, restore
-     the shape `{ marker: "12.2 PTR", label: "12.2" }` — `marker` is a frozen DATA KEY for
-     the whole cycle, `label` is what the page calls the era and drops " PTR" at launch. */
+     the shape `{ marker: "12.2 PTR", label: "12.2 PTR" }` — `marker` is a frozen DATA KEY for
+     the whole cycle, `label` is what the page calls the era: it carries " PTR" while the
+     patch is on the PTR (build.mjs's "PTR:"/"Live:" stamp keys on that suffix) and drops it
+     at launch, "12.2". Anything that needs the cycle's PATCH strips a trailing " PTR" first,
+     so both forms mean 12.2: the build feed's ceiling for realm "ptr" entries (validate.mjs)
+     and the frozen forecast's target season (snapshot.mjs predictionSeason). */
   ptr: null,
   /* The date liveSeason went live (ISO). Drawer metric rows whose asOf predates it are
      measurements of the PREVIOUS season and get a visible per-row era tag, because the
@@ -79,14 +84,18 @@ export const PHASES = {
   /* The patch that is live INSIDE the live season, when it is not the season's opening
      patch: `{ label, since }` (since = the ISO date it went live), null until then. Added
      2026-09-25 for 12.1.5, which is a mid-season patch within Season 2, not a new season.
-     DISPLAY-ONLY, and deliberately narrow. Exactly three build-time era tokens read it
-     (build.mjs `eraTokensFor`): the masthead chip, its phone form and the "Live:" stamp.
-     Everything that names DATA stays on liveLabel: the baseline line, the column
-     qualifiers, drawer headings, lag chips and frozen-lane text all describe the Season 2
-     consensus, which a mid-season patch does not restart. The payload strips it too
-     (render.mjs `meta.phases`), so no client-side prose can start reading it by accident.
-     That is why liveLabel, seasonLabels.s2 and LIVE_LEADERBOARDS.label (wcl-live.mjs)
-     never move within a season. `since` is the one recorded launch date; the Bloodmallet
+     DISPLAY-ONLY on the page, and deliberately narrow. Exactly three build-time era tokens
+     read it (build.mjs `eraTokensFor`): the masthead chip, its phone form and the "Live:"
+     stamp. Nothing that names DATA reads it: the baseline line, the column qualifiers, lag
+     chips and frozen-lane text stay on liveLabel, and the drawer headings ("Current numbers
+     · Raid (Season 2)", "Live Season 2 tuning") name the season (seasonOrder), because all
+     of them describe Season 2 data, which a mid-season patch does not restart. The payload
+     strips it too (render.mjs `meta.phases`), so no client-side prose can start reading it
+     by accident. That is why liveLabel, seasonLabels.s2 and LIVE_LEADERBOARDS.label
+     (wcl-live.mjs) never move within a season. Off the page two checks read it, and
+     neither changes a rendered value: validate.mjs takes it (else liveLabel) as the build
+     feed's patch ceiling, so once it is set a live entry may name 12.1.5, and
+     check-refresh's label-flip gate below. `since` is the one recorded launch date; the Bloodmallet
      adoption rule (refresh-metrics skill, which holds on LABEL_FLIP_DUE below until this
      is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
      page's chip is a hand-kept literal that must name the same live patch; a root build

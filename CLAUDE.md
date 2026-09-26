@@ -387,11 +387,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   page's chip (`pc-full`/`pc-short` in `gearing/src/app.template.html`, then
   `npm run gearing:build`). Gearing's chip is a hand-kept literal, like the rest of the
   mirrored bar, so `livePatch` does not reach it; a root build test compares it with the
-  live patch and reds until it matches. It is **display-only**: `eraTokensFor`
+  live patch and reds until it matches. On the page it is **display-only**: `eraTokensFor`
   (build.mjs) reads it for exactly three tokens, the masthead chip (`__ERA_CHIP__`), its
-  phone form (`__ERA_SHORT__`) and the "Live:" stamp. `__ERA_BASELINE__` stays on
-  `liveLabel` because it names the consensus season, and `meta.phases` strips the field, so
-  no client-side label can read it. A build test sets it and proves the page changes in
+  phone form (`__ERA_SHORT__`) and the "Live:" stamp. `__ERA_BASELINE__`, the column
+  qualifiers, lag chips and frozen-lane text stay on `liveLabel`, and the drawer headings
+  ("Current numbers · Raid (Season 2)", "Live Season 2 tuning") name the season, because all
+  of them describe the Season 2 data; `meta.phases` strips the field, so no client-side label
+  can read it. Off the page it has two readers, neither of which changes a rendered value:
+  validate.mjs takes it (else `liveLabel`) as the build feed's `patch` ceiling, and the
+  label-flip heartbeat below. A build test sets it and proves the page changes in
   those three places and nowhere else; its fixtures force `ptr` and `livePatch`, so it
   proves the same thing after the launch commit. `since` is the one recorded launch date;
   the watch-creators framing rule and the refresh-metrics Bloodmallet adoption rule both
@@ -711,11 +715,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   columns are **54px**; the worst case measured is 32px (projection view, letter + arrow +
   ± + three dots). Re-measure `scrollWidth` against `clientWidth` across all 80 cells in
   BOTH the consensus and projection views if either width changes again.
-- **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
-  self-heal when the next cycle opens, rather than on data that has to be remembered:
-  the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" for a live
-  tuning post (a live tuning post is `kind: "build"`, so the kind alone could not tell — this
-  was the mislabel render.mjs's own residue note exists to catch; since 2026-09-26 the newest
+- **Between-cycles copy residue** (same audit, stage 3). None of these is keyed on a literal
+  that has to be remembered, so each self-heals when the next cycle opens. The masthead stamp
+  keys on the newest feed entry's resolved realm, falling back to `PHASE.ptr`; the footer
+  heading and the "PTR verdict" sort key on `PHASE.ptr`; the movers strip keys on the frozen
+  forecast, which is active only while no cycle is open; and the lede's count keys on the
+  per-bracket source counts themselves. In detail: the masthead stamp says **"Latest class
+  tuning"** rather than "Latest PTR build" for a live tuning post (a live tuning post is
+  `kind: "build"`, so the kind alone could not tell — this was the mislabel render.mjs's own residue note exists to catch; since 2026-09-26 the newest
   entry's RESOLVED realm decides — `META.latestBuildRealm`, which is its recorded `realm`
   where it has one and otherwise the kind default (a hotfix with no recorded realm reads
   live) — and `PHASE.ptr` is only the fallback for a payload
@@ -976,18 +983,28 @@ correct for each of them. **validate.mjs requires `realm` on every entry dated o
 `BUILD_REALM_REQUIRED_FROM`** (the landing date; that constant is its only home — the tests
 import it, so moving it is a one-line change; the `SIM_TIER_REQUIRED` pattern) — an explicit
 field rather than a date rule, because a liveSince rule misfiles the 08-15 post and a rule
-keyed on the patch-notes date breaks at the next PTR cycle. Realm is presentation only: the
+keyed on the patch-notes date breaks at the next PTR cycle. An entry dated BEFORE the cutoff
+still validates without one, so a merge or backfill of a live `kind: "build"` post must add
+`realm: "live"` by hand: without it the post lands in the PTR lane and, while it is the
+newest entry, flips the masthead stamp to "Latest PTR build:". Realm is presentation only: the
 outlook tally, projection and consensus are unchanged by it (deep-compared on landing).
 **`patch`** is a dotted version with ONE spelling per patch (`"12.1"`, never `"12.1.0"` or
 `"12.01"` — the Shipped blocks group by the string), required on `kind: "patch-notes"`,
 whose realm is always live, and on every `realm: "ptr"` entry from the same cutoff. On
 EVERY kind it is never newer than the displayed live patch
 (`PHASES.livePatch?.label ?? liveLabel`); the one exception is a `realm: "ptr"` entry while
-a PTR cycle is open, bounded by `PHASES.ptr.label` instead. So a patch's consolidated notes
-cannot enter the feed before that patch is live, whether logged as patch notes or as a PTR
-build, provided the entry names the patch its source names — the one thing validation cannot
-catch is a PTR entry naming the live patch for next-patch material. Posted early, they go in
-the run report instead (ptr-watch skill). Canonical source: the official forum thread
+a PTR cycle is open, bounded instead by the cycle's patch: `PHASES.ptr.label` with a trailing
+" PTR" stripped (the label reads "12.2 PTR" while the patch is on the PTR and "12.2" after
+launch, and both mean 12.2 — the rule `predictionSeason` in snapshot.mjs uses). So a patch's
+consolidated notes cannot enter the feed before that patch is live, whether logged as patch
+notes or as a PTR build, provided the entry names the patch its source names. **Validation
+cannot catch two things**, because `realm` and `patch` are read off the post by whoever logs
+the entry and never verified: a PTR entry naming the live patch for next-patch material, and
+a `realm: "live"` build or hotfix with no `patch` (optional on live entries) carrying
+next-patch material — that one passes with 0 errors and votes in the outlook tally. Both are
+on the logger. Next-patch material posted early goes in the run report instead, and while
+`PHASES.ptr` is null PTR builds and hotfix rounds for an upcoming in-season patch (12.1.5)
+are not logged here at all (ptr-watch skill). Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse
 `.json`. **A new patch cycle means a NEW thread** — re-discover via Wowhead news RSS.
 **`specsAffected` and `highlights` must agree** — a coverage gate in validate.mjs fails
@@ -1204,9 +1221,11 @@ gotcha live in the refresh-metrics skill.
 1. Watch Wowhead news RSS (`/news/rss/all`) for "12.1 PTR" + Development Notes/Class
    Tuning/Datamined; fetch the forum thread `.json` for the new post.
 2. Add the build entry to `data/ptr-builds.json` (newest first) with its `kind` and
-   `realm` (and `patch` on patch notes — see the feed section above), update affected
-   specs' `ptr` writeups if their pass landed, rebuild. The ptr-watch skill is the full
-   procedure, including where pre-launch consolidated notes go (the run report, not here).
+   `realm` (and `patch` on patch notes and on every `realm: "ptr"` entry dated on or after
+   `BUILD_REALM_REQUIRED_FROM` — see the feed section above), update affected specs' `ptr`
+   writeups if their pass landed, rebuild. The ptr-watch skill is the full procedure,
+   including where pre-launch consolidated notes go (the run report, not here) and why PTR
+   builds for an in-season patch are not logged while `PHASES.ptr` is null.
 
 ### Creator transcript breadth — local vs nightly (2026-08-08, Riley)
 Title-filtering before a transcript fetch is **run-mode dependent**, because the two

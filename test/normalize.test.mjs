@@ -171,8 +171,9 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
      appears. The take/era machinery reads as closed (expertRead null, PTR_METRIC_NAMES
      null) and the frozen forecast (B6) carries the pre-launch read through the window. */
   assert.equal(PHASES.ptr, null);
-  /* The in-season patch (12.1.5 inside Season 2) is DORMANT until it ships: display-only,
-     read by three build-time era tokens and nothing else. A literal pin for the same reason
+  /* The in-season patch (12.1.5 inside Season 2) is DORMANT until it ships: display-only on
+     the page, where three build-time era tokens read it and nothing else (off the page,
+     validate.mjs's feed patch ceiling and the label-flip gate). A literal pin for the same reason
      as the lines around it — setting it is the owner's launch edit, and that commit
      updates this line to the { label, since } it sets, or fails here first. */
   assert.equal(PHASES.livePatch, null);

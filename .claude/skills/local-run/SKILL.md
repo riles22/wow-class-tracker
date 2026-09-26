@@ -117,10 +117,13 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 
 1. **`ptr-watch`** — now in its BETWEEN-CYCLES posture (see the ⚑ block at the top of
    its SKILL.md, added at the 2026-08-18 launch): Wowhead news RSS + official forums for
-   **live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"`, scheduled passes with a
-   forum post → `kind: "build"`, both with `realm: "live"`, which every new entry must
-   record) and the separate **12.1.5 notes-only preview**; consolidated 12.1.5 notes
-   posted before launch go in the run report, never the feed.
+   **live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"`, scheduled passes with their
+   own forum topic → `kind: "build"`, both with `realm: "live"`, which every new entry must
+   record) and the separate **12.1.5 notes-only preview**. While `PHASES.ptr` is null no
+   12.1.5 PTR material enters the feed: its PTR builds, PTR hotfix rounds and consolidated
+   notes posted before launch go in the run report, never `data/ptr-builds.json` (the
+   development-notes thread's staff posts reach the site through the preview lane). The
+   nightly prompts carry the same rule; a local run has only the skill to hold it.
    Read the deterministic official-notes receipts and resolve every changed class
    section; leave PHASES and the frozen forecast closed. The four PTR
    WCL zone sweeps (54/52/56/57) are DORMANT — skip them entirely; their contract rows
