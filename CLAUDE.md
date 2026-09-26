@@ -1373,6 +1373,9 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           checklist is fully done; see git log around 5e92824).
           s2-flip-runbook.md — the operational 08-18 flip checklist (execution mode:
           LOCAL RUN, chosen 2026-08-12); read it before touching anything flip-related.
+          1215-launch-runbook.md — the 12.1.5 launch checklist (written 2026-09-26): the
+          push rule, the launch-morning data edits and release-date replacement for the
+          pre-staged `claude/1215-launch` branch, and the WCL raid switch trigger and pins.
           s2-flip-test-patch.diff + s2-flip-test-patch-verify.md — the PRE-STAGED flip-day
           test patch and its verification log. The patch is applied INSIDE the flip commit
           (`git apply docs/s2-flip-test-patch.diff`) and is what makes `npm test` land green
