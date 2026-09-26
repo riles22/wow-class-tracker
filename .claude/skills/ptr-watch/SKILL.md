@@ -314,11 +314,16 @@ posture above.
    into `spec.ptr`: no new writeup, no `changes[]` line, no `watch` edit, no `verdict`
    change. They are feed entries (step 3, `realm: "live"`). While `PHASES.ptr` is null
    this step is read-only: recount the uncovered specs below for the run report and write
-   nothing. The one exception is step 3's dated "(pre-<date> …)" caveat on an existing
-   `ptr.set2`/`ptr.set4` commentary whose design a live set-bonus change replaced; it
-   marks that commentary stale, carries none of the new notes' content, and leaves the
-   verdict and source as they are. Everything below in this step (the lanes, the
-   append-to-`changes[]` rule) applies during an open cycle.
+   nothing. Two exceptions, neither of which adds content: (1) step 3's dated
+   "(pre-<date> …)" caveat on an existing `ptr.set2`/`ptr.set4` commentary whose design a
+   live set-bonus change replaced; it marks that commentary stale, carries none of the new
+   notes' content, and leaves the verdict and source as they are; (2) **provenance
+   repair** of a writeup grandfathered in `UNDATED_WRITEUPS`: adding the `asOf` date (and
+   the URL, if missing) that the writeup's OWN source gave for the read it already
+   carries, and deleting its name from the list in the same edit, with verdict, summary,
+   `changes[]`, `watch` and `set2`/`set4` untouched (paste-discord step 4 applies the same
+   rule). Everything else below in this step (the lanes, the append-to-`changes[]` rule)
+   applies during an open cycle.
 
    **Wowhead RSS is a discovery lane, NOT the only one** (2026-08-01). Nine specs sat at
    `ptr: null` for weeks with run after run logging "no article covering any of them
@@ -369,7 +374,7 @@ posture above.
    (URL) or `sourceLabel` (validation enforces it); (b) **every NEW writeup also carries
    `ptr.asOf`** — the date the SOURCE published or said it, which for an article is its
    own publication date, NOT the date you fetched it (added 2026-07-26; validation fails
-   the run without it). The only writeups allowed to omit it are the 29 grandfathered in
+   the run without it). The only writeups allowed to omit it are the ones grandfathered in
    `UNDATED_WRITEUPS` (`src/validate.mjs`), and **that list may only shrink** — if you
    rewrite one of those from a fresh, dated source, add the date and delete its name from
    the list in the same edit. Never add a name to it; (c) distill FAITHFULLY — the
