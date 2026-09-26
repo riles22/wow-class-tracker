@@ -1209,7 +1209,10 @@ test("ptr-builds: patch notes are live, one spelling per patch, and the patch ce
   PHASES.ptr = null;
   try {
     assert.ok(errs({ ...build, realm: "ptr", patch: newer }).some(e => e.includes("only while a PTR cycle is open")));
-    PHASES.ptr = { marker: `${newer} PTR`, label: newer };
+    // An OPEN cycle's label carries " PTR" (the stamp reads "PTR:"). This fixture used the
+    // dotted label until 2026-09-26, but a dotted label is the LAUNCHED shape (the stamp
+    // reads "Live:"), which is how it hid the raw-label ceiling bug; see the next test.
+    PHASES.ptr = { marker: `${newer} PTR`, label: `${newer} PTR` };
     assert.deepEqual(errs({ ...build, realm: "ptr", patch: newer }), []);
     assert.ok(errs({ ...build, realm: "ptr", patch: `${newer}.1` }).some(e => e.includes(`newer than the open PTR cycle's patch "${newer}"`)));
     // an open cycle never lifts the ceiling for live entries or patch notes
@@ -1257,15 +1260,38 @@ test("ptr-builds: an open cycle's ceiling is its label with the trailing \" PTR\
     assert.ok(errs({ ...build, realm: "live", patch: next }).some(e => e.includes("a live entry cannot belong")));
     const notes = { ...rest, kind: "patch-notes", realm: "live", forumUrl, patch: next };
     assert.ok(errs(notes).some(e => e.includes("is newer than the displayed live patch")));
-    // the dotted label (the shape once the patch launches) behaves the same way
+    // the live-entry error points at realm "ptr" only when that would pass: material newer
+    // than the cycle's patch belongs in the run report, not the PTR lane
+    const liveNext = errs({ ...build, realm: "live", patch: next });
+    assert.ok(liveNext.some(e => e.includes(`logged with realm "ptr"`)), liveNext.join("\n"));
+    const liveBeyond = errs({ ...build, realm: "live", patch: `${next}.5` });
+    assert.ok(liveBeyond.some(e => e.includes("a live entry cannot belong") && e.includes("run report")), liveBeyond.join("\n"));
+    assert.ok(!liveBeyond.some(e => e.includes(`logged with realm "ptr"`)), "following the hint would fail again");
+    // an entry that has not recorded its realm gets the realm error, not a ceiling error
+    // asserting a realm the entry does not state
+    const { realm: _r, ...noRealm } = build;
+    const unrecorded = errs({ ...noRealm, patch: `${next}.5` });
+    assert.ok(unrecorded.some(e => e.includes("must record realm")), unrecorded.join("\n"));
+    assert.ok(!unrecorded.some(e => e.includes("is newer than")), unrecorded.join("\n"));
+    // The dotted label is the LAUNCHED shape — 24532b5 ran label "12.1" for the seven days
+    // between 12.1's launch and the season flip, and the stamp reads "Live: 12.1" then. The
+    // PTR lane keeps the same ceiling, and the displayed live patch IS that label, so live
+    // tuning and the launched patch's notes name it without error.
     PHASES.ptr = { marker: `${next} PTR`, label: next };
     assert.deepEqual(errs({ ...build, patch: next }), []);
     assert.ok(errs({ ...build, patch: `${next}.5` }).some(e => e.includes(`newer than the open PTR cycle's patch "${next}"`)));
+    assert.deepEqual(errs({ ...hotfix, realm: "live", patch: next }), [], "live tuning for the launched patch");
+    assert.deepEqual(errs(notes), [], "the launched patch's notes");
+    const launchedBeyond = errs({ ...hotfix, realm: "live", patch: `${next}.5` });
+    assert.ok(launchedBeyond.some(e => e.includes(`displayed live patch "${next}"`) && e.includes("run report")), launchedBeyond.join("\n"));
     // a cycle whose label names no version is uncheckable — never reported as no cycle
     PHASES.ptr = { marker: "Next PTR", label: "Next PTR" };
     const garbled = errs({ ...build, patch: next });
     assert.ok(garbled.some(e => e.includes("a PTR cycle is open, but its label")), garbled.join("\n"));
     assert.ok(!garbled.some(saysNoCycle));
+    // …and a live entry is never told to log under an unreadable cycle's empty patch name
+    const garbledLive = errs({ ...build, realm: "live", patch: next });
+    assert.ok(!garbledLive.some(e => e.includes(`patch ""`)), garbledLive.join("\n"));
   } finally {
     PHASES.ptr = hadPtr;
   }

@@ -168,6 +168,34 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
   }
 });
 
+test("the build feed's live-patch ceiling is the patch the Live: stamp names", async () => {
+  /* validate.mjs bounds live feed entries by normalize.mjs displayedLivePatch; the page
+     says which patch is live in build.mjs's "Live:" stamp. They are separate code, so this
+     holds them in step in every state the stamp reads "Live:" — between cycles, with a
+     mid-season livePatch, and a cycle whose label dropped " PTR" at launch (24532b5 ran
+     label "12.1" beside liveLabel "12.0.7" for seven days). While the label carries " PTR"
+     the stamp reads "PTR:" and the live patch stays livePatch, else liveLabel. */
+  const { PHASES, displayedLivePatch } = await import("../src/normalize.mjs");
+  const { eraTokensFor } = await import("../src/build.mjs");
+  const livePatch = { label: "12.1.5", since: "2026-12-01" };
+  const states = [
+    { ...PHASES, ptr: null, livePatch: null },
+    { ...PHASES, ptr: null, livePatch },
+    { ...PHASES, ptr: { marker: "12.2 PTR", label: "12.2" }, livePatch: null },
+    { ...PHASES, ptr: { marker: "12.2 PTR", label: "12.2" }, livePatch },
+  ];
+  for (const s of states) {
+    const stamp = /^<b>Live:<\/b> (\S+) /.exec(eraTokensFor(s).__ERA_TRACKED_STAMP__);
+    assert.ok(stamp, `the stamp reads "Live:" in ${JSON.stringify({ ptr: s.ptr, livePatch: s.livePatch })}`);
+    assert.equal(displayedLivePatch(s), stamp[1]);
+  }
+  for (const p of [null, livePatch]) {
+    const open = { ...PHASES, ptr: { marker: "12.2 PTR", label: "12.2 PTR" }, livePatch: p };
+    assert.match(eraTokensFor(open).__ERA_TRACKED_STAMP__, /^<b>PTR:<\/b> 12\.2 /);
+    assert.equal(displayedLivePatch(open), p?.label ?? PHASES.liveLabel);
+  }
+});
+
 test("the gearing page's chip names the same live patch as the tracker", async () => {
   /* The two pages' bars mirror each other BY HAND (CLAUDE.md, "Gearing carries the same
      bar"), and gearing's chip is a literal in its own template, so setting PHASES.livePatch

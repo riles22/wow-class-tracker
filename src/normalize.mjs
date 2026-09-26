@@ -93,8 +93,9 @@ export const PHASES = {
      strips it too (render.mjs `meta.phases`), so no client-side prose can start reading it
      by accident. That is why liveLabel, seasonLabels.s2 and LIVE_LEADERBOARDS.label
      (wcl-live.mjs) never move within a season. Off the page two checks read it, and
-     neither changes a rendered value: validate.mjs takes it (else liveLabel) as the build
-     feed's patch ceiling, so once it is set a live entry may name 12.1.5, and
+     neither changes a rendered value: validate.mjs bounds the build feed's live entries by
+     the patch the "Live:" stamp names (displayedLivePatch below — this field, else
+     liveLabel, outside a launched cycle), so once it is set a live entry may name 12.1.5, and
      check-refresh's label-flip gate below. `since` is the one recorded launch date; the Bloodmallet
      adoption rule (refresh-metrics skill, which holds on LABEL_FLIP_DUE below until this
      is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
@@ -118,6 +119,16 @@ export const PHASES = {
    exists. The gate asks "older", not "different", so it stays silent once the chip reaches
    12.1.5, at a later in-season patch and after the next season flip (livePatch back to
    null, liveLabel moved on); nothing needs retiring (check-refresh.mjs `labelFlipViolation`). */
+/* The patch the masthead's "Live:" stamp names (build.mjs eraTokensFor): an open cycle's
+   label once it has dropped " PTR" at launch — the 2026-08-11..18 window ran
+   `ptr.label: "12.1"` while liveLabel was still "12.0.7" (24532b5) — else livePatch, else
+   liveLabel. validate.mjs bounds the build feed's live entries by it, so the feed and the
+   stamp can never disagree about which patch is live; a build test holds the two in step. */
+export function displayedLivePatch(phases = PHASES) {
+  if (phases.ptr && !String(phases.ptr.label ?? "").includes("PTR")) return phases.ptr.label;
+  return phases.livePatch?.label ?? phases.liveLabel;
+}
+
 export const LABEL_FLIP_EXPECTED = "12.1.5";
 export const LABEL_FLIP_DUE = null;
 

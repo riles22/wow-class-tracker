@@ -394,7 +394,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   ("Current numbers · Raid (Season 2)", "Live Season 2 tuning") name the season, because all
   of them describe the Season 2 data; `meta.phases` strips the field, so no client-side label
   can read it. Off the page it has two readers, neither of which changes a rendered value:
-  validate.mjs takes it (else `liveLabel`) as the build feed's `patch` ceiling, and the
+  validate.mjs bounds the build feed's `patch` by the patch the "Live:" stamp names
+  (`displayedLivePatch`: this field, else `liveLabel`, outside a launched cycle), and the
   label-flip heartbeat below. A build test sets it and proves the page changes in
   those three places and nowhere else; its fixtures force `ptr` and `livePatch`, so it
   proves the same thing after the launch commit. `since` is the one recorded launch date;
@@ -991,18 +992,22 @@ outlook tally, projection and consensus are unchanged by it (deep-compared on la
 **`patch`** is a dotted version with ONE spelling per patch (`"12.1"`, never `"12.1.0"` or
 `"12.01"` — the Shipped blocks group by the string), required on `kind: "patch-notes"`,
 whose realm is always live, and on every `realm: "ptr"` entry from the same cutoff. On
-EVERY kind it is never newer than the displayed live patch
-(`PHASES.livePatch?.label ?? liveLabel`); the one exception is a `realm: "ptr"` entry while
-a PTR cycle is open, bounded instead by the cycle's patch: `PHASES.ptr.label` with a trailing
-" PTR" stripped (the label reads "12.2 PTR" while the patch is on the PTR and "12.2" after
-launch, and both mean 12.2 — the rule `predictionSeason` in snapshot.mjs uses). So a patch's
-consolidated notes cannot enter the feed before that patch is live, whether logged as patch
-notes or as a PTR build, provided the entry names the patch its source names. **Validation
-cannot catch two things**, because `realm` and `patch` are read off the post by whoever logs
-the entry and never verified: a PTR entry naming the live patch for next-patch material, and
-a `realm: "live"` build or hotfix with no `patch` (optional on live entries) carrying
-next-patch material — that one passes with 0 errors and votes in the outlook tally. Both are
-on the logger. Next-patch material posted early goes in the run report instead, and while
+EVERY kind it is never newer than the displayed live patch — the one the masthead's "Live:"
+stamp names (`displayedLivePatch` in normalize.mjs: a cycle's label once it has dropped
+" PTR" at launch, else `PHASES.livePatch?.label`, else `liveLabel`; a build test holds the two
+in step). The one exception is a `realm: "ptr"` entry while a PTR cycle is open, bounded
+instead by the cycle's patch: `PHASES.ptr.label` with a trailing " PTR" stripped (the label
+reads "12.2 PTR" while the patch is on the PTR and "12.2" after launch, and both mean 12.2,
+as in `predictionSeason` in snapshot.mjs). So a patch's consolidated notes cannot enter the
+feed as patch notes before the site shows that patch live, and between cycles not as a PTR
+build either, provided the entry names the patch its source names. **Validation checks the
+labels, never the content**: `realm` and `patch` are read off the post by whoever logs the
+entry and never verified, so any mislabel to an accepted value passes with 0 errors and,
+outside patch notes, votes in the outlook tally — a PTR entry naming the live patch; a
+`realm: "live"` build or hotfix with no `patch` (optional on live entries) or naming the live
+patch, carrying next-patch material; and, while a cycle is open, the cycle patch's
+consolidated notes logged as a PTR build (log them as patch notes once the patch launches).
+All are on the logger. Next-patch material posted early goes in the run report instead, and while
 `PHASES.ptr` is null PTR builds and hotfix rounds for an upcoming in-season patch (12.1.5)
 are not logged here at all (ptr-watch skill). Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse

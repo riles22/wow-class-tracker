@@ -4,7 +4,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
+import { aheadSeasonFor, displayedLivePatch, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
 import { specBuildChanges, BUILD_REALMS, buildRealmOf, PATCH_VERSION, comparePatchVersions } from "./render.mjs";
 import { validateOfficialNotes } from "./official-notes.mjs";
 import { validateWclCoverage } from "./wcl-coverage.mjs";
@@ -799,12 +799,14 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
        below always has something to check. Until this rule the ceiling bound only entries
        that volunteered a `patch`, and early 12.1.5 notes logged in the ordinary PTR-build
        shape (no `patch`) validated and voted in the outlook tally (repair-round probe,
-       2026-09-26). Two things it cannot catch, because realm and patch are read off the post
-       and asserted by whoever logs it, never inferred or verified: a PTR entry that names the
-       live patch for material about the next one, and an entry marked realm "live" (where
-       patch is optional) that carries next-patch material with no patch at all — that one
-       validates with 0 errors and votes in the outlook tally like any live tuning line. */
-    if (build.realm === "ptr" && build.patch == null && typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM) {
+       2026-09-26). What it cannot catch: realm and patch are read off the post and asserted
+       by whoever logs it, never inferred or verified, so validation checks the LABELS against
+       the phase and never the content against the labels. Any mislabel to an accepted value
+       passes with 0 errors and, outside patch notes, votes in the outlook tally — e.g. a PTR
+       entry naming the live patch, a realm "live" entry with no patch (optional there) or
+       naming the live patch, and, while a cycle is open, the cycle patch's consolidated notes
+       logged as a PTR build. Patch notes are exempt: they must carry patch on every date, below. */
+    if (kind !== "patch-notes" && build.realm === "ptr" && build.patch == null && typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM) {
       errors.push(
         `ptr-builds.json: ${kind} ${build.date} is realm "ptr" and must record patch — the patch ` +
         `under test, as a dotted version — required on PTR entries dated on or after ` +
@@ -829,24 +831,27 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
        only one of them would carry the supersession note. A trailing ".0" past the minor
        version and leading zeros are refused; "12.0" stays valid, it IS the minor version.
        The ceiling applies to EVERY kind, not only patch-notes: the DISPLAYED live patch —
-       livePatch when that field (display-only on the page) is set, else liveLabel — bounds any
-       live-realm entry, so neither a patch's consolidated notes nor a live entry can name a
-       patch before it is live on the site. A ptr-realm entry may name the upcoming patch only
-       while a PTR cycle is open, and then no newer than the cycle's patch: PHASES.ptr.label
-       (else its marker) with a trailing " PTR" stripped — the label reads "12.2 PTR" while
-       the patch is on the PTR and "12.2" once it launches, and both mean patch 12.2; the same
-       rule snapshot.mjs predictionSeason applies. The first draft of this rule tested the raw
-       label, so the "12.2 PTR" convention matched no dotted version and every PTR entry of an
-       open cycle was refused as if no cycle were open. Between cycles — 12.1.5 has a
-       notes-only preview, not a cycle — nothing may. */
+       whatever the masthead's "Live:" stamp names (normalize.mjs displayedLivePatch: a
+       launched cycle's label, else livePatch, else liveLabel) — bounds any live-realm entry,
+       so neither a patch's consolidated notes nor a live entry can name a patch before the
+       site shows it live. A ptr-realm entry may name the upcoming patch only while a PTR
+       cycle is open, and then no newer than the cycle's patch: PHASES.ptr.label (else its
+       marker) with a trailing " PTR" stripped — the label reads "12.2 PTR" while the patch is
+       on the PTR and "12.2" once it launches, and both mean patch 12.2, as in snapshot.mjs
+       predictionSeason. The first draft of this rule tested the raw label, so the "12.2 PTR"
+       convention matched no dotted version and every PTR entry of an open cycle was refused
+       as if no cycle were open. Between cycles — 12.1.5 has a notes-only preview, not a
+       cycle — nothing may. An entry that must record its realm and has not is not checked
+       here: its lane is unknown, and the realm error above already fires. */
     if (build.patch != null && (typeof build.patch !== "string" || !PATCH_VERSION.test(build.patch))) {
       errors.push(`ptr-builds.json: entry ${build.date} patch must be a dotted version such as "12.1", got ${JSON.stringify(build.patch)}`);
     }
     const patchOk = typeof build.patch === "string" && PATCH_VERSION.test(build.patch);
-    const livePatch = PHASES.livePatch?.label ?? PHASES.liveLabel;
+    const livePatch = displayedLivePatch(PHASES);
     const cycleLabel = PHASES.ptr ? String(PHASES.ptr.label ?? PHASES.ptr.marker ?? "") : null;
     const cyclePatch = cycleLabel == null ? null : cycleLabel.replace(/\s*PTR$/i, "").trim();
-    if (patchOk) {
+    const realmUnrecorded = build.realm == null && typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM;
+    if (patchOk && !(realmUnrecorded && kind !== "patch-notes")) {
       const segs = build.patch.split(".");
       if (segs.some(s => s.length > 1 && s.startsWith("0")) || (segs.length > 2 && segs.at(-1) === "0")) {
         const nums = segs.map(Number);
@@ -872,7 +877,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
             : !ptrLane
               ? `ptr-builds.json: ${kind} ${build.date} patch "${build.patch}" is newer than the displayed live ` +
                 `patch "${livePatch}" — a live entry cannot belong to a patch that is not live yet` +
-                (cyclePatch != null
+                (cyclePatch != null && PATCH_VERSION.test(cyclePatch) && comparePatchVersions(build.patch, cyclePatch) <= 0
                   ? `; PTR material for the open cycle's patch "${cyclePatch}" is logged with realm "ptr"`
                   : `; material for a patch that is not live yet is recorded in the run report, never logged to the feed`)
               : cyclePatch == null
