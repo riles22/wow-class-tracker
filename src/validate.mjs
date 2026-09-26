@@ -8,6 +8,7 @@ import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
 import { specBuildChanges } from "./render.mjs";
 import { validateOfficialNotes } from "./official-notes.mjs";
 import { validateWclCoverage } from "./wcl-coverage.mjs";
+import { LIVE_LEADERBOARDS } from "./wcl-live.mjs";
 import { validateSourcePredictions } from "./source-predictions.mjs";
 import { validateCreatorPredictions } from "./creator-predictions.mjs";
 
@@ -362,6 +363,12 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       isoOk(metric.asOf, `specs.json: ${key} metric "${metric.name}" asOf`);
       if (metric.sample != null || /^Leaderboard median /.test(metric.name ?? "")) {
         const sample = metric.sample;
+        /* Zone, difficulty, size and key level come from the reviewed recipe for the row's
+           bracket rather than restated literals, so a reviewed recipe change cannot leave this
+           check behind. A stored row may sit on any REVIEWED partition of that zone, not only
+           the pinned one: after a reviewed switch the older partition's rows are a legitimate
+           wholesale hold. Mixing partitions inside one rank pool is refused further down. */
+        const recipe = LIVE_LEADERBOARDS.brackets.find(cfg => cfg.bracket === metric.bracket);
         const validInstant = v => typeof v === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(v) && Number.isFinite(Date.parse(v));
         if (metric.source !== "warcraftlogs" || !/^Leaderboard median (DPS|HPS) \(S2 (Mythic|M\+10): .+, top 100\)$/.test(metric.name ?? "")
           || sample?.kind !== "leaderboard-entries" || sample.cap !== 100 || !["dps", "hps"].includes(sample.metric)
@@ -370,9 +377,10 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
           || !validInstant(sample.observedAt) || !validInstant(sample.oldestRun) || !validInstant(sample.newestRun)
           || sample.oldestRun > sample.newestRun || sample.newestRun > sample.observedAt
           || metric.asOf !== sample.newestRun.slice(0, 10) || typeof sample.hasMorePages !== "boolean"
-          || sample.partition !== 1 || !Number.isInteger(sample.encounterId) || sample.encounterId <= 0
-          || (metric.bracket === "raid" ? sample.zoneId !== 53 || sample.difficulty !== 5 || sample.size !== 20 || sample.keystoneLevel != null
-            : sample.zoneId !== 55 || sample.difficulty !== 10 || sample.size !== 5 || sample.keystoneLevel !== 10)) {
+          || !recipe || !recipe.reviewedPartitions.some(p => p.id === sample.partition)
+          || !Number.isInteger(sample.encounterId) || sample.encounterId <= 0
+          || sample.zoneId !== recipe.zoneId || sample.difficulty !== recipe.difficulty || sample.size !== recipe.size
+          || (recipe.keystoneLevel ? sample.keystoneLevel !== recipe.keystoneLevel : sample.keystoneLevel != null)) {
           errors.push(`specs.json: ${key} metric "${metric.name}" has invalid WCL leaderboard sample provenance`);
         }
       }
@@ -554,6 +562,34 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         `publishes a cross-season ranking no source ever made.`
       );
     }
+  }
+
+  /* --- single-partition leaderboard pools (2026-09-25, ahead of 12.1.5) ---
+     The same rule one level down. A WCL leaderboard series keeps its name across a
+     partition switch (expectedMetricName carries no partition), so a switch that lands some
+     cuts on the new partition while sparse or failed cuts retain their old-partition
+     rows would rank two patches' leaderboards in one published list. Merge a family
+     wholesale, hold it wholesale, or drop the unrefreshable rows; never mix. */
+  const partitionPools = new Map();
+  for (const spec of specs) {
+    for (const m of spec.metrics ?? []) {
+      if (m.sample?.kind !== "leaderboard-entries") continue;
+      const key = `${spec.role}|${m.bracket}|${m.name}`;
+      if (!partitionPools.has(key)) partitionPools.set(key, new Map());
+      const byPartition = partitionPools.get(key);
+      if (!byPartition.has(m.sample.partition)) byPartition.set(m.sample.partition, []);
+      byPartition.get(m.sample.partition).push(`${spec.class} ${spec.spec}`);
+    }
+  }
+  for (const [key, byPartition] of partitionPools) {
+    if (byPartition.size <= 1) continue;
+    const groups = [...byPartition.entries()]
+      .map(([partition, list]) => `partition ${partition} x${list.length} (e.g. ${list.slice(0, 3).join(", ")})`);
+    errors.push(
+      `specs.json: rank pool (${key}) mixes WCL partitions — ${groups.join(" | ")}. ` +
+      `Merge the family wholesale, hold it wholesale, or drop the unrefreshable rows — a mixed pool ` +
+      `publishes a cross-patch ranking no leaderboard ever made.`
+    );
   }
 
   // --- community registry ---

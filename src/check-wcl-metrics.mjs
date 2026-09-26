@@ -6,7 +6,7 @@ import { createHash } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import { LIVE_LEADERBOARDS, expectedMetricName } from "./wcl-live.mjs";
+import { LIVE_LEADERBOARDS, expectedMetricName, leaderboardCeiling } from "./wcl-live.mjs";
 import { PHASES } from "./normalize.mjs";
 import { createWclCoverage } from "./wcl-coverage.mjs";
 
@@ -33,7 +33,7 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
     if (evidence?.schemaVersion !== 2 || evidence.liveSeason !== PHASES.liveSeason || !iso(evidence.attemptedAt)
       || Date.parse(evidence.attemptedAt) > +now || +now - Date.parse(evidence.attemptedAt) > 24 * 3600_000
       || evidence.baselineSha256 !== wclDigest(before)) throw new Error("WCL receipt is missing, stale, future, wrong-season, or bound to a different baseline");
-    if (!updates || Object.keys(updates).join() !== "metrics" || !Array.isArray(updates.metrics) || updates.metrics.length > 640
+    if (!updates || Object.keys(updates).join() !== "metrics" || !Array.isArray(updates.metrics) || updates.metrics.length > leaderboardCeiling(baseline.length)
       || evidence.updatesSha256 !== wclDigest(updates)) throw new Error("WCL updates differ from the trusted receipt");
     if (manifest !== undefined && !Array.isArray(manifest?.sources)) throw new Error("WCL manifest source rows are missing");
     const bySpec = new Map(baseline.map(s => [`${s.class}|${s.spec}`, s]));

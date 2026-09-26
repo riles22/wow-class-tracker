@@ -1904,7 +1904,10 @@ function leaderboardSampleHTML(m){
   if(sample?.kind !== "leaderboard-entries") return "";
   const date = value => esc(String(value || "unknown").slice(0,10));
   const url = `https://www.warcraftlogs.com/zone/rankings/${encodeURIComponent(sample.zoneId)}#boss=${encodeURIComponent(sample.encounterId)}`;
-  return `<span class="mnote" style="display:block;margin-top:3px">Top ≤${esc(sample.cap)} entries per spec; partition ${esc(sample.partition)} bests, mixed dates ${date(sample.oldestRun)}–${date(sample.newestRun)}; checked ${date(sample.observedAt)} (UTC). ${sample.hasMorePages?"Further entries omitted.":"No further entries returned."} <a href="${esc(url)}" target="_blank" rel="noopener">Source leaderboard</a></span>`;
+  // Reviewed partitions carry their WCL name (build.mjs, from LIVE_LEADERBOARDS); any other id stays a number.
+  const named = (META.wclPartitions || []).find(p => p.zoneId === sample.zoneId && p.id === sample.partition);
+  const partition = named ? `partition “${esc(named.name)}”` : `partition ${esc(sample.partition)}`;
+  return `<span class="mnote" style="display:block;margin-top:3px">Top ≤${esc(sample.cap)} entries per spec; ${partition} bests, mixed dates ${date(sample.oldestRun)}–${date(sample.newestRun)}; checked ${date(sample.observedAt)} (UTC). ${sample.hasMorePages?"Further entries omitted.":"No further entries returned."} <a href="${esc(url)}" target="_blank" rel="noopener">Source leaderboard</a></span>`;
 }
 
 function metricsHTML(s){

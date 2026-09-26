@@ -6,6 +6,7 @@ import path from "node:path";
 import { build } from "../src/build.mjs";
 import { buildPayload } from "../src/render.mjs";
 import { loadData } from "../src/validate.mjs";
+import { leaderboardPartitions } from "../src/wcl-live.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -28,6 +29,8 @@ test("build produces the tracker and fetchable launcher icons", async () => {
   assert.ok(Array.isArray(published.creatorCredits), "publication must carry credits from the complete archive");
   assert.ok(published.creatorTakes.takes.every(t => !t.superseded) && published.creatorTakes.metaNotes.every(n => !n.superseded),
     "HTML serialization must use the compact publication payload");
+  // The drawer's partition names come from the reviewed recipe, not from the template.
+  assert.deepEqual(published.meta.wclPartitions, leaderboardPartitions());
 
   const icons = [
     { name: "favicon-192.png", rel: "icon", width: 192, height: 192 },

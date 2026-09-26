@@ -245,10 +245,12 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
   The pre-agent `src/fetch-wcl.mjs` holds credentials and writes independently uploaded
   receipts; `check-wcl-metrics.mjs` checks exact numeric updates and retained data.
   [Reviewed supported recipe](docs/wcl-supported-collection.md): eight Mythic raid bosses
-  (zone53, partition1,difficulty5,size20; world boss3379 excluded) and eight +10 dungeons
+  (zone53, partition1,difficulty5,size20; world boss3379 excluded and, until the reviewed partition switch, Kith'ix 3513) and eight +10 dungeons
   (zone55,partition1,difficulty10,size5,API bracket9). Per-spec per-encounter medians use
   the first up to100 ranked **entries**, minimum10; repeated characters are possible.
   Included log ranges, latest-log date, and collection time are displayed separately.
+  A partition WCL adds after review holds that bracket `partial` on the pinned partition
+  until a reviewed switch; the drawer names the partition a row came from.
   These are partition leaderboard samples, not whole-population medians or a weekly
   window. Tank DPS/HPS alone are not overall role effectiveness; no letter grades derive
   from them. WCL's DPS attribution is retained without asserting 'raw' or 'rDPS'.

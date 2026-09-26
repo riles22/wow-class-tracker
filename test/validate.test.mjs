@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { validateData, loadData } from "../src/validate.mjs";
 import { PHASES } from "../src/normalize.mjs";
+import { LIVE_LEADERBOARDS } from "../src/wcl-live.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -1001,4 +1002,57 @@ test("season guard: a WHOLESALE hold passes — the whole pool on the old side i
   }
   // Staleness is check-refresh's beat (--age flags it); validation only refuses the mix.
   assert.ok(!validateData(held).some(e => e.includes("mixes seasons")));
+});
+
+/* The partition sibling (2026-09-25): after a reviewed WCL partition switch, a sparse or
+   failed cut would otherwise keep its old-partition row inside a new-partition pool. */
+function leaderboardFamily(specs) {
+  const first = specs.flatMap(s => (s.metrics ?? []).filter(m => m.bracket === "raid" && m.sample?.kind === "leaderboard-entries"
+    && s.role === "DPS").map(m => m.name))[0];
+  return specs.filter(s => s.role === "DPS").map(s => s.metrics.find(m => m.bracket === "raid" && m.name === first)).filter(Boolean);
+}
+test("partition guard: a rank pool mixing two reviewed WCL partitions fails; a wholesale move passes", async () => {
+  const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid");
+  raid.reviewedPartitions.push({ id: raid.partition + 1, name: "fixture partition" });
+  try {
+    const data = await loadData(ROOT);
+    const mixed = structuredClone(data), rows = leaderboardFamily(mixed.specs);
+    assert.ok(rows.length >= 2, "fixture needs a real multi-spec leaderboard pool");
+    rows[0].sample.partition = raid.partition + 1;
+    const errors = validateData(mixed);
+    assert.ok(errors.some(e => e.includes("mixes WCL partitions") && e.includes(rows[0].name)
+      && e.includes(`partition ${raid.partition + 1} x1`)), `expected a mixed-partition pool error, got: ${errors.join(" | ")}`);
+    assert.ok(!errors.some(e => e.includes("invalid WCL leaderboard sample provenance")));
+    const moved = structuredClone(data);
+    for (const m of leaderboardFamily(moved.specs)) m.sample.partition = raid.partition + 1;
+    assert.deepEqual(validateData(moved).filter(e => /WCL partitions|WCL leaderboard sample provenance/.test(e)), []);
+  } finally { raid.reviewedPartitions.pop(); }
+});
+
+test("partition guard: leaderboard provenance comes from the reviewed recipe, and an unreviewed partition fails", async () => {
+  const data = await loadData(ROOT);
+  const cases = [s => { s.partition = 2; }, s => { s.zoneId = 54; }, s => { s.difficulty = 4; }, s => { s.size = 25; }, s => { s.keystoneLevel = 10; }];
+  for (const mutate of cases) {
+    const broken = structuredClone(data), [row] = leaderboardFamily(broken.specs);
+    mutate(row.sample);
+    assert.ok(validateData(broken).some(e => e.includes("invalid WCL leaderboard sample provenance")), String(mutate));
+  }
+  // The other direction: change the RECIPE and leave the rows alone. Restated literals
+  // would keep accepting the stored rows; reading LIVE_LEADERBOARDS refuses them.
+  const provenance = errors => errors.filter(e => e.includes("invalid WCL leaderboard sample provenance"));
+  const [raid, mplus] = LIVE_LEADERBOARDS.brackets;
+  for (const [cfg, field, value] of [[raid, "zoneId", 54], [raid, "difficulty", 4], [raid, "size", 25],
+    [raid, "reviewedPartitions", [{ id: 2, name: "fixture partition" }]], [mplus, "keystoneLevel", 11]]) {
+    const saved = cfg[field]; cfg[field] = value;
+    try { assert.ok(provenance(validateData(structuredClone(data))).length > 0, `${cfg.bracket}.${field}`); }
+    finally { cfg[field] = saved; }
+  }
+  // And rows that follow a changed recipe pass: equality with the config, not with a literal.
+  const saved = raid.size; raid.size = 25;
+  try {
+    const followed = structuredClone(data);
+    for (const s of followed.specs) for (const m of s.metrics ?? []) if (m.bracket === "raid" && m.sample?.kind === "leaderboard-entries") m.sample.size = 25;
+    assert.deepEqual(provenance(validateData(followed)), []);
+  } finally { raid.size = saved; }
+  assert.deepEqual(provenance(validateData(structuredClone(data))), []);
 });

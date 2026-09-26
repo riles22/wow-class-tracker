@@ -59,7 +59,7 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   `asOf` is the newest log date and `sample.observedAt` is the check instant. Empty or
   sparse cuts remain missing/retain prior observations. No pooling across encounters.
   Raid: zone53, partition1, difficulty5, size20, eight pinned raid bosses excluding
-  Nymrissa3379. M+: zone55, partition1, difficulty10, size5, **bracket9 = key+10**;
+  Nymrissa3379 and, until the reviewed partition switch (not merely 12.1.5 launch), Kith'ix 3513. M+: zone55, partition1, difficulty10, size5, **bracket9 = key+10**;
   validate `brackets.min=2,bucket=1` and each returned `hardModeLevel=bracketData=10`.
   Five spec aliases per request, inter-request pause, one bounded transport retry,
   hourly-budget checks, three consecutive failures stop, and12-minute total budget.
@@ -67,7 +67,15 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   status and matching landed rows; exact trusted updates and retained rows are checked
   independently on publication. The old `wcl-live-raid/mplus` requirements remain
   unreachable until a genuine aggregate endpoint is validated. New leaderboard data
-  cannot refresh their old medians. See [the reviewed recipe](../../../docs/wcl-supported-collection.md).
+  cannot refresh their old medians. **Partition supersession (dormant guard, 2026-09-25):**
+  when WCL lists a zone partition above the pinned one or outside the recipe's
+  `reviewedPartitions`, that bracket's receipt is `partial` with `supersededBy` and a detail
+  naming it, while rows are still collected from the pinned partition. Write the manifest
+  row `partial` with that detail. Never switch the partition agent-side: the switch is a
+  reviewed recipe change, and for raid it waits for Mythic Kith'ix ranked entries plus parity
+  on the reviewed bosses, both on the new partition (owner decision). The dispatch-only
+  `wcl-probe.yml` prints the evidence.
+  See [the reviewed recipe](../../../docs/wcl-supported-collection.md).
 - **Archon numbers** (same `__NEXT_DATA__` JSON as tiers): "95th pct DPS (Mythic)",
   "95th pct HPS (Mythic)", "95th pct DPS (Heroic)", "95th pct HPS (Heroic)",
   "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
