@@ -1100,7 +1100,10 @@ the payload (`timestamp` / `metadata.timestamp`), and the specs genuinely differ
 defeats the staleness gate exactly, because `required-sources.json` measures bloodmallet off
 `fightProfile.asOf` itself — for a month that hid 31-day-old sims behind a 5-day threshold
 (corrected 2026-08-08). Honest dates mean the manifest row is `partial` whenever upstream has not
-re-simmed, and the heartbeat goes red; that red IS the signal. Recipe and the transient-error
+re-simmed, and the heartbeat goes red once the chart dates pass the requirement's `maxAgeDays`;
+that red IS the signal. The threshold is sized to upstream's roughly weekly re-sim cadence
+(raised 2026-09-25 — the label in `required-sources.json` records why), so a `partial` row
+between weekly re-sims is normal and only a missed cycle reds. Recipe and the transient-error
 gotcha live in the refresh-metrics skill.
 
 ### Log a new PTR build

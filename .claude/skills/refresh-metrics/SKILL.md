@@ -341,6 +341,10 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
     `success` row unless the stored date is within 1 day of the run, so honest dates mean the
     manifest row is **`partial`** on any day Bloodmallet has not re-simmed. Record it as partial
     and let the age gate go red — a red heartbeat is the true signal that upstream has stalled.
+    Since 2026-09-25 that gate is `maxAgeDays: 8`, not 5: upstream re-sims about weekly (chart
+    dates 09-02, 09-05, 09-09, 09-16, 09-23), so a `partial` row between re-sims is normal and
+    only a missed weekly cycle reds. The bloodmallet label in `required-sources.json` has the
+    measurement; do not "fix" a quiet mid-week `partial` by touching dates.
   - **The 76-byte `{"status": "error", ...}` body is AMBIGUOUS — retry, but do not assume
     transient.** Beast Mastery once returned the identical body and then succeeded on retry
     with real data, so a single error never proves absence. But the body is equally the

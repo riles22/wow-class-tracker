@@ -431,7 +431,7 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 /* --- the heartbeat ----------------------------------------------------------------- */
 
-export const FLOOR_RESTORE_DUE = "2026-10-01", FULL_FLOOR = 7;
+export const FLOOR_RESTORE_DUE = "2026-11-01", FULL_FLOOR = 7;
 
 export function checkFreshness(config, manifest, data, now, gearing = null) {
   const violations = [], report = [], keys = [];
@@ -500,9 +500,18 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
      human-verification wall, wcl-live x2 on the upstream rDPS 500, and both sim rows held
      pre-adoption. Restoring 7 would have redded six of those nine nights for no new fact.
      The same-day wholesale MID2 adoption lifts the reachable ceiling by two; restore to 7
-     when Archon returns or by the new date, whichever first. */
+     when Archon returns or by the new date, whichever first.
+     EXTENDED AGAIN 2026-10-01 -> 2026-11-01 (Riley, 2026-09-25, reviewed edit): Archon did
+     not return — all nine archon-* rows have failed behind its human-verification wall in
+     every committed run manifest since 2026-08-26 (recorded unreachable, then blocked from
+     09-11) — and Icy Veins joined it, Cloudflare-blocked from the runners on every nightly
+     since 2026-09-23. With both wcl-live rows unreachable (no sanctioned aggregate
+     endpoint), 12 of 23 requirements cannot succeed from a runner. The
+     nightlies 2026-09-19..09-25 landed 7, 7, 6, 7, 5, 8, 6 successes of 23 (09-23 at exactly
+     5; counted from each nightly commit's data/run-manifest.json), so restoring 7 on 10-01
+     would have redded three of those seven nights for a wall no run can fix. */
   if ((config.minSuccessfulSources ?? FULL_FLOOR) < FULL_FLOOR && dateOf(nowDate) > FLOOR_RESTORE_DUE) {
-    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01" and extended once to ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
+    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01" and extended twice (2026-09-03, 2026-09-25) to ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
     keys.push("min-sources-floor");
   }
   for (const req of config.requirements) {

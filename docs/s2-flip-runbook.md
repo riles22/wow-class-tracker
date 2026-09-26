@@ -420,7 +420,9 @@ it with the 12.2 transition scope, not now.
 
 ## Deliberately left alone (checked 08-11, do not re-open without new evidence)
 
-Bloodmallet `maxAgeDays` 5 (the red IS the signal — owner decision in `edc63942`);
+Bloodmallet `maxAgeDays` 5 (the red IS the signal — owner decision in `edc63942`; re-opened on
+new evidence 2026-09-25 and raised to 8 for upstream's weekly re-sim cadence — see its label in
+`data/required-sources.json`);
 `published` threshold retightening (deferred ~09-01; tierListHealth already flags at 14d);
 a Method `published` block (needs a deliberate number first — it self-dates 133d);
 ci.yml-on-nightly-commits gap (narrow: publish+deploy both run npm test; exposure is the

@@ -694,7 +694,8 @@ test("age gate: a below-full floor is nagged past its restore date, and only the
   assert.ok(!before.violations.some(v => v.includes("minSuccessfulSources")), before.violations.join("\n"));
   assert.ok(!before.fingerprint.includes("min-sources-floor"));
   // Past it: red until restored. The date is read off the module so a reviewed extension
-  // of the window (2026-09-03: 09-01 -> 10-01) moves this pin with it instead of reddening it.
+  // of the window (2026-09-03: 09-01 -> 10-01; 2026-09-25: 10-01 -> 11-01) moves this pin
+  // with it instead of reddening it.
   const dayAfter = new Date(Date.parse(FLOOR_RESTORE_DUE) + 86400000).toISOString().slice(0, 10);
   const after = checkFreshness(lowered, goodManifest(), freshData(), dayAfter);
   assert.ok(after.violations.some(v => v.includes("minSuccessfulSources is still 5")), after.violations.join("\n"));
