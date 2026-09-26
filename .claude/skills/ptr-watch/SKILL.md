@@ -113,8 +113,8 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
 - **Consolidated 12.1.5 patch notes posted before 12.1.5 is live go in the RUN REPORT,
   never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`
   and is always `realm: "live"`; a new `realm: "ptr"` entry must carry `patch` too; and
-  validation refuses a `patch` newer than the displayed live patch (the one the masthead's
-  "Live:" stamp names — `PHASES.livePatch?.label ?? liveLabel` between cycles; normalize.mjs
+  validation refuses a `patch` newer than the displayed live patch
+  (`PHASES.livePatch?.label ?? liveLabel` between cycles; normalize.mjs
   `displayedLivePatch`) on EVERY kind, except that a `realm: "ptr"`
   entry may name the upcoming patch while a PTR cycle is open (`PHASES.ptr` set; the
   ceiling is then `PHASES.ptr.label` with a trailing " PTR" stripped, so "12.2 PTR" and
@@ -122,9 +122,11 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
   them early, as patch notes or as a PTR build, reds the run — as long as the entry names
   the patch its source names. Validation checks the labels, never the content: `realm` and
   `patch` are read off the post by you and never verified, so any mislabel to an accepted
-  value validates with 0 errors and votes in the outlook tally — a PTR entry that names the
-  live patch for next-patch material, or a `realm: "live"` build or hotfix carrying
-  next-patch material with no `patch` (optional on live entries) or naming the live patch.
+  value validates with 0 errors — a PTR entry that names the live patch for next-patch
+  material, or a `realm: "live"` build or hotfix carrying next-patch material with no
+  `patch` (optional on live entries) or naming the live patch, each of which votes in the
+  outlook tally; and early 12.1.5 notes logged as `kind: "patch-notes"` naming the live
+  patch, which render as shipped 12.1 content (patch notes never vote in the tally).
   All are on you. Record the post (URL, date,
   what it covers) in the run report and this skill's `log.md`. Nothing carries their
   per-spec content onto the site before launch: the notes-only preview lane above reads only staff posts

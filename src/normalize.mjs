@@ -50,8 +50,9 @@ export function consensusTier(score, scales) {
                      of NEXT-season letters can be labelled with its own patch instead of
                      inheriting the live one.
      · livePatch   — a patch released INSIDE the live season (12.1.5 inside Season 2):
-                     display-only on the page (validate.mjs also reads it as the feed's
-                     patch ceiling), null until it ships. See the field below. Every season
+                     display-only on the page (validate.mjs also reads it, through
+                     displayedLivePatch, as the feed's live patch ceiling), null until it
+                     ships. See the field below. Every season
                      flip resets it to null (pinned: its `since` must postdate liveSince).
    At 12.1 launch: liveSeason -> "s2", liveLabel -> "12.1", ptr -> null (until the 12.2
    thread appears), alongside the SNAPSHOT_PHASE flip in render.mjs. */
@@ -94,7 +95,7 @@ export const PHASES = {
      by accident. That is why liveLabel, seasonLabels.s2 and LIVE_LEADERBOARDS.label
      (wcl-live.mjs) never move within a season. Off the page two checks read it, and
      neither changes a rendered value: validate.mjs bounds the build feed's live entries by
-     the patch the "Live:" stamp names (displayedLivePatch below — this field, else
+     the patch the page shows as live (displayedLivePatch below — this field, else
      liveLabel, outside a launched cycle), so once it is set a live entry may name 12.1.5, and
      check-refresh's label-flip gate below. `since` is the one recorded launch date; the Bloodmallet
      adoption rule (refresh-metrics skill, which holds on LABEL_FLIP_DUE below until this
@@ -119,18 +120,23 @@ export const PHASES = {
    exists. The gate asks "older", not "different", so it stays silent once the chip reaches
    12.1.5, at a later in-season patch and after the next season flip (livePatch back to
    null, liveLabel moved on); nothing needs retiring (check-refresh.mjs `labelFlipViolation`). */
-/* The patch the masthead's "Live:" stamp names (build.mjs eraTokensFor): an open cycle's
-   label once it has dropped " PTR" at launch — the 2026-08-11..18 window ran
-   `ptr.label: "12.1"` while liveLabel was still "12.0.7" (24532b5) — else livePatch, else
-   liveLabel. validate.mjs bounds the build feed's live entries by it, so the feed and the
-   stamp can never disagree about which patch is live; a build test holds the two in step. */
-export function displayedLivePatch(phases = PHASES) {
-  if (phases.ptr && !String(phases.ptr.label ?? "").includes("PTR")) return phases.ptr.label;
-  return phases.livePatch?.label ?? phases.liveLabel;
-}
-
 export const LABEL_FLIP_EXPECTED = "12.1.5";
 export const LABEL_FLIP_DUE = null;
+
+/* The patch the page shows as live. When the masthead stamp reads "Live:" (build.mjs
+   eraTokensFor) it is the patch that stamp names: a cycle's label once it has dropped
+   " PTR" at launch — the 2026-08-11..18 window ran `ptr.label: "12.1"` while liveLabel was
+   still "12.0.7" (24532b5) — else livePatch, else liveLabel. While a cycle is on the PTR the
+   stamp reads "PTR:" and names the cycle instead; the live patch is then livePatch, else
+   liveLabel, which the chip no longer shows. The label falls back to the marker exactly as
+   validate.mjs's cycle patch does, so a missing label reads as still on the PTR. validate.mjs
+   bounds the build feed's live entries by this, and gearing's chip must name it; build
+   tests hold both in step with the stamp. */
+export function displayedLivePatch(phases = PHASES) {
+  const label = phases.ptr ? String(phases.ptr.label ?? phases.ptr.marker ?? "") : null;
+  if (label != null && !label.includes("PTR")) return label;
+  return phases.livePatch?.label ?? phases.liveLabel;
+}
 
 export const isLiveEra = source => (source.era ?? "live") === "live";
 /* Position of a season on the declared timeline; null when the id is unknown. */

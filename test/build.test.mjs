@@ -200,15 +200,17 @@ test("the gearing page's chip names the same live patch as the tracker", async (
   /* The two pages' bars mirror each other BY HAND (CLAUDE.md, "Gearing carries the same
      bar"), and gearing's chip is a literal in its own template, so setting PHASES.livePatch
      does not move it. Without this, the launch commit would leave the two site tabs naming
-     different patches (2026-09-25 review). Compared with the LIVE patch (livePatch, else
-     liveLabel), not with the tracker's chip, because an open PTR cycle takes the tracker's
-     chip over while gearing stays about the live season's gear. The launch commit that sets
-     livePatch edits gearing's chip too and runs `npm run gearing:build`, or reds here. */
-  const { PHASES } = await import("../src/normalize.mjs");
+     different patches (2026-09-25 review). Compared with the patch the page shows as live
+     (normalize.mjs displayedLivePatch), not with the tracker's chip, because an open PTR
+     cycle takes the tracker's chip over while gearing stays about the live season's gear;
+     once a cycle's label drops " PTR" at launch, gearing's chip follows it (24532b5 edited
+     both). The launch commit that sets livePatch edits gearing's chip too and runs
+     `npm run gearing:build`, or reds here. */
+  const { PHASES, displayedLivePatch } = await import("../src/normalize.mjs");
   const tpl = await readFile(path.join(ROOT, "gearing", "src", "app.template.html"), "utf8");
   const chip = /<span class="patchchip"><span class="pc-full">([^<]*)<\/span><span class="pc-short">([^<]*)<\/span><\/span>/.exec(tpl);
   assert.ok(chip, "gearing's patch chip markup must be findable");
-  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  const live = displayedLivePatch(PHASES);
   assert.equal(chip[2], live, "gearing's phone chip must name the live patch");
   assert.equal(chip[1].replaceAll("&mdash;", "—"), `${live} — ${PHASES.patchName.toUpperCase()}`,
     "gearing's full chip must name the live patch and the patch name");

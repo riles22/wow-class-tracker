@@ -1121,8 +1121,9 @@ test("ptr-builds: a PTR entry from the cutoff names its patch, so early notes ca
     // live entries and entries before the cutoff are not asked for a patch
     assert.ok(!errs({ ...early, realm: "live" }).some(patchErr));
     assert.ok(!errs({ ...early, date: dayBefore }).some(patchErr));
-    // during an open cycle a PTR entry names the patch under test and passes
-    PHASES.ptr = { marker: `${live}.9 PTR`, label: `${live}.9` };
+    // during an open cycle a PTR entry names the patch under test and passes (an open
+    // cycle's label carries " PTR"; the dotted label is the launched shape)
+    PHASES.ptr = { marker: `${live}.9 PTR`, label: `${live}.9 PTR` };
     assert.deepEqual(errs({ ...early, patch: `${live}.9` }), []);
     assert.ok(errs(early).some(patchErr), "an open cycle does not waive the patch");
   } finally {
@@ -1185,6 +1186,10 @@ test("ptr-builds: patch notes are live, one spelling per patch, and the patch ce
   const ptrRealm = errs({ ...notes, realm: "ptr", patch: live });
   assert.ok(ptrRealm.some(e => e.includes('carries realm "ptr"')));
   assert.ok(!ptrRealm.some(e => e.includes("(or omitted)")), "omitting the realm is not an option from the cutoff");
+  // patch notes' patch rule is their own (every date); the PTR-entry patch rule never fires on them
+  const ptrRealmNoPatch = errs({ ...notes, realm: "ptr" });
+  assert.ok(ptrRealmNoPatch.some(e => e.includes("patch-notes") && e.includes("must record patch")), ptrRealmNoPatch.join("\n"));
+  assert.ok(!ptrRealmNoPatch.some(e => e.includes('is realm "ptr" and must record patch')), ptrRealmNoPatch.join("\n"));
   assert.deepEqual(errs({ ...notes, realm: "live", patch: live }), []);
   const omitted = errs({ ...notes, patch: live });
   assert.ok(omitted.some(e => e.includes('must record realm "live"')), omitted.join("\n"));
@@ -1273,6 +1278,14 @@ test("ptr-builds: an open cycle's ceiling is its label with the trailing \" PTR\
     const unrecorded = errs({ ...noRealm, patch: `${next}.5` });
     assert.ok(unrecorded.some(e => e.includes("must record realm")), unrecorded.join("\n"));
     assert.ok(!unrecorded.some(e => e.includes("is newer than")), unrecorded.join("\n"));
+    // …and the same for a realm outside the vocabulary, which is neither lane
+    const unknownRealm = errs({ ...build, realm: "beta", patch: `${next}.5` });
+    assert.ok(unknownRealm.some(e => e.includes('unknown realm "beta"')), unknownRealm.join("\n"));
+    assert.ok(!unknownRealm.some(e => e.includes("is newer than")), unknownRealm.join("\n"));
+    // the spelling rule does not depend on the realm, so both errors arrive in one pass
+    const unrecordedSpelling = errs({ ...noRealm, patch: `${next}.0` });
+    assert.ok(unrecordedSpelling.some(e => e.includes("must record realm")), unrecordedSpelling.join("\n"));
+    assert.ok(unrecordedSpelling.some(e => e.includes(`must be written "${next}"`)), unrecordedSpelling.join("\n"));
     // The dotted label is the LAUNCHED shape — 24532b5 ran label "12.1" for the seven days
     // between 12.1's launch and the season flip, and the stamp reads "Live: 12.1" then. The
     // PTR lane keeps the same ceiling, and the displayed live patch IS that label, so live

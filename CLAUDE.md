@@ -394,7 +394,7 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   ("Current numbers · Raid (Season 2)", "Live Season 2 tuning") name the season, because all
   of them describe the Season 2 data; `meta.phases` strips the field, so no client-side label
   can read it. Off the page it has two readers, neither of which changes a rendered value:
-  validate.mjs bounds the build feed's `patch` by the patch the "Live:" stamp names
+  validate.mjs bounds the build feed's `patch` by the patch the page shows as live
   (`displayedLivePatch`: this field, else `liveLabel`, outside a launched cycle), and the
   label-flip heartbeat below. A build test sets it and proves the page changes in
   those three places and nowhere else; its fixtures force `ptr` and `livePatch`, so it
@@ -992,10 +992,11 @@ outlook tally, projection and consensus are unchanged by it (deep-compared on la
 **`patch`** is a dotted version with ONE spelling per patch (`"12.1"`, never `"12.1.0"` or
 `"12.01"` — the Shipped blocks group by the string), required on `kind: "patch-notes"`,
 whose realm is always live, and on every `realm: "ptr"` entry from the same cutoff. On
-EVERY kind it is never newer than the displayed live patch — the one the masthead's "Live:"
-stamp names (`displayedLivePatch` in normalize.mjs: a cycle's label once it has dropped
-" PTR" at launch, else `PHASES.livePatch?.label`, else `liveLabel`; a build test holds the two
-in step). The one exception is a `realm: "ptr"` entry while a PTR cycle is open, bounded
+EVERY kind it is never newer than the displayed live patch (`displayedLivePatch` in
+normalize.mjs: a cycle's label once it has dropped " PTR" at launch, else
+`PHASES.livePatch?.label`, else `liveLabel` — whatever the masthead's "Live:" stamp names,
+and a build test holds the two in step; while a cycle is on the PTR the stamp reads "PTR:"
+and the live patch is livePatch, else liveLabel). The one exception is a `realm: "ptr"` entry while a PTR cycle is open, bounded
 instead by the cycle's patch: `PHASES.ptr.label` with a trailing " PTR" stripped (the label
 reads "12.2 PTR" while the patch is on the PTR and "12.2" after launch, and both mean 12.2,
 as in `predictionSeason` in snapshot.mjs). So a patch's consolidated notes cannot enter the

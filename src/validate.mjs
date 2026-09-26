@@ -831,18 +831,20 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
        only one of them would carry the supersession note. A trailing ".0" past the minor
        version and leading zeros are refused; "12.0" stays valid, it IS the minor version.
        The ceiling applies to EVERY kind, not only patch-notes: the DISPLAYED live patch —
-       whatever the masthead's "Live:" stamp names (normalize.mjs displayedLivePatch: a
-       launched cycle's label, else livePatch, else liveLabel) — bounds any live-realm entry,
-       so neither a patch's consolidated notes nor a live entry can name a patch before the
-       site shows it live. A ptr-realm entry may name the upcoming patch only while a PTR
+       normalize.mjs displayedLivePatch: a launched cycle's label, else livePatch, else
+       liveLabel, which is what the "Live:" stamp names whenever it reads "Live:" — bounds
+       any live-realm entry, so neither a patch's consolidated notes nor a live entry can
+       name a patch before the site shows it live. A ptr-realm entry may name the upcoming patch only while a PTR
        cycle is open, and then no newer than the cycle's patch: PHASES.ptr.label (else its
        marker) with a trailing " PTR" stripped — the label reads "12.2 PTR" while the patch is
        on the PTR and "12.2" once it launches, and both mean patch 12.2, as in snapshot.mjs
        predictionSeason. The first draft of this rule tested the raw label, so the "12.2 PTR"
        convention matched no dotted version and every PTR entry of an open cycle was refused
        as if no cycle were open. Between cycles — 12.1.5 has a notes-only preview, not a
-       cycle — nothing may. An entry that must record its realm and has not is not checked
-       here: its lane is unknown, and the realm error above already fires. */
+       cycle — nothing may. An entry other than patch notes whose realm is unknown (a value
+       outside BUILD_REALMS, or none where one is required) is not ceiling-checked: its lane
+       cannot be told, and the realm error above already fires. Patch notes are always live,
+       so they are checked either way; the spelling rule never depends on the realm. */
     if (build.patch != null && (typeof build.patch !== "string" || !PATCH_VERSION.test(build.patch))) {
       errors.push(`ptr-builds.json: entry ${build.date} patch must be a dotted version such as "12.1", got ${JSON.stringify(build.patch)}`);
     }
@@ -850,14 +852,18 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     const livePatch = displayedLivePatch(PHASES);
     const cycleLabel = PHASES.ptr ? String(PHASES.ptr.label ?? PHASES.ptr.marker ?? "") : null;
     const cyclePatch = cycleLabel == null ? null : cycleLabel.replace(/\s*PTR$/i, "").trim();
-    const realmUnrecorded = build.realm == null && typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM;
-    if (patchOk && !(realmUnrecorded && kind !== "patch-notes")) {
+    const laneUnknown = kind !== "patch-notes" && (build.realm != null
+      ? !BUILD_REALMS.includes(build.realm)
+      : typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM);
+    if (patchOk) {
       const segs = build.patch.split(".");
       if (segs.some(s => s.length > 1 && s.startsWith("0")) || (segs.length > 2 && segs.at(-1) === "0")) {
         const nums = segs.map(Number);
         while (nums.length > 2 && nums.at(-1) === 0) nums.pop();
         errors.push(`ptr-builds.json: entry ${build.date} patch "${build.patch}" must be written "${nums.join(".")}" — one spelling per patch, or its notes render as two "Shipped in" blocks`);
       }
+    }
+    if (patchOk && !laneUnknown) {
       const ptrLane = buildRealmOf(build) === "ptr" && kind !== "patch-notes";
       if (ptrLane && cyclePatch != null && !PATCH_VERSION.test(cyclePatch)) {
         errors.push(
@@ -892,7 +898,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       }
     }
     if (kind === "patch-notes" && build.patch == null) {
-      errors.push(`ptr-builds.json: patch-notes ${build.date} must record patch (e.g. "${livePatch}") — each patch's notes render as their own "Shipped in {patch}" block`);
+      errors.push(`ptr-builds.json: patch-notes ${build.date} must record patch${PATCH_VERSION.test(String(livePatch)) ? ` (e.g. "${livePatch}")` : ", as a dotted version"} — each patch's notes render as their own "Shipped in {patch}" block`);
     }
     if (kind === "hotfix") {
       if (!build.wowheadUrl) errors.push(`ptr-builds.json: hotfix ${build.date} missing wowheadUrl — a hotfix has no forum post, so the Wowhead round-up is its citation`);
