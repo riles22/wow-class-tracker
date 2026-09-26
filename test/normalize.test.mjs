@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { scoreFor, consensusTier, consensusFor, isLiveEra, ptrTierSources, PHASES, sourceSeasonOk,
   seasonRank, aheadSeasonFor, nextPatchTierSources, frozenLettersFor } from "../src/normalize.mjs";
 
@@ -198,6 +199,37 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
      dead weight — the FIELD is deleted, not set false. Assert absence, so resurrecting
      it is a deliberate edit that fails here first. */
   assert.ok(!("ptrSunset" in PHASES), "ptrSunset was deleted at the flip (DECISION 3 amendment) — do not resurrect it");
+});
+
+/* The launch date must be a real day that has already happened (2026-09-26 review
+   finding). The 12.1.5 launch branch was pre-staged before Blizzard announced the release
+   date, so it carried a far-future placeholder `since` plus a marker comment beside it in
+   src/normalize.mjs, both replaced on launch morning (docs/1215-launch-runbook.md, B5).
+   Nothing else reds if that edit is skipped: the chip already reads 12.1.5 and the
+   label-flip gate is silent, while the two skills that read `since` (the refresh-metrics
+   Bloodmallet adoption hold and the watch-creators live-framing rule) would wait for the
+   placeholder year. This makes CI and the nightly's `npm test` red instead. The marker is
+   assembled at run time so this file never contains it: B5's leftover check and the
+   runbook's `git grep` both scan this file and must find nothing here. */
+test("PHASES.livePatch.since is a real ISO date no later than today (UTC), with no placeholder marker left in normalize.mjs", () => {
+  const marker = ["FIX", "TURE"].join("");
+  const src = readFileSync(new URL("../src/normalize.mjs", import.meta.url), "utf8");
+  assert.ok(!src.includes(marker),
+    `src/normalize.mjs still carries a ${marker} marker: the pre-staged placeholder comment beside PHASES.livePatch ` +
+    `and its placeholder date are replaced together on launch morning (docs/1215-launch-runbook.md, B5)`);
+  if (PHASES.livePatch == null) return; // no in-season patch recorded: nothing to date
+  const since = PHASES.livePatch.since;
+  const iso = typeof since === "string" && /^\d{4}-\d{2}-\d{2}$/.test(since);
+  const [y, m, d] = iso ? since.split("-").map(Number) : [];
+  assert.ok(iso && new Date(Date.UTC(y, m - 1, d)).toISOString().slice(0, 10) === since,
+    `PHASES.livePatch.since must be a real calendar date written YYYY-MM-DD, got ${JSON.stringify(since)}`);
+  const today = new Date().toISOString().slice(0, 10);
+  assert.ok(since <= today,
+    `PHASES.livePatch.since ${since} is later than today (${today} UTC). A future date is always wrong: livePatch ` +
+    `is set by the launch commit once the patch is already live, so since records a day that has happened. A future ` +
+    `value can only be a placeholder or a typo, and the skills that read it (the refresh-metrics Bloodmallet adoption ` +
+    `hold, the watch-creators live-framing rule) would wait for that date with no other gate objecting. Set it to the ` +
+    `real US release date (docs/1215-launch-runbook.md, B5).`);
 });
 
 /* ---- the season-ahead predicate + the frozen lane (2026-08-09) ---------------------
