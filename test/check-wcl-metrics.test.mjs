@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { checkWclMetrics, storedWclRows, wclDigest } from "../src/check-wcl-metrics.mjs";
-import { LIVE_LEADERBOARDS, expectedMetricName } from "../src/wcl-live.mjs";
+import { LIVE_LEADERBOARDS, expectedMetricName, leaderboardCeiling } from "../src/wcl-live.mjs";
 import { PHASES } from "../src/normalize.mjs";
 import { createWclCoverage } from "../src/wcl-coverage.mjs";
 import { loadData, validateData } from "../src/validate.mjs";
@@ -94,6 +94,23 @@ test("WCL gate rejects tampered canonical values, sample dates, labels and extra
   }
   const added = fixture(); added.current[0].metrics.push({ ...added.current[0].metrics[0], name: "Unreceipted measurement" });
   reject(added, /Canonical WCL rows differ/);
+});
+
+test("WCL update ceiling derives from the reviewed recipe (640 today) and refuses one row more", () => {
+  assert.equal(leaderboardCeiling(roster.length), 640);
+  const f = fixture(); assert.equal(f.updates.metrics.length, 640);
+  f.updates.metrics.push(structuredClone(f.updates.metrics.at(-1))); reseal(f);
+  reject(f, /WCL updates differ from the trusted receipt/);
+  // One more reviewed encounter moves the ceiling with it; no literal to forget.
+  const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid");
+  raid.encounters.push({ id: 999999, name: "Fixture encounter" });
+  try { assert.equal(leaderboardCeiling(roster.length), 680); } finally { raid.encounters.pop(); }
+  assert.equal(leaderboardCeiling(roster.length), 640);
+});
+
+test("new WCL updates must come from the pinned partition, even one validation would accept as reviewed", () => {
+  const f = fixture(); f.updates.metrics[0].sample.partition = LIVE_LEADERBOARDS.brackets[0].partition + 1; reseal(f);
+  reject(f, /Invalid WCL leaderboard tuple, value, sample, or provenance/);
 });
 
 test("WCL gate rejects updates whose payload hash or cut receipt differs", () => {

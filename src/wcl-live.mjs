@@ -11,6 +11,11 @@ export const LIVE_LEADERBOARDS = {
   brackets: [
     { key: "wcl-leaderboard-raid", bracket: "raid", zoneId: 53, zoneName: "The Venomous Abyss",
       partition: 1, partitionName: "12.1", difficulty: 5, size: 20, minRows: 200,
+      // Every partition this zone listed when the recipe was last reviewed (the
+      // 2026-09-25 zone probe). See partitionSupersession below.
+      reviewedPartitions: [{ id: 1, name: "12.1" }],
+      // Owner decision (2026-09-25): the raid switch waits for Mythic Kith'ix, not a reset.
+      switchWaitsFor: "Mythic Kith'ix (3513) ranked entries on the new partition",
       encounters: [
         { id: 3470, name: "Nek'zali the Soulcoiler" }, { id: 3445, name: "Entombed Sentinels" },
         { id: 3455, name: "Vashnik the Malignant" }, { id: 3497, name: "The Lost Explorers" },
@@ -27,6 +32,7 @@ export const LIVE_LEADERBOARDS = {
     },
     { key: "wcl-leaderboard-mplus", bracket: "mplus", zoneId: 55, zoneName: "Mythic+ Season 2",
       partition: 1, partitionName: "Season 2", difficulty: 10, size: 5, minRows: 280,
+      reviewedPartitions: [{ id: 1, name: "Season 2" }],
       keystoneLevel: 10, rankingBracket: 9,
       bracketMetadata: { min: 2, max: 30, bucket: 1, type: "Keystone Level" },
       encounters: [
@@ -41,6 +47,18 @@ export const LIVE_LEADERBOARDS = {
 
 export const expectedMetricName = (cfg, encounter, metric) =>
   `Leaderboard median ${metric.toUpperCase()} (S2 ${cfg.bracket === "raid" ? "Mythic" : `M+${cfg.keystoneLevel}`}: ${encounter.name}, top 100)`;
+// The collector refuses to run unless the live phase is exactly the reviewed one, so a
+// PHASES edit that forgets this config (e.g. a patch label written into liveLabel)
+// silently turns every cut invalid. test/wcl-live.test.mjs pins the two in lockstep.
+export const leaderboardPhaseOk = phases => phases?.liveSeason === LIVE_LEADERBOARDS.season
+  && phases?.liveLabel === LIVE_LEADERBOARDS.label && phases?.liveSince === LIVE_LEADERBOARDS.liveSince;
+// Most rows one collection can produce: one per (encounter, spec). Gates derive it here
+// rather than restating a literal, so adding a reviewed encounter moves them together.
+export const leaderboardCeiling = rosterSize => LIVE_LEADERBOARDS.brackets
+  .reduce((n, cfg) => n + cfg.encounters.length * rosterSize, 0);
+// Reviewed partition names for display: a drawer shows "12.1", not a bare WCL id.
+export const leaderboardPartitions = () => LIVE_LEADERBOARDS.brackets
+  .flatMap(cfg => cfg.reviewedPartitions.map(({ id, name }) => ({ zoneId: cfg.zoneId, id, name })));
 const canonical = value => typeof value === "string" ? value.replace(/[\s-]+/g, "").toLowerCase() : "";
 const sameName = (a, b) => typeof a === "string" && a.replace(/[‘’]/g, "'") === b.replace(/[‘’]/g, "'");
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -73,7 +91,29 @@ function zoneValid(zone, cfg) {
   }
   return true;
 }
-function rankingQuery(cfg, encounter, specs) {
+/* Partition supersession guard (dormant; added 2026-09-25 ahead of 12.1.5). WCL adds a
+   zone partition per patch: zone 46 lists 12.0, 12.0.5, 12.0.7 and 12.1. New logs are
+   then expected to rank on the new partition, yet every cut on the pinned one keeps
+   succeeding and a freshness gate keyed on collection time stays green. The zone
+   listing is the signal.
+   The `default` flag is not: zone 46 still marks 12.0.7 as default beside 12.1, and zone
+   50 likewise (2026-09-25 zone probe). Any partition with an id above the pinned one, or
+   outside the reviewed set, holds the bracket at partial with a detail naming it, while
+   rows are still collected from the pinned partition. Switching is a reviewed recipe
+   change (docs/wcl-supported-collection.md), never automatic. */
+export function partitionSupersession(zone, cfg) {
+  const found = (Array.isArray(zone?.partitions) ? zone.partitions : []).filter(p => !(p?.id <= cfg.partition)
+    || !cfg.reviewedPartitions.some(r => r.id === p.id && sameName(p.name, r.name)));
+  return found.length ? found.map(p => ({ id: Number.isSafeInteger(p?.id) ? p.id : null,
+    name: typeof p?.name === "string" ? p.name.slice(0, 60) : null })) : null;
+}
+function supersessionDetail(found, cfg) {
+  const listed = found.map(p => `${p.id} ${JSON.stringify(p.name)}`).join(", ");
+  return `WCL lists partition${found.length > 1 ? "s" : ""} ${listed} outside the reviewed recipe `
+    + `(pinned partition ${cfg.partition} ${JSON.stringify(cfg.partitionName)}); rows are still collected from partition `
+    + `${cfg.partition}, held there until the reviewed switch, which waits for ${cfg.switchWaitsFor ?? "owner review of the new partition"}`;
+}
+export function rankingQuery(cfg, encounter, specs) {
   const aliases = specs.map((spec, index) => `s${index}: characterRankings(metric: ${metricFor(spec)}, className: ${JSON.stringify(spec.class.replace(/ /g, ""))}, specName: ${JSON.stringify(spec.spec.replace(/ /g, ""))}, page: 1, partition: ${cfg.partition}, difficulty: ${cfg.difficulty}, size: ${cfg.size}${cfg.keystoneLevel ? `, bracket: ${cfg.rankingBracket}` : ""})`);
   return `{ worldData { encounter(id: ${encounter.id}) { id zone { id } ${aliases.join(" ")} } } }`;
 }
@@ -121,7 +161,7 @@ export async function collectLeaderboards({ roster, query, pause = sleep, now = 
   const observed = () => { const date = new Date(getNow()); if (!Number.isFinite(+date)) throw new Error("Invalid collection timestamp"); return date.toISOString(); };
   const began = clock(), attemptedAt = observed(), updates = { metrics: [] }, brackets = {};
   let abortReason = null, consecutiveFailures = 0, rankedBatches = 0, budgetChecks = 0, queries = 0;
-  const scheduledCuts = LIVE_LEADERBOARDS.brackets.reduce((n, cfg) => n + cfg.encounters.length * roster.length, 0);
+  const scheduledCuts = leaderboardCeiling(roster.length);
   let processedCuts = 0;
   const request = async expression => {
     const remaining = maxRunMs - (clock() - began);
@@ -160,8 +200,7 @@ export async function collectLeaderboards({ roster, query, pause = sleep, now = 
     const needed = (scheduledCuts - processedCuts) * LIVE_LEADERBOARDS.estimatedPointsPerCut + LIVE_LEADERBOARDS.budgetReserve;
     if (rate.limitPerHour - rate.pointsSpentThisHour < needed) abortReason = "Insufficient hourly query budget for the remaining bounded collection";
   };
-  const phaseOk = phases?.liveSeason === LIVE_LEADERBOARDS.season && phases?.liveLabel === LIVE_LEADERBOARDS.label
-    && phases?.liveSince === LIVE_LEADERBOARDS.liveSince;
+  const phaseOk = leaderboardPhaseOk(phases);
   if (phaseOk) await checkBudget();
   for (const cfg of LIVE_LEADERBOARDS.brackets) {
     const receipt = brackets[cfg.key] = { status: "partial", rows: 0, zoneId: cfg.zoneId, bracket: cfg.bracket,
@@ -169,11 +208,17 @@ export async function collectLeaderboards({ roster, query, pause = sleep, now = 
       ...(cfg.keystoneLevel ? { keystoneLevel: cfg.keystoneLevel, rankingBracket: cfg.rankingBracket } : {}),
       attemptedAt, cuts: [], omissions: [], failures: [] };
     let zoneError = phaseOk ? null : "Live phase differs from the reviewed S2 leaderboard configuration";
+    let superseded = null;
     if (!zoneError && !abortReason) {
       const discovery = await request(zoneQuery(cfg));
       if (discovery?.status !== 200 || graphErrors(discovery).length) zoneError = "Zone discovery failed";
       else if (!zoneValid(discovery.json?.data?.worldData?.zone, cfg)) zoneError = "Zone identity/season/encounter/difficulty/keystone metadata differs from reviewed configuration";
-      else receipt.discoveryVerified = true;
+      else {
+        receipt.discoveryVerified = true;
+        // Absent unless WCL lists an unreviewed partition, so today's receipt is unchanged.
+        superseded = partitionSupersession(discovery.json.data.worldData.zone, cfg);
+        if (superseded) receipt.supersededBy = superseded;
+      }
     }
     for (const encounter of cfg.encounters) {
       for (let offset = 0; offset < roster.length; offset += LIVE_LEADERBOARDS.batchSize) {
@@ -206,9 +251,9 @@ export async function collectLeaderboards({ roster, query, pause = sleep, now = 
       }
     }
     receipt.verifiedCuts = receipt.cuts.filter(c => ["success", "sparse"].includes(c.status)).length;
-    receipt.status = receipt.rows >= cfg.minRows && !receipt.failures.length ? "success"
+    receipt.status = receipt.rows >= cfg.minRows && !receipt.failures.length && !superseded ? "success"
       : receipt.rows || receipt.verifiedCuts ? "partial" : receipt.failures.some(f => f.status === "unreachable") ? "unreachable" : "invalid";
-    receipt.detail = `${receipt.rows} median rows; ${receipt.omissions.length} empty/sparse cuts; ${receipt.failures.length} failed/unattempted cuts; minimum ${cfg.minRows} rows${abortReason ? `; ${abortReason}` : ""}`;
+    receipt.detail = `${receipt.rows} median rows; ${receipt.omissions.length} empty/sparse cuts; ${receipt.failures.length} failed/unattempted cuts; minimum ${cfg.minRows} rows${abortReason ? `; ${abortReason}` : ""}${superseded ? `; ${supersessionDetail(superseded, cfg)}` : ""}`;
   }
   return { brackets, updates, querySummary: { queries, rankedBatches, budgetChecks, elapsedMs: Math.round(clock() - began), abortReason } };
 }

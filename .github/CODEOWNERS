@@ -43,6 +43,12 @@
 /src/check-official-notes.mjs @riles22
 /src/fetch-official-notes.mjs @riles22
 /src/official-notes.mjs @riles22
+# The WCL lane (2026-09-25): wcl-live.mjs holds the reviewed leaderboard recipe that
+# validate.mjs and check-wcl-metrics.mjs now read their zone, partition and ceiling from,
+# and wcl-coverage.mjs shapes the public receipt the gate compares against.
+/src/wcl-live.mjs @riles22
+/src/wcl-coverage.mjs @riles22
+/src/check-wcl-metrics.mjs @riles22
 /src/verify-deployment.mjs @riles22
 /src/sync-agent-instructions.mjs @riles22
 /AGENTS.md @riles22

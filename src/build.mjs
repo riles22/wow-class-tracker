@@ -12,6 +12,7 @@ import { renderSeasonArchive } from "./render-season-archive.mjs";
 import { loadSnapshots } from "./report-card.mjs";
 import { createForecastReport, renderForecastReport } from "./render-forecast-report.mjs";
 import { esc, inlineScripts, scriptTagCount } from "./html-safety.mjs";
+import { leaderboardPartitions } from "./wcl-live.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ICON_ASSETS = ["favicon-192.png", "apple-touch-icon.png"];
@@ -33,6 +34,9 @@ export async function build(root = ROOT) {
   const forecastReport = createForecastReport({ ...data,
     historySnapshots: data.frozenForecast ? await loadSnapshots(root) : [] });
   if (forecastReport?.summary) payload.meta.forecastReport = forecastReport.summary;
+  // The drawer names a leaderboard's WCL partition ("12.1") instead of its bare id. Only
+  // reviewed partitions have names; any other id renders as its number.
+  payload.meta.wclPartitions = leaderboardPartitions();
   const forecastReportHTML = renderForecastReport(forecastReport);
   // Escape "<" so the payload can never terminate the surrounding <script> block.
   const json = JSON.stringify(publicationPayload(payload)).replace(/</g, "\\u003c");

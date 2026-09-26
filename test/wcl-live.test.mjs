@@ -1,7 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { collectLeaderboards, LIVE_LEADERBOARDS, expectedMetricName } from "../src/wcl-live.mjs";
+import { collectLeaderboards, LIVE_LEADERBOARDS, expectedMetricName, partitionSupersession, leaderboardPhaseOk,
+  leaderboardCeiling, leaderboardPartitions } from "../src/wcl-live.mjs";
+import { PHASES } from "../src/normalize.mjs";
 
 const roster = JSON.parse(await readFile(new URL("../data/specs.json", import.meta.url), "utf8"))
   .map(({ class: className, spec, role }) => ({ class: className, spec, role }));
@@ -193,4 +195,82 @@ test("overall deadline bounds both pauses and an unresponsive query", async () =
   assert.equal(paused.querySummary.queries, 0); assert.match(paused.querySummary.abortReason, /deadline/);
   const hung = await collectLeaderboards({ ...options, query: () => new Promise(() => {}), maxRunMs: 10 });
   assert.match(hung.querySummary.abortReason, /deadline/); assert.equal(hung.querySummary.queries, 1);
+});
+
+/* Partition supersession guard (2026-09-25). zoneOf() lists exactly the partitions the
+   2026-09-25 zone probe recorded for zones 53 and 55, so the first test here is today. */
+test("today's reviewed partition shape leaves the receipt unchanged: no supersededBy key, success detail", async () => {
+  const result = await collectLeaderboards({ ...options, query: fakeQuery() });
+  for (const cfg of LIVE_LEADERBOARDS.brackets) {
+    const receipt = result.brackets[cfg.key];
+    assert.equal(partitionSupersession(zoneOf(cfg), cfg), null);
+    assert.equal(receipt.status, "success"); assert.equal(Object.hasOwn(receipt, "supersededBy"), false);
+    assert.equal(receipt.detail, `320 median rows; 0 empty/sparse cuts; 0 failed/unattempted cuts; minimum ${cfg.minRows} rows`);
+  }
+});
+
+test("a partition WCL adds after review holds the bracket partial while rows stay on the pinned partition", async () => {
+  const clean = await collectLeaderboards({ ...options, query: fakeQuery() });
+  const record = [];
+  // Fixture name only: the real partition name is whatever WCL lists when it lists it.
+  const result = await collectLeaderboards({ ...options, query: fakeQuery({ record, mutateZone: (zone, cfg) => {
+    if (cfg.bracket === "raid") zone.partitions.push({ id: 2, name: "12.1.5" });
+  } }) });
+  const raid = result.brackets["wcl-leaderboard-raid"];
+  assert.equal(raid.status, "partial"); assert.equal(raid.rows, 320); assert.equal(raid.failures.length, 0);
+  assert.equal(raid.discoveryVerified, true);
+  assert.deepEqual(raid.supersededBy, [{ id: 2, name: "12.1.5" }]);
+  assert.match(raid.detail, /partition 2 "12\.1\.5" outside the reviewed recipe \(pinned partition 1 "12\.1"\)/);
+  assert.match(raid.detail, /held there until the reviewed switch, which waits for Mythic Kith'ix \(3513\) ranked entries on the new partition/);
+  assert.deepEqual(result.updates, clean.updates);
+  const ranked = record.filter(q => q.includes("characterRankings"));
+  assert.ok(ranked.length > 0 && ranked.every(q => q.includes("partition: 1,") && !q.includes("partition: 2")));
+  assert.equal(result.brackets["wcl-leaderboard-mplus"].status, "success");
+  assert.equal(Object.hasOwn(result.brackets["wcl-leaderboard-mplus"], "supersededBy"), false);
+});
+
+test("the M+ zone carries the same guard, and its detail falls back when no trigger is recorded", async () => {
+  const result = await collectLeaderboards({ ...options, query: fakeQuery({ mutateZone: (zone, cfg) => {
+    if (cfg.bracket === "mplus") zone.partitions.push({ id: 2, name: "Post-Season" });
+  } }) });
+  const mplus = result.brackets["wcl-leaderboard-mplus"];
+  assert.equal(mplus.status, "partial"); assert.equal(mplus.rows, 320);
+  assert.deepEqual(mplus.supersededBy, [{ id: 2, name: "Post-Season" }]);
+  assert.match(mplus.detail, /waits for owner review of the new partition$/);
+  assert.equal(result.brackets["wcl-leaderboard-raid"].status, "success");
+});
+
+test("the guard flags unreviewed or renamed partitions below the pin, not only higher ids", () => {
+  const cfg = { partition: 2, reviewedPartitions: [{ id: 1, name: "A" }, { id: 2, name: "B" }] };
+  assert.equal(partitionSupersession({ partitions: [{ id: 1, name: "A" }, { id: 2, name: "B" }] }, cfg), null);
+  assert.deepEqual(partitionSupersession({ partitions: [{ id: 1, name: "A renamed" }, { id: 2, name: "B" }] }, cfg), [{ id: 1, name: "A renamed" }]);
+  assert.deepEqual(partitionSupersession({ partitions: [{ id: 0, name: "Z" }, { id: 2, name: "B" }] }, cfg), [{ id: 0, name: "Z" }]);
+  assert.deepEqual(partitionSupersession({ partitions: [{ id: "3", name: 7 }] }, cfg), [{ id: null, name: null }]);
+  // A curly apostrophe is the one spelling difference zone validation already tolerates.
+  assert.equal(partitionSupersession({ partitions: [{ id: 1, name: "A’s" }] }, { partition: 1, reviewedPartitions: [{ id: 1, name: "A's" }] }), null);
+});
+
+test("reviewed partitions, switch trigger and derived ceiling are pinned (a recipe change must edit these)", () => {
+  const [raid, mplus] = LIVE_LEADERBOARDS.brackets;
+  assert.deepEqual(raid.reviewedPartitions, [{ id: 1, name: "12.1" }]);
+  assert.deepEqual(mplus.reviewedPartitions, [{ id: 1, name: "Season 2" }]);
+  assert.equal(raid.switchWaitsFor, "Mythic Kith'ix (3513) ranked entries on the new partition");
+  assert.ok(raid.excludedEncounters.some(e => e.id === 3513));
+  for (const cfg of LIVE_LEADERBOARDS.brackets) {
+    assert.ok(cfg.reviewedPartitions.some(p => p.id === cfg.partition && p.name === cfg.partitionName));
+  }
+  assert.deepEqual(leaderboardPartitions(), [{ zoneId: 53, id: 1, name: "12.1" }, { zoneId: 55, id: 1, name: "Season 2" }]);
+  assert.equal(leaderboardCeiling(roster.length), 640);
+});
+
+test("lockstep: the real PHASES matches the reviewed leaderboard phase, and any drift disarms collection", async () => {
+  assert.equal(leaderboardPhaseOk(PHASES), true,
+    "PHASES and LIVE_LEADERBOARDS disagree on season/label/liveSince; edit them together (a reviewed recipe change)");
+  assert.equal(leaderboardPhaseOk(phases), true);
+  for (const drift of [{ liveLabel: "12.1.5" }, { liveSeason: "s3" }, { liveSince: "2026-10-01" }]) {
+    assert.equal(leaderboardPhaseOk({ ...PHASES, ...drift }), false);
+  }
+  let calls = 0;
+  const result = await collectLeaderboards({ ...options, phases: { ...PHASES, liveLabel: "12.1.5" }, query: async () => { calls++; } });
+  assert.equal(calls, 0); assert.equal(result.brackets["wcl-leaderboard-raid"].status, "invalid");
 });

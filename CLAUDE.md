@@ -1065,6 +1065,17 @@ and the page's own `published` date rides alongside `snapshot`.
    description of current WoW rankings. `RAW_RECIPES` stays empty. `wcl-probe.mjs` is a
    read-only supported-API diagnostic, not a data refresh. New cycle/zone configuration
    needs a reviewed recipe change; never infer identity from shared names or ID patterns.
+   **Partition supersession (dormant guard, 2026-09-25):** WCL adds a zone partition per
+   patch, and its `default` flag does not follow the newest one. When discovery lists a
+   partition above the pinned one or outside the recipe's `reviewedPartitions`, that
+   bracket's receipt is `partial` with `supersededBy`, rows are still collected from the
+   pinned partition, and the manifest row cannot be `success`. The raid bracket is held
+   there until the reviewed switch, which waits for Mythic Kith'ix ranked entries on the
+   new partition (owner decision); `wcl-probe.yml` prints that evidence. A per-boss
+   zone/size override for Kith'ix is switch-time work only if the probe shows WCL files it
+   outside zone 53 / difficulty 5 / size 20. Validation, the update ceiling and the drawer's
+   partition name read `LIVE_LEADERBOARDS`; a rank pool may not mix partitions; a test pins
+   `PHASES` and `LIVE_LEADERBOARDS` in lockstep. Procedure: `docs/wcl-supported-collection.md`.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm run test:quiet && npm run build`.
