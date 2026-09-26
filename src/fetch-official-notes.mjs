@@ -24,10 +24,10 @@ export async function fetchNoteJSON(url, fetchImpl = fetch) {
   catch { throw fetchError("Invalid JSON in official response", "invalid"); }
 }
 
-export async function fetchOfficialNotes({ specs, previous, fetchJSON = fetchNoteJSON, now = new Date() }) {
+export async function fetchOfficialNotes({ specs, previous, fetchJSON = fetchNoteJSON, now = new Date(), sources = OFFICIAL_NOTE_SOURCES }) {
   const evidence = { schemaVersion: 1, checkedAt: now.toISOString(), sources: {} };
   // Sources are independent. A failed source retains its prior ledger byte-for-byte.
-  for (const source of OFFICIAL_NOTE_SOURCES) {
+  for (const source of sources) {
     const identity = { topicId: source.topicId, patch: source.patch, era: source.era };
     let received = false;
     try {
@@ -56,7 +56,7 @@ export async function fetchOfficialNotes({ specs, previous, fetchJSON = fetchNot
       evidence.sources[source.id] = { ...identity, status, details: String(error.message).slice(0, 300), posts: [] };
     }
   }
-  return { evidence, pending: pendingLedger(evidence, previous) };
+  return { evidence, pending: pendingLedger(evidence, previous, sources) };
 }
 
 export async function main(root = ROOT) {
