@@ -80,10 +80,12 @@ export async function runProbe({ query, roster, log = console.log, pause = () =>
       }
     }
     // The owner's switch trigger (docs/wcl-supported-collection.md): on the new partition,
-    // at the reviewed Mythic cut, Kith'ix reaches minSamples entries for every spec that
-    // holds a stored raid row today, and the eight reviewed bosses reach it for every
-    // (spec, boss) cut stored today. Counts come from the collector's own query; the
-    // probe prints them and leaves the call to the reviewer.
+    // at the reviewed Mythic cut, Kith'ix reaches minSamples entries, and the reviewed
+    // bosses reach it for every (spec, boss) cut stored today. Which specs Kith'ix must
+    // cover awaits owner confirmation: `shortOfTrigger` applies the strictest reading
+    // (every spec holding any stored raid row), while `atMinimum` and `short` let a
+    // reviewer apply another. Counts come from the collector's own query; the probe
+    // prints them and leaves the call to the reviewer.
     const cfg = { ...raid, partition: partition.id };
     const kithix = await perSpec(cfg, KITHIX);
     log(JSON.stringify({ encounter: KITHIX.id, trigger: "mythic-entries", partition: partition.id, partitionName: partition.name,
@@ -93,7 +95,9 @@ export async function runProbe({ query, roster, log = console.log, pause = () =>
       short: kithix.filter(c => !(c.entries >= minimum)).map(({ key, ...c }) => ({ ...c, storedRaidRow: storedSpecs.has(key) })) }));
     if (partition.id === raid.partition) continue;   // parity with itself is today's state
     const parity = [];
-    for (const encounter of raid.encounters) {
+    // Kith'ix is measured above; once the switch moves it into `encounters` it must not be
+    // queried a second time here.
+    for (const encounter of raid.encounters.filter(e => e.id !== KITHIX.id)) {
       const cuts = await perSpec(cfg, encounter), stored = cuts.filter(c => storedCuts.has(`${c.key}|${encounter.id}`));
       const missing = stored.filter(c => !(c.entries >= minimum));
       parity.push({ encounter: encounter.id, name: encounter.name, storedToday: stored.length,

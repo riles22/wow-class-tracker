@@ -101,16 +101,28 @@ test("WCL update ceiling derives from the reviewed recipe (640 today) and refuse
   const f = fixture(); assert.equal(f.updates.metrics.length, 640);
   f.updates.metrics.push(structuredClone(f.updates.metrics.at(-1))); reseal(f);
   reject(f, /WCL updates differ from the trusted receipt/);
-  // One more reviewed encounter moves the ceiling with it; no literal to forget.
+  // One more reviewed encounter moves the ceiling with it; no literal to forget. The gate
+  // itself must accept the full 680-row collection, which a restated 640 would refuse.
   const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid");
   raid.encounters.push({ id: 999999, name: "Fixture encounter" });
-  try { assert.equal(leaderboardCeiling(roster.length), 680); } finally { raid.encounters.pop(); }
+  try {
+    assert.equal(leaderboardCeiling(roster.length), 680);
+    const wider = fixture(); assert.equal(wider.updates.metrics.length, 680);
+    assert.deepEqual(checkWclMetrics(wider), []);
+    wider.updates.metrics.push(structuredClone(wider.updates.metrics.at(-1))); reseal(wider);
+    reject(wider, /WCL updates differ from the trusted receipt/);
+  } finally { raid.encounters.pop(); }
   assert.equal(leaderboardCeiling(roster.length), 640);
 });
 
 test("new WCL updates must come from the pinned partition, even one validation would accept as reviewed", () => {
-  const f = fixture(); f.updates.metrics[0].sample.partition = LIVE_LEADERBOARDS.brackets[0].partition + 1; reseal(f);
-  reject(f, /Invalid WCL leaderboard tuple, value, sample, or provenance/);
+  const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid"), next = raid.partition + 1;
+  raid.reviewedPartitions.push({ id: next, name: "fixture partition" });
+  try {
+    const f = fixture(), row = f.updates.metrics.find(m => m.bracket === "raid");
+    row.sample.partition = next; reseal(f);
+    reject(f, /Invalid WCL leaderboard tuple, value, sample, or provenance/);
+  } finally { raid.reviewedPartitions.pop(); }
 });
 
 test("WCL gate rejects updates whose payload hash or cut receipt differs", () => {

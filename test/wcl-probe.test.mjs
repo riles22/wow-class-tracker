@@ -102,6 +102,24 @@ test("a new raid partition is reported by the collector's own guard, with Kith'i
   assert.ok(record.filter(q => q.includes("characterRankings(metric: ") && q.includes("partition: 2,")).length === 8 + 8 * 8);
 });
 
+test("after the switch moves Kith'ix into the recipe, parity does not query it a second time", async () => {
+  const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid");
+  const zones = zonesToday();
+  zones[0].partitions.push({ id: 2, name: "fixture partition", compactName: "fixture", default: false });
+  // The switch commit itself will already hold it; only add it while it is still excluded.
+  const added = !raid.encounters.some(e => e.id === KITHIX.id);
+  if (added) raid.encounters.push(KITHIX);
+  try {
+    const { failures, json, record } = await probe({ zones });
+    assert.equal(failures, 0);
+    const parity = json.find(l => l.trigger === "parity");
+    assert.equal(parity.encounters.some(e => e.encounter === KITHIX.id), false);
+    assert.equal(parity.encounters.length, raid.encounters.length - 1);
+    const kithixBatches = record.filter(q => q.includes("encounter(id: 3513)") && q.includes("partition: 2,"));
+    assert.equal(kithixBatches.length, Math.ceil(roster.length / LIVE_LEADERBOARDS.batchSize));
+  } finally { if (added) raid.encounters.pop(); }
+});
+
 test("a refused combination is reported, not counted; a transport failure is counted", async () => {
   const refused = await probe({ kithix: (_p, difficulty) => difficulty === 1 ? { error: "Invalid partition\nspecified" } : page(0) });
   assert.equal(refused.failures, 0);

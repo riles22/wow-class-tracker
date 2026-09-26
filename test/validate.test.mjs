@@ -1037,4 +1037,22 @@ test("partition guard: leaderboard provenance comes from the reviewed recipe, an
     mutate(row.sample);
     assert.ok(validateData(broken).some(e => e.includes("invalid WCL leaderboard sample provenance")), String(mutate));
   }
+  // The other direction: change the RECIPE and leave the rows alone. Restated literals
+  // would keep accepting the stored rows; reading LIVE_LEADERBOARDS refuses them.
+  const provenance = errors => errors.filter(e => e.includes("invalid WCL leaderboard sample provenance"));
+  const [raid, mplus] = LIVE_LEADERBOARDS.brackets;
+  for (const [cfg, field, value] of [[raid, "zoneId", 54], [raid, "difficulty", 4], [raid, "size", 25],
+    [raid, "reviewedPartitions", [{ id: 2, name: "fixture partition" }]], [mplus, "keystoneLevel", 11]]) {
+    const saved = cfg[field]; cfg[field] = value;
+    try { assert.ok(provenance(validateData(structuredClone(data))).length > 0, `${cfg.bracket}.${field}`); }
+    finally { cfg[field] = saved; }
+  }
+  // And rows that follow a changed recipe pass: equality with the config, not with a literal.
+  const saved = raid.size; raid.size = 25;
+  try {
+    const followed = structuredClone(data);
+    for (const s of followed.specs) for (const m of s.metrics ?? []) if (m.bracket === "raid" && m.sample?.kind === "leaderboard-entries") m.sample.size = 25;
+    assert.deepEqual(provenance(validateData(followed)), []);
+  } finally { raid.size = saved; }
+  assert.deepEqual(provenance(validateData(structuredClone(data))), []);
 });

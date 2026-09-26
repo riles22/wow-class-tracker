@@ -14,8 +14,9 @@ export const LIVE_LEADERBOARDS = {
       // Every partition this zone listed when the recipe was last reviewed (the
       // 2026-09-25 zone probe). See partitionSupersession below.
       reviewedPartitions: [{ id: 1, name: "12.1" }],
-      // Owner decision (2026-09-25): the raid switch waits for Mythic Kith'ix, not a reset.
-      switchWaitsFor: "Mythic Kith'ix (3513) ranked entries on the new partition",
+      // Owner decision (2026-09-25): the raid switch waits for Mythic Kith'ix, not a reset,
+      // and for parity on the reviewed bosses. docs/wcl-supported-collection.md has the text.
+      switchWaitsFor: "Mythic Kith'ix (3513) ranked entries and parity on the reviewed bosses, both on the new partition",
       encounters: [
         { id: 3470, name: "Nek'zali the Soulcoiler" }, { id: 3445, name: "Entombed Sentinels" },
         { id: 3455, name: "Vashnik the Malignant" }, { id: 3497, name: "The Lost Explorers" },
@@ -26,8 +27,10 @@ export const LIVE_LEADERBOARDS = {
       // rankings for it. Successful API output alone cannot establish raid membership.
       // Kith'ix (The Unbinding of Kith'ix) is the patch 12.1.5 boss. WCL registered it
       // in this zone during PTR testing (first seen 2026-09-17), and since then the
-      // unknown id has made zone validation refuse every raid cut. It is excluded until
-      // 12.1.5 is live; moving it into `encounters` then is a reviewed recipe change.
+      // unknown id has made zone validation refuse every raid cut. It stays excluded until
+      // the reviewed partition switch, which waits for Mythic Kith'ix (owner decision
+      // 2026-09-25), not merely for 12.1.5 going live; moving it into `encounters` is part
+      // of that reviewed recipe commit.
       excludedEncounters: [{ id: 3379, name: "Nymrissa Wavecaller" }, { id: 3513, name: "Kith'ix" }],
     },
     { key: "wcl-leaderboard-mplus", bracket: "mplus", zoneId: 55, zoneName: "Mythic+ Season 2",
@@ -91,8 +94,9 @@ function zoneValid(zone, cfg) {
   }
   return true;
 }
-/* Partition supersession guard (dormant; added 2026-09-25 ahead of 12.1.5). WCL adds a
-   zone partition per patch: zone 46 lists 12.0, 12.0.5, 12.0.7 and 12.1. New logs are
+/* Partition supersession guard (dormant; added 2026-09-25 ahead of 12.1.5). WCL has added
+   a partition per patch to its raid zones (zone 46 lists 12.0, 12.0.5, 12.0.7 and 12.1);
+   M+ zones have not reliably followed it, but carry the same guard. New logs are
    then expected to rank on the new partition, yet every cut on the pinned one keeps
    succeeding and a freshness gate keyed on collection time stays green. The zone
    listing is the signal.

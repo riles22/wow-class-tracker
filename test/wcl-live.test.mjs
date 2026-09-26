@@ -221,7 +221,7 @@ test("a partition WCL adds after review holds the bracket partial while rows sta
   assert.equal(raid.discoveryVerified, true);
   assert.deepEqual(raid.supersededBy, [{ id: 2, name: "12.1.5" }]);
   assert.match(raid.detail, /partition 2 "12\.1\.5" outside the reviewed recipe \(pinned partition 1 "12\.1"\)/);
-  assert.match(raid.detail, /held there until the reviewed switch, which waits for Mythic Kith'ix \(3513\) ranked entries on the new partition/);
+  assert.match(raid.detail, /held there until the reviewed switch, which waits for Mythic Kith'ix \(3513\) ranked entries and parity on the reviewed bosses, both on the new partition$/);
   assert.deepEqual(result.updates, clean.updates);
   const ranked = record.filter(q => q.includes("characterRankings"));
   assert.ok(ranked.length > 0 && ranked.every(q => q.includes("partition: 1,") && !q.includes("partition: 2")));
@@ -254,7 +254,7 @@ test("reviewed partitions, switch trigger and derived ceiling are pinned (a reci
   const [raid, mplus] = LIVE_LEADERBOARDS.brackets;
   assert.deepEqual(raid.reviewedPartitions, [{ id: 1, name: "12.1" }]);
   assert.deepEqual(mplus.reviewedPartitions, [{ id: 1, name: "Season 2" }]);
-  assert.equal(raid.switchWaitsFor, "Mythic Kith'ix (3513) ranked entries on the new partition");
+  assert.equal(raid.switchWaitsFor, "Mythic Kith'ix (3513) ranked entries and parity on the reviewed bosses, both on the new partition");
   assert.ok(raid.excludedEncounters.some(e => e.id === 3513));
   for (const cfg of LIVE_LEADERBOARDS.brackets) {
     assert.ok(cfg.reviewedPartitions.some(p => p.id === cfg.partition && p.name === cfg.partitionName));
