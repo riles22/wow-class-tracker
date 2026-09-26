@@ -114,6 +114,28 @@ heartbeat to go red honestly.
 > design — a healthy night reads ~5h, a single miss ~28.6h — so a nightly landing after
 > ~13:23 UTC re-opens the gap (see CLAUDE.md).
 
+> **Annotation 2026-09-25 (record left as written; the run colour and the cron changed
+> after this audit):** owner decision "red on new problems + weekly". The alert issue's
+> lifecycle is unchanged: it is opened, refreshed daily, commented on a fingerprint change
+> and auto-closed on recovery. The RUN is no longer red on every stale day. It is red only
+> when a fingerprint key is new against the issue's previous fingerprint; when a pipeline
+> key (`run-age`, `snapshot-phase`, `min-sources-floor`) is present; when the check cannot
+> be trusted (a crash, or a stale exit without a usable fingerprint — fail closed); or on a
+> Monday (UTC) while any key outside the workflow's `ACCEPTED_KEYS` remains. Otherwise the
+> run passes with a warning annotation. `run-age` also raises a `NIGHTLY MISSED`
+> annotation. The accepted set is every `archon-*` key plus `wcl-live-raid` and
+> `wcl-live-mplus`. So the "goes red" in item 3 above now holds for those two keys on the
+> day they first appear and not on later days. The other WCL requirements,
+> `wcl-leaderboard-raid` and `wcl-leaderboard-mplus` (2-day threshold), are not accepted:
+> they go red on the day they turn stale and again on every Monday while they stay stale.
+> The cron moved from 17:23 to **19:23 UTC** after the
+> nightly's September scheduled runs recorded manifest `startedAt` 13:46–16:47 UTC, and
+> `maxRunAgeHours` was lowered from 28 to **26h** (owner decision 2026-09-26). At 19:23
+> with 26h, a single missed night is caught when the previous day's NEWEST manifest (a
+> same-day re-dispatch counts) started before 17:23 UTC. Replayed against September's real
+> manifest history, that held after 22 of those 24 nights (19:23 with 28h: 12; the old
+> 17:23 with 28h: 0). The recomputed arithmetic is in CLAUDE.md.
+
 ### 7. Validation improvements — **addressed**
 
 `src/validate.mjs` now also rejects: duplicate source ids; duplicate class entries,

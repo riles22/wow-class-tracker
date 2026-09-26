@@ -1005,8 +1005,10 @@ one fresh row can't vouch for a stale cut) and, for WCL rows, against
 dishonest rows fail the publish. **Every full
 refresh — nightly or local — ends by updating the manifest**; the freshness heartbeat
 (`.github/workflows/freshness.yml` → `check-refresh --age`) also accepts a new history
-snapshot as proof of life, alerts (one auto-closing issue + red run) on staleness past
-thresholds, and comments only when the violating set changes.
+snapshot as proof of life, keeps one auto-closing alert issue listing every violation
+past thresholds, and comments only when the violating set changes. Its RUN goes red
+only on a new key, a pipeline-level key, an untrustworthy check (fail-closed), or a
+Monday reminder — see the heartbeat paragraph under the nightly automation below.
 The committed manifest is always the PREVIOUS run's record — never evidence about the
 current run, and its standing skip/unreachable explanations never excuse skipping
 again: each run attempts every requirement fresh and rewrites the file (fresh `run` +
@@ -1100,8 +1102,9 @@ the payload (`timestamp` / `metadata.timestamp`), and the specs genuinely differ
 defeats the staleness gate exactly, because `required-sources.json` measures bloodmallet off
 `fightProfile.asOf` itself — for a month that hid 31-day-old sims behind a 5-day threshold
 (corrected 2026-08-08). Honest dates mean the manifest row is `partial` whenever upstream has not
-re-simmed, and the heartbeat goes red once the chart dates pass the requirement's `maxAgeDays`;
-that red IS the signal. The threshold is sized to upstream's roughly weekly re-sim cadence
+re-simmed, and the heartbeat goes red the day the chart dates pass the requirement's
+`maxAgeDays` (and on each Monday while they stay past it — `bloodmallet` is not an accepted
+key); that red IS the signal. The threshold is sized to upstream's roughly weekly re-sim cadence
 (raised 2026-09-25 — the label in `required-sources.json` records why), so a `partial` row
 between weekly re-sims is normal and only a missed cycle reds. Recipe and the transient-error
 gotcha live in the refresh-metrics skill.
@@ -1450,15 +1453,44 @@ pending-transcripts queue diff (distilled / verified-skipped / queued / waiting)
 new takes+metaNotes, new builds, verdict changes, manifest health) and comments it
 on the pinned "Nightly digest" issue — GitHub notification mail is the owner's
 daily change email. A daily
-heartbeat (`freshness.yml`) alerts via a single auto-closing issue + red run when the
-last refresh signal exceeds `maxRunAgeHours` in `data/required-sources.json` (28h since
-2026-07-25; that file is the single source of truth for the number) or a source exceeds
-its max age. The A1 blind spot is FIXED (2026-07-24 audit): the history-snapshot
+heartbeat (`freshness.yml`) keeps a single auto-closing alert issue while the
+last refresh signal exceeds `maxRunAgeHours` in `data/required-sources.json` (26h since
+2026-09-26, 28h from 2026-07-25 until then; that file is the single source of truth for the number) or a source exceeds
+its max age. **Red is reserved for news** (owner decision 2026-09-25, "red on new
+problems + weekly" — a failed scheduled run is what emails the owner, and red on every
+stale day hid a new problem inside an already-red signal). The run fails only when:
+a fingerprint key is NEW (absent from the issue's previous fingerprint; no readable
+previous fingerprint counts every key as new); a pipeline key is present (`run-age`,
+which also annotates `NIGHTLY MISSED`, `snapshot-phase`, `min-sources-floor` — red every
+day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
+fingerprint — fail closed); or it is Monday (UTC) and any key outside the workflow's
+single `ACCEPTED_KEYS` pattern remains. Accepted: every `archon-*` key and
+`wcl-live-raid`/`wcl-live-mplus`; `wowmeta` deliberately is not. Otherwise a stale run
+passes with a `::warning::`, and the issue still lists everything. Replayed against
+September 2026's real fingerprints, 14 of 26 runs would have been red instead of 26.
+The A1 blind spot is FIXED (2026-07-24 audit): the history-snapshot
 proof-of-life signal now counts only when strictly newer than the manifest date, so a
 same-dated snapshot can no longer cap the measured age at 24h and mask a missed night.
-Margin is thin by design — a healthy night reads ~5h and a single miss ~28.6h — so a
-nightly that lands after ~13:23 UTC re-opens the gap; widen the freshness cron or lower
-the threshold if start times drift later. The agent step's only secret is
+**Margin, recomputed 2026-09-25 for the 19:23 UTC cron** (it was 17:23) **and the 26h
+threshold** (owner decision 2026-09-26; it was 28h): a single missed
+night is caught only when 24h + (heartbeat time − the NEWEST manifest `startedAt` of the
+day before) exceeds 26h, i.e. that `startedAt` was before 17:23 UTC. A same-day
+re-dispatch counts, because the heartbeat reads whichever manifest is newest. The 24
+September scheduled nightlies that published recorded `startedAt` 13:46–16:47 UTC, so at
+19:23 a healthy night reads at most 5.6h. Replayed against the real manifest history
+(re-dispatches started as late as 20:08:50 on 09-05, 19:45:51 on 09-06 and 16:06:50 on
+09-15), a single miss the next day would have read 23.2–29.6h: caught after 22 of the 24
+nights, missed only after 09-05 and 09-06, the two nights followed by a late re-dispatch
+(28h at 19:23 caught 12 of 24; the old 17:23/28h, 0 of 24). The tightest catch read 26.6h
+(after 09-14), so the margin is thin. The one
+September day with no published nightly, 09-02 (its scheduled run failed), never aged
+at all: a local run committed history snapshot 2026-09-02 at 14:04 UTC, and a snapshot
+dated after the newest manifest reads 0h (the real heartbeat that day had no `run-age`).
+GitHub started the heartbeat 1h54m–3h45m after its cron over its last 20 runs; 2 of its
+74 scheduled runs since 2026-07-14 (08-27, 08-28) started over 7.5h late. That delay has
+widened the window in practice but is not guaranteed. Two consecutive misses are always
+caught. A healthy night still reads at most 5.6h, so 26h adds no red on a normal day.
+The agent step's only secret is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew), the documented inherent
 residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The

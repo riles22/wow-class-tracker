@@ -111,8 +111,10 @@ credentials**: it leaves its changes plus a machine-readable run manifest
 deterministic publish job. That job runs the gates — schema validation + unit tests, the
 build, and `src/check-refresh.mjs` (source completeness, freshness, and mass-movement
 anomaly checks against `data/required-sources.json`) — and only then commits, pushes, and
-deploys to GitHub Pages. A daily heartbeat workflow goes red and files an issue if the
-nightly stops completing or any source's data grows stale. **All game data is fetched
+deploys to GitHub Pages. A daily heartbeat workflow keeps one alert issue open while the
+nightly stops completing or any source's data is stale. It goes red on a missed nightly
+or another pipeline-level problem, on a newly stale source, when the check itself fails,
+and in a Monday reminder for anything not already accepted as a standing condition. **All game data is fetched
 live, never recalled from model memory** — Midnight postdates the model's training
 cutoff, so anything unfetchable is left blank rather than guessed.
 
