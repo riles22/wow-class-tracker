@@ -2066,7 +2066,12 @@ function drawerHTML(s){
      on a toggle that no longer exists made them permanently invisible while the masthead
      promised "patch changes" on every row. Deliberately NOT applied to the ptr writeup
      lane (the decided flip consequence — see the baseline-view branch below) or to
-     ptrDummy (genuinely PTR data, sunset with the cycle). */
+     ptrDummy (genuinely PTR data, sunset with the cycle).
+     Known gap since realm placement (2026-09-26), dormant while PHASE.ptr is null: the
+     feed can now hold LIVE-realm entries during a cycle too, and this gate still hides the
+     whole feed — live lane and Shipped blocks included — in the live-only view. Whether
+     live-realm entries should escape it is an owner question, not a silent change; the
+     between-cycles invariant pins the current design. */
   const showCycle = showPtr || !PHASE.ptr;
   // Hover-only info (outlook basis, movement history) restated as text so touch and
   // keyboard users can reach what mouse users see in tooltips. Additive.
@@ -2147,8 +2152,11 @@ function buildChangesHTML(s){
   const live = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)==="live");
   const history = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)!=="live");
   /* Joined with " and ", never " · ": foldDrawerColumn cuts every collapsed summary at the
-     first " ·"/" —"/" (", so a " · " join read "Live Season 2 tuning class tuning" and
-     dropped the hotfixes. Hotfixes first, so the summary never puts "tuning" twice in a row. */
+     first " ·"/" —"/" (", so a " · " join kept only the first kind and dropped the rest.
+     Hotfixes come first, so a lane holding both reads "Live … tuning hotfixes and class
+     tuning". A lane holding ONLY class-tuning posts still reads "Live … tuning class tuning"
+     in its plain-text summary — the expanded heading shows the kind as a chip, the summary
+     cannot. */
   const liveKinds = ["hotfixes","class tuning"].filter(k => live.some(b => (b.kind==="hotfix"?"hotfixes":"class tuning")===k));
   const liveBlock = live.length ? `<div class="d-sec shipsec">
       <p class="d-h">Live ${esc(liveName)} tuning <span class="shipchip">${esc(liveKinds.join(" and "))}</span></p>
@@ -2209,10 +2217,13 @@ function newInfoFor(s){
 }
 function newBadgeHTML(s){
   /* Era-gated ONLY while a PTR cycle is running (audit 2026-08-14, amended 2026-08-19
-     audit A3). During a cycle both of newInfoFor's inputs — creator takes and the build
-     feed — are next-patch content, so a live-only view rightly hides the badge. Between
-     cycles the same inputs are LIVE-season content arriving daily (hotfix rounds, fresh
-     takes), and the permanent live-pin was silencing the freshness cue forever. */
+     audit A3). The gate was written when, during a cycle, both of newInfoFor's inputs —
+     creator takes and the build feed — were next-patch content, so a live-only view hid
+     the badge. Between cycles the same inputs are LIVE-season content arriving daily
+     (hotfix rounds, fresh takes), and the permanent live-pin was silencing the freshness
+     cue forever. Since realm placement (2026-09-26) the feed can also carry live-realm
+     entries DURING a cycle, which this gate still hides in the live-only view — the same
+     dormant, owner-level question as drawerHTML's showCycle gate. */
   if(state.era === "live" && PHASE.ptr) return "";
   const ni = newInfoFor(s);
   return ni ? `<button type="button" class="newbadge" data-fresh-target="${ni.targetId}" aria-controls="drawer-${slugOf(s)}" title="Show new — ${esc(ni.label)} · ${esc(ni.date)}" aria-label="Show new information for ${esc(s.spec)} ${esc(s.class)}: ${esc(ni.label)} · ${esc(ni.date)}">NEW</button>` : "";
@@ -2909,22 +2920,26 @@ function syncSrcControls(){
    No "Sources:" list here — the interactive source toggle directly below IS the live
    list; no "Tracked:" either — the legend count carries it and doubles as filter
    feedback. The stamp keeps only what nothing else shows: the data freshness dates. */
-if(META.latestSnapshot){
-  // Label follows the newest feed entry's KIND — post-launch that entry is a live-realm
-  // hotfix round-up, and "Latest PTR build: <live date>" was a liveness mislabel
-  // (2026-08-19 audit, B1).
-  /* The kind vocabulary has no value for a post-launch tuning post, so a live class-tuning
-     announcement falls back to kind "build" and used to stamp "Latest PTR build:" four days
-     after launch — the exact mislabel render.mjs's residue note exists to catch (audit
-     2026-08-22). Between cycles there IS no PTR, so the phase decides, not the kind.
-     Since 2026-09-26 the entry's REALM decides (META.latestBuildRealm, the same resolution
-     the drawer lanes use): kind alone called a PTR hotfix round "live hotfixes", and the
-     phase fallback would call a live tuning pass logged mid-cycle a "PTR build". The phase
-     remains the fallback only for a payload that predates the realm field. */
-  const realm = META.latestBuildRealm ?? (PHASE.ptr ? "ptr" : "live");
-  const buildLabel = META.latestBuildKind === "patch-notes" ? "Launch notes:"
-    : META.latestBuildKind === "hotfix" ? (realm === "live" ? "Latest live hotfixes:" : "Latest PTR hotfixes:")
+/* Label for the newest feed entry. It follows the entry's KIND — post-launch that entry is
+   a live-realm hotfix round-up, and "Latest PTR build: <live date>" was a liveness mislabel
+   (2026-08-19 audit, B1) — and its REALM. The kind vocabulary has no value for a
+   post-launch tuning post, so a live class-tuning announcement is kind "build" and used to
+   stamp "Latest PTR build:" four days after launch — the exact mislabel render.mjs's
+   residue note exists to catch (audit 2026-08-22); the phase decided until 2026-09-26.
+   Since then the payload's resolved realm decides (META.latestBuildRealm: the entry's
+   recorded realm, else the kind default — the same resolution the drawer lanes use): kind
+   alone called a PTR hotfix round "live hotfixes", and the phase fallback would call a live
+   tuning pass logged mid-cycle a "PTR build". The phase remains the fallback only for a
+   payload that predates the realm field. A named function so the invariants can drive it
+   with a realm the real feed does not currently hold. */
+function buildStampLabel(kind, realmOrNull){
+  const realm = realmOrNull ?? (PHASE.ptr ? "ptr" : "live");
+  return kind === "patch-notes" ? "Launch notes:"
+    : kind === "hotfix" ? (realm === "live" ? "Latest live hotfixes:" : "Latest PTR hotfixes:")
     : (realm === "live" ? "Latest class tuning:" : "Latest PTR build:");
+}
+if(META.latestSnapshot){
+  const buildLabel = buildStampLabel(META.latestBuildKind, META.latestBuildRealm);
   document.getElementById('stamp-snapshot').innerHTML = `<b>Latest snapshot:</b> ${esc(META.latestSnapshot)}`
     + (META.latestPtrBuild ? ` <b style="margin-left:14px">${esc(buildLabel)}</b> ${esc(META.latestPtrBuild)}` : "");
 }

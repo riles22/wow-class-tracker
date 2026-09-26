@@ -716,8 +716,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" for a live
   tuning post (a live tuning post is `kind: "build"`, so the kind alone could not tell — this
   was the mislabel render.mjs's own residue note exists to catch; since 2026-09-26 the newest
-  entry's recorded `realm` decides, via `META.latestBuildRealm`, and `PHASE.ptr` is only the
-  fallback for a payload without it); the footer
+  entry's RESOLVED realm decides — `META.latestBuildRealm`, which is its recorded `realm`
+  where it has one and otherwise the kind default (a hotfix with no recorded realm reads
+  live) — and `PHASE.ptr` is only the fallback for a payload
+  without the field; `buildStampLabel` in template.html, pinned by its own invariant); the footer
   heading is a **"patch feed"** between cycles, named for the season since 2026-09-25
   (**"Season 2 patch feed"**: it is the season's one list, and 12.1.5's entries join
   12.1's there after launch); the
@@ -971,17 +973,21 @@ under the live heading, and the live 08-15, 08-22, 08-28 and 09-18 tuning posts 
 development notes". Those six carry an explicit realm now; every other entry keeps the kind
 default (`build` → ptr, anything else → live — `buildRealmOf` in render.mjs), which is
 correct for each of them. **validate.mjs requires `realm` on every entry dated on or after
-2026-09-26** (`BUILD_REALM_REQUIRED_FROM`, the `SIM_TIER_REQUIRED` pattern) — an explicit
+`BUILD_REALM_REQUIRED_FROM`** (the landing date; that constant is its only home — the tests
+import it, so moving it is a one-line change; the `SIM_TIER_REQUIRED` pattern) — an explicit
 field rather than a date rule, because a liveSince rule misfiles the 08-15 post and a rule
 keyed on the patch-notes date breaks at the next PTR cycle. Realm is presentation only: the
 outlook tally, projection and consensus are unchanged by it (deep-compared on landing).
 **`patch`** is a dotted version with ONE spelling per patch (`"12.1"`, never `"12.1.0"` or
 `"12.01"` — the Shipped blocks group by the string), required on `kind: "patch-notes"`,
-whose realm is always live. On EVERY kind it is never newer than the displayed live patch
+whose realm is always live, and on every `realm: "ptr"` entry from the same cutoff. On
+EVERY kind it is never newer than the displayed live patch
 (`PHASES.livePatch?.label ?? liveLabel`); the one exception is a `realm: "ptr"` entry while
 a PTR cycle is open, bounded by `PHASES.ptr.label` instead. So a patch's consolidated notes
 cannot enter the feed before that patch is live, whether logged as patch notes or as a PTR
-build; posted early, they go in the run report instead (ptr-watch skill). Canonical source: the official forum thread
+build, provided the entry names the patch its source names — the one thing validation cannot
+catch is a PTR entry naming the live patch for next-patch material. Posted early, they go in
+the run report instead (ptr-watch skill). Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse
 `.json`. **A new patch cycle means a NEW thread** — re-discover via Wowhead news RSS.
 **`specsAffected` and `highlights` must agree** — a coverage gate in validate.mjs fails
@@ -1006,7 +1012,10 @@ Priest's +10% then +5% are superseded by the notes' +16%). The drawer's three la
 it spans that season's patches), then **one "Shipped in {patch}" block per patch, newest
 patch first** — every block but the newest adds that the newer patch notes supersede it
 where they touch the same values — then the PTR history. (Until 2026-09-26 this was a
-single "Shipping/Shipped in 12.1" block and a hotfix-only live lane keyed on kind.)
+single "Shipping/Shipped in 12.1" block and a hotfix-only live lane keyed on kind.) Dormant
+gap, open for the owner: while a PTR cycle is open, the live-only era view still hides the
+WHOLE feed and every NEW badge (`showCycle` in drawerHTML, `newBadgeHTML`), live-realm
+entries included — gates written before the feed could place an entry by realm.
 **They are excluded from the outlook tally, and being authoritative is exactly why.**
 The tally counts LINES; the notes are one paragraph per spec restating the whole patch, so
 mechanically they are unreadable to it: 34 of 49 lines classify null (a paragraph holding

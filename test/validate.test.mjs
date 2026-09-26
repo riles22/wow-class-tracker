@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { validateData, loadData } from "../src/validate.mjs";
+import { validateData, loadData, BUILD_REALM_REQUIRED_FROM } from "../src/validate.mjs";
 import { PHASES } from "../src/normalize.mjs";
 import { LIVE_LEADERBOARDS } from "../src/wcl-live.mjs";
 
@@ -1066,8 +1066,11 @@ test("ptr-builds: realm is required from the cutoff and must be live or ptr", as
     const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
     return validateData(c, { fullRoster: true });
   };
+  // Fixtures sit AT the cutoff and the day before it, derived from the one constant, so
+  // moving the landing date is a one-line change in validate.mjs.
+  const dayBefore = new Date(Date.parse(`${BUILD_REALM_REQUIRED_FROM}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
   const hotfix = {
-    date: "2026-09-26", kind: "hotfix", label: "x",
+    date: BUILD_REALM_REQUIRED_FROM, kind: "hotfix", label: "x",
     wowheadUrl: "https://www.wowhead.com/news=1",
     specsAffected: ["Shaman (class-wide)"],
     highlights: ["Shaman (class-wide) something happened."]
@@ -1077,16 +1080,54 @@ test("ptr-builds: realm is required from the cutoff and must be live or ptr", as
   const missing = errs(hotfix);
   assert.ok(missing.some(realmErr), "a hotfix dated at the cutoff without realm must fail");
   assert.ok(missing.some(e => realmErr(e) && e.includes("kind cannot say")));
-  // recorded: passes, for either realm
+  // recorded: passes, for either realm (a PTR entry also names its patch — next test)
   assert.deepEqual(errs({ ...hotfix, realm: "live" }), []);
-  assert.deepEqual(errs({ ...hotfix, realm: "ptr" }), []);
+  assert.deepEqual(errs({ ...hotfix, realm: "ptr", patch: PHASES.livePatch?.label ?? PHASES.liveLabel }), []);
   // an unknown value fails rather than defaulting
   assert.ok(errs({ ...hotfix, realm: "beta" }).some(e => e.includes('unknown realm "beta"')));
   assert.ok(errs({ ...hotfix, date: "2026-07-31", realm: "Live" }).some(e => e.includes('unknown realm "Live"')));
   // before the cutoff the kind default still stands, so history is not rewritten
-  assert.ok(!errs({ ...hotfix, date: "2026-09-25" }).some(realmErr));
+  assert.ok(!errs({ ...hotfix, date: dayBefore }).some(realmErr));
   // the real feed carries realm on every entry that needs one
   assert.ok(!validateData(data).some(realmErr));
+});
+
+test("ptr-builds: a PTR entry from the cutoff names its patch, so early notes cannot pass as a PTR build", async () => {
+  const data = await loadData(ROOT);
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  const dayBefore = new Date(Date.parse(`${BUILD_REALM_REQUIRED_FROM}T00:00:00Z`) - 86400000).toISOString().slice(0, 10);
+  // The shape a PTR build is logged in (no `patch`), carrying a tuning line that votes in
+  // the outlook tally — the review probe that found this validated it with 0 errors.
+  const early = {
+    date: BUILD_REALM_REQUIRED_FROM, kind: "build", realm: "ptr", label: "consolidated notes for the next patch",
+    forumPostNumber: 1, forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1",
+    specsAffected: ["Protection Warrior"], highlights: ["Protection Warrior Shield Slam damage increased by 30%."]
+  };
+  const patchErr = e => e.includes('is realm "ptr" and must record patch');
+  const hadPtr = PHASES.ptr;
+  PHASES.ptr = null;
+  try {
+    assert.ok(errs(early).some(patchErr), "a PTR build without patch must fail from the cutoff");
+    // naming the next patch reds on the ceiling instead (no PTR cycle is open)
+    const named = errs({ ...early, patch: `${live}.9` });
+    assert.ok(!named.some(patchErr) && named.some(e => e.includes("only while a PTR cycle is open")), named.join("\n"));
+    // a PTR hotfix is held to the same rule
+    const { forumPostNumber, forumUrl, ...rest } = early;
+    assert.ok(errs({ ...rest, kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1" }).some(patchErr));
+    // live entries and entries before the cutoff are not asked for a patch
+    assert.ok(!errs({ ...early, realm: "live" }).some(patchErr));
+    assert.ok(!errs({ ...early, date: dayBefore }).some(patchErr));
+    // during an open cycle a PTR entry names the patch under test and passes
+    PHASES.ptr = { marker: `${live}.9 PTR`, label: `${live}.9` };
+    assert.deepEqual(errs({ ...early, patch: `${live}.9` }), []);
+    assert.ok(errs(early).some(patchErr), "an open cycle does not waive the patch");
+  } finally {
+    PHASES.ptr = hadPtr;
+  }
 });
 
 test("ptr-builds: patch-notes must record a patch no newer than the displayed live patch", async () => {
@@ -1133,7 +1174,7 @@ test("ptr-builds: patch notes are live, one spelling per patch, and the patch ce
     const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
     return validateData(c, { fullRoster: true });
   };
-  const base = { date: "2026-09-26", label: "x", specsAffected: ["Shaman (class-wide)"], highlights: ["Shaman (class-wide) something happened."] };
+  const base = { date: BUILD_REALM_REQUIRED_FROM, label: "x", specsAffected: ["Shaman (class-wide)"], highlights: ["Shaman (class-wide) something happened."] };
   const notes = { ...base, kind: "patch-notes", forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1" };
   const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
   const newer = `${live}.9`;

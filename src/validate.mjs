@@ -48,8 +48,13 @@ const SIM_TIER_REQUIRED = new Set(["bloodmallet"]);
    the six misfiled ones carry an explicit realm. An explicit field, not a date rule, is the
    fix on purpose — a liveSince rule would misfile the 08-15 live tuning post (dated three
    days before liveSince), and a rule keyed on the patch-notes date breaks at the next PTR
-   cycle, when PTR builds and live tuning arrive in the same weeks. */
-const BUILD_REALM_REQUIRED_FROM = "2026-09-26";
+   cycle, when PTR builds and live tuning arrive in the same weeks.
+   The value is the LANDING date, and this constant is its only home: tests import it and
+   the prose names the constant rather than restating the date. If entries logged before
+   this landed are dated on or after it, they need their realm backfilled (or the date
+   moved here) in the same change — and any live "Class Tuning Incoming" post logged in
+   between without a realm fell back to the kind default and sits in the PTR lane. */
+export const BUILD_REALM_REQUIRED_FROM = "2026-09-26";
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
 // beyond https-only they must point at a host the pipeline actually cites.
@@ -782,6 +787,19 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         `happened: a live class-tuning post is kind "build", and a PTR hotfix is kind "hotfix".`
       );
     }
+    /* A PTR-realm entry from the same cutoff names the patch under test, so the ceiling
+       below always has something to check. Until this rule the ceiling bound only entries
+       that volunteered a `patch`, and early 12.1.5 notes logged in the ordinary PTR-build
+       shape (no `patch`) validated and voted in the outlook tally (repair-round probe,
+       2026-09-26). What it cannot catch is a PTR entry that names the live patch for
+       material about the next one — the patch is read off the post, never inferred. */
+    if (build.realm === "ptr" && build.patch == null && typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM) {
+      errors.push(
+        `ptr-builds.json: ${kind} ${build.date} is realm "ptr" and must record patch — the patch ` +
+        `under test, as a dotted version — required on PTR entries dated on or after ` +
+        `${BUILD_REALM_REQUIRED_FROM}, so an entry for a patch that is not live yet cannot pass without naming it`
+      );
+    }
     /* Patch notes are the SHIPPED launch notes, so they are live by definition. The drawer
        keys its "Shipped in {patch}" blocks on kind, so a patch-notes entry marked ptr would
        render as shipped while claiming it is not. */
@@ -789,7 +807,7 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
       errors.push(`ptr-builds.json: patch-notes ${build.date} carries realm "ptr" — patch notes are the shipped launch notes, so their realm is "live" (or omitted); PTR notes are kind "build"`);
     }
     /* `patch` names the patch an entry belongs to; each patch-notes entry renders as its own
-       "Shipped in {patch}" block, so it is required there.
+       "Shipped in {patch}" block, so it is required there (and on new PTR entries, above).
        ONE spelling per patch: the drawer groups Shipped blocks by the string, so "12.1" and
        "12.1.0" (equal to comparePatchVersions) would render as two blocks for one patch, and
        only one of them would carry the supersession note. A trailing ".0" past the minor

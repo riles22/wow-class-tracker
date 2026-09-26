@@ -2289,3 +2289,38 @@ ui("build-feed: two patches' notes render as ordered Shipped blocks and NEW labe
     notes: "official 12.1.5 patch notes", defaultBuild: "PTR development notes",
   });
 });
+
+/* The masthead stamp reads the newest entry's REALM, with the phase only as the fallback
+   for a payload without one. With today's feed (a live hotfix, no PTR cycle) the realm and
+   the phase fallback give the same answer, so the lanes invariant's stamp check passed with
+   the realm read deleted (repair-round mutation, 2026-09-26). Driving buildStampLabel with
+   the phase set AGAINST the realm is what tells the two rules apart. */
+ui("the masthead stamp follows the newest feed entry's realm, not the phase", async page => {
+  const seen = await page.evaluate(() => {
+    const was = PHASE.ptr;
+    const run = (ptr, kind, realm) => { PHASE.ptr = ptr; try { return buildStampLabel(kind, realm); } finally { PHASE.ptr = was; } };
+    const cycle = { marker: "test-ptr", label: "Test PTR" };
+    return {
+      rendered: document.getElementById("stamp-snapshot")?.textContent ?? "",
+      current: buildStampLabel(META.latestBuildKind, META.latestBuildRealm),
+      // realm against the phase, both directions
+      ptrHotfixBetweenCycles: run(null, "hotfix", "ptr"),
+      liveTuningMidCycle: run(cycle, "build", "live"),
+      liveHotfixMidCycle: run(cycle, "hotfix", "live"),
+      ptrBuildBetweenCycles: run(null, "build", "ptr"),
+      // the phase decides only when the payload carries no realm
+      noRealmMidCycle: run(cycle, "build", null),
+      noRealmBetweenCycles: run(null, "build", null),
+      notes: run(cycle, "patch-notes", "live"),
+    };
+  });
+  const data = payload();
+  if (data.meta.latestPtrBuild) assert.ok(seen.rendered.includes(`${seen.current} ${data.meta.latestPtrBuild}`), `stamp: "${seen.rendered}"`);
+  assert.equal(seen.ptrHotfixBetweenCycles, "Latest PTR hotfixes:");
+  assert.equal(seen.liveTuningMidCycle, "Latest class tuning:");
+  assert.equal(seen.liveHotfixMidCycle, "Latest live hotfixes:");
+  assert.equal(seen.ptrBuildBetweenCycles, "Latest PTR build:");
+  assert.equal(seen.noRealmMidCycle, "Latest PTR build:");
+  assert.equal(seen.noRealmBetweenCycles, "Latest class tuning:");
+  assert.equal(seen.notes, "Launch notes:");
+});

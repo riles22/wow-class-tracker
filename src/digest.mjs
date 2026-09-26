@@ -21,6 +21,15 @@ import { OFFICIAL_NOTE_SOURCES, noteUrl } from "./official-notes.mjs";
 
 const keyOf = s => `${s.class}|${s.spec}`;
 const TIER_LABEL = { raid: "Raid", mplus: "M+" };
+/* The forum TOPIC a feed entry cites (host + topic id), for the identity key below.
+   Discourse paths are /t/<slug>/<id>[/<post>] or /t/<id>[/<post>]. */
+export function forumTopicOf(url) {
+  let u;
+  try { u = new URL(url); } catch { return ""; }
+  const segs = u.pathname.split("/"), t = segs.indexOf("t");
+  const id = t < 0 ? null : /^\d+$/.test(segs[t + 1] ?? "") ? segs[t + 1] : segs[t + 2];
+  return /^\d+$/.test(id ?? "") ? `${u.host}/t/${id}` : `${u.host}${u.pathname}`;
+}
 
 /* ---------- pure diff helpers (unit-tested) ---------- */
 
@@ -153,7 +162,12 @@ const md = s => String(s ?? "")
 export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null }) {
   const takeId = t => `${t.creator}|${t.spec}|${t.url}`;
   const noteId = n => `${n.creator}|${n.spec}|${n.patchContext}|${n.url}`;
-  const buildId = b => String(b.forumPostNumber ?? `${b.date}|${b.label}`);
+  /* A post number is unique only WITHIN its topic. Every live "Class Tuning Incoming" pass is
+     post 1 of its own topic, so keyed on the number alone each new pass matched the first
+     one ever logged and was never announced (2026-09-26 review). Topic + post number is
+     unique; an entry without a post number keeps the date|label key. */
+  const buildId = b => b.forumPostNumber != null
+    ? `${forumTopicOf(b.forumUrl)}#${b.forumPostNumber}` : `${b.date}|${b.label}`;
   const moves = tierMoves(oldPayload, newPayload);
   const takesAll = newEntries(oldPayload.creatorTakes?.takes, newPayload.creatorTakes?.takes, takeId);
   const notesAll = newEntries(oldPayload.creatorTakes?.metaNotes, newPayload.creatorTakes?.metaNotes, noteId);

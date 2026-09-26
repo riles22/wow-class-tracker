@@ -278,3 +278,17 @@ test("payload decorates every spec with consensus for both brackets", async () =
   assert.ok(payload.meta.latestSnapshot >= "2026-06-15");
   assert.ok(Number.isInteger(payload.meta.projectionVersion) && payload.meta.projectionVersion >= 1);
 });
+
+test("meta.latestBuildRealm is the newest feed entry's resolved realm (recorded, else the kind default)", async () => {
+  const data = await loadData(ROOT);
+  const meta = newest => buildPayload({ ...data, ptrBuilds: { ...data.ptrBuilds, builds: [newest, ...data.ptrBuilds.builds] } }).meta;
+  const at = { date: "2099-01-01", label: "x", specsAffected: [], highlights: [] };
+  // recorded realm wins over the kind default, both directions
+  const pair = m => [m.latestBuildKind, m.latestBuildRealm];
+  assert.deepEqual(pair(meta({ ...at, kind: "build", realm: "live" })), ["build", "live"]);
+  assert.deepEqual(pair(meta({ ...at, kind: "hotfix", realm: "ptr" })), ["hotfix", "ptr"]);
+  // no realm: the kind default (build → ptr, hotfix → live)
+  assert.equal(meta({ ...at, kind: "build" }).latestBuildRealm, "ptr");
+  assert.equal(meta({ ...at, kind: "hotfix" }).latestBuildRealm, "live");
+  assert.equal(buildPayload({ ...data, ptrBuilds: { ...data.ptrBuilds, builds: [] } }).meta.latestBuildRealm, null);
+});

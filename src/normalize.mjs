@@ -66,10 +66,11 @@ export const PHASES = {
   ptr: null,
   /* The date liveSeason went live (ISO). Drawer metric rows whose asOf predates it are
      measurements of the PREVIOUS season and get a visible per-row era tag, because the
-     box heading stamps liveLabel over every era:"live" row and the transition window
-     mixes S1 cuts (frozen WCL zones, held-back ceilings) with genuine S2 rows under one
-     "(12.1)" banner (2026-08-19 audit, B2). Update alongside liveSeason at every flip
-     (the era-vocabulary pin test checks the shape). */
+     box heading names one banner over every era:"live" row — the live season's name since
+     2026-09-26 ("Current numbers · Raid (Season 2)"), liveLabel's "(12.1)" before — and
+     the transition window mixes S1 cuts (frozen WCL zones, held-back ceilings) with
+     genuine S2 rows under it (2026-08-19 audit, B2). Update alongside liveSeason at every
+     flip (the era-vocabulary pin test checks the shape). */
   liveSince: "2026-08-18",
   /* The tracked patch's display name — the masthead chip and footer read it via the
      build-time era tokens (build.mjs). It outlives `ptr` (the branding stays after the
