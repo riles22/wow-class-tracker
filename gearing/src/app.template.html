@@ -376,6 +376,17 @@ table.paths tr.tr-champ td.ilvl{color:var(--champ)}
 table.paths tr.tr-hero td.ilvl{color:var(--hero)}
 table.paths tr.tr-myth td.ilvl{color:var(--myth)}
 table.paths tr:hover td{background:rgba(255,255,255,.03)}
+/* Pre-launch estimate label (owner decision, 2026-09-26). Visible text, never a title=:
+   a hover-only caveat does not exist on a phone. Mono and uppercase like the other
+   structural labels; muted with a dashed edge so it reads as a hedge, not as one of the
+   upgrade-track colours the ilvl column already spends. */
+.ilvl-est{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--t2);line-height:1.5;
+  border:1px dashed var(--control-line);border-radius:4px;padding:0 4px;margin-left:3px;
+  vertical-align:1px;white-space:nowrap}
+/* a ceiling box holds 102px of content at 320px and 111px at 800px (measured 2026-09-26),
+   narrower than the 113px one-line label, so there it wraps inside its own edge */
+.ceil .ilvl-est{margin:5px 0 0;white-space:normal;max-width:100%}
 
 /* ---- item tooltip: Wowhead's own markup, captured at harvest time and rendered here ---- */
 .row[data-id]{cursor:help}
@@ -1634,9 +1645,23 @@ function trinketCard(list, usingCustom) {
     + '</div>';
 }
 
-/* These are listed rewards from the reviewed chart, including crafts and Ascended
-   gear. A reward's item level alone does not identify its upgrade track (tracks
-   overlap), so do not infer upgrades for paths without individual item/track data. */
+/* PRE-LAUNCH ESTIMATES (owner decision, 2026-09-26). The Venomstone reward rows were carried
+   over from the pre-launch community sheet (sheet-rewards.json `priorSource`), and the data
+   records them as estimates only in prose — an `authorCaveats` line — with no per-row field.
+   `sheetOnlyKeys` cannot drive this: it covers eight keys, and marking all of them would bring
+   back the provisional tags Riley retired on 2026-08-18. So the label is keyed on the reward
+   KEY, never on a list of item levels: a re-harvest that moves the values keeps the label on
+   the right cells. Drop the key once those rows are re-harvested from launched game data; a
+   gearing test fails if this set and that data caveat disagree. */
+const ESTIMATE_KEYS = new Set(['venomstone']);
+const ESTIMATE_TAG = '<span class="ilvl-est">pre-launch est.</span>';
+
+/* These are listed rewards, including crafts and Ascended gear. Most come from the
+   reviewed chart; the values only the pre-launch community sheet supplies stay as it
+   gave them (sheet-rewards.json `priorSource.note`: world campaign rows, delve tiers,
+   Venomstone estimates), so the heading names both sources (2026-09-26). A reward's
+   item level alone does not identify its upgrade track (tracks overlap), so do not
+   infer upgrades for paths without individual item/track data. */
 function ceilingCard() {
   if (!SHEET) return '';
   const paths = [
@@ -1648,13 +1673,15 @@ function ceilingCard() {
     const rows = (SHEET.rewards[p.k] || []).concat(p.extra ? (SHEET.rewards[p.extra] || []) : []);
     if (!rows.length) return '';
     const top = rows.reduce((a, b) => (b.ilvl > a.ilvl ? b : a));
+    const estimated = [p.k, p.extra].some(k => k && ESTIMATE_KEYS.has(k) && (SHEET.rewards[k] || []).includes(top));
     return '<div class="ceil"><div class="ceil-h">' + esc(p.h) + '</div>'
       + '<div class="ceil-v">' + esc(top.ilvl) + '</div>'
-      + '<div class="ceil-s">' + esc(top.label) + '</div></div>';
+      + '<div class="ceil-s">' + esc(top.label) + '</div>'
+      + (estimated ? ESTIMATE_TAG : '') + '</div>';
   }).join('');
-  return '<div class="card wide"><h3>Top listed rewards by path<span>from the reviewed reward chart</span></h3>'
+  return '<div class="card wide"><h3>Top listed rewards by path<span>from the reviewed reward chart and the pre-launch community sheet</span></h3>'
     + '<div class="ceils">' + cells + '</div>'
-    + '<div class="note">These are charted rewards, including drops, Vault, crafting and Ascended gear. Individual items may be upgraded further along their track; these values are not upgrade ceilings.</div></div>';
+    + '<div class="note">These are listed rewards, including drops, Vault, crafting and Ascended gear. Individual items may be upgraded further along their track; these values are not upgrade ceilings.</div></div>';
 }
 
 function slotsOf(list) {
@@ -2075,7 +2102,9 @@ $('#curilvl').addEventListener('input', renderUp);
    "prov"/provisional tags that marked sheet-only columns were removed at
    Riley's request 2026-08-18 — post-launch the ladder is confirmed game data
    (Gandalin chart updated launch day), so the early-season hedge had expired.
-   sheetOnlyKeys stays in the data for the validation disclosure.             */
+   sheetOnlyKeys stays in the data for the validation disclosure.
+   2026-09-26: the Venomstone rows alone carry a visible "pre-launch est." label
+   again (owner decision) — see ESTIMATE_KEYS above ceilingCard.             */
 const PATH_COLS = [
   {k: 'raidDrop', h: 'Raid drop'}, {k: 'raidVault', h: 'Raid vault'},
   {k: 'dungeonDrop', h: 'Dungeon drop'}, {k: 'dungeonVault', h: 'Dungeon vault'},
@@ -2092,13 +2121,26 @@ const TRACK_OF = {266:'adv',269:'adv',272:'adv',276:'adv',279:'vet',282:'vet',28
 function renderPaths() {
   if (!SHEET) { $('#paths').innerHTML = '<div class="empty">no sheet data</div>'; return; }
   const v = SHEET.validation || {};
+  const estimated = PATH_COLS.filter(c => ESTIMATE_KEYS.has(c.k) && (SHEET.rewards[c.k] || []).length);
+  const prior = SHEET.priorSource || {};
   $('#paths-note').innerHTML =
     'Compare the maximum item level and full reward ladder for each Season 2 gearing path.'
+    + (estimated.length
+      ? ' ' + estimated.map(c => esc(c.h)).join(', ') + ' levels are marked ' + ESTIMATE_TAG
+        + ': they are pre-launch estimates'
+        + (prior.harvestedAt ? ' from a community sheet harvested ' + esc(prior.harvestedAt) : '')
+        + ', not confirmed item levels.'
+      : '')
     + '<details class="disclosure"><summary>Validation and source details</summary><div class="disclosure-body">'
     + '<b>' + esc(v.confirmed || 0) + ' of ' + esc(v.total || 0) + '</b> independent anchor checks agree with data '
     + 'harvested from game guides and loot tables. Unmarked columns have corroborated anchor points, but not every individual cell was independently verified. '
     + 'The sheet author flags inferred cells in red text that the CSV export strips, so sheet-only values are corroboration rather than confirmation. '
-    + 'Source: <b>' + esc(SHEET.source) + '</b></div></details>';
+    + 'Source: <b>' + esc(SHEET.source) + '</b>'
+    + (estimated.length && prior.name
+      ? '. Pre-launch estimates: <b>' + esc(prior.name) + '</b>'
+        + (prior.harvestedAt ? ', harvested ' + esc(prior.harvestedAt) : '') + '.'
+      : '')
+    + '</div></details>';
 
   const idx = {};
   for (const c of PATH_COLS) {
@@ -2114,7 +2156,8 @@ function renderPaths() {
     const cells = used.map(c => {
       const val = idx[c.k][l];
       return '<td>'
-        + (val ? esc(val.join(' / ')) : '<span class="dash">&middot;</span>') + '</td>';
+        + (val ? esc(val.join(' / ')) + (ESTIMATE_KEYS.has(c.k) ? ' ' + ESTIMATE_TAG : '')
+          : '<span class="dash">&middot;</span>') + '</td>';
     }).join('');
     const tr = TRACK_OF[l];
     return '<tr class="' + (tr ? 'tr-' + esc(tr) : '') + '"><td class="ilvl">' + esc(l) + '</td>' + cells + '</tr>';

@@ -1078,6 +1078,65 @@ test("upgrade ceilings include the reviewed Myth track and preserve higher final
   assert.match(document.ids.get("paths").innerHTML, /these values are not upgrade ceilings/);
 });
 
+test("Item levels: the Venomstone rows carry a visible pre-launch estimate label, and only they do", async () => {
+  const { document, data } = await upgradeClient();
+  const paths = document.ids.get("paths").innerHTML;
+  const note = document.ids.get("paths-note").innerHTML;
+  const TAG = '<span class="ilvl-est">pre-launch est.</span>';
+  const tagCount = (html) => html.split(TAG).length - 1;
+  const tableStart = paths.indexOf("<table");
+  assert.ok(tableStart > 0, "the ceiling card precedes the ladder table");
+  const [ceilings, table] = [paths.slice(0, tableStart), paths.slice(tableStart)];
+
+  // The template's ESTIMATE_KEYS and the data's own record must agree. sheet-rewards.json says
+  // it only in prose (an authorCaveats line), so this is the coupling: re-harvest the rows from
+  // launched data and drop that caveat, and this reds until the label is dropped too. Any line
+  // naming Venomstone and "pre-launch estimate(s)", in either order, counts, so a reworded caveat
+  // still holds. A missing line has two causes, and the message names both, because only one of
+  // them means the label should go.
+  const dataSaysEstimate = (data.sheet.authorCaveats || [])
+    .some((caveat) => /venomstone/i.test(caveat) && /pre-launch estimates?\b/i.test(caveat));
+  if (!dataSaysEstimate) {
+    assert.equal(tagCount(paths + note), 0,
+      "sheet-rewards.json has no authorCaveats line calling the Venomstone rows pre-launch estimates. "
+      + "If those rows were re-harvested from launched game data, remove 'venomstone' from ESTIMATE_KEYS "
+      + "in src/app.template.html. Otherwise they are still the pre-launch estimates: the caveat was "
+      + "dropped, or src/harvest-sheet.mjs was re-run over the hand-distilled file (README says not to). "
+      + "Keep the label and restore the caveat line.");
+    return;
+  }
+
+  const venomstone = data.sheet.rewards.venomstone;
+  assert.ok(venomstone.length, "fixture: the Venomstone rows exist");
+  // Every Venomstone cell in the ladder is labeled, with its value and text unchanged
+  // (a cell joins the labels that share an item level, as renderPaths does).
+  const cells = new Map();
+  for (const row of venomstone) cells.set(row.ilvl, [...(cells.get(row.ilvl) || []), row.label]);
+  for (const [ilvl, labels] of cells)
+    assert.ok(table.includes(labels.join(" / ") + " " + TAG), `Venomstone ${ilvl} (${labels.join(" / ")}) is labeled`);
+  assert.equal(tagCount(table), cells.size, "one label per Venomstone cell in the ladder");
+  // ...and nothing else is: the 2026-08-18 retirement of the provisional tags still holds for
+  // every other column, including a confirmed cell that shares a Venomstone row's item level.
+  for (const [key, rows] of Object.entries(data.sheet.rewards)) {
+    if (key === "venomstone") continue;
+    for (const row of rows)
+      assert.ok(!paths.includes(row.label + " " + TAG) && !paths.includes(row.label + TAG),
+        `${key} ${row.ilvl} (${row.label}) must stay unlabeled`);
+  }
+  // The ceiling card's Venomstone cell shows the highest estimate, labeled beneath it.
+  const top = venomstone.reduce((a, b) => (b.ilvl > a.ilvl ? b : a));
+  assert.ok(ceilings.includes('<div class="ceil-v">' + top.ilvl + '</div><div class="ceil-s">' + top.label + '</div>' + TAG),
+    "the Venomstone ceiling is labeled");
+  assert.equal(tagCount(ceilings), 1, "only the Venomstone ceiling is labeled");
+  // ...and the card's heading does not attribute that labeled box to the reviewed chart alone.
+  assert.match(ceilings, /<h3>Top listed rewards by path<span>[^<]*pre-launch community sheet<\/span>/);
+  // The key is visible text above the table, not inside the closed disclosure and not a title=.
+  const visibleNote = note.slice(0, note.indexOf("<details"));
+  assert.ok(visibleNote.includes("Venomstone levels are marked " + TAG + ": they are pre-launch estimates from a community sheet harvested "
+    + data.sheet.priorSource.harvestedAt + ", not confirmed item levels."), visibleNote);
+  assert.doesNotMatch(paths + note, /title="[^"]*estimate/i, "the label is text, not a tooltip");
+});
+
 test("Unique-Equipped rings and trinkets replace their own copy without filling the other slot", async () => {
   const { app, document, select, paste } = await upgradeClient();
   select("Mage|Frost");
