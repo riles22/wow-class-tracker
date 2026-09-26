@@ -6,9 +6,14 @@ import { createHash } from "node:crypto";
    defaults to this config. The optional `sources` argument exists for tests only: it lets
    them exercise a lane no configured source uses at the moment (between PTR cycles, the
    era "ptr" staff-posts preview) without re-adding a retired row to the real config. */
+/* The 12.1.5 notes-only preview (ptr-preview, topic 2344395, era "ptr", staff-posts) was
+   retired at the 12.1.5 launch: its row here, its data/official-notes.json block and its
+   data/required-sources.json officialNotes entry leave together (validation refuses a
+   ledger source this list does not name; a test pins the contract to this list). The era
+   "ptr" staff-posts code path stays for the next patch's preview and is tested through an
+   injected fixture source. Live 12.1.5 hotfixes arrive in the live compilation below. */
 export const OFFICIAL_NOTE_SOURCES = Object.freeze([
   { id: "live-hotfixes", topicId: 2336376, slug: "world-of-warcraft-midnight-hotfixes", patch: "12.1", era: "live", mode: "compilation", since: "2026-08-18" },
-  { id: "ptr-preview", topicId: 2344395, slug: "midnight-1215-ptr-development-notes", patch: "12.1.5", era: "ptr", mode: "staff-posts" },
 ]);
 export const noteHash = value => createHash("sha256").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex");
 export const noteUrl = (source, postNumber = 1) => `https://us.forums.blizzard.com/en/wow/t/${source.slug}/${source.topicId}/${postNumber}`;
