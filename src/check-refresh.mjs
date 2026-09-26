@@ -52,6 +52,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData, validateData } from "./validate.mjs";
 import { buildPayload, snapshotStateOf, SNAPSHOT_PHASE, PHASE_FLIP_DUE } from "./render.mjs";
+import { PHASES, LABEL_FLIP_DUE, LABEL_FLIP_EXPECTED } from "./normalize.mjs";
 
 export const RESULTS = new Set(["success", "partial", "unreachable", "blocked", "parse_error", "skipped"]);
 // Results that mean "didn't fully land" — allowed with a reason, never silently.
@@ -433,7 +434,49 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 export const FLOOR_RESTORE_DUE = "2026-11-01", FULL_FLOOR = 7;
 
-export function checkFreshness(config, manifest, data, now, gearing = null) {
+/* The in-season label flip (12.1.5 owner decision 6; constants beside PHASES in
+   normalize.mjs). Returns the violation text, or null. One question: from LABEL_FLIP_DUE
+   on, is the live patch the chip names (PHASES.livePatch?.label, else liveLabel) still
+   OLDER than LABEL_FLIP_EXPECTED?
+   · due null                                   → inert (no release date recorded yet)
+   · today >= due, live patch older than expected → violation, fingerprint key `live-patch-label`
+   · live patch is the expected one or LATER      → silent.
+   "Older", not "different", is what makes it one-shot, like the SNAPSHOT_PHASE gate that
+   tests for the old value: patches only move forward, so once the chip reaches 12.1.5 the
+   condition never returns, whether at a later in-season patch or at the next season's
+   flip (which resets livePatch to null and moves liveLabel on). Dotted numeric labels
+   compare segment by segment ("12.1" < "12.1.5" < "12.2"); a label that is not purely
+   dotted numbers falls back to exact equality with the expected one.
+   A malformed due date is reported rather than string-compared, because a typo there
+   would otherwise make the gate fire never, or always. The defaults read the real
+   constants; tests pass fixtures. */
+const DOTTED_PATCH = /^\d+(\.\d+)*$/;
+function patchReached(label, expected) {
+  if (!DOTTED_PATCH.test(String(label)) || !DOTTED_PATCH.test(String(expected))) return label === expected;
+  const a = label.split(".").map(Number), b = expected.split(".").map(Number);
+  for (let i = 0; i < Math.max(a.length, b.length); i++) {
+    const d = (a[i] ?? 0) - (b[i] ?? 0);
+    if (d !== 0) return d > 0;
+  }
+  return true;
+}
+
+export function labelFlipViolation(now, { due = LABEL_FLIP_DUE, expected = LABEL_FLIP_EXPECTED,
+  livePatch = PHASES.livePatch, liveLabel = PHASES.liveLabel } = {}) {
+  if (due == null) return null;
+  if (!ISO_DATE.test(String(due))) {
+    return `LABEL_FLIP_DUE is ${JSON.stringify(due)}, not an ISO date — fix it in src/normalize.mjs (null keeps the gate inert)`;
+  }
+  const shown = livePatch?.label ?? liveLabel;
+  if (dateOf(now) < due || patchReached(shown, expected)) return null;
+  const current = livePatch?.label ? `"${livePatch.label}"` : "unset";
+  return `PHASES.livePatch.label is ${current} on or after ${due} (LABEL_FLIP_DUE, the recorded ${expected} release date), ` +
+    `so the chip still names ${shown} as the live patch — ` +
+    `set PHASES.livePatch = { label: "${expected}", since: "<launch date>" } in src/normalize.mjs (the owner launch commit). ` +
+    `If the release slipped, move LABEL_FLIP_DUE instead.`;
+}
+
+export function checkFreshness(config, manifest, data, now, gearing = null, { labelFlip = {} } = {}) {
   const violations = [], report = [], keys = [];
   const nowDate = dateOf(now);
   const nowMs = ISO_INSTANT.test(String(now)) ? Date.parse(now) : utc(nowDate);
@@ -486,6 +529,13 @@ export function checkFreshness(config, manifest, data, now, gearing = null) {
   if (SNAPSHOT_PHASE === "12.1-ptr" && dateOf(nowDate) > PHASE_FLIP_DUE) {
     violations.push(`SNAPSHOT_PHASE is still "12.1-ptr" past ${PHASE_FLIP_DUE} — flip it in src/render.mjs to the live Season-2 id. Until then every snapshot is tagged pre-launch and the forecast report card cannot find the boundary it grades the frozen projection against.`);
     keys.push("snapshot-phase");
+  }
+  // The in-season patch label: the same one-shot shape, keyed on the live patch still
+  // being OLDER than the expected one (labelFlipViolation above).
+  const labelFlipFinding = labelFlipViolation(nowDate, labelFlip);
+  if (labelFlipFinding) {
+    violations.push(labelFlipFinding);
+    keys.push("live-patch-label");
   }
   /* The one-shot transition restore (2026-08-19 audit, D1) — same shape as the flip gate
      above: a dated owner action whose omission nothing else can detect. 152dcc6 lowered

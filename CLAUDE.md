@@ -376,6 +376,41 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the forecast report card grades the frozen pre-launch projection against, so nothing
   downstream can infer the boundary if this is missed. Recorded here because a code
   comment is invisible to whoever notices 12.1 going live (2026-07-24 audit, X3).
+- **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label, DORMANT (`null`)
+  until 12.1.5 ships** (added 2026-09-25). 12.1.5 is a mid-season patch inside Season 2,
+  not a new season: `liveSeason`, `liveLabel` "12.1", `liveSince`, `SNAPSHOT_PHASE`,
+  `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. **For the label, the
+  owner launch commit makes three edits** (it carries more than the label — the ptr-preview
+  retirement and the nightly prompt wording among them; the 12.1.5 launch runbook in
+  `docs/` lists the whole commit): it sets `livePatch = { label: "12.1.5", since: "<launch
+  date>" }`, updates the literal pin in `test/normalize.test.mjs`, and changes the gearing
+  page's chip (`pc-full`/`pc-short` in `gearing/src/app.template.html`, then
+  `npm run gearing:build`). Gearing's chip is a hand-kept literal, like the rest of the
+  mirrored bar, so `livePatch` does not reach it; a root build test compares it with the
+  live patch and reds until it matches. It is **display-only**: `eraTokensFor`
+  (build.mjs) reads it for exactly three tokens, the masthead chip (`__ERA_CHIP__`), its
+  phone form (`__ERA_SHORT__`) and the "Live:" stamp. `__ERA_BASELINE__` stays on
+  `liveLabel` because it names the consensus season, and `meta.phases` strips the field, so
+  no client-side label can read it. A build test sets it and proves the page changes in
+  those three places and nowhere else; its fixtures force `ptr` and `livePatch`, so it
+  proves the same thing after the launch commit. `since` is the one recorded launch date;
+  the watch-creators framing rule and the refresh-metrics Bloodmallet adoption rule both
+  read it, and both fall back to `LABEL_FLIP_DUE` until `since` exists.
+  **Label-flip heartbeat** (owner decision for 12.1.5): `check-refresh --age` reports the
+  fingerprint key **`live-patch-label`** from `LABEL_FLIP_DUE` (inclusive) while the live
+  patch the chip names (`PHASES.livePatch?.label`, else `liveLabel`) is still OLDER than
+  `LABEL_FLIP_EXPECTED` ("12.1.5"). Dotted labels compare segment by segment; a label that is
+  not purely dotted numbers falls back to exact equality. Both constants sit beside `PHASES`
+  in `normalize.mjs`, and `LABEL_FLIP_DUE` is `null`, which keeps the gate inert. **Owner
+  action, one line: when Blizzard announces the release date, set `LABEL_FLIP_DUE` in
+  `src/normalize.mjs` to that date**; if the release slips, move it. The heartbeat's cron
+  is 19:23 UTC (`freshness.yml`; runs often start hours later), so a launch commit that
+  lands after that day's heartbeat on release day costs a red run, and `live-patch-label`
+  is a pipeline key there, red every day it persists. Because the gate tests "older"
+  rather than "different", it goes quiet once the chip reaches 12.1.5 and stays quiet at
+  later in-season patches and after the next season flip. That flip must set `livePatch`
+  back to `null` (a normalize test reds while its `since` does not postdate `liveSince`);
+  nothing else needs retiring.
 - **`dataHealth()` (`render.mjs`)** computes the frozen-series banner: every metric,
   `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
   announced as a Warcraft Logs outage. Staleness is relative to the data's own newest
@@ -681,7 +716,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
   is no PTR (a live tuning post falls back to `kind: "build"`, so the kind alone could not
   tell — this was the mislabel render.mjs's own residue note exists to catch); the footer
-  heading is a **"patch feed"** between cycles; the **"PTR verdict" sort option hides** when
+  heading is a **"patch feed"** between cycles, named for the season since 2026-09-25
+  (**"Season 2 patch feed"**: it is the season's one list, and 12.1.5's entries join
+  12.1's there after launch); the
+  **"PTR verdict" sort option hides** when
   the era filter is rendering no verdict chips; the lede states **both bracket counts** when
   the consensus is split, because a single figure contradicted the toolbar two rows below it;
   and the movers strip reframes from "Into 12.1" to **"Forecast vs. live consensus"** once the
@@ -1478,8 +1516,8 @@ problems + weekly" — a failed scheduled run is what emails the owner, and red 
 stale day hid a new problem inside an already-red signal). The run fails only when:
 a fingerprint key is NEW (absent from the issue's previous fingerprint; no readable
 previous fingerprint counts every key as new); a pipeline key is present (`run-age`,
-which also annotates `NIGHTLY MISSED`, `snapshot-phase`, `min-sources-floor` — red every
-day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
+which also annotates `NIGHTLY MISSED`, `snapshot-phase`, `min-sources-floor`,
+`live-patch-label` — red every day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
 fingerprint — fail closed); or it is Monday (UTC) and any key outside the workflow's
 single `ACCEPTED_KEYS` pattern remains. Accepted: every `archon-*` key and
 `wcl-live-raid`/`wcl-live-mplus`; `wowmeta` deliberately is not. Otherwise a stale run

@@ -186,6 +186,26 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    projection's date-sort assumes the newest live take is the current read, so a stale
    un-superseded take both clutters the drawer and can mislead — supersede diligently,
    but only within the same lens.
+   **A patch inside the season: 12.1.5** (added 2026-09-25; applies to `takes[]` and
+   `metaNotes[]` alike). Before it ships, 12.1.5 content is a different subject from a live
+   read: its `patchContext` opens **"12.1.5 PTR preview — NOT LIVE"** and it stays live
+   beside the creator's live take (the 2026-09-22 log precedent). From the 12.1.5 release
+   date, content published on or after it about the live game is framed **"Season 2 live
+   (12.1.5) — …"**. The release date is keyed exactly as the refresh-metrics Bloodmallet
+   rule keys it: `PHASES.livePatch.since` once it is set, and before that `LABEL_FLIP_DUE`
+   once today is on or after it (both in src/normalize.mjs). The patch can go live before
+   the owner's launch commit sets `livePatch`, and takes are never edited afterwards, so a
+   live video framed "NOT LIVE" in that gap would be a permanent provenance error. If
+   neither date applies but the video itself says it is playing live 12.1.5, frame it as
+   live and name that statement in the take; otherwise keep the preview framing. It is still Season 2, so never
+   "PTR" and never a new season. A creator's new live read then **supersedes** their
+   "12.1.5 PTR preview — NOT LIVE" take in the same bracket lens (the guardrail above),
+   because the preview has become a claim about the live game. The two carry different
+   dates, so this is the legitimate different-date supersede (creator-layer invariant 3 in
+   CLAUDE.md), not the same-date several-claims case. Their older "Season 2 live — …" take
+   in that lens is superseded as usual. **Never edit an old take or metaNote to reframe
+   it**: its text, date and `patchContext` stay as written, and `superseded: true` is the
+   only change it ever receives.
 4a. **Drop the weaker lane record — also EVERY time you add a take or metaNote.** Distilling a
    video makes its take/metaNote url that video's record, so if the same id is still sitting in
    `seen[]`, `skipped[]` or `videos[]`, remove it from that lane **in the same edit**. The lanes
@@ -222,7 +242,9 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    hold one of each). **Era framing since the 2026-08-18 launch: content published on or
    after 2026-08-18 discussing 12.1 is LIVE-era, not PTR** — write "Season 2 live — …",
    never "Season 2 PTR — …", for post-launch takes; PTR phrasing on a new take mislabels
-   its provenance and misleads the bracket-scope regexes' era context. Validation requires the creator be a `generalCreators`
+   its provenance and misleads the bracket-scope regexes' era context. For 12.1.5 (a patch
+   inside Season 2) the same rule keys on the 12.1.5 release date (`PHASES.livePatch.since`,
+   else `LABEL_FLIP_DUE` once passed): see step 4. Validation requires the creator be a `generalCreators`
    entry, keeping the firewall intact. **Curate honestly**: capture only genuine spec-level
    reads — if the creator says a spec merely topped ONE fight because the fight favors its
    role (not a spec-strength call), that's a fight artifact, NOT a meta note; drop it or

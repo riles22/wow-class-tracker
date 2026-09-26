@@ -171,12 +171,25 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
      appears. The take/era machinery reads as closed (expertRead null, PTR_METRIC_NAMES
      null) and the frozen forecast (B6) carries the pre-launch read through the window. */
   assert.equal(PHASES.ptr, null);
+  /* The in-season patch (12.1.5 inside Season 2) is DORMANT until it ships: display-only,
+     read by three build-time era tokens and nothing else. A literal pin for the same reason
+     as the lines around it — setting it is the owner's launch edit, and that commit
+     updates this line to the { label, since } it sets, or fails here first. */
+  assert.equal(PHASES.livePatch, null);
   assert.equal(PHASES.patchName, "Curse of Ula'tek");
   /* liveSince is the flip date (2026-08-19 audit, B2): drawer metric rows older than it
      get a visible previous-season tag. It must move WITH liveSeason at every flip, so it
      is pinned here beside it — the flip edit updates both or fails this test. */
   assert.equal(PHASES.liveSince, "2026-08-18");
   assert.match(PHASES.liveSince, /^\d{4}-\d{2}-\d{2}$/);
+  /* Shape, not value: a livePatch belongs to ONE season and must postdate its opening.
+     The next season's flip moves liveSince forward, so a livePatch left set would put
+     "12.1.5" on the next season's chip while the label-flip gate stayed silent and the
+     gearing lockstep test demanded the same stale label. This reds that flip commit until
+     livePatch goes back to null (2026-09-26 review finding). */
+  assert.ok(PHASES.livePatch === null ||
+    (/^\d{4}-\d{2}-\d{2}$/.test(PHASES.livePatch.since) && PHASES.livePatch.since > PHASES.liveSince),
+    `PHASES.livePatch ${JSON.stringify(PHASES.livePatch)} must be null or dated after liveSince ${PHASES.liveSince} — reset it to null at every season flip`);
   /* DECISION 3 as amended 2026-08-12: the sunset happens AT the flip, so ptrSunset is
      dead weight — the FIELD is deleted, not set false. Assert absence, so resurrecting
      it is a deliberate edit that fails here first. */

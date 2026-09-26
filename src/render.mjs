@@ -1986,7 +1986,11 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
         ranks: ranksComparableWith(baseline),
         projection: projComparableWith(baseline),
       } : null,
-      phases: PHASES,
+      /* livePatch is build-time display only (build.mjs eraTokensFor: chip, phone chip,
+         "Live:" stamp). Every client-side label names the season's DATA and reads
+         liveLabel, so the field is kept out of the page entirely rather than left for
+         some later prose to pick up. It also keeps the launch edit off the payload. */
+      phases: (({ livePatch, ...shipped }) => shipped)(PHASES),
       /* Present ONLY while the frozen artifact is the forecast column's render source
          (post-flip, pre-sunset). The template keys every frozen-mode surface change on
          this — null means the live projection machinery is authoritative, which is every

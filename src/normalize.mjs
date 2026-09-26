@@ -49,6 +49,9 @@ export function consensusTier(score, scales) {
                      seasonLabels[liveSeason] (pinned by test); this map exists so a column
                      of NEXT-season letters can be labelled with its own patch instead of
                      inheriting the live one.
+     · livePatch   — a patch released INSIDE the live season (12.1.5 inside Season 2):
+                     display-only, null until it ships. See the field below. Every season
+                     flip resets it to null (pinned: its `since` must postdate liveSince).
    At 12.1 launch: liveSeason -> "s2", liveLabel -> "12.1", ptr -> null (until the 12.2
    thread appears), alongside the SNAPSHOT_PHASE flip in render.mjs. */
 export const PHASES = {
@@ -72,9 +75,41 @@ export const PHASES = {
      build-time era tokens (build.mjs). It outlives `ptr` (the branding stays after the
      ptr lane sunsets), which is why it does not live inside it. */
   patchName: "Curse of Ula'tek",
+  /* The patch that is live INSIDE the live season, when it is not the season's opening
+     patch: `{ label, since }` (since = the ISO date it went live), null until then. Added
+     2026-09-25 for 12.1.5, which is a mid-season patch within Season 2, not a new season.
+     DISPLAY-ONLY, and deliberately narrow. Exactly three build-time era tokens read it
+     (build.mjs `eraTokensFor`): the masthead chip, its phone form and the "Live:" stamp.
+     Everything that names DATA stays on liveLabel: the baseline line, the column
+     qualifiers, drawer headings, lag chips and frozen-lane text all describe the Season 2
+     consensus, which a mid-season patch does not restart. The payload strips it too
+     (render.mjs `meta.phases`), so no client-side prose can start reading it by accident.
+     That is why liveLabel, seasonLabels.s2 and LIVE_LEADERBOARDS.label (wcl-live.mjs)
+     never move within a season. `since` is the one recorded launch date; the Bloodmallet
+     adoption rule (refresh-metrics skill, which holds on LABEL_FLIP_DUE below until this
+     is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
+     page's chip is a hand-kept literal that must name the same live patch; a root build
+     test compares the two. */
+  livePatch: null,
   seasonOrder: ["s1", "s2"],
   seasonLabels: { s1: "12.0.7", s2: "12.1" },
 };
+
+/* The label-flip heartbeat gate (12.1.5 owner decision 6). The same shape as
+   PHASE_FLIP_DUE in render.mjs: a dated owner action that nothing else would notice being
+   missed. If 12.1.5 ships and PHASES.livePatch is never set, the chip keeps announcing
+   "12.1" under a patch that has moved on, and no gate, test or data check objects.
+   `check-refresh --age` reports `live-patch-label` from LABEL_FLIP_DUE onwards (that date
+   INCLUSIVE) while the live patch the chip names (PHASES.livePatch?.label, else liveLabel)
+   is still OLDER than LABEL_FLIP_EXPECTED.
+   INERT while LABEL_FLIP_DUE is null. OWNER ACTION: when Blizzard announces the release
+   date, set LABEL_FLIP_DUE to that date. It is then the recorded release date: the
+   violation text calls it that, and the Bloodmallet hold keys on it until livePatch.since
+   exists. The gate asks "older", not "different", so it stays silent once the chip reaches
+   12.1.5, at a later in-season patch and after the next season flip (livePatch back to
+   null, liveLabel moved on); nothing needs retiring (check-refresh.mjs `labelFlipViolation`). */
+export const LABEL_FLIP_EXPECTED = "12.1.5";
+export const LABEL_FLIP_DUE = null;
 
 export const isLiveEra = source => (source.era ?? "live") === "live";
 /* Position of a season on the declared timeline; null when the id is unknown. */
