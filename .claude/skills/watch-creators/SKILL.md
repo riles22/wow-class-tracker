@@ -189,9 +189,15 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    **A patch inside the season: 12.1.5** (added 2026-09-25; applies to `takes[]` and
    `metaNotes[]` alike). Before it ships, 12.1.5 content is a different subject from a live
    read: its `patchContext` opens **"12.1.5 PTR preview — NOT LIVE"** and it stays live
-   beside the creator's live take (the 2026-09-22 log precedent). Once `PHASES.livePatch` is
-   set (src/normalize.mjs), content published on or after `PHASES.livePatch.since` about
-   the live game is framed **"Season 2 live (12.1.5) — …"**. It is still Season 2, so never
+   beside the creator's live take (the 2026-09-22 log precedent). From the 12.1.5 release
+   date, content published on or after it about the live game is framed **"Season 2 live
+   (12.1.5) — …"**. The release date is keyed exactly as the refresh-metrics Bloodmallet
+   rule keys it: `PHASES.livePatch.since` once it is set, and before that `LABEL_FLIP_DUE`
+   once today is on or after it (both in src/normalize.mjs). The patch can go live before
+   the owner's launch commit sets `livePatch`, and takes are never edited afterwards, so a
+   live video framed "NOT LIVE" in that gap would be a permanent provenance error. If
+   neither date applies but the video itself says it is playing live 12.1.5, frame it as
+   live and name that statement in the take; otherwise keep the preview framing. It is still Season 2, so never
    "PTR" and never a new season. A creator's new live read then **supersedes** their
    "12.1.5 PTR preview — NOT LIVE" take in the same bracket lens (the guardrail above),
    because the preview has become a claim about the live game. The two carry different
@@ -237,7 +243,8 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    after 2026-08-18 discussing 12.1 is LIVE-era, not PTR** — write "Season 2 live — …",
    never "Season 2 PTR — …", for post-launch takes; PTR phrasing on a new take mislabels
    its provenance and misleads the bracket-scope regexes' era context. For 12.1.5 (a patch
-   inside Season 2) the same rule keys on `PHASES.livePatch.since`: see step 4. Validation requires the creator be a `generalCreators`
+   inside Season 2) the same rule keys on the 12.1.5 release date (`PHASES.livePatch.since`,
+   else `LABEL_FLIP_DUE` once passed): see step 4. Validation requires the creator be a `generalCreators`
    entry, keeping the firewall intact. **Curate honestly**: capture only genuine spec-level
    reads — if the creator says a spec merely topped ONE fight because the fight favors its
    role (not a spec-strength call), that's a fight artifact, NOT a meta note; drop it or

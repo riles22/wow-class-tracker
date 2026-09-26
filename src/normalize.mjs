@@ -50,7 +50,8 @@ export function consensusTier(score, scales) {
                      of NEXT-season letters can be labelled with its own patch instead of
                      inheriting the live one.
      · livePatch   — a patch released INSIDE the live season (12.1.5 inside Season 2):
-                     display-only, null until it ships. See the field below.
+                     display-only, null until it ships. See the field below. Every season
+                     flip resets it to null (pinned: its `since` must postdate liveSince).
    At 12.1 launch: liveSeason -> "s2", liveLabel -> "12.1", ptr -> null (until the 12.2
    thread appears), alongside the SNAPSHOT_PHASE flip in render.mjs. */
 export const PHASES = {

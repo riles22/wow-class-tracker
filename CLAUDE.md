@@ -379,8 +379,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
 - **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label, DORMANT (`null`)
   until 12.1.5 ships** (added 2026-09-25). 12.1.5 is a mid-season patch inside Season 2,
   not a new season: `liveSeason`, `liveLabel` "12.1", `liveSince`, `SNAPSHOT_PHASE`,
-  `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. **The owner launch
-  commit makes three edits:** it sets `livePatch = { label: "12.1.5", since: "<launch
+  `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. **For the label, the
+  owner launch commit makes three edits** (it carries more than the label — the ptr-preview
+  retirement and the nightly prompt wording among them; the 12.1.5 launch runbook in
+  `docs/` lists the whole commit): it sets `livePatch = { label: "12.1.5", since: "<launch
   date>" }`, updates the literal pin in `test/normalize.test.mjs`, and changes the gearing
   page's chip (`pc-full`/`pc-short` in `gearing/src/app.template.html`, then
   `npm run gearing:build`). Gearing's chip is a hand-kept literal, like the rest of the
@@ -392,8 +394,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   no client-side label can read it. A build test sets it and proves the page changes in
   those three places and nowhere else; its fixtures force `ptr` and `livePatch`, so it
   proves the same thing after the launch commit. `since` is the one recorded launch date;
-  the watch-creators framing rule reads it, and so does the refresh-metrics Bloodmallet
-  adoption rule, which holds on `LABEL_FLIP_DUE` until `since` exists.
+  the watch-creators framing rule and the refresh-metrics Bloodmallet adoption rule both
+  read it, and both fall back to `LABEL_FLIP_DUE` until `since` exists.
   **Label-flip heartbeat** (owner decision for 12.1.5): `check-refresh --age` reports the
   fingerprint key **`live-patch-label`** from `LABEL_FLIP_DUE` (inclusive) while the live
   patch the chip names (`PHASES.livePatch?.label`, else `liveLabel`) is still OLDER than
@@ -401,12 +403,14 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   not purely dotted numbers falls back to exact equality. Both constants sit beside `PHASES`
   in `normalize.mjs`, and `LABEL_FLIP_DUE` is `null`, which keeps the gate inert. **Owner
   action, one line: when Blizzard announces the release date, set `LABEL_FLIP_DUE` in
-  `src/normalize.mjs` to that date**; if the release slips, move it. The heartbeat runs
-  daily at 17:23 UTC (`freshness.yml`), so a launch commit that lands later than that on
-  release day costs one red run. Because the gate tests "older" rather than "different",
-  it goes quiet once the chip reaches 12.1.5 and stays quiet at later in-season patches and
-  after the next season flip (`livePatch` back to `null`, `liveLabel` moved on). Nothing
-  needs retiring.
+  `src/normalize.mjs` to that date**; if the release slips, move it. The heartbeat's cron
+  is 19:23 UTC (`freshness.yml`; runs often start hours later), so a launch commit that
+  lands after that day's heartbeat on release day costs a red run, and `live-patch-label`
+  is a pipeline key there, red every day it persists. Because the gate tests "older"
+  rather than "different", it goes quiet once the chip reaches 12.1.5 and stays quiet at
+  later in-season patches and after the next season flip. That flip must set `livePatch`
+  back to `null` (a normalize test reds while its `since` does not postdate `liveSince`);
+  nothing else needs retiring.
 - **`dataHealth()` (`render.mjs`)** computes the frozen-series banner: every metric,
   `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
   announced as a Warcraft Logs outage. Staleness is relative to the data's own newest

@@ -182,6 +182,14 @@ test("PHASES is the single era vocabulary and carries the current cycle", () => 
      is pinned here beside it — the flip edit updates both or fails this test. */
   assert.equal(PHASES.liveSince, "2026-08-18");
   assert.match(PHASES.liveSince, /^\d{4}-\d{2}-\d{2}$/);
+  /* Shape, not value: a livePatch belongs to ONE season and must postdate its opening.
+     The next season's flip moves liveSince forward, so a livePatch left set would put
+     "12.1.5" on the next season's chip while the label-flip gate stayed silent and the
+     gearing lockstep test demanded the same stale label. This reds that flip commit until
+     livePatch goes back to null (2026-09-26 review finding). */
+  assert.ok(PHASES.livePatch === null ||
+    (/^\d{4}-\d{2}-\d{2}$/.test(PHASES.livePatch.since) && PHASES.livePatch.since > PHASES.liveSince),
+    `PHASES.livePatch ${JSON.stringify(PHASES.livePatch)} must be null or dated after liveSince ${PHASES.liveSince} — reset it to null at every season flip`);
   /* DECISION 3 as amended 2026-08-12: the sunset happens AT the flip, so ptrSunset is
      dead weight — the FIELD is deleted, not set false. Assert absence, so resurrecting
      it is a deliberate edit that fails here first. */
