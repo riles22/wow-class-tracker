@@ -114,6 +114,23 @@ heartbeat to go red honestly.
 > design — a healthy night reads ~5h, a single miss ~28.6h — so a nightly landing after
 > ~13:23 UTC re-opens the gap (see CLAUDE.md).
 
+> **Annotation 2026-09-25 (record left as written; the run colour and the cron changed
+> after this audit):** owner decision "red on new problems + weekly". The alert issue's
+> lifecycle is unchanged: it is opened, refreshed daily, commented on a fingerprint change
+> and auto-closed on recovery. The RUN is no longer red on every stale day. It is red only
+> when a fingerprint key is new against the issue's previous fingerprint; when a pipeline
+> key (`run-age`, `snapshot-phase`, `min-sources-floor`) is present; when the check cannot
+> be trusted (a crash, or a stale exit without a usable fingerprint — fail closed); or on a
+> Monday (UTC) while any key outside the workflow's `ACCEPTED_KEYS` remains. Otherwise the
+> run passes with a warning annotation. `run-age` also raises a `NIGHTLY MISSED`
+> annotation. The accepted set is every `archon-*` key plus `wcl-live-raid` and
+> `wcl-live-mplus`, so the "goes red" in item 3 above now holds on the day a WCL key first
+> appears and not on later days. The cron moved from 17:23 to **19:23 UTC** after the
+> nightly's September scheduled runs recorded manifest `startedAt` 13:46–16:47 UTC. At
+> 19:23 with the 28h threshold, a single missed night is caught when the previous night
+> started before 15:23 UTC, which was true of 15 of those 23 runs. At 17:23 it was true of
+> 0 of 23. The recomputed arithmetic is in CLAUDE.md.
+
 ### 7. Validation improvements — **addressed**
 
 `src/validate.mjs` now also rejects: duplicate source ids; duplicate class entries,
