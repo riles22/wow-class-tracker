@@ -142,8 +142,12 @@ jobs:
             gh issue close "$num"
           fi
 
-      # The run's colour (rules in the header). `!= 'false'` fails safe: a check step that
-      # never wrote `stale` still reaches this step, and an empty `usable` fails closed.
+      # The run's colour (rules in the header). This `if:` names no status function, so
+      # it carries an implicit success(): the step runs only when every earlier step
+      # succeeded. The check step writes `stale` as its last command, so `stale` is
+      # missing only when that step failed. That failure already reds the run, but this
+      # step is then skipped and prints no rule line. When the step does run, an `rc` or
+      # fingerprint that is not usable fails closed below.
       - name: Decide the run colour
         if: steps.check.outputs.stale != 'false'
         env:

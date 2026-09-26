@@ -1473,10 +1473,13 @@ proof-of-life signal now counts only when strictly newer than the manifest date,
 same-dated snapshot can no longer cap the measured age at 24h and mask a missed night.
 **Margin, recomputed 2026-09-25 for the 19:23 UTC cron** (it was 17:23): a single missed
 night is caught only when 24h + (heartbeat time − the previous nightly's manifest
-`startedAt`) exceeds 28h, i.e. that `startedAt` was before 15:23 UTC. September's 23
+`startedAt`) exceeds 28h, i.e. that `startedAt` was before 15:23 UTC. September's 24
 scheduled nightlies recorded `startedAt` 13:46–16:47 UTC, so at 19:23 a healthy night
-reads 2.6–5.6h and a single miss 26.6–29.6h: caught after 15 of the 23, missed after
-the 8 that started after 15:23 (at the old 17:23 cron: caught after 0 of 23). GitHub
+reads 2.6–5.6h and a single miss 26.6–29.6h: caught after 15 of the 24, missed after
+the 9 that started after 15:23 (at the old 17:23 cron: caught after 0 of 24). One of
+those 9 came right before the only September day with no published manifest: 09-01
+started 15:29:36 and the 09-02 scheduled run failed, so a 19:23 read on 09-02 would have
+aged 27.9h and not fired `run-age`. GitHub
 started the heartbeat 1h54m–3h45m after its cron over its last 20 runs, which has
 widened the window in practice but is not guaranteed; two consecutive misses are always
 caught. Catching every single miss at those start times needs the heartbeat after

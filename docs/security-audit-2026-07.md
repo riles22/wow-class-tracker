@@ -124,12 +124,15 @@ heartbeat to go red honestly.
 > Monday (UTC) while any key outside the workflow's `ACCEPTED_KEYS` remains. Otherwise the
 > run passes with a warning annotation. `run-age` also raises a `NIGHTLY MISSED`
 > annotation. The accepted set is every `archon-*` key plus `wcl-live-raid` and
-> `wcl-live-mplus`, so the "goes red" in item 3 above now holds on the day a WCL key first
-> appears and not on later days. The cron moved from 17:23 to **19:23 UTC** after the
+> `wcl-live-mplus`. So the "goes red" in item 3 above now holds for those two keys on the
+> day they first appear and not on later days. The other WCL requirements,
+> `wcl-leaderboard-raid` and `wcl-leaderboard-mplus` (2-day threshold), are not accepted:
+> they go red on the day they turn stale and again on every Monday while they stay stale.
+> The cron moved from 17:23 to **19:23 UTC** after the
 > nightly's September scheduled runs recorded manifest `startedAt` 13:46–16:47 UTC. At
 > 19:23 with the 28h threshold, a single missed night is caught when the previous night
-> started before 15:23 UTC, which was true of 15 of those 23 runs. At 17:23 it was true of
-> 0 of 23. The recomputed arithmetic is in CLAUDE.md.
+> started before 15:23 UTC, which was true of 15 of those 24 runs. At 17:23 it was true of
+> 0 of 24. The recomputed arithmetic is in CLAUDE.md.
 
 ### 7. Validation improvements — **addressed**
 
