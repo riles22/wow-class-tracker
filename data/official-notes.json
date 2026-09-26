@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-26T01:47:47.842Z",
+      "checkedAt": "2026-09-26T02:06:41.213Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -2337,7 +2337,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-26T01:47:47.842Z",
+      "checkedAt": "2026-09-26T02:06:41.213Z",
       "removedSections": [],
       "posts": [
         {
@@ -2562,11 +2562,11 @@
               "sha256": "c389299e5c6f85a5cec5fa1934fb834a2a057a520aa94f92f38aaadc22d71987",
               "resolution": {
                 "disposition": "applied",
-                "reason": "Re-reviewed 2026-09-26 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1; the post is unedited since the 2026-09-16 review). The section reopened because the receipt parser now renders struck-through text (<s>/<del>/<strike>) as an explicit “[reverted: …]” marker instead of flattening it into current text. Read from the new receipt text: two of the section's lines (Execute no longer consuming additional Rage for additional damage, and Execute damage increased by 100%) are struck through as withdrawn, and only Execute damage increased by 30% stands. The 2026-09-16 summary had read the struck lines as current and asserted all three changes; it is corrected here. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
+                "reason": "Re-reviewed 2026-09-26 (local run) against the official 12.1.5 PTR development-notes thread 2344395, post 4 (Linxy, created 2026-09-15T23:09:31Z, version 1; the post is unedited since the 2026-09-16 review). The section reopened because the receipt parser now renders struck-through text (<s>/<del>/<strike>) as an explicit “[reverted: …]” marker instead of flattening it into current text. Read from the new receipt text: two of the section's lines (Execute no longer consuming additional Rage for additional damage, and Execute damage increased by 100%) are struck through as withdrawn, and only Execute damage increased by 30% stands. The 2026-09-16 summary had read the struck lines as current and asserted all three changes; it is corrected here, and scoped to this post's own lines, because post 4 neither strikes nor mentions the September 3 Colossus Practiced Strikes change. Published only as an attributed 12.1.5 notes preview — never entering ptr-builds, spec.ptr, tier sets, live ratings or model inputs; PHASES.ptr stays null.",
                 "notes": [
                   {
                     "specKey": "Warrior|Protection",
-                    "summary": "Blizzard is restoring Execute to its previous functionality with a damage boost: the earlier 12.1.5 lines that stopped Execute consuming additional Rage for additional damage and raised its damage by 100% are struck through as reverted, and the only Execute change that stands is damage increased by 30%. Blizzard says last week's Execute changes did not accomplish their goals and the scope needed is better suited to a major update, so further Protection changes are being refocused on 12.2 and 13.0. This post does not mention the Colossus Practiced Strikes Rage-cost change from the September 3 notes."
+                    "summary": "Blizzard is restoring Execute to its previous functionality with a damage boost. Of this post's three Execute lines, two are struck through as reverted — Execute no longer consuming additional Rage for additional damage, and Execute damage increased by 100%, both first published in the September 3 notes — and the one that stands is Execute damage increased by 30%. Blizzard says last week's Execute changes did not accomplish their goals and the scope needed is better suited to a major update, so further Protection changes are being refocused on 12.2 and 13.0. This post neither strikes nor mentions the September 3 Colossus change (Practiced Strikes reducing the Rage cost of Execute and Revenge by 10), so it does not say whether that change stands."
                   }
                 ]
               }

@@ -82,6 +82,21 @@ test("struck-through lines are marked reverted, never read as current; live line
   assert.match(sectionsForPost(post(source, inline), source, roster)[0].text, /- Damage increased by \[reverted: 10%\] 15%\.\n\s+- \[reverted: Old line\.\]\n\s+- Kept line\.$/);
 });
 
+test("a struck heading keeps the section's identity; the marker lives only in the hashed text", () => {
+  // Headings are identity (id, date, category, class, spec scope) and must match on the
+  // unmarked text: marking them once widened a struck spec to its whole class, renamed a
+  // struck class to "[reverted: Warrior]", and dropped a struck class outside Classes.
+  const source = OFFICIAL_NOTE_SOURCES[0], wide = [...roster, { class: "Warrior", spec: "Arms" }, { class: "Warrior", spec: "Fury" }];
+  const identity = html => sectionsForPost(post(source, html), source, wide).map(s => [s.id, s.date, s.category, s.class, s.specKeys.join(",")]);
+  const strike = (html, text) => html.replace(`<strong>${text}</strong>`, `<strong><s>${text}</s></strong>`);
+  for (const category of ["Classes", "Player versus Player"]) {
+    const base = `<p><strong>September 4, 2026</strong></p><p><strong>${category}</strong></p><ul><li><strong>Warrior</strong><ul><li><strong>Protection</strong><ul><li>Shield changes.</li></ul></li></ul></li></ul>`;
+    assert.deepEqual(identity(base), [[`2336376:1:2026-09-04:${category.toLowerCase().replace(/ /g, "-")}:warrior:1`, "2026-09-04", category, "Warrior", "Warrior|Protection"]]);
+    for (const heading of ["September 4, 2026", category, "Warrior", "Protection"]) assert.deepEqual(identity(strike(base, heading)), identity(base), `${category}: struck ${heading}`);
+    for (const heading of ["Warrior", "Protection"]) assert.match(sectionsForPost(post(source, strike(base, heading)), source, wide)[0].text, new RegExp(`- \\[reverted: ${heading}\\]\\n`));
+  }
+});
+
 test("unknown Classes items are reviewable; layout loss and non-staff posts fail closed", () => {
   const source = OFFICIAL_NOTE_SOURCES[0];
   const unknown = sectionsForPost(post(source, `<h3>Classes</h3><ul><li>Unexpected new category<ul><li>A change</li></ul></li></ul>`), source, roster);

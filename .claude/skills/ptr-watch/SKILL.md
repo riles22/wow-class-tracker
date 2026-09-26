@@ -31,7 +31,9 @@ ledger inventories every class section rather than trusting the latest feed date
    version is a substitute for reading all changed sections.
    Struck-through source text (`<s>`, `<del>`, `<strike>`) arrives as `[reverted: …]`.
    It is a WITHDRAWN change, never a current one: say it was withdrawn and distil only
-   what stands. (Since 2026-09-26. The parser used to flatten strikes into plain text,
+   what stands. A struck class or spec heading is marked the same way in the text, but
+   headings still match on their unmarked text, so the section keeps its id and spec
+   scope. (Since 2026-09-26. The parser used to flatten strikes into plain text,
    so the 2026-09-16 review of post 4 published two struck Protection Execute lines as
    current changes.)
 3. Resolve every obligation with a specific `reason`:
