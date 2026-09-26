@@ -90,6 +90,65 @@ test("gearing: phone starts with a complete recommendation and readable contextu
     } finally { await browser.close(); }
   });
 
+/* The Venomstone "pre-launch est." label (owner decision 2026-09-26) must be readable TEXT,
+   not a tooltip. project.test.mjs pins its markup, and a CSS change such as display:none,
+   font-size:0 or a transparent colour would hide it without touching that markup, so this
+   checks what the browser actually paints at a phone width and a desktop width. */
+test("gearing: the pre-launch estimate labels render as readable text at phone and desktop widths",
+  reason ? { skip: reason } : {}, async () => {
+    const executablePath = engine === "chromium" && process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;
+    const browser = await browserType.launch(executablePath ? { executablePath } : {});
+    try {
+      for (const [width, height] of [[375, 812], [1440, 900]]) {
+        const page = await browser.newPage({ viewport: { width, height } });
+        try {
+          await page.goto(artifact.href + "#spec=mage-frost");
+          await page.evaluate(() => document.fonts.ready);
+          await page.locator("#tab-paths").click();
+          const labels = await page.locator("#p-paths .ilvl-est").evaluateAll(els => els.map(el => {
+            const rgba = color => { const [r, g, b, a = 1] = color.match(/[\d.]+/g).map(Number); return { r, g, b, a }; };
+            const luminance = ({ r, g, b }) => [r, g, b].map(n => {
+              const s = n / 255;
+              return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+            }).reduce((sum, c, i) => sum + c * [0.2126, 0.7152, 0.0722][i], 0);
+            let bgEl = el;
+            while (bgEl && rgba(getComputedStyle(bgEl).backgroundColor).a < 1) bgEl = bgEl.parentElement;
+            const bg = rgba(getComputedStyle(bgEl || document.body).backgroundColor);
+            const fg = rgba(getComputedStyle(el).color);
+            // a translucent colour is painted over the background, so blend before measuring
+            const seen = { r: fg.r * fg.a + bg.r * (1 - fg.a), g: fg.g * fg.a + bg.g * (1 - fg.a), b: fg.b * fg.a + bg.b * (1 - fg.a) };
+            const [l1, l2] = [luminance(seen), luminance(bg)];
+            const rect = el.getBoundingClientRect();
+            const box = el.closest(".ceil, td, #paths-note");
+            const outer = box.getBoundingClientRect();
+            return {
+              where: box.id || box.className || box.tagName.toLowerCase(),
+              text: el.innerText.trim(),
+              painted: el.checkVisibility({ opacityProperty: true, visibilityProperty: true }),
+              fontSize: parseFloat(getComputedStyle(el).fontSize),
+              height: rect.height,
+              contrast: (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05),
+              inside: rect.left >= outer.left - 0.5 && rect.right <= outer.right + 0.5
+                && rect.top >= outer.top - 0.5 && rect.bottom <= outer.bottom + 0.5,
+            };
+          }));
+          for (const where of ["paths-note", "ceil", "td"])
+            assert.ok(labels.some(label => label.where === where), `${width}px: a label renders in ${where}`);
+          for (const label of labels) {
+            const at = `${width}px ${label.where}: ${JSON.stringify(label)}`;
+            assert.match(label.text, /^pre-launch est\.$/i, at);
+            assert.equal(label.painted, true, at);
+            assert.ok(label.fontSize >= 9 && label.height >= 10, at);
+            assert.ok(label.contrast >= 4.5, at);
+            assert.equal(label.inside, true, at);
+          }
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+            `the Item levels panel overflows the ${width}px page`);
+        } finally { await page.close(); }
+      }
+    } finally { await browser.close(); }
+  });
+
 test("gearing: custom weights keep controls contained and remove inapplicable guide columns",
   reason ? { skip: reason } : {}, async () => {
     const executablePath = engine === "chromium" && process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE;

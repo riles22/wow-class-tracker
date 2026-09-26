@@ -1090,12 +1090,19 @@ test("Item levels: the Venomstone rows carry a visible pre-launch estimate label
 
   // The template's ESTIMATE_KEYS and the data's own record must agree. sheet-rewards.json says
   // it only in prose (an authorCaveats line), so this is the coupling: re-harvest the rows from
-  // launched data and drop that caveat, and this reds until the label is dropped too.
-  const dataSaysEstimate = data.sheet.authorCaveats
-    .some((caveat) => /venomstone rows are pre-launch estimates/i.test(caveat));
+  // launched data and drop that caveat, and this reds until the label is dropped too. Any line
+  // naming Venomstone and "pre-launch estimate(s)", in either order, counts, so a reworded caveat
+  // still holds. A missing line has two causes, and the message names both, because only one of
+  // them means the label should go.
+  const dataSaysEstimate = (data.sheet.authorCaveats || [])
+    .some((caveat) => /venomstone/i.test(caveat) && /pre-launch estimates?\b/i.test(caveat));
   if (!dataSaysEstimate) {
     assert.equal(tagCount(paths + note), 0,
-      "sheet-rewards.json no longer calls the Venomstone rows estimates: remove 'venomstone' from ESTIMATE_KEYS");
+      "sheet-rewards.json has no authorCaveats line calling the Venomstone rows pre-launch estimates. "
+      + "If those rows were re-harvested from launched game data, remove 'venomstone' from ESTIMATE_KEYS "
+      + "in src/app.template.html. Otherwise they are still the pre-launch estimates: the caveat was "
+      + "dropped, or src/harvest-sheet.mjs was re-run over the hand-distilled file (README says not to). "
+      + "Keep the label and restore the caveat line.");
     return;
   }
 
@@ -1121,6 +1128,8 @@ test("Item levels: the Venomstone rows carry a visible pre-launch estimate label
   assert.ok(ceilings.includes('<div class="ceil-v">' + top.ilvl + '</div><div class="ceil-s">' + top.label + '</div>' + TAG),
     "the Venomstone ceiling is labeled");
   assert.equal(tagCount(ceilings), 1, "only the Venomstone ceiling is labeled");
+  // ...and the card's heading does not attribute that labeled box to the reviewed chart alone.
+  assert.match(ceilings, /<h3>Top listed rewards by path<span>[^<]*pre-launch community sheet<\/span>/);
   // The key is visible text above the table, not inside the closed disclosure and not a title=.
   const visibleNote = note.slice(0, note.indexOf("<details"));
   assert.ok(visibleNote.includes("Venomstone levels are marked " + TAG + ": they are pre-launch estimates from a community sheet harvested "

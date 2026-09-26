@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-oZ0Gt0Ilg2iU7B323L4NJuoBLPIie6k7dPuuEDWsPk4='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-pk4y5vbJ4HwzI8gJxwEqySMhszINyKPA1yojxmUTIR8='; style-src 'unsafe-inline'; font-src data:; img-src data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Spec Tracker &mdash; Season 2 Gearing</title>
 <!-- The Spec Tracker brand mark as favicon — same artwork as the tracker page, shipped
@@ -1657,9 +1657,12 @@ function trinketCard(list, usingCustom) {
 const ESTIMATE_KEYS = new Set(['venomstone']);
 const ESTIMATE_TAG = '<span class="ilvl-est">pre-launch est.</span>';
 
-/* These are listed rewards from the reviewed chart, including crafts and Ascended
-   gear. A reward's item level alone does not identify its upgrade track (tracks
-   overlap), so do not infer upgrades for paths without individual item/track data. */
+/* These are listed rewards, including crafts and Ascended gear. Most come from the
+   reviewed chart; the values only the pre-launch community sheet supplies stay as it
+   gave them (sheet-rewards.json `priorSource.note`: world campaign rows, delve tiers,
+   Venomstone estimates), so the heading names both sources (2026-09-26). A reward's
+   item level alone does not identify its upgrade track (tracks overlap), so do not
+   infer upgrades for paths without individual item/track data. */
 function ceilingCard() {
   if (!SHEET) return '';
   const paths = [
@@ -1677,9 +1680,9 @@ function ceilingCard() {
       + '<div class="ceil-s">' + esc(top.label) + '</div>'
       + (estimated ? ESTIMATE_TAG : '') + '</div>';
   }).join('');
-  return '<div class="card wide"><h3>Top listed rewards by path<span>from the reviewed reward chart</span></h3>'
+  return '<div class="card wide"><h3>Top listed rewards by path<span>from the reviewed reward chart and the pre-launch community sheet</span></h3>'
     + '<div class="ceils">' + cells + '</div>'
-    + '<div class="note">These are charted rewards, including drops, Vault, crafting and Ascended gear. Individual items may be upgraded further along their track; these values are not upgrade ceilings.</div></div>';
+    + '<div class="note">These are listed rewards, including drops, Vault, crafting and Ascended gear. Individual items may be upgraded further along their track; these values are not upgrade ceilings.</div></div>';
 }
 
 function slotsOf(list) {

@@ -57,7 +57,9 @@ waiting for 12.2 does not supersede this approved 12.1.5 notes lane.
 - `npm run gearing:build` — rebuild `gearing/wow-s2-gearing.html`. **Required after any edit
   to `gearing/src/app.template.html`**: the artifact is committed, and a template edit
   without a rebuild publishes nothing (a test pins this since 2026-08-14).
-  `npm run gearing:test` runs gearing's tests alone — all **44** of them. It ran only
+  `npm run gearing:test` runs gearing's tests alone — every file in `gearing/test/`, **79**
+  tests as of 2026-09-26 (read the count off the run: it grows with gearing work, and this
+  line said 44 until that date, by which time master held 77). It ran only
   `project.test.mjs` (12) until 2026-08-23: Phase A correctly trimmed a five-file enumeration
   to one file, and Phases B and G9 added the guide-harvest and enhancements-parser suites
   without re-extending it, so a third of gearing's tests answered to no gearing command. It is
