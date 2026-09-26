@@ -623,6 +623,8 @@ jobs:
             unresolved sections block publication. 12.1.5 is live inside Season 2:
             log its live notes and hotfixes per ptr-watch with realm live, with
             PHASES, SNAPSHOT_PHASE and the frozen forecasts unchanged.
+            Never write 12.1.5 into spec ptr verdicts, never reopen forecasts,
+            and never relabel archived 12.1 PTR metrics.
             Run node src/check-official-notes.mjs before finishing.
 
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one

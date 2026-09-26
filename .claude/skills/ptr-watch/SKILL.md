@@ -102,7 +102,9 @@ configured:
 
 - **Live lanes (run every time):** step 2's RSS sweep — now filtered for LIVE 12.1.5
   tuning ("Class Tuning", "Hotfixes", tuning round-ups, the consolidated 12.1.5 notes)
-  and for the 12.2 PTR announcement — plus step 3's feed logging and step 4's writeup flagging. The official
+  and for the 12.2 PTR announcement — plus step 3's feed logging and step 4's writeup
+  coverage count (read-only while `PHASES.ptr` is null: live notes never enter `spec.ptr`,
+  see step 4). The official
   revision-ledger step above also runs every time. Live tuning
   logs as `kind: "hotfix"` (Wowhead round-up = citation, NO forumUrl/forumPostNumber)
   or `kind: "build"` when a scheduled pass has its own citable Blizzard forum topic (a
@@ -220,7 +222,8 @@ posture above.
    safe), set `asOf` to the build date and `source` to the forum post URL. A pure
    bug-fix still bumps `asOf` (re-verified). Then re-read the writeup's `ptr.set2/set4`
    commentary: if it reviews a now-replaced design, append a dated "(pre-<date> …)"
-   note — attributed commentary about a dead design must say so. `npm test` enforces
+   note — attributed commentary about a dead design must say so (a staleness caveat
+   only: it is the one `spec.ptr` edit a live change may make, see step 4). `npm test` enforces
    the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
    build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
    **Nightly tier-set publishing is supported (2026-09-05):** the trusted
@@ -305,6 +308,18 @@ posture above.
    articles ("12.1 <spec> changes/review/tier set...") as writeup material for untracked
    specs, and distill them into the spec's `ptr` object in `data/specs.json`.
 
+   **`spec.ptr` belongs to an OPEN PTR cycle only (`PHASES.ptr` non-null).** It is the
+   cycle's pre-launch writeup; the 12.1 writeups on file are the closed cycle's record.
+   Live patch notes, live hotfixes and live tuning passes (12.1.5's included) never go
+   into `spec.ptr`: no new writeup, no `changes[]` line, no `watch` edit, no `verdict`
+   change. They are feed entries (step 3, `realm: "live"`). While `PHASES.ptr` is null
+   this step is read-only: recount the uncovered specs below for the run report and write
+   nothing. The one exception is step 3's dated "(pre-<date> …)" caveat on an existing
+   `ptr.set2`/`ptr.set4` commentary whose design a live set-bonus change replaced; it
+   marks that commentary stale, carries none of the new notes' content, and leaves the
+   verdict and source as they are. Everything below in this step (the lanes, the
+   append-to-`changes[]` rule) applies during an open cycle.
+
    **Wowhead RSS is a discovery lane, NOT the only one** (2026-08-01). Nine specs sat at
    `ptr: null` for weeks with run after run logging "no article covering any of them
    appeared in the RSS window" — the RSS window is a few days wide and Wowhead's preview
@@ -360,7 +375,9 @@ posture above.
    the list in the same edit. Never add a name to it; (c) distill FAITHFULLY — the
    verdict must be the source's own read, never your editorial call; if the source
    gives no clear verdict, don't write a writeup from it. Don't rewrite an existing
-   writeup wholesale on tuning-only changes — append to `changes[]` / adjust `watch`.
+   writeup wholesale on tuning-only changes — append to `changes[]` / adjust `watch`,
+   and only for the open cycle's PTR tuning: live notes and hotfixes never reach
+   `spec.ptr` (top of this step).
    **WCL runner status (2026-07-14, corrected 2026-10-06; applies to steps 5-7):** the
    HTML statistics URLs below no longer work from residential IPs either (curl has been
    redirected to `/human-challenge` since 2026-08-10); on the nightly runner the agent holds
@@ -493,7 +510,9 @@ posture above.
   See the between-cycles posture block. The zone-54 half is unchanged.)*
 - Do not rewrite existing spec `ptr` writeups wholesale on tuning-only changes — append
   to `changes[]` / adjust `watch`, and only flip `verdict` when the picture genuinely
-  changed (state why in the diff).
+  changed (state why in the diff). All of this is for an OPEN cycle's PTR tuning
+  (`PHASES.ptr` non-null). Live notes and hotfixes, 12.1.5's included, never go into
+  `spec.ptr` at all (step 4); they are feed entries (step 3).
 
 ### Transport traps promoted from `log.md` (2026-08-15 context audit)
 
