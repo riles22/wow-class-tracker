@@ -183,9 +183,10 @@ deploy and Tests have finished.
       - The last two lines check that the branch is 0 commits behind `origin/master` and
         that `origin/master..HEAD` is exactly the commits listed under "What is staged", by
         subject and in order. The last line reads that list from
-        `docs\1215-launch-runbook.md` in the rebased worktree, which is master's copy, so
-        it throws `no commit list` until this runbook is merged. When it passes it prints
-        `launch commits: 9 of 9 listed`.
+        `docs\1215-launch-runbook.md` in the rebased worktree, which is master's copy.
+        Until this runbook is merged the file is not there: `Select-String` reports
+        `Cannot find path` and the line then throws `no commit list`. When it passes it
+        prints `launch commits: 9 of 9 listed`.
 
       If #81 gained commits after `c80a9f7`, expect conflicts only where they touch the same
       prose or tests. Resolve toward #81's version, then re-apply the launch intent. Never
@@ -581,8 +582,10 @@ worktree, before editing:
 git grep -n -F -e "until the reviewed partition switch" -e "The fixed recipe covers 8 raid bosses" -e "Partition supersession (dormant guard" -e "A partition WCL adds after review" -e "The switch trigger (owner decision" -e "The switch is one reviewed recipe commit" -e "owner's switch trigger" -- CLAUDE.md SOURCES.md .claude/skills/refresh-metrics/SKILL.md docs/wcl-supported-collection.md src/wcl-probe.mjs
 ```
 
-It prints 13 lines, on master `38dc0fe` and on the launch branch `027fcb9` alike; only the
-CLAUDE.md and SOURCES.md line numbers differ. Rewrite the passage around each hit:
+It prints the same 12 hits on master `38dc0fe`, on the launch branch `027fcb9` and on the
+simulated post-launch master; only the CLAUDE.md and SOURCES.md line numbers differ (CLAUDE.md
+1083/1085/1110 on `38dc0fe`, 1152/1154/1179 on `027fcb9`, 1149/1151/1176 after B5). Rewrite
+the passage around each hit:
 
 - CLAUDE.md: the WCL recipe paragraph (`The fixed recipe covers 8 raid bosses`, and
   `until the reviewed partition switch` two lines below it) and the
@@ -710,27 +713,58 @@ verification and loot-age rows. The floor stays 5 until 2026-11-01.
 
 Verified during staging (2026-09-26 UTC, in scratch worktrees, never on master):
 
-The counts below are dated measurements of the 8-commit branch (head `fddd2a6`). Pass totals
+The counts below are dated measurements of the 9-commit branch (head `027fcb9`). Pass totals
 will differ once master gains tests; the fail counts are the part that matters.
 
 - Launch branch alone: `instructions:check` passes; `test:quiet` 701 tests, 673 pass,
   27 fail, 1 skip; build and validate fail on `unknown source ptr-preview` only.
-- Launch branch plus the B4 edits only: `test:quiet` 1 fail, the placeholder guard; build,
-  gearing:build and validate green.
+- Launch branch plus the B4 edits only: `test:quiet` 699 pass, 1 fail (the placeholder
+  guard); build, gearing:build and validate green.
 - Launch branch plus B4 and B5 (simulation date 2026-09-25): `instructions:check`,
-  `test:quiet` (0 fail; the only skip is freeze-season; UI invariants ran), build,
+  `test:quiet` (700 pass, 0 fail; the only skip is freeze-season; UI invariants ran), build,
   gearing:build and validate all green.
-- The B2 lines were run under `powershell.exe` 5.1 in scratch clones of a local bare repo
-  standing in for GitHub (never GitHub itself). Its master was built as `38dc0fe`, then
-  this runbook squash-merged, then #81 squash-merged, then one nightly-style commit adding
-  a `data/history` snapshot. (1) Branch still on `c80a9f7`: the `--onto` form ran; the
-  branch ended 0 behind with exactly the 8 launch subjects; before the rebase the B7 hash
-  differed from the B1 hash, and after it they matched (`fc.exe`: no differences).
-  (2) Branch first rebased onto the #81 squash ("Before launch day"), then the nightly
-  commit landed: B2 took the plain `git rebase origin/master` form, with the same end
-  state and matching hashes. (3) #81 not merged: the `--onto` rebase stopped on a conflict
-  in `test/digest.test.mjs` and the throw fired. The behind-count and subject checks both
-  throw on an un-rebased branch. The `gh` line throws today, because #81 is still OPEN.
+- Phase B was run under `powershell.exe` 5.1, line for line as written, in scratch clones
+  of a local bare repo standing in for GitHub (never GitHub itself). The only differences:
+  the main-checkout `cd` pointed at the scratch clone, `$env:TEMP` at a scratch folder,
+  `gh` was a stub, `npm i` was replaced by a copy of the same `node_modules`, `<N>` was a
+  number, and B6 (a live fetch) was skipped. Its master was built as
+  `38dc0fe`, then #81 squash-merged, then this runbook squash-merged. A nightly stand-in
+  commit did what every September nightly does to the files that matter: a new `checkedAt`
+  in every `data/official-notes.json` source block, today's `data/history` snapshot, the run
+  manifest, a skill log line and a rebuilt `dist/`, once with gearing's structural-sync date
+  moved and `gearing/wow-s2-gearing.html` and `dist/gearing.html` rebuilt. In order:
+  - Rehearsal ("Before launch day") on the branch at `027fcb9`: the `--onto` form ran and
+    printed `launch commits: 9 of 9 listed`. The subject line threw on the un-rebased branch
+    (no runbook in that tree), and threw `not exactly the 9 listed launch commits` with the
+    branch one commit short.
+  - One nightly, then B1, B2 (plain `git rebase origin/master` form, 9 of 9), B4, B5 and B7:
+    green, `fc.exe` no differences, `git status` exactly the listed files.
+  - A second nightly (the gearing one) after B7: B9's pre-commit check threw
+    `origin/master moved since B1`. "If origin/master moved" as written: the reset dropped
+    nothing (no B9 commit yet); B1 recorded the new master; B2's rebase merged the launch's
+    chip line with the nightly's gearing data line cleanly; the data-file check passed;
+    B4, B5 and B7 were green again, and `gearing:build` reproduced the merged artifact
+    byte for byte. The pre-commit check then passed; commit and `git push -u` ran.
+  - A third nightly after the push: the pre-merge check threw before the merge line. A
+    squash merge of the pushed branch into that master stopped with conflicts in
+    `data/official-notes.json` and `dist/index.html`. The recovery again: the reset listed
+    and dropped the one B9 commit; B1, B2, the data-file check, B4, B5 and B7 green; the
+    pre-commit check passed; the commit went up with `git push --force-with-lease`
+    (forced update accepted); the pre-merge check passed and reached the merge line. The
+    squash merge was then clean, and its tree equals the launch head's tree, the tree B7
+    tested.
+  - A post-launch nightly, then B10's fingerprint lines: `git log` showed the nightly on
+    top of the launch merge, and `new keys:` was empty (26 keys before and after). With
+    `murlok` removed from a copy of the baseline, the same lines printed `new keys: murlok`.
+    The launch worktree's `data/run-manifest.json` was still the pre-launch night's while
+    the throwaway worktree read the post-launch one.
+  - In this simulation the payload hash did not change across the stand-in nightlies: each
+    rewrote the same day's snapshot from an earlier day's, and those differ only in fields
+    the hash does not cover. The B9 checks compare commits, not hashes, so they fired
+    regardless.
+  - From the earlier 8-commit round, not re-run: with #81 not merged, the `--onto` rebase
+    stopped on a conflict in `test/digest.test.mjs` and the throw fired. The `gh` line
+    throws today, because #81 is still OPEN.
 - A worktree registration whose directory was deleted makes `git worktree add` fail with
   `already used by worktree`; after `git worktree prune`, the same `add` succeeds, and
   `git worktree remove` on a clean worktree keeps the branch ref.
@@ -748,12 +782,15 @@ will differ once master gains tests; the fail counts are the part that matters.
   `buildPayload` differs from #81's head only in `officialNotes`; `meta` is identical.
   `data/history` is untouched.
 - `check-refresh --age` lists the same 26 keys on `38dc0fe`, on the 8-commit branch alone
-  and on it with B4 and B5.
+  and on it with B4 and B5, and (above) at B1 and after the simulated launch.
 - B4 and B5 were run under `powershell.exe` 5.1 exactly as written (B5 with a simulation
   date, then all gates green). B5 is ASCII-only on purpose: a literal em dash in a PS 5.1
   argument is mangled before node sees it.
+- The C2 prose `git grep` was run under `powershell.exe` 5.1 on `38dc0fe`, on `027fcb9`
+  and on the simulated post-launch tree: 12 hits in each, at the line numbers C2 quotes.
 - The C2 switch was re-simulated on 2026-09-26 on the 8-commit launch branch with B4 and
-  B5 applied (0 fail before the switch), with a hypothetical partition `{ id: 2, name:
+  B5 applied (0 fail before the switch; the ninth commit changes only the paste-discord
+  skill and its adapter), with a hypothetical partition `{ id: 2, name:
   "12.1.5" }`. Scenario A kept the earlier simulation's pins, with 227 changed as a single
   literal and `test/validate.test.mjs` untouched: 4 fail (the provenance test at 1032 on
   its 1034 case, `wcl-live.test.mjs` 227, and the 2 wcl-probe tests). Scenario B applied
@@ -775,6 +812,12 @@ Inferred, not observed:
 - Where WCL files Kith'ix (zone, difficulty, size) and when Mythic opens.
 - The release date: not announced as of 2026-09-26.
 - That the auto-started nightly after the merge is healthy; B10 checks it.
+- The nightly timing in Phase B "Timing". The start and finish times are GitHub's records
+  for 2026-07-28 to 09-25, not a guarantee; GitHub has started the scheduled run anywhere
+  from 10:53 to 21:14 UTC. The B9 checks, not the timing, are what catch a moved master.
+- The B9 recovery with real GitHub: the simulation used a local bare repo, a stubbed `gh`
+  and no B6 fetch (network). A real PR shows the conflict until the forced push replaces
+  its head; that part was not observed.
 - That the first nightly after the C2 switch passes `check-wcl-metrics` and Gate 3 with the
   new recipe. Those gates cannot run locally for the switch commit; C2's post-nightly read
   checks them.
