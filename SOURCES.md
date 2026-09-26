@@ -157,7 +157,8 @@ shown in each drawer's Source ratings box.
 contract rows were removed at the flip; the fetch recipes are retired in
 `src/fetch-wcl.mjs` awaiting the 12.2 zone ids), and the dev-notes thread is closed.
 What stays LIVE from this layer: the Wowhead RSS discovery lane, now watching for
-**live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"` feed entries) and for the
+**live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"` feed entries, each recording
+`realm: "live"` — the realm, not the kind, decides where an entry is shown) and for the
 future PTR announcements. **12.1.5 currently has a notes-only preview**, separate
 from every forecast and live-ranking input; a new notes thread never reopens the
 closed empirical or forecast cycle automatically.

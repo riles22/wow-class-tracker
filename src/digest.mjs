@@ -3,7 +3,8 @@
  * emits a compact markdown summary — tier moves (consensus, our 12.1 projection,
  * and each tier-list source), creator-video activity (distilled / skipped /
  * queued, from the pending-transcripts queue diff), new creator takes/meta
- * notes, official-note revisions, new PTR builds, writeup-verdict changes, and the run's health line
+ * notes, official-note revisions, new patch-feed entries (each labelled live or PTR by its
+ * realm), writeup-verdict changes, and the run's health line
  * from the manifest.
  *
  * The publish job posts this as a comment on the pinned "Nightly digest" issue;
@@ -15,7 +16,7 @@
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildPayload } from "./render.mjs";
+import { buildPayload, feedEntryLabel } from "./render.mjs";
 import { OFFICIAL_NOTE_SOURCES, noteUrl } from "./official-notes.mjs";
 
 const keyOf = s => `${s.class}|${s.spec}`;
@@ -84,7 +85,7 @@ export function officialNoteChanges(oldLedger, newLedger) {
           if (!texts.length) continue;
           // Sorting a copy avoids treating a reordered receipt as a changed summary.
           texts.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
-          rows.set(`${config.id}|${section.id}`, { patch: source.patch, era: source.era,
+          rows.set(`${config.id}|${section.id}`, { patch: source.patch, era: source.era, mode: config.mode,
             date: section.date, class: section.class, specKeys: [...(section.specKeys ?? [])].sort(),
             category: section.category, sha256: section.sha256, texts,
             url: source.topicId === config.topicId ? noteUrl(config, post.postNumber)
@@ -172,8 +173,10 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
     lines.push(...cap(moves, 14, m => `- **${m.spec}** — ${m.parts.join(" · ")}`), "");
   }
   if (builds.length) {
-    lines.push(`**New PTR build${builds.length === 1 ? "" : "s"}:**`);
-    lines.push(...builds.map(b => `- ${b.date} — ${md(b.label)}${b.forumUrl ? ` ([notes](${b.forumUrl}))` : ""}`), "");
+    // Each entry names its own realm and kind (feedEntryLabel): between cycles nearly every
+    // entry is a LIVE hotfix round or tuning pass, which this heading announced as a PTR build.
+    lines.push(`**New patch-feed ${builds.length === 1 ? "entry" : "entries"}:**`);
+    lines.push(...builds.map(b => `- ${b.date} — ${feedEntryLabel(b)} — ${md(b.label)}${b.forumUrl ? ` ([notes](${b.forumUrl}))` : ""}`), "");
   }
   if (officialChanges.length) {
     lines.push(`**Official-note changes (${officialChanges.length}):**`);
@@ -186,7 +189,11 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
           ? `${summaries(change)} (official section revised; tracked summary unchanged)`
           : `Previously: ${summaries(change.before)} → Now: ${summaries(change)}`
         : `${change.kind === "removed" ? "Previous tracked summary: " : ""}${summaries(change)}`;
-      return `- ${label} — **${md(change.class)}** (${md(change.patch)} ${change.era === "ptr" ? "PTR preview" : "live"}, ${md(change.date)}, ${md(change.category)}) — ${text} — [Blizzard notes](${change.url})`;
+      // A compilation-mode source is the expansion-wide live hotfix thread; its `patch` is an
+      // identity field, not a label, and would misname every later patch's hotfixes.
+      const where = change.mode === "compilation" ? "Midnight live hotfixes"
+        : `${md(change.patch)} ${change.era === "ptr" ? "PTR preview" : "live"}`;
+      return `- ${label} — **${md(change.class)}** (${where}, ${md(change.date)}, ${md(change.category)}) — ${text} — [Blizzard notes](${change.url})`;
     }), "");
   }
   if (verdicts.length) lines.push(`**Writeup verdicts:**`, ...verdicts.map(v => `- ${v}`), "");

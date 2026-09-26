@@ -1056,3 +1056,73 @@ test("partition guard: leaderboard provenance comes from the reviewed recipe, an
   } finally { raid.size = saved; }
   assert.deepEqual(provenance(validateData(structuredClone(data))), []);
 });
+
+test("ptr-builds: realm is required from the cutoff and must be live or ptr", async () => {
+  const data = await loadData(ROOT);
+  // Kind cannot say where an entry happened: the live "Class Tuning Incoming" posts are
+  // kind "build" and the 07-16/07-31 PTR hotfix rounds are kind "hotfix", so the kind
+  // default misfiled six entries (2026-09-26). New entries must record realm.
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const hotfix = {
+    date: "2026-09-26", kind: "hotfix", label: "x",
+    wowheadUrl: "https://www.wowhead.com/news=1",
+    specsAffected: ["Shaman (class-wide)"],
+    highlights: ["Shaman (class-wide) something happened."]
+  };
+  const realmErr = e => e.includes("must record realm");
+  // missing on or after the cutoff: fails, and names why the kind cannot stand in
+  const missing = errs(hotfix);
+  assert.ok(missing.some(realmErr), "a hotfix dated at the cutoff without realm must fail");
+  assert.ok(missing.some(e => realmErr(e) && e.includes("kind cannot say")));
+  // recorded: passes, for either realm
+  assert.deepEqual(errs({ ...hotfix, realm: "live" }), []);
+  assert.deepEqual(errs({ ...hotfix, realm: "ptr" }), []);
+  // an unknown value fails rather than defaulting
+  assert.ok(errs({ ...hotfix, realm: "beta" }).some(e => e.includes('unknown realm "beta"')));
+  assert.ok(errs({ ...hotfix, date: "2026-07-31", realm: "Live" }).some(e => e.includes('unknown realm "Live"')));
+  // before the cutoff the kind default still stands, so history is not rewritten
+  assert.ok(!errs({ ...hotfix, date: "2026-09-25" }).some(realmErr));
+  // the real feed carries realm on every entry that needs one
+  assert.ok(!validateData(data).some(realmErr));
+});
+
+test("ptr-builds: patch-notes must record a patch no newer than the displayed live patch", async () => {
+  const data = await loadData(ROOT);
+  const errs = entry => {
+    const c = structuredClone(data); c.ptrBuilds.builds.unshift(entry);
+    return validateData(c, { fullRoster: true });
+  };
+  const notes = {
+    date: "2026-08-06", kind: "patch-notes", label: "x",
+    forumUrl: "https://us.forums.blizzard.com/en/wow/t/x/1",
+    specsAffected: ["Shaman (class-wide)"],
+    highlights: ["Shaman (class-wide) something happened."]
+  };
+  const live = PHASES.livePatch?.label ?? PHASES.liveLabel;
+  // each patch's notes render as their own "Shipped in {patch}" block, so patch is required
+  assert.ok(errs(notes).some(e => e.includes("must record patch")));
+  assert.deepEqual(errs({ ...notes, patch: live }), []);
+  // not a dotted version: fails on any entry kind
+  assert.ok(errs({ ...notes, patch: "Patch 12.1" }).some(e => e.includes("must be a dotted version")));
+  assert.ok(errs({ ...notes, patch: 12.1 }).some(e => e.includes("must be a dotted version")));
+  // newer than the displayed live patch: consolidated notes posted before launch belong in
+  // the run report, not the feed
+  const newer = `${live}.9`;
+  const early = errs({ ...notes, patch: newer });
+  assert.ok(early.some(e => e.includes(`"${newer}" is newer than the displayed live patch "${live}"`)), early.join("\n"));
+  assert.ok(early.some(e => e.includes("run report")));
+  // a later livePatch display label moves the ceiling; read defensively, absent on this branch
+  const had = Object.prototype.hasOwnProperty.call(PHASES, "livePatch"), before = PHASES.livePatch;
+  PHASES.livePatch = { label: newer };
+  try {
+    assert.deepEqual(errs({ ...notes, patch: newer }), []);
+    assert.ok(errs({ ...notes, patch: `${newer}.1` }).some(e => e.includes("is newer than the displayed live patch")));
+  } finally {
+    if (had) PHASES.livePatch = before; else delete PHASES.livePatch;
+  }
+  // the real feed's launch notes carry their patch
+  assert.ok(data.ptrBuilds.builds.filter(b => b.kind === "patch-notes").every(b => typeof b.patch === "string"));
+});

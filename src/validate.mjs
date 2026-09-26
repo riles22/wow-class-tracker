@@ -5,7 +5,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
-import { specBuildChanges } from "./render.mjs";
+import { specBuildChanges, BUILD_REALMS, PATCH_VERSION, comparePatchVersions } from "./render.mjs";
 import { validateOfficialNotes } from "./official-notes.mjs";
 import { validateWclCoverage } from "./wcl-coverage.mjs";
 import { LIVE_LEADERBOARDS } from "./wcl-live.mjs";
@@ -39,6 +39,17 @@ const KINDS = new Set(["tier-list", "metrics", "notes-feed", "reference", "commu
    a legitimate shape for some future source; admitting one is then a one-line reviewed edit
    here rather than a silent exemption. */
 const SIM_TIER_REQUIRED = new Set(["bloodmallet"]);
+/* Build-feed entries dated on or after this must RECORD their realm ("live" | "ptr") —
+   see buildRealmOf in render.mjs (2026-09-26). The same shape as SIM_TIER_REQUIRED: the
+   field existed in spirit long before anything required it, and until it is required a
+   new entry can simply omit it and fall back to the kind-based guess that misfiled six
+   entries. Keyed on the entry's date so the rule binds every new entry without rewriting
+   history: older entries keep the kind default, which is correct for all of them now that
+   the six misfiled ones carry an explicit realm. An explicit field, not a date rule, is the
+   fix on purpose — a liveSince rule would misfile the 08-15 live tuning post (dated three
+   days before liveSince), and a rule keyed on the patch-notes date breaks at the next PTR
+   cycle, when PTR builds and live tuning arrive in the same weeks. */
+const BUILD_REALM_REQUIRED_FROM = "2026-09-26";
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 // Creator-take URLs come from an autonomous nightly pipeline over untrusted transcripts —
 // beyond https-only they must point at a host the pipeline actually cites.
@@ -757,6 +768,42 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
     if (kind === "build" && !build.forumUrl) errors.push(`ptr-builds.json: build ${build.date} missing forumUrl`);
     if (kind === "patch-notes" && !build.forumUrl && !build.wowheadUrl) {
       errors.push(`ptr-builds.json: patch-notes ${build.date} needs a forumUrl or wowheadUrl — the notes are a published post and must be citable`);
+    }
+    /* Realm and patch attribution (2026-09-26). `realm` decides the drawer lane and the NEW
+       badge's wording; see BUILD_REALM_REQUIRED_FROM above and buildRealmOf in render.mjs. */
+    if (build.realm != null) {
+      if (!BUILD_REALMS.includes(build.realm)) {
+        errors.push(`ptr-builds.json: entry ${build.date} has unknown realm "${build.realm}" (expected ${BUILD_REALMS.map(r => `"${r}"`).join(" or ")})`);
+      }
+    } else if (typeof build.date === "string" && build.date >= BUILD_REALM_REQUIRED_FROM) {
+      errors.push(
+        `ptr-builds.json: ${kind} ${build.date} must record realm ("live" or "ptr") — required on ` +
+        `entries dated on or after ${BUILD_REALM_REQUIRED_FROM}. The kind cannot say where an entry ` +
+        `happened: a live class-tuning post is kind "build", and a PTR hotfix is kind "hotfix".`
+      );
+    }
+    /* `patch` names the patch an entry belongs to; each patch-notes entry renders as its own
+       "Shipped in {patch}" block, so it is required there. The ceiling is the DISPLAYED live
+       patch — livePatch when that display-only field exists and is set, else liveLabel — so a
+       patch's consolidated notes cannot validate before that patch is live on the site. */
+    if (build.patch != null && (typeof build.patch !== "string" || !PATCH_VERSION.test(build.patch))) {
+      errors.push(`ptr-builds.json: entry ${build.date} patch must be a dotted version such as "12.1", got ${JSON.stringify(build.patch)}`);
+    }
+    if (kind === "patch-notes") {
+      const livePatch = PHASES.livePatch?.label ?? PHASES.liveLabel;
+      if (build.patch == null) {
+        errors.push(`ptr-builds.json: patch-notes ${build.date} must record patch (e.g. "${livePatch}") — each patch's notes render as their own "Shipped in {patch}" block`);
+      } else if (typeof build.patch === "string" && PATCH_VERSION.test(build.patch)) {
+        if (!PATCH_VERSION.test(String(livePatch))) {
+          errors.push(`ptr-builds.json: patch-notes ${build.date} cannot be checked — the displayed live patch "${livePatch}" is not a dotted version`);
+        } else if (comparePatchVersions(build.patch, livePatch) > 0) {
+          errors.push(
+            `ptr-builds.json: patch-notes ${build.date} patch "${build.patch}" is newer than the displayed ` +
+            `live patch "${livePatch}" — notes for a patch that is not live yet are recorded in the run ` +
+            `report, never logged to the feed`
+          );
+        }
+      }
     }
     if (kind === "hotfix") {
       if (!build.wowheadUrl) errors.push(`ptr-builds.json: hotfix ${build.date} missing wowheadUrl — a hotfix has no forum post, so the Wowhead round-up is its citation`);

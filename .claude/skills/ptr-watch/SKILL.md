@@ -88,9 +88,22 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
   announcement — plus step 3's feed logging and step 4's writeup flagging. The official
   revision-ledger step above also runs every time. Live tuning
   logs as `kind: "hotfix"` (Wowhead round-up = citation, NO forumUrl/forumPostNumber)
-  or `kind: "build"` when a scheduled pass has a citable forum post. The `specsAffected`
-  ↔ `highlights` coverage gate and the tierSet upkeep gate apply to these exactly as
-  they did to PTR builds.
+  or `kind: "build"` when a scheduled pass has a citable forum post — and **either way
+  with `realm: "live"`**. Kind names the citation, not the realm; `realm` is what places
+  the entry in the drawer's live lane (2026-09-26 — six entries were misfiled by kind
+  before it existed). The `specsAffected` ↔ `highlights` coverage gate and the tierSet
+  upkeep gate apply to these exactly as they did to PTR builds.
+- **Every new feed entry records `realm`** (`"live"` | `"ptr"`): validate.mjs fails any
+  entry dated on or after 2026-09-26 without one. Read it off the source, never off the
+  kind — a hotfix round pushed to the PTR is `kind: "hotfix", realm: "ptr"`, and a live
+  "Class Tuning Incoming" post is `kind: "build", realm: "live"`.
+- **Consolidated 12.1.5 patch notes posted before 12.1.5 is live go in the RUN REPORT,
+  never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`,
+  and validation refuses a `patch` newer than the displayed live patch
+  (`PHASES.livePatch?.label ?? liveLabel`) — so logging them early is not a judgement
+  call, it reds the run. Record the post (URL, date, what it covers) in the run report
+  and this skill's `log.md`; their per-spec content reaches the site only through the
+  notes-only preview lane above. Moving the displayed live patch is not an agent action.
 - **Dormant lanes (skip; do NOT mark them unreachable in the manifest — their contract
   rows were removed at the flip):** steps 5–7b, the four WCL PTR zone sweeps. Their
   recipes below are kept verbatim for the 12.2 cycle — transport lessons cost weeks to
@@ -132,8 +145,12 @@ posture above.
    (thread URL in `data/ptr-builds.json` + `.json`) and read `post_stream.posts` for
    new Linxy posts.
 3. **For each new build**: add an entry to `data/ptr-builds.json` (newest first):
-   `{date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl, specsAffected[],
-   highlights[]}` — highlights are verbatim tuning lines naming the spec, in practice
+   `{date, kind, realm, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl,
+   specsAffected[], highlights[]}` — `kind` is `build` | `hotfix` | `patch-notes` (the
+   citation it has), `realm` is `live` | `ptr` (where it happened; required on every
+   entry dated on or after 2026-09-26), and a `patch-notes` entry also carries `patch`
+   (a dotted version no newer than the displayed live patch — see the posture block
+   above). Highlights are verbatim tuning lines naming the spec, in practice
    as a "Spec Class — …" prefix (the older "(Class — Spec)" suffix is also accepted;
    the tier-set gate below matches either form).
    **Tier-set changes are NEVER optional highlights** (2026-07-21 audit: three builds of
@@ -387,6 +404,10 @@ posture above.
 - Separate **live hotfix** notes from **PTR build** notes — only PTR builds go in the
   feed. PTR testing windows are scheduled by Blizzard; zone 54 having zero new parses
   for weeks is expected, not an error.
+  *(Corrected 2026-09-26: the "only PTR builds" half is superseded — since the 12.1
+  launch the feed also carries live hotfix rounds and live tuning passes, and the
+  separation now lives in each entry's `realm` field rather than in what is left out.
+  See the between-cycles posture block. The zone-54 half is unchanged.)*
 - Do not rewrite existing spec `ptr` writeups wholesale on tuning-only changes — append
   to `changes[]` / adjust `watch`, and only flip `verdict` when the picture genuinely
   changed (state why in the diff).

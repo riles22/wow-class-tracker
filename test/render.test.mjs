@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { expertRead, EXPERT_MIN, dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, ptrTierRead, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
+import { BUILD_REALMS, buildRealmOf, feedEntryLabel, comparePatchVersions, PATCH_VERSION } from "../src/render.mjs";
 import { PHASES } from "../src/normalize.mjs";
 
 /* The specialist-take lane is keyed on the CURRENT cycle's marker (PHASES.ptr) and is
@@ -1923,4 +1924,68 @@ test("the outlook tally excludes kind:\"patch-notes\" — the launch notes must 
   const notesOnly = outlookFor(spec, { builds: [notes] });
   assert.notEqual(notesOnly?.direction, "up",
     "patch notes alone must not produce a tuning direction");
+});
+
+test("buildRealmOf: an explicit realm wins; otherwise build → ptr and anything else → live", () => {
+  assert.deepEqual([...BUILD_REALMS], ["live", "ptr"]);
+  assert.equal(buildRealmOf({}), "ptr");
+  assert.equal(buildRealmOf({ kind: "build" }), "ptr");
+  assert.equal(buildRealmOf({ kind: "hotfix" }), "live");
+  assert.equal(buildRealmOf({ kind: "patch-notes" }), "live");
+  // the two misfiling shapes the explicit field exists for
+  assert.equal(buildRealmOf({ kind: "build", realm: "live" }), "live");
+  assert.equal(buildRealmOf({ kind: "hotfix", realm: "ptr" }), "ptr");
+});
+
+test("feedEntryLabel names an entry by kind AND realm", () => {
+  assert.equal(feedEntryLabel({ kind: "build" }), "PTR development notes");
+  assert.equal(feedEntryLabel({ kind: "build", realm: "live" }), "live class tuning");
+  assert.equal(feedEntryLabel({ kind: "hotfix" }), "live hotfix");
+  assert.equal(feedEntryLabel({ kind: "hotfix", realm: "ptr" }), "PTR hotfix");
+  assert.equal(feedEntryLabel({ kind: "patch-notes", patch: "12.1" }), "official 12.1 patch notes");
+  assert.equal(feedEntryLabel({ kind: "patch-notes" }), "official patch notes");
+});
+
+test("comparePatchVersions orders dotted versions numerically, not as strings", () => {
+  assert.equal(comparePatchVersions("12.1", "12.1"), 0);
+  assert.equal(comparePatchVersions("12.1", "12.1.0"), 0);
+  assert.equal(comparePatchVersions("12.1", "12.1.5"), -1);
+  assert.equal(comparePatchVersions("12.1.5", "12.1"), 1);
+  assert.equal(comparePatchVersions("12.10", "12.9"), 1, "a string compare gets this one wrong");
+  assert.equal(comparePatchVersions("12.1.5", "12.2"), -1);
+  assert.ok(PATCH_VERSION.test("12.1") && PATCH_VERSION.test("12.1.5"));
+  assert.ok(!PATCH_VERSION.test("12") && !PATCH_VERSION.test("Patch 12.1") && !PATCH_VERSION.test("12.1a"));
+});
+
+test("specBuildChanges carries realm (explicit or kind default) and patch through to the drawer", () => {
+  const spec = { class: "Shaman", spec: "Elemental" };
+  const line = "Elemental Shaman Lava Burst damage increased by 5%.";
+  const feed = { builds: [
+    { date: "2026-09-18", kind: "build", realm: "live", forumUrl: "https://example.com/t/2/1", specsAffected: ["Elemental Shaman"], highlights: [line] },
+    { date: "2026-08-06", kind: "patch-notes", patch: "12.1", forumUrl: "https://example.com/t/3/1", specsAffected: ["Elemental Shaman"], highlights: [line] },
+    { date: "2026-07-31", kind: "hotfix", realm: "ptr", wowheadUrl: "https://www.wowhead.com/news=1", specsAffected: ["Elemental Shaman"], highlights: [line] },
+    { date: "2026-07-14", forumPostNumber: 14, forumUrl: "https://example.com/t/1/14", specsAffected: ["Elemental Shaman"], highlights: [line] },
+    { date: "2026-09-24", kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=2", specsAffected: ["Elemental Shaman"], highlights: [line] },
+  ] };
+  const out = specBuildChanges(spec, feed);
+  assert.deepEqual(out.map(b => [b.date, b.kind, b.realm, b.patch]), [
+    ["2026-09-18", "build", "live", undefined],
+    ["2026-08-06", "patch-notes", "live", "12.1"],
+    ["2026-07-31", "hotfix", "ptr", undefined],
+    ["2026-07-14", "build", "ptr", undefined],
+    ["2026-09-24", "hotfix", "live", undefined],
+  ]);
+  // patch is only present when the entry records one — no invented key
+  assert.ok(!("patch" in out[0]));
+});
+
+test("realm is presentation only: the outlook tally is unchanged by it", () => {
+  const spec = { class: "Priest", spec: "Holy", ptr: null };
+  const entries = [
+    { date: "2026-09-18", kind: "build", forumUrl: "https://example.com/t/2/1", specsAffected: ["Holy Priest"], highlights: ["Holy Priest Heal healing increased by 20%."] },
+    { date: "2026-07-16", kind: "hotfix", wowheadUrl: "https://www.wowhead.com/news=1", specsAffected: ["Holy Priest"], highlights: ["Holy Priest Renew healing increased by 10%."] },
+  ];
+  const before = outlookFor(spec, { builds: entries });
+  const after = outlookFor(spec, { builds: [{ ...entries[0], realm: "live" }, { ...entries[1], realm: "ptr" }] });
+  assert.deepEqual(after, before);
 });

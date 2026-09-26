@@ -713,9 +713,11 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   BOTH the consensus and projection views if either width changes again.
 - **Between-cycles copy residue** (same audit, stage 3). All keyed on `PHASE.ptr` so they
   self-heal when the next cycle opens, rather than on data that has to be remembered:
-  the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" when there
-  is no PTR (a live tuning post falls back to `kind: "build"`, so the kind alone could not
-  tell — this was the mislabel render.mjs's own residue note exists to catch); the footer
+  the masthead stamp says **"Latest class tuning"** rather than "Latest PTR build" for a live
+  tuning post (a live tuning post is `kind: "build"`, so the kind alone could not tell — this
+  was the mislabel render.mjs's own residue note exists to catch; since 2026-09-26 the newest
+  entry's recorded `realm` decides, via `META.latestBuildRealm`, and `PHASE.ptr` is only the
+  fallback for a payload without it); the footer
   heading is a **"patch feed"** between cycles, named for the season since 2026-09-25
   (**"Season 2 patch feed"**: it is the season's one list, and 12.1.5's entries join
   12.1's there after launch); the
@@ -957,9 +959,26 @@ Editing the bands means editing both — a visitor reading a stale threshold off
 is the same misattribution problem the column qualifiers exist to prevent. Adding a
 *source* still needs no code change; only moving the BANDS does.
 
-### `data/ptr-builds.json` — 12.1 PTR build feed (newest first)
-Per build: `{ date, label, forumPostNumber, forumUrl, wowheadUrl, icyveinsUrl,
-specsAffected[], highlights[] }`. Canonical source: the official forum thread
+### `data/ptr-builds.json` — the patch feed: PTR builds, live tuning, hotfixes, patch notes (newest first)
+Per entry: `{ date, kind, realm, patch?, label, forumPostNumber, forumUrl, wowheadUrl,
+icyveinsUrl, specsAffected[], highlights[] }`.
+**`realm` (`"live"` | `"ptr"`) records WHERE an entry happened, and it — not `kind` —
+places the entry in the drawer** (2026-09-26, 12.1.5 prep). Kind describes the citation:
+a live "Class Tuning Incoming" post is `kind: "build"` because it has a forum post, and a
+PTR hotfix round is `kind: "hotfix"` because it has only a Wowhead round-up. Placing by kind
+misfiled six entries, verified against the live pages: the 07-16 and 07-31 PTR hotfixes sat
+under the live heading, and the live 08-15, 08-22, 08-28 and 09-18 tuning posts under "PTR
+development notes". Those six carry an explicit realm now; every other entry keeps the kind
+default (`build` → ptr, anything else → live — `buildRealmOf` in render.mjs), which is
+correct for each of them. **validate.mjs requires `realm` on every entry dated on or after
+2026-09-26** (`BUILD_REALM_REQUIRED_FROM`, the `SIM_TIER_REQUIRED` pattern) — an explicit
+field rather than a date rule, because a liveSince rule misfiles the 08-15 post and a rule
+keyed on the patch-notes date breaks at the next PTR cycle. Realm is presentation only: the
+outlook tally, projection and consensus are unchanged by it (deep-compared on landing).
+**`patch`** is a dotted version (`"12.1"`), required on `kind: "patch-notes"` and never
+newer than the displayed live patch (`PHASES.livePatch?.label ?? liveLabel`) — so a patch's
+consolidated notes cannot enter the feed before that patch is live; posted early, they go
+in the run report instead (ptr-watch skill). Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse
 `.json`. **A new patch cycle means a NEW thread** — re-discover via Wowhead news RSS.
 **`specsAffected` and `highlights` must agree** — a coverage gate in validate.mjs fails
@@ -976,10 +995,15 @@ Dense builds use ONE consolidated line per spec (see #16) — which is why
 **`kind: "patch-notes"` is the consolidated LAUNCH notes and is a different animal**
 (2026-08-07). Kinds are `build` (default) | `hotfix` | `patch-notes`. The patch notes are
 the **authority on what actually ships** — where they differ from a PTR build, they win,
-and the drawer says so: they render in their own gold "Shipping in 12.1" block above a
+and the drawer says so: they render in their own gold "Shipped in {patch}" block above a
 "How it got here — PTR development notes" list, because stacking them as one undated pile
 read as redundant AND implied the superseded incremental figures were still live (Holy
-Priest's +10% then +5% are superseded by the notes' +16%).
+Priest's +10% then +5% are superseded by the notes' +16%). The drawer's three lanes, as of
+2026-09-26: **"Live Season N tuning"** (every live-realm entry, named for the season since
+it spans that season's patches), then **one "Shipped in {patch}" block per patch, newest
+patch first** — every block but the newest adds that the newer patch notes supersede it
+where they touch the same values — then the PTR history. (Until 2026-09-26 this was a
+single "Shipping/Shipped in 12.1" block and a hotfix-only live lane keyed on kind.)
 **They are excluded from the outlook tally, and being authoritative is exactly why.**
 The tally counts LINES; the notes are one paragraph per spec restating the whole patch, so
 mechanically they are unreadable to it: 34 of 49 lines classify null (a paragraph holding
@@ -1167,8 +1191,10 @@ gotcha live in the refresh-metrics skill.
 ### Log a new PTR build
 1. Watch Wowhead news RSS (`/news/rss/all`) for "12.1 PTR" + Development Notes/Class
    Tuning/Datamined; fetch the forum thread `.json` for the new post.
-2. Add the build entry to `data/ptr-builds.json` (newest first), update affected specs'
-   `ptr` writeups if their pass landed, rebuild.
+2. Add the build entry to `data/ptr-builds.json` (newest first) with its `kind` and
+   `realm` (and `patch` on patch notes — see the feed section above), update affected
+   specs' `ptr` writeups if their pass landed, rebuild. The ptr-watch skill is the full
+   procedure, including where pre-launch consolidated notes go (the run report, not here).
 
 ### Creator transcript breadth — local vs nightly (2026-08-08, Riley)
 Title-filtering before a transcript fetch is **run-mode dependent**, because the two
