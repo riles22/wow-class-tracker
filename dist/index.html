@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-gss/Vmv+SAA9a8nHncoNx0S7LdiqgiGlM9Xk/tJvINk='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-c+V8f37JBMNCZOam6iPoPxidNxNSFwk4vFuWAUQhFu0='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -2147,9 +2147,12 @@ function buildChangesHTML(s){
   const ships = bc.filter(b=>b.kind==="patch-notes");
   const live = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)==="live");
   const history = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)!=="live");
-  const liveKinds = new Set(live.map(b=>b.kind==="hotfix"?"hotfixes":"class tuning"));
+  /* Joined with " and ", never " · ": foldDrawerColumn cuts every collapsed summary at the
+     first " ·"/" —"/" (", so a " · " join read "Live Season 2 tuning class tuning" and
+     dropped the hotfixes. Hotfixes first, so the summary never puts "tuning" twice in a row. */
+  const liveKinds = ["hotfixes","class tuning"].filter(k => live.some(b => (b.kind==="hotfix"?"hotfixes":"class tuning")===k));
   const liveBlock = live.length ? `<div class="d-sec shipsec">
-      <p class="d-h">Live ${esc(liveName)} tuning <span class="shipchip">${esc([...liveKinds].sort().join(" · "))}</span></p>
+      <p class="d-h">Live ${esc(liveName)} tuning <span class="shipchip">${esc(liveKinds.join(" and "))}</span></p>
       ${live.map(b=>buildEntryHTML(b,s)).join("")}
       <p class="mnote">Live-realm hotfix rounds and class-tuning passes, newest first — the newest word on current tuning.${ships.length?" Where one of these and a patch's notes below touch the same value, whichever took effect later is what is live.":""}</p>
     </div>` : "";

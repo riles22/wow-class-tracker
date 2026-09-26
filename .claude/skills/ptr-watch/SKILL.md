@@ -98,10 +98,13 @@ reopen those historical lanes. Until a new forecast cycle is explicitly configur
   kind — a hotfix round pushed to the PTR is `kind: "hotfix", realm: "ptr"`, and a live
   "Class Tuning Incoming" post is `kind: "build", realm: "live"`.
 - **Consolidated 12.1.5 patch notes posted before 12.1.5 is live go in the RUN REPORT,
-  never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`,
-  and validation refuses a `patch` newer than the displayed live patch
-  (`PHASES.livePatch?.label ?? liveLabel`) — so logging them early is not a judgement
-  call, it reds the run. Record the post (URL, date, what it covers) in the run report
+  never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`
+  and is always `realm: "live"`, and validation refuses a `patch` newer than the
+  displayed live patch (`PHASES.livePatch?.label ?? liveLabel`) on EVERY kind; a
+  `realm: "ptr"` entry may name the upcoming patch only while a PTR cycle is open
+  (`PHASES.ptr` set), and 12.1.5 is a notes-only preview, not a cycle — so logging
+  them early, as patch notes or as a PTR build, is not a judgement call, it reds the
+  run. Record the post (URL, date, what it covers) in the run report
   and this skill's `log.md`; their per-spec content reaches the site only through the
   notes-only preview lane above. Moving the displayed live patch is not an agent action.
 - **Dormant lanes (skip; do NOT mark them unreachable in the manifest — their contract
@@ -149,8 +152,8 @@ posture above.
    specsAffected[], highlights[]}` — `kind` is `build` | `hotfix` | `patch-notes` (the
    citation it has), `realm` is `live` | `ptr` (where it happened; required on every
    entry dated on or after 2026-09-26), and a `patch-notes` entry also carries `patch`
-   (a dotted version no newer than the displayed live patch — see the posture block
-   above). Highlights are verbatim tuning lines naming the spec, in practice
+   (a dotted version in one spelling — `"12.1"`, never `"12.1.0"` — no newer than the
+   displayed live patch; see the posture block above). Highlights are verbatim tuning lines naming the spec, in practice
    as a "Spec Class — …" prefix (the older "(Class — Spec)" suffix is also accepted;
    the tier-set gate below matches either form).
    **Tier-set changes are NEVER optional highlights** (2026-07-21 audit: three builds of
@@ -182,7 +185,9 @@ posture above.
    (confirmed case: Ride the Lightning +59%, Wowhead news=382321, 2026-07-31). Before
    logging one, check whether it sits under a bare CLASS heading with no spec qualifier —
    that one does, so attributing it to Elemental is inference. It belongs as a
-   `Class (class-wide)` line or not at all.
+   `Class (class-wide)` line or not at all. Log a PTR hotfix round as
+   `kind: "hotfix", realm: "ptr"` — without the realm the kind default files it in the
+   drawer's LIVE lane (the 07-31 round sat there until 2026-09-26).
 
 3b. **The development-notes thread is not the only Blizzard channel** (2026-08-02).
    Blizzard also posts class tuning as **standalone blue posts** in other forum topics —
@@ -195,10 +200,13 @@ posture above.
      this one reads "(Patch 12.0.7)" while the body says "hotfixes to the PTR … in Curse
      of Ula'tek". **Trust the body, not the tag.** Getting this backwards either drops
      real 12.1 data or files live-realm tuning as PTR.
-   - Log it `kind: "hotfix"`. It has a forum origin but no post number in the tracked
-     thread, and `forumUrl` is validated as the dev-notes-thread citation — cite the
-     blue-tracker mirror via `wowheadUrl` and say in the `label` that it was a
-     standalone blue post.
+   - Log it `kind: "hotfix"` with the realm the BODY names — `realm: "ptr"` for
+     "hotfixes to the PTR" (this one), `realm: "live"` for live-realm tuning. The kind
+     default reads every hotfix as live, which is how this very post sat in the live lane
+     until 2026-09-26, and entries dated from then on fail validation without a realm. It
+     has a forum origin but no post number in the tracked thread, and `forumUrl` is
+     validated as the dev-notes-thread citation — cite the blue-tracker mirror via
+     `wowheadUrl` and say in the `label` that it was a standalone blue post.
 
 3c. **PvP-only changes are OUT OF SCOPE** — this tracker rates PvE. A change that only
    alters PvP combat must never be written as a `Spec Class ...` highlight: it would let a

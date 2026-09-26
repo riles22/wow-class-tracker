@@ -95,8 +95,10 @@ presentation-only `src/template.html` into a single `dist/index.html`.
 - `data/scales.json` — each source's tier scale mapped onto the shared 0–100 axis that
   produces the consensus
 - `data/ptr-builds.json` — the dated patch feed: 12.1 PTR builds from Blizzard's official
-  dev-notes thread, live tuning passes and hotfix rounds (each entry records its realm),
-  and the consolidated patch notes (each recording its patch)
+  dev-notes thread, live tuning passes and hotfix rounds, and the consolidated patch notes
+  (each recording its patch). Entries from 2026-09-26 on record their realm (live or PTR);
+  older ones follow the kind default (a build post is PTR, anything else live), apart
+  from six corrected entries that record it explicitly
 - `data/creator-takes.json` — the cited creator-take layer
 - `data/encounter-tiers.json` — Archon's per-boss (throughput) and per-dungeon (score)
   tiers, behind the Fight selector

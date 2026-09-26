@@ -5,7 +5,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { aheadSeasonFor, isLiveEra, PHASES, scoreFor } from "./normalize.mjs";
-import { specBuildChanges, BUILD_REALMS, PATCH_VERSION, comparePatchVersions } from "./render.mjs";
+import { specBuildChanges, BUILD_REALMS, buildRealmOf, PATCH_VERSION, comparePatchVersions } from "./render.mjs";
 import { validateOfficialNotes } from "./official-notes.mjs";
 import { validateWclCoverage } from "./wcl-coverage.mjs";
 import { LIVE_LEADERBOARDS } from "./wcl-live.mjs";
@@ -782,28 +782,57 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
         `happened: a live class-tuning post is kind "build", and a PTR hotfix is kind "hotfix".`
       );
     }
+    /* Patch notes are the SHIPPED launch notes, so they are live by definition. The drawer
+       keys its "Shipped in {patch}" blocks on kind, so a patch-notes entry marked ptr would
+       render as shipped while claiming it is not. */
+    if (kind === "patch-notes" && build.realm === "ptr") {
+      errors.push(`ptr-builds.json: patch-notes ${build.date} carries realm "ptr" — patch notes are the shipped launch notes, so their realm is "live" (or omitted); PTR notes are kind "build"`);
+    }
     /* `patch` names the patch an entry belongs to; each patch-notes entry renders as its own
-       "Shipped in {patch}" block, so it is required there. The ceiling is the DISPLAYED live
-       patch — livePatch when that display-only field exists and is set, else liveLabel — so a
-       patch's consolidated notes cannot validate before that patch is live on the site. */
+       "Shipped in {patch}" block, so it is required there.
+       ONE spelling per patch: the drawer groups Shipped blocks by the string, so "12.1" and
+       "12.1.0" (equal to comparePatchVersions) would render as two blocks for one patch, and
+       only one of them would carry the supersession note. A trailing ".0" past the minor
+       version and leading zeros are refused; "12.0" stays valid, it IS the minor version.
+       The ceiling applies to EVERY kind, not only patch-notes: the DISPLAYED live patch —
+       livePatch when that display-only field exists and is set, else liveLabel — bounds any
+       live-realm entry, so neither a patch's consolidated notes nor a live entry can name a
+       patch before it is live on the site. A ptr-realm entry may name the upcoming patch only
+       while a PTR cycle is open (PHASES.ptr set, its dotted `label` the ceiling); between
+       cycles — 12.1.5 has a notes-only preview, not a cycle — nothing may. */
     if (build.patch != null && (typeof build.patch !== "string" || !PATCH_VERSION.test(build.patch))) {
       errors.push(`ptr-builds.json: entry ${build.date} patch must be a dotted version such as "12.1", got ${JSON.stringify(build.patch)}`);
     }
-    if (kind === "patch-notes") {
-      const livePatch = PHASES.livePatch?.label ?? PHASES.liveLabel;
-      if (build.patch == null) {
-        errors.push(`ptr-builds.json: patch-notes ${build.date} must record patch (e.g. "${livePatch}") — each patch's notes render as their own "Shipped in {patch}" block`);
-      } else if (typeof build.patch === "string" && PATCH_VERSION.test(build.patch)) {
-        if (!PATCH_VERSION.test(String(livePatch))) {
-          errors.push(`ptr-builds.json: patch-notes ${build.date} cannot be checked — the displayed live patch "${livePatch}" is not a dotted version`);
-        } else if (comparePatchVersions(build.patch, livePatch) > 0) {
-          errors.push(
-            `ptr-builds.json: patch-notes ${build.date} patch "${build.patch}" is newer than the displayed ` +
+    const patchOk = typeof build.patch === "string" && PATCH_VERSION.test(build.patch);
+    const livePatch = PHASES.livePatch?.label ?? PHASES.liveLabel;
+    if (patchOk) {
+      const segs = build.patch.split(".");
+      if (segs.some(s => s.length > 1 && s.startsWith("0")) || (segs.length > 2 && segs.at(-1) === "0")) {
+        const nums = segs.map(Number);
+        while (nums.length > 2 && nums.at(-1) === 0) nums.pop();
+        errors.push(`ptr-builds.json: entry ${build.date} patch "${build.patch}" must be written "${nums.join(".")}" — one spelling per patch, or its notes render as two "Shipped in" blocks`);
+      }
+      const ptrCycle = PHASES.ptr && PATCH_VERSION.test(String(PHASES.ptr.label ?? "")) ? String(PHASES.ptr.label) : null;
+      const ceiling = buildRealmOf(build) === "ptr" && kind !== "patch-notes" && ptrCycle ? ptrCycle : livePatch;
+      if (!PATCH_VERSION.test(String(ceiling))) {
+        errors.push(`ptr-builds.json: ${kind} ${build.date} patch cannot be checked — the displayed live patch "${ceiling}" is not a dotted version`);
+      } else if (comparePatchVersions(build.patch, ceiling) > 0) {
+        errors.push(kind === "patch-notes"
+          ? `ptr-builds.json: patch-notes ${build.date} patch "${build.patch}" is newer than the displayed ` +
             `live patch "${livePatch}" — notes for a patch that is not live yet are recorded in the run ` +
             `report, never logged to the feed`
-          );
-        }
+          : ceiling === livePatch
+            ? `ptr-builds.json: ${kind} ${build.date} patch "${build.patch}" is newer than the displayed live ` +
+              `patch "${livePatch}" — a live entry cannot belong to a patch that is not live yet, and a PTR ` +
+              `entry may name the upcoming patch only while a PTR cycle is open (PHASES.ptr); material for ` +
+              `a patch that is not live yet is recorded in the run report, never logged to the feed`
+            : `ptr-builds.json: ${kind} ${build.date} patch "${build.patch}" is newer than the open PTR cycle's ` +
+              `patch "${ceiling}"`
+        );
       }
+    }
+    if (kind === "patch-notes" && build.patch == null) {
+      errors.push(`ptr-builds.json: patch-notes ${build.date} must record patch (e.g. "${livePatch}") — each patch's notes render as their own "Shipped in {patch}" block`);
     }
     if (kind === "hotfix") {
       if (!build.wowheadUrl) errors.push(`ptr-builds.json: hotfix ${build.date} missing wowheadUrl — a hotfix has no forum post, so the Wowhead round-up is its citation`);

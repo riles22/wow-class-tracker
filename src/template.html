@@ -2146,9 +2146,12 @@ function buildChangesHTML(s){
   const ships = bc.filter(b=>b.kind==="patch-notes");
   const live = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)==="live");
   const history = bc.filter(b=>b.kind!=="patch-notes" && realmOf(b)!=="live");
-  const liveKinds = new Set(live.map(b=>b.kind==="hotfix"?"hotfixes":"class tuning"));
+  /* Joined with " and ", never " · ": foldDrawerColumn cuts every collapsed summary at the
+     first " ·"/" —"/" (", so a " · " join read "Live Season 2 tuning class tuning" and
+     dropped the hotfixes. Hotfixes first, so the summary never puts "tuning" twice in a row. */
+  const liveKinds = ["hotfixes","class tuning"].filter(k => live.some(b => (b.kind==="hotfix"?"hotfixes":"class tuning")===k));
   const liveBlock = live.length ? `<div class="d-sec shipsec">
-      <p class="d-h">Live ${esc(liveName)} tuning <span class="shipchip">${esc([...liveKinds].sort().join(" · "))}</span></p>
+      <p class="d-h">Live ${esc(liveName)} tuning <span class="shipchip">${esc(liveKinds.join(" and "))}</span></p>
       ${live.map(b=>buildEntryHTML(b,s)).join("")}
       <p class="mnote">Live-realm hotfix rounds and class-tuning passes, newest first — the newest word on current tuning.${ships.length?" Where one of these and a patch's notes below touch the same value, whichever took effect later is what is live.":""}</p>
     </div>` : "";

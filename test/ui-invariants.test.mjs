@@ -2180,16 +2180,21 @@ ui("build-feed lanes: the 07-16 PTR hotfix sits in the PTR lane and the 08-15 li
   assert.equal(target.buildChanges[ptrIdx].realm, "ptr", "the payload resolves the 07-16 hotfix to the PTR realm");
   assert.equal(target.buildChanges[liveIdx].realm, "live", "the payload resolves the 08-15 post to the live realm");
 
-  const row = page.locator(`.row[data-idx="${index}"]`);
-  await row.locator(".spec-txt").scrollIntoViewIfNeeded();
-  await row.locator(".spec-txt").click();
+  // A DOM click, not a pointer click: at desktop width rows are content-visibility:auto, and
+  // in WebKit the layout shifts after scrollIntoViewIfNeeded so a pointer click landed on
+  // #matrix instead of the row (5 of 8 local WebKit runs timed out, 2026-09-26). This
+  // invariant is about lane placement, not about hit-testing; the neighbouring
+  // between-cycles invariant opens its drawer the same way.
+  await page.evaluate(index => document.querySelector(`.row[data-idx="${index}"] .spec-txt`).click(), index);
   await page.waitForFunction(index => document.querySelector(`.row[data-idx="${index}"]`)?.classList.contains("open"), index, { timeout: 5000 });
   const seen = await page.evaluate(([index, ptrIdx, liveIdx]) => {
     const s = SPECS[index];
     const laneOf = i => {
       const el = document.getElementById(freshTargetId(s, "tuning", i));
       const sec = el?.closest(".d-sec");
-      return sec ? { heading: sec.querySelector(".d-h")?.textContent.trim() ?? "", live: sec.classList.contains("shipsec") } : null;
+      return sec ? { heading: sec.querySelector(".d-h")?.textContent.trim() ?? "", live: sec.classList.contains("shipsec"),
+        // the COLLAPSED accordion line, which foldDrawerColumn cuts at the first " ·"/" —"/" ("
+        summary: sec.closest("details.dfold")?.querySelector(":scope > summary")?.textContent.trim() ?? "" } : null;
     };
     const drawer = document.querySelector(`.row[data-idx="${index}"] .drawer`);
     const metricHeads = [...(drawer?.querySelectorAll(".metrics > .d-h, .metrics .d-h") ?? [])]
@@ -2205,6 +2210,14 @@ ui("build-feed lanes: the 07-16 PTR hotfix sits in the PTR lane and the 08-15 li
   assert.match(seen.live.heading, /^Live .* tuning/, `08-15 live tuning post sits under "${seen.live.heading}"`);
   assert.ok(seen.live.heading.startsWith(`Live ${seasonName} tuning`), `the live lane names the season: "${seen.live.heading}"`);
   assert.ok(seen.live.heading.includes("class tuning"), "the live lane's chip says it holds class tuning, not only hotfixes");
+  // The collapsed summary must name every kind the lane holds. A draft of this lane joined
+  // its chip with " · ", the fold cut the summary there, and 37 of 40 drawers read "Live
+  // Season 2 tuning class tuning" with the hotfixes dropped (measured 2026-09-26).
+  const liveKinds = new Set(target.buildChanges.filter(b => b.kind !== "patch-notes" && b.realm === "live")
+    .map(b => b.kind === "hotfix" ? "hotfixes" : "class tuning"));
+  assert.ok(seen.live.summary.startsWith(`Live ${seasonName} tuning`), `live lane summary: "${seen.live.summary}"`);
+  for (const k of liveKinds) assert.ok(seen.live.summary.includes(k), `the collapsed live lane summary names "${k}": "${seen.live.summary}"`);
+  assert.doesNotMatch(seen.live.summary, /tuning class tuning/, `the summary must not stutter: "${seen.live.summary}"`);
   // Metric headings name the live SEASON, never the patch label.
   for (const h of seen.metricHeads) assert.match(h, new RegExp(`^Current numbers · (Raid|M\\+) \\(${seasonName}\\)$`), h);
   // Masthead stamp follows the newest entry's realm.

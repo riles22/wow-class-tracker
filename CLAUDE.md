@@ -975,10 +975,13 @@ correct for each of them. **validate.mjs requires `realm` on every entry dated o
 field rather than a date rule, because a liveSince rule misfiles the 08-15 post and a rule
 keyed on the patch-notes date breaks at the next PTR cycle. Realm is presentation only: the
 outlook tally, projection and consensus are unchanged by it (deep-compared on landing).
-**`patch`** is a dotted version (`"12.1"`), required on `kind: "patch-notes"` and never
-newer than the displayed live patch (`PHASES.livePatch?.label ?? liveLabel`) — so a patch's
-consolidated notes cannot enter the feed before that patch is live; posted early, they go
-in the run report instead (ptr-watch skill). Canonical source: the official forum thread
+**`patch`** is a dotted version with ONE spelling per patch (`"12.1"`, never `"12.1.0"` or
+`"12.01"` — the Shipped blocks group by the string), required on `kind: "patch-notes"`,
+whose realm is always live. On EVERY kind it is never newer than the displayed live patch
+(`PHASES.livePatch?.label ?? liveLabel`); the one exception is a `realm: "ptr"` entry while
+a PTR cycle is open, bounded by `PHASES.ptr.label` instead. So a patch's consolidated notes
+cannot enter the feed before that patch is live, whether logged as patch notes or as a PTR
+build; posted early, they go in the run report instead (ptr-watch skill). Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse
 `.json`. **A new patch cycle means a NEW thread** — re-discover via Wowhead news RSS.
 **`specsAffected` and `highlights` must agree** — a coverage gate in validate.mjs fails
