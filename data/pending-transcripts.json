@@ -2,25 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "CtKL4uOPUIk",
-      "creator": "Obli",
-      "title": "Breaking down Blightfall in M+ / Midnight 12.1 Unholy DK",
+      "id": "peDmFfrUZeg",
+      "creator": "izen (Izenhart)",
+      "title": "EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS",
       "published": "2026-09-25",
-      "queuedAt": "2026-09-25"
+      "queuedAt": "2026-09-26"
     },
     {
-      "id": "WglElpwZpZ4",
-      "creator": "AutomaticJak",
-      "title": "Is Disc BACK in Mythic+?",
-      "published": "2026-09-25",
-      "queuedAt": "2026-09-25"
+      "id": "GWaPC3CyfwI",
+      "creator": "Dalaran Gaming",
+      "title": "WoW 12.1.5 PTR: Demon Hunter Rework, Rogue Buffs & More!",
+      "published": "2026-09-26",
+      "queuedAt": "2026-09-26"
     },
     {
-      "id": "tnwOizGhvU0",
-      "creator": "YoDaTV",
-      "title": "Emergency Mythic+ Tierlist Update for 12.1!",
-      "published": "2026-09-24",
-      "queuedAt": "2026-09-25"
+      "id": "QsYJEKOp-dA",
+      "creator": "Tactyks",
+      "title": "Kith'ix Raid Testing on the 12.1.5 PTR, then keys into Mythic Coiled Altar prog",
+      "published": "2026-09-17",
+      "queuedAt": "2026-09-26"
     }
   ],
   "skipped": [
@@ -3124,6 +3124,13 @@
       "title": "Return of Aldrachi Reaver's Mark Bug",
       "reason": "Transcript read in full (~10 min, ~1,700 words, fetched by the deterministic step 2026-09-25): a bug explainer for two long-standing Aldrachi Reaver defects — a target-swap bug where the removal script for the first Reaver's Mark still fires 20 seconds later and strips the mark you swapped back to, daisy-chaining until you stop throwing the glaive for 20 seconds; and a rarer single-target one where reapplying on the exact server tick the old mark expires vanishes the new stack. He works both through log events and names one key where the swap bug cost his group a pull. It is a mechanics PSA with a workaround, not a spec-strength, tuning or comparative read on Havoc or Vengeance — his Aldrachi strength reads are the 2026-09-23 takes already on file. No take.",
       "verifiedAt": "2026-09-25"
+    },
+    {
+      "id": "CtKL4uOPUIk",
+      "creator": "Obli",
+      "title": "Breaking down Blightfall in M+ / Midnight 12.1 Unholy DK",
+      "reason": "Transcript read in full (~10 min, ~1,800 words, fetched by the deterministic step 2026-09-26): an Unholy DK Blightfall PLAY guide — a commentary walkthrough of one +17 Blinding Veil, covering when to cast Blightfall inside a burst window (late, after spreading Violent Plague; at the end of the trinket in AoE, at the end of Soul Reaper in single target and 3-target cleave), Dark Transformation and Essence of the Blood Queen upkeep, Putrify charge handling after Blightfall consumes the dots, and repeated advice that the build is the hardest version of Unholy and not for players new to the spec. The recording cut out after the first boss and trash pool, which he apologises for. Every comparison is Blightfall against Rider/San'layn WITHIN Unholy; there is no read on Unholy against any other spec, no tier or meta call, and no tuning read. Build-guide shaped, no take — the same disposition as YoDaTV's dtQ0MnB9FxI hero-talent comparison.",
+      "verifiedAt": "2026-09-26"
     }
   ],
   "seen": [

@@ -338,6 +338,99 @@
           "supersededAtFreeze": false
         }
       ]
+    },
+    {
+      "id": "yodatv-tnwOizGhvU0-2026-09-24",
+      "label": "YoDaTV — 2026-09-24 emergency Mythic+ tier list update",
+      "creator": "YoDaTV",
+      "season": "s2",
+      "date": "2026-09-24",
+      "capturedAt": "2026-09-26",
+      "scope": {
+        "brackets": [
+          "mplus"
+        ],
+        "roles": [
+          "DPS",
+          "Healer",
+          "Tank"
+        ],
+        "keys": [
+          "Death Knight|Unholy",
+          "Priest|Holy",
+          "Druid|Restoration",
+          "Druid|Guardian",
+          "Demon Hunter|Devourer"
+        ]
+      },
+      "scopeNote": "Live Season 2 Mythic+ (his own list), recorded after the September 22/23 Unholy DK Blightfall buff and bug fix; keys around +19/+20 referenced. Only the placements he STATES in the video are captured: the updated list is shown on screen and cannot be read from a transcript, so the unspoken remainder of his roster is absent rather than reconstructed, and nativeOrder records only the tiers the audio evidences (he declines S+ for Unholy, places it top of S, and moves Holy Priest to A+).",
+      "nativeOrder": [
+        "S+",
+        "S",
+        "A+"
+      ],
+      "pages": [
+        {
+          "url": "https://youtu.be/tnwOizGhvU0",
+          "published": "2026-09-24",
+          "snapshot": "2026-09-26"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Death Knight|Unholy",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-09-24",
+          "url": "https://youtu.be/tnwOizGhvU0?t=129",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement after the Blightfall buff and bug fix",
+          "text": "Explicit: he declines to put Unholy in S+ because he has not seen an Unholy take rank-one DPS in any dungeon and they still lose on overall damage, and places it at the top of S while calling it extremely strong after the buff.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Priest|Holy",
+          "bracket": "mplus",
+          "tier": "A+",
+          "date": "2026-09-24",
+          "url": "https://youtu.be/tnwOizGhvU0?t=155",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he says he moved Holy Priest to A+ because it does a lot of healing and keeps up until the very top keys, where he has not seen anyone play it, and leaves it there for now.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Guardian",
+          "bracket": "mplus",
+          "tier": null,
+          "reason": "Placement given only relative to another spec: he moves bear to one tier below Vengeance DH after viewer objections, but names no tier letter, so no native tier can be recorded.",
+          "date": "2026-09-24",
+          "url": "https://youtu.be/tnwOizGhvU0?t=136",
+          "context": "Season 2 live — updated M+ tier list, relative placement only",
+          "text": "He moves Guardian to one tier below Vengeance DH on the grounds that bears appear to be pushing similar key levels, while saying he has not played much bear this season and still rates Vengeance better. No letter is spoken.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Restoration",
+          "bracket": "mplus",
+          "tier": null,
+          "reason": "Ambiguous: \"Same with resto druid\" follows \"we're going to leave it in A plus for now\" about Holy Priest, and can mean either the same tier or the same decision to leave it where it is. The audio does not settle it, so no tier is recorded.",
+          "date": "2026-09-24",
+          "url": "https://youtu.be/tnwOizGhvU0?t=168",
+          "context": "Season 2 live — updated M+ tier list, ambiguous placement",
+          "text": "He says \"same with resto druid\" directly after leaving Holy Priest at A+, and adds that after the recent buffs it is a great source of Mark of the Wild and he would not be surprised to see a comeback.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Demon Hunter|Devourer",
+          "bracket": "mplus",
+          "tier": null,
+          "reason": "Bounded but not placed: he says Devourer is not as good as some of the specs in S tier, which excludes an S placement without naming a tier of its own.",
+          "date": "2026-09-24",
+          "url": "https://youtu.be/tnwOizGhvU0?t=180",
+          "context": "Season 2 live — updated M+ tier list, bounded placement only",
+          "text": "He has now played Devourer and does not think it is as good as some of the S-tier specs, while saying the priority/single-target buff definitely helps Annihilator, which he considers the better hero tree for keys.",
+          "supersededAtFreeze": false
+        }
+      ]
     }
   ]
 }
