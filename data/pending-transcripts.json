@@ -2,25 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "peDmFfrUZeg",
-      "creator": "izen (Izenhart)",
-      "title": "EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS",
-      "published": "2026-09-25",
-      "queuedAt": "2026-09-26"
-    },
-    {
-      "id": "GWaPC3CyfwI",
-      "creator": "Dalaran Gaming",
-      "title": "WoW 12.1.5 PTR: Demon Hunter Rework, Rogue Buffs & More!",
-      "published": "2026-09-26",
-      "queuedAt": "2026-09-26"
-    },
-    {
       "id": "QsYJEKOp-dA",
       "creator": "Tactyks",
       "title": "Kith'ix Raid Testing on the 12.1.5 PTR, then keys into Mythic Coiled Altar prog",
       "published": "2026-09-17",
       "queuedAt": "2026-09-26"
+    },
+    {
+      "id": "jBVWrW2ibOw",
+      "creator": "izen (Izenhart)",
+      "title": "Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces",
+      "published": "2026-09-26",
+      "queuedAt": "2026-09-27"
+    },
+    {
+      "id": "6PSzZBIDrYc",
+      "creator": "leak",
+      "title": "Wildfire Bomb is Bugged... Again.",
+      "published": "2026-09-26",
+      "queuedAt": "2026-09-27"
     }
   ],
   "skipped": [

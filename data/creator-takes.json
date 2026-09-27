@@ -8290,6 +8290,42 @@
       "claim": "He moves Guardian up to one tier below Vengeance DH on his updated M+ list, explicitly on other players' results rather than his own: viewers objected to the previous placement, and he grants that bears appear to be pushing keys of a similar level to Blood DK even if not the same dungeons. He is equally explicit about the limits of the move — he has not played much bear himself this season, and he personally still rates Vengeance the better tank, which is why Guardian stays behind it.",
       "url": "https://youtu.be/tnwOizGhvU0?t=136",
       "superseded": false
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Outlaw",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-26",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. His review of the class section of the official 12.1.5 PTR development notes (\"WoW 12.1.5 PTR: Demon Hunter Rework, Rogue Buffs & More!\", published 2026-09-26, reading the 2026-09-15 update of thread 2344395); nothing here describes the live 12.1 spec, and his live Season 2 reads stand alongside it. He notes the patch has no announced launch date.",
+      "url": "https://youtu.be/GWaPC3CyfwI?t=371",
+      "claim": "His clearest positive of the video. He reads the Deft Maneuvers rework — Blade Flurry's flat energy surcharge replaced by a per-target cost that only scales up as the number of cleave targets rises — as solving a real Outlaw problem: maintaining Blade Flurry against one or two extra targets, as in most boss fights, becomes much cheaper, so the spec stops running dry or waiting to refresh the buff without very high haste. He calls it such a good change and a very good convenience change that should result in a decent damage increase overall."
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-26",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. His review of the class section of the official 12.1.5 PTR development notes (\"WoW 12.1.5 PTR: Demon Hunter Rework, Rogue Buffs & More!\", published 2026-09-26, reading the 2026-09-15 update of thread 2344395); nothing here describes the live 12.1 spec, and his live Season 2 reads stand alongside it. He notes the patch has no announced launch date.",
+      "url": "https://youtu.be/GWaPC3CyfwI?t=452",
+      "claim": "He calls the Subtlety change deliberately ambiguous and declines to score it: asked whether the Shadow-damage modifier consolidation is a buff, he answers \"potentially\", and whether it is a nerf, \"conceivably\". His read of the intent is that Blizzard is cleaning up long-standing double-dipping, where some effects carried the spec's damage while others benefited from no increases at all, so the outcome should be a more consistent spec that may then need a buff or a nerf on top. He wants the fix and hopes the net damage change is small, adding that Subtlety has been plagued with bugs since the start."
+    },
+    {
+      "superseded": false,
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "Dalaran Gaming",
+      "date": "2026-09-26",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. His review of the class section of the official 12.1.5 PTR development notes (\"WoW 12.1.5 PTR: Demon Hunter Rework, Rogue Buffs & More!\", published 2026-09-26, reading the 2026-09-15 update of thread 2344395); nothing here describes the live 12.1 spec, and his live Season 2 reads stand alongside it. He notes the patch has no announced launch date.",
+      "url": "https://youtu.be/GWaPC3CyfwI?t=196",
+      "claim": "He reads the Nature's Bounty redesign — Regrowth healing up to three allies carrying Rejuvenation for 15% of its healing, lowest health first — as potentially good, comparing it to Glimmer Paladin: single-target healing that cleaves across the party. He names the two cases he expects it to serve, pumping into whoever is being focused during a dodge and into the tank, and flags the three-target cap as the limit on it; he also sees it rewarding a Regrowth-heavy playstyle. He frames the whole thing as solving problems with the current design rather than as a tuning gain."
     }
   ],
   "metaNotes": [
@@ -13938,7 +13974,7 @@
       "note": "Blood is at about 79% of 20+ keys, but he stresses what has NOT happened: unlike Holy Paladin its play rate has stayed flat since the start of the season rather than climbing week by week the way a flavour-of-the-month pick does. Even with the roughly 5–6% damage cut arriving with this tuning he expects Blood to remain the biggest damage dealer of all the tanks — 213k against Guardian's 164k in the same King's Rest key — though it takes about 200k damage per second against Guardian's 130k while self-healing 170k against 105k.",
       "patchContext": "Season 2 live — M+ outlook, his weekly Mythic+ meta and performance recap for the end of week five (\"Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5\", published 2026-09-22), read off live representation and average-score data at 15+ and 20+ keys, with the September 22 tuning landing the same day and its effects explicitly not yet measured.",
       "url": "https://youtu.be/yDyEKvcZ3VM?t=162",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -13950,7 +13986,7 @@
       "note": "The clear tank riser: play rate more than doubled from about 11% to 25% over the past month and a half, helped by Druid's other specs offering little competition, and its high-key average score is now very close to Brewmaster's. He rates Guardian even tankier than Blood — 130k damage taken per second against Blood's 200k, leaving a smaller unhealed deficit — with the gap being damage, 164k against Blood's 213k in the same dungeon. He credits roughly 30k of that back to Guardian via Mark of the Wild's 3% on three DPS, which still does not close it.",
       "patchContext": "Season 2 live — M+ outlook, his weekly Mythic+ meta and performance recap for the end of week five (\"Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5\", published 2026-09-22), read off live representation and average-score data at 15+ and 20+ keys, with the September 22 tuning landing the same day and its effects explicitly not yet measured.",
       "url": "https://youtu.be/yDyEKvcZ3VM?t=279",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -14022,7 +14058,7 @@
       "note": "The season's biggest riser and the standout of this recap: Elemental has gone up every single week and is now the only DPS spec present in all three most popular comps, having passed both Arcane and Arms. He is explicit about what it is and is not — it has the best AoE damage across all specs (Earthquake, Chain Lightning, ancestor Chain Lightning, five-to-six-target Lava Burst), narrowly matched at times by Arcane, and nothing else: its burst window is not great, and its focus damage on a priority target is \"not good at all\".",
       "patchContext": "Season 2 live — M+ outlook, his weekly Mythic+ meta and performance recap for the end of week five (\"Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5\", published 2026-09-22), read off live representation and average-score data at 15+ and 20+ keys, with the September 22 tuning landing the same day and its effects explicitly not yet measured.",
       "url": "https://youtu.be/yDyEKvcZ3VM?t=943",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -14070,7 +14106,7 @@
       "note": "The Blightfall doubling is, in his words, wishful thinking until the bugs go: most of Unholy's own damage amplifiers were not modifying Blightfall at all, so doubling the talent leaves it \"still remaining mostly bugged\", and he says there is no reasonable proof yet of significant bug fixing around it. Conditional on a fix he is bullish — roughly a 15% single-target gain would go \"a pretty good way of bringing you much higher up\", in both Mythic+ and the raid, where he says Unholy has not been having a good time — but he closes by listing Blightfall as the biggest asterisk of the week and the least likely of the changes to actually pay out. (Recorded before Blizzard's September 23 bug fix.)",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=92",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -14310,6 +14346,54 @@
       "note": "He reads the Shadow changes as a large-looking set that amounts to a single-target buff, and compares it directly to Windwalker's: a spec that was weaker in the raid and weaker in single target getting exactly that fixed. He calls the paired AoE cut odd, because Shadow's AoE was nowhere near the level that justified compensation, and concludes that Shadow should do better in the raid on the stronger single target. (He adds that in Mythic+ it was never that high to begin with.)",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=983",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "note": "The asterisk he raised on 09-23 has resolved his way: a properly working Blightfall bug fix landed, and he reads the talent as scaling with Unholy's own amplifiers and the target's debuffs at last. His evidence is that essentially every new top key on the Unholy list is dated to this reset and every one of them is played with Blightfall, while the comparable Arcane results span ten days. Play rate follows — 0.7% to 11% at all key levels in two to three days, 2% to 5.6% at 15+, and 0.2% last reset to 3.4% at 20+, on his figures. On profile he puts Unholy's priority damage inside an AoE pull ahead of Elemental and matching or slightly beating Arcane on the first pulls of Altar of Fangs and Murder Row, with Dread Plague's eruption a large single-target instance, and its pure single target comfortably ahead of Elemental and close behind Subtlety. He names one clear weakness, short burst windows, where the dot-based Blightfall build loses to Arcane and even Balance, and adds that being one of the tankiest DPS in the game is part of the case. His two caveats are his own: only a handful of the very top keys have an Unholy yet, and Blizzard may decide it overdid this and nerf it back.",
+      "patchContext": "Season 2 live — M+ outlook, his one-spec emergency follow-up on how Blizzard's September 23 Blightfall bug fix is landing in live keys (\"EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS\", published 2026-09-25), read off this reset's top-key results, the play-rate shares at all key levels / 15+ / 20+, and the comps those keys are running. Recorded three days into the reset, which he repeatedly says is a small sample.",
+      "url": "https://youtu.be/peDmFfrUZeg?t=107",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-25",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "note": "He still calls Elemental a currently meta spec, but for the first time argues the comp case against it. Since Unholy now does more priority damage, comparable AoE and is in his words astronomically tankier, he asks what the point is in keeping an Elemental in the group, noting the swap costs no Bloodlust because the comps already run an Arcane Mage — the real loss would be Windfury from the Arms Warrior, which is an argument for dropping Arms instead. He grounds it in what he has already said Elemental is: flat AoE damage and little else. He is explicit that this is a question the first few days of the reset have only started to answer.",
+      "patchContext": "Season 2 live — M+ outlook, his one-spec emergency follow-up on how Blizzard's September 23 Blightfall bug fix is landing in live keys (\"EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS\", published 2026-09-25), read off this reset's top-key results, the play-rate shares at all key levels / 15+ / 20+, and the comps those keys are running. Recorded three days into the reset, which he repeatedly says is a small sample.",
+      "url": "https://youtu.be/peDmFfrUZeg?t=717",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-25",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "note": "The tank riser keeps rising: comparing like-for-like first-three-days windows he reads Guardian at 12% last reset against 22% now, nearly a doubling on top of the growth he tracked through the season. He names it the likeliest tank to make room for an Unholy DK, because Mark of the Wild is a versatility buff that suits any group, and reads the tank slot rather than a DPS slot as where the new Unholy keys are finding space.",
+      "patchContext": "Season 2 live — M+ outlook, his one-spec emergency follow-up on how Blizzard's September 23 Blightfall bug fix is landing in live keys (\"EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS\", published 2026-09-25), read off this reset's top-key results, the play-rate shares at all key levels / 15+ / 20+, and the comps those keys are running. Recorded three days into the reset, which he repeatedly says is a small sample.",
+      "url": "https://youtu.be/peDmFfrUZeg?t=903",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-25",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "note": "A change to the flat play rate he described three days earlier: Blood had been sitting around 60% and has, in his words, lost nearly 10 points out of nowhere this reset, in the same week Guardian gained and Unholy jumped about 10 points. He offers as one possible answer — explicitly as speculation — that groups are giving up the Blood tank to make room for a Death Knight as DPS instead, and reports having seen the intermediate state, keys running double Death Knight with both a Blood and an Unholy, which he says is a combination he has not seen in a long time.",
+      "patchContext": "Season 2 live — M+ outlook, his one-spec emergency follow-up on how Blizzard's September 23 Blightfall bug fix is landing in live keys (\"EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS\", published 2026-09-25), read off this reset's top-key results, the play-rate shares at all key levels / 15+ / 20+, and the comps those keys are running. Recorded three days into the reset, which he repeatedly says is a small sample.",
+      "url": "https://youtu.be/peDmFfrUZeg?t=828",
       "superseded": false
     }
   ]
