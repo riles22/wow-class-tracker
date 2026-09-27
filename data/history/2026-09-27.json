@@ -161,15 +161,15 @@
             "bracket": "raid",
             "role": "DPS",
             "url": "https://www.icy-veins.com/wow/dps-rankings-tier-list",
-            "snapshot": "2026-09-22",
-            "published": "2026-08-30",
+            "snapshot": "2026-09-27",
+            "published": "2026-09-24",
             "seasonVerified": "s2"
           },
           {
             "bracket": "raid",
             "role": "Healer",
             "url": "https://www.icy-veins.com/wow/healer-rankings-tier-list",
-            "snapshot": "2026-09-22",
+            "snapshot": "2026-09-27",
             "published": "2026-09-01",
             "seasonVerified": "s2"
           },
@@ -177,7 +177,7 @@
             "bracket": "raid",
             "role": "Tank",
             "url": "https://www.icy-veins.com/wow/tank-rankings-tier-list",
-            "snapshot": "2026-09-22",
+            "snapshot": "2026-09-27",
             "published": "2026-08-29",
             "seasonVerified": "s2"
           },
@@ -185,24 +185,24 @@
             "bracket": "mplus",
             "role": "DPS",
             "url": "https://www.icy-veins.com/wow/mythic-dps-tier-list",
-            "snapshot": "2026-09-22",
-            "published": "2026-08-30",
+            "snapshot": "2026-09-27",
+            "published": "2026-09-23",
             "seasonVerified": "s2"
           },
           {
             "bracket": "mplus",
             "role": "Healer",
             "url": "https://www.icy-veins.com/wow/mythic-healer-tier-list",
-            "snapshot": "2026-09-22",
-            "published": "2026-08-30",
+            "snapshot": "2026-09-27",
+            "published": "2026-09-24",
             "seasonVerified": "s2"
           },
           {
             "bracket": "mplus",
             "role": "Tank",
             "url": "https://www.icy-veins.com/wow/mythic-tank-tier-list",
-            "snapshot": "2026-09-22",
-            "published": "2026-08-30",
+            "snapshot": "2026-09-27",
+            "published": "2026-09-24",
             "seasonVerified": "s2"
           }
         ],
@@ -878,7 +878,7 @@
     },
     "Death Knight|Unholy": {
       "consensus": {
-        "raid": "B",
+        "raid": "A",
         "mplus": "A"
       },
       "ranks": {
@@ -921,7 +921,7 @@
         "score": 57
       },
       "scores": {
-        "raid": 49,
+        "raid": 60,
         "mplus": 68
       },
       "consensusSources": {
@@ -952,7 +952,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "B",
+          "icyveins": "S",
           "method": "B",
           "wowhead": "B",
           "archon": "B"
@@ -1050,7 +1050,7 @@
     },
     "Demon Hunter|Devourer": {
       "consensus": {
-        "raid": "A",
+        "raid": "B",
         "mplus": "A+"
       },
       "ranks": {
@@ -1094,7 +1094,7 @@
         "score": 65
       },
       "scores": {
-        "raid": 60,
+        "raid": 55,
         "mplus": 77
       },
       "consensusSources": {
@@ -1125,7 +1125,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "A",
           "wowhead": "B",
           "archon": "B"
@@ -1340,7 +1340,7 @@
       },
       "scores": {
         "raid": 33,
-        "mplus": 71
+        "mplus": 73
       },
       "consensusSources": {
         "raid": [
@@ -1376,7 +1376,7 @@
           "archon": "C"
         },
         "mplus": {
-          "icyveins": "A+",
+          "icyveins": "S",
           "method": "B",
           "wowhead": "B",
           "archon": "S"
@@ -1463,7 +1463,7 @@
     "Druid|Restoration": {
       "consensus": {
         "raid": "A",
-        "mplus": "C"
+        "mplus": "B"
       },
       "ranks": {
         "archon|raid|95th pct HPS (Mythic)": 6,
@@ -1497,7 +1497,7 @@
       },
       "scores": {
         "raid": 60,
-        "mplus": 39
+        "mplus": 47
       },
       "consensusSources": {
         "raid": [
@@ -1533,7 +1533,7 @@
           "archon": "A"
         },
         "mplus": {
-          "icyveins": "B",
+          "icyveins": "A+",
           "method": "B",
           "wowhead": "C",
           "archon": "C"
@@ -1578,7 +1578,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 6
       },
       "scores": {
-        "raid": 33,
+        "raid": 37,
         "mplus": 34
       },
       "consensusSources": {
@@ -1609,7 +1609,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "C",
+          "icyveins": "B",
           "method": "C",
           "wowhead": "B",
           "archon": "C"
@@ -1792,7 +1792,7 @@
     },
     "Hunter|Beast Mastery": {
       "consensus": {
-        "raid": "B",
+        "raid": "C",
         "mplus": "A"
       },
       "ranks": {
@@ -1827,7 +1827,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 24
       },
       "scores": {
-        "raid": 48,
+        "raid": 39,
         "mplus": 64
       },
       "consensusSources": {
@@ -1858,7 +1858,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A",
+          "icyveins": "C",
           "method": "B",
           "wowhead": "B",
           "archon": "C"
@@ -1874,7 +1874,7 @@
     "Hunter|Marksmanship": {
       "consensus": {
         "raid": "A",
-        "mplus": "B"
+        "mplus": "A"
       },
       "ranks": {
         "archon|raid|95th pct DPS (Mythic)": 7,
@@ -1918,7 +1918,7 @@
       },
       "scores": {
         "raid": 70,
-        "mplus": 55
+        "mplus": 60
       },
       "consensusSources": {
         "raid": [
@@ -1954,7 +1954,7 @@
           "archon": "A"
         },
         "mplus": {
-          "icyveins": "B",
+          "icyveins": "A",
           "method": "B",
           "wowhead": "B",
           "archon": "A"
@@ -1997,7 +1997,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 19
       },
       "scores": {
-        "raid": 37,
+        "raid": 33,
         "mplus": 60
       },
       "consensusSources": {
@@ -2028,7 +2028,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "C",
           "wowhead": "C",
           "archon": "C"
@@ -2087,7 +2087,7 @@
         "score": 75
       },
       "scores": {
-        "raid": 91,
+        "raid": 88,
         "mplus": 89
       },
       "consensusSources": {
@@ -2118,7 +2118,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "S",
+          "icyveins": "A+",
           "method": "S",
           "wowhead": "A",
           "archon": "S"
@@ -2133,7 +2133,7 @@
     },
     "Mage|Fire": {
       "consensus": {
-        "raid": "B",
+        "raid": "C",
         "mplus": "B"
       },
       "ranks": {
@@ -2165,7 +2165,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 25
       },
       "scores": {
-        "raid": 43,
+        "raid": 39,
         "mplus": 49
       },
       "consensusSources": {
@@ -2196,7 +2196,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "C",
           "wowhead": "C",
           "archon": "B"
@@ -2409,7 +2409,7 @@
       },
       "scores": {
         "raid": 49,
-        "mplus": 62
+        "mplus": 58
       },
       "consensusSources": {
         "raid": [
@@ -2445,7 +2445,7 @@
           "archon": "B"
         },
         "mplus": {
-          "icyveins": "A+",
+          "icyveins": "A",
           "method": "B",
           "wowhead": "A",
           "archon": "B"
@@ -2899,7 +2899,7 @@
       },
       "scores": {
         "raid": 84,
-        "mplus": 48
+        "mplus": 43
       },
       "consensusSources": {
         "raid": [
@@ -2935,7 +2935,7 @@
           "archon": "S"
         },
         "mplus": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "C",
           "wowhead": "B",
           "archon": "B"
@@ -3073,7 +3073,7 @@
       },
       "scores": {
         "raid": 64,
-        "mplus": 75
+        "mplus": 80
       },
       "consensusSources": {
         "raid": [
@@ -3109,7 +3109,7 @@
           "archon": "A"
         },
         "mplus": {
-          "icyveins": "A+",
+          "icyveins": "S+",
           "method": "B",
           "wowhead": "A",
           "archon": "S"
@@ -3159,7 +3159,7 @@
         "score": 35
       },
       "scores": {
-        "raid": 53,
+        "raid": 45,
         "mplus": 84
       },
       "consensusSources": {
@@ -3190,7 +3190,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A+",
+          "icyveins": "B",
           "method": "B",
           "wowhead": "C",
           "archon": "B"
@@ -3248,7 +3248,7 @@
         "score": 20
       },
       "scores": {
-        "raid": 71,
+        "raid": 64,
         "mplus": 68
       },
       "consensusSources": {
@@ -3279,7 +3279,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "S",
+          "icyveins": "A",
           "method": "B",
           "wowhead": "A",
           "archon": "A"
@@ -3338,7 +3338,7 @@
         "score": 71
       },
       "scores": {
-        "raid": 64,
+        "raid": 60,
         "mplus": 86
       },
       "consensusSources": {
@@ -3369,7 +3369,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A+",
+          "icyveins": "A",
           "method": "B",
           "wowhead": "B",
           "archon": "A"
@@ -3426,7 +3426,7 @@
         "score": 67
       },
       "scores": {
-        "raid": 54,
+        "raid": 49,
         "mplus": 60
       },
       "consensusSources": {
@@ -3457,7 +3457,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "C",
           "wowhead": "B",
           "archon": "A"
@@ -3589,7 +3589,7 @@
       },
       "scores": {
         "raid": 48,
-        "mplus": 48
+        "mplus": 43
       },
       "consensusSources": {
         "raid": [
@@ -3625,7 +3625,7 @@
           "archon": "C"
         },
         "mplus": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "C",
           "wowhead": "B",
           "archon": "B"
@@ -3672,7 +3672,7 @@
       },
       "scores": {
         "raid": 54,
-        "mplus": 80
+        "mplus": 76
       },
       "consensusSources": {
         "raid": [
@@ -3708,7 +3708,7 @@
           "archon": "C"
         },
         "mplus": {
-          "icyveins": "S+",
+          "icyveins": "A+",
           "method": "B",
           "wowhead": "S",
           "archon": "A"
@@ -3717,7 +3717,7 @@
     },
     "Warlock|Destruction": {
       "consensus": {
-        "raid": "A+",
+        "raid": "A",
         "mplus": "A"
       },
       "ranks": {
@@ -3754,8 +3754,8 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 15
       },
       "scores": {
-        "raid": 74,
-        "mplus": 66
+        "raid": 70,
+        "mplus": 61
       },
       "consensusSources": {
         "raid": [
@@ -3785,13 +3785,13 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A+",
+          "icyveins": "A",
           "method": "A",
           "wowhead": "A",
           "archon": "A"
         },
         "mplus": {
-          "icyveins": "A",
+          "icyveins": "B",
           "method": "A",
           "wowhead": "B",
           "archon": "A"
@@ -3845,7 +3845,7 @@
         "score": 93
       },
       "scores": {
-        "raid": 91,
+        "raid": 88,
         "mplus": 89
       },
       "consensusSources": {
@@ -3876,7 +3876,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "S",
+          "icyveins": "A+",
           "method": "S",
           "wowhead": "A",
           "archon": "S"
@@ -3925,7 +3925,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 17
       },
       "scores": {
-        "raid": 52,
+        "raid": 43,
         "mplus": 55
       },
       "consensusSources": {
@@ -3956,7 +3956,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "A",
+          "icyveins": "C",
           "method": "B",
           "wowhead": "A",
           "archon": "C"

@@ -17,6 +17,12 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-09-27 (local, scheduled) — 0 captions (persistent 429, third day); 0 takes, 0 metaNotes; queue left to the nightly's Supadata lane
+
+- Probed once at 14:07Z, before today's nightly, on izen `peDmFfrUZeg`. The caption download returned HTTP 429 while the player fetch succeeded. One paced retry without `player_client=android` at `--sleep-requests 3` also returned 429. **Caption traffic stopped there.** This is the persistent timedtext shape (09-25, 09-26 and now 09-27).
+- The nightly then drained that queue itself (published `af66dfd`: 4 izen metaNotes + 3 12.1.5 takes) and left 3 in the queue: Tactyks `QsYJEKOp-dA` (carried over from 09-26), plus two it queued today, izen `jBVWrW2ibOw` and leak `6PSzZBIDrYc`. **None were attempted here**, because the IP flag has not cleared. All three stay in `videos[]` for Supadata. `data/` was not touched by this skill.
+- No authenticated fallback: this was an unattended run, and that lane needs a cookies.txt from Riley. No breadth sweep, since it needs the same caption endpoint.
+
 ## 2026-09-27 (nightly) — 44 feeds, 0 failures; 2 of 3 transcripts resolved → **4 metaNotes + 3 takes**, 2 queued; 1 left `review-required`
 
 - **Transcripts.** `summary.json` verdict **`review-required`**: 2 of 3 fetched natively (`peDmFfrUZeg` 449 chunks, `GWaPC3CyfwI` 336), 0 cached, **29 counted requests** in the 30-day window, no configured limit. `QsYJEKOp-dA` (Tactyks) returned `review-required` on a **request-timeout that may have consumed a provider request** — so it **stays in `videos[]`** with its retry state untouched and no replacement was fetched. No YouTube or transcript-API request was made by this agent.
