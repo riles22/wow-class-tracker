@@ -11426,7 +11426,7 @@
       "note": "He puts Discipline in the top healer group on very high overall raid healing plus the DPS it contributes, and singles out that it is practically physically unable to run out of mana in this raid."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Evoker",
       "spec": "Preservation",
       "creator": "izen (Izenhart)",
@@ -11582,7 +11582,7 @@
       "note": "He lists Feral among the specs that went unhighlighted through testing and sit at the bottom of the preliminary raid power read."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Survival",
       "creator": "izen (Izenhart)",
@@ -11666,7 +11666,7 @@
       "note": "He calls Demonology the weaker of the Warlock performers, and notes that unlike Augmentation it has no class-side escape hatch: you will bring a Warlock, but not this one."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Retribution",
       "creator": "izen (Izenhart)",
@@ -11690,7 +11690,7 @@
       "note": "He groups Subtlety with the specs that have no free raid spot, behind Outlaw among the rogues."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Unholy",
       "creator": "izen (Izenhart)",
@@ -11750,7 +11750,7 @@
       "note": "He says Fury is still good and still fine, but that the choice is not Fury against Frost or Outlaw — it is Fury against Arms, and Arms is so much more complete across the board that he wonders why you would play Fury."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Evoker",
       "spec": "Devastation",
       "creator": "izen (Izenhart)",
@@ -12962,7 +12962,7 @@
       "note": "His biggest downside surprise. Devourer simmed and tested well right through the PTR on the build people are actually playing, and in live Mythic it has landed in the bottom half of the pack — with nine casters occupying the top nine DPS slots and Devourer below all of them, which he says makes it arguably the worst caster in the game right now; in Heroic it is only ahead of Fire and Frost Mage. He attributes it to the start-of-season tier-set cut: the damage compensation does not make up for generating far fewer soul fragments, so souls now go into Eradicate only and no longer into Reap. The follow-up hotfix did not touch Devourer and buffed Havoc instead."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Havoc",
       "creator": "izen (Izenhart)",
@@ -12986,7 +12986,7 @@
       "note": "An upside surprise relative to the channel's pre-season placement. He credits the burst window rather than overall throughput: in Heroic, where things live for less, Marksmanship's burst value is high; in Mythic that value drops somewhat but the niche holds, with Sentinel single target decent enough and burst good enough that race guilds ran double Marksmanship on Zul'jan for shield breaks and again on Ula'tek for the phase-one and phase-two adds. He is explicit about the ceiling: with this many adds in the late bosses, Hunter will not be near the top of overall damage any time soon."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Subtlety",
       "creator": "izen (Izenhart)",
@@ -13022,7 +13022,7 @@
       "note": "Included in his read that all three Rogue specs came out of the post-testing buffs (Outlaw +6%) doing very high single-target damage, and that Rogues as a whole have gone better than expected. He notes Outlaw is ranked first on the single-target boss Zorak — and immediately supplies the caveat himself, that this rests on a grand total of one logged Outlaw parse, which is enough to appear on that chart."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Frost",
       "creator": "izen (Izenhart)",
@@ -13463,7 +13463,7 @@
       "note": "izen's read on Preservation Evoker is burst-scaled rather than flat: he calls it much stronger than Holy Paladin at burst healing in small windows, and says it gains value as a fight's raid damage and small-window healing requirements rise. So it pulls ahead on the later, harder bosses — he points to the few Twin Fangs logs — while Holy Priest is ahead on the early, easier, lower-damage ones. He frames that as the only real by-boss swap on the healer side.",
       "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
       "url": "https://youtu.be/TJe8OnXl3pY?t=1058",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -13485,7 +13485,7 @@
       "note": "izen has Frost Mage at the very top of Twin Fangs on two-target cleave, and says that value survives the nerf to its cleave because the mechanism is innate: Flurry plus Frostbolt or Frostfire Bolt hits an extra target, and Ice Lance does as well. The same caveat applies as for Arms Warrior — he is explicit that Twin Fangs is the only boss in the tier with that damage profile.",
       "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
       "url": "https://youtu.be/TJe8OnXl3pY?t=596",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warlock",
@@ -13662,7 +13662,7 @@
       "note": "His headline example of why the overall ranking misleads: Balance sits second overall on the strength of two spread-add bosses (top two on the Lost Explorers with some 7,000 logs, third on Sentinels), yet it is near the bottom on Zoroak's pure single target, at the bottom on Vashnik's clumped burst AoE, and outdone again on Twin Fangs' two-target cleave — beaten on every profile except spread multi-dotting, which he sums up as not good at all.",
       "patchContext": "Season 2 live — raid outlook. \"Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss\" (published 2026-09-19), his boss-by-boss recap of Mythic Venomous Abyss DPS results ten days after the previous one, recorded on the reset before the September 22 tuning pass. His central caveat is repeated throughout: the overall raid DPS ranking means nothing because it is dominated by the early add-heavy bosses that carry almost all of the logs; he reads per-boss consistency instead, and cautions that Coiled Altar has only ~260 DPS entries and Ula'tek about two logs.",
       "url": "https://youtu.be/iXjoMyr1LAs?t=725",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -13674,7 +13674,7 @@
       "note": "He picks Shadow Priest out as exposed across several damage types now that harder bosses have logs: last on Zoroak, last on Vashnik, bottom third on Twin Fangs. The overall table makes it look as though it is doing kind of well this tier and, in his words, it is not.",
       "patchContext": "Season 2 live — raid outlook. \"Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss\" (published 2026-09-19), his boss-by-boss recap of Mythic Venomous Abyss DPS results ten days after the previous one, recorded on the reset before the September 22 tuning pass. His central caveat is repeated throughout: the overall raid DPS ranking means nothing because it is dominated by the early add-heavy bosses that carry almost all of the logs; he reads per-boss consistency instead, and cautions that Coiled Altar has only ~260 DPS entries and Ula'tek about two logs.",
       "url": "https://youtu.be/iXjoMyr1LAs?t=794",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -13722,7 +13722,7 @@
       "note": "Augmentation's first-place Coiled Altar result is, in his reading, carried almost entirely by the phase-two-to-three intermission: with the 100% damage window it does about 50 million there, fifteen to twenty million more than other DPS, while phases one, two and three are all not as good. He says the spec has not been relevant on pretty much any other boss this tier and that its power level is not what the Coiled Altar table suggests, adding that Ebon Might no longer hands the buff to chosen players, only the less relevant crit buff.",
       "patchContext": "Season 2 live — raid outlook. \"Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss\" (published 2026-09-19), his boss-by-boss recap of Mythic Venomous Abyss DPS results ten days after the previous one, recorded on the reset before the September 22 tuning pass. His central caveat is repeated throughout: the overall raid DPS ranking means nothing because it is dominated by the early add-heavy bosses that carry almost all of the logs; he reads per-boss consistency instead, and cautions that Coiled Altar has only ~260 DPS entries and Ula'tek about two logs.",
       "url": "https://youtu.be/iXjoMyr1LAs?t=856",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -13734,7 +13734,7 @@
       "note": "Marksmanship stands out on Coiled Altar as a spec he had not mentioned much: not through add damage or an outsized intermission, but through very consistent, very good single-target damage in phases one and three, with the double-execute final phase adding Kill Shot value — not at an Arms Warrior's level of execute power, but among the specs that benefit from two bosses sitting in execute range for a whole phase. He notes it had not been doing terribly overall either.",
       "patchContext": "Season 2 live — raid outlook. \"Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss\" (published 2026-09-19), his boss-by-boss recap of Mythic Venomous Abyss DPS results ten days after the previous one, recorded on the reset before the September 22 tuning pass. His central caveat is repeated throughout: the overall raid DPS ranking means nothing because it is dominated by the early add-heavy bosses that carry almost all of the logs; he reads per-boss consistency instead, and cautions that Coiled Altar has only ~260 DPS entries and Ula'tek about two logs.",
       "url": "https://youtu.be/iXjoMyr1LAs?t=1128",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -13758,7 +13758,7 @@
       "note": "Windwalker appears among the new well-performing entries on Vashnik and can still do well on Twin Fangs, but by the opposite route to Arms and Demonology: rather than cleaving the bosses it focuses the add waves, the same damage profile it used on Vashnik. He offers no read on it for the single-target or spread-dot bosses.",
       "patchContext": "Season 2 live — raid outlook. \"Season 2 Raid DPS Meta | Results in 1 Month of Venomous Abyss\" (published 2026-09-19), his boss-by-boss recap of Mythic Venomous Abyss DPS results ten days after the previous one, recorded on the reset before the September 22 tuning pass. His central caveat is repeated throughout: the overall raid DPS ranking means nothing because it is dominated by the early add-heavy bosses that carry almost all of the logs; he reads per-boss consistency instead, and cautions that Coiled Altar has only ~260 DPS entries and Ula'tek about two logs.",
       "url": "https://youtu.be/iXjoMyr1LAs?t=683",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -14394,6 +14394,182 @@
       "note": "A change to the flat play rate he described three days earlier: Blood had been sitting around 60% and has, in his words, lost nearly 10 points out of nowhere this reset, in the same week Guardian gained and Unholy jumped about 10 points. He offers as one possible answer — explicitly as speculation — that groups are giving up the Blood tank to make room for a Death Knight as DPS instead, and reports having seen the intermediate state, keys running double Death Knight with both a Blood and an Unholy, which he says is a combination he has not seen in a long time.",
       "patchContext": "Season 2 live — M+ outlook, his one-spec emergency follow-up on how Blizzard's September 23 Blightfall bug fix is landing in live keys (\"EMERGENCY BROADCAST: Unholy DK now S Tier M+ DPS\", published 2026-09-25), read off this reset's top-key results, the play-rate shares at all key levels / 15+ / 20+, and the comps those keys are running. Recorded three days into the reset, which he repeatedly says is a small sample.",
       "url": "https://youtu.be/peDmFfrUZeg?t=828",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "positive",
+      "note": "He reads the September 22 Unholy buffs as by far the biggest mover of the pass: Unholy had been sitting in the bottom three of raid results and is now first overall. He attributes it to the buffs being weighted toward single target — the spec still plays Sun King with the newly buffed Blightfall, and Red Plague's single-target damage increase carries even on a pure single-target fight like Z'gora, with Zoraak's damage-amp phases adding burst on top. He notes this is the least surprising of the pass because the same spike had already shown up in Mythic+.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=80",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "positive",
+      "note": "He sees Frost DK genuinely improved by the pass but at a much smaller scale than Unholy: the Obliterate buff is single-target damage, and on a pure single-target boss like Zoraak he puts Obliterate at roughly 15-20% of overall damage, so better results follow — but, in his words, nowhere near Unholy's level. He adds the Blightfall bug fix on top of the tuning.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=194",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "mixed",
+      "note": "He reads the Aldrachi Warblades buff as very good for the hero tree and clearly adopted — nearly every top Havoc raid log since the reset is Aldrachi Ripper, with Fel-Scarred surviving only on the add-heavy fight and in pre-hotfix logs — because Wounded Quarry gives back the prior-target funnel damage Demon Hunter used to have, which he says is the most damage to the main target even on Ula'tek and works on Vashj'ir and Twin Fangs. But he is explicit that it did not move the spec's overall standing: Havoc still looks like it is doing pretty poorly, and what it gained is a clearer purpose rather than a rank.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=394",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "positive",
+      "note": "He reads Augmentation as one of the risers of the pass. His reasoning is that Blizzard buffed the spec's personal damage rather than its buff damage, which he calls necessary because Augmentation had drifted to roughly 80%+ of its contribution being buffs — he walks a top Coilfang Darter log where only about 17% of the listed damage is the player's own buttons. He says the buff itself is necessarily small because the personal damage is small, but that Augmentation has been doing pretty well since and has risen higher than before.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=423",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "mixed",
+      "note": "He says Devastation also rose, but frames it as the less meaningful of the two Evoker moves: it was already doing fine-ish and had been ahead of Augmentation for most of the tier, and Blizzard's changes did not really affect it much. The buffs were flat increases across the toolkit, and the part aimed at reviving the dropped Other Strike / Other Sweep pairing has not worked — he says it is still not being taken by most players even on multi-target raid fights, so what advantage Devastation gets comes from the other buffs instead.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=501",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Windwalker",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "neutral",
+      "note": "He groups Windwalker with the specs whose September 22 buffs produced no visible improvement: the increase was to single-target melee auto attacks, and reading the pre- to post-tuning window he says Windwalker is barely increasing.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=560",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "negative",
+      "note": "Reading the pre- to post-tuning window he singles Survival out as the spec that did not move at all: it is, in his words, practically not even increasing, despite being one of the specs the September 22 pass buffed.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=574",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "positive",
+      "note": "Of the smaller buffs in the pass he says Marksmanship is the only one that visibly went up from September 22 to patch day. He argues the buffs read as AoE — Volley and extra Trick Shots ricochet damage — but still convert in this raid, naming Twin Fangs' add spawns, Nexxus-Val'e and Vashj'ir as fights with cleave to use, while conceding it will not count on every boss. He adds that across the three Hunter specs Marksmanship has been doing the best, not just this week but in general.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=581",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Frost",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "positive",
+      "note": "He reads Frost Mage as the other spec with a visible gain, because its buffs were spread across the kit — Frostbite shatter damage, Glacial Assault, Comet Storm and Frozen Orb — rather than confined to AoE as Fire's were. His comparison is relative: compared to Fire at least, Frost Mage has been doing slightly better since the pass, while still sitting below the class's leading spec.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=639",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "negative",
+      "note": "He notes Fire Mage was technically buffed in the same pass but only in AoE — Meteor and Flamestrike damage — and uses it as the contrast case for Frost, which was buffed across the board. His read is that the narrower buff left Fire behind Frost after the pass.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=644",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "neutral",
+      "note": "He reads the Templar buff as landing on nothing: Templar is still not being played by Retribution Paladins even after the September 22 increase, and the overwhelming majority of logs are still Herald of the Sun, so buffing Templar's damage does not change the spec's results.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=667",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "negative",
+      "note": "He says the September 22 Shadow Priest buff — a flat increase weighted to single target — has not really affected the spec's position. His underlying read is the one he has repeated about overall raid rankings: Shadow Priest is one of the main padders of the overall results because of its spread multi-target profile on the early bosses, while on pure single-target bosses it is dead last, on Twin Fangs the adds die too quickly to give it value, and Coldarra is effectively single target too. He grants a slight post-patch increase but calls it not that relevant, and not present on the last few bosses.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=688",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Balance",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "negative",
+      "note": "He names Balance alongside Shadow Priest as a spec whose overall raid standing is inflated by the early spread multi-target bosses that carry most of the logs, and says that on the pure single-target bosses, where Shadow Priest is dead last, Balance was not doing that much better.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=701",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "neutral",
+      "note": "He calls the Subtlety buff from the pass useless in practice: it went to Trickster, and Trickster is still not worth playing for Subtlety, so players remain on Deathstalker and the buff has no effect on the spec.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=754",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "positive",
+      "note": "He reads Restoration Druid as continuing to climb in raid healing results, though he is careful that the September 22 change was only a 4% healing compensation attached to a bug fix and that the other healers are rising too on gear alone, so that change itself did not move the needle much. The stronger claim is about trajectory: after the back-to-back buffs to Rejuvenation, Wild Growth and its HoTs the spec is now firmly a HoT build rather than the Regrowth-spam battery it looked like in the season's first weeks, it has come very close to Preservation Evoker, and he expects it to continue to do well and likely match or pass Preservation.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=784",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-09-26",
+      "sentiment": "negative",
+      "note": "He expects Preservation Evoker to keep losing ground as the tier goes on, and gives a mechanism rather than a number: Preservation is the better burst-healing spec, so the less damage there is to heal back — more item level, more raid-buff stacking, more healing increases — the less its burst is worth, whereas constant HoT healing keeps its value even on fights where less damage goes out. He has Restoration Druid arriving very close to it and expects it to match or pass it.",
+      "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
+      "url": "https://youtu.be/jBVWrW2ibOw?t=846",
       "superseded": false
     }
   ]
