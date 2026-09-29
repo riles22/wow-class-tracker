@@ -109,7 +109,7 @@ jobs:
       # with backoff before failing the run; the first success short-circuits the rest.
       - name: Deploy to GitHub Pages (attempt 1)
         id: d1
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
         continue-on-error: true
       - name: Back off before retry
         if: steps.d1.outcome == 'failure'
@@ -117,7 +117,7 @@ jobs:
       - name: Deploy to GitHub Pages (attempt 2)
         id: d2
         if: steps.d1.outcome == 'failure'
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
         continue-on-error: true
       - name: Back off before final retry
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
@@ -125,7 +125,7 @@ jobs:
       - name: Deploy to GitHub Pages (attempt 3, final)
         id: d3
         if: steps.d1.outcome == 'failure' && steps.d2.outcome == 'failure'
-        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
 
   # This plain-Node job remains inside the workflow-wide Pages concurrency lock,
   # so a newer deployment cannot replace the site while these hashes are checked.
