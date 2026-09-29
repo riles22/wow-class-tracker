@@ -7080,7 +7080,7 @@
       "claim": "Reading the tank half of the same tuning, he says Blizzard buffed the other tanks specifically so Blood Death Knight would not dominate, and that Guardian is now one of the two he would push high keys with. His argument is that Guardian did not have to reinvent itself — the new Apex talent is worth taking but the core is still Chosen of Elune, Moonfire spam and Thrash damage — while staying easy to get into and approachable, carrying the full Druid five-man kit, and being reliable and powerful enough to open up more group compositions. He closes by naming Bear Druid and Brewmaster the sturdiest and highest-damage tanks for pushing outside Blood DK, and adds the general caveat that at merely mid-core key level route and personal play now matter more than the tank class, since all of them were buffed enough to be fine."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Survival",
       "creator": "leak",
@@ -8326,6 +8326,18 @@
       "patchContext": "12.1.5 PTR preview — NOT LIVE. His review of the class section of the official 12.1.5 PTR development notes (\"WoW 12.1.5 PTR: Demon Hunter Rework, Rogue Buffs & More!\", published 2026-09-26, reading the 2026-09-15 update of thread 2344395); nothing here describes the live 12.1 spec, and his live Season 2 reads stand alongside it. He notes the patch has no announced launch date.",
       "url": "https://youtu.be/GWaPC3CyfwI?t=196",
       "claim": "He reads the Nature's Bounty redesign — Regrowth healing up to three allies carrying Rejuvenation for 15% of its healing, lowest health first — as potentially good, comparing it to Glimmer Paladin: single-target healing that cleaves across the party. He names the two cases he expects it to serve, pumping into whoever is being focused during a dodge and into the tank, and flags the three-target cap as the limit on it; he also sees it rewarding a Regrowth-heavy playstyle. He frames the whole thing as solving problems with the current design rather than as a tuning gain."
+    },
+    {
+      "class": "Hunter",
+      "spec": "Survival",
+      "creator": "leak",
+      "date": "2026-09-21",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"Mythic Twin Fangs | Rank 1 Survival Hunter PoV and Commentary\" (published 2026-09-21). Mostly a Mythic Twin Fangs VOD review, but it closes with an explicit spec-standing read argued from that pull's own Warcraft Logs rankings. Supersedes his 2026-09-05 raid read.",
+      "url": "https://youtu.be/5LF-JYAo8j0?t=543",
+      "claim": "Closing out the fight he calls Mythic Twin Fangs a miserable experience as Survival Hunter, because it combines pet, Harpoon and Takedown pathing problems with Wildfire Bomb being unable to properly cleave both bosses — every issue the spec has dealt with in the past gathered onto one encounter. Reading the log, his parse was rank one for Survival on the boss and he immediately discounts it: rank one of four, because almost nobody is playing the spec on it, and looking at the all-specs view for the encounter his rank-one Survival parse still sits far down while Marksmanship is much higher. His verdict is that Survival is not the worst spec in the game but is pretty bad compared to Marksmanship, that it is simply not very good, and that you should just play Marksmanship if you have the choice — he points out he is being beaten in his own raid group by people who are not parsing well. The one strength he names is add damage: he did a lot of damage to the Spawn of Vexxol adds, calls Survival very good at nuking them, and notes those adds are one of the main wipe causes on Mythic, so the spec at least frees other players to stay on the bosses. That add-damage strength is scoped to this encounter and he offers it as the bright side of an otherwise negative read, not as a revision of it.",
+      "superseded": false
     }
   ],
   "metaNotes": [

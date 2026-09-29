@@ -9,18 +9,18 @@
       "queuedAt": "2026-09-26"
     },
     {
-      "id": "2zGgllzxL3U",
-      "creator": "Critcake",
-      "title": "THANE Blasts?? - +21 Temple of Sethraliss - Midnight M+ Season 2",
-      "published": "2026-09-27",
-      "queuedAt": "2026-09-28"
+      "id": "5Itu4dmNP8M",
+      "creator": "Obli",
+      "title": "THE TWIN FANGS MYTHIC / Unholy DK POV",
+      "published": "2026-09-17",
+      "queuedAt": "2026-09-29"
     },
     {
-      "id": "5LF-JYAo8j0",
-      "creator": "leak",
-      "title": "Mythic Twin Fangs | Rank 1 Survival Hunter PoV and Commentary",
-      "published": "2026-09-21",
-      "queuedAt": "2026-09-28"
+      "id": "Wo69fFji8fc",
+      "creator": "Sha",
+      "title": "Mythic Nymrissa Wavecaller | Brewmaster Commentary",
+      "published": "2026-09-19",
+      "queuedAt": "2026-09-29"
     }
   ],
   "skipped": [
@@ -3138,6 +3138,13 @@
       "title": "Wildfire Bomb is Bugged... Again.",
       "reason": "Transcript read in full (~3.5 min, 105 chunks, fetched by the deterministic step 2026-09-28): a single-defect PSA plus a talent-build recommendation. He reports that the September 22 tuning's +20% Wildfire Bomb damage did not apply to the periodic portion of REGULAR Wildfire Bomb (it did apply to the initial hit and to the Shrapnel Bomb dot), reading the AP coefficients — 20.988% against Shrapnel Bomb's 25.2%, which is what 20.988% x 1.2 would be — and a Sentinel damage breakdown where the Shrapnel dot out-damages the regular dot despite Flame Break. He says there is NO raid impact because raid builds already ran Shrapnel Bomb, and that in Mythic+ the grenade-juggler build is now 1.5-4.3% behind flanked at 5 and 8 targets, so he recommends flanked with Shrapnel Bomb and moving the Flanker's Advantage point to Shell Shock. No take: the video carries no read on where Survival stands against any other spec and no tier, meta or outlook call — every comparison is intra-spec between two Survival builds. Distilling it would have required the distiller, not the source, to supply a direction, and any sentiment written here would have diluted his substantive 2026-08-22 live M+ standing read through expertRead's per-creator average. The finding itself is recorded here and in the run log; it is a bug claim, not Blizzard's own notes, so it is not feed material either.",
       "verifiedAt": "2026-09-28"
+    },
+    {
+      "id": "2zGgllzxL3U",
+      "creator": "Critcake",
+      "title": "THANE Blasts?? - +21 Temple of Sethraliss - Midnight M+ Season 2",
+      "reason": "Transcript read in full (407 chunks). A +21 Temple of Sethraliss key run whose only analytical content is the intro's INTRA-SPEC hero-talent comparison: Mountain Thane was buffed ~3%, does less single target than Slayer and more AoE than Slayer, and he calls it solid on overall. The word \"Arms\" never appears in the transcript, so the cross-spec comparison its RSS description advertised is not in the video — this is Fury Mountain Thane against Fury Slayer, the hero-talent-within-one-spec case the skill records as a standing skip (YoDaTV qIIE4KDp_uU precedent). The rest is rotation detail (five globals inside an Improved Whirlwind window when the last stack is consumed by Rampage; no Thunder Clap spam above six targets per recent sims) and key-run callouts. No read on Fury against any other spec, so a sentiment would have been the distiller's own; a filler neutral would also dilute Critcake's substantive 09-16 Arms and 09-17 Fury reads through expertRead's per-creator average.",
+      "verifiedAt": "2026-09-29"
     }
   ],
   "seen": [
