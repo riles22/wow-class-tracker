@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-09-06T19:13:04.118Z",
-  "note": "Reviewed 80 current bonus tooltips against Aug18 archived item text: ten changed bonuses are already reflected in curated tracker facts, including the explicit Demonology official-note conflict and dated Retribution coefficients. Catalyst guide, currency3465 and achievement62872 corroborate the stored eligibility, cadence, cap and criteria; preview-dependent sockets and reward-level tables remain outside this verification.",
+  "reviewedAt": "2026-09-30T04:58:57.830Z",
+  "note": "Reviewed fresh 80-bonus tier evidence and all three Catalyst sources; both source digests exactly match the September 6 reviewed baseline. Compared the prior scoped tracker digest against commit 7a6cea35578d792df8ab36affa3896372a2f282b: only the already-applied September 9 Arms/Protection Warrior UI-tracking notes and September 15 Protection Paladin/Holy Priest behavior-fix annotations, source links and asOf dates changed; printed numeric bonuses did not. Existing Demonology official-note conflict, dated Retribution coefficients, preview-dependent sockets and separate reward-level chart review remain unchanged.",
   "tierBonuses": {
-    "inputDigest": "ed39ec19eafb5953d373231ceceffa088bc57b18947bc8b70da3de194094926d",
+    "inputDigest": "c1d35c125d559e732c59ca528941e4aab282a17c66df4dc2969c967aa7eed085",
     "digest": "579bf9bac02759808af7a84d530db7dfc2fae8b4d2146f90409d1b6bbb68f85c",
-    "verifiedAt": "2026-09-06T19:08:18.060Z",
+    "verifiedAt": "2026-09-30T04:51:21.383Z",
     "sources": [
       {
         "url": "https://nether.wowhead.com/tooltip/item/271474?locale=0",
@@ -717,7 +717,7 @@
   "catalystRules": {
     "inputDigest": "7e4886a948651e13d7b09d1e4fe5dbaf8e46f243a42edd1a3f81ef3b58839b2d",
     "digest": "6472ac55d7159f4b0e5fc2bc85d5e80fb50b79077ff1cc1697c5e2eb5315b71c",
-    "verifiedAt": "2026-09-06T19:08:18.060Z",
+    "verifiedAt": "2026-09-30T04:51:21.383Z",
     "sources": [
       {
         "url": "https://www.wowhead.com/guide/midnight/matrix-catalyst-crafting-tier-set",
