@@ -3,6 +3,21 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-09-29",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Live 12.1 hotfixes for September 29 — NO class or spec line in the entire batch. Read from the CONFIGURED canonical source: Kaivax’s running hotfix compilation (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - September 29”, post 1 at version 51, last edited 2026-09-30T00:10:48.542Z), via the deterministic official-notes receipt and independently re-fetched from the topic JSON this run with its heading nesting INTACT, then cross-checked line for line against the Wowhead mirror news=383182 (published 2026-09-29T19:13:28-05:00). The two agree. The September 29 block carries exactly two headings — Dungeons and Raids (one Ula’tek threat/targeting fix in The Venomous Abyss) and Events (a Brewfest / Coren Direbrew loot required-level fix) — and NO Classes and NO Player versus Player heading, which is why this run’s official-notes receipt reports the post moving v49 → v51 with zero new or edited class sections. specsAffected is therefore deliberately empty (the posts #7/#12/#13 precedent) and nothing here reaches a spec drawer or votes in any outlook tally. Logged for the same reason as the September 17/18/21 raid entries — raid difficulty is the context the raid bracket’s letters are read against. NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “tier set” appear zero times in the September 29 block), so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-september-29/2336376/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383182/ulatek-bug-fix-patch-12-1-midnight-hotfixes-for-september-29",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: Dungeons and Raids — The Venomous Abyss, Ula’tek: fixed an issue with Mother’s Wrath where it can be cast at a target that isn’t the current target if a non-target has higher threat but hasn’t passed the threat threshold to force a target change.",
+        "Non-class: Events — Brewfest: items that drop from Coren Direbrew now have the required level set to the player who receives the item; they can still be traded, but players below that level must reach it to equip the item."
+      ]
+    },
+    {
       "date": "2026-09-24",
       "kind": "hotfix",
       "label": "Live 12.1 hotfixes for September 24 — NO PvE class or spec line in the batch. ⚠️ The CONFIGURED canonical source, Kaivax’s running compilation on us.forums topic 2336376, had NOT yet received this block: the deterministic official-notes receipt (checkedAt 2026-09-25T15:32:41.989Z) reports post 1 still at version 47 / “September 23”, and an independent fetch of the topic JSON this run reproduced exactly that. The block was therefore read from the EU mirror of the SAME Kaivax compilation — eu.forums topic 625785, “World of Warcraft: Midnight Hotfixes - 24 September”, post 1 at version 49, last edited 2026-09-25T00:19:06.954Z — with its heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383108 (published 2026-09-25T01:03:59Z). The two agree. Because the US topic has not carried the block yet, it raises no ledger obligation this run; it will when Blizzard updates that post, and this entry already records the change. Content: one Delves fix and a Player versus Player movement-speed pass. EVERY class line is PvP-only — each is written “in PvP combat”, Mage’s is explicitly a PvP Talent, and the developers’ note frames the whole block as “more adjustments to our prior changes to movement speed reduction effects” — so rule 3c applies and none is written as a “Spec Class …” highlight; they are logged with the out-of-scope prefix so they reach no drawer and cannot vote in the PvE outlook tally. specsAffected is deliberately empty (the posts #7/#12/#13 precedent). NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “tier set” appear zero times in the September 24 block), so no spec.tierSet date advances. Citation: https://eu.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-24-september/625785/1.",

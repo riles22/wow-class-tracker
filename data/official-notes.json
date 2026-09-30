@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-09-29T16:39:26.553Z",
+      "checkedAt": "2026-09-30T16:31:54.942Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -432,9 +432,9 @@
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 49,
-          "updatedAt": "2026-09-25T17:19:59.285Z",
-          "bodySha256": "a4f0797c6b1c39fdbede4986586be3aa1ad25ae61d54db9c9ee6347479d9162c",
+          "version": 51,
+          "updatedAt": "2026-09-30T00:10:48.542Z",
+          "bodySha256": "2858fb54f779630adde88b9f87511d6c49e5dc5f75895cf51f8bdf78265e9d67",
           "sections": [
             {
               "id": "2336376:1:2026-09-24:player-versus-player:hunter:1",
@@ -2337,7 +2337,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-09-29T16:39:26.553Z",
+      "checkedAt": "2026-09-30T16:31:54.942Z",
       "removedSections": [],
       "posts": [
         {
@@ -2580,6 +2580,199 @@
           "updatedAt": "2026-09-22T21:31:41.509Z",
           "bodySha256": "57bbb75540f5eb5c06d0b5615219256a6c5c1901061cda630a5c958f4cef661c",
           "sections": []
+        },
+        {
+          "id": 30257176,
+          "postNumber": 6,
+          "version": 1,
+          "updatedAt": "2026-09-29T20:58:25.478Z",
+          "bodySha256": "2e6041d7472b193c27e5f88607edbee0455f5faed745ce38d6e3cd67a90140fb",
+          "sections": [
+            {
+              "id": "2344395:6:2026-09-29:classes:evoker:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "5a932012844c2b5e376777ee0acb0e66a69e43477cbaf03d35701e74686310e9",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Evoker|Augmentation",
+                    "summary": "Chronowarden: Temporality's duration and Temporal Burst's duration are now increased by Mastery: Timewalker. Scalecommander: Melt Armor damage increased by 100%."
+                  },
+                  {
+                    "specKey": "Evoker|Preservation",
+                    "summary": "Consume Flame no longer double dips from healing increases on the target. Chronowarden bug fixes: extending Fire Breath with Double-time no longer causes Life-Giver's Flame to stop healing, and Afterimage no longer causes Deep Breath to sometimes cast Living Flame on the Evoker."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:classes:hunter:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship",
+                "Hunter|Survival"
+              ],
+              "sha256": "560aea8fda227c5f14d47495442cd50447becce390985ac186198e1d7b9673ad",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Hunter|Marksmanship",
+                    "summary": "Bug fixes only: Explosive Shot no longer automatically selects and fires at a nearby target when pressed with no target selected, and Dark Ranger's Umbral Reach now generates Trick Shots when Bleak Powder hits exactly 2 targets."
+                  },
+                  {
+                    "specKey": "Hunter|Survival",
+                    "summary": "Two Aspect of the Eagle bug fixes: Strike as One's bonus damage from Raptor Swipe (Rank 3) now works properly while it is active, and Raptor Swipe no longer has a longer range than intended during it."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:classes:mage:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Frost"
+              ],
+              "sha256": "5440d1750949e350b392413d0ba64e8faa81673093c0b0844a58e98572f78afd",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Mage|Frost",
+                    "summary": "Bug fixes only: a Splitting Ice Frostbolt's second target now uses the same search radius as other spells; Shatter no longer drops Fingers of Frost from both Ice Lances when two are in the air and only the first benefits (the same issue with Thermal Void is fixed too); and interrupting Ray of Frost by casting Ray of Frost no longer stops Crystalline Refraction generating Fingers of Frost."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:classes:monk:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Brewmaster",
+                "Monk|Mistweaver",
+                "Monk|Windwalker"
+              ],
+              "sha256": "33f6db94c0c18fd60045adfd76f95624cce2e84723c5f3f49a7f78e0500538fd",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Monk|Brewmaster",
+                    "summary": "Class-wide bug fix (the note sits under a bare MONK heading with no spec block, so it is attributed to all three specs): Transcendence: Transfer can no longer be used while silenced when talented into Transcendence: Linked Spirits."
+                  },
+                  {
+                    "specKey": "Monk|Mistweaver",
+                    "summary": "Class-wide bug fix (the note sits under a bare MONK heading with no spec block, so it is attributed to all three specs): Transcendence: Transfer can no longer be used while silenced when talented into Transcendence: Linked Spirits."
+                  },
+                  {
+                    "specKey": "Monk|Windwalker",
+                    "summary": "Class-wide bug fix (the note sits under a bare MONK heading with no spec block, so it is attributed to all three specs): Transcendence: Transfer can no longer be used while silenced when talented into Transcendence: Linked Spirits."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:classes:rogue:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "528d1edd15953e2977cbb37de05e3b9c8b2c1fa86fc93b8f39d32a0f4eec8112",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Rogue|Assassination",
+                    "summary": "Visual changes only, with no tuning value: Mutilate has an updated weapon trail, and Crimson Tempest's animation has been updated and now has a weapon trail."
+                  },
+                  {
+                    "specKey": "Rogue|Subtlety",
+                    "summary": "Visual change only, with no tuning value: Shadow Blades has an updated cast visual and weapon visual."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:classes:shaman:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Enhancement",
+                "Shaman|Restoration"
+              ],
+              "sha256": "6e36bee8813d82b6b3477965fc943551963950f5441b2328cefab1053152f56a",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Shaman|Enhancement",
+                    "summary": "Bug fix: Static Accumulation no longer causes Maelstrom Weapon stacks to stop generating automatically when it is activated at certain points during Ascendance or Doom Winds."
+                  },
+                  {
+                    "specKey": "Shaman|Restoration",
+                    "summary": "Extending Riptide through Swelling Tides now extends Riptide's timer rather than resetting it. Bug fix: Nature's Swiftness and Ancestral Swiftness now properly make Healing Rain instant cast."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:classes:warrior:1",
+              "date": "2026-09-29",
+              "category": "CLASSES",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Protection"
+              ],
+              "sha256": "921e01c0ed5ab359195b9f62bce79496ec9e2441f28bb712c02438ebd9902ad2",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through. Published only as an attributed 12.1.5 notes preview: it never enters ptr-builds, spec.ptr, tier sets, live ratings or model inputs, and PHASES.ptr stays null.",
+                "notes": [
+                  {
+                    "specKey": "Warrior|Protection",
+                    "summary": "Colossus: Practiced Strikes gains an additional effect — Execute and Revenge Rage cost reduced by 10. Blizzard's developers' note says Colossus is meant to express a Warrior's innate prowess, which for Protection means being more efficient with Rage, and that cheaper access to Revenge and Execute should give a more distinct rotation and better threat-management tools. The post itself adds that these changes were already active in the previous week's PTR build, and the same Practiced Strikes effect was already carried by this ledger's 2026-09-03 preview note for the spec."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2344395:6:2026-09-29:player-versus-player:evoker:1",
+              "date": "2026-09-29",
+              "category": "PLAYER VERSUS PLAYER",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Preservation"
+              ],
+              "sha256": "aefe6b058894e4965f4799c04c5f45af3fcf8efc4fa895a9c717daebfedcc874",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-09-30 (nightly) against the official 12.1.5 PTR development-notes thread 2344395, post 6 (Linxy, created 2026-09-29T20:58:25Z, version 1), read from the deterministic receipt text with its heading nesting INTACT and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383180 (published 2026-09-29T16:11:31-05:00) — the two agree exactly, and no line is struck through.  This is the post's PLAYER VERSUS PLAYER section, which holds one line: Merithra's Blessing is now considered an Arcane spell and can be cast when locked out of Nature. The line does not itself carry an \"in PvP combat\" qualifier, so the exclusion rests on Blizzard's own placement plus what it does — school lockout is the arena/battleground mechanic the change addresses, and Blizzard filed it under PvP rather than under the CLASSES Preservation block it also wrote in the same post. This tracker rates PvE raid and Mythic+, so a PvP-section line is out of scope (ptr-watch rule 3c) and publishes no preview note; the Preservation notes above come from the CLASSES section only."
+              }
+            }
+          ]
         }
       ]
     }
