@@ -17,6 +17,83 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-01 (nightly) — Method + Wowhead refetched and reparsed, **0 of 160 letters moved**; Icy Veins walled (day 9 from CI); Archon walled day 37; **0 consensus letters moved**
+
+**Method — success.** Both registered pages by direct browser-header GET, HTTP 200, **162,876 B**
+(raiding) and **169,525 B** (mythic-plus) decoded. Era-verified from the body, not the metadata:
+the `og:description` on both pages still reads *"The War Within Season 3"* (stale boilerplate)
+while the ranking body reads *"how each spec ranks for Raiding content in the Midnight Season 2
+Raid, The Venomous Abyss"* and *"Method's Mythic+ Spec and Dungeon Tier List for Midnight
+Season 2"* — body over title/meta, the blue-tracker precedent, so `seasonVerified: "s2"` is
+unchanged on both. The pages' own dates are **Last Updated 10th August 2026** (raid) and **13th
+August 2026** (M+), exactly matching the stored `published` values and the independent
+pre-agent published-evidence receipt, so `published` was not touched; `snapshot` → 2026-10-01.
+Parse: one roster-matching `tierlist` block per page. **The "Mythic+ Dungeon Difficulty Tier
+List" block was rejected by ROSTER MATCH** (0 of its names map), never by position — the
+documented rule, since "take the first" and "take container[2]" have each failed a page
+rebuild. Counts printed and reconciled against the 27 DPS + 7 healer + 6 tank = 40 shape:
+raid **S 6 / A 11 / B 17 / C 6 = 40**, M+ **S 2 / A 13 / B 21 / C 4 = 40**, 0 unmatched rows.
+**0 of 80 letters moved.**
+
+**Wowhead — success.** All six registered pages by direct browser-header GET, HTTP 200,
+76,480–346,401 B decoded; no r.jina.ai (dead on `/guide/*` since 2026-08-03). Unescaped
+`\/` → `/` across the whole document **first**, then searched for `[tier-list=rows] …
+[/tier-list]`, with tolerant whitespace on `[tier-label …]` (Wowhead writes a trailing space
+inside the tag). Exactly **one** such block per page this run — no decoy, the raid-healer
+two-call trap did not fire — and per-page counts printed: raid 27/7/6, M+ 27/7/6, **80 rows,
+0 unmatched, 0 duplicates**. Spec identity came from the `[spec-badge=<spec>-<class>]` kebab
+slug, which sidesteps the two-word-class split problem entirely. JSON-LD `dateModified`:
+raid DPS 2026-08-31, raid Healer 2026-08-31, raid Tank 2026-08-31, M+ DPS 2026-08-28, M+ Healer
+2026-09-10, M+ Tank 2026-09-01 — byte-identical to the pre-agent published-evidence receipt
+and to the stored `published`, so those stayed put; `snapshot` → 2026-10-01. Every page title
+self-identifies Midnight Season 2 (the stray "Season 1/3/4" hits are changelog rows).
+**0 of 80 letters moved.**
+
+**Icy Veins — BLOCKED (day 9 from CI).** All six registered URLs fetched once each with the
+full browser header set (UA + Accept + Accept-Language + Accept-Encoding + sec-ch-ua +
+Sec-Fetch-* + Upgrade-Insecure-Requests + no-cache): **HTTP 403** with the
+`<title>Attention Required! | Cloudflare</title>` interstitial on all six, 5,487-byte bodies.
+One retry after a pause with a different UA and a Google referer returned the same
+interstitial at 1,894 B. This agrees exactly with the independent pre-agent
+published-evidence receipt (http 403, `dateModified: null`, `resolved: null`, all six pages).
+No proxy, no challenge solve, no replay; r.jina.ai was not attempted. Nothing parsed, so
+nothing written: `snapshot` stays **2026-09-27** (set by the 09-27 residential local run),
+every page-stated `published` date is untouched, and no `seasonVerified` value changed. The
+stored 80 Icy Veins letters stand and keep feeding both brackets' consensus.
+
+**Archon — BLOCKED (day 37).** All **11** archon.gg routes probed once each with the same full
+header set — the six registered letter pages (raid heroic all-bosses × 3 roles, M+ +10
+all-dungeons this-week × 3 roles), the three ancillary Mythic all-bosses pages, plus
+`raid/mythic/nekzali` and `mythic-plus/10/altar-of-fangs/this-week`. Every one returned
+**HTTP 403** with Cloudflare's interactive `Just a moment...` / `challenge-platform` body
+(3,435–3,507 B); no `__NEXT_DATA__` on any of them. The independent pre-agent
+`source-health/evidence.json` recorded the same wall from the other side: raid
+`httpStatus 403 / cloudflare-challenge`, M+ `httpStatus 200 / human-verification`. No
+challenge was solved, replayed or bypassed, and availability was not treated as data.
+**Retention (owner-confirmed 2026-09-05):** Archon's last verified S2 letters stay in the
+consensus with their original 2026-08-25 dates — an outage does not remove a source.
+
+**`data/encounter-tiers.json` read directly rather than assumed:** still `season: "s1"`,
+`asOf: "2026-08-17"`. The S1 archive stays quarantined and the Fight selector stays hidden
+(`season ≠ PHASES.liveSeason`); no S2 encounter observation landed, so neither the stamp nor
+any encounter `name` was touched.
+
+**The `method-published` heartbeat key is firing, and this run establishes WHY.** `check-refresh --age`
+now reports the Method raid page self-date 2026-08-10 as 52 days old against its 45-day threshold,
+with the gate advising "the page has likely rebuilt unseen, or upstream went quiet". It is the
+second: the pages WERE fetched fresh today, their own Last Updated lines still read 10th / 13th
+August 2026, and all 80 letters are byte-identical to stored. So nothing rebuilt behind us and no
+carried-forward `published` value contradicts the page — Method has simply not retouched its
+Season 2 tier lists in seven weeks. Nothing to merge, nothing to re-date; the red is the honest
+signal and clearing it would mean stamping a date the page does not claim.
+
+**0 `seasonVerified` values changed this run**, so `freeze-season.mjs` had nothing to freeze
+agent-side (the publish job runs it between Gate 0 and Gate 1 regardless, with the
+`fetch-depth: 0` history it needs). `apply-ratings.mjs` was still run on the full 160-row
+file per the no-staleness-gate policy — "✓ applied 160 rating(s) across 40 specs" — and a
+deep comparison of every spec's `ratings.raid` / `ratings.mplus` object against
+`git show HEAD:data/specs.json` reports **0 differences**. **0 consensus letters moved.**
+
 ## 2026-09-30 (nightly) — Method + Wowhead refetched and reparsed, **0 of 160 letters moved**; Icy Veins walled (day 8 from CI); Archon walled day 36; **0 consensus letters moved**
 
 - **Method — SUCCESS, 80/80 rows, 0 moved.** Both registered pages HTTP 200 by direct browser-header GET (163,420 B raid / 170,071 B mplus, decoded). Era read from the **BODY, not the meta tags**: the og/twitter description boilerplate still says "The War Within Season 3" (4 hits per page) while the ranking body reads "Midnight Season 2" and, on raid, "Venomous Abyss"; Devourer present in both. **Body over title, so `seasonVerified` stays `s2`** — reading the og tag would have dropped Method out of BOTH brackets' consensus. Zero "12.1.5" hits on either page, so neither is a pre-launch preview; and per the 2026-09-25 rule a live list retitled "12.1.5" would still be `s2`, because `PHASES.liveSeason` does not move for a mid-season patch. Parse: split on `<div class="tier__tier`, letter from the sibling `tier__title`, entries bounded to THAT block's `tier__entries`, resolved from `data-original-title` looked up WHOLE against the roster. Counts printed before merging — raid **40** (S 6 / A 11 / B 17 / C 6), mplus **40** (S 2 / A 13 / B 21 / C 4), each 27 DPS / 7 healer / 6 tank, **0 unmatched, 0 duplicates**. The mplus page's eight extra `tier__entries` names are the dungeon-difficulty block and were rejected **by ROSTER MATCH, never by position** (King's Rest, Ruby Life Pools, Voidscar Arena, The Blinding Vale, Den of Nalorakk, Murder Row, Temple of Sethraliss, Altar of Fangs). "Last Updated" re-read live: **10th August 2026** (raid), **13th August 2026** (mplus) — unchanged, matching the registry and the pre-agent published-evidence receipt, so `published` untouched and only `snapshot` advances to 2026-09-30.

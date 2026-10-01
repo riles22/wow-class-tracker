@@ -17,6 +17,93 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-01 (nightly) — **OFFICIAL 12.1.5 PATCH NOTES PUBLISHED (Oct 1)** → run report only, NOT logged in `ptr-builds.json`; revision ledger 0 new / 0 edited / 0 removed sections, 0 unresolved; no new live 12.1 tuning; ⚠️ `LABEL_FLIP_DUE` still null
+
+**Official revision ledger first (step 0).** Read the pre-agent `official-notes/evidence.json` +
+`pending.json` (checkedAt 2026-10-01T17:09:51.506Z); no agent fetch of either topic.
+- `live-hotfixes` (topic 2336376): post 1 still **v51**, updatedAt 2026-09-30T00:10:48.542Z,
+  bodySha256 `2858fb54…`, 118 class sections — byte-identical to the committed ledger.
+- `ptr-preview` (topic 2344395): posts 1 (v3), 4 (v1), 5 (v1, 0 sections), 6 (v1) unchanged,
+  18 sections, all four bodySha256 values identical to the committed ledger.
+- Section diff across both sources: **0 added, 0 edited, 0 removed**; the 27 live-hotfix
+  removed-section tombstones carry forward untouched. 163 sections total, **0 unresolved**.
+  So the only field that changed in `data/official-notes.json` is each source's `checkedAt`
+  (2026-09-30T16:31:54.942Z → 2026-10-01T17:09:51.506Z) — verified by deep-comparing the
+  pending ledger against the committed one with `checkedAt` stripped (identical: true).
+  `node src/check-official-notes.mjs --base=HEAD` → "Official-note revisions, section
+  dispositions and applied references verified."
+
+**Channel sweep.** Wowhead RSS 40 items / 163,797 B, parsed per `<item>` block (never by tag
+adjacency); news INDEX page 1 via `data.news.newsData` (20 posts, totalPages 1562, anchored on
+the id attribute and brace-balanced); blue tracker via `data.blueTracker.default` (50 entries);
+and the 12.1 PTR dev-notes thread `2317811.json`. The index agreed with the RSS top item, so
+nothing landed mid-run.
+
+**⚠️ THE NEW THING, AND IT IS DELIBERATELY NOT IN THE FEED.** Blizzard published the
+**consolidated 12.1.5 Content Update Notes** on 2026-10-01 at 12:00Z — Blizzard forum topic
+**2368213** (US) / 632922 (EU), blue-tracker news mirror 24304162, Wowhead
+`news=383206` ("Official 12.1.5 Patch Notes - Class Changes, Labyrinths, Kith'ix Raid",
+pubDate Thu 01 Oct 2026 12:02:39 -0500, 20,957-byte `content:encoded` body read in full).
+12.1.5 ships **October 13 NA / October 14 EU**, so the displayed live patch is still 12.1 and
+the posture block applies verbatim: pre-launch consolidated patch notes go in the run report
+and this log, **never** `data/ptr-builds.json` — as `kind: "patch-notes"` they would carry a
+`patch` newer than `displayedLivePatch` and red the run, and mislabelling them to "12.1" to
+get past validation would publish 12.1.5 material as shipped 12.1 content. They also do not
+reach the notes-only preview lane, which reads **only** staff posts in topic 2344395; this is
+a standalone topic, exactly as 12.1's own notes (2333514) were. Nothing on the site moved.
+What they contain, for the owner: CLASSES — Demon Hunter **Devourer** (Collapsing Star gains
+range after the cast starts, loses the 5s cancel cooldown, Fury-drain slow capped at ~1.5
+casts; Soulforged Blades 18% was 15%; Voidpurge 2.5s was 2s; talent repositioning; Void-Scarred
+rewired so Collapsing Star rather than Void Metamorphosis grants the bonuses — Demonic
+Intensity resets The Hunt and empowers it 30%, Violent Transformation resets Soul Immolation
+and loses its Hunt reset/damage, Monster Rising Intellect 10% was 15% and Collapsing Star
+damage 20% was 15%); Druid **Restoration** (Nature's Bounty redesigned — Regrowth heals up to
+3 Rejuvenation'd allies for 15%); Evoker **Augmentation** (Temporality and Temporal Burst
+scale with Mastery: Timewalker), **Scalecommander** (Melt Armor +100%), **Preservation**
+(Merithra's Blessing 30s was 1 min; Consume Flame no longer double-dips) plus Chronowarden
+fixes; Hunter **Marksmanship** (Unload removed, new **Blood Fletching**) plus Dark Ranger and
+Survival fixes; Mage Arcane spell-density, Frost/Frostfire Splitting-Ice and Shatter fixes,
+Spellslinger Splinterstorm tracking; a Monk Transcendence fix; Priest **Discipline** (Master
+the Darkness 30s was 1 min) and **Holy** (Holy Celerity ↔ Ultimate Serenity swap); Rogue
+**Outlaw** (Deft Maneuvers now +5 Energy per target hit up to 30, instead of a flat +30) and
+**Subtlety** (a broad Shadow-damage modifier correctness pass, "impact … remains under
+review") plus Assassination visuals; Shaman Enhancement and **Restoration** (Swelling Tides
+extends rather than resets Riptide) fixes; Warrior **Protection** (**Execute damage +30%**,
+and Colossus Practiced Strikes now also cuts Execute/Revenge Rage cost by 10). Plus the
+single-boss **Unbinding of Kith'ix** raid (Mythic 15–25 flex), the **Labyrinth of Kindo'jan**,
+Aqir Invasions, the mid-season refresh (extra weekly Nebulous Voidcore from the week of Oct 6,
+Ascendant Venomstones from the week of Oct 20, crest cap lifted), the Keystone Myth 3,600
+achievement, and housing/UI/PvP/Prey/warband-reputation sections. **No set-bonus line
+anywhere in the notes**, so no `spec.tierSet` edit and the tier-set upkeep gate stays quiet.
+
+**⚠️ OWNER ACTION STILL OPEN (second run in a row).** `LABEL_FLIP_DUE` in `src/normalize.mjs`
+is still `null`, and the release date is now confirmed by the official notes themselves, not
+just the announcement post. Until it is set to 2026-10-13 the `live-patch-label` heartbeat key
+cannot arm, and a launch commit landing after the 19:23Z heartbeat on release day costs a red
+run. `PHASES.livePatch` stays null, as it must until the owner's launch commit.
+
+**Also seen, also not logged.** `news=383181` "Kith'ix Raid Boss Music Added on Patch 12.1.5
+PTR" (09-29) — a PTR datamine, and while `PHASES.ptr` is null PTR material of any kind is not a
+feed entry. `news=383204` "Aidan Moon Confirms Rage Bug for Warriors While Dual Wielding"
+(10-01) reads as a Warrior tuning lead but the body is about the **WoW: Forever** beta's
+dual-wield spec — a different product, out of scope; the RSS window is now dominated by
+Forever beta coverage and none of it is Midnight 12.1.
+
+**Live 12.1 lane: nothing new.** No "Class Tuning Incoming" post and no hotfix round-up since
+the September 29 Ula'tek bug fix, which is already feed entry #1
+(`kind: "hotfix", realm: "live"`). Blue tracker confirms: the newest Linxy live-hotfix entry
+is "World of Warcraft: Midnight Hotfixes - September 29" (topic 2336376, 09-29 19:11Z).
+`data/ptr-builds.json` unchanged at 43 entries, newest 2026-09-29.
+
+**12.1 PTR cycle, confirmed closed.** `2317811.json`: 19 posts, `last_posted_at`
+2026-07-31T23:42:09.995Z. The thread going quiet is not a lost thread (posture block) — the
+12.1.5 preview has its own configured source and opening a 12.2 cycle is an owner action.
+
+**Dormant lanes skipped as specified:** zone 54 (PTR raid), zone 52 (Dummy Dome), zone 56
+(PTR M+) and zone 57 (Tidebound Grotto). Their contract rows were removed at the flip, so they
+get no manifest row, and the stored zone-52/54/56 receipts in `specs.json` were not touched,
+refreshed or relabelled.
+
 ## 2026-09-30 (nightly) — **12.1.5 RELEASE DATE ANNOUNCED: October 13 NA / 14 EU** ⚠️ owner must set `LABEL_FLIP_DUE`; Sept 29 live hotfix logged (no class line); dev-notes **post 6** → 8 preview sections resolved, 0 unresolved
 
 - ⚠️⚠️ **OWNER ACTION NOW DUE, and nothing in the pipeline can do it for you.** Blizzard announced on 2026-09-29 that **Patch 12.1.5 releases October 13 (NA) / October 14 (EU), with weekly maintenance** — Wowhead news=383171 "Midnight Patch 12.1.5 Releases on October 13th" (2026/09/29 12:02), mirrored on the blue tracker as topics **2366151 / 2366152** (Blizzard Entertainment / Nethaera, 2026-09-29 12:27) and **632485** ("…Arrives 14 October", EU). `LABEL_FLIP_DUE` in `src/normalize.mjs` is still **null**, so the `live-patch-label` heartbeat key is inert and CLAUDE.md's one-line owner action is unperformed. A nightly agent does not edit code, so this is flagged in the manifest summary, the `blizzard-ptr` row and here. Note the cron interaction CLAUDE.md records: the heartbeat runs 19:23 UTC, `live-patch-label` is a PIPELINE key (red every day it persists), and a launch commit landing after that day's heartbeat on release day costs a red run.

@@ -17,6 +17,81 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-01 (nightly) — 44/44 feeds polled, 660 entries, 400 unseen in-cycle; **1 transcript read → `skipped[]`, 1 queued; 0 takes, 0 metaNotes**; Tactyks still `review-required`
+
+**Discovery.** Every configured YouTube feed polled inline in the foreground — 44 unique
+`channelId`s behind the 79 transcribable creator entries (76 class-scoped + 3
+`generalCreators`), up to 3 attempts each with backoff: **44 of 44 HTTP 200, 0 failures, 0
+entries missing a channelId**. The 40 `transcribable: false` entries were skipped by design.
+660 feed entries, `media:description` parsed alongside the title on every one.
+
+**Seen-set from STRUCTURED DATA only** (never a regex over this file): `seen[]` 551 +
+`skipped[]` 447 + `videos[]` 2 + 315 distinct `youtu.be` ids cited by a take or metaNote =
+**1,315 ids**. 400 entries are unseen, and **every one of them is on or after the cycle bound
+2026-06-18**, derived as `Math.min` over the dates in `data/ptr-builds.json` (never
+`builds[0]`, which is the 09-29 hotfix). 251 of the 400 pass the nightly keyword cut
+(class/spec names + Midnight/12.1/Season), which stays ON because the queue is drained by the
+metered provider.
+
+**No YouTube or transcript-API request was made by this agent.**
+`transcript-fetch/summary.json` verdict **`review-required`** (requested 1 / fetched 1 /
+cached 0):
+- `QsYJEKOp-dA` (Tactyks, "Kith'ix Raid Testing on the 12.1.5 PTR…", 09-17, queued 09-26)
+  remains `review-required` on *"request-timeout: provider may have consumed a request; no
+  automatic retry"*, `failures: 1`, `nextAttemptAt: null`. It **stays queued with its retry
+  state untouched** and no replacement was fetched. The verdict is neither `unauthorized` nor
+  `limit-exceeded`, so no API-key problem is flagged in the manifest summary.
+- Usage receipt: 35 counted requests / 1 uncertain in the 30-day window, `limit: null`.
+
+**DISTILLED 0 takes and 0 metaNotes.**
+
+**SKIPPED with a transcript-verified reason (1):** `eetDj-TI5UM` — Dratnos, "Weekly Vault:
+Passion Raids" (2026-09-29), all **381** chunks read. It is a Great Vault loot-selection
+walkthrough across his six tanks: neck/bracer/helmet/belt item-level arithmetic, socketed-vs-
+unsocketed comparisons, bonus-roll sequencing against the new Nebulous Voidcore cadence, crest
+saving until the Myth achievement, and an aside that he ran no M+ keys last week. That is
+gear-level content, and the rule is explicit that an item- or gear-level claim never mints a
+take. His registered scope here is **Warrior Arms/Fury**, and the warrior passage is purely
+"which vault slot rolled what". The one comparative line in the whole transcript —
+*"surprisingly the auto attacks were not anywhere near as bad as I thought … my fears were a
+little overblown on playing Brewmaster on those fights once we have a decent chunk of gear"* —
+fails on two independent tests: it is a single-encounter, gear-conditional survivability
+observation (a fight artifact, not a spec-strength call), and **Brewmaster is outside his
+registered scope**. Minting a neutral to record that the video was watched would have asserted
+a directional view he never expressed and diluted his live Warrior reads through `expertRead`'s
+per-creator averaging. 0 takes, 0 metaNotes. Moved out of `videos[]` into `skipped[]` in the
+same edit, so the one-record rule holds (overlap check across all four lanes: 0).
+
+**QUEUED 1, chosen on its `media:description`, not its title:** `LKzPqYFo6dw` — izen
+(Izenhart), "2/5 New Meta Specs? | Mythic+ Week 6 - 2 Weeks From 12.1.5" (2026-09-30). The
+description is a per-spec chapter list — *01:25 The Unholy Growth · 02:34 Damage Profiles ·
+03:32 But if UH is growing… · 05:18 …then one is falling · 07:14 The 5 DPS · 08:23 The 2xRed
+Question · 10:02 Guardian Druid · 16:14 Different Comps?* — and names "2 More DPS Specs up as
+potential TOP 3 Picks in M+ as well as the major growing of the potential new Meta Tank". That
+is the `metaNotes[]` archetype for a `generalCreators` entry, and the firewall holds: izen can
+never receive a specialist `takes[]` attribution.
+
+**Declined on description and left UNSEEN** (a budget/description judgment is not a durable
+dismissal, so `seen[]` took nothing and stays at **551**): AutomaticJak `kbnF2DNzQjU` "Three
+BIG Holy Priest Tips You Need To Know" and `qk4eaZ6-bHM` (guide-shaped how-to — the documented
+zero-take shape); Critcake `oIbrnsfwEOc` "+21 RLP Arms Warrior" (a key run whose description is
+a gear-level claim, "all that new gear is definitely making a big difference"); NeekapHere
+`oSbpQvomOuo` and Dalaran Gaming `3W6JY-T4MYw` / `AB40BDcU1Pk` (12.1.5 release-date and
+patch-notes recaps — content summaries with no spec-strength read); Bansherz `WQu3KIFOdOc`
+(Mythic Ula'tek boss guide, MM-focused but a kill breakdown); Obli `Vz0gSsUBZEE` (San'layn
+opener how-to); Whispyr `_RqREgnO62w` "Kith'ix First Look - Patch 12.1.5" (boss first-look);
+Tettles `e-1ucW1ZjUA` / `Gt0Zgk1l3Fk` / `1Ndtl2Z8A4I` and Shadarek/Megasett/Sha key VODs
+(stream re-uploads). **Supatease `_8GdxRs5OpI` "Midnight PVP Tier List Update 12.1" is a
+triage-out, not a budget cut** — PvP is out of scope and a PvP-lens read must never vote in
+PvE; same for his duel-tournament and WoW: Forever uploads, and for Dalaran Gaming's "5v5 1v1
+Duels" series. A large share of this week's keyword hits are **WoW: Forever beta** content
+(class deep dives, legacy-talent reviews, Forever class updates) — a different product
+entirely, and it is why the unseen count is high while the distillable set is near empty.
+
+No `community.json` `latest` was advanced, because nothing was distilled to advance one to.
+Nothing read published a tier list or rank order, so `data/creator-predictions.json` was not
+written. No creator opinion moved any rating.
+
 ## 2026-10-01 (local, scheduled) — queue **2 → 2**: 0 captions fetched (persistent 429, fifth day); 0 takes, 0 metaNotes; run BEFORE today's nightly, which had not fired by 14:15Z
 
 - `--list-subs` (never rate-limited) on both queued videos: Dratnos `eetDj-TI5UM` and Tactyks `QsYJEKOp-dA` each carry an English auto-caption track (`en` + `en-orig`), so neither is a durable no-caption dismissal and both stay in `videos[]`.
