@@ -17,6 +17,12 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-01 (local, scheduled) — queue **2 → 2**: 0 captions fetched (persistent 429, fifth day); 0 takes, 0 metaNotes; run BEFORE today's nightly, which had not fired by 14:15Z
+
+- `--list-subs` (never rate-limited) on both queued videos: Dratnos `eetDj-TI5UM` and Tactyks `QsYJEKOp-dA` each carry an English auto-caption track (`en` + `en-orig`), so neither is a durable no-caption dismissal and both stay in `videos[]`.
+- One caption download attempted, on Dratnos `eetDj-TI5UM` (the shorter of the two), without `player_client=android` at `--sleep-requests 3`: **HTTP 429** while the player fetch succeeded — the persistent timedtext shape again (09-25, 09-26, 09-27, 09-30, now 10-01). **Caption traffic stopped there**; no second probe. Tactyks' `review-required` Supadata state left untouched.
+- yt-dlp still 2026.07.04 against the 2026.8.19 pin, not changed in-run. No authenticated fallback (needs a cookies.txt from Riley) and no breadth sweep (same caption endpoint). `data/` unchanged.
+
 ## 2026-09-30 (nightly) — 44/44 feeds polled; **0 takes, 0 metaNotes**; 1 transcript-verified skip (Sha's Brewmaster kill breakdown); 1 queued (Dratnos "Weekly Vault", per-class chapters)
 
 - **Discovery: 44 of 44 channel ids HTTP 200, 0 failures**, up to 3 attempts each with backoff, polled inline in the foreground. 44 unique ids behind the **79** transcribable creator entries (76 class-scoped + 3 `generalCreators`); 0 entries missing a `channelId`; the 40 `transcribable: false` entries skipped by design. **660** feed entries.
