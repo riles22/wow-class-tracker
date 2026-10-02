@@ -17,6 +17,12 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-02 (local, scheduled) — queue **2 → 2**: 0 captions fetched (persistent 429, sixth day); 0 takes, 0 metaNotes; run BEFORE today's nightly, which had not fired by 14:48Z
+
+- Queue on entry: Tactyks `QsYJEKOp-dA` (Supadata `review-required`, untouched) and izen `LKzPqYFo6dw` ("2/5 New Meta Specs? | Mythic+ Week 6", 09-30, queued by the 10-01 nightly). Dratnos `eetDj-TI5UM` left the queue in the 10-01 nightly (`skipped[]`).
+- One caption download attempted, on izen `LKzPqYFo6dw` (the newer item, never probed locally), default client, `--sleep-requests 3`: the android-vr player fetch succeeded and the subtitle request returned **HTTP 429** — the same timedtext shape as 09-25 through 10-01. **Caption traffic stopped there**; no second probe, no breadth sweep (same endpoint).
+- yt-dlp still 2026.07.04 against the 2026.8.19 pin, not changed in-run. No authenticated fallback (needs a cookies.txt from Riley). `data/` unchanged; manifest left alone (partial run).
+
 ## 2026-10-01 (nightly) — 44/44 feeds polled, 660 entries, 400 unseen in-cycle; **1 transcript read → `skipped[]`, 1 queued; 0 takes, 0 metaNotes**; Tactyks still `review-required`
 
 **Discovery.** Every configured YouTube feed polled inline in the foreground — 44 unique
