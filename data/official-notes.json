@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-10-01T17:09:51.506Z",
+      "checkedAt": "2026-10-02T16:23:30.335Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -432,10 +432,52 @@
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 51,
-          "updatedAt": "2026-09-30T00:10:48.542Z",
-          "bodySha256": "2858fb54f779630adde88b9f87511d6c49e5dc5f75895cf51f8bdf78265e9d67",
+          "version": 53,
+          "updatedAt": "2026-10-02T00:02:37.783Z",
+          "bodySha256": "e92c9ba6755bd2ad57c2adeac38f563751c9625c1d58708c118bf1631dde1d92",
           "sections": [
+            {
+              "id": "2336376:1:2026-10-01:classes:druid:1",
+              "date": "2026-10-01",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Feral"
+              ],
+              "sha256": "35e9d8dcd39621127be1fb716e67b852c75c923e8d786ac46db112449cd0f0fb",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-02 (nightly) against official hotfix topic 2336376, post 1, version 53 (last edited 2026-10-02T00:02:37.783Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383227 (published 2026-10-01T19:04:45-05:00). Feral spec heading nested under Druid: a single Rampant Ferocity behaviour fix with no tuning value stated by Blizzard, logged as one spec line in the new 2026-10-01 hotfix feed entry. Because it states no value it casts no outlook vote, which is deliberate. No set bonus is touched, so Feral Druid's spec.tierSet date does not advance.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-01",
+                    "highlight": "Feral Druid — Fixed an issue that could cause Rampant Ferocity to trigger incorrectly against a single target."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-01:classes:hunter:1",
+              "date": "2026-10-01",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Survival"
+              ],
+              "sha256": "a8c5526d8b75b8599c7616b854c18561ecb56e3914b44d1afa7a094436cc2b3b",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-02 (nightly) against official hotfix topic 2336376, post 1, version 53 (last edited 2026-10-02T00:02:37.783Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run, then cross-checked line for line against the Wowhead mirror news=383227 (published 2026-10-01T19:04:45-05:00). Survival spec heading nested under Hunter: Wildfire Bomb's periodic damage +20%, with Blizzard's developers' note stating this is the part of the week-of-September-22 tuning pass that did not properly apply to an untalented variant. It is therefore the LIVE landing of the already-logged 2026-09-18 announcement rather than a second buff, and the feed entry's label says so; the +20% is stored as Blizzard wrote it, while Wowhead's 0% single-target / 6.2% AoE estimates for the original pass are that outlet's figures and are not written as official values. Logged as one spec line in the new 2026-10-01 hotfix feed entry. No set bonus is touched, so Survival Hunter's spec.tierSet date does not advance.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-01",
+                    "highlight": "Survival Hunter — Wildfire Bomb’s periodic damage increased by 20%. Developers’ notes: the tuning hotfix from the week of September 22 did not properly increase the periodic damage of an untalented variant of Wildfire Bomb; this hotfix corrects that issue."
+                  }
+                ]
+              }
+            },
             {
               "id": "2336376:1:2026-09-24:player-versus-player:hunter:1",
               "date": "2026-09-24",
@@ -2337,7 +2379,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-10-01T17:09:51.506Z",
+      "checkedAt": "2026-10-02T16:23:30.335Z",
       "removedSections": [],
       "posts": [
         {

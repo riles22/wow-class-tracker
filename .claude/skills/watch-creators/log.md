@@ -17,6 +17,79 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-02 (nightly) — 44/44 feeds polled; izen `LKzPqYFo6dw` distilled into **7 M+ metaNotes** (7 superseded); queue **2 → 3** (Obli DK season round-up + Musguete 12.1.5 Rogue); Tactyks `QsYJEKOp-dA` still `review-required`
+
+- **Discovery:** every configured feed polled inline in the foreground — **44 distinct channel
+  ids** behind the 79 transcribable entries (76 class-scoped + 3 `generalCreators`), up to 3
+  attempts each, **44 of 44 HTTP 200, 0 failures, 0 entries missing a `channelId`**; the 40
+  `transcribable: false` entries skipped by design.
+- **Seen-set from structured data only** — `seen[]` 551 + `skipped[]` 448 + `videos[]` + every
+  `youtu.be` id in a take or metaNote url = **1,316 ids**. Never regexed from this file.
+- **402 unseen videos are in-cycle** against the computed bound (the OLDEST date in
+  `ptr-builds.json`, **2026-06-18**, taken as a DATE and not an index), **184** of them
+  keyword-matching. Nightly run ⇒ the keyword filter stays and the queue stays narrow; nothing
+  was marked `seen[]` on a budget or title judgment, so the other 400 stay genuinely
+  unexamined and reconsiderable.
+- **Transcripts:** the deterministic step fetched 1 of the 2 queued (`summary.json` verdict
+  `review-required`; usage 36 counted requests in the 30-day window, `limit` null). No agent-side
+  yt-dlp or API call — this runner holds no transcript credentials.
+- **izen `LKzPqYFo6dw`** "2/5 New Meta Specs? | Mythic+ Week 6 — 2 Weeks From 12.1.5"
+  (published 2026-09-30, **481 chunks / 3,447 words, read in full**) → **7 metaNotes**, M+ lens,
+  `generalCreators` lane only (never `takes[]`). His thesis is that the September 23 Unholy
+  bug-fix buff is displacing two of the five meta-comp slots:
+  **Unholy DK positive** (overall representation more than doubled ~2.2 → 4.8%, **0.2 → 4.8% in
+  the highest keys**, ~15% of popular comps, and he judges its single-target/boss damage genuinely
+  competitive rather than just popular);
+  **Arms Warrior negative** (−14% in one week after a month that gained 7%; the all-rounder cut
+  when a fifth candidate arrives, though he still credits two-target cleave, Execute and the shout);
+  **Blood DK negative but explicitly NOT nerfed** (two specs of one class are historically not
+  meta together, so Blood yields the tank slot; he still rates its damage above Guardian's and
+  notes its larger defensive array);
+  **Guardian Druid positive with no buff behind it** (11 → 22% of 20+ keys against Blood's opening
+  83%, 27 → 40% in the post-hotfix cut, effective damage-taken parity once self-healing is netted
+  — 290k vs 190k taken, ~50k external each — plus Mark of the Wild and big-pull synergy; he keeps
+  the caveat that Guardian's damage is still a reasonable amount behind);
+  **Assassination Rogue positive** (+6%, priority damage too valuable to drop);
+  **Elemental Shaman mixed** (still growing, but weak single target and named a replacement
+  candidate alongside Arms);
+  **Arcane Mage neutral** — a read he genuinely expresses (unmoved since the season began, ruled
+  out as the spec Unholy replaces), not a filler neutral.
+  Each supersedes **that creator's previous live M+ note for the same spec** (7 superseded: Unholy
+  09-25, Blood 09-25, Guardian 09-25, Elemental 09-25, Arms 09-22, Assassination 09-22, Arcane
+  09-22). His 2026-08-16/08-17 **pre-launch** panels were left live, as every newer live note on
+  this file has done. Every number was checked back against the chunk it deep-links to, and ASR
+  mangles ("Anoli"/"ank" for Unholy, "Mwever" for Mistweaver, "rally cry") are paraphrased, never
+  quoted.
+- **DECLINED, on the documented rules:** Protection Paladin, Protection Warrior and Brewmaster —
+  a single +21 damage-taken log plus a bare "the other tanks gave up on them" enumeration, i.e.
+  fight artifact + list-mention; **Frost DK** — "stays practically the same" is a representation
+  observation inside an enumeration, and the 2026-08-07 precedent is explicit that Frost DK must
+  not be read off list membership; **Feral / Outlaw / Windwalker** — named only in a list of niche
+  melee comps; **Mistweaver** — a Season-1 historical analogy, not a current read.
+- Its id was removed from `videos[]` in the same edit (one-record rule), and izen's
+  `generalCreators.latest` advanced to this distilled video rather than to a fresh title.
+- **`QsYJEKOp-dA` (Tactyks) stays queued, untouched:** the provider returned
+  `request-timeout: provider may have consumed a request; no automatic retry`, recorded as
+  `review-required`. State was not reset and no replacement fetch was attempted.
+- **QUEUED 2 (queue 2 → 3)**, both verified against this run's live RSS with an author match:
+  **Obli `cUeoz6js3OY`** "How has the state of DK been in Season 2 of Midnight? /w @Bicepspump &
+  @waalpen" (2026-10-02) — a season-state round-up inside his registered Frost/Unholy scope; it
+  has **two guests**, so the ASR-has-no-speakers rule applies at distillation and only
+  self-anchored claims may be attributed to him. **Musguete `zQgeZR1ag0Q`** "Patch 12.1.5 Rogue
+  Changes: Everything You Need to Know" (2026-10-01) — in his Outlaw/Assassination/Subtlety scope;
+  being pre-release 12.1.5 material it would be framed `"12.1.5 PTR preview — NOT LIVE"`, since
+  `PHASES.livePatch` and `LABEL_FLIP_DUE` are both still null and the patch is dated Oct 13.
+- **Not queued, with reasons** (so the next run need not re-reason them): the eight YoDaTV "Why
+  Your Tank is Dying in …" dungeon-mechanic guides and Tactyks'/Bansherz' Mythic Ula'tek boss
+  guides (guide-shaped, no spec-strength read); Shadarek's bonus-roll/crest PSA (gearing PSA);
+  the leak/Critcake/Whispyr/Kalamazi key-run and prog streams; everything titled "WoW: Forever"
+  (a different product); Dalaran Gaming's 5v5 duel series and Supatease's "Midnight PVP Tier List
+  Update" (PvP lens, out of scope). None of these was written into `seen[]` — they remain unseen
+  so a later run can still verify by transcript if one looks worth it.
+- **No creator opinion touched a tier, a consensus or the frozen forecast.** `npm run
+  audit:creators` → **HIGH 0 · MED 0 · INFO 9** (8 zero-take transcribable entries + the standing
+  "expert lane dormant between cycles" note).
+
 ## 2026-10-02 (local, scheduled) — queue **2 → 2**: 0 captions fetched (persistent 429, sixth day); 0 takes, 0 metaNotes; run BEFORE today's nightly, which had not fired by 14:48Z
 
 - Queue on entry: Tactyks `QsYJEKOp-dA` (Supadata `review-required`, untouched) and izen `LKzPqYFo6dw` ("2/5 New Meta Specs? | Mythic+ Week 6", 09-30, queued by the 10-01 nightly). Dratnos `eetDj-TI5UM` left the queue in the 10-01 nightly (`skipped[]`).

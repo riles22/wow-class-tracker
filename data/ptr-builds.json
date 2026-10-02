@@ -3,6 +3,25 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-10-01",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Live 12.1 hotfixes for October 1 — two class lines and one raid fix. Read from the CONFIGURED canonical source: Kaivax’s running hotfix compilation (us.forums topic 2336376, title now “World of Warcraft: Midnight Hotfixes - October 1”, post 1 at version 53, last edited 2026-10-02T00:02:37.783Z) via the deterministic official-notes receipt, whose section text was independently re-fetched from the topic JSON in this run with its heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383227 (published 2026-10-01T19:04:45-05:00 / 2026-10-02T00:04:45Z). The two agree exactly. The October 1 block carries two headings: Classes (Druid › Feral and Hunter › Survival, each nested under its own spec heading, so neither is attributed by guess) and Dungeons and Raids (one Ula’tek fix in The Venomous Abyss). There is NO Player versus Player heading this time, so rule 3c does not come into play. The Survival line is the LIVE landing of a buff the 2026-09-18 tuning announcement already carried: Blizzard’s own developers’ note says the September 22 pass “did not properly increase the periodic damage of an untalented variant of Wildfire Bomb”, so this is the missing part of that pass arriving rather than a second, separate +20% — Wowhead covered it twice (news=383216 “Survival Hunter Buff to Wildfire Bomb Now Live”, 2026-10-01T22:12Z, and the hotfix round-up), and its 0% single-target / 6.2% AoE figures for the original pass are that outlet’s estimates and are deliberately not written here as official values. The Feral line is a behaviour fix that states no tuning value. NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “tier set” appear zero times in the October 1 block), so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-october-1/2336376/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383227/ulateks-heart-no-longer-melees-players-patch-12-1-hotfixes-for-october-1st",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Feral Druid",
+        "Survival Hunter"
+      ],
+      "highlights": [
+        "Feral Druid — Fixed an issue that could cause Rampant Ferocity to trigger incorrectly against a single target.",
+        "Survival Hunter — Wildfire Bomb’s periodic damage increased by 20%. Developers’ notes: the tuning hotfix from the week of September 22 did not properly increase the periodic damage of an untalented variant of Wildfire Bomb; this hotfix corrects that issue.",
+        "Non-class: Dungeons and Raids — The Venomous Abyss, Ula’tek: fixed an issue where the Venomous Heart would sometimes melee a player."
+      ]
+    },
+    {
       "date": "2026-09-29",
       "kind": "hotfix",
       "realm": "live",

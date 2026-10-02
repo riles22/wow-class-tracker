@@ -17,6 +17,71 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-02 (nightly) — **October 1 live hotfix block LOGGED** (Feral fix + Survival Wildfire Bomb +20%); revision ledger v51 → v53, 2 new sections resolved `applied`; 12.1.5 notes + Oct 13 date stay in the run report; ⚠️ `LABEL_FLIP_DUE` still null
+
+**Official revision ledger first (step 0).** Pre-agent `official-notes/evidence.json` +
+`pending.json`, `checkedAt 2026-10-02T16:23:30.335Z`.
+- `live-hotfixes` topic 2336376 post 1: **v51 → v53**, `updatedAt 2026-10-02T00:02:37.783Z`,
+  120 sections, **2 NEW** — `…:2026-10-01:classes:druid:1` (Druid|Feral) and
+  `…:2026-10-01:classes:hunter:1` (Hunter|Survival). Section inventory 163 → **165**; the 27
+  removed-section tombstones carried forward unchanged; a keyed diff against HEAD shows
+  **exactly two ADDED and zero CHANGED/REMOVED**, so no prior disposition was rewritten.
+- `ptr-preview` topic 2344395: posts 1 (v3), 4 (v1), 5 (v1), 6 (v1) all at unchanged body
+  hashes, 0 added / edited / removed. The notes-only 12.1.5 preview lane therefore publishes
+  nothing new this run.
+- Both new sections dispositioned **`applied`** with `references` naming the exact stored
+  highlights of the new 2026-10-01 feed entry. Section text was read with its heading nesting
+  INTACT and independently re-fetched from the topic JSON this run (title now "World of
+  Warcraft: Midnight Hotfixes - October 1"); Feral and Survival each sit under their own spec
+  heading, so neither attribution is a guess.
+- `node src/check-official-notes.mjs --base=HEAD` → "Official-note revisions, section
+  dispositions and applied references verified." **0 unresolved.**
+
+**New feed entry (43 → 44), `kind: "hotfix"`, `realm: "live"`, date 2026-10-01.** The October 1
+block carries two headings — Classes (Druid›Feral, Hunter›Survival) and Dungeons and Raids (one
+Ula'tek Venomous Heart melee fix) — and **no Player versus Player heading**, so rule 3c did not
+come into play this time. Cross-checked line for line against the Wowhead mirror
+**news=383227** (published 2026-10-01T19:04:45-05:00): the two agree exactly.
+- `specsAffected`: Feral Druid, Survival Hunter. Three highlights, one of them `Non-class:`.
+- **The Survival +20% is the LIVE LANDING of the already-logged 2026-09-18 announcement, not a
+  second buff** — Blizzard's own developers' note says the week-of-September-22 pass "did not
+  properly increase the periodic damage of an untalented variant of Wildfire Bomb". The label
+  records that framing; Wowhead covered it twice (news=383216 "Survival Hunter Buff to Wildfire
+  Bomb Now Live", 22:12Z, plus the round-up) and its **0% single-target / 6.2% AoE figures are
+  that outlet's estimates and are deliberately not stored as official values**.
+- `classifyHighlight` run on each line rather than assumed: Survival **buff**, the Feral bug fix
+  **null**, the non-class line **null**. Both specs' outlooks come from their dated
+  `ptr.verdict` (Mixed), so **no direction moved** — only the basis line counts (Survival
+  +5/−1 → +6/−1 across 8 → 9 builds; Feral +3/−0 across 7 → 8).
+- **NO SET BONUS IS TOUCHED** — "set bonus", "-piece" and "tier set" all appear **zero** times
+  in the 885-byte October 1 block — so no `spec.tierSet` date advances, the upkeep gate stays
+  quiet and no gearing mirror resync was due.
+
+**Discovery, three transports.** Wowhead RSS (40 items, 201,077 B, parsed per `<item>` block,
+never by tag adjacency); the news INDEX payload `data.news.newsData` (20 posts, brace-balanced
+from the `id` attribute — top item **383226** at 2026-10-02 09:15 agrees with the RSS top, so
+nothing landed mid-run); the blue-tracker payload `data.blueTracker.default` (50 entries, whose
+newest WoW-Midnight rows are the Oct 1 hotfix mirrors already handled). Nothing else for live
+12.1.
+
+**Seen and deliberately NOT logged (run-report lane).** The consolidated **12.1.5 Content Update
+Notes** (us.forums topic 2368213 / eu 632922, blue-tracker 24304162, Wowhead news=383206,
+published 2026-10-01T12:00Z) and **"Midnight's 12.1.5 Content Update Arrives October 13"**
+(topics 2366152/2366151, blue-tracker 24307306; Wowhead news from 09-29). 12.1.5 is not live, so
+consolidated notes cannot enter `ptr-builds.json` as `patch-notes` (the `patch` would exceed the
+displayed live patch) and not as a PTR build either while `PHASES.ptr` is null. Also seen: the
+large run of "WoW: Forever" beta articles, a different product.
+
+⚠️ **OWNER ACTION STILL OPEN, third run running:** `LABEL_FLIP_DUE` in `src/normalize.mjs` is
+still `null` while Blizzard's own notes now confirm **October 13 NA / October 14 EU**. Until an
+owner sets it, the `live-patch-label` heartbeat stays inert and the Bloodmallet 12.1.5
+wholesale-hold rule has no keying date (it did not engage this run — see refresh-metrics).
+
+**Dormant lanes skipped as specified:** zone 54 (PTR raid), zone 52 (Dummy Dome), zone 56 (PTR
+M+) and zone 57 (Tidebound Grotto). Their stored receipts were not read, refreshed or
+reinterpreted; no manifest rows exist for them. The 12.1 PTR thread 2317811 was not re-polled
+(closed since 2026-07-31; the rediscovery gotcha stays suspended).
+
 ## 2026-10-01 (nightly) — **OFFICIAL 12.1.5 PATCH NOTES PUBLISHED (Oct 1)** → run report only, NOT logged in `ptr-builds.json`; revision ledger 0 new / 0 edited / 0 removed sections, 0 unresolved; no new live 12.1 tuning; ⚠️ `LABEL_FLIP_DUE` still null
 
 **Official revision ledger first (step 0).** Read the pre-agent `official-notes/evidence.json` +
