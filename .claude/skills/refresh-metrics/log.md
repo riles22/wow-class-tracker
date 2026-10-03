@@ -17,6 +17,104 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-03 (nightly) — **Murlok RECOVERED** (40 rows at its own 2026-10-03, after last night's INVALID); SimC re-simmed on a new build, **Unholy DK −7.0%**; Mythicstats recalculated in-period, **Devastation Evoker retired**; Bloodmallet 23/27 with **Subtlety newly erroring**; WoWMeta frozen a NINTH week; Archon walled day 39
+
+**Trusted collectors (the only input for these two families — no second parser was written).**
+Receipt `metrics-fetch/evidence.json`, `checkedAt 2026-10-03T14:54:05.728Z`; merged ONLY via
+`node src/apply-metrics.mjs metrics-fetch/updates.json` (78 metrics + 1 retire).
+`node src/check-stable-metrics.mjs` passes.
+- **Murlok `success` — a real recovery.** Last night the same collector reported the source
+  INVALID (its page date had REGRESSED 10-01 → 09-29) and the row was `parse_error`. Tonight: all
+  three meta pages HTTP 200 first attempt (71,309 / 42,298 / 40,902 B), role counts **27 / 7 / 6 =
+  40**, 0 omitted specs, `dateBasis: source-time-datetime` off the page's own `<time datetime>`
+  (10:10:23Z, 10:13:12Z, 10:11:13Z) → `sourceAsOf 2026-10-03`, a same-day coverage date.
+  **previousAsOf 2026-10-01 → newAsOf 2026-10-03.** Name keeps "(ceiling)".
+- **Mythicstats `success` — same period, but the values MOVED.** `/period/latest` → `/period/1083`
+  (HTTP 200, 209,581 B), the third night on period 1083; unlike last night this is an **in-period
+  recalculation**, not an unchanged recheck. Share-column checks reconcile: sum **100.1**, role
+  totals Ranged 28.3 / Melee 31.9 / Tank 19.9 / Healer 20 against the page's own printed 28.2 /
+  31.8 / 20 / 20 — the representation SHARE column, not the `/meta` per-key-presence figure.
+  **31 rows took the fetch date 2026-10-03** because their values changed; the **7 unchanged rows
+  keep their own older `asOf`** (5 at 10-01, one 09-29, one 09-27) exactly as the undated-source
+  rule requires — no row was re-dated to today for being looked at.
+  ⚠️ **First retirement under the owner's 2026-09-25 "show those specs as blank" decision.** Two
+  specs are omitted upstream: **Mage|Fire**, which has no stored row to retire, and
+  **Evoker|Devastation**, whose stored share was **0.1** — at or below
+  `MYTHICSTATS_RETIRE_MAX_SHARE` (0.5), so its single row was REMOVED (39 → 38 rows, a 2.6% drop,
+  far inside `maxRowDropPct` 0.25). **No fabricated zero was written in its place**; the drawer
+  now prints no Mythicstats line for Devastation and Compare all shows "—". It returns by itself
+  the first period that prints it again.
+
+**Fetched by the agent.**
+- **SimulationCraft `success`.** `reports/MID2_Raid.txt` HTTP 200, 1,447,313 B, and it **does**
+  carry a complete `DPS Ranking:` block (46 lines), so the HTML fallback was not needed — but the
+  same file ALSO contains "Generating Baseline … 1/45" progress spam, which is the exact shape the
+  recipe warns reads as an in-progress log. Checked it through to **45/45** before trusting the
+  block: one completed run, not a stale report with a fresh run appended.
+  Era-verified off the **header build string**, never the visible version:
+  `SimulationCraft 1210-01 for World of Warcraft 12.1.0.69933 Live (hotfix 2026-10-03/69933, git
+  build HEAD 6c50c3c7b9, no-networking)` → `asOf` is that hotfix date, **2026-10-03**.
+  Mapped by **longest-prefix with a hyphen allowed**, best hero-variant per DPS spec, `Raid`
+  aggregate skipped: 45 profiles → **24 DPS specs**, and the 7 unmapped names are all tanks (Prot
+  Paladin ×2, Prot Warrior, Brewmaster, Vengeance, Blood DK ×2), correctly excluded. Balance,
+  Augmentation and Devastation still absent upstream, so the pool holds at 24 of 27.
+  **All 24 merged. 23 are sub-0.2% iteration noise; the one real move is Unholy Death Knight
+  273,154 → 253,928 (−7.0%)** — the source's own number, well inside `maxValueMovePct` 0.6, and
+  recorded plainly rather than narrated: it lands the same week Blizzard announced the Blightfall
+  cut, and nothing here was adjusted to fit that coincidence.
+- **Bloodmallet `partial`** — fetched complete, upstream has not re-simmed since **2026-09-30**,
+  so the coverage date is three days old and that is not a success. All 27 DPS specs requested
+  (`talent_target_scaling/castingpatchwerk`, 3 retries each): **23 charts returned**, and **four**
+  give the 76-byte `{"status":"error"}` body on 8/8 attempts — Balance Druid, Augmentation Evoker,
+  Devastation Evoker and, **newly tonight, SUBTLETY ROGUE** (Subtlety is the single stored profile
+  dated 2026-09-23). Every one of the 23 reads `simc_settings.tier` **MID2** and `ptr` the
+  **string "0"** (compared explicitly, never truthiness), and every chart's own `timestamp` is
+  2026-09-30 → **all 23 byte-identical to stored, nothing merged.** Subtlety's stored MID2 profile
+  is **RETAINED**: an error body is upstream absence, not a deletion signal, and the pool stays
+  single-tier either way (24 profiles, all MID2; floor 15 untouched).
+  **The 12.1.5 hold rule was checked and does not apply yet:** `PHASES.livePatch` null,
+  `LABEL_FLIP_DUE` null, and 12.1.5 is **not live** (announced for October 13) — so there is no
+  release date to adopt wholesale against. ⚠️ **This changes once `LABEL_FLIP_DUE` is set**: from
+  that date the rule holds the WHOLE pool until every chart is dated on or after the release, and
+  a partial re-sim must not be merged.
+- **WoWMeta `partial`, frozen a NINTH week.** Two plain curls, no headers/proxy/auth:
+  `manifest.json` 200 (353 B) still `snapshotDate 2026-09-15` (**18 days**), `rankings/…/0.json`
+  200 (162,488 B) with `Last-Modified: Tue, 29 Sep 2026 10:03:08 GMT`. The rankings file was
+  **fetched and DIFFED** rather than short-circuited on the frozen manifest date (the 2026-08-04
+  rule — the two steps run independently): 44 blocks, whitelisted on `categoryType ∈ {dps,hps,tank}`
+  **AND** `sortField === "lowerBound"` **AND** `keyRange === undefined` → tank 6 / dps 27 / hps 7
+  = **40 rows**, 0 unmatched, `melee`/`ranged` subsets correctly excluded. Diffed at the **stored
+  1-dp precision**: 40 of 40 `lowerBound` values and all 40 `numberOfCharacters` identical →
+  nothing merged, no `asOf` restamped. The 18-day lag exceeds `maxAgeDays` **8**; the heartbeat red
+  is the honest signal and no date was touched to quiet it.
+- **Robydoby** (best-effort, deliberately outside the contract and so carrying **no manifest
+  row**): `htmlview` HTTP 200, 16,209 B, tab map parsed — 26 tabs, and the newest **Mythic** week
+  is still **24/7**, unchanged. Nothing merged, and deliberately so: this is a curated **zone-54**
+  series from the **closed** 12.1 PTR cycle, and closed-cycle receipts are not refreshed.
+
+**Warcraft Logs — agent holds no credentials and made no request.**
+Read from `wcl-fetch/evidence.json` (`attemptedAt 2026-10-03T14:51:44.643Z`, oauth true, graphql
+true, 370.57/3,600 hourly points, 138 queries, no abort).
+- `wcl-leaderboard-raid` **partial** (not success): bracket status is `partial` —
+  "287 median rows; 31 empty/sparse cuts; 2 failed/unattempted cuts; minimum 200 rows", and
+  `landed.rows` 287 matches the 287 stored rows at `observedAt 2026-10-03`. The **2 invalid** cuts
+  are Demonology Warlock on encounters 3429 and 3492 ("Ranking amount must be positive"); the 31
+  sparse cuts are under the 10-entry minimum, 24 of them on 3492. All 33 keep prior observations,
+  which is why one stored row still reads `observedAt 2026-10-02` (288 stored vs 287 landed).
+- `wcl-leaderboard-mplus` **success**: "320 median rows; 0 empty/sparse; 0 failed", `landed.rows`
+  320, every returned key level validated at exactly **10** (bracket 9).
+- No partition supersession reported (`supersededBy` absent, pinned partition 1 on both).
+- `wcl-live-raid` / `wcl-live-mplus` stay **unreachable**, recorded verbatim from
+  `legacy[key]`: no verified sanctioned aggregate endpoint. The leaderboard series **cannot** green
+  them. Closed PTR zone-52/54/56 rows untouched. `node src/check-wcl-metrics.mjs --manifest` passes.
+
+**Archon — day 39 behind the wall**, all twelve routes 403 (the M+ route returning HTTP **200**
+with a `human-verification` body, which is why body signature decides and not status). All six
+numeric requirements are separate rows so it is visible which series are stale: 95th-pct DPS
+(Mythic) 32 @ 08-25, HPS (Mythic) 7 @ 08-25, DPS (Heroic) 33 @ 08-24, HPS (Heroic) 7 @ 08-24,
+M+ score 40 @ 08-25, Popularity 79 @ 08-25 — every one retained byte-identical. Per-boss
+survivability was **not** substituted for the empty aggregate (measured dead end, 2026-08-21).
+
 ## 2026-10-02 (nightly) — **Murlok INVALID: its page date REGRESSED (10-01 → 09-29), nothing merged** (`parse_error`); SimC re-simmed on a new git HEAD; Mythicstats same period 1083, byte-identical; Bloodmallet 23/27 unchanged (`partial`); WoWMeta frozen an EIGHTH week; Archon walled day 38
 
 **Warcraft Logs — no agent request of any kind.** Recorded from the deterministic pre-agent

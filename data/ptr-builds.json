@@ -3,6 +3,32 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-10-02",
+      "kind": "build",
+      "realm": "live",
+      "label": "“Incoming Class Tuning - October 6” (Linxy, us.forums topic 2370266, post 1, created 2026-10-02T22:37:59.944Z, still VERSION 1 when read this run — so unlike the 09-18 pass there is no forum-versus-mirror divergence to reconcile; the Wowhead mirror news=383242 published 2026-10-02T17:42:56-05:00 and was diffed line by line against the forum JSON with zero differences, and the forum wording is the one stored). A LIVE-realm tuning pass with its own standalone Blizzard topic rather than a reply in the 12.1 development-notes thread the feed's `thread` key tracks, so its post number is 1 of its own topic — the same shape as the 08-15 / 08-22 / 08-28 / 09-18 entries. It applies with each region's weekly maintenance on October 6, so this entry records the ANNOUNCEMENT: the values are not live yet. This pass sits OUTSIDE Blizzard's 2026-08-12 “Season 2 Class Tuning Plans” roadmap (topic 2335871), whose three scheduled passes — Aug 25, Sep 1, Sep 22 — are all already logged. Blizzard's own framing is per-spec developer notes rather than a stated theme: an Unholy correction after a bug fix overshot, Devourer single-target buffs, Brewmaster durability, raid-focused Mistweaver healing, Trickster-vs-Deathstalker parity for Subtlety, and an all-round Enhancement buff. Heading nesting was kept INTACT and decides one attribution: Rogue's three buffs sit under “Rogue › Subtlety › Trickster”, i.e. a hero-talent block NESTED INSIDE the Subtlety spec heading (not a sibling of the spec blocks, which is the Druid-Wildstalker shape that forced a class-wide line on 09-18), so they are attributed to Subtlety Rogue. The separate PLAYER VERSUS PLAYER section is OUT OF SCOPE for this PvE tracker and is deliberately not distilled; it is the larger half of the post this week, and SEVENTEEN specs appear THERE AND NOWHERE in the Classes section — Blood and Frost Death Knight, Havoc and Vengeance Demon Hunter, Balance and Restoration Druid, Augmentation Evoker, Beast Mastery Hunter, Fire and Frost Mage, Windwalker Monk, Retribution Paladin, Outlaw Rogue, Restoration Shaman, Demonology Warlock, plus class-wide Priest and Warrior blocks — which is why they are absent from specsAffected. The PvP Tank Specializations block likewise touches six tank specs' PvP talents only and is not distilled. NO LINE IN THE CLASSES SECTION IS ITSELF PvP-ONLY: every “Does not affect PvP combat” / “Does not apply in PvP combat” qualifier here marks an ordinary PvE line (the 3c rule keeps those), and the PvE lines carrying no qualifier are stored without one. NO SET BONUS IS TOUCHED anywhere in the post (“set bonus”, “-piece”, “tier set” and “Venomous Abyss” all appear zero times), so no spec.tierSet date moves with this entry and the tier-set upkeep gate stays quiet. Directions were checked against classifyHighlight rather than assumed: Devourer, Brewmaster, Mistweaver, Subtlety and Enhancement are one-directional BUFFS and vote accordingly; Unholy Death Knight is a consolidated NERF line (Blightfall halved) whose second clause is an Augmentation-attribution bug fix, and it votes as a nerf.",
+      "forumPostNumber": 1,
+      "forumUrl": "https://us.forums.blizzard.com/en/wow/t/incoming-class-tuning-october-6/2370266",
+      "wowheadUrl": "https://www.wowhead.com/news=383242/unholy-dk-nerfs-incoming-class-tuning-on-weekly-reset",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Unholy Death Knight",
+        "Devourer Demon Hunter",
+        "Brewmaster Monk",
+        "Mistweaver Monk",
+        "Subtlety Rogue",
+        "Enhancement Shaman"
+      ],
+      "highlights": [
+        "Unholy Death Knight — Blightfall now deals 100% of the remaining plague damage (was 200%); resolved an issue causing Augmentation Evoker Reattribution damage from plague erupt effects to be attributed to the Death Knight.",
+        "Devourer Demon Hunter — Consume/Devour damage increased by 8%; Reap/Cull damage increased by 8%; Eradicate primary target damage increased by 8%; Collapsing Star primary target damage increased by 8%; The Hunt initial damage increased by 10%; Voidblade damage increased by 10% (all PvE only).",
+        "Brewmaster Monk — Quick Sip now purifies 8% of current Stagger amount each time you gain 3 seconds of Stagger duration (was 5%); Pretense of Instability grants 10% dodge for 8 seconds after drinking a Brew (was 5 seconds).",
+        "Mistweaver Monk — Invigorating Mists healing increased by 15%; Enveloping Mist healing increased by 15% (PvE only).",
+        "Subtlety Rogue — Trickster: Fazed now causes enemies to take 7% more damage (was 5%); Unseen Blade damage increased by 15%; Coup de Grace damage increased by 10% (all PvE only).",
+        "Enhancement Shaman — All ability and auto-attack damage increased by 4%; Lava Lash damage increased by 35% (both PvE only)."
+      ]
+    },
+    {
       "date": "2026-10-01",
       "kind": "hotfix",
       "realm": "live",

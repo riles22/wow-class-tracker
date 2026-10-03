@@ -17,6 +17,62 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-03 (nightly) — Method + Wowhead refetched and reparsed, **0 of 160 letters moved**; Icy Veins walled **day 11** from CI; Archon walled **day 39**; **0 consensus letters moved**
+
+**Reachable (2 of 4 sources).**
+- **Method** — both pages HTTP 200 by direct browser-header GET, 177,635 B (mythic-plus) /
+  170,984 B (raiding). Parsed by **ROSTER MATCH over every `.tierlist` container**, never by
+  position: **6** containers on the M+ page and **4** on the raid page, exactly one of each mapping
+  to the roster at **40/40 distinct specs** with **0 non-roster titles inside it**, and the
+  8-entry dungeon-difficulty container (King's Rest, Ruby Life Pools, Voidscar Arena, The Blinding
+  Vale, Den of Nalorakk, Murder Row …) correctly mapping to **0** roster specs and being rejected.
+  Tier counts: raid **S6 / A11 / B17 / C6**, M+ **S2 / A13 / B21 / C4**. Page-stated dates re-read
+  and unchanged: "Last Updated 13th August 2026" (M+), "10th August 2026" (raid).
+- **Wowhead** — all six pages HTTP 200, 76,503–346,698 B. Recipe followed in order: unescape
+  `\/` across the WHOLE document first, then `[tier-list=rows] … [/tier-list]`, then
+  `[tier-label …]…[/tier-label]` with **tolerant whitespace** and `[spec-badge=<spec>-<class>]`
+  kebab slugs. Exactly **one** tier-list block per page this run (no decoy on the raid-healer
+  page), **0 unmatched badges** anywhere. Per-page row counts printed and reconciled to the roster
+  shape: raid **27 + 7 + 6 = 80**, M+ **27 + 7 + 6 = 80**. JSON-LD `dateModified` re-read per page
+  → 2026-08-31 ×3, 2026-08-28, 2026-09-10, 2026-09-01, all unchanged and all **matching the
+  independent pre-agent published-evidence receipt exactly**.
+- **160 of 160 letters byte-identical to stored, 0 moves.** Expected: both outlets' own update
+  dates are weeks old and did not move. Only the capture-date `snapshot` advances to 2026-10-03;
+  `published` stays each page's own date.
+
+**Era verification — and the "patch inside the season" rule got its first real exercise.**
+All eight reachable pages still title themselves **Midnight Season 2** (the Wowhead raid-healer
+page still with its **double space**, "Midnight  Season 2", which is exactly why the check is not
+an exact-spacing literal), Devourer present in both DPS lists, `seasonVerified` **s2** on all
+eight — unchanged. Two false-positive traps checked rather than assumed: every Wowhead page now
+contains the string **12.1.5** (sidebar/news furniture, not the ranking era — and a mid-season
+patch does not move `PHASES.liveSeason` anyway), and the two **"Season 3"** hits on the M+ DPS and
+M+ tank pages are **2024-dated user comments**, not ranking body. No `seasonVerified` value
+changed, so `node src/freeze-season.mjs` was still run and reported "8 source/bracket pairs still
+describe the live season — nothing to freeze there".
+
+**Walled (2 of 4).**
+- **Icy Veins, day 11 from CI.** One bounded GET per page with the full header set → HTTP **403**
+  "Attention Required! | Cloudflare" on all six, **5,485 B on every single page** (identical byte
+  length, which is itself the interstitial's fingerprint). Agrees with the pre-agent
+  published-evidence receipt exactly (403, `dateModified` null, `lastUpdated` null, `resolved`
+  null, six pages). Nothing parsed → nothing written; snapshot holds at 2026-09-27 from the
+  residential local run.
+- **Archon, day 39.** All **twelve** registered routes probed once each → HTTP **403**
+  "Just a moment…", 6,054–6,159 B. The pre-agent source-health receipt shows the two shapes side
+  by side: the raid route 403/`cloudflare-challenge`, the M+ route **HTTP 200** with
+  `bodySignature: human-verification` — a 200 that is a challenge page, which is precisely why
+  availability is judged on body signature and not on status code. No proxy, no r.jina.ai, no
+  challenge solve or replay. All 80 stored letters retained and still feeding both brackets'
+  consensus (owner-confirmed 2026-09-05: an outage does not remove a source).
+- `data/encounter-tiers.json` read directly rather than described: still `season: "s1"`,
+  `asOf 2026-08-17`, 9 encounters / 619 rows — the quarantined S1 archive, Fight selector still
+  hidden by design. No stamp written, because nothing was observed.
+
+**Consensus:** unchanged — 0 of 80 letters moved, and `check-refresh --manifest` reports
+"movement vs 2026-10-02: 0 tier moves (0 of ≥2 bands)". Transport used, for the record: direct
+`curl -L --compressed` with the full browser header set on every source; no proxy anywhere.
+
 ## 2026-10-02 (nightly) — Method + Wowhead refetched and reparsed, **0 of 160 letters moved**; Icy Veins walled **day 10** from CI; Archon walled **day 38**; **0 consensus letters moved**
 
 **Method — success.** Both registered pages by direct browser-header GET, HTTP 200, **170,984 B**

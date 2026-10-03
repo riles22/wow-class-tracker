@@ -17,6 +17,92 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-03 (nightly) — **October 6 live class-tuning pass LOGGED** (`kind: build`, `realm: live`, feed 44 → 45); revision ledger UNCHANGED at v53, 0 sections added/edited/removed; ⚠️ **Blizzard has now dated 12.1.5 — October 13 — and `LABEL_FLIP_DUE` is STILL null**
+
+**Official revision ledger first (step 0).** Pre-agent `official-notes/evidence.json` +
+`pending.json`, `checkedAt 2026-10-03T14:54:09.570Z`, both sources `status: success`.
+- `live-hotfixes` topic 2336376 post 1: still **v53** at `updatedAt 2026-10-02T00:02:37.783Z`,
+  120 sections, and the 27 removed-section tombstones carried forward untouched.
+- `ptr-preview` topic 2344395: posts 1 (v3), 4 (v1), 5 (v1), 6 (v1) all at unchanged body hashes.
+- A keyed diff of pending against the stored ledger returns **0 added / 0 changed / 0 removed**
+  in both sources; a whole-file compare ignoring `checkedAt` is **identical**. So the only edit
+  to `data/official-notes.json` this run is the two check timestamps, every prior disposition is
+  preserved byte-for-byte, and **0 sections are unresolved** (live-hotfixes 22 applied / 98
+  irrelevant, ptr-preview 17 applied / 1 irrelevant).
+- `node src/check-official-notes.mjs --base=HEAD` → "Official-note revisions, section
+  dispositions and applied references verified."
+
+**New feed entry (44 → 45): "Incoming Class Tuning - October 6".** `kind: "build"`,
+`realm: "live"`, date **2026-10-02**, `forumUrl` the topic itself, `forumPostNumber: 1`, no
+`patch` (optional on live entries, and the precedent 08-15/08-22/08-28/09-18 entries carry none).
+- **READ FROM THE FORUM JSON**: us.forums topic **2370266**, post 1, created
+  2026-10-02T22:37:59.944Z, **still VERSION 1** when fetched — so unlike the 09-18 pass there was
+  no forum-versus-mirror divergence to reconcile. Diffed line by line against the Wowhead mirror
+  **news=383242** (published 2026-10-02T17:42:56-05:00): zero differences. Staff post 2 of the
+  topic is empty.
+- This pass sits **OUTSIDE** the 2026-08-12 "Season 2 Class Tuning Plans" roadmap (topic 2335871,
+  Aug 25 / Sep 1 / Sep 22 — all three already logged). It applies with each region's weekly
+  maintenance on **October 6**, so the entry records the ANNOUNCEMENT; the values are not live.
+- Six specs, six consolidated lines. Heading nesting kept INTACT, and it decides one attribution:
+  Rogue's three buffs sit under "Rogue › Subtlety › **Trickster**", a hero-talent block NESTED
+  INSIDE the Subtlety heading — not the sibling-of-the-spec-blocks shape that forced a class-wide
+  Druid line on 09-18 — so they are Subtlety's.
+- `classifyHighlight` was RUN on each line rather than assumed: **1 nerf** (Unholy DK — Blightfall
+  200% → 100%, with the Augmentation-attribution bug fix as its second clause) and **5 buffs**
+  (Devourer, Brewmaster, Mistweaver, Subtlety, Enhancement). **All six specs carry a dated
+  `ptr.verdict`**, which outranks the tally, so **no 12.1 outlook direction moved** — only the
+  basis line counts.
+- **PvP half out of scope (rule 3c).** It is the larger half of this post and **17 specs appear
+  THERE AND NOWHERE** in the Classes section (Blood/Frost DK, Havoc/Vengeance DH, Balance/Resto
+  Druid, Augmentation, Beast Mastery, Fire/Frost Mage, Windwalker, Retribution, Outlaw, Resto
+  Shaman, Demonology, plus class-wide Priest and Warrior) — which is why `specsAffected` is six
+  names and not twenty-three. The PvP "Tank Specializations" block touches six tanks' PvP talents
+  only. **No line in the Classes section is itself PvP-only**: every "Does not affect PvP combat"
+  qualifier there marks an ordinary PvE line, which rule 3c keeps.
+- **NO SET BONUS IS TOUCHED** — "set bonus", "-piece", "tier set" and "Venomous Abyss" all appear
+  **zero** times in post 1 — so no `spec.tierSet.asOf` advances, the upkeep gate stays quiet and
+  no gearing mirror resync was due.
+
+**Discovery, three transports.** Wowhead RSS (HTTP 200, 212,697 B, 40 items, parsed per `<item>`
+block and never by tag adjacency); the news INDEX payload `data.news.newsData` (20 posts,
+brace-balanced from the `id` attribute — top item **383239** at 2026-10-03 09:00 matches the RSS
+top, so nothing landed mid-run); the blue-tracker payload `data.blueTracker.default` (50 entries,
+deduped by topic). Nothing else for live 12.1.
+
+**Run-report lane — seen and deliberately NOT logged in the feed** (`PHASES.ptr` is null):
+- ⚠️ **"Midnight's 12.1.5 Content Update Arrives October 13"** — us.forums topic **2366152**
+  post 1 **v2**, created 2026-09-29T17:00:13.373Z (EU topic 632485 reads **14 October**);
+  blue-tracker news 24307306. **This is the announced release date the owner action keys on:
+  `LABEL_FLIP_DUE` in `src/normalize.mjs` is still `null` and must be set to it.** `src/` is
+  outside this agent's write boundary, so it is reported, not edited — third consecutive night.
+  Consequence to know: the `live-patch-label` heartbeat key is a **pipeline** key, red every day
+  it persists once `LABEL_FLIP_DUE` passes, and the 19:23 UTC cron means a launch commit landing
+  after that day's heartbeat on release day costs a red run.
+- The consolidated **12.1.5 Content Update Notes** (topic 2368213 / eu 632922, Wowhead
+  news=383206, 2026-10-01T12:00Z) — still run-report only: a `patch-notes` entry must carry
+  `patch`, and validation refuses a `patch` newer than the displayed live patch, which is 12.1.
+- "Patch 12.1.5 and Forever Class Deep Dives" (This Week in WoW blog, news=383237) — no tuning.
+- The whole **WoW: Forever** beta stream (datamined class changes, Warrior/Gnome/Paladin builds,
+  level-30 cap notes) is a different product and reaches nothing here.
+
+**Dormant lanes, skipped as designed:** zone-54 PTR raid, zone-52 Dummy Dome, zone-56 PTR M+ and
+zone-57 Tidebound Grotto. The 12.1 PTR cycle is closed; their contract rows were removed at the
+flip, their stored rows are final receipts, and the agent holds no WCL credentials in any case.
+
+⚠️ **LOG SIZE — measured, not pruned, and here is why.** This file is **215 KB with 58 entries**
+against the header's "newest ~20" and the Read tool's **262,144-byte** hard gate: roughly **47 KB
+of headroom, four or five nights at tonight's entry size.** `refresh-tiers/log.md` is 178 KB / 55
+entries, `refresh-metrics` 130 KB / 22, `watch-creators` 119 KB / 25. A prune was scoped and then
+**declined for this run, deliberately**: an automated pass restricted to "nothing new / ledger
+clean" headlines carrying no rule-shaped language found only **2 entries / 4.8 KB** safely
+removable here and **0** in refresh-tiers, because almost every entry contains at least one
+durable-sounding clause. Cutting deeper needs per-entry judgment about whether a fact exists
+anywhere else — which is exactly what the 2026-08-15 prune had to do by hand, promoting ~31 KB of
+parser traps into SKILL.md first — and a single-shot unattended run is the wrong place to make
+twenty of those calls quickly. **Recommended owner/local action before ~2026-10-08:** prune
+ptr-watch and refresh-tiers to the newest ~20 entries, checking the removed range for anything not
+already in SKILL.md.
+
 ## 2026-10-02 (nightly) — **October 1 live hotfix block LOGGED** (Feral fix + Survival Wildfire Bomb +20%); revision ledger v51 → v53, 2 new sections resolved `applied`; 12.1.5 notes + Oct 13 date stay in the run report; ⚠️ `LABEL_FLIP_DUE` still null
 
 **Official revision ledger first (step 0).** Pre-agent `official-notes/evidence.json` +

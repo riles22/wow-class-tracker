@@ -17,6 +17,87 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-03 (nightly) — 44/44 feeds polled; **Musguete `zQgeZR1ag0Q` distilled into 2 12.1.5-PREVIEW Rogue takes**; Obli's 3-speaker DK podcast `cUeoz6js3OY` **declined on ASR-speaker attribution** → `skipped[]`; queue **3 → 6**
+
+**Discovery.** 44 distinct channel ids behind the 79 transcribable entries (76 class + 3 general)
+— **44 of 44 HTTP 200**, retries available and none needed, **660 videos**. `media:description`
+parsed alongside the title on every item, as required.
+- Seen-set rebuilt from STRUCTURED DATA only (`seen[]` 551 + `skipped[]` 448 + `videos[]` 3 +
+  every `youtu.be` id in a take or metaNote url) = **1,318 ids**. Never regexed out of this file.
+- **408 unseen**, and all 408 postdate the computed cycle bound **2026-06-18** — taken as
+  `Math.min(...builds.map(b=>b.date))`, i.e. the OLDEST entry, not `builds[0]`.
+- Nightly keyword filter kept (Supadata is metered): 408 → **68**.
+  ⚠️ **The first filter pass was wrong and was caught by self-testing it.** A trailing `\b` in the
+  patch alternation killed every suffixed form, so `BUFFS!`, `Buffed` and bare `Healer` titles
+  scored zero — it reported **32** matches and silently dropped four of the five videos queued
+  below, including both LBNinja7 items and VooDooSaurus. Re-run with prefix forms and a six
+  known-positive self-test printed before the list. This is the 2026-08-08 extractor trap in a new
+  costume; **prove the triage pass on known positives, every run.**
+
+**Transcripts.** Pre-agent step fetched 2 of 3 queued (`summary.json` verdict
+`review-required`; usage 38 counted requests / 1 uncertain in the 30-day window, limit `null`).
+- `zQgeZR1ag0Q` **Musguete — "Patch 12.1.5 Rogue Changes: Everything You Need to Know"**
+  (2026-10-01, 111 chunks) → **2 takes**, both `patchContext` opening
+  **"12.1.5 PTR preview — NOT LIVE"** per the 2026-09-22 precedent. 12.1.5 releases **October 13**,
+  `PHASES.livePatch` is null and `LABEL_FLIP_DUE` is null, and the video itself says the sim sites
+  are not updated yet — so preview framing is right and these **stand BESIDE** his live
+  2026-09-14 reads rather than superseding them (different lens; 0 existing 12.1.5-preview takes
+  of his to retire).
+  · **Outlaw, `neutral`** — Death from Above no longer adding 30 Blade Flurry energy but adding
+    5 cost per target hit up to 30; his read is that big pulls are "literally the same", small
+    pulls gain a little energy, damage unchanged. **This is an EXPRESSED neutral, not a
+    placeholder** — he assesses the change and finds it negligible, which the rule permits.
+  · **Subtlety, `mixed`** — the shadow-damage double-dip rework. He **twice declines** to call it
+    (sims not updated; Blizzard's own note says the impact is under review) and then, asked for an
+    opinion, leans "might be a slight nerf". `mixed` carries the hedge; `nerf` would overstate a
+    call he explicitly refused to make.
+  · **Assassination got NO take**, deliberately: he reports its only 12.1.5 entries as cosmetic
+    (Mutilate weapon trail, Crimson Tempest animation) and offers no performance read.
+  · **One line NOT distilled**, and worth recording why: "all three rogue specs very very good …
+    they are not going to change that anytime soon". It is a real strength claim, but it restates
+    his 09-14 comparative reads with *less* detail, and minting three live takes from it would
+    supersede the richer ones — "trades information for recency". His 09-14 set stands.
+  · `latest` advanced to this video; `videos[]` entry removed (precedence ladder).
+- `cUeoz6js3OY` **Obli — "How has the state of DK been in Season 2 of Midnight? /w @Bicepspump &
+  @waalpen"** (2026-10-02, 1,532 chunks ≈ 55 min) → **`skipped[]`, reason preserved in the entry.**
+  Read in full. It DOES carry substantive Season-2 DK reads — Blightfall-era Unholy called
+  "absolutely busted" and answered "Yes, it is" to S tier in M+, Unholy trumping Frost almost
+  everywhere, Frost limited to Twin Fangs in the raid, the two profiles converging — **and not one
+  of them is attributable.** The caption track has no speaker labels, only inconsistent turn
+  markers; the ONLY passages anchored to Obli by name are "One change on unholy obly that you
+  would do" (26:30) and "Obly, what about you?" (54:19), both design wish-lists (rotation/resource
+  critique, "buff Frost DK cooldown"), which carry no spec-strength read. `waalpen` is not a
+  registered creator at all. The `yt-dlp --print "%(description)s"` route that normally resolves
+  guest/chapter attribution is unavailable here — three probes, all "Sign in to confirm you're not
+  a bot", then **stopped** (settled 2026-07-17; no install, no upgrade, no retry loop).
+  Declined under the AutomaticJak / Maximum-watch-along precedents. Nothing of consequence lost:
+  Obli's own current Unholy raid+M+ reads are on file from 2026-09-24, and his 2026-10-03 SOLO
+  video on the same nerf is queued below.
+- `QsYJEKOp-dA` (Tactyks) **stays queued** — collector reports `review-required`,
+  "request-timeout: provider may have consumed a request; no automatic retry". State left exactly
+  as received: not reset, no replacement fetched.
+
+**Queued (3 → 6, inside `PER_RUN_CAP` 25).** All five new ones are analysis-shaped, in-scope PvE
+Midnight, published 10-02/10-03:
+`ikERYz-aMy8` Obli "The Inevitable Unholy Nerf is coming." (description promises the Blightfall
+nerf *and* where Unholy stands against Frost — the highest-value item in the sweep) ·
+`5-aEKR25QIA` Shadarek "Devourer Buffs & Unholy DK Nerfs" (his title says "September 6th"; the
+pass is October 6) · `kC6gjXl4xHo` VooDooSaurus "Devourer Demon Hunter BUFFS! What do they mean??"
+· `Z6AVWgAX7n4` Nintern "Devourer Tuning 10/6" · `16WZvRFYF3s` LBNinja7 "The WORST Healer Spells
+in the GAME | Midnight S2".
+
+**Left UNSEEN on purpose** (budget/transport/shape dismissals are not durable): the ~62 other
+keyword matches — boss and key POVs, stream VODs, PvP duel series (Dalaran Gaming, Supatease), the
+whole WoW: Forever beta lane, and spec guides. Two LBNinja7 hashtag-style items
+(`nCgFxapXjs8` "Mistweaver Healing Buffed AGAIN 10/6", `Ljq_r4zAa0g` 09-19) look like Shorts, and
+a sub-minute duration WOULD be a durable `seen[]` fact — but duration cannot be measured from this
+runner with yt-dlp walled, so they stay unseen rather than guessed.
+
+`npm run audit:creators`: **HIGH 0 · MED 0 · INFO 9** (8 transcribable creators who have never
+yielded a take, plus the expected "expert lane dormant between cycles" note — `expertRead` returns
+null for all 40 specs in both brackets while `PHASES.ptr` is null, which is dormancy, not a gap).
+**No creator opinion moved any tier.**
+
 ## 2026-10-02 (nightly) — 44/44 feeds polled; izen `LKzPqYFo6dw` distilled into **7 M+ metaNotes** (7 superseded); queue **2 → 3** (Obli DK season round-up + Musguete 12.1.5 Rogue); Tactyks `QsYJEKOp-dA` still `review-required`
 
 - **Discovery:** every configured feed polled inline in the foreground — **44 distinct channel
