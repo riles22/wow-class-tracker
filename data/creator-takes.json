@@ -8253,7 +8253,7 @@
       "patchContext": "Season 2 live — \"Single target damage is INSANE / Unholy DK Midnight Season 2 update\" (published 2026-09-24), a short Warcraft Logs read-through recorded the day after Blizzard fixed the Blightfall bug he had spent two videos reporting. Everything in it is read off the first ~24 hours of logs, a limit he states repeatedly himself. Supersedes his 2026-09-23 Unholy raid read, which was written while the bug was still live.",
       "url": "https://youtu.be/kB0bop0aUpI?t=92",
       "claim": "The bug fix flips Obli's Unholy raid read from mixed to strongly positive: Blightfall is now \"the build everywhere\", and on single-target bosses he reads the top Unholy logs roughly 10% clear of the nearest Frost (242k against 227k on one, a similar gap on another), calling a spec that was \"dog water single target\" now the best in the bracket at it \"not even by a little bit\". He bounds the claim himself in three ways: it is single target only — on any cleave or two-target fight Frost is instantly ahead again, and there are bosses where Frost is still far better; the pets build is not far behind Blightfall; and the sample is under 24 hours and skewed by Asian-server rank-chasing, since the small pool of players on the new build makes rank ones easy. He expects Blizzard to over-nerf it within days — \"enjoy it while it lasts\" — and says he will not even get to play it on Mythic before then. Raid-wise his recommendation is Unholy for single target and Frost for everything else.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8362,6 +8362,17 @@
       "url": "https://youtu.be/zQgeZR1ag0Q?t=160",
       "claim": "His read on Subtlety's 12.1.5 shadow-damage rework is an explicitly uncommitted lean toward a slight nerf. He reads the change out in full — every shadow-damage modifier reworked so the bonus applies consistently to individual shadow-damage abilities (he names Secret Technique secondary hits, Shadow finisher attacks and shadow clone attacks) and to effects that scale off the damage of the triggering attack (Shadow Blades, Goremaw's Bite, Lingering Shadow), so that they benefit correctly when the input attack is physical and no longer double dip when the output is shadow. He twice declines to call it: he says we still do not know whether it is a buff or a nerf, giving as his reason that the simming sites are not yet updated for the change and that Blizzard's own note says the damage impact is still under review, and he says he does not want to call it a nerf for that reason — but asked for his opinion from what he can see, he believes it might be a slight nerf. He gives no placement and no comparison against other specs or classes, so this is a read on the direction of one change rather than on where Subtlety lands.",
       "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-10-03",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — \"The Inevitable Unholy Nerf is coming.\" (published 2026-10-03), a ten-minute solo read of the announced October 6 class tuning, recorded before the change is live. He reads it off Mythic Warcraft Logs with his own estimate of the loss applied by hand; he notes he has not personally pulled some of the weaker fights on Mythic. Supersedes his 2026-09-24 Unholy raid read.",
+      "url": "https://youtu.be/ikERYz-aMy8?t=66",
+      "claim": "Obli reads the Blightfall cut (200% to 100% of the remaining plague damage) as a deserved and healthy nerf: he cites it as roughly a 7-10% single-target and about 7% AoE loss, and argues it had to come because Blightfall gave Unholy top single target without giving up its AoE. Applying a 10% cut to his own Mythic log, he expects Unholy to drop from \"overbearingly strong\" on single target to in line with Frost and the rest of the field, while still placing well on its best bosses — he names Vashnik, Sszorak and Coiled Altar, flagging the last as where the cut will be most interesting because Blightfall stacks with Inevitable's execute bonus and so inflates the current logs there. Where Unholy was already weak (he names Lost Explorers, Entombed Sentinels and Twin Fangs, the last the biggest drop) he expects it to fall a long way, and he worries it will now need add padding to post good boss damage, which could push Frost up. He still calls it the best spec to play and says a great Unholy will beat a good Frost or Marksmanship player. He also reads the Augmentation reattribution fix as a further small loss only for groups playing with an Augmentation Evoker, while saying he is unsure what it means."
     }
   ],
   "metaNotes": [

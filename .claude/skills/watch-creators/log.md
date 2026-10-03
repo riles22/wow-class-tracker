@@ -17,6 +17,13 @@ by parsed DATE, never by position. Do not cite lines of this file by NUMBER from
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
 
+## 2026-10-03 (local run, transcript catch-up after today's nightly) — **Obli `ikERYz-aMy8` distilled into 1 Unholy RAID take**; caption 429 on the second video → stopped; queue **6 → 5**
+
+- No discovery sweep: the nightly polled all feeds hours earlier; this run only drained the queue with yt-dlp 2026.07.04 (pin).
+- `ikERYz-aMy8` **Obli — "The Inevitable Unholy Nerf is coming." (2026-10-03)**: fetched clean (android client). Solo read of the announced October 6 Blightfall cut (200% → 100%). One raid take, sentiment `nerf`, superseding his 2026-09-24 raid `buff` take (same lens, different date). No M+ claim in the video, so his 09-24 M+ take stays live. Frost not given a take: his Frost remarks are coherence/feel and "Unholy now in line with Frost", not a Frost strength read.
+  ASR boss names resolved against `data/specs.json` metric names before writing: "Scissorak/Scizarak" = **Sszorak**, "Vashnate" = **Vashnik**, "Sentinels" = **Entombed Sentinels**, "Explorers" = **Lost Explorers**, "Winfangs" = **Twin Fangs**, "cord/coral alter" = **Coiled Altar**. Two first-draft phrasings were corrected on the verify pass: Coiled Altar is where he says the cut will be "most interesting" (not "hit hardest"), and his not-pulled-on-Mythic caveat is about the weaker fights, not all affected bosses.
+- `5-aEKR25QIA` (Shadarek): caption download **429** with the android client, retried once ~20s later without it → **429 again**. Per the two-429s rule, stopped all caption traffic here (no authenticated cookies file available on an unattended run). Remaining queue left for the nightly's Supadata step / a later local run: `5-aEKR25QIA`, `kC6gjXl4xHo`, `Z6AVWgAX7n4`, `16WZvRFYF3s`, `QsYJEKOp-dA`.
+
 ## 2026-10-03 (nightly) — 44/44 feeds polled; **Musguete `zQgeZR1ag0Q` distilled into 2 12.1.5-PREVIEW Rogue takes**; Obli's 3-speaker DK podcast `cUeoz6js3OY` **declined on ASR-speaker attribution** → `skipped[]`; queue **3 → 6**
 
 **Discovery.** 44 distinct channel ids behind the 79 transcribable entries (76 class + 3 general)
