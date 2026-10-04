@@ -16,6 +16,92 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-04 (nightly) — 44/44 feeds polled, **4 pre-fetched transcripts distilled into 5 takes** (724 → 729); Devourer DH covered by three independent creators on the October 6 pass; one Mistweaver raid take out of a spell-opinion video; queue 5 → 7
+
+**Discovery.** All **44 distinct channelIds** behind the 79 transcribable creator entries polled
+inline in the foreground, HTTP 200 with 15 entries each, **0 failures**, 660 videos. Zero
+transcribable creators lack a `channelId`. Diffed against the **structured four-lane seen-set**
+(`seen[]` + `skipped[]` + `videos[]` + every `youtu.be` id in a take or metaNote url), union
+**1,323**: **408 unseen**, every one of them on or after the cycle-opening build date **2026-06-18**
+(derived as the OLDEST date in `ptr-builds.json`, never `builds[0]`), **223** matching the nightly
+keyword filter. `media:description` parsed alongside every title, which settled several borderline
+cases without spending a request.
+
+**Distilled (5 takes, all from the deterministic pre-agent fetch — the agent made no transcript
+request).** `transcript-fetch/summary.json` verdict `review-required`; 4 of 5 requested videos
+fetched (111 / 174 / 86 / 604 chunks, offsets in ms).
+- **Shadarek — Devourer, M+, buff** (`5-aEKR25QIA`, t=217). The 8%/10% single-target lines come to
+  ~6% for Annihilator and ~5% for Void's Guard, **~3% across a whole dungeon**, all on the priority
+  target; his own caveat is that a *separate* Reap/Cull line would also lift Eradicate's AoE. He
+  already rated Devourer good in keys and expects much more high-end play.
+  ⚠️ The title says "September 6th"; the video itself says the **October 6** NA / October 7 EU
+  reset. Took the content, not the title.
+  **His Unholy DK, Brewmaster, Mistweaver, Subtlety and Enhancement reads in the same video are
+  OUTSIDE his Demon Hunter scope and were not attributed to him** — that is five takes deliberately
+  not written.
+- **VooDooSaurus — Devourer, bracket-SPLIT** (`kC6gjXl4xHo`). Raid **mixed** (t=305): his sims put
+  Annihilator 248k→263k (~6%) and Void's Guard 264k→275k (~4%) single target, AoE ~1.4%/~1.2%, but
+  "the raid is still not great for Devourer because of how it is built" — Void's Guard stays his
+  raid pick. M+ **buff** (t=213): "looking very good Mythic+ now, especially with Unholy's nerf",
+  Annihilator the pick. The 12.1.5 PTR chart he also shows was **kept out of the live take**.
+- **Nintern — Devourer, both, buff** (`Z6AVWgAX7n4`, t=30). Endorses the whole package, "no notes
+  besides W's all around", and notes the values carry into 12.1.5.
+- **LBNinja7 — Mistweaver, raid, nerf** (`16WZvRFYF3s`, t=711). This video is an **opinion ranking
+  of healer SPELLS**, not a tier list, and only its one spec-level claim was distilled: Mistweaver
+  is suffering for Vivify's tuning — a hundred cleaved Vivify casts over a raid fight not
+  out-healing a Holy Priest's single-target Flash Heal, Vivify in the worst spot he has seen even
+  after buffs, Revival abysmal as a major raid cooldown next to Tranquility or Rewind though solid
+  in M+.
+  **Declined from the same transcript:** his Resto Shaman **Healing Wave** complaint, which is tied
+  to the Temple of Sethraliss final boss — a single-fight artifact, the inverse of the "topped one
+  fight because the fight favours the role" rule — and his Unleash Life, Holy Word: Sanctify,
+  Consecration, Living Flame and Crackling Jade Lightning segments, which are spell-design opinions
+  with no spec-strength read.
+
+**Supersession — same lens only, and two deliberate non-supersedes.** Retired: VooDooSaurus
+2026-08-17 and Nintern 2026-09-18 (both whole-spec live reads, jointly replaced). LBNinja7
+2026-09-18 **raid** (same lens).
+- **Shadarek's 2026-09-19 whole-spec take was NOT retired**: tonight's is **M+-only** and cannot
+  replace a both-brackets read, so they are complementary and both stay live.
+- **No 12.1.5 PTR-preview take was retired.** The rule that a live read supersedes a preview keys
+  on the 12.1.5 release date, and Blizzard dates the patch **October 13** — it is not live, so
+  VooDooSaurus' 2026-09-16 and Nintern's 2026-09-16 preview takes stay live beside the new ones.
+All five new takes are framed **"Season 2 live — …"**, never "PTR", and each says it was recorded
+before the October 6 values are live.
+
+**Queue maintained honestly, 5 → 7.** The 4 distilled videos removed from `videos[]` (and verified
+absent from `seen[]`/`skipped[]`, so the one-record ladder holds). `QsYJEKOp-dA` **retained**:
+summary reports `review-required` / `request-timeout: provider may have consumed a request; no
+automatic retry`, so its state was not reset and no replacement was fetched. Six new in-scope
+videos appended, keyword-filtered as the nightly lane requires: `IHejgfDKrAo` (Bicepspump, DK DPS
+state podcast with Obli + Waalpen — multi-speaker, so attribution will need the metadata rule),
+`CKGXuJMtgXI` (YoDaTV, tier-list update + meta analysis — possible `creator-predictions` capture),
+`Kv6chpg_6fk` (Jedith, Devourer buffs), `N8x5_4nieWk` and `ixJGTHQnF_o` (izen, metaNote lane),
+`65gAEPrNBlU` (Dalaran Gaming, October 6 recap — only Subtlety and Enhancement are inside his
+scope). Seven total, well under `PER_RUN_CAP` 25; usage receipt reads 42 counted requests in the
+30-day window, limit unknown.
+
+**NOT queued, and why — all left UNSEEN rather than retired.**
+- `nCgFxapXjs8` (LBNinja7, "Mistweaver Healing Buffed AGAIN 10/6", hashtag title and a one-line
+  description that merely restates it — the clip-short shape). Duration is unverifiable from the
+  runner, and only a *verified* sub-minute duration is a durable `seen[]` fact, so it stays unseen.
+- The large **WoW: Forever** beta block (Psybear's `EjxVtoxgKAY` is explicitly about Forever
+  spellpower scaling in its own description; Supatease's Forever duels are PvP *and* Forever).
+  Tempting for `seen[]`, but that is still a judgment from a title/description, which this skill
+  says is a bad predictor — so they stay unexamined and will be reconsidered.
+- Stream VODs, gameplay/key runs and healer-grind streams (MadSkillzzTV, Bansherz, Critcake,
+  Megasett, Shindigg, Hopeful, Kesslive) — guide-shaped, no spec-strength read expected.
+Budget and title dismissals staying unseen is what keeps the 408-video backlog auditable.
+
+**One bounded yt-dlp probe, then stop.** A single metadata-only `--print` on `nCgFxapXjs8` to settle
+the Short question returned the **settled datacenter bot wall** ("Sign in to confirm you're not a
+bot", plus the no-JS-runtime warning). Not retried, nothing escalated, no caption request made —
+the 2026-07-17 decision stands and this is not a re-litigation of it.
+
+`npm run audit:creators` → **HIGH 0 · MED 0 · INFO 9** (8 transcribable creators with zero takes
+ever — Reholy, Kyrasis, Psybear, Voulk, Hopeful, Clandon, Woxtoxic, Shindigg — plus the expected
+"expert lane dormant between cycles" note, since `PHASES.ptr` is null and `expertRead` returns null
+for every spec, so none of tonight's takes moves a projection).
 
 ## 2026-10-03 (local run, transcript catch-up after today's nightly) — **Obli `ikERYz-aMy8` distilled into 1 Unholy RAID take**; caption 429 on the second video → stopped; queue **6 → 5**
 

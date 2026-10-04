@@ -16,6 +16,65 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-04 (nightly) — **nothing new on any of the four official channels**; revision ledger UNCHANGED at v53, 0 sections added/edited/removed; feed holds at 45; ⚠️ **the 12.1.5 notes now DATE the patch in their body — October 13 NA / October 14 EU — and `LABEL_FLIP_DUE` is STILL null (fourth consecutive night)**
+
+**Official revision ledger first (step 0).** Pre-agent `official-notes/evidence.json` +
+`pending.json`, `checkedAt 2026-10-04T15:31:34.486Z`, both sources `status: success`.
+- `live-hotfixes` topic 2336376 post 1: still **v53** at `updatedAt 2026-10-02T00:02:37.783Z`,
+  same `bodySha256`, 120 sections, and the 27 removed-section tombstones carried forward untouched.
+- `ptr-preview` topic 2344395: posts 1 (v3), 4 (v1), 5 (v1), 6 (v1), all at unchanged body hashes.
+- A keyed diff of pending against the stored ledger returns **0 added / 0 edited / 0 removed** in
+  both sources, so the ONLY edit to `data/official-notes.json` is the two check timestamps and
+  every prior disposition is preserved byte-for-byte. **0 unresolved** (live-hotfixes 22 applied /
+  98 irrelevant + 27 irrelevant tombstones; ptr-preview 17 applied / 1 irrelevant).
+- `node src/check-official-notes.mjs --base=HEAD` → "Official-note revisions, section
+  dispositions and applied references verified."
+
+**Forum JSON fetched independently rather than trusting the receipt.** 2336376 reproduces post 1
+at v53 (title still "October 1"); the closed 12.1 PTR notes thread **2317811** is unchanged, newest
+staff post still 2026-07-31; 2344395 matches the ledger exactly; the October 6 tuning topic
+**2370266** is still post 1 **version 1** with staff post 2 empty, so the entry logged last night
+needs no reconciliation.
+
+**Discovery, three Wowhead transports, nothing new for live 12.1.** RSS HTTP 200, 213,155 B,
+40 items parsed per `<item>` block; the news INDEX payload `data.news.newsData` (20 posts,
+brace-balanced from the `id` attribute) tops out at **383243** at 2026-10-04 09:00, matching the
+RSS top, so nothing landed mid-run; the blue-tracker payload `data.blueTracker.default` (50
+entries, deduped by topic) has nothing newer than the already-logged 2026-10-02 tuning post. The
+two live-12.1 items in the window — news=383242 (October 6 tuning) and news=383227 (October 1
+hotfixes) — are both already in the feed. **No set bonus touched anywhere, so no `tierSet.asOf`
+advances and the upkeep gate stays quiet.**
+
+**Run-report lane — seen and deliberately NOT logged in the feed** (`PHASES.ptr` is null):
+- ⚠️ **The consolidated 12.1.5 Content Update Notes (topic 2368213 / eu 632922, Wowhead
+  news=383206) state the release date in their own BODY: "Patch 12.1.5 releases on October 13th
+  for NA and October 14th for EU."** That is the announced date the owner action keys on —
+  `LABEL_FLIP_DUE` in `src/normalize.mjs` is still `null`. `src/` is outside this agent's write
+  boundary, so this is **reported, not edited, for the fourth consecutive night**. Two things that
+  follow: the `live-patch-label` heartbeat key cannot fire at all while the constant is null, so
+  there is no automated reminder behind this note; and once it IS set, the key is a **pipeline**
+  key, red every day it persists, and the 19:23 UTC heartbeat cron means a launch commit landing
+  after that day's run on release day costs a red night. The notes' own class section is Devourer
+  DH, Resto Druid, Augmentation/Preservation Evoker, Marksmanship/Survival Hunter, Arcane/Frost/
+  Frostfire/Spellslinger Mage, Monk, Disc/Holy Priest, Assassination/Outlaw/Subtlety Rogue,
+  Enhancement/Resto Shaman and Protection Warrior — none of it reaches the site before launch, by
+  design: the notes-only preview lane reads only staff posts in thread 2344395, and these are a
+  standalone topic.
+- The release-date announcement topic 2366152 (eu 632485 reads 14 October) — unchanged since
+  2026-09-29, already recorded.
+- The whole **WoW: Forever** beta stream in the RSS window (datamined class changes, Warrior and
+  Gnome build notes, level-cap notes, dev podcast) is a different product and reaches nothing here.
+
+**Dormant lanes, skipped as designed:** zone-54 PTR raid, zone-52 Dummy Dome, zone-56 PTR M+,
+zone-57 Tidebound Grotto. The 12.1 PTR cycle is closed, their contract rows were removed at the
+flip, their stored rows are final receipts — and the agent holds no WCL credentials in any case.
+
+⚠️ **LOG SIZE, re-measured: 218 KB / 59 entries against the header's "newest ~20" and the Read
+tool's 262,144-byte gate — about 44 KB of headroom, roughly ten nights at this entry size.** The
+2026-10-03 entry scoped a prune and declined it for a single-shot run; that judgment still holds
+tonight and tonight's entry was kept deliberately short instead. **Recommended owner/local action,
+now overdue: prune ptr-watch and refresh-tiers to the newest ~20 entries, checking the removed
+range for anything that exists nowhere but here.**
 
 ## 2026-10-03 (nightly) — **October 6 live class-tuning pass LOGGED** (`kind: build`, `realm: live`, feed 44 → 45); revision ledger UNCHANGED at v53, 0 sections added/edited/removed; ⚠️ **Blizzard has now dated 12.1.5 — October 13 — and `LABEL_FLIP_DUE` is STILL null**
 

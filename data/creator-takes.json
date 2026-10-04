@@ -5510,7 +5510,7 @@
       "patchContext": "12.1 PTR — post-sim read on the August 18 Devourer tuning pass, with APL rework (supersedes his 08-10 read)",
       "url": "https://youtu.be/byBgZmZlzxI?t=826",
       "claim": "He breaks the pass into its parts: all ability damage up 14%, Reap/Call/Eradicate down 12%, Eradicate's AoE portion restored from 85% to 90%, and the four-piece cut from +20% Reap damage and eight soul fragments to +10% and two. He reads the soul-fragment cut as the consequential one, because it stops Reap being soul-positive and so hits Annihilator, which benefited from the set about 8% more than Void's Guard, harder than Void's Guard. His measured figures are roughly a 9% single-target and 1% AoE nerf to Annihilator against 4% and 2% for Void's Guard, leaving Annihilator about 12% behind on single target. He calls the set still strong in raw value at about 12% but no longer something the spec plays around, and concludes Devourer is definitely nerfed but still in a great spot, with Void's Guard ahead in raid and the two close in Mythic+.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -7584,7 +7584,7 @@
       "claim": "As a Mistweaver main he reads its M+ curve as the one that surprised him most in the wrong direction: five Mistweavers in the top 100 (the die-hards, in his framing) growing to only 13 by the top 500, while Holy Priest went from one to 20 over the same range. He closes by asking Blizzard for Mythic+ buffs to Mistweaver specifically — naming Vivify and its spot healing — separately from the raid tuning he wants."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "LBNinja7",
@@ -7848,7 +7848,7 @@
       "claim": "In keys the sim gap is extreme in one direction: in an eight-target pull Aldrachi does almost half its damage to the main target and might do 50% more priority damage than Fel-Scarred after the buff, but its AoE is still just not good. From playing it last season he warns that it kills the priority mob so fast you are left fighting small mobs it clears poorly, so it would need planned routes and a specific composition — in his own group with Arms, Retribution and Havoc already providing priority damage it may simply be too much of it — and he would not be surprised if it does not work or only works dungeon by dungeon (Ruby Life Pools is his example of a single-target-gated key). The Broken Spirit change should at least fix the 30-second soul droughts. His Mythic+ Fel-Scarred build is untouched."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "Nintern",
@@ -8373,6 +8373,66 @@
       "patchContext": "Season 2 live — \"The Inevitable Unholy Nerf is coming.\" (published 2026-10-03), a ten-minute solo read of the announced October 6 class tuning, recorded before the change is live. He reads it off Mythic Warcraft Logs with his own estimate of the loss applied by hand; he notes he has not personally pulled some of the weaker fights on Mythic. Supersedes his 2026-09-24 Unholy raid read.",
       "url": "https://youtu.be/ikERYz-aMy8?t=66",
       "claim": "Obli reads the Blightfall cut (200% to 100% of the remaining plague damage) as a deserved and healthy nerf: he cites it as roughly a 7-10% single-target and about 7% AoE loss, and argues it had to come because Blightfall gave Unholy top single target without giving up its AoE. Applying a 10% cut to his own Mythic log, he expects Unholy to drop from \"overbearingly strong\" on single target to in line with Frost and the rest of the field, while still placing well on its best bosses — he names Vashnik, Sszorak and Coiled Altar, flagging the last as where the cut will be most interesting because Blightfall stacks with Inevitable's execute bonus and so inflates the current logs there. Where Unholy was already weak (he names Lost Explorers, Entombed Sentinels and Twin Fangs, the last the biggest drop) he expects it to fall a long way, and he worries it will now need add padding to post good boss damage, which could push Frost up. He still calls it the best spec to play and says a great Unholy will beat a good Frost or Marksmanship player. He also reads the Augmentation reattribution fix as a further small loss only for groups playing with an Augmentation Evoker, while saying he is unsure what it means."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-10-03",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Devourer Buffs & Unholy DK Nerfs | September 6th Class Tuning\" (published 2026-10-03; the title's \"September 6th\" is a slip, the video itself says the October 6 NA / October 7 EU reset). A short solo walkthrough of the announced October 6 pass, recorded before it is live, with his own hand-computed percentages. Read as Mythic+ only: he frames every figure per key and closes on what it means for M+ comps, and never discusses raid.",
+      "url": "https://youtu.be/5-aEKR25QIA?t=217",
+      "claim": "Shadarek reads the Devourer single-target package as a real Mythic+ gain: the 8% lines (Consume/Devour, Reap/Cull, Eradicate primary, Collapsing Star primary) plus the 10% lines (The Hunt initial, Voidblade) come to roughly a 6% single-target buff for Annihilator and about 5% for Void's Guard, which he puts closer to about 3% across a whole dungeon, with all of it landing on the priority target. He flags one uncertainty of his own: if the Reap/Cull line is separate from the Eradicate line it would also buff Eradicate's AoE portion, which cannot be settled until it hits live. He already thought Devourer was a good overall spec in keys and in a powerful spot despite little play, and expects these buffs to bring it a lot more play in high-end groups — he says he expects to play it himself. Nothing in Void Ray, the Annihilator stars or Hungering Slash is buffed.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — raid outlook. \"Devourer Demon Hunter BUFFS! What do they mean??\" (published 2026-10-03), his own SimulationCraft pass on the announced October 6 tuning, recorded before it is live. He splits raid from Mythic+ explicitly; this is the raid half. He also shows a separate 12.1.5 PTR chart in the same video, which is deliberately not folded into this live read.",
+      "url": "https://youtu.be/kC6gjXl4xHo?t=305",
+      "claim": "VooDooSaurus quantifies the buff from his own sims and then says it does not fix Devourer's raid problem. Single target goes 248k to 263k for Annihilator (about 6%) and 264k to 275k for Void's Guard (about 4%), with AoE up about 1.4% and 1.2% respectively; his eight-target sims \"doesn't really change much\". His read on the raid itself is that Devourer is \"kind of bad in this raid\" because what the spec does does not line up with the raid's demands — single target is fine on a dummy but it is very hard to get Void's Guard's full damage out, and Annihilator does not play well with this raid's mechanics — so \"the raid is still not great for Devourer because of how it is built\". Void's Guard stays his raid recommendation for a bit more single target and a more flexible damage profile, while Annihilator is now \"probably a lot better in a lot of fights\" than before. He flags that if the Eradicate and Collapsing Star buffs are implemented so their AoE scales off the buffed primary component the gain could be much larger, and assumes they will not be.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "VooDooSaurus",
+      "date": "2026-10-03",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — Mythic+ outlook. The same 2026-10-03 sim pass on the announced October 6 tuning, recorded before it is live; this is the Mythic+ half of a read he splits by bracket.",
+      "url": "https://youtu.be/kC6gjXl4xHo?t=213",
+      "claim": "On the Mythic+ side VooDooSaurus is straightforwardly positive: he thinks Devourer is \"going to be pretty good Mythic+\" because of these buffs, since its AoE was already good and the pass adds single-target and priority damage it can deal all the time, and he says the spec is \"looking very good Mythic+ now, especially with Unholy's nerf\". Annihilator is his pick there — \"still better in Mythic+\" and now doing really good single-target damage too — while he sees little reason left to play Void's Guard in keys since the Collapsing Star buff of a few weeks earlier removed its main benefit.",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Nintern",
+      "date": "2026-10-02",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — \"DOMINATION! | Devourer Tuning 10/6 | Midnight Season 2\" (published 2026-10-02), a short reaction to the announced October 6 pass, recorded before it is live. He names no bracket split; his promised raid-versus-Mythic+ breakdown of the Void-Scarred changes is a future video. Supersedes his 2026-09-18 live Season 2 read; his 2026-09-16 12.1.5 PTR-preview take stays live beside it, because 12.1.5 is not live.",
+      "url": "https://youtu.be/Z6AVWgAX7n4?t=30",
+      "claim": "Nintern endorses the whole October 6 Devourer package without reservation: he agrees with Blizzard's own framing that the single-target sources were below expectation, reads through the six lines (Consume/Devour, Reap/Cull, Eradicate primary and Collapsing Star primary at 8%, The Hunt initial and Voidblade at 10%) and says he has no notes beyond \"W's all around\" and that they are \"really good\". He adds that the tuning also carries into 12.1.5, which he dates two weeks out, so the one week of live 12.1 before it is a limbo state of pre-12.1.5 values.",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-10-02",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — raid outlook. \"The WORST Healer Spells in the GAME | Midnight S2\" (published 2026-10-02), an opinion ranking of healer spells rather than a tier list; distilled only where it makes a spec-level claim. Supersedes his 2026-09-18 raid read of Mistweaver. The spell-design complaints he makes about Resto Shaman's Healing Wave are tied to one dungeon boss and are deliberately not distilled as a spec read.",
+      "url": "https://youtu.be/16WZvRFYF3s?t=711",
+      "claim": "LBNinja7 says Mistweaver is suffering for Vivify's tuning in raid: with a build built around keeping as many Renewing Mists out as possible and cleaving Vivify onto 10 to 20 people a cast, he says a hundred Vivify casts over a raid fight still would not out-heal a Holy Priest's single-target Flash Heal, and he calls Vivify's spot the worst he has seen it, even after the buffs it has had. He adds that Revival is abysmal in raid — laughably low healing for a major raid cooldown next to Tranquility or Rewind — while conceding it is solid in Mythic+, which is why he keeps it out of his bottom five. He also calls most of Mistweaver's tuning outside its core rotation and Ancient Teachings bad.",
+      "superseded": false
     }
   ],
   "metaNotes": [

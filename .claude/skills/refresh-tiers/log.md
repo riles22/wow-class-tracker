@@ -16,6 +16,57 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-04 (nightly) — Method + Wowhead fetched and re-parsed clean, **0 of 160 letters moved**; Icy Veins Cloudflare-403 day 12; Archon wall day 40 (letters RETAINED); ⚠️ Method's own page date is now 55 days old and trips the published-gate lag threshold
+
+**Counts printed and reconciled every page, because nothing mechanical catches a shortfall.**
+Per source-bracket the roster shape is 27 DPS + 7 healer + 6 tank = **40**.
+- **Wowhead — success.** All six pages direct browser-header GET, HTTP 200, **76,478–346,673 B of
+  real decompressed body** (never `size_download`, which is the compressed figure). Parsed by
+  unescaping `\/` across the whole document FIRST, then locating `[tier-list=rows] … [/tier-list]`,
+  then taking the candidate block with the MOST `[spec-badge=]` entries — which is how the known
+  1.2 KB decoy on the raid-healer page cannot win without hard-coding anything. Tier labels matched
+  with tolerant whitespace. Rows: 27 / 7 / 6 raid and 27 / 7 / 6 M+, **80 total, 0 unmatched slugs,
+  0 conflicts**. M+ DPS carries `A+` as expected. Each page's JSON-LD `dateModified` read and
+  **unchanged**: raid DPS/Healer/Tank 2026-08-31, M+ DPS 2026-08-28, M+ Healer 2026-09-10, M+ Tank
+  2026-09-01 — byte-identical to the independent pre-agent published-evidence receipt, so
+  `published` was not touched.
+- **Method — success, and the era check mattered tonight.** Both pages HTTP 200 (177,916 B M+,
+  171,265 B raid). ⚠️ **Both carry a STALE `og`/`meta` description reading "The War Within
+  Season 3"** — four hits each — while the body, Tactyks' author intro and the ranking preamble read
+  **"Midnight Season 2"** and name "The Venomous Abyss". Body over meta, the blue-tracker precedent;
+  `seasonVerified` stays `s2`. A naive substring count on "Season 3" would have dropped a healthy
+  source out of the consensus. 4 tier blocks per bracket, **40 + 40 roster rows, 0 unmatched**, and
+  the M+ page's extra tierlist container was rejected **by roster match, never by position**: its 8
+  entries are dungeon names (King's Rest, Ruby Life Pools, Voidscar Arena, The Blinding Vale, Den of
+  Nalorakk, Murder Row, Temple of Sethraliss, Altar of Fangs) and all 8 failed to map. M+ now has an
+  S tier (2 specs) — the old "Method's M+ list has no S tier" note is historical.
+- **All 160 rows re-applied** through `apply-ratings.mjs` ("applied 160 rating(s) across 40 specs").
+  **0 of 160 letters moved**; a semantic diff against `HEAD:data/specs.json` confirms **0 specs with
+  a ratings change**. Only the two sources' fetch `snapshot` advanced to 2026-10-04.
+- **Icy Veins — blocked, day 12.** One bounded GET per registered page with the full header set:
+  **HTTP 403 "Attention Required! | Cloudflare" on all six**, 5,488-byte bodies of identical length,
+  zero tier-list markup. Agrees exactly with the pre-agent published-evidence receipt (`http 403`,
+  `resolved: null`, all six). All 80 letters, the 2026-09-27 snapshots, the per-page `published`
+  dates and `seasonVerified` left untouched. r.jina.ai not tried — recorded dead lane.
+- **Archon — blocked, day 40.** One bounded GET per representative route: raid **403 "Just a
+  moment..."** (5,956 B, `__NEXT_DATA__` count **0**), M+ the same (6,022 B). Asserted on
+  `__NEXT_DATA__` presence, not the status code, exactly as the standing note requires. Matches the
+  pre-agent source-health receipt (raid 403 `cloudflare-challenge`; M+ **HTTP 200**
+  `human-verification` — the shape that would fool a status-only check). No challenge solved,
+  replayed or automated past. **Owner retention policy (2026-09-05) applied: the last verified S2
+  letters still feed the consensus**, so the consensus is still four sources and nothing was
+  removed, dropped or back-filled from Warcraft Logs.
+- **`data/encounter-tiers.json` read rather than assumed:** `season: "s1"`, `asOf: 2026-08-17`, still
+  the S1 encounters — the quarantined archive, Fight selector still hidden, stamp NOT touched.
+
+**No `seasonVerified` value changed anywhere this run, so `freeze-season.mjs` had nothing to do**
+(publish runs it between Gate 0 and Gate 1 regardless).
+
+⚠️ **New heartbeat item worth an owner eye:** `check-refresh --age` now reports *"method … page
+self-date 2026-08-10 is 55 days old (max 45d) — the page has likely rebuilt unseen, or upstream went
+quiet; check it"*. Checked tonight: the page is genuinely serving its own 10 August build with
+unchanged letters, so this is upstream going quiet rather than a parse we are missing — but it is the
+first time Method has crossed that threshold, and the raid list has now been static for eight weeks.
 
 ## 2026-10-03 (nightly) — Method + Wowhead refetched and reparsed, **0 of 160 letters moved**; Icy Veins walled **day 11** from CI; Archon walled **day 39**; **0 consensus letters moved**
 
