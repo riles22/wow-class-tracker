@@ -2,20 +2,6 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "QsYJEKOp-dA",
-      "creator": "Tactyks",
-      "title": "Kith'ix Raid Testing on the 12.1.5 PTR, then keys into Mythic Coiled Altar prog",
-      "published": "2026-09-17",
-      "queuedAt": "2026-09-26"
-    },
-    {
-      "id": "IHejgfDKrAo",
-      "creator": "Bicepspump",
-      "title": "State of DK DPS (Podcast with Bicepsump, Obli & Waalpen)",
-      "published": "2026-10-04",
-      "queuedAt": "2026-10-04"
-    },
-    {
       "id": "CKGXuJMtgXI",
       "creator": "YoDaTV",
       "title": "Unholy DK Nerfed! (Tierlist Update and Meta Analysis)",
@@ -3194,6 +3180,13 @@
       "title": "How has the state of DK been in Season 2 of Midnight? /w @Bicepspump & @waalpen",
       "reason": "Transcript fetched and read in full (111 min of caption chunks, ~53k characters). It is a three-speaker podcast — Bicepspump, waalpen and Obli, who introduce themselves in the first 90 seconds — and the caption track carries NO speaker labels, only inconsistent turn markers. It does contain substantive Season 2 Death Knight reads (Blightfall-era Unholy called busted and S tier in M+, Unholy ahead of Frost on single target almost everywhere, Frost limited to Twin Fangs in the raid, the two specs' damage profiles converging), but every one of them sits in an unattributable turn: the only passages anchored to Obli BY NAME are design wish-list answers (\"One change on unholy obly that you would do\" at 26:30, \"Obly, what about you?\" at 54:19), and those are playstyle and resource-economy critique plus a request to buff Frost cooldowns — no spec-strength read. waalpen is not a registered creator at all, so his turns are not attributable either way, and the one self-reference in the comparative section (\"someone in my chat said...\") does not identify which of the three is speaking. Declined under the ASR-speaker rule (the AutomaticJak Resto Druid and Maximum watch-along precedents); the yt-dlp metadata route that normally resolves guest/chapter attribution is unavailable from this runner (bot wall). Nothing is lost that matters: Obli's own current Unholy raid and M+ reads are already on file from 2026-09-24 (kB0bop0aUpI), and his 2026-10-03 solo video on the October 6 Blightfall nerf is queued this run. The remainder of the VOD is rotation min-maxing and great-vault/bonus-roll gearing discussion, which yields no take by rule.",
       "verifiedAt": "2026-10-03"
+    },
+    {
+      "id": "IHejgfDKrAo",
+      "creator": "Bicepspump",
+      "title": "State of DK DPS (Podcast with Bicepsump, Obli & Waalpen)",
+      "reason": "Transcript fetched locally via yt-dlp 2026-10-04 and read in full (~56 min). It is the same three-speaker Bicepspump / Obli / waalpen podcast already verified and skipped from Obli's channel as cUeoz6js3OY on 2026-10-03, re-uploaded on Bicepspump's channel with a new spoken intro. The intro (t=8) says it was recorded BEFORE the October 6 Blightfall nerf that halves its damage, so its Unholy strength talk is pre-nerf by the host's own account. The caption track carries no speaker labels, and every comparative Unholy/Frost read (Unholy S tier in M+, single-target kings, Frost confined to Twin Fangs in raid) sits in an unattributable turn; the only passages anchored by name are the closing design wish-lists (Obli at t=3299: buff Frost cooldowns, no more raid AoE checks), which carry no spec-strength read. Declined under the ASR-speaker rule; the rest is rotation min-maxing and Great Vault/bonus-roll gearing discussion. 0 takes, 0 metaNotes.",
+      "verifiedAt": "2026-10-04"
     }
   ],
   "seen": [

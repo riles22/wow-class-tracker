@@ -16,6 +16,42 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-04 (local, after today's nightly) — queue drain only: **2 of 7 transcripts fetched** via yt-dlp before a persistent caption 429; 1 take added (729 → 730), 1 verified skip; queue 7 → 5
+
+**Transport.** Pinned yt-dlp 2026.07.04, android client, `--sleep-requests 1.5`, 4s between videos.
+`QsYJEKOp-dA` and `IHejgfDKrAo` landed; the third (`CKGXuJMtgXI`) drew a caption-download 429.
+Retried once after 90s without the android client, as the isolated-429 rule allows. It 429'd
+again, so the run stopped all caption traffic there. `N8x5_4nieWk`, `ixJGTHQnF_o`, `Kv6chpg_6fk`,
+`CKGXuJMtgXI` and `65gAEPrNBlU` stay queued for the nightly's Supadata lane. No discovery sweep
+this run, because the nightly polled all 44 feeds a few hours earlier.
+
+**Distilled — Tactyks, Protection Paladin, raid, mixed** (`QsYJEKOp-dA`, t=14361, corroborated at
+t=24255–24374). An 8h40m VOD published 2026-09-17: 12.1.5 PTR Kith'ix testing, then live Mythic
+Coiled Altar progression. He is the stream's Protection Paladin, and both passages are his own
+answers to chat (no voice-chat turn markers). His guild ran double Protection Paladin on Twin Fangs
+and Blood DK + Protection Paladin on Coiled Altar for the interrupt load. He reads the 09-16
+reset's encounter changes (Twin Fangs' required kicks 14 → 10, a longer interrupt timer on Coiled
+Altar) as removing the Protection Paladin *requirement*: zero would be fine, though the spec still
+makes both fights easier. Framed "Season 2 live". Bracket raid, which is his only permitted lens.
+**Superseded his 2026-08-10 guide raid take** (`C0HuvxhvNnA?t=687`) under the same-lens
+different-date rule. That take's text is unchanged, and his 08-09 tier-list placements were
+not touched. The two flagged live M+ Protection Paladin takes remain an owner decision and were not touched.
+**Declined from the same VOD:** (1) Blood DK at t=14429. "Not really a Blood DK" for the
+add-tank role on Coiled Altar is a single-fight comp aside, and writing it would have retired his
+08-09 tier-list raid placement (buff) in favour of a fight artifact. (2) Guardian, "probably fine",
+the same aside, so a list-mention. (3) Every Protection Paladin remark in the 12.1.5 PTR Kith'ix
+section (knockback on the frontal at t=9620–9698, "the answer is not prop paladin" at t=9948).
+These sit in multi-speaker voice comms and can't be attributed to him; the second is plainly
+another raider's line.
+
+**Verified skip — Bicepspump `IHejgfDKrAo`.** This is a re-upload, with a new intro, of the
+Bicepspump / Obli / waalpen podcast already skipped from Obli's channel as `cUeoz6js3OY` on
+10-03. The host's own intro (t=8) says it was recorded before the October 6 Blightfall halving.
+The comparative Unholy/Frost reads sit in unlabelled ASR turns, and the only passages anchored
+by name are design wish-lists. 0 takes, 0 metaNotes.
+
+`npm run audit:creators`: HIGH 0 · MED 0 · INFO 9.
+
 ## 2026-10-04 (nightly) — 44/44 feeds polled, **4 pre-fetched transcripts distilled into 5 takes** (724 → 729); Devourer DH covered by three independent creators on the October 6 pass; one Mistweaver raid take out of a spell-opinion video; queue 5 → 7
 
 **Discovery.** All **44 distinct channelIds** behind the 79 transcribable creator entries polled

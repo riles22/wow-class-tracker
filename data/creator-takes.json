@@ -4619,7 +4619,7 @@
       "claim": "Walking through the whole PTR tuning arc for keys he describes a spec pulled in two directions. On the gain side, mastery — the spot heals that proc from applying a mist or kicking up an ally — was buffed twice, the second time by a further 50%, which he calls much more healing than Season 1 and later a gigabuff; Jadefire Teachings was buffed, deliberately incentivising the single-target rotation over Spinning Crane Kick spam. On the loss side he lists a 3% cut followed by a further 8% nerf to everything outside damage-conversion healing, a Spinning Crane Kick nerf to both its damage and its healing component, and a 60% cut to Morning Breeze, which took Rising Sun Kick's mastery scaling from 20% to 8% and pulled the spec back off the mastery path it had been driven down for most of the PTR. He says those active-healing nerfs hit Shaolin's Gift hard enough that the third point is no longer affordable, with Spirit Font stepping in for spot healing. The tier set pivots from Renewing Mist to Rising Sun Kick — 30% more damage plus a chance to reset its own cooldown — and he says the practical consequence is that the rotation is genuinely target-count dependent again rather than Spinning Crane Kick dominating. Stats are haste, then crit, then mastery, then versatility. He ends positive on how it plays, saying he is excited for the single-target rotation and more healing on boss fights, and keeps a high-mastery build on the fringe as viable if gear supplies the stat."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Protection",
       "creator": "Tactyks",
@@ -8433,6 +8433,18 @@
       "url": "https://youtu.be/16WZvRFYF3s?t=711",
       "claim": "LBNinja7 says Mistweaver is suffering for Vivify's tuning in raid: with a build built around keeping as many Renewing Mists out as possible and cleaving Vivify onto 10 to 20 people a cast, he says a hundred Vivify casts over a raid fight still would not out-heal a Holy Priest's single-target Flash Heal, and he calls Vivify's spot the worst he has seen it, even after the buffs it has had. He adds that Revival is abysmal in raid — laughably low healing for a major raid cooldown next to Tranquility or Rewind — while conceding it is solid in Mythic+, which is why he keeps it out of his bottom five. He also calls most of Mistweaver's tuning outside its core rotation and Ancient Teachings bad.",
       "superseded": false
+    },
+    {
+      "superseded": false,
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "Tactyks",
+      "date": "2026-09-17",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live — Mythic raid tank-comp answer to chat during his Mythic Coiled Altar progression stream, after the September 16 reset's encounter tuning (supersedes his 08-10 guide raid read as his newest raid lens)",
+      "url": "https://youtu.be/QsYJEKOp-dA?t=14361",
+      "claim": "Playing Protection Paladin in his guild's Mythic progression and asked for the tank comps, he says they ran double Protection Paladin on Twin Fangs and Blood DK plus Protection Paladin on Coiled Altar, mainly for the interrupt load. He reads that reset's encounter changes — Twin Fangs' required kicks cut from 14 to 10 and a longer interrupt timer on Coiled Altar — as removing the Protection Paladin requirement on both fights: he says you could now run zero Protection Paladins there and be fine, and that the nerfs made tank comps far more flexible. He is clear the spec still makes those fights easier, being good at running the orbs, with a Paladin also covering the raid buff, so this is a loss of a hard niche rather than a call that the spec is weak (t=24255)."
     }
   ],
   "metaNotes": [
