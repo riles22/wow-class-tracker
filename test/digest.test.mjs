@@ -208,6 +208,29 @@ test("digestMarkdown escapes untrusted third-party text (audit 2026-07-24, S1)",
   assert.ok(!/^\*\*Tier moves/m.test(forged), "the summary must not be able to forge a section heading");
 });
 
+test("digestMarkdown breaks mentions, issue references and raw HTML in outside text (audit 2026-10-04, F23)", () => {
+  // GitHub acts on the RENDERED text, so a backslash does not stop `\@name` from notifying
+  // that account or `\#7` from linking issue 7. A zero-width space after the sigil does.
+  const zw = "\u200B";
+  const hostile = "Roundtable /w @someone & @org/team | Tuning #7 <img src=x> <!-- hide";
+  const md = digestMarkdown({ oldPayload: payload([]),
+    newPayload: payload([], { creatorTakes: {
+      takes: [{ creator: "Host @someone", class: "Rogue", spec: "Outlaw", sentiment: "buff", claim: hostile, url: "https://youtu.be/abcdefghijk", superseded: false }],
+      metaNotes: [{ creator: "News", class: "Mage", spec: "Fire", sentiment: "positive", patchContext: "12.1", note: hostile, url: "https://youtu.be/bcdefghijkl", superseded: false }],
+    } }),
+    manifest: { summary: hostile, sources: [{ source: "row @someone <b>x</b>", result: "partial" }] },
+    oldPending: { videos: [{ id: "cdefghijklm", creator: "Host", title: hostile }] },
+    newPending: { videos: [{ id: "defghijklmn", creator: "Host", title: hostile }] } });
+
+  assert.doesNotMatch(md, /@(?!\u200B)/, "every @ is followed by a zero-width space");
+  assert.doesNotMatch(md, /#\d/, "no # survives directly before a digit");
+  assert.doesNotMatch(md, /(^|[^\\])</m, "every < is backslash-escaped");
+  // the reader still sees the same text
+  assert.ok(md.includes(`“Roundtable /w @${zw}someone & @${zw}org/team \\| Tuning \\#${zw}7 \\<img src=x\\> \\<\\!-- hide”`));
+  assert.ok(md.includes(`**Host @${zw}someone** on Outlaw Rogue`));
+  assert.ok(md.includes(`(row @${zw}someone \\<b\\>x\\</b\\>)`), "agent-written manifest row names are escaped too");
+});
+
 const officialLedger = (summary = "Damage increased.") => ({ schemaVersion: 1, sources: {
   "ptr-preview": { topicId: 2344395, patch: "12.1.5", era: "ptr", checkedAt: "2026-09-05T10:00:00Z", removedSections: [],
     posts: [{ postNumber: 4, version: 2, updatedAt: "2026-09-04T10:00:00Z", bodySha256: "post-hash", sections: [

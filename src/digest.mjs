@@ -153,10 +153,18 @@ export function videoActivity(oldPending, newPending, newTakes, newNotes) {
    `[x](javascript:…)` becomes a link, and an embedded newline breaks out of its bullet and
    can forge new sections (audit 2026-07-24, S1). Collapse whitespace, then escape the
    Markdown control set. Deliberately NOT applied to URL targets — those are already
-   https-validated and host-allowlisted, and escaping them would break the links. */
+   https-validated and host-allowlisted, and escaping them would break the links.
+   A backslash cannot stop what GitHub does to the RENDERED text: `\@name` still mentions
+   and notifies that account, and `\#7` still links issue 7 (both measured through the
+   Markdown API, 2026-10-04). The public digest notified real accounts named in a video
+   title that way (audit 2026-10-04, F23), so `@`, and `#` before a digit, take a
+   zero-width space, which no mention or reference pattern matches across. `<` joins the
+   escape set because a title could otherwise open raw HTML (an `<img>` loads an outside
+   image into the issue). */
 const md = s => String(s ?? "")
   .replace(/\s*\n\s*/g, " ")
-  .replace(/([\\`*_[\]()#>|!~])/g, "\\$1")
+  .replace(/([\\`*_[\]()#<>|!~])/g, "\\$1")
+  .replace(/@|#(?=\d)/g, "$&\u200B")
   .trim();
 
 export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null }) {
@@ -230,16 +238,18 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
     lines.push(...cap(notes, 8, n => `- **${md(n.creator)}** on ${md(n.spec)} ${md(n.class)} (${md(n.sentiment)}, ${md(n.patchContext)}): ${md(n.note).slice(0, 120)}`), "");
   }
   const videoChange = vids.distilled.length || vids.skipped.length || vids.queued.length;
+  // Row names are written by the refresh agent, and a row matching no requirement is only a
+  // note in check-refresh, so they are escaped like any other outside text (F23).
   const degraded = (manifest?.sources ?? []).filter(r => r.result && r.result !== "success");
   if (!moves.length && !takes.length && !notes.length && !builds.length && !verdicts.length && !officialChanges.length && !videoChange) {
     // "Every source re-verified fresh" was emitted on ANY no-change run, including one
     // where nothing arrived at all — the most comforting possible wording for the least
     // healthy possible night (audit 2026-07-24, A4). Say which it actually was.
     lines.push(degraded.length
-      ? `Quiet run — but ${degraded.length} of ${manifest.sources.length} source${degraded.length === 1 ? " was" : "s were"} degraded this run (${degraded.map(r => r.source).join(", ")}). The tracker did not move because that data did not arrive, not because the field is stable.`
+      ? `Quiet run — but ${degraded.length} of ${manifest.sources.length} source${degraded.length === 1 ? " was" : "s were"} degraded this run (${degraded.map(r => md(r.source)).join(", ")}). The tracker did not move because that data did not arrive, not because the field is stable.`
       : "Quiet run: every source re-verified fresh — no tier moves, no new takes, no new builds. (That's honest stability, not a stuck pipeline.)");
   }
-  if (degraded.length) lines.push(`_Health: ${degraded.length} source${degraded.length === 1 ? "" : "s"} degraded (${degraded.map(r => r.source).join(", ")}) — details in the run manifest._`);
+  if (degraded.length) lines.push(`_Health: ${degraded.length} source${degraded.length === 1 ? "" : "s"} degraded (${degraded.map(r => md(r.source)).join(", ")}) — details in the run manifest._`);
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }
 

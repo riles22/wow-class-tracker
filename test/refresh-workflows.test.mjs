@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
+import { spawnSync } from "node:child_process";
+const workflow =name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
 
 test('all four page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
   const ci = workflow('ci');
@@ -22,6 +23,27 @@ test("nightly checks the trusted refresh base before overlay and gates gearing b
   assert.ok(text.indexOf("node gearing/src/harvest-specs.mjs --check") < text.indexOf('- name: "Gate 1:'));
   assert.match(text,/git add -- gearing\/data\/specs\.json gearing\/wow-s2-gearing\.html/);
   assert.doesNotMatch(text,/git rebase|git push[^\n]*--force/);
+});
+
+test("the failed-publish report fences gate output with a fence the output cannot close (audit 2026-10-04, F23)", t => {
+  const text = workflow("nightly");
+  const step = text.slice(text.indexOf("- name: Report a failed publish to the pinned issue"));
+  const run = step.slice(0, step.indexOf('gh issue comment "$num" --body-file "$RUNNER_TEMP/failure.md"'));
+  assert.doesNotMatch(run, /echo '```'/, "no fixed fence");
+  assert.ok(run.indexOf('} > "$gates"') < run.indexOf('echo "### ❌ Nightly publish failed"'), "gate output is collected before the fence is chosen");
+  assert.equal(run.match(/echo "\$fence"/g)?.length, 2, "the computed fence opens and closes the block");
+  assert.ok(run.indexOf('echo "$fence"') < run.indexOf('cat "$gates"'));
+  const program = run.match(/fence="\$\(awk '([^']+)' "\$gates"\)"/)?.[1];
+  assert.ok(program, "the fence is computed by awk from the gate output");
+  if (spawnSync("awk", ["BEGIN { exit 0 }"]).error) return t.skip("awk is not on PATH");
+  const fenceFor = body => spawnSync("awk", [program], { input: body, encoding: "utf8" }).stdout.trim();
+  for (const [body, length] of [
+    ["plain gate output\n", 3],
+    ["inline `code` and ``two``\n", 3],
+    ["```\n@someone **out of the fence**\n```\n", 4],
+    ["x\n``````` seven\n``` three\n", 8],
+    ["no trailing newline ````", 5],
+  ]) assert.equal(fenceFor(body), "`".repeat(length), JSON.stringify(body));
 });
 
 test("weekly guide publication isolates failed sources and keeps explicit validation and paths",()=>{

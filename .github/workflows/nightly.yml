@@ -1060,17 +1060,8 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -uo pipefail
+          gates="$RUNNER_TEMP/failure-gates.txt"
           {
-            echo "### ❌ Nightly publish failed"
-            echo
-            echo "The nightly publish job failed. The full log records whether a commit"
-            echo "or deployment completed before the failure."
-            echo
-            echo "[Full job log]($RUN_URL)"
-            echo
-            echo "Re-running each gate here so the reason is in this thread:"
-            echo
-            echo '```'
             echo "--- Gate 0 (boundary): files the artifact changed ---"
             git status --porcelain -- data/ 2>&1 | head -40 || true
             echo
@@ -1091,7 +1082,29 @@ jobs:
             echo
             echo "--- Official-note revision intake ---"
             node src/check-official-notes.mjs 2>&1 | tail -20 || true
-            echo '```'
+          } > "$gates"
+          # The gate output carries text the refresh agent can influence (data paths, test
+          # names, check messages), and this comment lands on a public issue. A line of three
+          # backticks in it would close a fixed ``` fence and render the rest as Markdown,
+          # mentions included. A fence longer than the longest backtick run anywhere in the
+          # output cannot be closed from inside it (audit 2026-10-04, F23).
+          fence="$(awk '{ while (match($0, /`+/)) { if (RLENGTH > m) m = RLENGTH; $0 = substr($0, RSTART + RLENGTH) } } END { n = (m < 3 ? 3 : m + 1); s = ""; for (i = 0; i < n; i++) s = s "`"; print s }' "$gates")"
+          [ -n "$fence" ] || fence='``````````'
+          {
+            echo "### ❌ Nightly publish failed"
+            echo
+            echo "The nightly publish job failed. The full log records whether a commit"
+            echo "or deployment completed before the failure."
+            echo
+            echo "[Full job log]($RUN_URL)"
+            echo
+            echo "Re-running each gate here so the reason is in this thread:"
+            echo
+            echo "$fence"
+            cat "$gates"
+            # tail can end without a newline, which would glue the closing fence onto it
+            [ -z "$(tail -c1 "$gates")" ] || echo
+            echo "$fence"
           } > "$RUNNER_TEMP/failure.md"
           num="$(gh issue list --state open --search "in:title \"Nightly digest\"" --json number --jq '.[0].number // empty')" || num=""
           [ -n "$num" ] && gh issue comment "$num" --body-file "$RUNNER_TEMP/failure.md" || true
