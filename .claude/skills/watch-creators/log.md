@@ -16,6 +16,16 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-05 (local scheduled, BEFORE today's nightly) — queue drain attempted: **0 of 5 transcripts**; caption 429 persists into a second day; queue 5 → 5
+
+One probe only, per the persistent-429 rule: `CKGXuJMtgXI` (pinned yt-dlp 2026.07.04, android
+client, `--sleep-requests 1.5`) — info and subtitle-track listing fine, caption download HTTP 429,
+same as the 10-04 stop roughly 28h earlier. Two consecutive days on the same IP matches the THIRD
+429 shape (IP-scoped timedtext flag), not transient throttling, so no retry and no further videos.
+The authenticated fallback needs a Riley-supplied cookies.txt and was not available to an
+unattended run. All five stay queued for the nightly's Supadata lane. No discovery sweep (the
+nightly polls every feed later today). 0 takes, 0 metaNotes, 0 skips; no data/ file changed.
+
 ## 2026-10-04 (local, after today's nightly) — queue drain only: **2 of 7 transcripts fetched** via yt-dlp before a persistent caption 429; 1 take added (729 → 730), 1 verified skip; queue 7 → 5
 
 **Transport.** Pinned yt-dlp 2026.07.04, android client, `--sleep-requests 1.5`, 4s between videos.
