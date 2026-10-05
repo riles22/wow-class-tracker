@@ -111,12 +111,17 @@ UTC.
 
 ## Push rule (every merge or push to master, including this runbook)
 
-1. Both lists must be empty:
+1. All three lists must be empty:
 
    ```powershell
    gh run list --workflow nightly.yml --status in_progress
    gh run list --workflow nightly.yml --status queued
+   gh run list --workflow nightly.yml --status pending
    ```
+
+   `pending` was added 2026-10-04. A nightly waiting on the `nightly-refresh` concurrency
+   group, which the two gearing workflows share, is `pending` rather than `queued`, so the
+   first two lists miss it. The local-run skill carries the same three lists.
 
 2. The previous master commit's runs must be finished, in this order: nightly publish, the
    deploy it dispatches (about 2 min), then the Tests run it dispatches (about 8 min).

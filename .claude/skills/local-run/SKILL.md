@@ -31,7 +31,10 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
 1. **Inspect the working tree and start from current master.** Fetch origin, then
    use `git switch master` and `git pull --ff-only` when the working tree permits.
    Preserve unrelated local work; never reset it away. The nightly may have pushed
-   while you slept; a local run must never rebase the night away.
+   while you slept; a local run must never rebase the night away. If a nightly is
+   queued, pending or in progress (the three lists in the push rule below), let it
+   finish before you start: you would have to wait for it before pushing anyway, and
+   starting after it saves redoing the run on top of its commit.
 2. **Do the work through the existing skills** (refresh-tiers / refresh-metrics /
    ptr-watch / watch-creators / paste-discord). They carry the per-source gotchas; do
    not improvise transport recipes here.
@@ -84,7 +87,8 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
    heartbeat — fine, the nightly already did).
 7. **Rebuild after the snapshot** (`npm run build`) so the drawer Timeline includes
    the point you just wrote — the same ordering the nightly publish learned on 07-31.
-8. **Commit with the run's story, push master directly.** Deploy fires on the push.
+8. **Commit with the run's story, then push master directly, but only once the push rule
+   below passes.** Deploy fires on the push.
 9. **Digest gap, known and accepted**: only the nightly publish posts to the pinned
    digest issue. A local run's changes appear in the NEXT nightly digest as part of its
    HEAD^..HEAD diff only if nothing else lands first — in practice they are documented
@@ -94,11 +98,15 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
 
 ## Scope — decide this before touching anything
 
-CI runs the full refresh nightly (`.github/workflows/nightly.yml`, 10:37 UTC). **There is no
-longer a scheduled local task** — it is retired along with the claude.ai cloud routine
-(`docs/cloud-routine.md` records why), verified 2026-08-14 against the machine's actual task
-list. Local runs are started by hand. What survives from the old schedule is only its
-ORDERING lesson: run *after* CI has had its go, so this is a catch-up rather than a race.
+CI runs the full refresh nightly (`.github/workflows/nightly.yml`; the cron says 10:37 UTC,
+but GitHub creates the runs hours later, as the push rule below records). **A scheduled local
+task exists again**: Riley's Claude desktop task `wow-ptr-watch` runs this skill unattended
+daily at 07:00 local time (next due 2026-10-05 14:05 UTC), verified 2026-10-04 against the
+machine's task list. That reverses the 2026-08-14 note here, which said the local task was
+retired along with the claude.ai cloud routine (`docs/cloud-routine.md` records why). The old
+schedule's ORDERING lesson still holds: run *after* CI has had its go, so this is a catch-up
+rather than a race. The clock no longer delivers that order, because 25 of the last 27
+scheduled nightlies were created after 14:05 UTC; step 1 and the push rule do.
 **Default scope is residential-only catch-up** —
 the things a datacenter runner physically cannot do:
 
@@ -185,33 +193,67 @@ Builds/hotfixes found; 12.2 PTR announcement check; videos processed and queue c
 before→after; gearing guide harvest run-or-skipped and why;
 takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether the
 manifest was rewritten or deliberately left alone and why; what `check-refresh
---manifest` printed; what was rebuilt; whether you pushed.
+--manifest` printed; what was rebuilt; whether you pushed, or held the push and for which
+run (id and status), and what you did once it finished.
 
-## Don't push a Gate-0 file while a nightly is in flight
+## Push rule: hold while a nightly is queued, pending or in progress
 
-Found the hard way 2026-08-14, and written down because nothing else says it. Publish checks
-out **current master** and then OVERLAYS the refresh artifact's `data/` on top of it
-(`download-artifact … path: .`). So if you push a change to one of Gate 0's immutable files
-— `required-sources.json`, `scales.json`, `season-final.json`, `forecasts/`,
-`season-archive/` — after the refresh job has captured its artifact but before publish runs,
-publish restores the artifact's OLDER copy over your newer one and then diffs it against
-HEAD. Gate 0 sees a difference it attributes to the agent and **fails the night red**, even
-though the agent did nothing wrong and your commit is fine.
+Rewritten 2026-10-04 to follow the push rule in `docs/1215-launch-runbook.md`, which governs
+every push to master. The 2026-08-14 version of this section set a clock window, 10:30–12:30
+UTC, and the clock was wrong by hours: the cron says 10:37 UTC, but GitHub created the 27
+scheduled nightlies of 2026-09-08 → 10-04 between **13:43 and 18:14 UTC** (each finished
+18–42 minutes later), and the 69 since 2026-07-28 between 10:53 and 21:14 UTC. No time of
+day is safe, so check run state before **every** push:
 
-The gate cannot tell "the agent edited this" from "master moved under the artifact", and it
-should not try — failing closed is the right default for that file set. The operational rule
-is just timing:
+1. All three lists must be empty:
+   ```
+   gh run list --workflow nightly.yml --status in_progress
+   gh run list --workflow nightly.yml --status queued
+   gh run list --workflow nightly.yml --status pending
+   ```
+   `pending` is not optional. The `nightly-refresh` concurrency group (cancel-in-progress
+   false, shared with `gearing-refresh.yml` and `gearing-verify.yml`) holds back a run that
+   arrives while another run has the lock, and GitHub's concurrency docs call that state
+   `pending`, not `queued`. On 2026-09-15 run 34990700222 waited 5 minutes that way.
+2. The previous master commit's runs must be finished, in this order: nightly publish, the
+   deploy it dispatches, then the Tests run it dispatches:
+   `gh run list --limit 8 --json databaseId,workflowName,status,headSha`
+3. Push only the commit you tested, with a plain `git push origin master`, never `--force`.
+   A plain push is rejected if master moved, which makes it this skill's form of the
+   runbook's `--match-head-commit`.
 
-- The nightly starts at **10:37 UTC** and publish lands roughly **60–100 minutes** later.
-  Treat ~10:30–12:30 UTC as the window to avoid.
-- `gh run list --limit 3` before pushing; if a nightly is `in_progress`, hold the commit
-  locally and push once it completes. A local commit is free — only the push races.
-- If you push anyway and the night reds at Gate 0, nothing is lost or corrupted: re-run the
-  nightly and it recomputes against your commit. The cost is a wasted agent run, not data.
+**Any non-empty list means hold.** A local commit is free; only the push races. Wait inside
+the turn (`gh run watch <id>`, then the three lists again) and never end the turn to come
+back later (see Orchestration limits). When the lists are empty and step 2 holds, fetch and
+push. If the push is rejected, master moved, usually because the nightly published: do not
+rebase, merge or cherry-pick onto it. Note the held commit's SHA, your record of what to
+redo. If `git log --oneline origin/master..master` lists only that commit,
+`git switch -C master origin/master` drops it and nothing else (otherwise stop and report);
+then start again from step 1 and re-apply only what CI could not do. If you cannot wait,
+leave the commit unpushed and report its SHA and the run that held it.
 
-This matters most on **flip day**, which is a local run by design: the flip commit touches
-`scales.json` and `required-sources.json` — two of the five — so land it well clear of the
-window, or dispatch the nightly yourself afterwards.
+Why every push counts, in today's publish job:
+- A run's base commit is fixed when GitHub creates the run. Since 2026-09-05 publish first
+  runs `src/check-refresh-base.mjs`, which **fails the night red if master has since gained
+  any `data/` or skill `log.md` edit**, and every local data run makes one. A queued or
+  pending nightly already has its base, which is why those lists count.
+- A push during publish gets the nightly's own `git push origin master` rejected, and the
+  night goes red; publish does not rebase, by design.
+- A master push cancels the nightly commit's waiting deploy and its in-progress Tests run,
+  and that Tests run is the only UI-invariant check a nightly gets.
+
+The 2026-08-14 failure, Gate 0 reading the artifact's older copy of an immutable file as an
+agent edit, now stops at the base guard instead. Since 2026-09-15 publish also installs the
+agent's output through `src/install-refresh-output.mjs`, which admits only HEAD-tracked data
+and skill logs, rather than downloading the artifact over the checkout.
+
+**A red night caused this way is not fixed by a re-run.** A re-run reuses the original run's
+commit SHA and fails the same guard; the guard's own message says to start a new refresh on
+current master, which means a new run (`gh workflow run nightly.yml --ref master`) once the
+three lists are empty. Nothing is lost or corrupted; the cost is a wasted agent run.
+
+**Flip day** is a local run by design and gets no exemption: the flip commit touches
+`scales.json` and `required-sources.json`, and it waits for empty lists like any other push.
 
 ## What a local run must never do
 
