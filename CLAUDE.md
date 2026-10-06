@@ -1495,6 +1495,8 @@ legacy/   original single-file tracker (pre-conversion reference)
           workflows/nightly.yml + workflows/dispatch-nightly.yml (the refresh + its
           auto-kick) · workflows/gearing-refresh.yml (weekly verified guide refresh) ·
           workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
+          workflows/dispatched-run-alert.yml (reusable last job of ci/deploy/nightly: a
+          bot-started run that fails comments on issue 15) ·
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
           yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate
           contract, scales, registries, gatekeeper code)
@@ -1511,6 +1513,10 @@ deliberately absent, so 43 nightly commits deployed unchecked. Dispatched rather
 `ci.yml` states the browser lives nowhere near the release path and that posture was kept, so a
 UI break is found minutes AFTER the push, not before it. The dispatch is `continue-on-error` —
 a dispatch hiccup must never redden a good publish; the ci.yml run reddens on its own.
+Nobody receives that red run by email, though: GitHub mails a failure only to whoever
+triggered the run and starts no `workflow_run` listener for a run github-actions[bot] began
+(observed 2026-10-06), so ci.yml, deploy.yml and nightly.yml now end with a
+`dispatched-run-alert.yml` job that comments on issue 15 when a bot-started run fails.
 
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC).
 **Since the September 15 isolation fix, collection, agent work, and publication use

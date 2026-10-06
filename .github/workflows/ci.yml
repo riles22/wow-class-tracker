@@ -102,3 +102,16 @@ jobs:
           npx playwright install --with-deps "$PLAYWRIGHT_BROWSER"
       - name: UI invariants
         run: node --test test/ui-invariants.test.mjs test/forecast-report-ui.test.mjs test/season-archive-ui.test.mjs gearing/test/ui-invariants.test.mjs
+
+  # The publishers dispatch this workflow as github-actions[bot] after each push, and
+  # GitHub emails nobody when such a run fails. This last job comments on issue 15
+  # instead. dispatched-run-alert.yml explains the gate and why it is not workflow_run.
+  dispatched-run-alert:
+    needs: [test, ui-invariants]
+    if: ${{ !cancelled() && github.triggering_actor == 'github-actions[bot]' && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
+    permissions:
+      issues: write
+    uses: ./.github/workflows/dispatched-run-alert.yml
+    with:
+      needs_json: ${{ toJSON(needs) }}
+      commit_sha: ${{ inputs.commit_sha || github.sha }}

@@ -1109,3 +1109,19 @@ jobs:
           } > "$RUNNER_TEMP/failure.md"
           num="$(gh issue list --state open --search "in:title \"Nightly digest\"" --json number --jq '.[0].number // empty')" || num=""
           [ -n "$num" ] && gh issue comment "$num" --body-file "$RUNNER_TEMP/failure.md" || true
+
+  # dispatch-nightly.yml starts this workflow as github-actions[bot] after a workflow edit,
+  # and GitHub emails nobody when such a run fails. A failed publish job already reports
+  # itself through the step above, so this last job covers only what that step cannot
+  # see: a failed collector (publish is skipped), a red refresh under a green publish,
+  # and a publish that timed out or never got a runner (it ends `cancelled`, and the
+  # step above never runs). dispatched-run-alert.yml explains the rest of the gate.
+  dispatched-run-alert:
+    needs: [collect, refresh, publish]
+    if: ${{ !cancelled() && github.triggering_actor == 'github-actions[bot]' && needs.publish.result != 'failure' && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
+    permissions:
+      issues: write
+    uses: ./.github/workflows/dispatched-run-alert.yml
+    with:
+      needs_json: ${{ toJSON(needs) }}
+      commit_sha: ${{ github.sha }}
