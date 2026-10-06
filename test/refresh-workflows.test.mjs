@@ -1,8 +1,8 @@
+import { spawnSync } from "node:child_process";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { spawnSync } from "node:child_process";
-const workflow =name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
+const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
 
 test('all four page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
   const ci = workflow('ci');
