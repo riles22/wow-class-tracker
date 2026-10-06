@@ -98,7 +98,7 @@
       "patchContext": "12.1 PTR",
       "claim": "Enhancement's playstyle is built upon rather than redefined in 12.1: the new gameplay hook is the tier set (guaranteed primary-target Fire Nova eruptions every 2 seconds, 4-set Crash Lightning cooldown reduction with a stacking 8% amp that feeds the apex talent) layered on flat base-kit buffs (Lightning Bolt/Chain Lightning +20%, Lava Lash/Stormstrike/melee +15%), while RNG power is trimmed — Doom Winds' Windfury activation bonus halved and Stormbringer's Tempest plus Totemic's Surging Totem tuned down.",
       "url": "https://youtu.be/00K4UWo-jvI?t=538",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -8028,7 +8028,7 @@
       "claim": "YoDaTV splits Guardian from Vengeance, which he now ranks above it as the second-best tank: bear \"does like basically no damage\" next to Blood DK and Vengeance, and he rates Vengeance's survivability superior after the recent buffs. Earlier in the video he calls Guardian a source of Mark of the Wild that \"does like zero DPS\"."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Brewmaster",
       "creator": "YoDaTV",
@@ -8040,7 +8040,7 @@
       "claim": "YoDaTV leaves Brewmaster in A: in his view it is basically only playable in physical-buff comps, is definitely worse than last season, and does not feel great to play after the Celestial Infusion change. The tuning post has no Brewmaster line."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Protection",
       "creator": "YoDaTV",
@@ -8052,7 +8052,7 @@
       "claim": "YoDaTV leaves Protection Paladin in A: the 6% damage buff comes with no survivability change, so he does not see it moving from \"worst or second worst tank\". Damage should stop being as pathetic, but survivability is at an all-time low thanks to low Sentinel uptime and the Reflection of Radiance nerfs it took going into the season."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Protection",
       "creator": "YoDaTV",
@@ -8064,7 +8064,7 @@
       "claim": "YoDaTV leaves Protection Warrior in A with a one-line read: the Mountain Thane changes are a small damage buff, but he just does not think you play Protection Warrior this season anyway."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warrior",
       "spec": "Arms",
       "creator": "YoDaTV",
@@ -8088,7 +8088,7 @@
       "claim": "YoDaTV names Holy Paladin and Blood DK as the only two S+ specs on his list, with Holy Priest — which has surprised him this season — explicitly \"not as good as holy paladin in the healing department\"."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Retribution",
       "creator": "YoDaTV",
@@ -8145,7 +8145,7 @@
       "patchContext": "Live 12.1 — his read of the September 22 weekly-reset class tuning for Devourer (Collapsing Star primary-target damage +25%, Consume/Devour damage +8%, both PvE only), the pass logged in this tracker's 2026-09-18 build entry. Supersedes his 2026-08-17 post-sim Season 2 read.",
       "url": "https://youtu.be/sYjd851J9Ow?t=65",
       "claim": "He reads the September 22 pass as a genuine buff to Devourer that lands almost entirely on the Annihilator hero tree. The Collapsing Star line he frames as restoring a 25% primary-target increase that was in the patch notes but never actually made it into the game, which he says was one of the main reasons Collapsing Star felt weak on the main target; combined with the 8% Consume/Devour increase he calls it a very good buff for Annihilator and reads the developers' stated intent — raid and single-target performance — as exactly what landed. He is careful not to over-read it for raid: Annihilator is now fully viable and the gap is much closer, but he still wants Void-Scarred on a lot of the earlier fights, with Annihilator probably just easier to play and losing less damage on roughly the last three bosses. For Mythic+ he goes further: the extra Collapsing Star and Consume/Devour damage closes what had been Void-Scarred's edge in priority damage through Devour's Bite against Annihilator's stronger mass AoE, so he says everyone is simply going to be playing Annihilator in Mythic+ from now on and calls it the best damage there for the rest of the season barring further changes. He adds that Collapsing Star is still not worth pressing for Void-Scarred, attributing that to the talent tree not affording the points rather than to the damage, and that nothing has changed rotationally since Season 1.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8184,7 +8184,7 @@
       "superseded": false
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Death Knight",
       "spec": "Blood",
       "creator": "YoDaTV",
@@ -8196,7 +8196,7 @@
       "claim": "YoDaTV reads the revision (Death Strike +15% rather than the originally posted +25%) as a nerf relative to the first announcement, and says the original 25% version would have been an outright Blood buff Blizzard did not intend. Against this week he measures single target as barely changing — \"they say it's a buff, but it's like 0.1%\" — priority-target damage roughly flat, and five- and ten-target AoE down about 5–6%. His conclusion is that the damage that matters is not really going down and that this will not change the meta: Blood remains the tank with the best consistent survivability, tankier than Vengeance or Guardian when cooldowns are not up, even though both can be tankier inside their own cooldown windows."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Vengeance",
       "creator": "YoDaTV",
@@ -8289,7 +8289,7 @@
       "patchContext": "Season 2 live — \"Emergency Mythic+ Tierlist Update for 12.1!\" (published 2026-09-24), his updated Mythic+ tier list after the September 22/23 Unholy DK Blightfall buff and bug fix. Supersedes his 2026-09-22 Guardian read from the class-tuning reaction video.",
       "claim": "He moves Guardian up to one tier below Vengeance DH on his updated M+ list, explicitly on other players' results rather than his own: viewers objected to the previous placement, and he grants that bears appear to be pushing keys of a similar level to Blood DK even if not the same dungeons. He is equally explicit about the limits of the move — he has not played much bear himself this season, and he personally still rates Vengeance the better tank, which is why Guardian stays behind it.",
       "url": "https://youtu.be/tnwOizGhvU0?t=136",
-      "superseded": false
+      "superseded": true
     },
     {
       "superseded": false,
@@ -8304,7 +8304,7 @@
       "claim": "His clearest positive of the video. He reads the Deft Maneuvers rework — Blade Flurry's flat energy surcharge replaced by a per-target cost that only scales up as the number of cleave targets rises — as solving a real Outlaw problem: maintaining Blade Flurry against one or two extra targets, as in most boss fights, becomes much cheaper, so the spec stops running dry or waiting to refresh the buff without very high haste. He calls it such a good change and a very good convenience change that should result in a decent damage increase overall."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Subtlety",
       "creator": "Dalaran Gaming",
@@ -8445,6 +8445,150 @@
       "patchContext": "Season 2 live — Mythic raid tank-comp answer to chat during his Mythic Coiled Altar progression stream, after the September 16 reset's encounter tuning (supersedes his 08-10 guide raid read as his newest raid lens)",
       "url": "https://youtu.be/QsYJEKOp-dA?t=14361",
       "claim": "Playing Protection Paladin in his guild's Mythic progression and asked for the tank comps, he says they ran double Protection Paladin on Twin Fangs and Blood DK plus Protection Paladin on Coiled Altar, mainly for the interrupt load. He reads that reset's encounter changes — Twin Fangs' required kicks cut from 14 to 10 and a longer interrupt timer on Coiled Altar — as removing the Protection Paladin requirement on both fights: he says you could now run zero Protection Paladins there and be fine, and that the nerfs made tank comps far more flexible. He is clear the spec still makes those fights easier, being good at running the orbs, with a Paladin also covering the raid buff, so this is a loss of a hard niche rather than a call that the spec is weak (t=24255)."
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Jedith",
+      "date": "2026-10-03",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Live 12.1 — his read of the October 6 weekly-reset class tuning for Devourer (\"Devourer Demon Hunter Got SURPRISE BUFFS!\", published 2026-10-03), the pass logged in this tracker's 2026-10-02 build entry. He is explicit that this is the week BEFORE patch 12.1.5 and that the 12.1.5 Collapsing Star quality-of-life changes he also mentions are two weeks out. Supersedes his 2026-09-21 whole-spec read of the September 22 pass; split by bracket because his Mythic+ and raid reads of this pass differ sharply.",
+      "claim": "He reads the October 6 buffs as landing roughly 6% on Annihilator single target and 1.4% on its AoE, and about 3.9% single target / 1.2% AoE on Void Scourge, and says Devourer is looking pretty good in Mythic+ on the back of them — specifically that the extra single-target damage makes Annihilator very strong there, because Annihilator already had the better mass AoE and was only held back by mid single target. He recommends trying Annihilator in keys this week and says Void Scourge is on its way out heading into 12.1.5. He is explicit that nothing in the buffs forces a build change right now.",
+      "url": "https://youtu.be/Kv6chpg_6fk?t=253",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Jedith",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Live 12.1 — his read of the October 6 weekly-reset class tuning for Devourer (\"Devourer Demon Hunter Got SURPRISE BUFFS!\", published 2026-10-03), the pass logged in this tracker's 2026-10-02 build entry. He is explicit that this is the week BEFORE patch 12.1.5 and that the 12.1.5 Collapsing Star quality-of-life changes he also mentions are two weeks out. Supersedes his 2026-09-21 whole-spec read of the September 22 pass; split by bracket because his Mythic+ and raid reads of this pass differ sharply.",
+      "claim": "On the raid side he welcomes the buffs but says plainly they will not push Devourer to the top of the meters, because the spec is not set up to work well with some of this tier's raid fights — he tells players whose raid damage feels lacklustre that the fights are working against them as well as their own play. He keeps recommending Annihilator only on certain fights rather than across the tier.",
+      "url": "https://youtu.be/Kv6chpg_6fk?t=234",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Vengeance",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-22 Vengeance read from the class-tuning reaction video.",
+      "claim": "He keeps Vengeance DH in S on his updated list and explicitly ahead of Guardian Druid, citing a newly discovered bug in its favour, and says it could potentially even be better than Blood DK. He is open that this is partly untested — he notes it will only be settled if someone actually plays Vengeance at the top, and says he hopes to make it work himself.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=214",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-24 Guardian read from the emergency tier-list update.",
+      "claim": "He leaves Guardian in S but behind Vengeance DH and says outright that he does not believe in the spec and does not think it belongs in that tier. His stated basis for keeping it there is other players' results rather than his own view — he has heard it is overtaking the EU pushing leaderboard — set against Chinese groups still winning by a mile with Blood DK.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=226",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-22 Blood read from the class-tuning reaction video.",
+      "claim": "He reads the Chinese top-key meta as settled on a comp built around Blood DK with Holy Paladin, a Rogue, Elemental Shaman and Arms Warrior, and places that comp in S+, saying the top three to five groups are all running it and that Chinese groups are still winning by a mile with Blood. The counterweight he states himself is that he rates Vengeance DH above it and thinks Vengeance could potentially be the better tank.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=231",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-19 Brewmaster read of the September 22 tuning post.",
+      "claim": "He calls the October 6 Brewmaster changes minor survivability buffs and rates the dodge-duration change the more useful of the two, but says he does not see Brewmaster overtaking the meta on them. He leaves it in A, below the tanks above it, and frames it as a pick-up for a physical/fist comp when nobody in the group plays Windwalker rather than as a competitive tank choice.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=79",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-19 Protection Warrior read of the September 22 tuning post.",
+      "claim": "He says nothing has really changed for the bottom-tier tanks and describes Protection Warrior as bimodal: very strong if you can Spell Reflect the one important cast in a pull, and mediocre if you cannot. He leaves it in the bottom tier of his list on that basis.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=561",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Protection",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-19 Protection Paladin read of the September 22 tuning post.",
+      "claim": "He says Protection Paladin looked good on the PTR but that after what he calls ridiculous nerfs to Reflection of Radiance with no compensating buff it is not good at all, and he leaves it in B.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=570",
+      "superseded": false
+    },
+    {
+      "class": "Warrior",
+      "spec": "Arms",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-19 Arms read of the September 22 tuning post.",
+      "claim": "Arms stays in his S+ meta comp and he rates it above Fury, crediting it with the two- and three-target cleave the season demands. His stated caveat is about availability rather than the spec: he says genuinely good Arms players are extremely hard to find and that nine times in ten the ones he meets are both dying and not doing much damage, and he names Demonology Warlock as the alternative if no good Arms is available.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=331",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Retribution",
+      "creator": "YoDaTV",
+      "date": "2026-10-03",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-19 Retribution read of the September 22 tuning post.",
+      "claim": "He puts Retribution Paladin firmly in S and says it is definitely not weak, pointing at a leaderboard group whose Retribution is topping every key. He supplies the caveat himself: that player has a 344 weapon, which he says definitely helps.",
+      "url": "https://youtu.be/CKGXuJMtgXI?t=374",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-04",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his walkthrough of the October 6 weekly-reset class tuning (\"Unholy DK NERFED, Huge Class Buffs & PvP Rework Next Reset!\", published 2026-10-04), PvE section. The video's later half is PvP talent tuning, which is out of scope for this PvE tracker and is not distilled. Supersedes his 2026-09-26 whole-spec Subtlety read.",
+      "claim": "He reads the October 6 Trickster package as decent buffs across the board — Fazed raised from 5% to 7% and stackable twice under Cloud Cover for roughly 14% inside Shadow Blades, Unseen Blade physical damage +15% with Disorienting Strikes resetting it, and the Coup de Grace capstone +10% — and says it could make Trickster a more comfortable or more viable pick than the Deathstalker players feel forced into. He is explicit about the limit: he cannot tell yet whether the numbers are good enough to let Subtlety play Trickster comfortably in dungeons and raids.",
+      "url": "https://youtu.be/65gAEPrNBlU?t=300",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-04",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live — his walkthrough of the October 6 weekly-reset class tuning (\"Unholy DK NERFED, Huge Class Buffs & PvP Rework Next Reset!\", published 2026-10-04), PvE section. The video's later half is PvP talent tuning, which is out of scope for this PvE tracker and is not distilled. Supersedes his 2026-07-02 Enhancement read from the 12.1 PTR cycle.",
+      "claim": "He calls the flat 4% to all ability and auto-attack damage a small but useful buff and singles out the auto-attack half as the important part, because Enhancement leans on auto attacks through Forceful Winds and its extra attack triggers. On the 35% Lava Lash buff he is non-committal: he does not know whether it is enough to make a Lava Lash build the go-to in Mythic+, and says time will tell, while welcoming it as a buff for a spec that has not had time in the spotlight.",
+      "url": "https://youtu.be/65gAEPrNBlU?t=401",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -11074,7 +11218,7 @@
       "note": "He reports Subtlety receiving 6% but treats it as largely absorbed, saying the increase is mostly offsetting the four-piece effectiveness drop from 100% to 60% rather than adding power. He also judges Subtlety not to have been the Rogue spec in contention for the physical melee composition slot in Mythic+, naming Outlaw as the one that was, and closes the section by calling the buffs pretty tiny for both Rogue specs."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Enhancement",
       "creator": "izen (Izenhart)",
@@ -12490,7 +12634,7 @@
       "creator": "izen (Izenhart)",
       "date": "2026-08-22",
       "patchContext": "Season 2 live — the season’s first weekly-reset balance tuning (the announced August 25 pass), read against the first days of live results, which he stresses are Heroic and mostly without completed tier sets",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -12997,7 +13141,7 @@
       "note": "Fire sits with Frost well behind Arcane on the Heroic results in his read, and he calls its 3% buff smaller than expected relative to what other specs in this pass received."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "izen (Izenhart)",
@@ -13069,7 +13213,7 @@
       "note": "Augmentation is his floor of the raid rankings: on Heroic it sits below Frost DK, which he calls the worst performing DPS spec \"only above augmentation\", and at the end of the video he notes the pass buffed everyone in the bottom pile \"other than the lizard at the very bottom\", i.e. Augmentation received nothing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Devourer",
       "creator": "izen (Izenhart)",
@@ -13483,7 +13627,7 @@
       "note": "Having been reasonably high in week one, Subtlety's share of high-key DPS has gotten smaller by week three; Assassination is the only one of the three Rogue specs to hold its popularity. This is a representation read rather than a power claim — he still counts the three Rogue specs together as a large chunk of high-key DPS presence, with Subtlety appearing at sixth and seventh in the 15-and-up results.",
       "patchContext": "Season 2 live — \"Season 2 - Mythic+ Week 3 | Meta Specs, Best Comps & 2 New TOP DPS Specs?\" (published 2026-09-07), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+) group compositions three weekly resets into the season. M+ outlook.",
       "url": "https://youtu.be/zf9FpCLuTeI?t=561",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -13681,7 +13825,7 @@
       "note": "Fewer and fewer Devourers have kept up in Mythic+: after the end-of-PTR nerfs and Havoc's buffs, Havoc has passed Devourer in the last couple of resets, whereas Devourer was ahead at the start of the season and during the race to world first; the season-long average still shows Devourer ahead only because of that early lead.",
       "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
       "url": "https://youtu.be/7ZaRcXRH8u4?t=275",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -14009,7 +14153,7 @@
       "note": "A complete lack of changes for Brewmaster, which he says was not having too good of a time right now — the one tank left out of the tank damage round.",
       "patchContext": "Season 2 live — his walkthrough of the announced September 22 tuning pass (\"Keywords: BUFFS ONLY | Season 2's Last Balance Tuning Before 12.1.5\", published 2026-09-19), each change weighed against current live raid and Mythic+ results; his summary is a no-nerf round of okay-but-not-major buffs, with talent and hero-talent swaps to watch after the reset.",
       "url": "https://youtu.be/sFNCt1mNb7U?t=946",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -14117,7 +14261,7 @@
       "note": "The physical-composition asterisk he predicted before the season did arrive, but only as a hipster pick: Brewmaster appears at 20+ keys in specific melee comps (with Feral plus Outlaw or Assassination plus Arms) and above Guardian in that population, yet it does not show up at 15+ at all and is absent from the very topmost keys. Its high-key average score is close to Guardian's, but Guardian is what tanks have actually gone to as the Blood alternative.",
       "patchContext": "Season 2 live — M+ outlook, his weekly Mythic+ meta and performance recap for the end of week five (\"Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5\", published 2026-09-22), read off live representation and average-score data at 15+ and 20+ keys, with the September 22 tuning landing the same day and its effects explicitly not yet measured.",
       "url": "https://youtu.be/yDyEKvcZ3VM?t=236",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -14249,7 +14393,7 @@
       "note": "The Devour buffs land on Annihilator, which he says is already the de facto Collapsing Star setup. In Mythic+ that is where Devourer was already playing Annihilator, so the buff makes an existing build slightly better — a real but small gain. In the raid it may finally push Annihilator past Fel-Scarred, which is new, but he immediately qualifies it: Devourer's raid performance has not been particularly good to begin with, so he expects an improvement \"but not that great\", and more competitiveness in keys than in the raid.",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=237",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -14381,7 +14525,7 @@
       "note": "He calls Mistweaver \"routinely the least valuable healer since the beginning of this season\" in raid terms, and reads the flat 5% all-healing increase plus the Vivify and Sheilun's Gift buffs as more relevant in the raid than in keys — single-target healing is worth more there — while still leaving the spec \"overall quite poor\".",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=524",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -14393,7 +14537,7 @@
       "note": "On keys he puts Mistweaver in a slightly better position than in the raid: it was the meta healer last season on the strength of Chi fistweaving, and although that has been nerfed repeatedly it has not been reduced to awful. The buff is flat and helps, but he reads it as worth less in Mythic+ than in the raid.",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=537",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -14667,7 +14811,7 @@
       "note": "He calls the Subtlety buff from the pass useless in practice: it went to Trickster, and Trickster is still not worth playing for Subtlety, so players remain on Deathstalker and the buff has no effect on the spec.",
       "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
       "url": "https://youtu.be/jBVWrW2ibOw?t=754",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -14700,7 +14844,7 @@
       "note": "The week after the bug-fix buff is his headline: he reads Unholy's overall representation as having more than doubled across all key levels (about 2.2% two resets ago to 4.8%), and in the highest keys as going from 0.2% to 4.8%, which he calls roughly a twenty-four-fold increase against a fortnight earlier, with Unholy appearing at around 15% of the popular comps it was absent from before. He judges its single-target and boss damage genuinely competitive rather than just popular — on the mostly single-target third boss of the week's dungeon he says Unholy is doing more than fine, and across the named bosses he reads Arms, Assassination and Unholy as very close to one another — and he expects it to keep taking a slot in the standard composition. His one caution is social rather than about the spec: a large wave of flavour-of-the-month players is currently dragging the quality of Unholy runs.",
       "patchContext": "Season 2 live — M+ outlook, his end-of-week-six Mythic+ meta recap (\"2/5 New Meta Specs? | Mythic+ Week 6 - 2 Weeks From 12.1.5\", published 2026-09-30), read off live representation shares at all key levels and in the top keys plus the comps those keys are running, one week after the September 23 Unholy bug-fix buff. He flags the sample caveat himself — this reset's top-key cut was 51 runs at recording time, and many listed top keys are days old — and his forward-looking remarks about patch 12.1.5 are about a patch that is not live yet (he dates it October 13).",
       "url": "https://youtu.be/LKzPqYFo6dw?t=96",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -14722,7 +14866,7 @@
       "note": "He extends the same displacement logic to the tank slot, and is explicit that it is not a nerf: two specs of one class are historically not meta together, so if Unholy takes a DPS slot the Blood tank has to go, and he reads Blood as already down about 14% of its representation from two weeks earlier. On power he still rates Blood above the alternative — its damage is significantly higher than Guardian's, and it has a much larger array of defensive buttons to spend on every pull — so his negative read is about Blood's place in the comp over the next couple of weeks rather than about the spec getting worse.",
       "patchContext": "Season 2 live — M+ outlook, his end-of-week-six Mythic+ meta recap (\"2/5 New Meta Specs? | Mythic+ Week 6 - 2 Weeks From 12.1.5\", published 2026-09-30), read off live representation shares at all key levels and in the top keys plus the comps those keys are running, one week after the September 23 Unholy bug-fix buff. He flags the sample caveat himself — this reset's top-key cut was 51 runs at recording time, and many listed top keys are days old — and his forward-looking remarks about patch 12.1.5 are about a patch that is not live yet (he dates it October 13).",
       "url": "https://youtu.be/LKzPqYFo6dw?t=519",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -14733,7 +14877,7 @@
       "note": "Guardian is his pick for the tank that takes the slot, and he says plainly that nothing was buffed: he reads its 20-plus-key popularity rising from about 11% two resets ago to 22% last reset against Blood's 83% in the opening weeks, a 27%-to-40% jump in the cut he shows after the Unholy hotfix, and roughly even numbers in the new reset's small sample. His case is comp fit plus effective tankiness: on two +21 logs Blood takes about 290k damage per second against Guardian's 190k, and once self-healing is netted out both need around 50k external healing, while Guardian adds Mark of the Wild and pairs especially well with the big grouped pulls the season rewards. He keeps the caveat that Guardian's damage is still a reasonable amount behind Blood's.",
       "patchContext": "Season 2 live — M+ outlook, his end-of-week-six Mythic+ meta recap (\"2/5 New Meta Specs? | Mythic+ Week 6 - 2 Weeks From 12.1.5\", published 2026-09-30), read off live representation shares at all key levels and in the top keys plus the comps those keys are running, one week after the September 23 Unholy bug-fix buff. He flags the sample caveat himself — this reset's top-key cut was 51 runs at recording time, and many listed top keys are days old — and his forward-looking remarks about patch 12.1.5 are about a patch that is not live yet (he dates it October 13).",
       "url": "https://youtu.be/LKzPqYFo6dw?t=631",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -14766,6 +14910,116 @@
       "note": "He reads Arcane as the stable member of the comp: barely losing anything in the week Unholy arrived, and essentially at the same level it has held since the season began. He expects it to be retained rather than displaced — he explicitly rules Arcane out as the spec Unholy replaces, because its priority damage inside AoE packs is too valuable to lose — while noting that Assassination covers the same ground, so a comp can swap one for the other.",
       "patchContext": "Season 2 live — M+ outlook, his end-of-week-six Mythic+ meta recap (\"2/5 New Meta Specs? | Mythic+ Week 6 - 2 Weeks From 12.1.5\", published 2026-09-30), read off live representation shares at all key levels and in the top keys plus the comps those keys are running, one week after the September 23 Unholy bug-fix buff. He flags the sample caveat himself — this reset's top-key cut was 51 runs at recording time, and many listed top keys are days old — and his forward-looking remarks about patch 12.1.5 are about a patch that is not live yet (he dates it October 13).",
       "url": "https://youtu.be/LKzPqYFo6dw?t=272",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. M+ outlook. Supersedes his 2026-09-30 end-of-week-six Mythic+ read of Unholy.",
+      "note": "He sizes the Blightfall change (100% of remaining plague damage instead of 200%) at roughly a 10% single-target and 6% AoE loss, about 8% on generic Mythic+ pulls, and says directly that it is not enough to undo the growth Unholy has had since its buff: it will still be doing very high damage, just comparable with the clump of specs around it rather than above them. He keeps it as a contender for a main Mythic+ group on the strength of its tankiness and its priority damage, and says this nerf will not stop the ongoing growth he has been tracking.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=244",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "negative",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. Raid outlook. Supersedes his 2026-08-31 raid-meta recap read and his 2026-09-23 read of how the September 22 tuning landed.",
+      "note": "He computes the October 6 buffs as about 5 to 6% total, because the 8% lands on roughly 75% of Devourer's damage while Void Ray and Void Meteor are untouched, and says it still does not make the spec look good in the raid: he calls Devourer completely cooked there and awful specifically on the last two bosses, which he says are the ones that matter, because of their movement and their burst windows — both things he rates Devourer very poor at.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=400",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "positive",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. M+ outlook. Supersedes his 2026-09-15 week-four Mythic+ read of Devourer.",
+      "note": "He says Devourer has slid steadily down the Mythic+ standings since launch, to the point that Havoc is now more represented in top keys, and that the roughly 5 to 6% damage gain from the October 6 buffs will definitely help: his read is that Devourer might have a chance at being relevant in Mythic+ again after them.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=422",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "negative",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. M+ outlook. Supersedes his 2026-09-22 end-of-week-five Mythic+ read and his 2026-08-22 and 2026-09-19 reads of the earlier tuning passes.",
+      "note": "He dismisses the October 6 Brewmaster changes — Quick Sip purifying 8% of Stagger instead of 5%, and the Pretense of Instability dodge window going from 5 to 8 seconds — as practically nothing, and says there is still zero hope for the spec to be relevant this season. His stated diagnosis is that Brewmaster needs actual defensive buttons rather than passive mitigation, pointing at Celestial Infusion having lost roughly 30% of its uptime against Season 1. He notes the one place it still appears is the physical comp, as the physical-damage debuff carrier now that Mistweaver is out of the picture.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=578",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "positive",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. Raid outlook. Supersedes his 2026-08-29 read of the September 1 pass and both of his 2026-09-23 reads of how the September 22 tuning landed.",
+      "note": "He counts this as the fifth Mistweaver buff in a row and reads the two 15% increases — Invigorating Mist and Enveloping Mist — as raid-focused, because Invigorating Mist is the Vivify splash and Enveloping Mist tags more players than five in a raid. He sizes it at roughly 3 to 4% of total healing and says it might even get Mistweaver close to Discipline and to about an average level, while being explicit that the spec is still a long way from its Season 1 standing and that its apex talent remains very poor.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=672",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. Raid and M+ outlook. Supersedes his 2026-09-07 week-three Mythic+ read and his 2026-09-26 post-tuning raid read.",
+      "note": "He notes this is the third patch in a row in which Blizzard has tried to buff Trickster for Subtlety and that after the previous two rounds rogues were still not playing it in raid or Mythic+. He rates this round bigger — the 15% to Unseen Blade and Coup de Grace he considers relevant to Trickster's damage — and says it is now a real possibility that Trickster could equal Deathstalker. His point is that the consequence would be a gearing one rather than a power one: Subtlety currently plays mastery and haste, and a Trickster build would put value back into crit.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=737",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "mixed",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. Raid outlook.",
+      "note": "He calls the flat 4% damage increase the relevant part of the pass for Enhancement and says it was very much needed, because Enhancement has been one of the least performing specs in the raid and has kept sliding further down. He discounts the 35% Lava Lash buff for raid purposes: with Enhancement playing Stormbringer everywhere it does not take the fire side of the tree, and he measures Lava Lash at 0.7% of damage on Mythic Twin Fangs. His read is that this round is more relevant to raid performance than to Mythic+.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=855",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Enhancement",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-03",
+      "sentiment": "negative",
+      "patchContext": "Season 2 live — his walkthrough of the announced October 6 weekly-reset balance tuning (\"Pre 12.1.5 Balance Tuning | UH DK Nerfed\", published 2026-10-03), each change weighed against current live raid and Mythic+ results. He says himself the round is small, and notes that another round follows on October 6 when 12.1.5 goes live. M+ outlook. Supersedes his 2026-08-15 pre-launch Mythic+ read of Enhancement.",
+      "note": "On the Mythic+ side he says the October 6 buff will not really change much, because Enhancement is crowded out by Elemental regardless; he measures Lava Lash at 0.12% of damage in a key, so the 35% buff is not relevant there. The most he allows is a less-likely niche chance in the physical-damage comp.",
+      "url": "https://youtu.be/N8x5_4nieWk?t=873",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-02",
+      "sentiment": "negative",
+      "patchContext": "Season 2 live — M+ outlook, \"5 Mythic+ Seasons as Top DPS In A Row | What’s Going On?\" (published 2026-10-02), his essay on Death Knight dominance across seasons, read off historical and current Mythic+ representation shares at 20+ keys through the first days of the week. Supersedes his 2026-09-30 end-of-week-six Mythic+ read of Blood.",
+      "note": "He tracks Blood's share of 20+ keys falling 58 to 41 to 36 and calls it a crash in its player base, attributing it to Unholy's rise rather than to Blood itself: his stated rule is that two specs of the same class are not meta at the same time. He notes Blood was made meta by defensive damage-reduction buffs just before the season and that Guardian has now passed it, and that the combat resurrection Blood might have been brought for is covered by Guardian anyway.",
+      "url": "https://youtu.be/ixJGTHQnF_o?t=899",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-02",
+      "sentiment": "positive",
+      "patchContext": "Season 2 live — M+ outlook, \"5 Mythic+ Seasons as Top DPS In A Row | What’s Going On?\" (published 2026-10-02), his essay on Death Knight dominance across seasons, read off historical and current Mythic+ representation shares at 20+ keys through the first days of the week. Supersedes his 2026-09-30 end-of-week-six Mythic+ read of Guardian.",
+      "note": "He reads Guardian as the direct beneficiary of Blood's displacement, tracking its share of 20+ keys from 8% at the start of the season to 11% two weeks ago, 21% last reset and 30% this reset, and treating it as the tank the meta has moved to while Unholy occupies the Death Knight slot as a DPS.",
+      "url": "https://youtu.be/ixJGTHQnF_o?t=907",
       "superseded": false
     }
   ]

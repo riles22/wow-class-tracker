@@ -2,39 +2,32 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "CKGXuJMtgXI",
-      "creator": "YoDaTV",
-      "title": "Unholy DK Nerfed! (Tierlist Update and Meta Analysis)",
-      "published": "2026-10-03",
-      "queuedAt": "2026-10-04"
-    },
-    {
-      "id": "Kv6chpg_6fk",
-      "creator": "Jedith",
-      "title": "Devourer Demon Hunter Got SURPRISE BUFFS!",
-      "published": "2026-10-03",
-      "queuedAt": "2026-10-04"
-    },
-    {
-      "id": "N8x5_4nieWk",
-      "creator": "izen (Izenhart)",
-      "title": "Pre 12.1.5 Balance Tuning | UH DK Nerfed",
-      "published": "2026-10-03",
-      "queuedAt": "2026-10-04"
-    },
-    {
-      "id": "ixJGTHQnF_o",
-      "creator": "izen (Izenhart)",
-      "title": "5 Mythic+ Seasons as Top DPS In A Row | What’s Going On?",
-      "published": "2026-10-02",
-      "queuedAt": "2026-10-04"
-    },
-    {
-      "id": "65gAEPrNBlU",
+      "id": "n8Z9SX9cRF0",
       "creator": "Dalaran Gaming",
-      "title": "Unholy DK NERFED, Huge Class Buffs & PvP Rework Next Reset!",
+      "title": "Blizzard Secretly Fixed These 5 Specs for M+ Season 2",
+      "published": "2026-10-06",
+      "queuedAt": "2026-10-06"
+    },
+    {
+      "id": "v-h_ahehYaA",
+      "creator": "AutomaticJak",
+      "title": "How Is Healing in Midnight Season 2?",
+      "published": "2026-10-06",
+      "queuedAt": "2026-10-06"
+    },
+    {
+      "id": "sCij1D_cQoI",
+      "creator": "Dalaran Gaming",
+      "title": "WoW 12.1.5 PTR: New Rogue Animations & Class Fixes",
+      "published": "2026-10-05",
+      "queuedAt": "2026-10-06"
+    },
+    {
+      "id": "qYVsRrr7xg8",
+      "creator": "izen (Izenhart)",
+      "title": "12.1 Week 7 Raid Rankings | A New Mage? Lizards? Unholy Nerfs?",
       "published": "2026-10-04",
-      "queuedAt": "2026-10-04"
+      "queuedAt": "2026-10-06"
     }
   ],
   "skipped": [

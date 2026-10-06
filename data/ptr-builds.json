@@ -3,6 +3,22 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-10-06",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Incoming Ula’tek raid encounter tuning for the October 6 weekly maintenance — a second round of Venomous Abyss end-boss nerfs after the September 14/15 pass. Read from the canonical source: Linxy, us.forums topic 2373623 “Incoming Ula’tek Raid Encounter Tuning - October 6”, post 1, created 2026-10-06T02:44:12Z (post version 2, last edited 2026-10-06T02:44:39Z), fetched fresh this run with its per-stage heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383264 (published 2026-10-05T21:45:44-05:00). The two agree exactly. NO CLASS OR SPEC LINE: every change is an encounter mechanic or boss/add value, so nothing here is spec tuning and nothing reaches a spec drawer or votes in any outlook tally — specsAffected is deliberately empty (the posts #7/#12/#13 precedent, and the same shape as the 2026-09-14 raid-tuning entry). It is logged because raid difficulty is the context the raid bracket’s letters are read against. It is NOT a hotfix compilation block: the running compilation (us.forums topic 2336376) was independently re-fetched this run and is still post 1 v53 / “October 1”, exactly as the deterministic official-notes receipt reports, so this announcement raises no ledger obligation yet. Logged as kind hotfix rather than build because validation refuses a forumUrl on a hotfix and the build kind is reserved for the class-tuning passes — the 2026-09-14 precedent for an encounter-tuning post with its own topic; the topic URL is cited here instead. NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “tier set” appear zero times in the post), so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/incoming-ulatek-raid-encounter-tuning-october-6/2373623.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383264/massive-heroic-and-mythic-ulatek-nerfs-with-weekly-reset",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: The Venomous Abyss, Ula’tek — General: Spectral Coils damage reduced by 20% on Heroic and Mythic difficulties.",
+        "Non-class: The Venomous Abyss, Ula’tek — Stage 02: Warden’s Protection damage reduced by 80%; the number of ground targets during Virulent Spit reduced; Grasping Fangs periodic damage reduced by 30% on Heroic and Mythic difficulties; Blight Vein duration reduced to 4 seconds on Heroic and Mythic difficulties (was 6 seconds).",
+        "Non-class: The Venomous Abyss, Ula’tek — Stage 03: Blightscale Shrieker and Blightscale Clutch health reduced by 20% on Heroic and Mythic difficulties; Slithering Clutch health reduced by 20% on Mythic difficulties; Circling Prey raid damage reduced by 30% on Heroic and Mythic difficulties; the Drain Rate of Serpent’s Bite adjusted so no more than 3 people are needed to soak regardless of raid size; Toxic Burn damage reduced by 30% on Mythic difficulty; the number of waves emitted from a tail during Caustic Waves reduced to 3 on Mythic difficulty (was 7)."
+      ]
+    },
+    {
       "date": "2026-10-02",
       "kind": "build",
       "realm": "live",

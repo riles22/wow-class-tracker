@@ -431,6 +431,416 @@
           "supersededAtFreeze": false
         }
       ]
+    },
+    {
+      "id": "yodatv-CKGXuJMtgXI-2026-10-03",
+      "label": "YoDaTV — 2026-10-03 Mythic+ tier-list update after the announced October 6 class tuning",
+      "creator": "YoDaTV",
+      "season": "s2",
+      "date": "2026-10-03",
+      "capturedAt": "2026-10-06",
+      "scope": {
+        "brackets": [
+          "mplus"
+        ],
+        "roles": [
+          "DPS",
+          "Healer",
+          "Tank"
+        ],
+        "keys": [
+          "Death Knight|Blood",
+          "Paladin|Holy",
+          "Shaman|Elemental",
+          "Warrior|Arms",
+          "Rogue|Subtlety",
+          "Rogue|Assassination",
+          "Demon Hunter|Vengeance",
+          "Druid|Guardian",
+          "Shaman|Restoration",
+          "Druid|Restoration",
+          "Priest|Holy",
+          "Mage|Arcane",
+          "Warlock|Demonology",
+          "Demon Hunter|Devourer",
+          "Death Knight|Frost",
+          "Paladin|Retribution",
+          "Hunter|Beast Mastery",
+          "Monk|Windwalker",
+          "Rogue|Outlaw",
+          "Druid|Feral",
+          "Shaman|Enhancement",
+          "Death Knight|Unholy",
+          "Monk|Brewmaster",
+          "Evoker|Preservation",
+          "Monk|Mistweaver",
+          "Warrior|Fury",
+          "Demon Hunter|Havoc",
+          "Hunter|Marksmanship",
+          "Hunter|Survival",
+          "Paladin|Protection",
+          "Warrior|Protection",
+          "Priest|Discipline",
+          "Druid|Balance",
+          "Mage|Fire"
+        ]
+      },
+      "scopeNote": "Live Season 2 Mythic+ (his own list), recorded after Blizzard announced the October 6 class tuning and read against the current top-key leaderboard. Only the placements he STATES are captured: the list is shown on screen and cannot be read from a transcript, so six specs he never names — Devastation and Augmentation Evoker, Frost Mage, Shadow Priest, Affliction and Destruction Warlock — are absent rather than reconstructed. nativeOrder records only the tiers the audio evidences; his scale also carries A+ (see the 2026-09-24 panel), which he does not use here. Two placement sentences are mangled by the auto-captions and the rows say so.",
+      "nativeOrder": [
+        "S+",
+        "S",
+        "A",
+        "B"
+      ],
+      "pages": [
+        {
+          "url": "https://youtu.be/CKGXuJMtgXI",
+          "published": "2026-10-03",
+          "snapshot": "2026-10-06"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Death Knight|Blood",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=204",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he opens the list with the \"Chinese meta comp\" in S+ and names its members — Blood DK, Holy Paladin, a Rogue, Elemental Shaman and Arms Warrior — saying the top three to five leaderboard groups are all running it.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Holy",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=204",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: named as a member of the S+ meta comp he places at the top of the list.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Shaman|Elemental",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=204",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: named as a member of the S+ meta comp he places at the top of the list.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Arms",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=204",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: named as a member of the S+ meta comp he places at the top of the list; he adds later that Fury is not as good as Arms right now.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Rogue|Subtlety",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=208",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he says \"the both Rogues are here\" of the S+ tier and tells Rogue players not to one-trick either, naming Subtlety as the spec the leaderboard Rogue uses in some dungeons (he cites Murder Row).",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Rogue|Assassination",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=208",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he says \"the both Rogues are here\" of the S+ tier; he names Assassination as the other half of the same Rogue slot (he cites Temple) and notes it is weaker at swapping to totems.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Demon Hunter|Vengeance",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=214",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he places Vengeance DH in S and ahead of Guardian Druid, adding that it could potentially be better than Blood DK after a newly discovered bug.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Guardian",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=239",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he leaves Guardian in S, behind Vengeance DH, while saying he does not believe in the spec and does not think it belongs in that tier.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Shaman|Restoration",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=245",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: named as one of the healers he has in S, with the reasoning that groups without a DPS Shaman need a Restoration Shaman for the Shaman buffs.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Restoration",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=245",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: named as one of the healers he has in S; he says it heals slightly less than Holy Paladin but is a great source of Mark of the Wild.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Priest|Holy",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=245",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: named as one of the healers he has in S; he says it heals a lot but he has not seen it in the very top keys, which is why he leaves it in S.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Mage|Arcane",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=284",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"we're leaving it in S tier\" — good at priority damage and at specific pulls, but not as good at that as the specs above it.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warlock|Demonology",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=296",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed among the S-tier DPS for its overall damage and its two- and three-target cleave, with pet bugs and invisibility skips named as what holds it back.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Demon Hunter|Devourer",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=354",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed in S after the fresh buff, with the stated bound that he does not think Devourer will be S+.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Death Knight|Frost",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=364",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he calls Frost the premier DPS Death Knight after the Unholy nerfs and says he does not see it being S+, leaving it in S.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Retribution",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=374",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"definitely S tier right now as well\", citing a leaderboard Retribution topping every key, with the caveat that that player has a 344 weapon.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Hunter|Beast Mastery",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=393",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: good overall damage and relatively tanky, but he does not think it is S+.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Windwalker",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=400",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed in S for great damage and raid buff; he names squishiness and one-shot risk against rot damage as the reason it is not one of the top damage dealers.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Rogue|Outlaw",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=433",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: good damage but not as good as the other two Rogues from what he has seen.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Feral",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=439",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"Feral Druid, I think, belongs in S tier... we're going to leave them in S tier\" — good overall DPS, very tanky, and useful utility, with overall damage below the higher S and S+ specs.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Shaman|Enhancement",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=471",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"we're going to leave it in S\" after the buff, while saying he does not think it is as good as Elemental.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Death Knight|Unholy",
+          "bracket": "mplus",
+          "tier": "S",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=475",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: he leaves freshly nerfed Unholy at the bottom of S on the strength of its quality of life, grips, CC and still-good single target, while saying he would not expect it to top the meters anymore.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Brewmaster",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=493",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: the A tier opens with Brewmaster; a good pick-up for a fist comp when nobody plays Windwalker, but not as good a tank as those above it.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Evoker|Preservation",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=502",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"we're going to leave them in A\" — he rates its damage highly but questions whether it can actually heal in high keys, especially with a group that does not know the class.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Mistweaver",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=514",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"we'll leave them in A for now\" — good damage, decent healing, with a raid buff useful in some comps.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Fury",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=525",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed among the A-tier DPS; decent but not as good as Arms right now and it does not fill the two-to-three-target cleave niche he says the season wants.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Demon Hunter|Havoc",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=534",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed among the A-tier DPS; doing okay but slower overall than Devourer, so he sees no reason to pick it over Devourer.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Hunter|Marksmanship",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=543",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed among the A-tier DPS as one of \"the other Hunters\", which he says are just worse than Beast Mastery right now.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Hunter|Survival",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=543",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: placed among the A-tier DPS as one of \"the other Hunters\", which he says are just worse than Beast Mastery right now.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Protection",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=570",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "Explicit: \"they are not good at all, so we're leaving them in the B tier\" — it looked good on the PTR but he cites nerfs to Reflection of Radiance with no compensating buff.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Protection",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=556",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "He groups Protection Warrior and Protection Paladin under one tier heading and then states that tier as B when he gets to Protection Paladin; the heading word itself is mangled by the auto-captions (rendered \"E tier\", a tier his list does not use). His read is that nothing has changed for these tanks and that Prot Warrior is strong only if you can Spell Reflect the important cast.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Priest|Discipline",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=580",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "He leaves Discipline in B, saying it heals worse than Holy right now; the caption of the placement sentence is mangled but names B.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Balance",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=599",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "He names moonkin as an example among \"the other specs in B\", whose shared problem he says is a bad damage profile — in Balance's case full padding, which he says is not good in Mythic+.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Mage|Fire",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-03",
+          "url": "https://youtu.be/CKGXuJMtgXI?t=606",
+          "context": "Season 2 live — updated M+ tier list, creator’s own placement",
+          "text": "He names Fire Mage among \"the other specs in B\", saying he has not seen anyone play it and recalling PTR complaints that it could only press Flamestrike at any target count, which he calls full padding and not good in Mythic+.",
+          "supersededAtFreeze": false
+        }
+      ]
     }
   ]
 }
