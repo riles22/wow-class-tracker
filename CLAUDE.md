@@ -1331,9 +1331,10 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           there runs the whole suite with 0 skipped and really does execute them — do not
           read a green local run as "the UI invariants were skipped". Treat any pass/skip
           COUNT written here as stale on sight and read it off the run instead; as of
-          2026-08-15 it is 25 invariants inside 401 total. After any template.html
-          change, run them for real:
-          `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm test`)
+          2026-08-15 it is 25 invariants inside 401 total. They read the BUILT
+          dist/index.html, and since 2026-10-06 nothing in the suite rebuilds it, so after
+          any template.html change build first, then run them for real:
+          `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm run build && npm test`)
 dist/     index.html + gearing.html  (generated — open directly in a browser; the two
           LIVE pages, linked to each other by the masthead tab strip)
           + s1.html — the frozen Season-1 archive page (footer-linked; one
@@ -1451,6 +1452,8 @@ legacy/   original single-file tracker (pre-conversion reference)
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
           workflows/nightly.yml + workflows/dispatch-nightly.yml (the refresh + its
           auto-kick) · workflows/gearing-refresh.yml (weekly verified guide refresh) ·
+          workflows/gearing-verify.yml (weekly source check of tier bonuses, Catalyst and
+          loot; publishes the verification status, never replaces game facts) ·
           workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
           yt-dlp) · CODEOWNERS (declares the human-owned boundary: workflows, gate

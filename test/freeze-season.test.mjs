@@ -77,7 +77,7 @@ test("a frozen record's commit really is the newest one still describing the liv
   }
 });
 
-test("only a source that has actually moved ahead is frozen", () => {
+test("only a source that has actually moved ahead is frozen", t => {
   /* Two failure directions, and asserting only the first is what let the BEHIND bug ship.
      `sourceSeasonOk === false` says "not describing the live season", which is equally true
      of an outlet that has moved ON and one that is LAGGING. Freezing a laggard writes its
@@ -85,7 +85,12 @@ test("only a source that has actually moved ahead is frozen", () => {
      flip: 159 letters, 36 of 80 consensus letters moved). So assert the real invariant —
      at least one page of the bracket has moved PAST the live season. That covers a fully
      flipped outlet and a mid-rebuild split alike, and excludes a laggard. */
-  if (!archive) return;
+  /* No archive means nothing to check. Say so, as the skips above and below do, instead of
+     returning early and counting as a pass that checked nothing. */
+  if (!archive) {
+    t.skip(`no ${ARCHIVE} — nothing has been frozen yet, so there is no record to hold to the moved-ahead rule`);
+    return;
+  }
   const liveRank = seasonRank(PHASES.liveSeason);
   for (const [season, bySource] of Object.entries(archive)) {
     if (season !== PHASES.liveSeason) continue;

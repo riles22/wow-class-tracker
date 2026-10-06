@@ -11,72 +11,90 @@ import { leaderboardPartitions } from "../src/wcl-live.mjs";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 test("build produces the tracker and fetchable launcher icons", async () => {
-  const result = await build(ROOT);
-  const html = await readFile(result.outPath, "utf8");
+  /* Build into a temp root, never the shared dist/ (2026-10-06). node --test runs the test
+     files concurrently, and the UI invariants and the CSP test in escaping.test.mjs read
+     dist/index.html, so rebuilding it here made which page they read depend on timing.
+     This is the smoke test of the real build, so the root gets every input `npm run build`
+     reads: data/, src/, and the two gearing files build() uses when present (the tierSet
+     mirror check in validation, and the dist/gearing.html copy). */
+  const { mkdtemp, cp, rm } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const root = await mkdtemp(path.join(tmpdir(), "tracker-build-"));
+  try {
+    await cp(path.join(ROOT, "data"), path.join(root, "data"), { recursive: true });
+    await cp(path.join(ROOT, "src"), path.join(root, "src"), { recursive: true });
+    for (const file of ["gearing/data/specs.json", "gearing/wow-s2-gearing.html"]) {
+      await cp(path.join(ROOT, file), path.join(root, file));
+    }
+    const result = await build(root);
+    const html = await readFile(result.outPath, "utf8");
 
-  assert.equal(result.specCount, 40);
-  assert.ok(html.includes("Curse of Ula'tek"));
-  assert.ok(!html.includes("__DATA_JSON__"), "placeholder must be replaced");
-  // Spot-check that data made it in:
-  for (const name of ["Outlaw", "Devourer", "Mistweaver", "Beast Mastery"]) {
-    assert.ok(html.includes(name), `missing spec ${name}`);
+    assert.equal(result.specCount, 40);
+    assert.ok(html.includes("Curse of Ula'tek"));
+    assert.ok(!html.includes("__DATA_JSON__"), "placeholder must be replaced");
+    // Spot-check that data made it in:
+    for (const name of ["Outlaw", "Devourer", "Mistweaver", "Beast Mastery"]) {
+      assert.ok(html.includes(name), `missing spec ${name}`);
+    }
+    // Script-injection safety: the payload must not contain a raw "<".
+    const payloadLine = html.split("\n").find(l => l.includes("const DATA ="));
+    assert.ok(payloadLine, "DATA constant missing");
+    assert.ok(!payloadLine.slice(payloadLine.indexOf("=")).includes("</"), "payload must escape < characters");
+    const published = JSON.parse(payloadLine.match(/const DATA = (.*);$/)[1]);
+    assert.ok(Array.isArray(published.creatorCredits), "publication must carry credits from the complete archive");
+    assert.ok(published.creatorTakes.takes.every(t => !t.superseded) && published.creatorTakes.metaNotes.every(n => !n.superseded),
+      "HTML serialization must use the compact publication payload");
+    // The drawer's partition names come from the reviewed recipe, not from the template.
+    assert.deepEqual(published.meta.wclPartitions, leaderboardPartitions());
+
+    const icons = [
+      { name: "favicon-192.png", rel: "icon", width: 192, height: 192 },
+      { name: "apple-touch-icon.png", rel: "apple-touch-icon", width: 180, height: 180 },
+    ];
+    for (const icon of icons) {
+      const href = `/wow-class-tracker/${icon.name}`;
+      const link = `<link rel="${icon.rel}" type="image/png" sizes="${icon.width}x${icon.height}" href="${href}">`;
+      assert.ok(html.includes(link), `missing exact ${icon.name} link`);
+      const liveUrl = new URL(href, "https://riles22.github.io/wow-class-tracker/index.html");
+      assert.equal(liveUrl.pathname, href, `${icon.name} must use the Pages project path explicitly`);
+
+      const source = await readFile(path.join(ROOT, "src", "assets", icon.name));
+      const built = await readFile(path.join(root, "dist", icon.name));
+      assert.deepEqual(built, source, `${icon.name} must be copied byte-for-byte`);
+      assert.deepEqual([...built.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${icon.name} must be a PNG`);
+      assert.equal(built.readUInt32BE(16), icon.width, `${icon.name} width mismatch`);
+      assert.equal(built.readUInt32BE(20), icon.height, `${icon.name} height mismatch`);
+    }
+
+    const csp = /<meta[^>]+Content-Security-Policy[^>]+content="([^"]*)"/i.exec(html)?.[1] ?? "";
+    assert.match(csp, /(?:^|;)\s*default-src 'none'\s*(?:;|$)/, "CSP must retain default-src 'none'");
+    assert.match(csp, /(?:^|;)\s*img-src 'self' data:\s*(?:;|$)/, "CSP must allow only same-origin and inline icons");
+
+    /* Era tokens (2026-08-11): the masthead/footer era prose is substituted at build time
+       from PHASES, so the launch-day label flip and the season flip need no template edits.
+       Expectations are COMPUTED from PHASES rather than written as literals, so this test
+       follows every flip instead of going stale — what it pins is the WIRING: each token
+       replaced (build throws on a missing one), none left unsubstituted, and the era the
+       page announces always matching the era vocabulary that governs the data. */
+    const { PHASES } = await import("../src/normalize.mjs");
+    const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
+    const eraDisplay = PHASES.ptr ? PHASES.ptr.label : (PHASES.livePatch?.label ?? PHASES.liveLabel);
+    // the chip carries a full and a short form since the 2026-08-22 bar compression
+    assert.ok(html.includes(`<span class="pc-full">${eraDisplay} — ${PHASES.patchName.toUpperCase()}</span>`),
+      "masthead chip must carry the PHASES-derived era");
+    assert.ok(html.includes(`<span class="pc-short">${eraDisplay}</span>`),
+      "…and its phone form must carry the era too, so attribution survives a mobile screenshot");
+    assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
+    /* The feed heading: an open PTR cycle's build feed carries its patch label; between
+       cycles it is named for the SEASON (2026-09-25), because the list is the season's feed
+       and 12.1.5's entries join 12.1's in it after launch. This expectation changed with that
+       decision. */
+    const feedHeading = PHASES.ptr ? `${eraDisplay} build feed` : `${seasonName(PHASES.liveSeason)} patch feed`;
+    assert.ok(html.includes(`>${feedHeading}<`), `patch-feed heading must read "${feedHeading}"`);
+    assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
+  } finally {
+    await rm(root, { recursive: true, force: true });
   }
-  // Script-injection safety: the payload must not contain a raw "<".
-  const payloadLine = html.split("\n").find(l => l.includes("const DATA ="));
-  assert.ok(payloadLine, "DATA constant missing");
-  assert.ok(!payloadLine.slice(payloadLine.indexOf("=")).includes("</"), "payload must escape < characters");
-  const published = JSON.parse(payloadLine.match(/const DATA = (.*);$/)[1]);
-  assert.ok(Array.isArray(published.creatorCredits), "publication must carry credits from the complete archive");
-  assert.ok(published.creatorTakes.takes.every(t => !t.superseded) && published.creatorTakes.metaNotes.every(n => !n.superseded),
-    "HTML serialization must use the compact publication payload");
-  // The drawer's partition names come from the reviewed recipe, not from the template.
-  assert.deepEqual(published.meta.wclPartitions, leaderboardPartitions());
-
-  const icons = [
-    { name: "favicon-192.png", rel: "icon", width: 192, height: 192 },
-    { name: "apple-touch-icon.png", rel: "apple-touch-icon", width: 180, height: 180 },
-  ];
-  for (const icon of icons) {
-    const href = `/wow-class-tracker/${icon.name}`;
-    const link = `<link rel="${icon.rel}" type="image/png" sizes="${icon.width}x${icon.height}" href="${href}">`;
-    assert.ok(html.includes(link), `missing exact ${icon.name} link`);
-    const liveUrl = new URL(href, "https://riles22.github.io/wow-class-tracker/index.html");
-    assert.equal(liveUrl.pathname, href, `${icon.name} must use the Pages project path explicitly`);
-
-    const source = await readFile(path.join(ROOT, "src", "assets", icon.name));
-    const built = await readFile(path.join(ROOT, "dist", icon.name));
-    assert.deepEqual(built, source, `${icon.name} must be copied byte-for-byte`);
-    assert.deepEqual([...built.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10], `${icon.name} must be a PNG`);
-    assert.equal(built.readUInt32BE(16), icon.width, `${icon.name} width mismatch`);
-    assert.equal(built.readUInt32BE(20), icon.height, `${icon.name} height mismatch`);
-  }
-
-  const csp = /<meta[^>]+Content-Security-Policy[^>]+content="([^"]*)"/i.exec(html)?.[1] ?? "";
-  assert.match(csp, /(?:^|;)\s*default-src 'none'\s*(?:;|$)/, "CSP must retain default-src 'none'");
-  assert.match(csp, /(?:^|;)\s*img-src 'self' data:\s*(?:;|$)/, "CSP must allow only same-origin and inline icons");
-
-  /* Era tokens (2026-08-11): the masthead/footer era prose is substituted at build time
-     from PHASES, so the launch-day label flip and the season flip need no template edits.
-     Expectations are COMPUTED from PHASES rather than written as literals, so this test
-     follows every flip instead of going stale — what it pins is the WIRING: each token
-     replaced (build throws on a missing one), none left unsubstituted, and the era the
-     page announces always matching the era vocabulary that governs the data. */
-  const { PHASES } = await import("../src/normalize.mjs");
-  const seasonName = s => `Season ${PHASES.seasonOrder.indexOf(s) + 1}`;
-  const eraDisplay = PHASES.ptr ? PHASES.ptr.label : (PHASES.livePatch?.label ?? PHASES.liveLabel);
-  // the chip carries a full and a short form since the 2026-08-22 bar compression
-  assert.ok(html.includes(`<span class="pc-full">${eraDisplay} — ${PHASES.patchName.toUpperCase()}</span>`),
-    "masthead chip must carry the PHASES-derived era");
-  assert.ok(html.includes(`<span class="pc-short">${eraDisplay}</span>`),
-    "…and its phone form must carry the era too, so attribution survives a mobile screenshot");
-  assert.ok(html.includes(`${PHASES.liveLabel} / ${seasonName(PHASES.liveSeason)}`), "baseline line must carry liveLabel + season");
-  /* The feed heading: an open PTR cycle's build feed carries its patch label; between
-     cycles it is named for the SEASON (2026-09-25), because the list is the season's feed
-     and 12.1.5's entries join 12.1's in it after launch. This expectation changed with that
-     decision. */
-  const feedHeading = PHASES.ptr ? `${eraDisplay} build feed` : `${seasonName(PHASES.liveSeason)} patch feed`;
-  assert.ok(html.includes(`>${feedHeading}<`), `patch-feed heading must read "${feedHeading}"`);
-  assert.ok(!/__ERA_[A-Z_]+__/.test(html), "no era token may survive substitution");
 });
 
 test("a mid-season livePatch moves the chip, its phone form and the Live: stamp, nothing else", async () => {
