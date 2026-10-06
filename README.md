@@ -120,7 +120,9 @@ anomaly checks against `data/required-sources.json`) — and only then commits, 
 deploys to GitHub Pages. A daily heartbeat workflow keeps one alert issue open while the
 nightly stops completing or any source's data is stale. It goes red on a missed nightly
 or another pipeline-level problem, on a newly stale source, when the check itself fails,
-and in a Monday reminder for anything not already accepted as a standing condition. **All game data is fetched
+and in a Monday reminder for anything not accepted as a standing condition. Each acceptance
+is a dated entry in `data/required-sources.json` with a reason and a review date, and the
+run goes red again when that date passes. **All game data is fetched
 live, never recalled from model memory** — Midnight postdates the model's training
 cutoff, so anything unfetchable is left blank rather than guessed.
 

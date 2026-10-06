@@ -136,6 +136,21 @@ heartbeat to go red honestly.
 > manifest history, that held after 22 of those 24 nights (19:23 with 28h: 12; the old
 > 17:23 with 28h: 0). The recomputed arithmetic is in CLAUDE.md.
 
+> **Annotation 2026-10-06 (record left as written; acceptance changed after this audit):**
+> owner decision. The workflow's `ACCEPTED_KEYS` pattern is gone. An accepted standing
+> condition is now a dated `acceptedStale { since, reason, reviewBy }` entry on its
+> requirement in `data/required-sources.json`; while it is in force the key is fingerprinted
+> as `<key>.accepted` and skips the Monday reminder, and the day after `reviewBy` the plain
+> key returns as a NEW key, so the run goes red on the lapse. A malformed or misplaced entry
+> raises the pipeline key `accepted-stale-invalid`. The nine `archon-*` keys are accepted
+> until 2026-11-01 and `method-published` until 2026-10-21. `wcl-live-raid` and
+> `wcl-live-mplus` are no longer accepted: their `maxAgeDays` is null, so the heartbeat
+> does not age-check them at all, while the publish gate's manifest row, evidence
+> cross-check and row floor still apply. Item 3's age alert therefore no longer covers
+> those two aggregate requirements, which have no endpoint to refresh from; the supported
+> `wcl-leaderboard-raid`/`wcl-leaderboard-mplus` series keep their 2-day threshold. The
+> 2026-09-25 annotation's account of those keys describes the rule as it was then.
+
 ### 7. Validation improvements — **addressed**
 
 `src/validate.mjs` now also rejects: duplicate source ids; duplicate class entries,

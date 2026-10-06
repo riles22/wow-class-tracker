@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE, labelFlipViolation } from "../src/check-refresh.mjs";
 import { LABEL_FLIP_DUE, LABEL_FLIP_EXPECTED } from "../src/normalize.mjs";
+import { PIPELINE_KEYS, ACCEPTED_SUFFIX, acceptanceProblem, misplacedAcceptances } from "../src/check-refresh.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
    probe-less feed requirement — enough to exercise every gate rule without the repo's
@@ -807,16 +808,46 @@ test("heartbeat: every pipeline and owner-deadline key reds the run every day it
      PIPELINE_KEYS. A dated owner gate missing from that pattern would red once, then pass
      with a warning while its deadline stayed missed. Nothing tied the two files together
      until 2026-09-26, when live-patch-label arrived after the pattern was written. A new
-     one-shot gate in checkFreshness belongs in this list and in PIPELINE_KEYS. */
+     one-shot gate in checkFreshness belongs in the exported PIPELINE_KEYS, and this test
+     holds the workflow's pattern to exactly that list (since 2026-10-06). */
   const yml = await readFile(new URL("../.github/workflows/freshness.yml", import.meta.url), "utf8");
   const m = yml.match(/^\s*PIPELINE_KEYS:\s*"([^"]+)"/m);
   assert.ok(m, "freshness.yml no longer declares PIPELINE_KEYS as a quoted env value");
   const pipeline = new RegExp(m[1]);
-  for (const key of ["run-age", "snapshot-phase", "min-sources-floor", LABEL_KEY]) {
-    assert.ok(pipeline.test(key), `PIPELINE_KEYS ${m[1]} does not match "${key}"`);
+  for (const key of ["run-age", "snapshot-phase", "min-sources-floor", LABEL_KEY, "accepted-stale-invalid"]) {
+    assert.ok(PIPELINE_KEYS.includes(key), `check-refresh no longer exports "${key}" as a pipeline key`);
   }
+  for (const key of PIPELINE_KEYS) {
+    assert.ok(pipeline.test(key), `PIPELINE_KEYS ${m[1]} does not match "${key}"`);
+    // An accepted-looking token cannot quiet a pipeline key either.
+    assert.ok(pipeline.test(key + ACCEPTED_SUFFIX), `PIPELINE_KEYS ${m[1]} does not match "${key}${ACCEPTED_SUFFIX}"`);
+  }
+  const listed = m[1].match(/^\^\(([^()]+)\)/);
+  assert.ok(listed, `PIPELINE_KEYS ${m[1]} is no longer one ^(a|b|...) alternation`);
+  assert.deepEqual(listed[1].split("|").sort(), [...PIPELINE_KEYS].sort(), "freshness.yml and check-refresh.mjs disagree on the pipeline keys");
   // Anchored: a source key that merely contains one of these words stays a news-only key.
   assert.ok(!pipeline.test(`x-${LABEL_KEY}`) && !pipeline.test("run-age-x"), `PIPELINE_KEYS ${m[1]} is not anchored`);
+});
+
+test("heartbeat: the Monday reminder reads acceptance from check-refresh, not from a pattern in the workflow", async () => {
+  /* Until 2026-10-06 freshness.yml carried ACCEPTED_KEYS, one regex that accepted whole key
+     families with no end date. Acceptance is now a dated acceptedStale entry in
+     data/required-sources.json, and the only thing the workflow reads is the `.accepted`
+     suffix check-refresh writes while an entry is in force. */
+  const yml = await readFile(new URL("../.github/workflows/freshness.yml", import.meta.url), "utf8");
+  assert.ok(!/ACCEPTED_KEYS:/.test(yml) && !/\$ACCEPTED_KEYS|\$\{ACCEPTED_KEYS/.test(yml),
+    "freshness.yml must not declare or read an accepted-key pattern again");
+  assert.equal(ACCEPTED_SUFFIX, ".accepted", "the workflow matches this suffix literally");
+  const step = yml.slice(yml.indexOf("- name: Decide the run colour"));
+  assert.match(step, /unaccepted="\$\(printf '%s\\n' "\$keys" \| match -v '\^\$' \| match -v '\[\.\]accepted\$'/,
+    "the Monday rule must count every key that is not an accepted token");
+  /* The new-key rule: the previous fingerprint covers its own keys plus the accepted form of
+     each plain key, so a key moving INTO acceptance is not news; nothing derives a plain key
+     from an accepted token, so a lapse is. */
+  assert.match(step, /match -v '\[\.\]accepted\$' \| sed 's\/\$\/\.accepted\/'/,
+    "the previous fingerprint's plain keys must also cover their accepted form");
+  assert.match(step, /comm -13 <\(printf '%s\\n' "\$covered"\) <\(printf '%s\\n' "\$keys"\)/,
+    "new keys are measured against the covered set");
 });
 
 /* ---------- the published-date gate (docs/published-gate-scope.md, 2026-08-04) ---------- */
@@ -901,4 +932,252 @@ test("published staleness is the heartbeat's half, with its own fingerprint key"
   // A configured gate with no published field anywhere is a violation here too.
   const none = checkFreshness(cfg, goodManifest(), data(null), "2026-07-14");
   assert.ok(none.violations.some(v => v.includes("no page carries a published date")));
+});
+
+/* ---------- owner-accepted standing staleness (acceptedStale, owner decision 2026-10-06) ----------
+   One dated acceptance per check: in force from `since` through `reviewBy` (UTC dates, both
+   inclusive). While it is in force a STALE key is fingerprinted as `<key>.accepted`, which
+   freshness.yml leaves out of its Monday reminder; the violation itself still prints. */
+
+const ACCEPT = Object.freeze({ since: "2026-07-10", reason: "fixture: upstream wall", reviewBy: "2026-07-20" });
+const alphaReq = config.requirements[0]; // pages-typed, max 4 days
+const acceptWorld = (acceptedStale, extra = {}) =>
+  ({ maxRunAgeHours: 36, requirements: [{ ...alphaReq, acceptedStale, ...extra }] });
+const staleAlpha = () => freshData(["2026-07-01", "2026-07-01"]); // stale from 2026-07-06
+// The heartbeat at its 19:23 UTC slot on a day whose nightly published, so run-age stays quiet.
+const heartbeatOn = (cfg, day, data = staleAlpha()) =>
+  checkFreshness(cfg, { run: day, startedAt: `${day}T10:41:00Z` }, data, `${day}T19:23:00Z`);
+/* freshness.yml's new-key rule, mirrored: the previous fingerprint covers its own keys plus the
+   accepted form of each plain key, and never the plain form of an accepted token. */
+const newKeys = (prev, now) => {
+  const keysOf = fp => (fp ?? "").split(",").filter(Boolean);
+  const covered = new Set(keysOf(prev).flatMap(k => k.endsWith(ACCEPTED_SUFFIX) ? [k] : [k, k + ACCEPTED_SUFFIX]));
+  return keysOf(now).filter(k => !covered.has(k));
+};
+
+test("acceptedStale: in force from since through reviewBy inclusive, still reported, fingerprinted as <key>.accepted", () => {
+  const cfg = acceptWorld(ACCEPT);
+  for (const day of [ACCEPT.since, "2026-07-15", ACCEPT.reviewBy]) {
+    const r = heartbeatOn(cfg, day);
+    assert.equal(r.fingerprint, "alpha.accepted", `${day}: ${r.violations.join("\n")}`);
+    assert.ok(r.violations.some(v => /^alpha \(Alpha tiers\) is \d+ days stale — max 4d \[ACCEPTED until 2026-07-20, since 2026-07-10: fixture: upstream wall\]$/.test(v)),
+      `${day}: the violation must still print, with its acceptance: ${r.violations.join("\n")}`);
+    assert.ok(r.report.some(l => l.startsWith("alpha: 2026-07-01") && l.endsWith("— ACCEPTED until 2026-07-20")), r.report.join("\n"));
+  }
+  // Moving INTO acceptance is not news to the workflow…
+  assert.deepEqual(newKeys("alpha", "alpha.accepted"), []);
+  // …and an acceptance on file for a fresh key changes nothing but the report line.
+  const fresh = heartbeatOn(cfg, "2026-07-15", freshData(["2026-07-15", "2026-07-15"]));
+  assert.equal(fresh.fingerprint, "");
+  assert.deepEqual(fresh.violations, []);
+  assert.ok(fresh.report.some(l => l.endsWith("acceptedStale on file until 2026-07-20, unused today")), fresh.report.join("\n"));
+});
+
+test("acceptedStale: the day after reviewBy the plain key returns, and the workflow reads that as NEW", () => {
+  const cfg = acceptWorld(ACCEPT);
+  const lastDay = heartbeatOn(cfg, ACCEPT.reviewBy), lapsed = heartbeatOn(cfg, "2026-07-21");
+  assert.equal(lastDay.fingerprint, "alpha.accepted");
+  assert.equal(lapsed.fingerprint, "alpha");
+  assert.ok(lapsed.violations.some(v => v.endsWith("[its acceptance LAPSED after 2026-07-20: fix the source, or renew acceptedStale with a new reviewBy and reason, or remove it]")),
+    lapsed.violations.join("\n"));
+  assert.ok(lapsed.report.some(l => l.endsWith("— acceptance LAPSED after 2026-07-20")), lapsed.report.join("\n"));
+  // The lapse is news, so the new-key rule reds the first heartbeat after reviewBy…
+  assert.deepEqual(newKeys(lastDay.fingerprint, lapsed.fingerprint), ["alpha"]);
+  // …once. From the next day it is standing staleness again, which Mondays still red.
+  assert.deepEqual(newKeys(lapsed.fingerprint, heartbeatOn(cfg, "2026-07-22").fingerprint), []);
+  // Before since, nothing is accepted yet.
+  const early = heartbeatOn(cfg, "2026-07-09");
+  assert.equal(early.fingerprint, "alpha");
+  assert.ok(early.violations.some(v => v.endsWith("[its acceptedStale takes effect 2026-07-10]")), early.violations.join("\n"));
+  assert.ok(early.report.some(l => l.endsWith("— acceptance starts 2026-07-10")), early.report.join("\n"));
+});
+
+test("acceptedStale accepts staleness, never missing data", () => {
+  const undated = { ...freshData(), sources: [{ id: "alpha", pages: [{ bracket: "raid" }, { bracket: "mplus" }] }] };
+  const r = heartbeatOn(acceptWorld(ACCEPT), "2026-07-15", undated);
+  assert.equal(r.fingerprint, "alpha");
+  assert.ok(r.violations.includes("alpha: no dated state at all"), r.violations.join("\n"));
+  assert.ok(r.report.some(l => l.endsWith("acceptedStale covers staleness, not missing data")), r.report.join("\n"));
+  // Likewise a published gate with no self-date to read.
+  const pubCfg = { maxRunAgeHours: 36, requirements: [{ ...pubConfig.requirements[0], published: { maxAgeDays: 9, acceptedStale: ACCEPT } }] };
+  assert.equal(heartbeatOn(pubCfg, "2026-07-15", pubData(null, "2026-07-15")).fingerprint, "gated-published");
+});
+
+test("acceptedStale: the published-level entry accepts only <key>-published, the requirement-level one only <key>", () => {
+  const gated = pubConfig.requirements[0];
+  const pubLevel = { maxRunAgeHours: 36, requirements: [{ ...gated, published: { maxAgeDays: 9, acceptedStale: ACCEPT } }] };
+  const reqLevel = { maxRunAgeHours: 36, requirements: [{ ...gated, acceptedStale: ACCEPT }] };
+  const oldPage = pubData("2026-07-01", "2026-07-15"), oldBoth = pubData("2026-07-01", "2026-07-01");
+  const r = heartbeatOn(pubLevel, "2026-07-15", oldPage);
+  assert.equal(r.fingerprint, "gated-published.accepted");
+  assert.ok(r.report.some(l => l.startsWith("gated published: 2026-07-01 (14d, max 9d)") && l.endsWith("— ACCEPTED until 2026-07-20")), r.report.join("\n"));
+  assert.equal(heartbeatOn(pubLevel, "2026-07-15", oldBoth).fingerprint, "gated,gated-published.accepted");
+  assert.equal(heartbeatOn(reqLevel, "2026-07-15", oldBoth).fingerprint, "gated-published,gated.accepted");
+});
+
+test("acceptedStale: pipeline keys can never be accepted", () => {
+  // A missed nightly stays plain run-age with every source key accepted.
+  const missed = checkFreshness(acceptWorld(ACCEPT), { run: "2026-07-01", startedAt: "2026-07-01T10:41:00Z" },
+    staleAlpha(), "2026-07-15T19:23:00Z");
+  assert.equal(missed.fingerprint, "alpha.accepted,run-age");
+  // An entry whose key IS a pipeline key is malformed: it accepts nothing and reds on its own.
+  for (const key of PIPELINE_KEYS) assert.match(acceptanceProblem(ACCEPT, key), /is a pipeline key, which can never be accepted/);
+  const named = heartbeatOn({ maxRunAgeHours: 36, requirements: [{ ...alphaReq, key: "run-age", acceptedStale: ACCEPT }] }, "2026-07-15");
+  assert.equal(named.fingerprint, "accepted-stale-invalid,run-age");
+  // A configured key that merely ENDS in the suffix cannot pose as accepted either.
+  const posing = heartbeatOn({ maxRunAgeHours: 36, requirements: [{ ...alphaReq, key: "alpha.accepted" }] }, "2026-07-15");
+  assert.equal(posing.fingerprint, "accepted-stale-invalid,alpha.accepted");
+  assert.ok(posing.violations.some(v => v.includes('the key "alpha.accepted" ends in ".accepted" without an acceptance')), posing.violations.join("\n"));
+});
+
+test("acceptedStale: a malformed entry accepts nothing and reds every day, even while its key is fresh", () => {
+  const cases = [
+    [[], /must be an object \{ since, reason, reviewBy \}, got \[\]/],
+    ["until 2026-07-20", /must be an object/],
+    [{ ...ACCEPT, since: "2026-7-10" }, /since must be a real YYYY-MM-DD date, got "2026-7-10"/],
+    [{ ...ACCEPT, reviewBy: "2026-02-30" }, /reviewBy must be a real YYYY-MM-DD date, got "2026-02-30"/],
+    [{ since: ACCEPT.since, reason: ACCEPT.reason }, /reviewBy must be a real YYYY-MM-DD date, got null/],
+    [{ ...ACCEPT, reviewBy: "2026-07-09" }, /reviewBy 2026-07-09 is before since 2026-07-10/],
+    [{ ...ACCEPT, reason: "   " }, /reason must be a non-empty string/],
+    [{ since: ACCEPT.since, reviewBy: ACCEPT.reviewBy }, /reason must be a non-empty string/],
+    [{ ...ACCEPT, until: "2026-08-01" }, /unknown field\(s\) until/],
+  ];
+  for (const [entry, why] of cases) {
+    const label = JSON.stringify(entry);
+    assert.match(acceptanceProblem(entry, "alpha") ?? "", why, label);
+    assert.equal(heartbeatOn(acceptWorld(entry), "2026-07-15").fingerprint, "accepted-stale-invalid,alpha", `${label}: the stale key stays plain`);
+    const fresh = heartbeatOn(acceptWorld(entry), "2026-07-15", freshData(["2026-07-15", "2026-07-15"]));
+    assert.equal(fresh.fingerprint, "accepted-stale-invalid", `${label}: red even with nothing stale`);
+    assert.ok(fresh.violations.some(v => v.startsWith('accepted-stale-invalid: acceptedStale for "alpha"')
+      && v.endsWith("It accepts nothing until it is fixed in data/required-sources.json")), fresh.violations.join("\n"));
+  }
+  // The published-level entry is validated the same way, under its own key.
+  const badPub = { maxRunAgeHours: 36, requirements: [{ ...pubConfig.requirements[0],
+    published: { maxAgeDays: 9, acceptedStale: { ...ACCEPT, reviewBy: "soon" } } }] };
+  const pub = heartbeatOn(badPub, "2026-07-15", pubData("2026-07-01", "2026-07-15"));
+  assert.equal(pub.fingerprint, "accepted-stale-invalid,gated-published");
+  assert.ok(pub.violations.some(v => v.includes('acceptedStale for "gated-published": reviewBy must be a real YYYY-MM-DD date, got "soon"')),
+    pub.violations.join("\n"));
+  // Not malformed: absent, null, and a one-day window.
+  for (const entry of [undefined, null, ACCEPT, { ...ACCEPT, reviewBy: ACCEPT.since }]) {
+    assert.equal(acceptanceProblem(entry, "alpha"), null, JSON.stringify(entry));
+  }
+});
+
+test("acceptedStale: an entry anywhere but a requirement or its published block accepts nothing and reds", () => {
+  // The two positions the heartbeat reads are not misplaced.
+  assert.deepEqual(misplacedAcceptances(acceptWorld(ACCEPT)), []);
+  assert.deepEqual(misplacedAcceptances({ requirements: [{ ...pubConfig.requirements[0], published: { maxAgeDays: 9, acceptedStale: ACCEPT } }] }), []);
+  // A gearing dataset, the top level and a nested block are read by nothing.
+  const elsewhere = { maxRunAgeHours: 36, acceptedStale: ACCEPT,
+    requirements: [{ ...alphaReq, date: { ...alphaReq.date, acceptedStale: ACCEPT } }],
+    gearing: { datasets: [{ key: "gearing-raid", file: "raid-items.json", dateField: "harvestedAt", maxAgeDays: 30, acceptedStale: ACCEPT }] } };
+  assert.deepEqual(misplacedAcceptances(elsewhere),
+    ["acceptedStale", "requirements[0].date.acceptedStale", "gearing.datasets[0].acceptedStale"]);
+  const stale = heartbeatOn(elsewhere, "2026-07-15");
+  assert.equal(stale.fingerprint, "accepted-stale-invalid,alpha", "nothing was accepted, so the stale key stays plain");
+  assert.equal(stale.violations.filter(v => v.startsWith("accepted-stale-invalid: ")).length, 3, stale.violations.join("\n"));
+  assert.ok(stale.violations.includes("accepted-stale-invalid: gearing.datasets[0].acceptedStale is not read by the heartbeat, which reads acceptedStale only on requirements[] and requirements[].published, so it accepts nothing; move or remove it in data/required-sources.json"),
+    stale.violations.join("\n"));
+  assert.equal(heartbeatOn(elsewhere, "2026-07-15", freshData(["2026-07-15", "2026-07-15"])).fingerprint, "accepted-stale-invalid",
+    "red even with nothing stale");
+});
+
+test("maxAgeDays null: no heartbeat age check, while the publish gate still holds the row to account", () => {
+  /* wcl-live-raid and wcl-live-mplus since 2026-10-06: no sanctioned aggregate endpoint exists,
+     so the retained values can only age. Null removes the daily age alarm and nothing else. */
+  const cfg = { ...evConfig, requirements: [{ ...evConfig.requirements[0], maxAgeDays: null }] };
+  const old = freshData(); old.specs[0].metrics[0].asOf = "2026-01-01";
+  const hb = heartbeatOn(cfg, "2026-07-14", old);
+  assert.equal(hb.fingerprint, "");
+  assert.ok(!hb.report.some(l => l.startsWith("wclx")), hb.report.join("\n"));
+  // A missing row, a success claim the stored date or the evidence cannot back, and the row floor all still fail.
+  assert.ok(checkManifest(cfg, evManifest([]), old, "2026-07-14").errors.some(e => e.includes('required source "wclx" has no row')));
+  assert.ok(checkManifest(cfg, evManifest([{ source: "wclx", result: "success" }]), old, "2026-07-14").errors
+    .some(e => e.includes('"wclx" claims success but stored data is dated 2026-01-01')));
+  assert.ok(checkManifest(cfg, evManifest([{ source: "wclx", result: "success" }]), freshData(), "2026-07-14", evidenceOf({})).errors
+    .some(e => e.includes('"wclx" claims success') && e.includes("landed no data")));
+  const empty = freshData(); empty.specs[0].metrics = [];
+  assert.ok(checkManifest(cfg, evManifest([{ source: "wclx", result: "unreachable", detail: "no endpoint" }]), empty, "2026-07-14").errors
+    .some(e => e.includes('data floor: "wclx" has 0 rows, below the 1 floor')));
+  // An honest unreachable row over intact data still passes, degraded.
+  const honest = checkManifest(cfg, evManifest([{ source: "wclx", result: "unreachable", detail: "no endpoint" }]), old, "2026-07-14", evidenceOf({}));
+  assert.deepEqual(honest.errors, []);
+  assert.ok(honest.degraded.some(d => d.startsWith("wclx: unreachable")));
+});
+
+test("gearing: a dataset with a verificationGroup ages from the newer of its own date and that group's last verification", () => {
+  /* Owner decision 2026-10-06. Weekly source verification re-proves the raid, dungeon, tier,
+     allocation and Catalyst-rule facts without re-harvesting them, so their own harvest or
+     review dates only grew older. currentVerification nulls lastVerifiedAt once the published
+     facts change, so a verification can only re-date the facts it actually checked. */
+  const cfg = { maxRunAgeHours: 36, requirements: [], gearing: { datasets: [
+    { key: "gearing-raid", file: "raid-items.json", dateField: "harvestedAt", verificationGroup: "raid", maxAgeDays: 30 },
+    { key: "gearing-sheet", file: "sheet-rewards.json", dateField: "harvestedAt", maxAgeDays: 30 }
+  ], verification: { maxAgeDays: 9, groups: ["raid"] } } };
+  const day = "2026-09-20";
+  const run = (raid, { harvested = "2026-08-02", ...extra } = {}) =>
+    checkFreshness(cfg, { run: day, startedAt: `${day}T10:41:00Z` }, freshData(), `${day}T19:23:00Z`,
+      { present: true, tierSetDrift: 0, dates: { "raid-items.json": harvested, "sheet-rewards.json": "2026-08-02" },
+        verification: { groups: { raid } }, ...extra });
+  const lastGood = { status: "unverified", reason: "Harvester rejected the source", lastVerifiedAt: "2026-09-15T04:59:12.883Z" };
+
+  // The last SUCCESSFUL verification dates the facts while this week's failed attempt still
+  // reports as gearing-verify-raid. A dataset without a group keeps its own date.
+  const r = run(lastGood);
+  assert.equal(r.fingerprint, "gearing-sheet,gearing-verify-raid", r.violations.join("\n"));
+  assert.ok(r.report.some(l => l.startsWith("gearing-raid: 2026-09-15 (5d, max 30d) — last raid source verification (harvestedAt 2026-08-02")),
+    r.report.join("\n"));
+  // A newer harvest beats an older verification.
+  const harvested = run(lastGood, { harvested: "2026-09-18" });
+  assert.ok(harvested.report.some(l => l.startsWith("gearing-raid: 2026-09-18 (2d, max 30d) — harvestedAt; last raid verification 2026-09-15 is not newer")),
+    harvested.report.join("\n"));
+  // No usable verification: the dataset falls back to its own date, and says so.
+  for (const [label, raid, extra] of [
+    ["facts changed since the verification", { ...lastGood, lastVerifiedAt: null }, {}],
+    ["verification unreadable", lastGood, { verificationError: "Invalid gearing verification report schema" }],
+    ["stamp from the future", { ...lastGood, lastVerifiedAt: "2026-09-21T04:59:12.883Z" }, {}],
+    ["unparseable stamp", { ...lastGood, lastVerifiedAt: "last Tuesday" }, {}],
+  ]) {
+    const fallback = run(raid, extra);
+    assert.ok(fallback.fingerprint.split(",").includes("gearing-raid"), `${label}: ${fallback.fingerprint}`);
+    assert.ok(fallback.violations.some(v => v.startsWith("gearing-raid (gearing/data/raid-items.json) is 49 days stale — max 30d (newer of harvestedAt and the last raid source verification; check gearing-verify.yml too)")),
+      `${label}: ${fallback.violations.join("\n")}`);
+  }
+  // Absence is reported against both dates; a verification alone can date a dataset.
+  assert.ok(run({ ...lastGood, lastVerifiedAt: null }, { harvested: null }).violations
+    .includes("gearing-raid: gearing/data/raid-items.json carries no harvestedAt date and no current raid verification"));
+  assert.ok(!run(lastGood, { harvested: null }).fingerprint.split(",").includes("gearing-raid"));
+});
+
+test("the real contract: every acceptance is well-formed and reachable, and every gearing verificationGroup exists", async () => {
+  /* Structure only. There is deliberately no date assertion: a lapsed acceptance is the
+     heartbeat's news to deliver, and a date check here would red every nightly's Gate 1 instead. */
+  const contract = JSON.parse(await readFile(new URL("../data/required-sources.json", import.meta.url), "utf8"));
+  assert.deepEqual(misplacedAcceptances(contract), [], "acceptedStale is read only on requirements[] and requirements[].published");
+  const accepted = [];
+  for (const req of contract.requirements) {
+    assert.ok(!req.key.endsWith(ACCEPTED_SUFFIX) && !PIPELINE_KEYS.includes(req.key),
+      `requirement key "${req.key}" collides with the heartbeat's own tokens`);
+    for (const [key, entry, ageChecked] of [
+      [req.key, req.acceptedStale, req.maxAgeDays != null && req.date != null],
+      [`${req.key}-published`, req.published?.acceptedStale, req.published?.maxAgeDays != null && req.date?.type === "pages"],
+    ]) {
+      if (entry == null) continue;
+      assert.equal(acceptanceProblem(entry, key), null, `${key}: ${acceptanceProblem(entry, key)}`);
+      assert.ok(ageChecked, `${key} carries an acceptedStale that no heartbeat age check reads`);
+      accepted.push(key);
+    }
+  }
+  // The owner note on wowmeta's own row (2026-08-21): do not ack it away.
+  assert.ok(!accepted.some(key => key.startsWith("wowmeta")), `wowmeta must not be accepted: ${accepted.join(", ")}`);
+  // Turning the age check off removes nothing else: the success-claim and floor teeth need both.
+  for (const req of contract.requirements.filter(r => r.maxAgeDays === null && r.evidence)) {
+    assert.ok(req.date && req.rows?.min > 0, `${req.key}: an evidence-gated requirement with no age check must keep its date probe and row floor`);
+  }
+  for (const ds of contract.gearing?.datasets ?? []) {
+    if (ds.verificationGroup == null) continue;
+    assert.ok(contract.gearing.verification?.groups?.includes(ds.verificationGroup),
+      `${ds.key}: verificationGroup "${ds.verificationGroup}" is not one of gearing.verification.groups`);
+  }
 });

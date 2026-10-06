@@ -260,7 +260,9 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
   defines rdps as FFXIV-only; earlier WoW-outage diagnoses based on its errors were wrong.
   The old S1 population medians and closed PTR52/54/56 records retain their values,
   dates, and historical identifiers. The unsupported exact aggregate requirements stay
-  visibly unresolved; new leaderboard receipts cannot clear them. Ordinary statistics
+  visibly unresolved in every run manifest; new leaderboard receipts cannot clear them.
+  Since 2026-10-06 the freshness heartbeat no longer age-checks them (`maxAgeDays` null),
+  because their age measures the missing endpoint, not a lapse in collection. Ordinary statistics
   pages still present verification challenges, which are not bypassed. An Archon aggregate
   [access request](docs/archon-access-request-2026-09-05.md) is prepared for Riley to send.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every

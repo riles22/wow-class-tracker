@@ -181,7 +181,11 @@ separately) and hard-coded reward-level ladders. No harvester acceptance overrid
 heartbeat must pass it through `currentVerification()` before displaying a verified
 state: malformed or future-dated receipts fail closed, and changed canonical hashes or
 review baselines invalidate previous successes. Existing harvest and review dates stay
-unchanged. The weekly workflow publishes complete reports even when some sources fail,
+unchanged. The tracker's freshness heartbeat dates the raid, dungeon, tier, stat-allocation
+and Catalyst-rule datasets by the newer of their own harvest or review date and their
+group's `lastVerifiedAt` as `currentVerification()` returns it, so a weekly verification of
+unchanged facts keeps them current; the reward sheet, icons, specs and guides keep their own
+dates. The weekly workflow publishes complete reports even when some sources fail,
 then finishes red to request attention; failed collection never promotes staged game data.
 
 To review a change, inspect `observations.json`, the raw response receipts and staged
