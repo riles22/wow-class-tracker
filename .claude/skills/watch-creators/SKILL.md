@@ -401,10 +401,11 @@ pruned.
   "nerf**ed**") — and trusted, it would have reported an ~800k-word batch that actually held 7
   takes and 5 metaNotes as empty.
 - **Measure the run's effect against `git show HEAD:dist/index.html`, never the working
-  `dist/` (2026-08-08).** `npm test` runs a build smoke test that writes the real `dist/`, so by
-  the time you think to copy it the comparison is post-change and reports zero movement whatever
-  happened. Same discipline before claiming a metaNote moved anything: the general-creator nudge
-  is gated on ≥2 creators agreeing, unanimous (render.mjs), so a one-voice lane is display-only.
+  `dist/` (2026-08-08).** `npm run build` rewrites the working `dist/` (and until 2026-10-06 so
+  did `npm test`, whose build smoke test now builds in a temp root), so by the time you think to
+  copy it the comparison is post-change and reports zero movement whatever happened. Same
+  discipline before claiming a metaNote moved anything: the general-creator nudge is gated on
+  ≥2 creators agreeing, unanimous (render.mjs), so a one-voice lane is display-only.
 - **Rejected creators and blocked hosts — do not re-research (2026-08-07 / 2026-08-08).** The
   durable rule: never add a creator who recaps our own registered tier lists on screen, which
   launders our sources back into the meta nudge as an independent voice. The register:
