@@ -1123,7 +1123,8 @@ refresh — nightly or local — ends by updating the manifest**; the freshness 
 snapshot as proof of life, keeps one auto-closing alert issue listing every violation
 past thresholds, and comments only when the violating set changes. Its RUN goes red
 only on a new key, a pipeline-level key, an untrustworthy check (fail-closed), or a
-Monday reminder — see the heartbeat paragraph under the nightly automation below.
+Monday reminder for a key no dated `acceptedStale` entry covers (a lapsed acceptance
+counts as a new key) — see the heartbeat paragraph under the nightly automation below.
 The committed manifest is always the PREVIOUS run's record — never evidence about the
 current run, and its standing skip/unreachable explanations never excuse skipping
 again: each run attempts every requirement fresh and rewrites the file (fresh `run` +
@@ -1172,7 +1173,9 @@ and the page's own `published` date rides alongside `snapshot`.
    Earlier 'WCL rDPS outage' diagnoses were incorrect. OAuth/GraphQL WoW dps/hps work.
    Exact aggregate population medians still have no verified sanctioned endpoint, and
    public statistics pages return verification challenges. Keep `wcl-live-raid/mplus`
-   honestly unreachable and their old values/dates unchanged. The NEW requirements
+   honestly unreachable and their old values/dates unchanged. Since 2026-10-06 (owner
+   decision) their `maxAgeDays` is null, so the freshness heartbeat no longer age-checks
+   them; the manifest row, the evidence cross-check and the row floor still apply. The NEW requirements
    `wcl-leaderboard-raid/mplus` report the supported series independently, based on the
    collector's bracket status and landed rows. Never use a new leaderboard receipt to
    green the old aggregate requirements. No challenge bypasses or proxy scraping.
@@ -1233,8 +1236,8 @@ defeats the staleness gate exactly, because `required-sources.json` measures blo
 `fightProfile.asOf` itself — for a month that hid 31-day-old sims behind a 5-day threshold
 (corrected 2026-08-08). Honest dates mean the manifest row is `partial` whenever upstream has not
 re-simmed, and the heartbeat goes red the day the chart dates pass the requirement's
-`maxAgeDays` (and on each Monday while they stay past it — `bloodmallet` is not an accepted
-key); that red IS the signal. The threshold is sized to upstream's roughly weekly re-sim cadence
+`maxAgeDays` (and on each Monday while they stay past it — `bloodmallet` carries no
+`acceptedStale`); that red IS the signal. The threshold is sized to upstream's roughly weekly re-sim cadence
 (raised 2026-09-25 — the label in `required-sources.json` records why), so a `partial` row
 between weekly re-sims is normal and only a missed cycle reds. Recipe and the transient-error
 gotcha live in the refresh-metrics skill.
@@ -1599,12 +1602,40 @@ stale day hid a new problem inside an already-red signal). The run fails only wh
 a fingerprint key is NEW (absent from the issue's previous fingerprint; no readable
 previous fingerprint counts every key as new); a pipeline key is present (`run-age`,
 which also annotates `NIGHTLY MISSED`, `snapshot-phase`, `min-sources-floor`,
-`live-patch-label` — red every day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
-fingerprint — fail closed); or it is Monday (UTC) and any key outside the workflow's
-single `ACCEPTED_KEYS` pattern remains. Accepted: every `archon-*` key and
-`wcl-live-raid`/`wcl-live-mplus`; `wowmeta` deliberately is not. Otherwise a stale run
-passes with a `::warning::`, and the issue still lists everything. Replayed against
-September 2026's real fingerprints, 14 of 26 runs would have been red instead of 26.
+`live-patch-label`, `accepted-stale-invalid` — red every day they stay); the check cannot be trusted (a crash, or a stale exit without a usable
+fingerprint — fail closed); or it is Monday (UTC) and any key that no dated acceptance
+covers remains. Otherwise a stale run passes with a `::warning::`, and the issue still
+lists everything. Replayed against September 2026's real fingerprints when the rule
+landed (2026-09-25, under the accepted-key pattern described next), 14 of 26 runs would
+have been red instead of 26.
+**Acceptance is dated data, not a workflow pattern** (owner decision 2026-10-06). It
+replaced the workflow's `ACCEPTED_KEYS` regex, which accepted every `archon-*` key and
+`wcl-live-raid`/`wcl-live-mplus` with no end date, so nothing ever asked whether a
+standing condition was still worth accepting. A requirement in
+`data/required-sources.json` may carry `acceptedStale: { since, reason, reviewBy }`; a
+`published` block may carry its own, which accepts only `<key>-published`. From `since`
+through `reviewBy` (inclusive, UTC dates) a stale key is still listed in the issue but is
+fingerprinted as `<key>.accepted`, and the Monday reminder ignores those tokens. The day
+after `reviewBy` the plain key returns and the workflow reads it as NEW, so a lapse reds
+once, on its own, and then joins the Monday reminder: fix the source, or renew the entry
+with a new `reviewBy` and reason, or remove it. The opposite move is not news, because a
+plain key in the previous fingerprint also covers its `.accepted` form. Acceptance covers
+staleness only; a requirement with no dated state at all is never accepted. A malformed
+entry (a date that is not a real `YYYY-MM-DD`, `reviewBy` before `since`, an empty
+reason, an unknown field, an entry on a pipeline key, or one placed anywhere but those two
+positions) accepts nothing and raises the pipeline key `accepted-stale-invalid`, checked
+every day even while its key is fresh.
+As of 2026-10-06: the nine `archon-*` keys are accepted until 2026-11-01 (`since`
+2026-09-25, the day the owner first accepted them in the old pattern) and
+`method-published` until 2026-10-21. `wowmeta` deliberately carries none (owner note
+2026-08-21 on its row), and neither does `icyveins`.
+`wcl-live-raid`/`wcl-live-mplus` no longer age at all: their `maxAgeDays` is null, the
+same form `blizzard-ptr` and `creators` already used, so the heartbeat skips them while
+the manifest row, the WCL evidence cross-check and the row floor still hold them to
+account. The five gearing datasets that a weekly source verification covers (raid,
+dungeons, tier, Catalyst allocations, Catalyst rules) age from the newer of their own
+date and that group's current `lastVerifiedAt` in `gearing/data/source-verification.json`;
+the sheet, icons, specs and guide datasets have no such field and keep their own dates.
 The A1 blind spot is FIXED (2026-07-24 audit): the history-snapshot
 proof-of-life signal now counts only when strictly newer than the manifest date, so a
 same-dated snapshot can no longer cap the measured age at 24h and mask a missed night.

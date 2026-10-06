@@ -1,5 +1,5 @@
 {
-  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run — src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness — visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) — one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot — before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added — 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night. Re-based 10 -> 7 at the 2026-08-18 S2 flip (owner-acked in the flip review): the contract shrank 26 -> 19 requirements and four of the previous night's 11 successes (icyveins-ptr + the three deterministic PTR raw-WCL rows) left with it, so 10 of 19 would red every transition night on sources sitting at their honest season-boundary freeze. 7 is the proportional re-base (10/26 of 19); healthy pre-flip runs sat at 17-19 of 25 — RECALIBRATE upward once S2 upstreams (Archon numerics, Murlok, Mythicstats, WCL live) are flowing and a healthy S2 run count has been observed. | minSuccessfulSources LOWERED 7->5 for the S2 transition window (Riley, 2026-08-19): the 08-18 dispatch nightly failed the floor HONESTLY at 5 — Archon frozen mid-S2-rebuild, WoWMeta frozen upstream, wcl-live x2 in their owner-accepted standing red. RESTORE TO 7 by ~2026-09-01 once sources rebuild for S2; a below-5 night is still a real failure. | RESTORE DATE EXTENDED to ~2026-10-01 (Riley, 2026-09-03, reviewed edit — FLOOR_RESTORE_DUE in src/check-refresh.mjs moved with it): the nine nightlies 2026-08-26..09-03 landed 5-7 successes of 21 (two at exactly 5) with 13 requirements structurally unable to succeed (archon-* x9 behind the human-verification wall, wcl-live x2 on the upstream rDPS 500, both sim rows held pre-adoption); restoring 7 would have redded six of nine nights for no new fact. The same-day wholesale MID2 sim adoption lifts the reachable ceiling by two. Restore to 7 when Archon returns or by the new date. | RESTORE DATE EXTENDED AGAIN to 2026-11-01 (Riley, 2026-09-25, reviewed edit — FLOOR_RESTORE_DUE in src/check-refresh.mjs moved with it): Archon did not return (all nine archon-* rows have failed behind the human-verification wall in every committed run manifest since 2026-08-26) and icyveins joined it, Cloudflare-blocked from the runners on every nightly since 2026-09-23; with wcl-live x2 unreachable (no sanctioned aggregate endpoint), 12 of 23 requirements cannot succeed from a runner. The seven nightlies 2026-09-19..09-25 landed 7, 7, 6, 7, 5, 8, 6 successes of 23 (09-23 at exactly 5); restoring 7 on 10-01 would have redded three of those seven nights for a wall no run can fix. Keep 5 until 2026-11-01.",
+  "comment": "The nightly refresh contract (2026-07-14, from the external security audit; tightened by the same-day re-audit). Every requirement here must have a row in data/run-manifest.json each run — src/check-refresh.mjs enforces it in the publish gate (--manifest) and the heartbeat (--age). maxAgeDays = staleness alert threshold for the committed data (alerts fire even for EXPLAINED staleness — visibility, not blame). rows.min = catastrophic-shrink floor, set ~60-65% of the 2026-07-14 real counts; raise/lower only with a reviewed reason. Date probes: pages = oldest matching sources.json page snapshot (a lagging page is a finding); metrics/ptrDummy = the COVERAGE date, i.e. the min-th-freshest asOf (min = date.minFresh, else rows.min, else 1) — one fresh row cannot vouch for a cut whose other role cuts/specs stayed old. evidence: \"wcl\" marks requirements cross-checked against wcl-fetch/evidence.json (written by the deterministic credentialed fetch step, uploaded before the agent runs): a success row needs evidence-landed rows, not just the agent's word. wcl-dummy-raw floors were tightened to min 60 + maxAgeDays 10 on 2026-07-17 after the first verified landing (103 rows). 2026-07-24 audit (D3/D4/N5): date probes for murlok, mythicstats, simulationcraft, bloodmallet and the three page-probed WCL cuts now read the DATA's own coverage date rather than the agent-written sources.json page snapshot — before this, rewriting 106 metric rows to 53 days stale while leaving snapshots at today produced zero violations from either gate. New probe type fightProfiles covers spec.fightProfile.asOf (sims live outside spec.metrics). encounterTiers ROW probes now count tier rows, not encounters: a partial Archon parse keeps all 17 encounters and empties their tier maps, so the old probe scored 17 while 92.5% of the surface was gone. archon-hps and archon-mplus-score were added — 47 published rows previously had neither a date gate nor a row floor. minSuccessfulSources = catastrophe floor: a run where essentially nothing arrived must not publish as a quiet night. Re-based 10 -> 7 at the 2026-08-18 S2 flip (owner-acked in the flip review): the contract shrank 26 -> 19 requirements and four of the previous night's 11 successes (icyveins-ptr + the three deterministic PTR raw-WCL rows) left with it, so 10 of 19 would red every transition night on sources sitting at their honest season-boundary freeze. 7 is the proportional re-base (10/26 of 19); healthy pre-flip runs sat at 17-19 of 25 — RECALIBRATE upward once S2 upstreams (Archon numerics, Murlok, Mythicstats, WCL live) are flowing and a healthy S2 run count has been observed. | minSuccessfulSources LOWERED 7->5 for the S2 transition window (Riley, 2026-08-19): the 08-18 dispatch nightly failed the floor HONESTLY at 5 — Archon frozen mid-S2-rebuild, WoWMeta frozen upstream, wcl-live x2 in their owner-accepted standing red. RESTORE TO 7 by ~2026-09-01 once sources rebuild for S2; a below-5 night is still a real failure. | RESTORE DATE EXTENDED to ~2026-10-01 (Riley, 2026-09-03, reviewed edit — FLOOR_RESTORE_DUE in src/check-refresh.mjs moved with it): the nine nightlies 2026-08-26..09-03 landed 5-7 successes of 21 (two at exactly 5) with 13 requirements structurally unable to succeed (archon-* x9 behind the human-verification wall, wcl-live x2 on the upstream rDPS 500, both sim rows held pre-adoption); restoring 7 would have redded six of nine nights for no new fact. The same-day wholesale MID2 sim adoption lifts the reachable ceiling by two. Restore to 7 when Archon returns or by the new date. | RESTORE DATE EXTENDED AGAIN to 2026-11-01 (Riley, 2026-09-25, reviewed edit — FLOOR_RESTORE_DUE in src/check-refresh.mjs moved with it): Archon did not return (all nine archon-* rows have failed behind the human-verification wall in every committed run manifest since 2026-08-26) and icyveins joined it, Cloudflare-blocked from the runners on every nightly since 2026-09-23; with wcl-live x2 unreachable (no sanctioned aggregate endpoint), 12 of 23 requirements cannot succeed from a runner. The seven nightlies 2026-09-19..09-25 landed 7, 7, 6, 7, 5, 8, 6 successes of 23 (09-23 at exactly 5); restoring 7 on 10-01 would have redded three of those seven nights for a wall no run can fix. Keep 5 until 2026-11-01. | acceptedStale (owner decision 2026-10-06; replaces the ACCEPTED_KEYS pattern in freshness.yml): an optional { since, reason, reviewBy } on a requirement accepts its stale age key, and inside its published block accepts the <key>-published key. While since <= today <= reviewBy the heartbeat still lists the violation but fingerprints it as <key>.accepted, which the Monday reminder skips; after reviewBy the plain key returns and reds the run as new. It covers staleness, never missing data, and can never cover a pipeline key. A malformed entry, or one placed anywhere but on a requirement or its published block, accepts nothing and reds every day as accepted-stale-invalid. maxAgeDays null means no age check: the heartbeat skips the requirement, while its manifest row, success cross-checks and row floor still apply.",
   "maxRunAgeHours": 26,
   "officialNotes": {
     "comment": "Separate deterministic intake receipts, checked by check-official-notes against the pre-agent artifact. These are verification instants, not tuning dates. Every edited class section needs an applied reference or explicit irrelevant reason; unresolved sections fail publication. A missed or unreachable source is also visible here after 48 hours, independent of the run-manifest's other sources.",
@@ -22,7 +22,7 @@
     "verification": {
       "maxAgeDays": 9,
       "groups": ["tierBonuses", "catalystRules", "raid", "dungeons", "tier", "allocations"],
-      "comment": "Weekly independent source verification, bound to scoped published facts. Does not renew unverified reward ladders or replace the retained dataset dates below. Changed, unreachable, missing, or outdated verification remains visible."
+      "comment": "Weekly independent source verification, bound to scoped published facts. Does not renew unverified reward ladders or replace the retained dataset dates below. Changed, unreachable, missing, or outdated verification remains visible. Since 2026-10-06 (owner decision) a dataset naming a verificationGroup is aged by the heartbeat from the NEWER of its own date and that group's lastVerifiedAt, read after currentVerification has dropped any verification the current facts no longer match; the dataset's own date field is never rewritten. sheet-rewards (rewardLadders, manual review only), icons, specs and the three guides have no verification group and keep their own dates."
     },
     "comment": "Freshness for the gearing subproject (gearing/README.md), added 2026-08-08. A sibling of requirements[] so the tracker run-manifest does not claim external gearing harvests. Current guide sources are refreshed by the separate weekly gearing-refresh workflow; failed providers retain their published bytes and verification dates. The nightly deterministic publish stage checks and synchronizes local capabilities before Gate 1. Owner-approved 2026-09-05: gearing-specs measures a local structuralSync receipt, validated against full output and current input digests; it does not re-date external loot, weapon or rule evidence. The 12.0.7 stat baseline is historical fallback, no longer a live age-gated feed; checkSpecSync validates its retained contents and provenance, while current stat priorities remain age-gated under all three guide sources. Age thresholds belong to the heartbeat, not the date-independent data validator. tierSetSync detects stale duplicated facts even when their dates are young. Existing external-feed age thresholds are unchanged.",
     "datasets": [
@@ -30,24 +30,28 @@
         "key": "gearing-raid",
         "file": "raid-items.json",
         "dateField": "harvestedAt",
+        "verificationGroup": "raid",
         "maxAgeDays": 30
       },
       {
         "key": "gearing-dungeons",
         "file": "dungeon-items.json",
         "dateField": "harvestedAt",
+        "verificationGroup": "dungeons",
         "maxAgeDays": 30
       },
       {
         "key": "gearing-tier",
         "file": "tier-items.json",
         "dateField": "harvestedAt",
+        "verificationGroup": "tier",
         "maxAgeDays": 30
       },
       {
         "key": "gearing-catalyst-alloc",
         "file": "catalyst-stat-allocations.json",
         "dateField": "harvestedAt",
+        "verificationGroup": "allocations",
         "maxAgeDays": 30
       },
       {
@@ -73,6 +77,7 @@
         "key": "gearing-catalyst-rules",
         "file": "catalyst-rules.json",
         "dateField": "reviewedAt",
+        "verificationGroup": "catalystRules",
         "maxAgeDays": 45
       },
       {
@@ -125,7 +130,12 @@
         "sourceId": "method"
       },
       "published": {
-        "maxAgeDays": 45
+        "maxAgeDays": 45,
+        "acceptedStale": {
+          "since": "2026-10-06",
+          "reason": "The raid tier list still self-dates 2026-08-10 (the M+ list re-dated 2026-10-05), past the 45-day publication window since 2026-09-25, while the captures stay fresh. Accepted by the 2026-10-06 owner decision. By reviewBy, check whether Method still publishes Season 2 raid updates: retire or re-scope the page, change the window with a reason, or renew this acceptance with a new reason.",
+          "reviewBy": "2026-10-21"
+        }
       },
       "rows": {
         "type": "ratings",
@@ -153,6 +163,11 @@
     },
     {
       "key": "archon-tiers",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon tier lists (raid throughput + M+ score, all roles) ARCHON WALL (opened 2026-08-25/26, held three consecutive nights as of 2026-08-27): every archon.gg application route is behind a site-wide human-verification interstitial, so all nine archon-* rows are expected to go red together. Three measured facts that a future reader needs. (1) It is NOT IP-scoped — re-tested from a residential IP on 2026-08-27, the wall held, so the datacenter-IP hypothesis is dead. (2) ITS SHAPE CHANGED FROM 403 TO 200: pages now return HTTP 200 carrying a ~2.5 KB \"Human Verification\" body with __NEXT_DATA__ count 0, so a status-only transport check would record SUCCESS and stamp a fresh snapshot over unchanged letters — assert on __NEXT_DATA__ presence, never on the status code. (3) There is no sanctioned machine lane: Archon is an RPGLogs property and publishes no Archon API (the \"API Documentation\" it links is Warcraft Logs’ own), and the Next.js data route /_next/data/<buildId>/... returns 403 {\"error\":\"Human verification required\"} — a content-type-aware, application-level refusal, i.e. deliberate rather than a default Cloudflare toggle. DO NOT attempt to solve, replay or automate past the check, and do NOT backfill these values from Warcraft Logs: Archon’s letters are Archon’s own tiering and its numbers are Archon’s own percentile cuts, so publishing ours under the archon source id would fabricate the source (hard rule 3). OWNER-CONFIRMED RETENTION POLICY (2026-09-05): retain the last verified in-season Archon letters during this outage. Freshness alerts do not expire a source or change consensus membership. The current four-source consensus still includes Archon; the UI names its retained verification date. Keep snapshot dates unchanged until actual source data is verified. Earlier three-source claims in run notes were incorrect. Clears if the wall lifts or an access agreement is reached.",
       "maxAgeDays": 4,
       "date": {
@@ -168,6 +183,11 @@
     },
     {
       "key": "archon-encounters",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon per-boss / per-dungeon tiers ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 10,
       "date": {
@@ -182,6 +202,11 @@
     },
     {
       "key": "archon-survivability",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon raid survivability tiers ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 10,
       "date": {
@@ -196,6 +221,11 @@
     },
     {
       "key": "archon-metrics",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon 95th-pct DPS (raid — DPS + tank rows, from specRankingsSection; HPS and M+ score are their own rows). The 2026-08-21 standing red (S2 rebuild served 0 rows) RESOLVED 2026-08-25 in a reviewed local run: the repopulated S2 tables were merged wholesale, and Fire Mage — which has no S2 row because nobody logs it at Mythic — had its S1 rows DROPPED rather than held, so the rank pool stays season-uniform (validate.mjs now gates that shape). Fire Mage reads pending until Archon publishes it; that is data, not a failure. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
@@ -212,6 +242,11 @@
     },
     {
       "key": "archon-hps",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon 95th-pct HPS (raid, healers). The 2026-08-21 standing red (healer page served 0 rows) RESOLVED 2026-08-24/25: the S2 healer table repopulated, all 7 rows merged by the 08-25 nightly and re-upserted from the same 08-25T12:00 dataset as archon-metrics in the follow-up local run. Kept as its own row per the split-row rule. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
@@ -228,6 +263,11 @@
     },
     {
       "key": "archon-heroic-dps",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon 95th-pct DPS, HEROIC raid (DPS + tank rows). Added 2026-08-25 with the Heroic lane (owner decision): Heroic is the dense early-season series (~170x the Mythic parses, all 27 DPS specs incl. Fire Mage) and, since the same change, the basis of archon's raid LETTERS. Same specRankingsSection recipe as archon-metrics, /heroic/ path. Split from the Mythic row so either difficulty can stall visibly on its own. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
@@ -244,6 +284,11 @@
     },
     {
       "key": "archon-heroic-hps",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon 95th-pct HPS, HEROIC raid (healers). Added 2026-08-25 with the Heroic lane. Kept as its own row per the split-row rule (archon-hps precedent). ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
@@ -260,6 +305,11 @@
     },
     {
       "key": "archon-mplus-score",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon M+ score (95th pct) ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
@@ -276,6 +326,11 @@
     },
     {
       "key": "archon-popularity",
+      "acceptedStale": {
+        "since": "2026-09-25",
+        "reason": "Archon's site-wide human-verification wall, in place since 2026-08-25/26 (measured detail on archon-tiers): all nine archon-* rows have failed behind it in every committed run manifest since 2026-08-26 (checked through 2026-10-06). Its last verified letters stay in the consensus under the owner-confirmed 2026-09-05 retention policy. First accepted on 2026-09-25 (owner decision, as the former ACCEPTED_KEYS pattern in freshness.yml) and given this review date by the 2026-10-06 owner decision. reviewBy matches FLOOR_RESTORE_DUE in src/check-refresh.mjs, the day the minSuccessfulSources floor is due back at 7, so both are decided together.",
+        "reviewBy": "2026-11-01"
+      },
       "label": "Archon popularity % (raid + M+, from specRankingsSection — the series a 07-21 recipe-navigation error silently stalled). The 2026-08-21 standing red RESOLVED 2026-08-25: the raid DPS group merged once the S2 tables repopulated, with Fire Mage's leftover S1 share DROPPED rather than held (a published sum-to-100 group cannot carry a stale extra share — it summed to 101.5). All role groups sum to 100.0 again; 79 rows, Fire Mage pending upstream. ARCHON WALL: see archon-tiers for the measured detail — same site-wide human-verification wall, upstream and expected, red together with the other archon-* rows. Assert on __NEXT_DATA__ presence, not the status code (the wall now returns 200). Do not attempt to defeat the check and do not backfill from Warcraft Logs (hard rule 3).",
       "maxAgeDays": 5,
       "date": {
@@ -309,8 +364,8 @@
     },
     {
       "key": "wcl-live-raid",
-      "label": "Warcraft Logs exact live raid population medians: no verified sanctioned aggregate endpoint. Stored S1 observations remain dated and unchanged. WoW dps/hps API access works; rdps is FFXIV-only, not an outage diagnostic. New per-encounter leaderboard samples are a separate requirement and cannot clear this missing aggregate.",
-      "maxAgeDays": 10,
+      "label": "Warcraft Logs exact live raid population medians: no verified sanctioned aggregate endpoint. Stored S1 observations remain dated and unchanged. WoW dps/hps API access works; rdps is FFXIV-only, not an outage diagnostic. New per-encounter leaderboard samples are a separate requirement and cannot clear this missing aggregate. maxAgeDays null since 2026-10-06 (owner decision): with no endpoint to refresh from, the retained values can only age, so the heartbeat no longer age-checks them. The manifest row, the WCL evidence cross-check on any success claim, and the row floor all still apply.",
+      "maxAgeDays": null,
       "evidence": "wcl",
       "date": {
         "type": "metrics",
@@ -326,8 +381,8 @@
     },
     {
       "key": "wcl-live-mplus",
-      "label": "Warcraft Logs exact live M+ population medians: no verified sanctioned aggregate endpoint. Retained S1 values are historical. New +10 leaderboard samples are separately measured, not replacement population medians.",
-      "maxAgeDays": 10,
+      "label": "Warcraft Logs exact live M+ population medians: no verified sanctioned aggregate endpoint. Retained S1 values are historical. New +10 leaderboard samples are separately measured, not replacement population medians. maxAgeDays null since 2026-10-06 (owner decision): see wcl-live-raid. The manifest row, the WCL evidence cross-check on any success claim, and the row floor all still apply.",
+      "maxAgeDays": null,
       "evidence": "wcl",
       "date": {
         "type": "metrics",

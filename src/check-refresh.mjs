@@ -44,7 +44,10 @@
          not blame) — or a page's own published date exceeds its published.maxAgeDays
          (lag-class half of the published gate; the dishonesty-class half lives in
          --manifest). Prints a stable `fingerprint=` line (sorted violation keys) so
-         the heartbeat workflow can comment only on state transitions. */
+         the heartbeat workflow can comment only on state transitions. A stale key
+         whose requirement carries an in-force acceptedStale entry is still a
+         violation but is fingerprinted as `<key>.accepted`, which the workflow
+         leaves out of its Monday reminder (see PIPELINE_KEYS below). */
 
 import { readFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
@@ -434,6 +437,66 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 export const FLOOR_RESTORE_DUE = "2026-11-01", FULL_FLOOR = 7;
 
+/* OWNER-ACCEPTED STANDING STALENESS (owner decision 2026-10-06). Until then the heartbeat's
+   Monday reminder skipped every key matching one regex in freshness.yml (ACCEPTED_KEYS,
+   2026-09-25). It accepted whole families with no end date: on 2026-10-06 it covered 11 of
+   24 stale keys, and nothing would ever have brought one back up for review. Acceptance now
+   sits on the check it accepts, in data/required-sources.json:
+     requirements[].acceptedStale            accepts the age key `<key>`
+     requirements[].published.acceptedStale  accepts the self-date key `<key>-published`
+   each { since, reason, reviewBy }: real YYYY-MM-DD dates, reviewBy on or after since, and
+   a non-empty reason. An acceptance is in force while since <= today <= reviewBy (UTC
+   dates), and it changes one thing: a STALE key is fingerprinted as `<key>.accepted`, which
+   freshness.yml leaves out of the Monday reminder. The violation is still printed and still
+   listed in the alert issue. It accepts staleness only, never absence: a requirement with no
+   dated state at all keeps its plain key. After reviewBy the key reverts to its plain form.
+   The workflow never lets an accepted token cover the plain key, so a lapse is a NEW key
+   and reds the run on the first heartbeat after it.
+   Pipeline keys can never be accepted: none goes through the acceptance path, an entry
+   whose key is one is rejected, and freshness.yml matches them with or without the suffix.
+   A malformed entry, or one placed anywhere but those two positions, accepts nothing and
+   adds the pipeline key `accepted-stale-invalid`, red every day until it is fixed. */
+export const PIPELINE_KEYS = Object.freeze(["run-age", "snapshot-phase", "min-sources-floor", "live-patch-label", "accepted-stale-invalid"]);
+export const ACCEPTED_SUFFIX = ".accepted";
+const ACCEPTANCE_FIELDS = ["since", "reason", "reviewBy"];
+// Round-trips through Date.UTC, which rolls 2026-02-30 into March, so only real dates pass.
+const realDate = v => typeof v === "string" && ISO_DATE.test(v) && new Date(utc(v)).toISOString().slice(0, 10) === v;
+
+/* Why the acceptedStale entry for fingerprint key `key` cannot be honoured, or null when it
+   can. Absent (undefined) and null both mean "not accepted" and are never a problem. */
+export function acceptanceProblem(entry, key) {
+  if (entry === undefined || entry === null) return null;
+  const where = `acceptedStale for "${key}"`;
+  if (PIPELINE_KEYS.includes(key)) return `${where}: "${key}" is a pipeline key, which can never be accepted`;
+  if (typeof entry !== "object" || Array.isArray(entry)) return `${where} must be an object { since, reason, reviewBy }, got ${JSON.stringify(entry)}`;
+  const unknown = Object.keys(entry).filter(field => !ACCEPTANCE_FIELDS.includes(field));
+  if (unknown.length) return `${where} has unknown field(s) ${unknown.join(", ")}; only since, reason and reviewBy are read`;
+  for (const field of ["since", "reviewBy"]) {
+    if (!realDate(entry[field])) return `${where}: ${field} must be a real YYYY-MM-DD date, got ${JSON.stringify(entry[field] ?? null)}`;
+  }
+  if (entry.reviewBy < entry.since) return `${where}: reviewBy ${entry.reviewBy} is before since ${entry.since}`;
+  if (typeof entry.reason !== "string" || !entry.reason.trim()) return `${where}: reason must be a non-empty string`;
+  return null;
+}
+
+/* The JSON path of every acceptedStale in the contract that sits anywhere other than the two
+   places checkFreshness reads (a gearing dataset, the top level, a nested block). Such an
+   entry accepts nothing while looking as if it does, so the heartbeat reports it as invalid. */
+const ACCEPTANCE_PATH = /^requirements\[\d+\](\.published)?\.acceptedStale$/;
+export function misplacedAcceptances(config) {
+  const found = [];
+  const walk = (value, at) => {
+    if (value === null || typeof value !== "object") return;
+    for (const [field, child] of Object.entries(value)) {
+      const here = Array.isArray(value) ? `${at}[${field}]` : at ? `${at}.${field}` : field;
+      if (!Array.isArray(value) && field === "acceptedStale" && !ACCEPTANCE_PATH.test(here)) found.push(here);
+      walk(child, here);
+    }
+  };
+  walk(config, "");
+  return found;
+}
+
 /* The in-season label flip (12.1.5 owner decision 6; constants beside PHASES in
    normalize.mjs). Returns the violation text, or null. One question: from LABEL_FLIP_DUE
    on, is the live patch the chip names (PHASES.livePatch?.label, else liveLabel) still
@@ -564,13 +627,57 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
     violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01" and extended twice (2026-09-03, 2026-09-25) to ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
     keys.push("min-sources-floor");
   }
+  /* Owner acceptances (PIPELINE_KEYS above). Every entry is validated before any age is
+     measured, so a malformed one reds the heartbeat even on a day its key is fresh. */
+  const acceptances = new Map(), acceptedTokens = new Set();
+  for (const req of config.requirements) {
+    for (const [key, entry] of [[req.key, req.acceptedStale], [`${req.key}-published`, req.published?.acceptedStale]]) {
+      const problem = acceptanceProblem(entry, key);
+      if (problem) {
+        violations.push(`accepted-stale-invalid: ${problem}. It accepts nothing until it is fixed in data/required-sources.json`);
+        keys.push("accepted-stale-invalid");
+      } else if (entry != null) acceptances.set(key, entry);
+    }
+  }
+  for (const at of misplacedAcceptances(config)) {
+    violations.push(`accepted-stale-invalid: ${at} is not read by the heartbeat, which reads acceptedStale only on requirements[] and requirements[].published, so it accepts nothing; move or remove it in data/required-sources.json`);
+    keys.push("accepted-stale-invalid");
+  }
+  const acceptanceOf = key => {
+    const entry = acceptances.get(key);
+    if (!entry) return null;
+    return { ...entry, state: nowDate < entry.since ? "pending" : nowDate <= entry.reviewBy ? "in force" : "lapsed" };
+  };
+  const acceptNote = (key, status) => {
+    const a = acceptanceOf(key);
+    if (!a) return "";
+    if (status === "fresh") return ` — acceptedStale on file until ${a.reviewBy}, unused today`;
+    if (status === "absent") return " — acceptedStale covers staleness, not missing data";
+    return a.state === "in force" ? ` — ACCEPTED until ${a.reviewBy}`
+      : a.state === "lapsed" ? ` — acceptance LAPSED after ${a.reviewBy}` : ` — acceptance starts ${a.since}`;
+  };
+  // A stale source key: its accepted token while an acceptance is in force, else plain.
+  const stale = (key, text) => {
+    const a = acceptanceOf(key);
+    if (a?.state === "in force") {
+      violations.push(`${text} [ACCEPTED until ${a.reviewBy}, since ${a.since}: ${a.reason}]`);
+      keys.push(key + ACCEPTED_SUFFIX);
+      acceptedTokens.add(key + ACCEPTED_SUFFIX);
+      return;
+    }
+    violations.push(!a ? text : a.state === "lapsed"
+      ? `${text} [its acceptance LAPSED after ${a.reviewBy}: fix the source, or renew acceptedStale with a new reviewBy and reason, or remove it]`
+      : `${text} [its acceptedStale takes effect ${a.since}]`);
+    keys.push(key);
+  };
   for (const req of config.requirements) {
     if (req.maxAgeDays == null || !req.date) continue;
     const date = probeDate(req, data);
     const age = date ? ageDays(nowDate, date) : null;
-    report.push(`${req.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${req.maxAgeDays}d)` : ""}`);
+    const status = date == null ? "absent" : age > req.maxAgeDays ? "stale" : "fresh";
+    report.push(`${req.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${req.maxAgeDays}d)` : ""}${acceptNote(req.key, status)}`);
     if (date == null) { violations.push(`${req.key}: no dated state at all`); keys.push(req.key); }
-    else if (age > req.maxAgeDays) { violations.push(`${req.key} (${req.label}) is ${age} days stale — max ${req.maxAgeDays}d`); keys.push(req.key); }
+    else if (age > req.maxAgeDays) stale(req.key, `${req.key} (${req.label}) is ${age} days stale — max ${req.maxAgeDays}d`);
   }
   /* Page self-date staleness (docs/published-gate-scope.md): lag-class — the page's own
      published date exceeding its threshold means an upstream cycle was likely missed
@@ -581,14 +688,15 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
      probeDate's pages rule: a lagging page is the finding. */
   for (const req of config.requirements) {
     if (req.published?.maxAgeDays == null || req.date?.type !== "pages") continue;
+    const key = `${req.key}-published`;
     const pubs = matchPages(req.date, data.sources).map(p => p.published).filter(Boolean).sort();
     const oldest = pubs[0] ?? null;
     const age = oldest ? ageDays(nowDate, oldest) : null;
-    report.push(`${req.key} published: ${oldest ?? "no published state"}${age != null ? ` (${age}d, max ${req.published.maxAgeDays}d)` : ""}`);
-    if (oldest == null) { violations.push(`${req.key}: a published gate is configured but no page carries a published date`); keys.push(`${req.key}-published`); }
+    const status = oldest == null ? "absent" : age > req.published.maxAgeDays ? "stale" : "fresh";
+    report.push(`${req.key} published: ${oldest ?? "no published state"}${age != null ? ` (${age}d, max ${req.published.maxAgeDays}d)` : ""}${acceptNote(key, status)}`);
+    if (oldest == null) { violations.push(`${req.key}: a published gate is configured but no page carries a published date`); keys.push(key); }
     else if (age > req.published.maxAgeDays) {
-      violations.push(`${req.key} (${req.label}) page self-date ${oldest} is ${age} days old (max ${req.published.maxAgeDays}d) — the page has likely rebuilt unseen, or upstream went quiet; check it`);
-      keys.push(`${req.key}-published`);
+      stale(key, `${req.key} (${req.label}) page self-date ${oldest} is ${age} days old (max ${req.published.maxAgeDays}d) — the page has likely rebuilt unseen, or upstream went quiet; check it`);
     }
   }
   // A successful night elsewhere must not hide a stalled official-note collector.
@@ -632,12 +740,29 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
       report.push("gearing: not present in this checkout — freshness not evaluated");
     } else {
       for (const ds of config.gearing.datasets) {
-        const date = gearing.dates?.[ds.file] ?? null;
+        /* A dataset with a verificationGroup (owner decision 2026-10-06) ages from the NEWER of
+           its own date and that group's lastVerifiedAt. readGearing passes the output of
+           currentVerification, which nulls lastVerifiedAt once the published facts change, so
+           only a verification of the facts now on the page can re-date them. A failed or
+           overdue verification still reports below as gearing-verify-<group>; this only stops
+           a weekly-verified dataset from reading as a months-old harvest. */
+        const own = gearing.dates?.[ds.file] ?? null;
+        const stamp = ds.verificationGroup && !gearing.verificationError
+          ? gearing.verification?.groups?.[ds.verificationGroup]?.lastVerifiedAt : null;
+        const verified = typeof stamp === "string" && Number.isFinite(Date.parse(stamp))
+          && ISO_DATE.test(dateOf(stamp)) && dateOf(stamp) <= nowDate ? dateOf(stamp) : null;
+        const byVerification = verified != null && (own == null || verified > dateOf(own));
+        const date = byVerification ? verified : own;
         const age = date ? ageDays(nowDate, date) : null;
-        report.push(`${ds.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${ds.maxAgeDays}d)` : ""}`);
-        if (date == null) { violations.push(`${ds.key}: gearing/data/${ds.file} carries no ${ds.dateField} date`); keys.push(ds.key); }
-        else if (age > ds.maxAgeDays) {
-          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d. Check the weekly guide workflow or the dataset's harvest procedure in gearing/README.md`);
+        const basis = !ds.verificationGroup ? ""
+          : byVerification ? ` — last ${ds.verificationGroup} source verification (${ds.dateField} ${own ?? "none"})`
+          : ` — ${ds.dateField}; ${verified ? `last ${ds.verificationGroup} verification ${verified} is not newer` : `no current ${ds.verificationGroup} verification`}`;
+        report.push(`${ds.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${ds.maxAgeDays}d)` : ""}${basis}`);
+        if (date == null) {
+          violations.push(`${ds.key}: gearing/data/${ds.file} carries no ${ds.dateField} date${ds.verificationGroup ? ` and no current ${ds.verificationGroup} verification` : ""}`);
+          keys.push(ds.key);
+        } else if (age > ds.maxAgeDays) {
+          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d${ds.verificationGroup ? ` (newer of ${ds.dateField} and the last ${ds.verificationGroup} source verification; check gearing-verify.yml too)` : ""}. Check the weekly guide workflow or the dataset's harvest procedure in gearing/README.md`);
           keys.push(ds.key);
         }
         if (ds.dateField === "structuralSync.checkedAt" && age != null && age < 0) {
@@ -666,6 +791,13 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
         violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/harvest-specs.mjs\``);
         keys.push("gearing-tierset-sync");
       }
+    }
+  }
+  // A configured key that itself ends in the suffix would read as accepted downstream.
+  for (const key of new Set(keys)) {
+    if (key.endsWith(ACCEPTED_SUFFIX) && !acceptedTokens.has(key)) {
+      violations.push(`accepted-stale-invalid: the key "${key}" ends in "${ACCEPTED_SUFFIX}" without an acceptance, so the heartbeat would read it as accepted; rename it in data/required-sources.json`);
+      keys.push("accepted-stale-invalid");
     }
   }
   return { violations, report, fingerprint: [...new Set(keys)].sort().join(",") };

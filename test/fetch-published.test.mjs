@@ -136,6 +136,8 @@ test("Method's real contract checks publisher dates independently of fresh captu
     .toISOString().slice(0, 10);
   for (const page of method.pages) page.snapshot = dayAfterLimit;
   const health = checkFreshness(cfg, { run: dayAfterLimit }, data, dayAfterLimit);
-  assert.deepEqual(health.fingerprint.split(","), ["method-published"],
+  // An owner acceptedStale on the real requirement may mark the key `.accepted` on this
+  // date; that still lists it, so the suffix does not change what this asserts.
+  assert.deepEqual(health.fingerprint.split(",").map(key => key.replace(/\.accepted$/, "")), ["method-published"],
     "fresh page captures cannot hide an expired publisher date");
 });

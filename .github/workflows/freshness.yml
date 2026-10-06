@@ -19,15 +19,22 @@ name: Data freshness heartbeat
 # is red only when one of these rules fires, and its last step names which:
 #   new keys     a fingerprint key absent from the previous fingerprint (the marker in
 #                the open issue). No open issue or no readable marker = every key is new.
+#                A plain key in the previous fingerprint also covers its accepted form, so
+#                `k` becoming `k.accepted` is not news. An accepted token never covers the
+#                plain key, so a lapsed acceptance (`k.accepted` becoming `k`) is new.
 #   pipeline     PIPELINE_KEYS below is present — red every day it stays present.
 #   fail-closed  check-refresh crashed or exited without a usable report, or reported
 #                stale with an empty or "clean" fingerprint.
-#   weekly       a Monday (UTC, `date -u +%u` = 1) run with any key outside
-#                ACCEPTED_KEYS below. The weekday is read when the run EXECUTES, not
-#                for its cron slot: 2 of this heartbeat's 74 scheduled runs since
-#                2026-07-14 (the 08-27 and 08-28 slots) started 8h09m and 7h37m late,
-#                which from 19:23 crosses UTC midnight, and Monday 08-31 started 4h33m
-#                late. A Monday run delayed past midnight skips that week's reminder.
+#   weekly       a Monday (UTC, `date -u +%u` = 1) run with any key that is not an
+#                accepted token. check-refresh writes a stale key as `<key>.accepted` only
+#                while its acceptedStale entry in data/required-sources.json is in force
+#                (since <= today <= reviewBy; owner decision 2026-10-06, which replaced the
+#                ACCEPTED_KEYS pattern this file used to hold). The weekday is read when
+#                the run EXECUTES, not for its cron slot: 2 of this heartbeat's 74
+#                scheduled runs since 2026-07-14 (the 08-27 and 08-28 slots) started
+#                8h09m and 7h37m late, which from 19:23 crosses UTC midnight, and Monday
+#                08-31 started 4h33m late. A Monday run delayed past midnight skips that
+#                week's reminder.
 # Otherwise a stale run SUCCEEDS with a ::warning:: and the full report in its log.
 
 on:
@@ -46,22 +53,18 @@ permissions:
   issues: write
 
 env:
-  # ACCEPTED standing conditions: the ONE place they are defined. Each is still listed in
-  # the alert issue every day, and still turns the run red on the day it is NEW; only the
-  # Monday reminder skips them. An anchored ERE matched against each key.
-  #   archon-*         Archon's human-verification wall. Its last verified letters stay in
-  #                    the consensus under the owner-confirmed 2026-09-05 retention policy
-  #                    (refresh-tiers SKILL.md).
-  #   wcl-live-raid    No verified sanctioned WCL endpoint serves exact aggregate medians;
-  #   wcl-live-mplus   both stay honestly unreachable (CLAUDE.md, WCL correction 2026-09-05).
-  # Deliberately NOT accepted: wowmeta (owner note 2026-08-21 on its row in
-  # data/required-sources.json: do not ack it away, do not raise maxAgeDays) and every
-  # other key.
-  ACCEPTED_KEYS: "^(archon-.+|wcl-live-raid|wcl-live-mplus)$"
+  # No accepted-key list lives here any more (owner decision 2026-10-06). An owner
+  # acceptance is a dated acceptedStale { since, reason, reviewBy } entry on the requirement
+  # in data/required-sources.json, so every acceptance comes back up for review on its own
+  # date. check-refresh marks the key `<key>.accepted` while the entry is in force and the
+  # colour step reads that suffix. Deliberately never accepted: wowmeta (owner note
+  # 2026-08-21 on its row: do not ack it away, do not raise maxAgeDays).
   # Keys that mean the pipeline itself is down or an owner deadline has passed (pushed by
-  # checkFreshness in src/check-refresh.mjs): a missed nightly, the phase-flip gate, the
-  # minSuccessfulSources restore gate, the in-season patch-label gate (2026-09-26).
-  PIPELINE_KEYS: "^(run-age|snapshot-phase|min-sources-floor|live-patch-label)$"
+  # checkFreshness in src/check-refresh.mjs, which exports the same list as PIPELINE_KEYS):
+  # a missed nightly, the phase-flip gate, the minSuccessfulSources restore gate, the
+  # in-season patch-label gate (2026-09-26) and a malformed acceptedStale entry
+  # (2026-10-06). The optional suffix keeps one red even if it were ever marked accepted.
+  PIPELINE_KEYS: "^(run-age|snapshot-phase|min-sources-floor|live-patch-label|accepted-stale-invalid)([.]accepted)?$"
 
 jobs:
   heartbeat:
@@ -161,29 +164,34 @@ jobs:
           PREV: ${{ steps.issue.outputs.prev }}
         run: |
           export LC_ALL=C # one collation for sort and comm
-          # grep with "no match" as success and a real error (a malformed ACCEPTED_KEYS or
-          # PIPELINE_KEYS) still a failure, so a broken pattern reds the run rather than
-          # silently matching nothing.
+          # grep with "no match" as success and a real error (a malformed PIPELINE_KEYS)
+          # still a failure, so a broken pattern reds the run rather than silently matching
+          # nothing.
           match() { local s=0; grep "$@" || s=$?; [ "$s" -le 1 ]; }
           keys_of() { tr ',' '\n' <<<"$1" | match -v '^$' | sort -u; }
           esc() { local s="${1//\%/%25}"; s="${s//$'\r'/%0D}"; printf '%s' "${s//$'\n'/%0A}"; }
 
           cat freshness-report.txt
           fired=()
-          added="" pipeline="" unaccepted=""
+          added="" pipeline="" accepted="" unaccepted=""
           dow="$(date -u +%u)"
           if [ "$USABLE" != true ]; then
             fired+=("fail-closed: check-refresh --age exited ${RC:-?} without a usable report (fingerprint '${FP}'), so nothing about the stale set can be trusted")
           else
             keys="$(keys_of "$FP")"
             prev_keys="$(keys_of "$PREV")"
-            added="$(comm -13 <(printf '%s\n' "$prev_keys") <(printf '%s\n' "$keys") | match -v '^$' | paste -sd, -)"
+            # What the previous fingerprint covers: its own keys, plus the accepted form of
+            # each plain key, so a key moving INTO acceptance is not news. Nothing adds the
+            # plain form of an accepted token, so a lapsed acceptance is.
+            covered="$( { printf '%s\n' "$prev_keys"; printf '%s\n' "$prev_keys" | match -v '^$' | match -v '[.]accepted$' | sed 's/$/.accepted/'; } | sort -u)"
+            added="$(comm -13 <(printf '%s\n' "$covered") <(printf '%s\n' "$keys") | match -v '^$' | paste -sd, -)"
             pipeline="$(printf '%s\n' "$keys" | match -E "$PIPELINE_KEYS" | paste -sd, -)"
-            unaccepted="$(printf '%s\n' "$keys" | match -v '^$' | match -vE "$ACCEPTED_KEYS" | paste -sd, -)"
+            accepted="$(printf '%s\n' "$keys" | match '[.]accepted$' | paste -sd, -)"
+            unaccepted="$(printf '%s\n' "$keys" | match -v '^$' | match -v '[.]accepted$' | paste -sd, -)"
             if [ -n "$added" ]; then fired+=("new keys: ${added}"); fi
             if [ -n "$pipeline" ]; then fired+=("pipeline keys: ${pipeline}"); fi
             if [ "$dow" = 1 ] && [ -n "$unaccepted" ]; then
-              fired+=("weekly (Monday) reminder, keys outside ACCEPTED_KEYS: ${unaccepted}")
+              fired+=("weekly (Monday) reminder, unaccepted keys: ${unaccepted}")
             fi
             if [[ ",${pipeline}," == *",run-age,"* ]]; then
               signal="$(sed -n 's/^ *last refresh signal: //p' freshness-report.txt | sed -n 1p)"
@@ -196,10 +204,11 @@ jobs:
           echo "fingerprint now:             ${FP:-<none>}"
           echo "new keys:                    ${added:-none}"
           echo "pipeline keys:               ${pipeline:-none}"
-          echo "keys outside ACCEPTED_KEYS:  ${unaccepted:-none} (weekly rule on Mondays; ISO weekday today: ${dow})"
+          echo "accepted (acceptedStale):    ${accepted:-none}"
+          echo "unaccepted keys:             ${unaccepted:-none} (weekly rule on Mondays; ISO weekday today: ${dow})"
           if [ "${#fired[@]}" -gt 0 ]; then
             reason="$(printf '%s; ' "${fired[@]}")"
             echo "::error title=Freshness heartbeat RED::$(esc "Rule(s) fired: ${reason%; }")"
             exit 1
           fi
-          echo "::warning title=Standing staleness (no rule fired)::$(esc "Every stale key was already in the previous fingerprint and none is pipeline-level (weekly rule: $([ "$dow" = 1 ] && echo 'Monday, only accepted keys remain' || echo 'not Monday')). They stay listed in the open Data freshness alert issue.")"
+          echo "::warning title=Standing staleness (no rule fired)::$(esc "Every stale key was already in the previous fingerprint and none is pipeline-level (weekly rule: $([ "$dow" = 1 ] && echo 'Monday, only keys accepted by acceptedStale remain' || echo 'not Monday')). They stay listed in the open Data freshness alert issue.")"
