@@ -1747,6 +1747,62 @@ export function latestSnapshot(sources) {
   return dates.at(-1) ?? null;
 }
 
+/* OLDER LETTERS THAT STILL COUNT IN FULL (audit 2026-10-04, F13; owner option (a): keep
+   them, and say on the page how much of each consensus they carry). The consensus is an
+   unweighted mean, so an old list keeps its whole share of every cell it rates. Two kinds
+   are named, page by page, from the actual cells and the registry dates, never a
+   hard-coded count:
+     · "verified": the page's snapshot is older than the newest snapshot of any source, so
+       the last refresh could not re-read it and its letters are retained (Archon since its
+       2026-08-25 access outage; Icy Veins between local runs while nightlies are blocked);
+     · "published": the page describes the live season but dates itself before that season
+       opened, so its letters are a pre-season read (Method's raid list, self-dated
+       2026-08-10 against Season 2's 2026-08-18).
+   A page covers its role's specs in its bracket wherever the source is a LIVE-lane
+   contributor to that cell's mean. Membership is read off the consensus itself rather than
+   re-derived from seasonVerified, so the note can never name fewer lists than the mean
+   averages (a page never season-checked feeds the mean, and is named like any other).
+   Frozen-lane letters carry their own disclosure, and ancillary pages feed no letters. A
+   cell's share is 1/n, n being every contributor its mean averaged, frozen lane included.
+   One entry per source and kind: the dates of the pages that reached a cell, and per
+   bracket the cells reached, the cells with any consensus, and the smallest and largest
+   share. */
+export function retainedRatings(specs, sources, latest = latestSnapshot(sources), phases = PHASES) {
+  const BRACKETS = ["raid", "mplus"];
+  const withConsensus = Object.fromEntries(BRACKETS.map(b =>
+    [b, specs.filter(spec => spec.consensus?.[b]?.perSource?.length).length]));
+  const kinds = [
+    ["verified", page => page.snapshot, latest],
+    ["published", page => page.published, phases.liveSince]
+  ];
+  const out = [];
+  for (const source of sources.filter(s => s.kind === "tier-list")) {
+    const pages = (source.pages ?? []).filter(page => !page.ancillary);
+    for (const [kind, dateOf, cutoff] of kinds) {
+      const old = cutoff ? pages.filter(page => dateOf(page) && dateOf(page) < cutoff) : [];
+      const brackets = {}, dates = new Set();
+      for (const bracket of BRACKETS) {
+        const reached = new Map(); // spec index → contributors its mean averaged
+        for (const page of old.filter(p => p.bracket === bracket)) {
+          const role = page.role ?? "All";
+          specs.forEach((spec, i) => {
+            const per = spec.consensus?.[bracket]?.perSource ?? [];
+            if ((role !== "All" && role !== spec.role) || !per.some(p => p.source === source.id && p.lane !== "frozen")) return;
+            reached.set(i, per.length);
+            dates.add(dateOf(page));
+          });
+        }
+        if (!reached.size) continue;
+        const shares = [...reached.values()].map(n => 1 / n);
+        brackets[bracket] = { cells: reached.size, of: withConsensus[bracket],
+          minShare: Math.min(...shares), maxShare: Math.max(...shares) };
+      }
+      if (Object.keys(brackets).length) out.push({ source: source.id, name: source.name, kind, dates: [...dates].sort(), brackets });
+    }
+  }
+  return out;
+}
+
 // Number of days a metric series may trail the freshest empirical data before it is
 // called "frozen" in the honesty banner (H1). 7 clears normal per-source refresh
 // staggering (Archon numbers a day behind sims is not "frozen") while catching the
@@ -2015,6 +2071,8 @@ export function buildPayload({ specs, sources, scales, community, ptrBuilds, cre
       specCount: specs.length,
       trackedCount: specs.filter(spec => spec.ptr).length,
       latestSnapshot: latestSnapshot(sources),
+      // The page's "Older ratings still in the consensus" note (F13): see retainedRatings.
+      retainedRatings: retainedRatings(decorated, sources),
       latestPtrBuild: latestBuild,
       latestBuildKind,
       latestBuildRealm,

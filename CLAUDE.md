@@ -420,6 +420,17 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
   announced as a Warcraft Logs outage. Staleness is relative to the data's own newest
   date — deliberately clock-free, which keeps it honest when page snapshot dates lie.
+- **`retainedRatings()` (`render.mjs`)** names the older lists that still count in full,
+  in the "Older ratings still in the consensus" note above the grid (audit 2026-10-04,
+  F13; owner option (a): keep those letters and disclose their share, rather than decay
+  or drop them). Two kinds, page by page: **verified** means the page's snapshot is older
+  than the newest snapshot in the registry, so the last refresh could not re-read it;
+  **published** means the page dates itself before `PHASES.liveSince`, so it is a
+  pre-season read of the live season. Which cells a page reaches is read off the
+  consensus's own `perSource` (live lane only, role-matched) and never re-derived from
+  `seasonVerified`, so the note cannot name fewer lists than a mean averages. A share is
+  1/n of that cell's mean, with the frozen lane counted in n. The template only words the
+  payload, and a UI invariant checks every named date and share against it.
 - **Zone-54 raid testing covers ALL ROLES** (2026-07-09): healer (hps) and tank cuts
   merge under the SAME metric name as DPS — "12.1 PTR raid testing score (normalized)" —
   so within-role ranks and the projection consume them with no special-casing.

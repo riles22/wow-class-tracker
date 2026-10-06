@@ -1642,19 +1642,34 @@ function seasonChip(asOf, opts){
    projection surface consults — before the flip it is the old era gate unchanged. */
 const FROZEN_FC = META.frozenForecast ?? null;
 {
-  // Snapshot age does not silently change consensus membership. Name retained
-  // contributors from the actual cells and registry dates, never a hard-coded count.
-  const contributors = new Set(SPECS.flatMap(s => ['raid','mplus'].flatMap(b =>
-    (s.consensus?.[b]?.perSource ?? []).filter(p=>p.lane !== 'frozen').map(p=>p.source))));
-  const retained = SOURCES.filter(s=>s.kind === 'tier-list' && contributors.has(s.id)).map(s=>{
-    const dates = (s.pages ?? []).filter(p=>!p.ancillary && p.seasonVerified === PHASE.liveSeason)
-      .map(p=>p.snapshot).filter(Boolean).sort();
-    return {name:s.name,date:dates[0]};
-  }).filter(s=>s.date && META.latestSnapshot && s.date < META.latestSnapshot);
-  if(retained.length){
+  /* Old letters still count in full (audit 2026-10-04, F13). render.mjs retainedRatings
+     names them from the actual cells and registry dates and measures each one's share of
+     the consensus; this block only words it. Sources with the same share and reach are
+     named together, which keeps the note to a few lines on a phone, where it sits above
+     the grid. */
+  const entries = META.retainedRatings ?? [];
+  if(entries.length){
+    const BRACKET = {raid:'raid', mplus:'M+'};
+    const live = seasonNameOf(PHASE.liveSeason) ?? 'the live season';
+    const pct = x => `${Math.round(x*100)}%`;
+    const span = d => d.length > 1 ? `${d[0]} to ${d.at(-1)}` : d[0];
+    const listed = xs => xs.length > 2 ? `${xs.slice(0,-1).join(', ')} and ${xs.at(-1)}` : xs.join(' and ');
+    const groups = new Map();
+    for(const e of entries){
+      const per = Object.entries(e.brackets).map(([b, x]) => ({ label: BRACKET[b], every: x.cells === x.of,
+        cells: x.cells, of: x.of, share: x.minShare === x.maxShare ? pct(x.minShare) : `${pct(x.minShare)}–${pct(x.maxShare)}` }));
+      const reach = per.every(p => p.every) && new Set(per.map(p => p.share)).size === 1
+        ? `${per[0].share} of every ${listed(per.map(p => p.label))} consensus score`
+        : listed(per.map(p => p.every ? `${p.share} of every ${p.label} consensus score`
+          : `${p.share} of ${p.cells} of ${p.of} ${p.label} consensus scores`));
+      const when = e.kind === 'published' ? `published ${span(e.dates)}, before ${live} opened` : `last verified ${span(e.dates)}`;
+      const who = `${esc(e.name)}${per.length === 1 ? ` ${per[0].label}` : ''} (${esc(when)})`;
+      groups.set(reach, [...(groups.get(reach) ?? []), who]);
+    }
     const host = document.getElementById('retained-ratings');
     host.hidden = false;
-    host.innerHTML = `<b>Retained source ratings:</b> ${retained.map(s=>`${esc(s.name)} last verified ${esc(s.date)}`).join(' · ')}; still contribute to consensus.`;
+    host.innerHTML = `<b>Older ratings still in the consensus:</b> ${[...groups].map(([reach, who]) =>
+      `${listed(who)} ${who.length > 1 ? 'each carry' : 'carries'} ${esc(reach)}`).join(' · ')}.`;
   }
 }
 const FORECAST_REPORT = META.forecastReport ?? null;

@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { expertRead, EXPERT_MIN, dataHealth, fightLabels, metricRanks, outlookFor, movementFor, projectionMovementFor, snapshotStateOf, pickBaseline, dummyDomeScores, classifyHighlight, projectionFor, ptrTierRead, historySeries, specBuildChanges, PROJECTION_VERSION, RANK_VERSION, CONSENSUS_VERSION } from "../src/render.mjs";
 import { BUILD_REALMS, buildRealmOf, feedEntryLabel, comparePatchVersions, PATCH_VERSION } from "../src/render.mjs";
+import { retainedRatings } from "../src/render.mjs";
 import { PHASES } from "../src/normalize.mjs";
 
 /* The specialist-take lane is keyed on the CURRENT cycle's marker (PHASES.ptr) and is
@@ -1988,4 +1989,84 @@ test("realm is presentation only: the outlook tally is unchanged by it", () => {
   const before = outlookFor(spec, { builds: entries });
   const after = outlookFor(spec, { builds: [{ ...entries[0], realm: "live" }, { ...entries[1], realm: "ptr" }] });
   assert.deepEqual(after, before);
+});
+
+/* retainedRatings (audit 2026-10-04, F13): the older lists the page names above the grid,
+   with each one's share of the consensus. Three specs, one per role, so a role-scoped page
+   reaches exactly one of them. A "~" marks a frozen-lane contributor. */
+const RETAINED_PHASES = { liveSeason: "s2", liveSince: "2026-08-18" };
+const perSourceOf = ids => ({ perSource: ids.map(id => id.startsWith("~") ? { source: id.slice(1), lane: "frozen" } : { source: id }) });
+const roleTrio = ids => ["DPS", "Healer", "Tank"].map(role =>
+  ({ class: "C", spec: role, role, consensus: { raid: perSourceOf(ids), mplus: perSourceOf(ids) } }));
+const listPage = (bracket, role, snapshot, extra = {}) =>
+  ({ bracket, role, url: `https://example.com/${bracket}/${role}`, snapshot, seasonVerified: "s2", ...extra });
+const tierList = (id, ...pages) => ({ id, name: id.toUpperCase(), kind: "tier-list", pages });
+
+test("retainedRatings: a list the last refresh could not re-read is named with its share of every mean", () => {
+  const specs = roleTrio(["a", "b", "c", "d"]);
+  const sources = [
+    tierList("a", listPage("raid", "All", "2026-10-06"), listPage("mplus", "All", "2026-10-06")),
+    tierList("d", listPage("raid", "All", "2026-08-25"), listPage("mplus", "All", "2026-08-25")),
+  ];
+  const all = { cells: 3, of: 3, minShare: 0.25, maxShare: 0.25 };
+  assert.deepEqual(retainedRatings(specs, sources, "2026-10-06", RETAINED_PHASES), [
+    { source: "d", name: "D", kind: "verified", dates: ["2026-08-25"], brackets: { raid: all, mplus: all } },
+  ]);
+  // by default "older" means older than the newest snapshot in the registry
+  assert.deepEqual(retainedRatings(specs, sources, undefined, RETAINED_PHASES),
+    retainedRatings(specs, sources, "2026-10-06", RETAINED_PHASES));
+});
+
+test("retainedRatings: a list dated before the live season opened is a pre-season read, scoped to its page", () => {
+  const specs = roleTrio(["a", "b", "c", "d"]);
+  const sources = [
+    // Method's shape on 2026-10-06: the raid list self-dated before launch, the M+ list rebuilt since
+    tierList("b", listPage("raid", "All", "2026-10-06", { published: "2026-08-10" }),
+      listPage("mplus", "All", "2026-10-06", { published: "2026-10-05" })),
+    // one role's page is old and another's is not: only the old page's cells count
+    tierList("c", listPage("raid", "DPS", "2026-10-06", { published: "2026-09-01" }),
+      listPage("raid", "Tank", "2026-10-06", { published: "2026-08-12" })),
+  ];
+  assert.deepEqual(retainedRatings(specs, sources, "2026-10-06", RETAINED_PHASES), [
+    { source: "b", name: "B", kind: "published", dates: ["2026-08-10"],
+      brackets: { raid: { cells: 3, of: 3, minShare: 0.25, maxShare: 0.25 } } },
+    { source: "c", name: "C", kind: "published", dates: ["2026-08-12"],
+      brackets: { raid: { cells: 1, of: 3, minShare: 0.25, maxShare: 0.25 } } },
+  ]);
+});
+
+test("retainedRatings: a share counts the frozen lane, and only pages behind a live-lane letter are named", () => {
+  const specs = roleTrio(["a", "b", "d", "~e"]);
+  specs[2].consensus.raid = perSourceOf(["a", "b", "d"]); // the Tank raid mean averages three lists
+  const sources = [
+    // an old ancillary page feeds no letter, so it explains nothing
+    tierList("a", listPage("raid", "All", "2026-10-06"), listPage("raid", "All", "2026-08-01", { ancillary: true }),
+      listPage("mplus", "All", "2026-10-06")),
+    tierList("d", listPage("raid", "All", "2026-08-25"), listPage("mplus", "All", "2026-10-06")),
+    // e reaches the means only through the frozen lane, which has its own disclosure
+    tierList("e", listPage("raid", "All", "2026-08-01"), listPage("mplus", "All", "2026-08-01")),
+    // f describes another season, so no live mean carries it
+    tierList("f", listPage("raid", "All", "2026-08-01", { seasonVerified: "s1" })),
+  ];
+  assert.deepEqual(retainedRatings(specs, sources, "2026-10-06", RETAINED_PHASES), [
+    { source: "d", name: "D", kind: "verified", dates: ["2026-08-25"],
+      brackets: { raid: { cells: 3, of: 3, minShare: 0.25, maxShare: 1 / 3 } } },
+  ]);
+  // with no newest snapshot and no season start, nothing can be called old
+  assert.deepEqual(retainedRatings(specs, sources, null, { liveSeason: "s2", liveSince: null }), []);
+});
+
+test("retainedRatings: a page never season-checked feeds the mean, so it is named like any other", () => {
+  // consensusFor reads an absent seasonVerified as current; a filter on the field here
+  // would leave this list's letters in every mean and off the note
+  const specs = roleTrio(["a", "g"]);
+  const unchecked = { seasonVerified: undefined };
+  const sources = [
+    tierList("a", listPage("raid", "All", "2026-10-06"), listPage("mplus", "All", "2026-10-06")),
+    tierList("g", listPage("raid", "All", "2026-09-01", unchecked), listPage("mplus", "All", "2026-10-06", unchecked)),
+  ];
+  assert.deepEqual(retainedRatings(specs, sources, "2026-10-06", RETAINED_PHASES), [
+    { source: "g", name: "G", kind: "verified", dates: ["2026-09-01"],
+      brackets: { raid: { cells: 3, of: 3, minShare: 0.5, maxShare: 0.5 } } },
+  ]);
 });
