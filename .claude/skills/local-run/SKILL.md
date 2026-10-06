@@ -180,9 +180,10 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
    and coordinated persistence back to the nightly; see
    `docs/transcript-operations.md`. Residential catch-up keeps its existing lane.
 3. **`refresh-tiers` / `refresh-metrics`** — scoped per above, which means Icy Veins every
-   run, done first. 🛑 **Do not apply WoWMeta
-   M+ rows or re-stamp their `snapshot`** while that source is under review (see
-   `refresh-tiers/log.md`, 2026-07-31).
+   run, done first. WoWMeta has been a metrics source since 2026-07-31: it never gets
+   tier-list rows, and when it is in scope it follows refresh-metrics' WoWMeta recipe.
+   (Until 2026-10-06 this line said to hold WoWMeta while it was under review, citing a
+   refresh-tiers log entry pruned long ago.)
 4. **Gearing guide harvest** (a separate weekly workflow since 2026-09-05, with
    local catch-up when a provider fails):
    when `gearing/data/guides/*.json` `harvestedAt` ages past ~7 days during the launch
