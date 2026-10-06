@@ -2002,20 +2002,30 @@ ui("a settled forecast report is reachable and separate from today's comparison"
   assert.equal(await page.locator('script').count(), 0);
 });
 
-ui("retained rating disclosure names actual older contributors without changing consensus", async page => {
-  const expected = await page.evaluate(()=>{
-    const ids = new Set(SPECS.flatMap(s=>['raid','mplus'].flatMap(b=>
-      (s.consensus?.[b]?.perSource ?? []).filter(p=>p.lane !== 'frozen').map(p=>p.source))));
-    return SOURCES.filter(s=>s.kind==='tier-list' && ids.has(s.id)).map(s=>({name:s.name,
-      date:s.pages.filter(p=>!p.ancillary && p.seasonVerified===PHASE.liveSeason).map(p=>p.snapshot).filter(Boolean).sort()[0]
-    })).filter(s=>s.date && s.date<META.latestSnapshot);
-  });
+ui("retained rating disclosure names each older contributor and its share without changing consensus", async page => {
+  /* render.mjs retainedRatings measures the entries, and its unit tests own the arithmetic.
+     This checks that the page states every entry, and that each claim agrees with the cells
+     and the phase the page itself ships (audit 2026-10-04, F13). */
+  const expected = payload().meta.retainedRatings;
+  assert.ok(Array.isArray(expected), 'the payload carries meta.retainedRatings');
+  const live = await page.evaluate(entries => ({ latest: META.latestSnapshot, since: PHASE.liveSince,
+    cells: entries.map(e => Object.fromEntries(Object.keys(e.brackets).map(b => [b, SPECS.filter(s =>
+      (s.consensus?.[b]?.perSource ?? []).some(p => p.source === e.source && p.lane !== 'frozen')).length]))) }), expected);
   assert.equal(await page.locator('#retained-ratings').isVisible(), expected.length>0);
-  if(expected.length){
-    const text = await page.locator('#retained-ratings').innerText();
-    for(const s of expected) assert.ok(text.includes(`${s.name} last verified ${s.date}`));
-    assert.match(text,/still contribute to consensus/);
-  }
+  if(!expected.length) return;
+  const text = await page.locator('#retained-ratings').innerText();
+  assert.match(text, /^Older ratings still in the consensus: /);
+  expected.forEach((e, i) => {
+    assert.ok(text.includes(e.name), `${e.name} is named`);
+    for(const d of e.dates){
+      assert.ok(text.includes(d), `${e.name}: ${d} is stated`);
+      assert.ok(d < (e.kind === 'published' ? live.since : live.latest), `${e.name}: ${d} predates its cutoff`);
+    }
+    for(const [b, x] of Object.entries(e.brackets)){
+      assert.ok(text.includes(`${Math.round(x.minShare*100)}%`), `${e.name} ${b}: its share is stated`);
+      assert.ok(x.cells <= live.cells[i][b], `${e.name} ${b}: every cell it counts still averages it in`);
+    }
+  });
 });
 
 for (const fresh of [false, true]) test(`the phone opening screen includes a complete spec card with visible scoring and source context${fresh ? ' and a NEW badge' : ''}`, skipOpts, async () => {
