@@ -485,6 +485,25 @@ jobs:
             (only a human re-running this workflow with the anomaly_ack input can); it is your
             evidence for that human.
 
+            ONE OUTLET REWRITING ITS OWN LIST: check-refresh also fails with "mass-movement
+            anomaly (one source's own list)" when a single tier-list source+bracket changes
+            more of its own letters than the sourceChurn limits in data/required-sources.json
+            allow; each such message names its pair as source:bracket (e.g. method:mplus).
+            Check the parse first (refresh-tiers): if it is wrong, re-parse, or revert that
+            source's letters and record parse_error. If the outlet really rebuilt its list,
+            keep the letters exactly as verified and record the evidence in
+            "anomalyAckProposal": for EACH pair the gate named, the pair, the outlet's page
+            URL, the page's own date if it shows one, and what changed (the gate's counts);
+            then the value the human would give the source_churn_ack workflow input, written
+            as "<pair> [<pair> ...] — <reason>, <page URL>". If the consensus anomaly check
+            fails too, keep both in that one string and say which input each part is for.
+            NEVER ack it yourself — no --churn-ack (or --ack, --value-ack) flag on
+            check-refresh and no ack environment variable: only a human re-run with
+            source_churn_ack can waive a pair, and it waives only the pairs it names. Never
+            change a seasonVerified value to earn the exemption a real season advance gets.
+            With the evidence recorded, this failure is the mass-movement anomaly case the
+            COMPLETION CONTRACT below lets you finish on.
+
             Run `npm run test:quiet` and npm run build before finishing (test:quiet is the
             same suite through a compact reporter — it reports the pass/fail/skip counts and
             full diagnostics for anything red; the deterministic gate re-runs the verbose
@@ -616,6 +635,20 @@ jobs:
             verified it, and finish; the publish-side gates and the human ack decide from there.
             NEVER buy a green gate by editing observations (e.g. reverting a seasonVerified
             value you verified tonight) — the one dishonest lever no gate catches.
+
+            The mass-movement exception above also covers check-refresh's "mass-movement
+            anomaly (one source's own list)" failure (one tier-list source+bracket rewriting
+            more of its letters than the sourceChurn limits allow), but only once you have
+            checked the parse (refresh-tiers): if it is wrong, re-parse, or revert that
+            source's letters and record parse_error. For a real rebuild, "anomalyAckProposal"
+            must give, for EACH source:bracket pair the gate named, the pair, the outlet's page
+            URL, the page's own date if it shows one and what changed, then the value the human
+            would give the source_churn_ack input
+            ("<pair> [<pair> ...] — <reason>, <page URL>"); if the consensus anomaly check
+            fails too, keep both in that one string, each part naming its input. Never ack it
+            yourself (no --churn-ack, --ack or --value-ack flag, no ack environment variable),
+            and never change a seasonVerified value to earn the exemption a real season
+            advance gets.
 
             SINGLE-SHOT SESSION — the proven cause of every lost night: the moment you end
             your turn, this session is over and you are NEVER woken again. Do NOT run
@@ -1063,9 +1096,13 @@ jobs:
       # (publish is `if: !cancelled()`, so it still starts and its first step fails).
       # It does NOT cover the 2026-07-25 incident itself — a publish job GitHub never
       # assigned a runner to. No step in a job that never started can report anything, so
-      # that mode is covered by the freshness heartbeat instead: `maxRunAgeHours: 28` turns
-      # a missed night into a red run plus an alert issue roughly 5h later. Run-level
-      # coverage would need a separate `workflow_run`-triggered workflow.
+      # that mode is covered by the freshness heartbeat instead: `maxRunAgeHours: 26` turns
+      # a missed night into a red run plus an alert issue at that day's heartbeat when the
+      # heartbeat runs more than 2h (26 − 24) later in the day than the newest manifest
+      # `startedAt` of the day before, which held after 22 of September's 24 nights; two
+      # missed nights in a row are always caught. The margin is thin, and CLAUDE.md's
+      # heartbeat paragraph has the replay. Run-level coverage would need a separate
+      # `workflow_run`-triggered workflow.
       - name: Report a failed publish to the pinned issue
         if: failure()
         continue-on-error: true
