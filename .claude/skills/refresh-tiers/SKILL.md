@@ -119,7 +119,9 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   every tier source, read the date the page publishes about itself — JSON-LD
   `dateModified`, a "Last updated" string, Archon's `lastUpdated`, WoWMeta's
   "Last updated:" — and log it. If it disagrees with the transport you used, say so and
-  do not stamp the snapshot with today.
+  do not stamp the snapshot with today. Archon's label is a page date, not a data date: it
+  has moved without the data and stood still while the data moved (see "Lessons promoted
+  from `log.md`" at the end of this file).
 - **Transport can silently change the DATA, not just the delivery.** Direct-vs-proxy on
   wowmeta returns different datasets (March-23 prerender vs July-28 live), which is why
   the 07-17→07-24 "WoWMeta reclustering" entries (26/40, 24/40, 18/40, 28/40 moves) are
@@ -196,11 +198,12 @@ letters, not just a wasted run.
 - **Archon: resolve every entry from its `icon` "Class-Spec" token, never the display name**,
   and note `tiers[].entries` is a list **of lists**. Archon writes display names as
   `"BeastMastery Hunter"` / `"Blood DeathKnight"`, which match no roster entry; the icon reads
-  `"DemonHunter-Devourer"` (2026-07-26 / 08-01). This matters in both directions: post-flip
-  (2026-08-18) Archon is the one tier source still describing S1 — "updating for 12.1"
-  on every bracket — so it is currently the only source NOT feeding the live consensus;
-  when its S2 pages land, that night's consensus recomposition will trip the anomaly
-  gate by design (expect one red night needing the human `anomaly_ack`).
+  `"DemonHunter-Devourer"` (2026-07-26 / 08-01). *(Corrected 2026-10-06: this bullet said
+  Archon still described S1 and its S2 pages had yet to land. All six letter pages were
+  verified `s2` by 2026-08-25, and Archon has fed the live consensus since, its last
+  verified letters retained through the wall (outage bullet above). A first read after
+  weeks behind the wall may move many letters at once: check the parse, then follow the
+  per-source churn gate bullet.)*
 - **Method's M+ page carries more than one tierlist and the extras are dungeon-difficulty
   blocks.** Reject by ROSTER MATCH — the eight dungeon names and the site logos simply fail
   to map — never by position: "take the first" and "take container[2]" are both on record and
@@ -210,7 +213,11 @@ letters, not just a wasted run.
   "Midnight  Season 1" with a DOUBLE space, and a strict `/Midnight Season 1/` check silently
   dropped that page (74 rows instead of 80, 2026-07-27). Recorded false positives on the
   other side: editorial `[-- Season 2 --]` markers in Wowhead's markup and Icy Veins changelog
-  rows for Dragonflight / TWW. Step 2 records what a misread costs.
+  rows for Dragonflight / TWW. Step 2 records what a misread costs. When they disagree, the
+  ranking BODY wins over the title and the meta tags: the Icy Veins raid-healer page has kept
+  the title "(Patch 12.0.7 / Midnight)" since at least 2026-08-28, and since 2026-09-13 both
+  Method pages' `og:description` / `twitter:description` have named "The War Within Season
+  3", while each of those bodies ranks Midnight Season 2.
 - **`data/encounter-tiers.json` must carry a `season` stamp** (top-level, e.g.
   `"season": "s2"`) — the season the Archon encounter pages actually described,
   era-verified the same way as the tier pages' `seasonVerified`. The UI hides the
@@ -223,3 +230,50 @@ letters, not just a wasted run.
   MQD Tier List"), not the boss name — taking it renames every encounter to the same string
   and destroys the per-boss attribution (2026-07-27). Single-source by design, so nothing
   cross-checks it.
+
+### Lessons promoted from `log.md` (2026-10-06 prune)
+
+The 2026-10-06 prune dropped the entries that carried these. As in the section above, each
+one came from a run that got it wrong at HTTP 200.
+
+- **Icy Veins: the tier letter is the first `<td>` of each row, and no class names it.** Each
+  page has one `<table class="tier-list">`, and each `<tr>` is `<td>S</td><td>…entries…</td>`.
+  A selector keyed on a `tier-list-tier-label` class found all 80 specs and returned every
+  letter null (2026-09-12): the row count was perfect and the data was not. Print each page's
+  count of NON-null letters beside its row count; the only legitimate null is a TBD row
+  (below). Specs still come from the first-`alt` rule above.
+- **Icy Veins: strip every `<style>…</style>` block before looking for the table, and assert
+  exactly one `<table class="tier-list">` per page.** Cutting the document at the LAST
+  `</style>` works on five pages and not on raid-healer, where a `</style>` sits at byte
+  215,504 and the table at 152,329: 0 rows at HTTP 200 (2026-09-08). Ratings upsert, so the
+  stored healer letters would have stood and every row gate stayed green; only the printed
+  count caught it. It is the Wowhead `printHtml` decoy again in another form.
+- **Icy Veins: a live list can carry a `TBD` row.** It is a literal `<tr><td>TBD</td>` row
+  (Windwalker Monk and Frost Death Knight on the M+ DPS page in late August 2026, both rated
+  on 2026-08-31). Write each spec in it as explicit `null`; never omit it and never guess. The
+  parse then reads 80 while the RATED count that `required-sources` checks reads 78, and that
+  gap is expected. A later letter for one of those specs is an arrival (null → letter), not a
+  move.
+- **Read a scale's `tiers` as the array it is: `new Set(scales.scales.<id>.tiers)`.**
+  `Object.keys` on it gives `"0".."6"`, so every real letter fails the membership test and all
+  six healthy Icy Veins pages parse 0 rows (2026-09-17), which looks exactly like an upstream
+  rebuild until the printed count says otherwise.
+- **Archon's `lastUpdated` is not its data date, in either direction.** On 2026-08-12 it
+  advanced on all six aggregate pages while every parse count held; on 2026-08-16 it stayed
+  pinned while every raid number moved, and five letters with them. The parse counts are the
+  re-cut detector: compare them with the stored counts before calling a night "no change".
+- **`published`: JSON-LD `dateModified` first, then the in-body "Last updated" line, never the
+  visible changelog.** `resolvePage` in `src/fetch-published.mjs` applies that order. The Icy
+  Veins raid-tank page has no in-body line and its changelog tops out at "08 Aug. 2026", so a
+  changelog read gives 2026-08-08 and looks right; `dateModified` said 2026-08-29
+  (2026-09-04). Check the stored value against the pre-agent published-evidence artifact: one
+  that contradicts it reds the publish gate.
+- **Method: rows come from `div.tier__tier`, the letter from its `tier__title`, and the specs
+  from `tier__entries`, each named only in a `data-original-title` attribute (looked up
+  WHOLE).** So a text search of the tag-stripped page reports Devourer missing from a list
+  that ranks it (2026-09-04). Confirm Devourer from the parsed rows; a failed text search is
+  not an era failure.
+- **Prune this skill's log only in a local or interactive run** (2026-09-04). A nightly's
+  `SKILL.md` edits are never published (the publish job stages `data/`, `dist/` and the skill
+  logs), so a nightly prune can delete a lesson but cannot move it here. The log's header says
+  the same.

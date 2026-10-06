@@ -92,8 +92,10 @@ numbers that matter on the day, they move with the data.
    TBD specs are explicit `null`, never omitted (the `icyveins-ptr` convention). Fallback
    if the fetch cannot land: write all 40 as explicit `null` — post-flip M+ consensus is
    then Wowhead alone, disclosed by the count chip. NEVER: collapse S+ into S (refused as
-   fabrication — grep refresh-tiers/log.md for "Collapsing S+ into S was refused"; this
-   cited a line NUMBER until 2026-08-15, which the log prune would have silently broken),
+   fabrication; the refresh-tiers log entry that recorded the refusal, added in commit
+   a72674e on 2026-08-04, was pruned by the 2026-08-21 nightly, so this line is now the
+   record. It cited a line number until 2026-08-15 and a grep string after that, and a
+   prune broke the grep too),
    revert `seasonVerified` (a lie, and corrupts
    `aheadSeasonFor`), or hold the flip (the check-refresh gate reds past 08-20 and a missed
    report-card boundary is unrecoverable).

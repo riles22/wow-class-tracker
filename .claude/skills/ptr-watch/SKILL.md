@@ -199,8 +199,7 @@ posture above.
    note — attributed commentary about a dead design must say so. `npm test` enforces
    the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
    build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
-   **Nightly tier-set publishing is supported (2026-09-05).** The old log entries
-   saying these changes must wait for an owner local run are obsolete: the trusted
+   **Nightly tier-set publishing is supported (2026-09-05):** the trusted
    publish job now runs `node gearing/src/harvest-specs.mjs`, its `--check`, and
    `npm run gearing:build` BEFORE Gate 1, then explicitly stages the derived gearing
    files. After changing a tracker tier set, run those same commands before your
@@ -442,9 +441,12 @@ posture above.
    and its own header says so. (Corrected 2026-08-15: this line said "Append", and the very
    next nightly after the 08-15 prune re-scrambled three of the four logs by obeying it. A
    mixed-order log is what made `refresh-tiers/log.md` unreadable in the first place — its
-   first page was July while the skill said to read "the last run".) Record: date · builds
-   found · zone-54 (PTR raid) state · zone-52 (Dummy Dome) state · zone-56 (PTR M+)
-   state · zone-57 (Tidebound Grotto) state.
+   first page was July while the skill said to read "the last run".) Record: date · channels
+   swept · ledger state · feed entries added · whether a new PTR cycle has opened. While a
+   cycle is open, also record each WCL PTR zone's state (for 12.1 they were zone-54 PTR
+   raid, zone-52 Dummy Dome, zone-56 PTR M+ and zone-57 Tidebound Grotto).
+   Prune `log.md` only in a local or interactive run, after moving any lesson that lives
+   only in the entries being dropped into this file (the log's header says why).
 
 ## Gotchas
 
@@ -535,3 +537,83 @@ like "the source has nothing new", which is why they are rules and not anecdotes
   `Non-class:` highlights, the precedent set by posts #7, #12 and #13 (2026-08-01). Two entries
   may share a date (#18/#19 on 07-31, as #11/#12 did on 07-08); order them newest-first by
   PUBLICATION time within the day.
+
+### Lessons promoted from `log.md` (2026-10-06 prune)
+
+The 2026-10-06 prune dropped the entries that carried these. Most of them failed quietly: the
+run looked healthy and recorded something false.
+
+- **A Blizzard forum topic's `.json` needs its slug, or `curl -L`** (2026-08-31). The bare
+  `us.forums.blizzard.com/en/wow/t/x/<id>.json` form answers HTTP 301 with a zero-byte body,
+  which reads exactly like a dead topic. Use `/t/<slug>/<id>.json`, or follow the redirect.
+- **A blue name on a post number is not a blue post** (2026-08-31). Discourse records
+  moderation as posts: "#5 | Linxy" in topic 2342331 was `post_type: 3` with
+  `action_code: "pinned.enabled"` and an empty `cooked`, which is Linxy pinning the topic.
+  Read a post as content only when `post_type === 1` and `cooked` is non-empty, or a
+  moderation event gets distilled as tuning; `details.participants` (Linxy at
+  `post_count: 1`) confirms it. Likewise `posts_count` below `highest_post_number` (17
+  against 19 on thread 2317811) means deleted replies, not missing blue posts.
+- **Take a Wowhead news id from the RSS item's `<link>`, never from memory** (2026-09-02: a
+  first draft of an entry carried 382731 for the real 382716 and was caught before commit).
+- **Check a lead against the official forum before believing it** (2026-09-03). Forum search
+  answers at `search.json?q=<terms> order:latest`; read a hit's posts and count the staff
+  ones. A "12.1.5 PTR delayed" topic found that way had 8 posts, all from players:
+  speculation, not a source. The PTR forum category's id changes with each patch (12.1.5's is
+  345), and what matters there is its staff topics. A running PTR realm is not by itself a
+  forecast cycle (2026-09-14: category 345's only staff topics were the configured 12.1.5
+  thread and a Kith'ix raid-testing timetable with no tuning in it).
+- **A "Class Tuning Incoming" post has a lifecycle** (precedents from 2026-08-15 on; the
+  Sept 22 pass is the worked example: announced 09-18, amended 09-21, shipped 09-22).
+  · Log it when it is ANNOUNCED, dated by the post, although it applies at a later
+    maintenance (`kind: "build", realm: "live"`, step 3b).
+  · It gets edited after posting, sometimes with a reply announcing the changes ("Made the
+    following changes to the original post") and sometimes silently. Re-read the post's
+    `version` every run until it ships; when it moves, amend the existing entry's highlights
+    in place and note the version and edit time in its `label`. A second entry would count
+    the restated lines twice in the outlook tally.
+  · When it ships, the running hotfix compilation (topic 2336376) restates it as new Classes
+    sections. Diff each against the stored entry and resolve the matching ones `irrelevant`,
+    giving that reason, never `applied`: `buildRefCovers` needs the referenced entry to cite
+    the compilation's own topic, and applying would double-count. Only lines that appear
+    nowhere but the compilation earn a new entry.
+- **Amend the same way when an applied section is edited without a new date or reply**
+  (2026-09-11: a 09-09 Shaman fix was re-attributed from Totemic to Stormbringer). Correct
+  the stored highlight to the new verbatim wording, note the version and edit time in that
+  entry's `label`, and re-resolve the section `applied` against the corrected line. Neither
+  the RSS date sweep nor the Wowhead mirror can surface such an edit; the ledger catches it.
+- **The Wowhead mirror can lag the forum post and misspell it; store the forum's wording**
+  (2026-09-18: news=382999 was published off version 1 of the Sept 22 tuning post, and one
+  PvE line differs from version 2; 2026-09-03: news=382725 wrote "Bladetorm" where the blue
+  post says Bladestorm). The mirror is the `wowheadUrl` citation; the text comes from the
+  canonical post.
+- **Count set-bonus keywords before calling a post set-free** (2026-09-19): "set bonus",
+  "-piece" and the raid's name (Venomous Abyss this season). A post with no hit needs no
+  `tierSet` change; any hit sends you to step 3's tier-set procedure.
+- **A running topic's title lags the edit that appends a section** (2026-08-31). Read the
+  hotfix compilation's own dated sections in the body, not its title, before deciding nothing
+  new landed.
+- **Attribute by the notes' heading structure, not by a line's wording** (2026-08-31
+  Affliction/Hellcaller, 2026-09-02 Warrior/Bladestorm, 2026-09-09 Priest/Flash Heal). A line
+  under a SPEC heading stays with that spec even when its text names a hero tree. A line under
+  a bare CLASS heading is `Class (class-wide)` even when its text names specs. Read the post
+  with its `<ul>` nesting intact; a flattened copy cannot show which heading a line sits under.
+
+**Open owner questions (raised 2026-10-06).** Until Riley decides, follow current practice
+and say in the run report when a case comes up.
+- **A line under a bare hero-talent heading** (a `Hero Talents › <Tree>` block that is a
+  sibling of the spec blocks, with no spec heading over it). Current practice logs it as
+  `Class (class-wide) — <Tree>: …` (2026-08-27 Rogue/Deathstalker, 08-28 Shaman/Farseer,
+  09-10 Mage/Spellslinger, 09-18 Druid/Wildstalker), and each of those four lines reaches every
+  spec of its class. `specBuildChanges` in render.mjs was written to stop that for hero-tree
+  scopes: a `Class (<Tree> hero talents)` line attaches only to specs the entry's
+  `specsAffected` names outright.
+- **A standalone official topic with no class content** (encounter or trinket tuning).
+  Current practice since 2026-09-14 logs it as `kind: "hotfix", realm: "live"` with
+  `specsAffected: []`, a `Non-class:` highlight, `forumUrl: null` and the topic cited in the
+  label; it reaches no drawer and casts no vote. Earlier runs logged nothing for the same
+  shape (08-27 Coiled Altar, 09-01 Vashnik).
+- **A history snapshot after a local run that changed only bookkeeping** (the ledger's
+  `checkedAt` stamps). Step 8 says to write one whenever a data file changed, and the
+  2026-09-18 local run did. The 2026-09-13 local run skipped it: a snapshot dated after the
+  newest manifest reads as proof of life to the freshness heartbeat and can hide a missed
+  nightly (the 2026-09-02 case in CLAUDE.md).

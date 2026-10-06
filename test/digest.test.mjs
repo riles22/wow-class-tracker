@@ -231,6 +231,19 @@ test("digestMarkdown breaks mentions, issue references and raw HTML in outside t
   assert.ok(md.includes(`(row @${zw}someone \\<b\\>x\\</b\\>)`), "agent-written manifest row names are escaped too");
 });
 
+test("digestMarkdown names skill logs past the size line and is silent without them (audit 2026-10-04, F11)", () => {
+  const p = payload([]);
+  const manifest = { summary: "ok", sources: [] };
+  const quiet = digestMarkdown({ oldPayload: p, newPayload: p, manifest });
+  assert.doesNotMatch(quiet, /Skill logs/);
+  assert.equal(digestMarkdown({ oldPayload: p, newPayload: p, manifest, skillLogs: [] }), quiet);
+  const md = digestMarkdown({ oldPayload: p, newPayload: p, manifest, skillLogs: [
+    { file: ".claude/skills/ptr-watch/log.md", bytes: 230_034 },
+    { file: ".claude/skills/odd_name @x/log.md", bytes: 200_001 }] });
+  assert.ok(md.includes("_Skill logs past the 200 KB warning line: ptr-watch 230 KB, odd\\_name @​x 200 KB. A Read returns nothing over 262 KB, so in a local run (a nightly cannot commit SKILL.md) prune each to its newest ~20 entries after moving any lesson that lives only in old entries into its SKILL.md._"), md);
+  assert.ok(md.includes("Quiet run"), "the size line does not displace the quiet-run line");
+});
+
 const officialLedger = (summary = "Damage increased.") => ({ schemaVersion: 1, sources: {
   "ptr-preview": { topicId: 2344395, patch: "12.1.5", era: "ptr", checkedAt: "2026-09-05T10:00:00Z", removedSections: [],
     posts: [{ postNumber: 4, version: 2, updatedAt: "2026-09-04T10:00:00Z", bodySha256: "post-hash", sections: [
