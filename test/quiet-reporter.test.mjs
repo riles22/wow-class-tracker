@@ -140,3 +140,37 @@ test("b", () => assert.ok(true));
     await rm(dir, { recursive: true, force: true });
   }
 });
+
+test("quiet reporter: the Playwright hint needs a UI-invariants file in which nothing ran", async () => {
+  /* On 2026-10-06 (2026-10-04 audit, F71) the UI invariants began reporting an empty lane
+     with t.skip() instead of a bare return. Keyed on the file name alone, that skip would bring back the false
+     "install Playwright" hint retired on 2026-08-23 on every green run between cycles. Both
+     fixtures are named ui-invariants.test.mjs, because the hint keys on that name. */
+  const dir = await mkdtemp(path.join(tmpdir(), "quiet-skip-"));
+  const file = path.join(dir, "ui-invariants.test.mjs");
+  try {
+    await writeFile(file, `
+import { test } from "node:test";
+import assert from "node:assert/strict";
+test("an invariant that ran", () => assert.ok(true));
+test("an invariant whose lane is empty", t => { t.skip("lane empty"); });
+`, "utf8");
+    const ran = run(["--test", `--test-reporter=${REPORTER}`], file);
+    assert.equal(ran.code, 0);
+    assert.match(ran.out, /# tests 2 \| pass 1 \| fail 0 \| skipped 1/);
+    assert.match(ran.out, /# 1 skipped \(UI invariants ran\): an invariant whose lane is empty/);
+    assert.doesNotMatch(ran.out, /INCLUDING the UI invariants/);
+
+    await writeFile(file, `
+import { test } from "node:test";
+const absent = { skip: "playwright not installed" };
+test("first invariant", absent, () => {});
+test("second invariant", absent, () => {});
+`, "utf8");
+    const absent = run(["--test", `--test-reporter=${REPORTER}`], file);
+    assert.equal(absent.code, 0);
+    assert.match(absent.out, /# 2 skipped INCLUDING the UI invariants — install Playwright/);
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});

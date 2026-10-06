@@ -665,7 +665,7 @@ test("no agent-writable field can inject markup or a handler into the rendered p
   }
 });
 
-ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in the 12.0.7 view", async page => {
+ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in the 12.0.7 view", async (page, t) => {
   const data = payload();
   const ptr = data.sources.find(s => s.kind === "tier-list" && s.era === "ptr");
   /* DERIVED, not asserted into existence (2026-08-15). This used to hard-assert that an
@@ -673,9 +673,10 @@ ui("an era-gated PTR tier list shows its own 12.1 letters and is unreachable in 
      moment flip step 5 retires `icyveins-ptr` — so it red at the flip state for a registry
      decision rather than a defect. Skipping when the lane is empty also makes it re-arm by
      itself at 12.2, when the next PTR list appears; naming a literal id here is the same
-     pin-to-live-registry trap `f02caec` had to undo in four other fixtures. Same
-     `if (!x) return` shape the frozen-archive test already uses for an absent lane. */
-  if (!ptr) return;
+     pin-to-live-registry trap `f02caec` had to undo in four other fixtures. The empty lane
+     is a reported SKIP, not a bare `return` (2026-10-06; 2026-10-04 audit, F71): a bare
+     return counted as a passing invariant that had checked nothing. */
+  if (!ptr) { t.skip("no era-gated PTR tier list in this payload"); return; }
   const subject = data.specs.find(s => s.ratings?.mplus?.[ptr.id] != null);
   assert.ok(subject, "expected at least one spec rated by the PTR list");
 
@@ -1520,11 +1521,12 @@ test("the FROZEN forecast column renders in the post-flip live view, labelled as
    promised "patch changes" on every row, and invariants 324/325 stayed green because
    hiding PTR surfaces in live view is exactly what they pin. This is the missing third
    assertion: between cycles, CURRENT-cycle content must be reachable in the live view. */
-ui("between cycles, a post-launch hotfix and the tier set are reachable in the live drawer", async page => {
+ui("between cycles, a post-launch hotfix and the tier set are reachable in the live drawer", async (page, t) => {
   const data = payload();
   // Only meaningful between cycles — during a PTR cycle the live view hides the lane by
   // design and the era toggle offers the way in (the mirror of the guard two tests down).
-  if (data.meta.phases.ptr) return;
+  // Out of scope is a reported skip, never a silent pass (2026-10-04 audit, F71).
+  if (data.meta.phases.ptr) { t.skip("a PTR cycle is open: the live view hides this lane by design"); return; }
   const liveSince = data.meta.phases.liveSince ?? "";
   const target = data.specs.find(s =>
     (s.buildChanges ?? []).some(b => b.kind === "hotfix" && (!liveSince || b.date >= liveSince)) &&
@@ -1560,13 +1562,13 @@ ui("between cycles, a post-launch hotfix and the tier set are reachable in the l
    12.0.7-only view still advertised next-patch activity it had otherwise hidden. Appended at
    the END of this file: the pre-staged flip patch carries hunks through ~:1080 and inserting
    near them breaks `git apply`. */
-ui("a 12.0.7-only view hides every PTR-derived summary surface", async page => {
+ui("a 12.0.7-only view hides every PTR-derived summary surface", async (page, t) => {
   /* Cycle-gated. Post-flip `phases.ptr` is null, the Era toggle is not rendered at all
      (template boot), and there is no PTR-derived content left to hide — so the control this
      test clicks does not exist and the whole premise is gone. Caught in the 08-15 flip
      simulation; same guard the pre-staged flip patch applies to every other era-dependent
-     invariant in this file. */
-  if (!payload().meta.phases.ptr) return;
+     invariant in this file. Between cycles it reports a skip, not a pass (2026-10-04 audit, F71). */
+  if (!payload().meta.phases.ptr) { t.skip("no PTR cycle is open: no era toggle and nothing PTR-derived to hide"); return; }
 
   // Both-era baseline: at least one of these must actually be present, or the test proves
   // nothing about gating — it would pass on an empty page.
@@ -1604,7 +1606,7 @@ ui("a 12.0.7-only view hides every PTR-derived summary surface", async page => {
    "30d" while SPARK_POINTS is a point COUNT, so the two only agree at a daily cadence —
    at the real one the window is ~11 days, and the true span was reachable only through a
    per-row title=, on a column that renders at >=980px where touch cannot read it. */
-test("the spark header states the real window, not a hard-coded duration", skipOpts, async () => {
+test("the spark header states the real window, not a hard-coded duration", skipOpts, async t => {
   const { page } = await newPage();
   const head = (await page.textContent(".head .sparkcell"))?.trim() ?? "";
   await page.close();
@@ -1612,7 +1614,8 @@ test("the spark header states the real window, not a hard-coded duration", skipO
   assert.notEqual(head, "30d", "the header must not be the old hard-coded literal");
   assert.match(head, /^(\d+d|Trend)$/, `header should be "<n>d" or "Trend", got "${head}"`);
 
-  if (head === "Trend") return;   // no enriched history in this artifact — nothing to check
+  // No enriched history in this artifact: the window cannot be checked, so say so (2026-10-04 audit, F71).
+  if (head === "Trend") { t.skip("no enriched history: the header's window was not checked"); return; }
   const { history } = payload();
   const dates = history?.dates ?? [];
   const start = (history?.enriched ?? []).findIndex(Boolean);
@@ -2120,9 +2123,10 @@ ui("source registry keeps credits and page dates distinct in a contained layout"
   }
 });
 
-ui("official previews keep their attribution and not-live label in mobile spec drawers", async page => {
+ui("official previews keep their attribution and not-live label in mobile spec drawers", async (page, t) => {
   const notes = payload().officialNotes?.previews ?? [];
-  if (!notes.length) return; // A notes lane may legitimately be empty between previews.
+  // A notes lane may legitimately be empty between previews; that is a skip, not a pass (2026-10-04 audit, F71).
+  if (!notes.length) { t.skip("the official-notes preview lane is empty"); return; }
   await page.setViewportSize({ width: 390, height: 844 });
   const footer = await page.locator('#officialnotes').innerText();
   assert.match(footer, /PTR preview — not live/i);

@@ -41,6 +41,7 @@ import path from "node:path";
 export default async function* quietReporter(source) {
   const failures = [];
   const skips = [];
+  const ranFiles = new Set(); // files in which at least one test passed or failed
   const tally = { tests: 0, passed: 0, failed: 0, skipped: 0, todo: 0 };
   let summary = null;
   let durationMs = null;
@@ -56,9 +57,10 @@ export default async function* quietReporter(source) {
       if (event.type === "test:fail") {
         tally.failed++;
         failures.push(d);
+        ranFiles.add(d?.file ?? "");
       } else if (d?.skip) { tally.skipped++; skips.push(d); }
       else if (d?.todo) tally.todo++;
-      else tally.passed++;
+      else { tally.passed++; ranFiles.add(d?.file ?? ""); }
       continue;
     }
 
@@ -100,9 +102,16 @@ export default async function* quietReporter(source) {
      current season", true for months). So every green run carried a Playwright warning that
      was false — and it worked: it convinced a reader the invariants had not run when they
      had. Name the tests that actually skipped, and mention Playwright only when the
-     invariants are genuinely among them. A hint that cries wolf is worse than no hint. */
+     invariants are genuinely among them. A hint that cries wolf is worse than no hint.
+     "Among them" means a UI-invariants file in which NOTHING ran (2026-10-06; 2026-10-04
+     audit, F71).
+     Without Playwright, or without the built artifact, every test in such a file skips at
+     declaration. Since F71 an invariant whose lane is empty, such as the era-gated PTR list
+     between cycles, calls t.skip() inside a file that otherwise ran, and keying on the file
+     name alone would have brought the false Playwright hint straight back. */
   if (counts.skipped > 0) {
-    const invariantsSkipped = skips.some(d => /ui-invariants/.test(d?.file ?? ""));
+    const invariantsSkipped = skips.some(d =>
+      /ui-invariants/.test(d?.file ?? "") && !ranFiles.has(d.file));
     yield invariantsSkipped
       ? `# ${counts.skipped} skipped INCLUDING the UI invariants — install Playwright; this run proved nothing about template.html\n`
       : `# ${counts.skipped} skipped (UI invariants ran): ${skipList(skips)}\n`;
@@ -110,12 +119,13 @@ export default async function* quietReporter(source) {
 }
 
 /* One line however many there are: skips should be rare enough to name, and a bare count is
-   exactly what sent a reader looking for the wrong cause. */
+   exactly what sent a reader looking for the wrong cause. Five names, because a green run on
+   the 12.1.5 launch state skips four tests and the launch runbook checks each one by name. */
 function skipList(skips) {
   const names = skips.map(d => d?.name ?? "unnamed");
-  return names.length <= 3
+  return names.length <= 5
     ? names.join("; ")
-    : `${names.slice(0, 3).join("; ")} +${names.length - 3} more`;
+    : `${names.slice(0, 5).join("; ")} +${names.length - 5} more`;
 }
 
 function formatFailure(failure) {

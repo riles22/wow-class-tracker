@@ -1,7 +1,10 @@
 # 12.1.5 launch runbook
 
 **Status:** written 2026-09-26 (UTC), before Blizzard announced the 12.1.5 US release date.
-This is a working checklist. Tick items off in your own copy; do not edit history into it.
+Blizzard announced it on 2026-09-29: October 13 (US), October 14 (EU). Updated 2026-10-06
+with the launch-week additions from the 2026-10-04 audit and a re-verification on the
+current master (see "Verified versus inferred"). This is a working checklist. Tick items
+off in your own copy; do not edit history into it.
 It covers three changes inside Season 2: the displayed patch label, the official-notes lane
 and the WCL raid partition. Nothing here moves `liveSeason`, `liveLabel` "12.1",
 `seasonLabels`, `liveSince`, `SNAPSHOT_PHASE`, `LIVE_LEADERBOARDS.label`, the frozen 12.1
@@ -29,7 +32,7 @@ at the first red. Run everything from a worktree, never from a checkout with unp
 | Thing | Where | State |
 | --- | --- | --- |
 | This runbook | branch `claude/1215-runbook` | docs only plus a CLAUDE.md pointer; merge it before the rehearsal in "Before launch day", because the subject check there and in B2 reads the commit list below from master's copy |
-| Launch code, tests, prose | branch `claude/1215-launch`, 9 commits on top of `c80a9f7` (the #81 head) | not mergeable alone, see below |
+| Launch code, tests, prose | branch `claude/1215-launch`, 9 commits, staged on top of `c80a9f7` (the #81 head); since the pre-launch rebase they sit on `ece7ddd`, #81's squash on master (checked 2026-10-06) | not mergeable alone, see below |
 | Launch data edits | nowhere | hand-applied on launch morning (B4) |
 
 **Where the launch branch lives (as of 2026-09-26).** `claude/1215-launch` is a local ref in
@@ -89,7 +92,7 @@ master gains tests.
 | --- | --- | --- |
 | Launch branch alone | 27 fail | both fail: `official-notes.json: unknown source ptr-preview` |
 | Plus the B4 data edits | 1 fail: the placeholder guard | green (gearing:build too) |
-| Plus B4 and B5 | 0 fail; the only skip is freeze-season; UI invariants ran | green (gearing:build too) |
+| Plus B4 and B5 | 0 fail; the skip line names B7's four tests and says UI invariants ran | green (gearing:build too) |
 
 The reds on the branch alone are by design: the committed ledger and
 `data/required-sources.json` still name the retired source until B4. 25 of the 27 reds are
@@ -123,8 +126,10 @@ UTC.
    group, which the two gearing workflows share, is `pending` rather than `queued`, so the
    first two lists miss it. The local-run skill carries the same three lists.
 
-2. The previous master commit's runs must be finished, in this order: nightly publish, the
-   deploy it dispatches (about 2 min), then the Tests run it dispatches (about 8 min).
+2. The previous master commit's runs must be finished: the nightly's publish job, then the
+   deploy and Tests runs it dispatches. Those two start together. Deploy takes about 1-2 min
+   and Tests usually about 3, but Tests took 17 min on 2026-10-06 (one slow Chromium job).
+   Wait for the runs to finish, not for a duration.
 
    ```powershell
    gh run list --limit 8 --json databaseId,workflowName,status,headSha
@@ -149,6 +154,11 @@ deploy and Tests have finished.
 - [ ] When Blizzard announces the US release date (read it from Blizzard directly, never a
       third-party guess): a separate owner commit sets `LABEL_FLIP_DUE` in
       `src/normalize.mjs` to that date. Push rule applies. Keep it out of the launch branch.
+- [ ] Keep the local `wow-ptr-watch` task off master on launch day. That Claude desktop task
+      runs the local-run skill daily at 07:00 local time and can push. Step 0 of
+      `C:\Users\Riley\.claude\scheduled-tasks\wow-ptr-watch\SKILL.md` ends the run without
+      touching the repo when the local date is `2026-10-13` (owner decision 2026-10-06). If
+      the release date moves, change that date in the same sitting as `LABEL_FLIP_DUE`.
 - [ ] After #81 squash-merges and this runbook is on master, move the launch branch onto
       master once, early, so any conflict shows up before launch day. B2 runs the same
       lines again on the day; this is a rehearsal, not a substitute. `c80a9f7` is the cut
@@ -228,16 +238,30 @@ nightly:
   runs it dispatched have finished (push rule, step 2). Its cron is 10:37 UTC, but GitHub
   starts it late. In September 2026 the scheduled run started between 13:31 and 16:34 UTC
   and finished 18 to 31 minutes later; CLAUDE.md records the same window from the manifest
-  side (`startedAt` 13:46-16:47 UTC). Deploy and Tests take about 10 minutes more. If the
-  day's run has not appeared, wait for it; do not assume it was dropped. On 2026-08-27 and
-  08-28 it started at 20:43 and 21:14 UTC.
+  side (`startedAt` 13:46-16:47 UTC). Deploy and Tests start together when publish pushes
+  and usually finish within about 3 minutes (Tests took 17 on 2026-10-06). If the day's run
+  has not appeared, wait for it; do not assume it was dropped. On 2026-08-27 and 08-28 it
+  started at 20:43 and 21:14 UTC, and on 2026-10-05 at 19:22 UTC.
 - Merge before the next scheduled nightly can start. From 2026-07-28 to 09-25 the earliest
   start was 10:53 UTC (2026-08-15).
 - Push nothing else to master in the window, and do not dispatch a nightly by hand. On a
-  Tuesday, `gearing-refresh.yml` also pushes to master (cron 08:37 UTC; on the last three
-  Tuesdays it started between 13:01 and 13:49 UTC).
+  Tuesday, `gearing-refresh.yml` also pushes to master, and 2026-10-13 is a Tuesday (cron
+  08:37 UTC; from 2026-09-08 to 10-06 it started between 13:01 and 15:24 UTC). The 09-29
+  and 10-06 runs ended red after pushing the guides that did verify, so a red run can still
+  leave a deploy and Tests to wait for.
   `gh run list --workflow gearing-refresh.yml --limit 1` must show that day's run
   completed, and its deploy and Tests finished, before B1.
+- The local `wow-ptr-watch` task skips this date (see "Before launch day"). In the desktop
+  app, confirm that its run that morning reported
+  `Skipped: 12.1.5 launch day (owner decision 2026-10-06)` and pushed nothing.
+- If the day's nightly fails only because `check-official-notes` lists a 12.1.5 hotfix
+  section it could not resolve, that failure is expected before the launch merge, and
+  nothing was published: publish's "Verify collected metrics and complete official note
+  intake" step stops it before the commit. On master, validation refuses a `12.1.5` patch
+  value and the ptr-watch skill keeps next-patch material out of the feed, so the night had
+  no valid way to resolve the section. Confirm from the failure report on the Nightly digest
+  issue that this was the only failure. Then treat the run as finished (it dispatched no
+  deploy or Tests), start B1, and resolve the section in B6.
 
 B9 checks that `origin/master` has not moved since B1, before the commit and again before
 the merge. If either check throws, follow "If origin/master moved" under B9.
@@ -307,9 +331,10 @@ node -e 'const fs=require(''fs''),p=''data/required-sources.json'',s=fs.readFile
 git diff --stat -- data/
 ```
 
-Expect `data/official-notes.json` about 250 lines removed and `data/required-sources.json`
-`3 +-`. The first file round-trips through `JSON.stringify` byte-identically apart from the
-removed block (checked); the second does not, which is why it is a text edit.
+Expect `data/official-notes.json` about 440 lines removed (443 on 2026-10-06; the count
+drifts as the preview block changes) and `data/required-sources.json` `3 +-`. The first
+file round-trips through `JSON.stringify` byte-identically apart from the removed block
+(checked); the second does not, which is why it is a text edit.
 
 Optional, same Gate-0 file: reword the `blizzard-ptr` row's label
 `"Official PTR build feed (forum thread + Wowhead RSS)"` in `data/required-sources.json`.
@@ -341,13 +366,15 @@ node src/check-official-notes.mjs --base=HEAD
 The fetch must report `live-hotfixes: success` and nothing about `ptr-preview`. If the
 check lists unresolved sections, they are hotfixes posted since the last nightly: resolve
 each per the ptr-watch skill (an applied build-feed reference or an explicit irrelevant
-reason), then run the check again. The base ledger at `HEAD` still carries the retired
-block; the gate compares configured sources only, so that is expected to pass.
+reason), then run the check again. A 12.1.5 hotfix that failed the day's nightly (see
+"Timing") is resolved here: on the launch branch, validation accepts a `12.1.5` patch
+value, so log it per the ptr-watch skill. The base ledger at `HEAD` still carries the
+retired block; the gate compares configured sources only, so that is expected to pass.
 
 **B7. Gates.**
 
 ```powershell
-foreach ($s in 'instructions:check','test:quiet','build','gearing:build','validate') { npm run -s $s; if ($LASTEXITCODE -ne 0) { throw "npm run $s failed" } }
+foreach ($s in 'instructions:check','build','test:quiet','gearing:build','validate') { npm run -s $s; if ($LASTEXITCODE -ne 0) { throw "npm run $s failed" } }
 node -e 'Promise.all([import(''./src/render.mjs''),import(''./src/validate.mjs'')]).then(async([r,v])=>{const d=await v.loadData(''.''),p=r.buildPayload(d),pick=f=>p.specs.map(s=>[s.class,s.spec,s[f]??null]);console.log(require(''crypto'').createHash(''sha256'').update(JSON.stringify([pick(''consensus''),pick(''projection''),d.frozenForecast??null,p.history])).digest(''hex''))})' > $env:TEMP\1215-payload-after.txt
 fc.exe $env:TEMP\1215-payload-before.txt $env:TEMP\1215-payload-after.txt
 git diff --stat -- data/history
@@ -356,11 +383,27 @@ Select-String -Path dist\gearing.html -Pattern 'pc-short">12\.1\.5<' | Measure-O
 git status --short
 ```
 
-Pass means: the loop throws nothing; `test:quiet` reads `fail 0`, and its skip line names
-only the freeze-season test (`a frozen record's commit really is the newest one still
-describing the live season`) and says `(UI invariants ran)`; `fc.exe` reports no
-differences; the `data/history` diff is empty; the first `Measure-Object`
-counts 2 and the second 1. `git status` lists exactly: `CLAUDE.md`,
+`build` runs before `test:quiet` so that every UI invariant reads the launch page. The
+suite's build smoke test (`test/build.test.mjs`) also rewrites `dist/` partway through the
+run. With the tests first, which page an invariant read depended on timing: on 2026-10-06
+the previews invariant ran against master's page when its file ran alone, and skipped in
+the full run.
+
+Pass means: the loop throws nothing; `test:quiet` reads `fail 0`, and its skip line says
+`(UI invariants ran)` and names exactly these four tests:
+
+- `a frozen record's commit really is the newest one still describing the live season`
+  (waits for an outlet to move past Season 2);
+- `an era-gated PTR tier list shows its own 12.1 letters and is unreachable in the 12.0.7
+  view` and `a 12.0.7-only view hides every PTR-derived summary surface` (nothing to check
+  while no PTR cycle is open);
+- `official previews keep their attribution and not-live label in mobile spec drawers`
+  (nothing to check once B4 empties the preview lane).
+
+If the line says `skipped INCLUDING the UI invariants`, the browser did not run: repeat B2's
+two Playwright lines, then B7. Also: `fc.exe` reports no differences; the `data/history`
+diff is empty; the first `Measure-Object` counts 2 and the second 1. `git status` lists
+exactly: `CLAUDE.md`,
 `data/official-notes.json`, `data/required-sources.json`, `dist/gearing.html`,
 `dist/index.html`, `src/normalize.mjs`, `test/normalize.test.mjs` (plus `data/ptr-builds.json`
 and whatever B6's resolutions touched, if any). Do not run `node src/snapshot.mjs`: nothing
@@ -618,12 +661,14 @@ The "S2 Mythic" series names and `LIVE_LEADERBOARDS.label` "12.1" stay.
 and value-move guards compare the working tree against `HEAD`):
 
 ```powershell
-foreach ($s in 'test:quiet','build','validate') { npm run -s $s; if ($LASTEXITCODE -ne 0) { throw "npm run $s failed" } }
+foreach ($s in 'build','test:quiet','validate') { npm run -s $s; if ($LASTEXITCODE -ne 0) { throw "npm run $s failed" } }
 node src/check-refresh.mjs --manifest
 ```
 
-- The loop must throw nothing. `test:quiet` reads `fail 0`, and its only skip is
-  freeze-season. `build` rewrites `dist/index.html` (2 lines in the simulation); commit the
+- The loop must throw nothing. `build` runs first, as in B7, so the UI invariants read the
+  switched page. `test:quiet` reads `fail 0`, and its skip line names B7's four tests,
+  unless a PTR cycle or an official-notes preview has opened since launch.
+  `build` rewrites `dist/index.html` (2 lines in the simulation); commit the
   rebuilt file.
 - `check-refresh --manifest` is informational here, as in step 5 of the local-run skill.
   It fails on exactly one line, `run-manifest: startedAt ... is Nh old — not a fresh write
@@ -685,24 +730,51 @@ is an inference from those step durations, not a per-request measurement.
 - Bloodmallet: hold, and write the row partial, until every chart timestamp is on or after
   `livePatch.since`; then adopt wholesale. That will likely need the owner's
   `value_move_ack`.
+  Subtlety Rogue blocks that today. Its chart has returned Bloodmallet's error body in every
+  refresh-metrics log entry from 2026-09-30 to 10-06, so its stored profile stays dated
+  2026-09-23 and the hold cannot release while the error lasts. At launch +2, if Subtlety
+  still errors, decide in a reviewed local run whether to drop it from the pool to complete
+  the adoption (the 2026-09-03 MID2 adoption dropped three MID1-only profiles the same
+  way). Never in a nightly.
 - Creators: new live reads supersede the six "12.1.5 PTR preview - NOT LIVE" Devourer takes.
   Old takes are never edited.
 - Venomstone: when verified live item levels exist, re-harvest `sheet-rewards.json`,
   remove the pre-launch `authorCaveats` line and `'venomstone'` from `ESTIMATE_KEYS`
   (gearing/src/app.template.html) together; `gearing/test/project.test.mjs` pins the pair.
 
+**Not through the nightly: Icy Veins.** Since 2026-09-23 GitHub's runners get a Cloudflare
+403 on all six Icy Veins tier-list pages. The nightly has written the row `blocked` in all
+13 runs it published from 2026-09-23 to 10-06, and the stored letters come from local run
+`4c672d9` (2026-09-27, a residential IP). Removing Icy Veins would change 27 of the 80
+consensus letters, and launch week is when tier lists move most. Refresh it in a local run
+at launch +1, then at least every 4 days (its `maxAgeDays`). The local-run skill's default
+scope leaves Icy Veins out, so ask for it by name.
+
 **C4. Gearing: Kith'ix loot and Venomstones** once live tooltips resolve (all 12 Kith'ix item
 ids returned 404 before launch). A reviewed code change: `harvest-raid.mjs` and
 `validate-data.mjs` hard-code eight bosses and their counts. Re-harvest with
-`WOW_ACCEPT_LOOT_CHANGES=1`. If launch is a Tuesday, the weekly gearing-refresh (08:37 UTC)
-may run red; failed providers keep their files by design.
+`WOW_ACCEPT_LOOT_CHANGES=1`. Launch day, 2026-10-13, is a Tuesday, so the weekly
+gearing-refresh (08:37 UTC) runs that day and may end red, as it did on 2026-09-29 and
+10-06; failed providers keep their files by design.
 
 **C5. Freshness expectations.** Compare `check-refresh --age` at launch +3 days against the
 baseline. Expected because of 12.1.5: `wcl-leaderboard-raid` partial from the day WCL adds
 a partition until C2; Bloodmallet partial or stale until wholesale adoption; M+ partial only
 if WCL unexpectedly adds a partition to zone 55. Pre-existing, not 12.1.5: the Archon wall,
-wowmeta, murlok, the Method page self-date, `wcl-live-raid`/`wcl-live-mplus`, and the gearing
-verification and loot-age rows. The floor stays 5 until 2026-11-01.
+wowmeta, murlok, the Method page self-date, `icyveins` (listed whenever the last local Icy
+Veins refresh is more than 4 days old; see C3), `wcl-live-raid`/`wcl-live-mplus`, and the
+gearing verification and loot-age rows. The floor stays 5 until 2026-11-01.
+
+**Launch +7: review the retained letters** (owner decision 2026-10-04: keep retention,
+disclose it, review it here). Two of the four consensus sources carry letters that predate
+12.1.5 by weeks. Archon's are from 2026-08-25, retained while archon.gg stays walled
+(decision 1 of `docs/audit-fixes-2026-09-05.md`); they are a 25% share of every consensus
+mean while all four sources are present. Method's raid page is self-dated 2026-08-10, before
+Season 2 began, and is a 25% share of every raid mean (its M+ page was rebuilt 2026-10-05).
+Method's 45-day page-age window lapsed on 2026-09-25 with no recorded review. At launch +7,
+check whether either source has published 12.1.5 letters and decide again whether to keep
+the old ones. The alternative on file is a patch-boundary rule that flags or drops letters
+last verified before `livePatch.since`.
 
 ## Why the data edits are hand-applied
 
@@ -814,12 +886,31 @@ will differ once master gains tests; the fail counts are the part that matters.
   master `38dc0fe` and on the simulated switch.
 - Before launch: the patch-notes host allowlist refuses worldofwarcraft.blizzard.com.
 
+Re-verified 2026-10-06 (UTC), after the release date was announced, in a scratch worktree
+(never pushed). The base was master `b8203ee` plus the `LABEL_FLIP_DUE = "2026-10-13"`
+commit (then unmerged), with the nine launch commits rebased onto it. B4 and B5 ran as
+written under PowerShell 7, B5 with `2026-10-13`. B7's steps and the fingerprint comparison
+ran under Git Bash with Node's clock moved to 2026-10-13 20:00 UTC, because the placeholder
+guard rejects a `since` date in the future. B6, a live fetch, was skipped.
+
+- B4: `data/official-notes.json` 443 lines removed, `data/required-sources.json` `3 +-`.
+- B7 in the order above, with the 2026-10-06 skip guards applied: every script green;
+  `test:quiet` 702 tests, 698 pass, 0 fail, 4 skipped, and the skip line names exactly the
+  four tests listed under B7 and says `(UI invariants ran)`. Without the skip guards the
+  same tree reads 701 tests, 700 pass, 1 skipped. The payload hash equals B1's, the
+  `data/history` diff is empty, the counts are 2 and 1, and `git status` lists the seven
+  files, plus the three test-lane files the skip guards change.
+- `check-refresh --age` against a B1 baseline taken at the same clock: no new keys, and
+  `live-patch-label` and `official-notes-ptr-preview` drop out (37 keys to 35). At that
+  clock both lists include keys that only the moved clock produces, such as `run-age`.
+
 Inferred, not observed:
 
 - That WCL will add a 12.1.5 partition to zone 53 (it did for zone 46 at every patch), and
   its id and name. The real values come from the probe.
 - Where WCL files Kith'ix (zone, difficulty, size) and when Mythic opens.
-- The release date: not announced as of 2026-09-26.
+- That 12.1.5 goes live on the announced date (announced 2026-09-29: October 13 US,
+  October 14 EU). B0 confirms it on the day.
 - That the auto-started nightly after the merge is healthy; B10 checks it.
 - The nightly timing in Phase B "Timing". The start and finish times are GitHub's records
   for 2026-07-28 to 09-25, not a guarantee; GitHub has started the scheduled run anywhere
