@@ -2,31 +2,38 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "n8Z9SX9cRF0",
-      "creator": "Dalaran Gaming",
-      "title": "Blizzard Secretly Fixed These 5 Specs for M+ Season 2",
+      "id": "lmNYCSAM5ZA",
+      "creator": "Sha",
+      "title": "Brewmaster Was Buffed This Week...",
       "published": "2026-10-06",
       "queuedAt": "2026-10-06"
     },
     {
-      "id": "v-h_ahehYaA",
-      "creator": "AutomaticJak",
-      "title": "How Is Healing in Midnight Season 2?",
+      "id": "GqFmO7zvSTc",
+      "creator": "Nintern",
+      "title": "Let’s Talk About Void-Scarred...",
       "published": "2026-10-06",
       "queuedAt": "2026-10-06"
     },
     {
-      "id": "sCij1D_cQoI",
-      "creator": "Dalaran Gaming",
-      "title": "WoW 12.1.5 PTR: New Rogue Animations & Class Fixes",
-      "published": "2026-10-05",
+      "id": "uZ0J_64LF_4",
+      "creator": "Supatease",
+      "title": "Midnight Class Tuning Update",
+      "published": "2026-10-06",
       "queuedAt": "2026-10-06"
     },
     {
-      "id": "qYVsRrr7xg8",
-      "creator": "izen (Izenhart)",
-      "title": "12.1 Week 7 Raid Rankings | A New Mage? Lizards? Unholy Nerfs?",
-      "published": "2026-10-04",
+      "id": "Vnk287HGguA",
+      "creator": "Musguete",
+      "title": "Is Sub Rogue Back To Trickster?! Trickster VS Deathstalker Breakdown",
+      "published": "2026-10-03",
+      "queuedAt": "2026-10-06"
+    },
+    {
+      "id": "gpE3J7s5_zM",
+      "creator": "Musguete",
+      "title": "What Is Assa Rogue Better With? Fatebond vs Deathstalker Analysis",
+      "published": "2026-09-28",
       "queuedAt": "2026-10-06"
     }
   ],
@@ -3733,7 +3740,8 @@
     "Pq9NJVn-SQc",
     "sb7LNHsCD2Q",
     "kAb3PLNfGKk",
-    "5Itu4dmNP8M"
+    "5Itu4dmNP8M",
+    "EjxVtoxgKAY"
   ],
   "seenNote": "Video ids already considered by an earlier run that carry no richer record — migrated 2026-08-08 from backticked ids in watch-creators/log.md when the seen-set stopped being derived from prose. Distilled videos are cited by their take's url, transcript-verified rejects live in skipped[], and queued ones in videos[]; this lane is only for the remainder. Append here when a run dismisses a video at DISCOVERY (pre-cycle date, already-processed) without fetching a transcript."
 }
