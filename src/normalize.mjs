@@ -119,9 +119,12 @@ export const PHASES = {
    violation text calls it that, and the Bloodmallet hold keys on it until livePatch.since
    exists. The gate asks "older", not "different", so it stays silent once the chip reaches
    12.1.5, at a later in-season patch and after the next season flip (livePatch back to
-   null, liveLabel moved on); nothing needs retiring (check-refresh.mjs `labelFlipViolation`). */
+   null, liveLabel moved on); nothing needs retiring (check-refresh.mjs `labelFlipViolation`).
+   Recorded 2026-10-06: Blizzard's own announcement of 2026-09-29 ("Midnight's 12.1.5
+   Content Update Arrives October 13", us.forums.blizzard.com topic 2366151) dates the US
+   release October 13. EU realms follow on October 14; the gate keys on the US date. */
 export const LABEL_FLIP_EXPECTED = "12.1.5";
-export const LABEL_FLIP_DUE = null;
+export const LABEL_FLIP_DUE = "2026-10-13";
 
 /* The patch the page shows as live. When the masthead stamp reads "Live:" (build.mjs
    eraTokensFor) it is the patch that stamp names: a cycle's label once it has dropped

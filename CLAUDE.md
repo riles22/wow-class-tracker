@@ -406,9 +406,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   patch the chip names (`PHASES.livePatch?.label`, else `liveLabel`) is still OLDER than
   `LABEL_FLIP_EXPECTED` ("12.1.5"). Dotted labels compare segment by segment; a label that is
   not purely dotted numbers falls back to exact equality. Both constants sit beside `PHASES`
-  in `normalize.mjs`, and `LABEL_FLIP_DUE` is `null`, which keeps the gate inert. **Owner
-  action, one line: when Blizzard announces the release date, set `LABEL_FLIP_DUE` in
-  `src/normalize.mjs` to that date**; if the release slips, move it. The heartbeat's cron
+  in `normalize.mjs`. **`LABEL_FLIP_DUE` is `"2026-10-13"`**, the US release date in
+  Blizzard's own 2026-09-29 announcement (owner edit, 2026-10-06; until then it was `null`,
+  which keeps the gate inert). If the release slips, move it. The heartbeat's cron
   is 19:23 UTC (`freshness.yml`; runs often start hours later), so a launch commit that
   lands after that day's heartbeat on release day costs a red run, and `live-patch-label`
   is a pipeline key there, red every day it persists. Because the gate tests "older"
