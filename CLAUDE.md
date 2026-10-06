@@ -36,10 +36,15 @@ waiting for 12.2 does not supersede this approved 12.1.5 notes lane.
   with Playwright (freeze-season's assertion is expired until an outlet leaves S2, i.e.
   months). So every green run carried a false warning — and on 2026-08-23 it worked: it
   convinced a reader the UI invariants had not run when they had, and that was reported to
-  the owner. It now NAMES the skipped tests and says `(UI invariants ran)`, switching to
-  "skipped INCLUDING the UI invariants" only when a skip really came from that file. Both
-  branches are exercised by hiding `node_modules/playwright` — with it absent the run reads
-  **347 pass / 27 skipped**, which is exactly what the nightly sees.
+  the owner. It now NAMES the skipped tests (up to five) and says `(UI invariants ran)`,
+  switching to "skipped INCLUDING the UI invariants" only when a UI-invariants file skipped
+  tests and ran none. Since 2026-10-06 (2026-10-04 audit, F71) an invariant whose lane is
+  empty reports `t.skip()` instead of passing on a bare `return`, so a green run with
+  Playwright named three skips that day (freeze-season, the era-gated PTR tier list, the
+  12.0.7-only view), and names four once the official-notes preview lane is empty, as at the
+  12.1.5 launch. Both branches are exercised by hiding `node_modules/playwright` — with it
+  absent the run read **633 pass / 64 skipped** on 2026-10-06, which is exactly what the
+  nightly sees.
 - `npm run build` — data + template → `dist/index.html`
 - `npm run validate` — data checks only
 - `npm run audit:creators` — creator/expert-layer audit (scope, firewall, supersession,
