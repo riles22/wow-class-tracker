@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
 
 test('all four page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
@@ -117,4 +117,71 @@ test("caption artifacts contain encrypted handoff and durable state only, with r
     assert.match(upload, /transcript-fetch\/authentication\.json/);
     assert.doesNotMatch(upload, /transcript-fetch\/\*|transcript-fetch\/\s*$/m);
   }
+});
+
+// The text of every `run:` (inline or block scalar), i.e. everything that reaches a shell.
+const runBlocks = text => {
+  const lines = text.split("\n"), blocks = [];
+  lines.forEach((line, i) => {
+    const m = /^(\s*)(- )?run:(.*)$/.exec(line);
+    if (!m) return;
+    const keyColumn = m[1].length + (m[2] ? 2 : 0), body = [m[3]];
+    for (let j = i + 1; j < lines.length && (!lines[j].trim() || lines[j].search(/\S/) > keyColumn); j++) body.push(lines[j]);
+    blocks.push(body.join("\n"));
+  });
+  return blocks;
+};
+
+test("a failed bot-started run comments on issue 15 from a final job, because workflow_run never fires for one", () => {
+  const text = workflow("dispatched-run-alert");
+  const on = text.slice(text.indexOf("\non:\n"), text.indexOf("\npermissions:"));
+  assert.match(on, /^\non:\n  workflow_call:\n/);
+  assert.doesNotMatch(on, /workflow_run|schedule|push|pull_request|workflow_dispatch/,
+    "GitHub starts no workflow_run listener for a run whose actor is github-actions[bot]");
+  assert.match(text, /\npermissions: \{\}\n/);
+  assert.deepEqual(text.match(/^\s*[a-z-]+: write\s*$/gm).map(s => s.trim()), ["issues: write"]);
+  assert.deepEqual([...text.matchAll(/runs-on: (\S+)/g)].map(m => m[1]), ["ubuntu-24.04"]);
+  assert.match(text, /\n    timeout-minutes: \d+\n/);
+  assert.doesNotMatch(text, /^\s*(- )?uses:/m, "no checkout and no third-party action");
+  assert.doesNotMatch(text, /secrets\./);
+  assert.match(text, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.match(text, /ALERT_ISSUE: "15"/);
+  const [script, ...others] = runBlocks(text);
+  assert.equal(others.length, 0);
+  assert.doesNotMatch(script, /\$\{\{/, "event and context values reach the shell only through env");
+  // GitHub links an @name or a #number after rendering, so neither may reach the body.
+  assert.doesNotMatch(/tr -cd '([^']+)'/.exec(script)[1], /[@#]/);
+  assert.match(script, /workflow="\$\(clean "\$WORKFLOW_NAME"\)"/);
+  assert.match(script, /event="\$\(clean "\$EVENT_NAME"\)"/);
+  assert.match(script, /jobs="\$\(clean "\$jobs"\)"/);
+  assert.match(script, /if \[\[ "\$COMMIT_SHA" =~ \^\[0-9a-f\]\{40\}\$ \]\]; then/);
+  const body = script.slice(script.indexOf("{\n"), script.indexOf('} > "$body"'));
+  assert.match(body, /Dispatched run failed: \$workflow/);
+  assert.match(body, /- Run: \$RUN_URL/);
+  assert.doesNotMatch(body, /@|#\d/);
+  const guard = script.indexOf("grep -qE '@|#[0-9]' \"$body\"");
+  assert.ok(guard > 0 && guard < script.indexOf('gh issue comment "$ALERT_ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$body"'));
+});
+
+test("every workflow the bot dispatches ends with the alert job, gated on a bot trigger and a failed job", () => {
+  const files = readdirSync(new URL("../.github/workflows/", import.meta.url)).filter(f => f.endsWith(".yml"));
+  const dispatched = new Set(files.flatMap(f =>
+    [...workflow(f.slice(0, -4)).matchAll(/gh workflow run ([a-z0-9-]+)\.yml/g)].map(m => m[1])));
+  assert.deepEqual([...dispatched].sort(), ["ci", "deploy", "nightly"]);
+  for (const name of dispatched) {
+    const text = workflow(name);
+    const ids = [...text.slice(text.indexOf("\njobs:\n")).matchAll(/\n  ([a-z][a-z0-9_-]*):\n/g)].map(m => m[1]);
+    assert.equal(ids.at(-1), "dispatched-run-alert", `${name}: the alert is the last job`);
+    const alert = job(text, "dispatched-run-alert");
+    assert.deepEqual(/\n    needs: \[([^\]]+)\]\n/.exec(alert)?.[1].split(", "), ids.slice(0, -1),
+      `${name}: the alert waits for every other job`);
+    const gate = /\n    if: \$\{\{ (.+) \}\}\n/.exec(alert)?.[1] ?? "";
+    assert.ok(gate.startsWith("!cancelled() && github.triggering_actor == 'github-actions[bot]' && "), `${name}: ${gate}`);
+    assert.ok(gate.endsWith("(contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled'))"), `${name}: ${gate}`);
+    assert.match(alert, /\n    permissions:\n      issues: write\n    uses: \.\/\.github\/workflows\/dispatched-run-alert\.yml\n/);
+    assert.match(alert, /\n      needs_json: \$\{\{ toJSON\(needs\) \}\}\n/);
+    assert.doesNotMatch(alert, /runs-on:|secrets:/);
+  }
+  // A red publish job already posts its gate output through its own `if: failure()` step.
+  assert.match(job(workflow("nightly"), "dispatched-run-alert"), / && needs\.publish\.result != 'failure' && /);
 });

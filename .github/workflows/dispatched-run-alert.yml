@@ -1,0 +1,93 @@
+name: Alert on a failed dispatched run
+
+# GitHub emails a failed run only to the user who triggered it (for a schedule, the user
+# who last edited the cron). A run that github-actions[bot] starts with `gh workflow run`
+# therefore fails in silence: nightly.yml, gearing-refresh.yml and gearing-verify.yml
+# dispatch ci.yml and deploy.yml after every push, and dispatch-nightly.yml dispatches
+# nightly.yml. Eleven of those dispatched Tests runs failed between 2026-09-16 and 09-24,
+# and nothing told the owner. Deploy runs before Tests, so a UI break could stay live.
+#
+# WHY A FINAL JOB AND NOT A `workflow_run` LISTENER: GitHub creates no workflow_run run
+# for a run whose actor is github-actions[bot]. The GITHUB_TOKEN loop protection covers
+# every event except workflow_dispatch and repository_dispatch. Observed 2026-10-06 in a
+# public repository with six workflow_run listeners and no branch filters: a human
+# dispatch of the watched workflow started all six within 14 seconds of completing, while
+# two bot dispatches of the same workflow on the default branch started none (nor did a
+# human re-run of one of them). A listener would never fire for the runs this reports.
+#
+# Callers (ci.yml, deploy.yml, nightly.yml) end with a job that calls this file. It waits
+# for every other job and runs only when (a) the run itself was not cancelled, because
+# Tests cancels superseded runs and Pages replaces pending deploys by design; (b) the
+# triggering actor is github-actions[bot], because a human-started run or a human re-run
+# already emails that human; and (c) some job ended `failure`, or `cancelled` inside a
+# run that was not cancelled. A job can end that way by exceeding timeout-minutes, or when
+# no hosted runner picks it up: the scheduled 2026-10-05 nightly's publish job was never
+# acquired, ran no step, and ended `cancelled` while the run concluded `failure`.
+# test/refresh-workflows.test.mjs pins the callers and this file.
+#
+# The comment goes to issue 15 (the nightly digest thread). It carries no @mention and
+# no #number reference: GitHub links both after rendering, and escaping does not stop it.
+
+on:
+  workflow_call:
+    inputs:
+      needs_json:
+        description: toJSON(needs) from the calling job
+        required: true
+        type: string
+      commit_sha:
+        description: Full SHA of the commit the calling run tested, deployed or started from
+        required: false
+        type: string
+        default: ""
+
+permissions: {}
+
+jobs:
+  comment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Comment on the nightly digest issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ALERT_ISSUE: "15"
+          WORKFLOW_NAME: ${{ github.workflow }}
+          EVENT_NAME: ${{ github.event_name }}
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          NEEDS_JSON: ${{ inputs.needs_json }}
+          COMMIT_SHA: ${{ inputs.commit_sha }}
+        run: |
+          set -euo pipefail
+          # Keep only characters a workflow name, job id or result can use here, which
+          # drops any @ or # before it can reach the body.
+          clean() { printf '%s' "$1" | tr -cd '[:alnum:] &()._,:=-'; }
+          workflow="$(clean "$WORKFLOW_NAME")"
+          event="$(clean "$EVENT_NAME")"
+          jobs="$(printf '%s' "$NEEDS_JSON" | jq -r 'to_entries | map("\(.key)=\(.value.result)") | join(", ")')" || jobs="unavailable"
+          jobs="$(clean "$jobs")"
+          if [[ "$COMMIT_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            commit="[${COMMIT_SHA:0:7}]($REPO_URL/commit/$COMMIT_SHA)"
+          else
+            commit="unknown"
+          fi
+          body="$RUNNER_TEMP/dispatched-run-alert.md"
+          {
+            echo "### ❌ Dispatched run failed: $workflow"
+            echo
+            echo 'GitHub sends no failure email for a run that github-actions[bot] started, so this comment is the notice.'
+            echo
+            echo "- Jobs: $jobs"
+            echo "- Commit: $commit"
+            echo "- Event: $event"
+            echo "- Run: $RUN_URL"
+          } > "$body"
+          cat "$body"
+          if grep -qE '@|#[0-9]' "$body"; then
+            echo "::error::Not posting: the alert body contains an @mention or a #number reference."
+            exit 1
+          fi
+          gh issue comment "$ALERT_ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$body"
