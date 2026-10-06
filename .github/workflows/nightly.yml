@@ -44,6 +44,16 @@ on:
           runs; scheduled runs can never carry an ack.
         required: false
         default: ""
+      source_churn_ack:
+        description: >-
+          Human approval for ONE tier-list outlet rewriting much of its own list (the
+          per-source churn gate). Name each approved source:bracket pair, then the
+          reason + citation, e.g. "method:mplus — Method rebuilt its M+ list for the
+          new season, <link>". It waives only the pairs it names, and it is separate
+          from anomaly_ack and value_move_ack for the same reason those two are.
+          Leave empty for normal runs; scheduled runs can never carry an ack.
+        required: false
+        default: ""
       agent_model:
         description: >-
           Claude model for BOTH refresh agents, this run only (one-off trials, e.g.
@@ -522,6 +532,7 @@ jobs:
         env:
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
           VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
+          SOURCE_CHURN_ACK: ${{ inputs.source_churn_ack }}
         run: |
           set -euo pipefail
           if git diff --quiet -- data/run-manifest.json; then
@@ -620,6 +631,7 @@ jobs:
         env:
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
           VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
+          SOURCE_CHURN_ACK: ${{ inputs.source_churn_ack }}
         run: |
           set -euo pipefail
           if git diff --quiet -- data/run-manifest.json; then
@@ -924,10 +936,12 @@ jobs:
           # HUMAN-ONLY overrides: empty on scheduled runs; a person supplies them
           # via Run workflow after reviewing what the gate blocked. The agent-written
           # manifest can only PROPOSE (anomalyAckProposal), which check-refresh prints
-          # for that person — it never satisfies either gate. The two are separate
-          # inputs so approving a tier retune cannot waive unrelated value findings.
+          # for that person — it never satisfies any gate. The three are separate
+          # inputs so approving a tier retune cannot waive unrelated value findings,
+          # and a churn ack waives only the source:bracket pairs it names.
           ANOMALY_ACK: ${{ inputs.anomaly_ack }}
           VALUE_MOVE_ACK: ${{ inputs.value_move_ack }}
+          SOURCE_CHURN_ACK: ${{ inputs.source_churn_ack }}
         run: |
           # The agents must have REWRITTEN the manifest this run. An unchanged file
           # means the run free-rode on the previous record instead of doing

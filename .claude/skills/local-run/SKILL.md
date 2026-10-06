@@ -7,7 +7,7 @@ description: Run a tracker refresh (full or spot-fix) from a local/interactive s
 
 The nightly runs on a CI runner behind five deterministic gates. A local run has NONE of
 them: no Gate 0 boundary guard, no manifest cross-check, no value-move guard, no anomaly
-gate, no publish-side rebuild. It pushes straight to master and deploys immediately. That
+gate, no per-source churn gate, no publish-side rebuild. It pushes straight to master and deploys immediately. That
 is by design — the human at the keyboard *is* the review — but it means the honesty
 guarantees only hold if the run actually does the things the gates would have checked.
 This skill is that checklist. It was written after auditing the 07-28 and 07-30 local
@@ -21,7 +21,8 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
   (see watch-creators — CI-blocked videos queue as pending and land in local runs).
 - **Human-acked fixes**: a change the nightly's gates would rightly block — like the
   07-30 Archon Popularity repair, a 40-row ~100% value move — is exactly what a local
-  run is for. The human review replaces the `value_move_ack` input. **Say so in the
+  run is for. The human review replaces the `value_move_ack` input (or `anomaly_ack`, or
+  `source_churn_ack` for one outlet's rebuilt list). **Say so in the
   commit message**: name what was corrupt, what the fix is, and how it was verified.
   That commit message is the ack record; without it the history shows a mass value move
   with no explanation, indistinguishable from the corruption it fixed.

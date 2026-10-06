@@ -1100,8 +1100,8 @@ exception: the newest bracket-scoped, non-superseded read nudges the 12.1 projec
 ### Run manifest + integrity gates (2026-07-14 security audit + same-day re-audit)
 `data/required-sources.json` is the machine-readable refresh contract — every source a
 full refresh must account for, with staleness thresholds, row-count floors, a
-row-drop limit (`maxRowDropPct` vs the last committed state), and mass-movement
-anomaly limits. `data/run-manifest.json` is the per-run status file: one
+row-drop limit (`maxRowDropPct` vs the last committed state), mass-movement
+anomaly limits, and per-source churn limits (below). `data/run-manifest.json` is the per-run status file: one
 honest result row per requirement (`success | partial | unreachable | blocked |
 parse_error | skipped`; everything but success needs a `detail`; every row carries
 `previousAsOf`/`newAsOf` — the stored dates before/after the run, null for undated
@@ -1110,7 +1110,8 @@ ISO `startedAt` (required — the heartbeat's precision signal; must be a FRESH
 instant, ≤12h old at gate time), `summary`
 (becomes the nightly commit message), and optional `anomalyAckProposal` (the agent's
 cited evidence FOR a human ack — **the anomaly gate itself only accepts the
-human-supplied `anomaly_ack` workflow input**, never anything agent-written; a
+human-supplied `anomaly_ack` workflow input**, and the churn gate only its own
+`source_churn_ack`, never anything agent-written; a
 manifest carrying the old `anomalyAck` field is rejected outright).
 `node src/check-refresh.mjs --manifest` enforces it in
 the nightly publish gate — "success" claims are cross-checked against the actual stored
@@ -1129,6 +1130,29 @@ The committed manifest is always the PREVIOUS run's record — never evidence ab
 current run, and its standing skip/unreachable explanations never excuse skipping
 again: each run attempts every requirement fresh and rewrites the file (fresh `run` +
 `startedAt`); the nightly publish gate hard-fails on an unchanged manifest file.
+
+**The per-source churn gate** (2026-10-06, audit 2026-10-04 F2). The anomaly limits count
+CONSENSUS moves, and the consensus is a mean of four lists, so one outlet rewriting its
+own list arrives diluted to about a quarter. Replayed, the 2026-07-09 Method incident (a
+one-tier shift on 35 of 40 M+ letters) made 9 consensus moves, and an all-S rewrite of
+Method's raid list made 23 with no two-band move: both pass. The anomaly gate never
+caught July 9; the agent did. `checkSourceChurn` (check-refresh `--manifest`) counts each
+tier-list source's own letter→letter changes per bracket against HEAD (a letter arriving
+or leaving, or a spec added or removed, is a coverage event and does not count) and
+fails when more than 25 of its letters changed or more than 10 of them moved two or
+more places on the source's OWN scale (`sourceChurn` in `required-sources.json`; a
+letter the scale does not hold counts as two-step). A
+source+bracket whose `seasonVerified` advanced that night, ranked by
+`PHASES.seasonOrder`, is exempt for that night only, so a re-merge landing a night later
+needs the ack. The waiver is a THIRD human-only input, `source_churn_ack`, with no
+fallback to `anomaly_ack` or `value_move_ack`, forwarded to the same three check-refresh
+steps as they are. It waives exactly the `source:bracket` pairs it names
+(`method:mplus — <reason + citation>`); the agent's evidence still goes in
+`anomalyAckProposal`. The error text starts "mass-movement anomaly", so both agent
+prompts' single completion exception covers it. Calibration: 25/10 fires on none of the
+64 commits that changed `specs.json` from 2026-08-20 to 2026-10-06, but the margin is
+thin (two changed exactly 25 letters, two reached 9 two-step), and the first proposal,
+20/8, fires on four of them.
 
 ### Tier lists (every `tier-list` source — currently Icy Veins / Method / Wowhead / Archon)
 *(WoWMeta was retyped to `kind: "metrics"` on 2026-07-31 — its letters clustered on player
@@ -1298,7 +1322,7 @@ data/     specs.json · sources.json · scales.json · ptr-builds.json · commun
           metaNotes[] season/meta outlook, never tiers) ·
           encounter-tiers.json (per-boss/dungeon Archon tiers) ·
           required-sources.json (refresh contract: required sources, staleness thresholds,
-          row floors, anomaly limits) · run-manifest.json (per-run status file — see
+          row floors, anomaly and per-source churn limits) · run-manifest.json (per-run status file — see
           "Run manifest + integrity gates") ·
           pending-transcripts.json (machine transcript queue: agents append/remove,
           the deterministic fetch step drains) ·
@@ -1320,7 +1344,7 @@ src/      build.mjs · template.html · render.mjs · normalize.mjs · validate.
           script-free static page with its own default-src 'none' CSP; refuses
           non-current seasons and overwrites) ·
           digest.mjs (per-run change digest) ·
-          check-refresh.mjs (manifest/freshness/anomaly gates) ·
+          check-refresh.mjs (manifest/freshness/anomaly/per-source churn gates) ·
           fetch-wcl.mjs + fetch-transcripts.mjs (deterministic pre-agent stages —
           the only WCL / transcript-API credential holders) ·
           fetch-published.mjs (deterministic pre-agent page-self-date evidence —
@@ -1581,7 +1605,8 @@ which is why it cannot run agent-side) → deterministic gearing capability sync
 `harvest-specs.mjs --check` and `npm run gearing:build` → `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
-human `anomaly_ack` workflow input), then snapshots, stages
+human `anomaly_ack` workflow input and its per-source churn ack ONLY from
+`source_churn_ack`), then snapshots, stages
 explicit paths, commits (title = the manifest summary, sanitized), pushes, and
 dispatches deploy.yml (GITHUB_TOKEN pushes don't auto-trigger workflows). Publish
 checks out CURRENT master (not the trigger sha), subject to the refresh-base guard above.

@@ -22,19 +22,25 @@
      no longer claim success unchallenged (the 08-02 icyveins-ptr incident).
 
    Modes (CLI):
-     node src/check-refresh.mjs --manifest [--now=ISO] [--ack=REASON] [--wcl-evidence=PATH]
+     node src/check-refresh.mjs --manifest [--now=ISO] [--ack=REASON] [--value-ack=REASON]
+                                [--churn-ack="SOURCE:BRACKET … REASON"] [--wcl-evidence=PATH]
                                 [--published-evidence=PATH]
          Nightly publish gate. Fails (exit 1) on: missing/duplicate manifest rows,
          missing/implausible startedAt, unexplained skips, "success" claims the stored
          data dates or the WCL fetch evidence contradict, a stored `published` that
          contradicts the published-date evidence or regresses vs HEAD,
          row-count floor breaches, a
-         >maxRowDropPct row loss vs the last committed state (HEAD), or
+         >maxRowDropPct row loss vs the last committed state (HEAD), a metric value
+         move past the value limits vs HEAD, one tier-list source rewriting its own
+         letters past the sourceChurn limits vs HEAD, or
          mass tier movement without a TRUSTED ack. The trusted ack comes ONLY from
          --ack= or the ANOMALY_ACK env var (in CI: a human-supplied workflow_dispatch
          input) — manifest.anomalyAckProposal is surfaced as the agent's evidence for
          that human but never satisfies the gate (re-audit: the AI being gated must
-         not hold the gate's override). Expected unavailability (unreachable/blocked/
+         not hold the gate's override). The value-move and source-churn guards take
+         their OWN human acks the same way (--value-ack= / VALUE_MOVE_ACK and
+         --churn-ack= / SOURCE_CHURN_ACK), with no fallback between the three.
+         Expected unavailability (unreachable/blocked/
          partial/parse_error WITH a reason) degrades the run but does not fail it.
      node src/check-refresh.mjs --age [--now=ISO]
          Heartbeat. Fails when the last refresh signal is older than maxRunAgeHours
@@ -55,7 +61,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadData, validateData } from "./validate.mjs";
 import { buildPayload, snapshotStateOf, SNAPSHOT_PHASE, PHASE_FLIP_DUE } from "./render.mjs";
-import { PHASES, LABEL_FLIP_DUE, LABEL_FLIP_EXPECTED } from "./normalize.mjs";
+import { PHASES, LABEL_FLIP_DUE, LABEL_FLIP_EXPECTED, seasonRank } from "./normalize.mjs";
 
 export const RESULTS = new Set(["success", "partial", "unreachable", "blocked", "parse_error", "skipped"]);
 // Results that mean "didn't fully land" — allowed with a reason, never silently.
@@ -804,13 +810,23 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
 }
 
 /* --- mass-movement anomaly gate ----------------------------------------------------
-   A one-night, many-spec, multi-band tier shift is the shape of a parse bug (the
-   2026-07-09 Method incident), not of normal tuning. Blizzard DOES ship mass retunes,
-   so a HUMAN can acknowledge a real one — `ack` reaches this gate only from the
-   workflow_dispatch input / --ack / ANOMALY_ACK env, never from the agent-written
-   manifest (re-audit 2026-07-14: the AI being gated must not hold the override).
-   The agent may still write manifest.anomalyAckProposal — the CLI surfaces it as the
-   agent's evidence for the human, and nothing more. */
+   A one-night, many-spec, multi-band shift of the CONSENSUS is not the shape of normal
+   tuning: it is a mass retune, a recomposition of the source set, or a loss of coverage.
+   Blizzard DOES ship mass retunes, so a HUMAN can acknowledge a real one — `ack` reaches
+   this gate only from the workflow_dispatch input / --ack / ANOMALY_ACK env, never from
+   the agent-written manifest (re-audit 2026-07-14: the AI being gated must not hold the
+   override). The agent may still write manifest.anomalyAckProposal — the CLI surfaces it
+   as the agent's evidence for the human, and nothing more.
+
+   CORRECTION 2026-10-06 (audit 2026-10-04, F2). This block used to say the gate catches
+   the parse-bug shape of the 2026-07-09 Method incident. It cannot. The consensus averages
+   four lists, so one outlet's bad parse arrives at about a quarter of its size: replayed on
+   that day's data (eb71ea8^) with that day's code, the incident's uniform one-tier shift on
+   35 of Method's 40 M+ letters makes 9 consensus moves and no two-band move, and passes. An
+   all-S rewrite of Method's raid list on current data (34 letters, 23 of them two or more
+   steps) makes 23 moves, none of two bands, and passes too. The July 9 bug was caught by
+   the agent, never by this gate. One outlet rewriting its own list is checkSourceChurn's
+   job (below); this gate still watches the consensus as a whole. */
 
 export function checkAnomaly(nowState, baselineSpecs, bands, limits, ack) {
   const idx = new Map(bands.map((b, i) => [b.tier, i]));
@@ -854,6 +870,139 @@ export function checkAnomaly(nowState, baselineSpecs, bands, limits, ack) {
   return { errors, notes, twoBand, total, vanished };
 }
 
+/* --- per-source churn gate (audit 2026-10-04, F2) ----------------------------------
+   One outlet rewriting its own list is the shape of a parse bug, and the consensus gate
+   above cannot see it: the consensus is the mean of four lists, so one list's change
+   arrives diluted to about a quarter. Replayed, the 2026-07-09 Method incident (a uniform
+   one-tier shift on 35 of Method's 40 M+ letters) made 9 consensus moves, and an all-S
+   rewrite of Method's raid list (34 letters, 23 of them two or more steps) made 23 with no
+   two-band move. Both pass checkAnomaly. So this compares each tier-list source's OWN
+   letters, bracket by bracket, against the last committed state (HEAD; in the publish job
+   that is the tree from before the agent's output was overlaid):
+     · only a letter→letter change counts. A letter arriving or leaving, and a spec added
+       or removed, are coverage events the row floors, the row-drop guard and the anomaly
+       gate's coverage-loss check already own;
+     · a change is TWO-STEP when it crosses two or more places of the source's own `tiers`
+       list in scales.json (Icy Veins A+→A is one step; Method S→B is two). A letter the
+       scale does not hold has no measurable distance, so it counts as two-step;
+     · a source+bracket breaches above sourceChurn.maxChangedLetters changed letters OR
+       above sourceChurn.maxTwoStepChanges two-step ones (required-sources.json, so tuning
+       them is a reviewed edit).
+   Calibration, replayed with this function over every commit that changed specs.json.
+   From 2026-08-20 to 2026-10-06 (64 commits) 25/10 fires on none, including the
+   early-Season-2 churn of 08-22..25, the 09-27 Icy Veins catch-up and the 10-06 Method M+
+   rebuild (12 letters), and it still catches both shapes above. The margin is thin, and
+   that is the measured trade: the 08-22 Archon M+ recut and the 08-25 Archon Heroic
+   re-harvest each changed exactly 25 letters, and two Icy Veins recuts (08-25, 09-27)
+   reached 9 two-step changes. The first proposal, 20/8, fires on four of those commits.
+   Before 2026-08-20 it would have fired six times: four July nightly runs of WoWMeta M+
+   churn (07-17 twice, 07-19, 07-24; 26-28 letters, before WoWMeta was retyped to
+   metrics), Archon's collapsed post-S1 raid sample on 08-14 (26/12), and the 08-15 Icy
+   Veins M+ re-merge (33/17).
+
+   A SEASON ADVANCE IS EXEMPT for the night it happens. When a page of the source+bracket
+   records a LATER seasonVerified than it did at HEAD (ranked by PHASES.seasonOrder, never a
+   string compare), the outlet has published a new season's list and a wholesale rewrite is
+   the expected result; without this every outlet's flip at Season 3 fires. Replayed, it
+   is what kept the S2 flips quiet: Wowhead raid and M+ on 08-09, Icy Veins raid on 08-11
+   and Method raid on 08-14 changed 20-29 letters each, 10-11 of them two-step. Two limits,
+   both deliberate. (1) The exemption covers that night only, so a re-merge landing on a
+   LATER night than its flip needs the human ack: that is the 08-15 Icy Veins M+ re-merge
+   above, blocked four nights on a scale edit. (2) seasonVerified is agent-writable and has
+   no ratchet yet (F27), so a false advance could buy an exemption; but it also takes that
+   outlet out of the live consensus (sourceSeasonOk) and into the frozen lane, so letters
+   smuggled that way reach only the forecast term. A backward or deleted label earns
+   nothing here.
+
+   The ack is HUMAN-ONLY and separate from the other two: approving a consensus retune or a
+   value rescale must not also waive a corrupted list, and the reverse. It reaches this
+   function only from the source_churn_ack workflow input, --churn-ack= or SOURCE_CHURN_ACK,
+   never from an agent-written file, and it waives EXACTLY the source:bracket pairs it names
+   ("method:mplus — <reason + citation>"); a breach it does not name still fails. */
+
+const CHURN_BRACKETS = ["raid", "mplus"];
+// url alone is not unique in the registry, so a page is matched on its full identity.
+const pageIdentity = p => [p.bracket, p.role ?? "", p.label ?? "", p.url ?? ""].join("|");
+
+/* The season advance this source+bracket recorded since HEAD, or null. Reads the page set
+   sourceSeasonOk and aheadSeasonFor read (ancillary pages feed no letters, so they cannot
+   explain a letter rewrite) and matches each page to its HEAD self. An absent or unknown
+   season on either side is no evidence of an advance. */
+export function seasonAdvanceFor(prevSource, source, bracket, order = PHASES.seasonOrder) {
+  const before = new Map((prevSource?.pages ?? [])
+    .filter(p => !p.ancillary && p.bracket === bracket)
+    .map(p => [pageIdentity(p), p.seasonVerified]));
+  for (const p of source?.pages ?? []) {
+    if (p.ancillary || p.bracket !== bracket || !before.has(pageIdentity(p))) continue;
+    const from = before.get(pageIdentity(p));
+    const was = seasonRank(from, order), now = seasonRank(p.seasonVerified, order);
+    if (was != null && now != null && now > was) return { from, to: p.seasonVerified };
+  }
+  return null;
+}
+
+/* "method:mplus wowhead:raid — <reason + citation>". Pairs are sourceId:bracket tokens,
+   case-insensitive; the whole string is kept as the reason. Null for an empty ack. */
+export function parseChurnAck(ack) {
+  if (typeof ack !== "string" || !ack.trim()) return null;
+  const pairs = new Set();
+  for (const m of ack.matchAll(/(?<![\w./-])([a-z0-9][a-z0-9-]*):(raid|mplus)(?![\w-])/gi)) {
+    pairs.add(`${m[1].toLowerCase()}:${m[2].toLowerCase()}`);
+  }
+  return { pairs, reason: ack.trim() };
+}
+
+export function checkSourceChurn(config, data, prevData, prevSources, ack = null, order = PHASES.seasonOrder) {
+  const errors = [], notes = [], acked = [], pairs = [];
+  if (!prevData?.specs) return { errors, notes, acked, pairs };
+  const maxChanged = config.sourceChurn?.maxChangedLetters, maxTwoStep = config.sourceChurn?.maxTwoStepChanges;
+  if (!Number.isFinite(maxChanged) || !Number.isFinite(maxTwoStep)) {
+    errors.push("source churn: data/required-sources.json has no usable sourceChurn limits (maxChangedLetters, maxTwoStepChanges) — a gate that cannot run must not pass");
+    return { errors, notes, acked, pairs };
+  }
+  const granted = parseChurnAck(ack);
+  const letter = v => (typeof v === "string" && v.trim()) ? v : null;
+  const prevSpecs = new Map(prevData.specs.map(s => [`${s.class}|${s.spec}`, s]));
+  const breached = new Set(), exempt = new Set();
+  for (const source of (data.sources ?? []).filter(s => s.kind === "tier-list")) {
+    const pos = new Map((data.scales?.scales?.[source.scale]?.tiers ?? []).map((t, i) => [t, i]));
+    const prevSource = (prevSources ?? []).find(s => s.id === source.id) ?? null;
+    for (const bracket of CHURN_BRACKETS) {
+      let changed = 0, twoStep = 0;
+      for (const spec of data.specs ?? []) {
+        const was = letter(prevSpecs.get(`${spec.class}|${spec.spec}`)?.ratings?.[bracket]?.[source.id]);
+        const now = letter(spec.ratings?.[bracket]?.[source.id]);
+        if (was == null || now == null || was === now) continue; // arrivals, departures, no change
+        changed++;
+        if (!pos.has(was) || !pos.has(now) || Math.abs(pos.get(was) - pos.get(now)) >= 2) twoStep++;
+      }
+      if (!changed) continue;
+      const pair = `${source.id}:${bracket}`;
+      const advance = seasonAdvanceFor(prevSource, source, bracket, order);
+      pairs.push({ pair, changed, twoStep, advance });
+      if (changed <= maxChanged && twoStep <= maxTwoStep) continue;
+      const what = `${pair} changed ${changed} of its letters vs the last committed state, ${twoStep} of them by two or more steps on its own scale (max ${maxChanged} changed, ${maxTwoStep} two-step)`;
+      if (advance) {
+        exempt.add(pair);
+        notes.push(`source churn: ${what} — exempt: its seasonVerified advanced ${advance.from} → ${advance.to} tonight, so a new season's list replaced the old one`);
+        continue;
+      }
+      breached.add(pair);
+      if (granted?.pairs.has(pair)) { acked.push(what); continue; }
+      errors.push(`mass-movement anomaly (one source's own list): ${what} — the whole-list parse-bug shape the consensus gate cannot see (the 2026-07-09 Method incident). If the outlet really rebuilt its list, leave the letters as verified and a human re-runs the nightly with the source_churn_ack input naming ${pair} (plus reason + citation); otherwise re-parse, or revert that source's letters and record parse_error`);
+    }
+  }
+  if (acked.length) notes.push(`source churn: ${acked.length} finding(s) approved by human ack — ${granted.reason}`);
+  if (granted && !granted.pairs.size) {
+    notes.push(`source churn ack names no source:bracket pair, so it waived nothing — write e.g. "method:mplus — <reason + citation>"`);
+  }
+  for (const p of granted?.pairs ?? []) {
+    if (breached.has(p)) continue;
+    notes.push(`source churn ack names ${p}, which ${exempt.has(p) ? "its season advance already exempted" : "did not breach"} — nothing to waive there`);
+  }
+  return { errors, notes, acked, pairs };
+}
+
 /* --- CLI --------------------------------------------------------------------------- */
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -861,7 +1010,7 @@ if (isMain) {
   const args = process.argv.slice(2);
   const mode = args.includes("--age") ? "age" : args.includes("--manifest") ? "manifest" : null;
   const now = args.find(a => a.startsWith("--now="))?.slice(6) ?? new Date().toISOString();
-  if (!mode) { console.error("usage: check-refresh.mjs --manifest|--age [--now=ISO] [--ack=REASON] [--wcl-evidence=PATH]"); process.exit(2); }
+  if (!mode) { console.error('usage: check-refresh.mjs --manifest|--age [--now=ISO] [--ack=REASON] [--value-ack=REASON] [--churn-ack="SOURCE:BRACKET … REASON"] [--wcl-evidence=PATH]'); process.exit(2); }
 
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const readJson = async p => JSON.parse(await readFile(path.resolve(root, p), "utf8"));
@@ -936,15 +1085,16 @@ if (isMain) {
     // two unrelated judgements on one signature (audit 2026-07-25). Falling back to the
     // anomaly ack would recreate exactly that, so there is deliberately no fallback.
     const valueAck = args.find(a => a.startsWith("--value-ack="))?.slice(12) ?? process.env.VALUE_MOVE_ACK ?? null;
+    // The per-source churn guard takes a THIRD ack, for the same reason and again with no
+    // fallback: approving a consensus retune or a value rescale must not also waive one
+    // outlet's rewritten list (audit 2026-10-04, F2). It waives only the source:bracket
+    // pairs it names, so it is never read from the manifest either.
+    const churnAck = args.find(a => a.startsWith("--churn-ack="))?.slice(12) ?? process.env.SOURCE_CHURN_ACK ?? null;
     const payload = buildPayload(data);
     const baseline = data.historySnapshots?.[0] ?? null;
     const a = baseline
       ? checkAnomaly(snapshotStateOf(payload.specs), baseline.specs, data.scales.consensus.bands, config.anomaly, trustedAck)
       : { errors: [], notes: ["no history snapshot — anomaly gate skipped"], twoBand: 0, total: 0 };
-    const proposal = manifest?.anomalyAckProposal ?? null;
-    if (a.errors.length && typeof proposal === "string" && proposal.trim()) {
-      console.log(`  note: the agent PROPOSED an anomaly ack (not trusted — a human must re-run with the anomaly_ack input to approve): ${proposal.trim()}`);
-    }
     // Row-drop guard baseline: the last committed state (in the publish job, HEAD is
     // the tree from before the agent's output was overlaid). Absent git → skip + note.
     const gitShow = f => new Promise(res =>
@@ -957,7 +1107,7 @@ if (isMain) {
       if (prevSpecs) prevData = { specs: JSON.parse(prevSpecs), encounterTiers: prevEnc ? JSON.parse(prevEnc) : null };
       if (prevSrc) { const s = JSON.parse(prevSrc); prevSources = s.sources ?? s; }
     } catch { prevData = null; }
-    if (!prevData) console.log("  note: no HEAD baseline readable — row-drop and value-move guards skipped");
+    if (!prevData) console.log("  note: no HEAD baseline readable — row-drop, value-move and source-churn guards skipped");
     // Published-date evidence: written by src/fetch-published.mjs pre-agent; in CI the
     // publish job downloads the artifact to published-evidence/. Absent for local runs.
     const pubEvidencePath = args.find(a => a.startsWith("--published-evidence="))?.slice(21)
@@ -975,10 +1125,22 @@ if (isMain) {
     // Show what was waived. An ack that prints only a count asks a human to approve a set
     // they were never shown — `acked` was computed and then dropped on the floor.
     for (const f of vals.acked ?? []) console.log("    waived by value ack: " + f);
-    failures.push(...m.errors, ...a.errors, ...pub.errors, ...drop.errors, ...vals.errors);
+    // One outlet rewriting its own list, against the same HEAD baseline, with its own ack.
+    const churn = checkSourceChurn(config, data, prevData, prevSources, churnAck);
+    for (const n of churn.notes) console.log("  note: " + n);
+    for (const f of churn.acked) console.log("    waived by source-churn ack: " + f);
+    const proposal = manifest?.anomalyAckProposal ?? null;
+    if ((a.errors.length || churn.errors.length) && typeof proposal === "string" && proposal.trim()) {
+      console.log(`  note: the agent PROPOSED an ack (not trusted — only a human re-run with the anomaly_ack or source_churn_ack input can approve): ${proposal.trim()}`);
+    }
+    failures.push(...m.errors, ...a.errors, ...pub.errors, ...drop.errors, ...vals.errors, ...churn.errors);
     for (const d of m.degraded) console.log("  degraded: " + d);
     for (const n of [...m.notes, ...a.notes]) console.log("  note: " + n);
     if (!m.errors.length) console.log(`  movement vs ${baseline?.date ?? "—"}: ${a.total} tier moves (${a.twoBand} of ≥2 bands)`);
+    if (prevData) {
+      const moved = churn.pairs.map(p => `${p.pair} ${p.changed} (${p.twoStep} two-step)`);
+      console.log(`  source churn vs HEAD: ${moved.length ? moved.join(", ") : "no letter changed"}`);
+    }
   }
 
   if (failures.length) {

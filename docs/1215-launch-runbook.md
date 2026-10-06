@@ -552,8 +552,12 @@ made against an older master. Redo the launch-morning edits on top of the new ma
 **C1. First-week triage.** Read every post-launch nightly's check-refresh output and agent
 transcripts. If the only failures are the anomaly limits (maxTotalMoves 25, maxTwoBandMoves
 6) or the value-move limits (0.6 per row, 0.35 per family) and the moves trace to 12.1.5,
-re-dispatch with the human `anomaly_ack` or `value_move_ack` input citing the patch. Never
-give an ack blind or in advance. Watch the forums for a NEW "Midnight Hotfixes" topic: the
+re-dispatch with the human `anomaly_ack` or `value_move_ack` input citing the patch. The
+per-source churn limits (added 2026-10-06: more than 25 of one outlet's letters in one
+bracket, or more than 10 of them by two or more places) take their own `source_churn_ack`
+input, naming each `source:bracket` pair, e.g. `icyveins:mplus`. 12.1.5 does not advance
+`seasonVerified`, so an outlet rebuilding its list for the patch gets no season exemption;
+check the page itself before acking. Never give an ack blind or in advance. Watch the forums for a NEW "Midnight Hotfixes" topic: the
 old topic 2336376 still passes the title check, so a new thread would be missed silently.
 Adding it is a new `OFFICIAL_NOTE_SOURCES` row plus its `data/required-sources.json`
 entry, one owner edit.
