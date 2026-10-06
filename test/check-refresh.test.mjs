@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE, labelFlipViolation } from "../src/check-refresh.mjs";
+import { checkManifest, checkFreshness, checkAnomaly, checkRowDrop, checkValueMove, checkPublished, checkSourceChurn, parseChurnAck, seasonAdvanceFor, probeDate, probeRows, ageDays, FLOOR_RESTORE_DUE, labelFlipViolation } from "../src/check-refresh.mjs";
 import { LABEL_FLIP_DUE, LABEL_FLIP_EXPECTED } from "../src/normalize.mjs";
 
 /* Small synthetic world: one tier-list source (two pages), one metrics source, one
@@ -626,6 +626,221 @@ test("the value-move ack is a separate human token from the anomaly ack, and its
   assert.match(wf, /value_move_ack:/, "the separate input must be dispatchable");
   assert.match(wf, /VALUE_MOVE_ACK: \$\{\{ inputs\.value_move_ack \}\}/,
     "…and wired to the gate step, or the input is decorative");
+});
+
+/* --- per-source churn gate (audit 2026-10-04, F2) ---------------------------------- */
+
+/* Two tier-list sources on their real scales, Method's four places and Icy Veins' seven,
+   so one pair of letters can be one step on one scale and two on the other; a metrics
+   source the gate must ignore; and 40 specs, the size of the real roster. */
+const CHURN_LIMITS = { sourceChurn: { maxChangedLetters: 25, maxTwoStepChanges: 10 } };
+const METHOD_TIERS = ["S", "A", "B", "C"];
+const IV_TIERS = ["S+", "S", "A+", "A", "B+", "B", "C"];
+// seasons: { raid, mplus } per page; an explicit null leaves seasonVerified off the page.
+const churnPages = (id, seasons = {}) => ["raid", "mplus"].map(bracket => {
+  const season = bracket in seasons ? seasons[bracket] : "s2";
+  return { bracket, role: "All", url: `https://example.test/${id}/${bracket}`, ...(season == null ? {} : { seasonVerified: season }) };
+});
+const churnWorld = (seasons = {}) => ({
+  sources: [
+    { id: "method", kind: "tier-list", scale: "method", pages: churnPages("method", seasons.method) },
+    { id: "icyveins", kind: "tier-list", scale: "icyveins", pages: churnPages("icyveins", seasons.icyveins) },
+    { id: "murlok", kind: "metrics", pages: [] }
+  ],
+  scales: { scales: { method: { tiers: METHOD_TIERS }, icyveins: { tiers: IV_TIERS } } },
+  specs: Array.from({ length: 40 }, (_, i) => ({ class: "K", spec: `S${i}`, ratings: {
+    raid: { method: METHOD_TIERS[i % 4], icyveins: IV_TIERS[i % 7] },
+    mplus: { method: METHOD_TIERS[(i + 1) % 4], icyveins: IV_TIERS[(i + 3) % 7] }
+  } }))
+});
+// Rewrite one source+bracket's letter on the first n specs (every spec by default).
+const relist = (world, id, bracket, fn, n = world.specs.length) => {
+  const w = structuredClone(world);
+  w.specs.slice(0, n).forEach((s, i) => { s.ratings[bracket][id] = fn(s.ratings[bracket][id], i); });
+  return w;
+};
+const churnOf = (now, before, ack = null, order) =>
+  checkSourceChurn(CHURN_LIMITS, now, { specs: before.specs }, before.sources, ack, order);
+const oneUp = tiers => t => tiers[Math.max(0, tiers.indexOf(t) - 1)];
+
+test("source churn: one outlet rewriting its whole list fails red, which the consensus gate cannot see (F2)", () => {
+  const before = churnWorld();
+  const r = churnOf(relist(before, "method", "raid", () => "S"), before);
+  // Method raid holds S/A/B/C ten times each: 30 letters change, the 20 from B and C by two or more places.
+  assert.deepEqual(r.pairs, [{ pair: "method:raid", changed: 30, twoStep: 20, advance: null }]);
+  assert.equal(r.errors.length, 1);
+  assert.match(r.errors[0], /method:raid changed 30 of its letters .*20 of them by two or more steps/);
+  assert.match(r.errors[0], /source_churn_ack input naming method:raid/);
+  /* Both agent prompts let a run finish when check-refresh fails ONLY on its "mass-movement
+     anomaly" check, with the evidence in anomalyAckProposal for the human. A real upstream
+     rebuild needs exactly that path, so this wording is load-bearing. */
+  assert.match(r.errors[0], /^mass-movement anomaly/);
+});
+
+test("source churn: the 2026-07-09 shape, a uniform one-tier shift, fails on the changed count alone", () => {
+  // Method M+ on A/B/C only, so every letter can move up one place; 35 of 40 do, as on July 9.
+  const before = relist(churnWorld(), "method", "mplus", (_, i) => ["A", "B", "C"][i % 3]);
+  const r = churnOf(relist(before, "method", "mplus", oneUp(METHOD_TIERS), 35), before);
+  assert.deepEqual(r.pairs, [{ pair: "method:mplus", changed: 35, twoStep: 0, advance: null }]);
+  assert.equal(r.errors.length, 1, "no letter moved two places, and the count alone must still fire");
+});
+
+test("source churn: recuts within the limits pass; both limits are strict and steps count on the source's own scale", () => {
+  const before = relist(churnWorld(), "method", "mplus", (_, i) => ["A", "B", "C"][i % 3]);
+  // 25 one-step changes sit exactly on the limit and pass; the 26th fires.
+  assert.deepEqual(churnOf(relist(before, "method", "mplus", oneUp(METHOD_TIERS), 25), before).errors, []);
+  assert.equal(churnOf(relist(before, "method", "mplus", oneUp(METHOD_TIERS), 26), before).errors.length, 1);
+
+  // Two-step changes: 10 pass, and an 11th fires although only 11 letters changed.
+  const twoAway = t => IV_TIERS[IV_TIERS.indexOf(t) + 2] ?? IV_TIERS[IV_TIERS.indexOf(t) - 2];
+  const ten = churnOf(relist(before, "icyveins", "raid", twoAway, 10), before);
+  assert.deepEqual(ten.pairs, [{ pair: "icyveins:raid", changed: 10, twoStep: 10, advance: null }]);
+  assert.deepEqual(ten.errors, []);
+  const eleven = churnOf(relist(before, "icyveins", "raid", twoAway, 11), before);
+  assert.equal(eleven.errors.length, 1);
+  assert.match(eleven.errors[0], /icyveins:raid changed 11 of its letters .*11 of them/);
+
+  // S → A is one place on Method's scale and two on Icy Veins' (S, A+, A).
+  const sToA = t => (t === "S" ? "A" : t);
+  const steps = churnOf(relist(relist(before, "method", "raid", sToA), "icyveins", "raid", sToA), before);
+  assert.deepEqual(steps.pairs.map(p => [p.pair, p.changed, p.twoStep]), [["method:raid", 10, 0], ["icyveins:raid", 6, 6]]);
+
+  // A letter the scale does not hold has no measurable distance, so it counts as two-step.
+  const offScale = churnOf(relist(before, "method", "raid", () => "Z", 11), before);
+  assert.equal(offScale.pairs[0].twoStep, 11);
+  assert.equal(offScale.errors.length, 1);
+});
+
+test("source churn: a letter arriving or leaving, or a spec added or removed, is coverage and not churn", () => {
+  const world = churnWorld();
+  const before = relist(world, "method", "mplus", () => null, 30); // 30 M+ letters absent at HEAD arrive tonight…
+  const now = relist(world, "method", "raid", () => null, 30);     // …while 30 raid letters leave
+  now.specs.splice(39, 1);                                          // a spec leaves the roster
+  now.specs.push({ class: "K", spec: "New", ratings: { raid: { method: "S" }, mplus: { method: "C" } } });
+  const r = churnOf(now, before);
+  assert.deepEqual(r.pairs, []);
+  assert.deepEqual(r.errors, []);
+});
+
+test("source churn: a season advance exempts that source+bracket on the night it lands, ranked by seasonOrder", () => {
+  // Method's raid page advances s1 → s2 tonight, and both of its lists are rewritten to all S.
+  const before = churnWorld({ method: { raid: "s1", mplus: "s2" } });
+  const now = relist(relist(churnWorld(), "method", "raid", () => "S"), "method", "mplus", () => "S");
+  const r = churnOf(now, before);
+  assert.deepEqual(r.pairs.map(p => [p.pair, p.advance]), [["method:raid", { from: "s1", to: "s2" }], ["method:mplus", null]]);
+  assert.equal(r.errors.length, 1, "only the bracket whose season advanced is exempt");
+  assert.match(r.errors[0], /method:mplus/);
+  assert.ok(r.notes.some(n => /method:raid .*exempt: its seasonVerified advanced s1 → s2/.test(n)));
+  const named = churnOf(now, before, "method:raid method:mplus — Method's new-season lists, <link>");
+  assert.deepEqual(named.errors, []);
+  assert.ok(named.notes.some(n => n.includes("method:raid, which its season advance already exempted")));
+
+  // Errors left by an all-S raid rewrite when Method's raid page goes from `from` to `to`.
+  const breachOf = (from, to, order) => churnOf(
+    relist(churnWorld({ method: { raid: to } }), "method", "raid", () => "S"),
+    churnWorld({ method: { raid: from } }), null, order).errors.length;
+  assert.equal(breachOf("s1", "s2"), 0);
+  assert.equal(breachOf("s2", "s1"), 1, "a backward move is no advance");
+  assert.equal(breachOf(null, "s2"), 1, "a label appearing from nothing is no evidence of an advance");
+  assert.equal(breachOf("s1", "s3"), 1, "a season PHASES.seasonOrder does not know has no rank");
+  assert.equal(breachOf("s2", "s3", ["s1", "s2", "s3"]), 0, "…until the order declares it");
+  // Ranked by the declared order, never by string: "s10" sorts below "s9" as text.
+  const tenSeasons = Array.from({ length: 10 }, (_, i) => `s${i + 1}`);
+  assert.equal(breachOf("s9", "s10", tenSeasons), 0);
+  assert.equal(breachOf("s10", "s9", tenSeasons), 1);
+
+  // An ancillary page feeds no letters, so its season cannot explain a letter rewrite.
+  const withAncillary = season => {
+    const w = churnWorld();
+    w.sources[0].pages.push({ bracket: "raid", role: "All", label: "per-boss", url: "https://example.test/method/bosses", ancillary: true, seasonVerified: season });
+    return w;
+  };
+  assert.equal(churnOf(relist(withAncillary("s2"), "method", "raid", () => "S"), withAncillary("s1")).errors.length, 1);
+  // …nor can a letter page that turned ancillary the same night its label advanced.
+  const turned = churnWorld({ method: { raid: "s2" } });
+  turned.sources[0].pages[0].ancillary = true;
+  assert.equal(churnOf(relist(turned, "method", "raid", () => "S"), churnWorld({ method: { raid: "s1" } })).errors.length, 1);
+
+  // Pages are matched to their HEAD selves by full identity (url alone repeats in the registry).
+  const prev = { pages: [{ bracket: "raid", role: "DPS", url: "https://example.test/a", seasonVerified: "s1" }] };
+  const advanced = { pages: [{ ...prev.pages[0], seasonVerified: "s2" }] };
+  assert.deepEqual(seasonAdvanceFor(prev, advanced, "raid"), { from: "s1", to: "s2" });
+  assert.equal(seasonAdvanceFor(prev, advanced, "mplus"), null, "the other bracket did not advance");
+  const added = { pages: [...prev.pages, { bracket: "raid", role: "Healer", url: "https://example.test/a", seasonVerified: "s2" }] };
+  assert.equal(seasonAdvanceFor(prev, added, "raid"), null, "a page new tonight has no HEAD self to advance from");
+  assert.equal(seasonAdvanceFor(null, advanced, "raid"), null, "no HEAD registry, no evidence");
+});
+
+test("source churn ack: a human names exactly the source:bracket pairs it waives", () => {
+  const before = churnWorld();
+  const now = relist(relist(before, "method", "raid", () => "S"), "method", "mplus", () => "S"); // both brackets breach
+  assert.equal(churnOf(now, before).errors.length, 2);
+
+  const one = churnOf(now, before, "method:raid — Method rebuilt its raid list, https://example.test/method/raid");
+  assert.equal(one.errors.length, 1, "the pair it does not name still fails");
+  assert.match(one.errors[0], /method:mplus/);
+  assert.equal(one.acked.length, 1);
+  assert.match(one.acked[0], /^method:raid changed 30/);
+  assert.ok(one.notes.some(n => /1 finding\(s\) approved by human ack — method:raid — Method rebuilt/.test(n)),
+    "what was waived, and why, must be printed");
+
+  assert.deepEqual(churnOf(now, before, "METHOD:Raid, method:MPLUS: new-season lists, <link>").errors, [], "pairs are case-insensitive");
+
+  const vague = churnOf(now, before, "Method rebuilt everything, trust me");
+  assert.equal(vague.errors.length, 2, "an ack that names no pair waives nothing");
+  assert.ok(vague.notes.some(n => n.includes("names no source:bracket pair")));
+
+  // Near-misses are not pairs: a plural, a pair inside a URL. A pair that did not breach waives nothing.
+  const nearMiss = "method:raids https://example.test/method:raid wowhead:mplus";
+  assert.deepEqual([...parseChurnAck(nearMiss).pairs], ["wowhead:mplus"]);
+  const near = churnOf(now, before, nearMiss);
+  assert.equal(near.errors.length, 2);
+  assert.ok(near.notes.some(n => n.includes("wowhead:mplus, which did not breach")));
+  assert.equal(parseChurnAck("   "), null);
+  assert.equal(parseChurnAck(null), null);
+});
+
+test("source churn: missing limits fail closed; no HEAD baseline skips, as the other HEAD guards do", async () => {
+  const before = churnWorld();
+  const now = relist(before, "method", "raid", () => "S");
+  const unconfigured = checkSourceChurn({}, now, { specs: before.specs }, before.sources);
+  assert.equal(unconfigured.errors.length, 1);
+  assert.match(unconfigured.errors[0], /no usable sourceChurn limits/);
+  assert.deepEqual(checkSourceChurn(CHURN_LIMITS, now, null, null), { errors: [], notes: [], acked: [], pairs: [] });
+
+  // The real contract carries both limits, where Gate 0 keeps them out of the agent's reach.
+  const required = JSON.parse(await readFile(new URL("../data/required-sources.json", import.meta.url), "utf8"));
+  for (const k of ["maxChangedLetters", "maxTwoStepChanges"]) {
+    assert.ok(Number.isInteger(required.sourceChurn?.[k]) && required.sourceChurn[k] > 0, `sourceChurn.${k}`);
+  }
+});
+
+test("the source-churn ack is a third human-only token, wired through all three gate steps", async () => {
+  const src = await readFile(new URL("../src/check-refresh.mjs", import.meta.url), "utf8");
+  assert.match(src, /checkSourceChurn\(config, data, prevData, prevSources, churnAck\)/);
+  const churnLine = src.split("\n").find(l => l.includes("const churnAck"));
+  assert.ok(churnLine && churnLine.includes("SOURCE_CHURN_ACK"), "the churn gate reads its own env input: " + churnLine);
+  // No fallback to another token, and never the agent-written manifest.
+  for (const other of ["ANOMALY_ACK", "VALUE_MOVE_ACK", "trustedAck", "valueAck", "manifest"]) {
+    assert.ok(!churnLine.includes(other), `the churn ack must not read ${other}: ${churnLine}`);
+  }
+  assert.match(src, /failures\.push\([^)]*\.\.\.churn\.errors\)/, "a churn breach must fail the run");
+  assert.match(src, /waived by source-churn ack/, "a human must see WHAT their ack waived");
+
+  /* Forwarded to the same three steps as the other two acks (audit 2026-09-04, F8): an ack
+     only at publish would leave the primary check failing on the approved change, start a
+     recovery agent, and redden the refresh job before publish could run. */
+  const wf = await readFile(new URL("../.github/workflows/nightly.yml", import.meta.url), "utf8");
+  const inputs = wf.slice(wf.indexOf("workflow_dispatch:"), wf.indexOf("\nconcurrency:"));
+  assert.match(inputs, /\n      source_churn_ack:\r?\n/, "the separate input must be dispatchable");
+  const envLine = "SOURCE_CHURN_ACK: ${{ inputs.source_churn_ack }}";
+  for (const name of ["Check primary agent completion", "Final deterministic completion gate", '"Gate 3: refresh contract']) {
+    const start = wf.indexOf(`- name: ${name}`);
+    assert.ok(start >= 0, name);
+    const next = wf.indexOf("\n      - name:", start + 1);
+    assert.ok(wf.slice(start, next < 0 ? undefined : next).includes(envLine), `${name} must receive the churn ack`);
+  }
+  assert.equal(wf.split(envLine).length - 1, 3, "…and no other step, least of all an agent step, may see it");
 });
 
 test("checkValueMove covers sims and Dummy Dome, not just spec.metrics", () => {

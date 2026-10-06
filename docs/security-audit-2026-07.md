@@ -63,6 +63,21 @@ cuts at 07-09 — and still went green. Now:
   Blizzard mass retune passes only via an explicit, cited `anomalyAck` that lands in
   the run report.
 
+> **Correction 2026-10-06 (record left as written; audit 2026-10-04 F2 found the
+> claim above false):** this gate counts CONSENSUS moves, and the consensus is a mean of
+> four lists, so one outlet's bad parse reaches it at about a quarter of its size. It
+> could not have blocked the 07-09 incident. Replayed on that day's data (`eb71ea8^`)
+> with that day's code, the incident's one-tier shift on 35 of Method's 40 M+ letters
+> makes 9 consensus moves and no two-band move, and passes. An all-S rewrite of Method's
+> raid list on current data (34 letters, 23 of them two or more steps) makes 23 moves
+> and passes too. The 07-09 bug was caught by the agent. A per-source churn gate now
+> covers that shape: `checkSourceChurn` in `src/check-refresh.mjs`, with its limits in
+> `data/required-sources.json` → `sourceChurn` and its own human-only
+> `source_churn_ack` workflow input naming the `source:bracket` pairs it waives. The
+> `anomalyAck` named above is also history: since the same-day re-audit (below) the
+> anomaly ack is the human `anomaly_ack` workflow input, and a manifest carrying
+> `anomalyAck` is rejected.
+
 ### 3. WCL data stale-by-design on GitHub runners — **alerting addressed; root cause pinned; runner choice is the owner's**
 
 - Staleness is now measured and alerted (10-day threshold on every WCL cut) instead of

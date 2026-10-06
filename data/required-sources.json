@@ -18,6 +18,11 @@
     "maxTwoBandMoves": 6,
     "maxTotalMoves": 25
   },
+  "sourceChurn": {
+    "comment": "Per-source churn gate (audit 2026-10-04 F2; checkSourceChurn in src/check-refresh.mjs). The anomaly limits above count CONSENSUS moves, and the consensus is a mean of four lists, so one outlet rewriting its whole list arrives diluted: the 2026-07-09 Method incident (a one-tier shift on 35 of 40 M+ letters) made 9 consensus moves, and an all-S rewrite of Method's raid list (34 letters, 23 by two or more steps) made 23, both under these limits. This block counts each tier-list source's OWN letter-to-letter changes per bracket against HEAD; a two-step change crosses two or more places of that source's own scale in scales.json. It fires when changed > maxChangedLetters OR two-step > maxTwoStepChanges. A source+bracket whose seasonVerified advanced that night is exempt. A breach is waived only by the human source_churn_ack input naming that source:bracket pair. Calibration, replayed over every commit that changed specs.json: from 2026-08-20 to 2026-10-06 (64 commits, the early-Season-2 recuts of 08-21..25 and the 09-27 Icy Veins catch-up included) 25/10 fires on none. The margin is thin: two commits changed exactly 25 letters (Archon M+ on 08-22, Archon's Heroic re-harvest on 08-25) and two reached 9 two-step changes (Icy Veins on 08-25 and 09-27). The first proposal, 20/8, fires on four of those commits: the 08-22 and 08-25 nightlies, the 08-25 Heroic re-harvest and the 09-27 catch-up (the 08-24 Archon raid rebuild, 21 letters, is exempt by its season advance).",
+    "maxChangedLetters": 25,
+    "maxTwoStepChanges": 10
+  },
   "gearing": {
     "verification": {
       "maxAgeDays": 9,

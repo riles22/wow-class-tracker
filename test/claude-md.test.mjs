@@ -138,6 +138,31 @@ test("CLAUDE.md: the heartbeat threshold matches data/required-sources.json", ()
   );
 });
 
+test("CLAUDE.md: the per-source churn limits match data/required-sources.json", () => {
+  /* The limits live in the contract file (sourceChurn, audit 2026-10-04 F2) and CLAUDE.md
+     states both in prose, the same rot risk as the heartbeat number above. */
+  const changed = claim(
+    /fails\s+when\s+more\s+than\s+(\d+)\s+of\s+its\s+letters\s+changed/,
+    "sourceChurn.maxChangedLetters",
+  );
+  assert.equal(
+    changed.value,
+    required.sourceChurn.maxChangedLetters,
+    `CLAUDE.md:${changed.line} says "${changed.text}" but required-sources.json sets ` +
+      `sourceChurn.maxChangedLetters = ${required.sourceChurn.maxChangedLetters}.`,
+  );
+  const twoStep = claim(
+    /or\s+more\s+than\s+(\d+)\s+of\s+them\s+moved\s+two\s+or\s+more\s+places/,
+    "sourceChurn.maxTwoStepChanges",
+  );
+  assert.equal(
+    twoStep.value,
+    required.sourceChurn.maxTwoStepChanges,
+    `CLAUDE.md:${twoStep.line} says "${twoStep.text}" but required-sources.json sets ` +
+      `sourceChurn.maxTwoStepChanges = ${required.sourceChurn.maxTwoStepChanges}.`,
+  );
+});
+
 test("CLAUDE.md: every tier-list scale it names still exists in data/scales.json", () => {
   /* Guards the other direction: a source removed from scales.json while CLAUDE.md
      still describes it as live. */

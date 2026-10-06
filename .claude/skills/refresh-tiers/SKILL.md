@@ -140,6 +140,18 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   consensus; era-gated lists are shown and feed the projection, never the mean.
 - A new source first needs a scale in `data/scales.json` (check each tier round-trips
   through the consensus bands) and a registry entry — config only, no code.
+- **One source rewriting much of its own list fails the per-source churn gate** (added
+  2026-10-06, audit 2026-10-04 F2). `check-refresh --manifest` fails when a source+bracket
+  changes more than `sourceChurn.maxChangedLetters` of its letters against HEAD, or more
+  than `maxTwoStepChanges` of them by two or more places on its own scale (limits in
+  `data/required-sources.json`). That is the whole-list parse-bug shape of the 2026-07-09
+  Method shift, which the consensus anomaly gate cannot see. A bracket whose
+  `seasonVerified` advanced this run is exempt. Otherwise check the parse first. If the
+  outlet really rebuilt its list, leave the letters as verified and put the evidence (the
+  page's own date and what changed) in `anomalyAckProposal`; a human re-runs with the
+  `source_churn_ack` input naming the `source:bracket` pair. If the parse is wrong,
+  re-parse, or revert that source's letters and record `parse_error`. Never change
+  `seasonVerified` to earn the exemption.
 
 ### Parser traps promoted from `log.md` (2026-08-15 context audit)
 
