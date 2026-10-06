@@ -854,8 +854,38 @@ ui("Compare all shows each source's OWN letters and each role's OWN ranks", asyn
   assert.ok(rk > 20, `expected many rank cells verified, saw ${rk}`);
 });
 
+/* A current-WCL cell in Compare all, read off the page and derived from the payload the way
+   the template derives it (wclMetric, wclState, wclStatusText, wclDatesHTML). Its date line
+   has three states: the cut's own check time, else the sample the cell still shows, else no
+   date. A failed cut has no checkedAt, so its cell falls back to the last sample. The test
+   below used to assert "Checked" on every cell, and it failed on 2026-10-06, the first night
+   a failed cut landed in the dungeon it selects. */
+const wclCells=page=>page.$$eval('table.alltab tbody tr',rows=>{
+  const col=[...document.querySelectorAll('table.alltab thead tr:first-child th')].findIndex(h=>h.dataset.k==='m:wcl');
+  return rows.map(row=>({cls:row.dataset.cls,spec:row.dataset.spec,text:row.children[col].textContent,
+    status:row.children[col].querySelector('.wcl-status')?.textContent??''}));
+});
+const wclCellSays=cell=>({rank:cell.text.match(/#(\d+)/)?.[1]??null,status:cell.status,
+  dates:cell.text.match(/Checked \d{4}-\d\d-\d\d UTC|Last sample checked \d{4}-\d\d-\d\d UTC|Collection date unavailable/g)??[],
+  latest:cell.text.match(/Latest log \d{4}-\d\d-\d\d UTC/g)??[]});
+const wclCutsOf=data=>new Map(data.wclCoverage.cuts.map(c=>[`${c.class}|${c.spec}|${c.bracket}|${c.encounterId}`,c]));
+const wclMetricOf=(s,bracket,id)=>(s.metrics||[]).find(m=>m.source==='warcraftlogs' && m.bracket===bracket
+  && m.sample?.kind==='leaderboard-entries' && String(m.sample.encounterId)===String(id));
+function wclCellExpected(cuts,s,bracket,id){
+  const metric=wclMetricOf(s,bracket,id), cut=cuts.get(`${s.class}|${s.spec}|${bracket}|${id}`);
+  const message=cut?.status==='insufficient'?'Insufficient logs':cut?.status==='failed'?'Collection failed'
+    :!cut?'Collection status unavailable':!metric?'Awaiting collection':'';
+  const status=[message,metric && cut?.status!=='success'?'historical data retained':''].filter(Boolean).join(' · ');
+  return {rank:metric?.rank!=null?String(metric.rank):null,
+    status:status?status+(cut?.entries!=null?` (n=${cut.entries})`:''):'',
+    dates:[cut?.checkedAt?`Checked ${cut.checkedAt.slice(0,10)} UTC`
+      :metric?.sample?.observedAt?`Last sample checked ${metric.sample.observedAt.slice(0,10)} UTC`
+      :'Collection date unavailable'],
+    latest:metric?.sample?.newestRun?[`Latest log ${metric.sample.newestRun.slice(0,10)} UTC`]:[]};
+}
+
 ui("current WCL comparisons select one encounter and keep historical aggregates optional", async page => {
-  const data=payload(), inventory=data.wclCoverage.encounters;
+  const data=payload(), inventory=data.wclCoverage.encounters, cuts=wclCutsOf(data);
   for(const width of [1440,390]){
     await page.setViewportSize({width,height:1000});
     await page.evaluate(()=>document.getElementById("allbtn").click());
@@ -865,16 +895,12 @@ ui("current WCL comparisons select one encounter and keep historical aggregates 
     assert.equal(await page.locator('#all-encounter option').count(),inventory.mplus.length);
     const selected=inventory.mplus.at(-1);
     await page.selectOption('#all-encounter',String(selected.id));
-    const cells=await page.$$eval('table.alltab tbody tr',rows=>{
-      const col=[...document.querySelectorAll('table.alltab thead tr:first-child th')].findIndex(h=>h.dataset.k==='m:wcl');
-      return rows.map(row=>({cls:row.dataset.cls,spec:row.dataset.spec,text:row.children[col].textContent}));
-    });
+    const cells=await wclCells(page);
+    assert.equal(cells.length,data.specs.length,"every spec has a row to check");
     for(const cell of cells){
       const spec=data.specs.find(s=>s.class===cell.cls && s.spec===cell.spec);
-      const metric=spec.metrics.find(m=>m.bracket==='mplus' && m.sample?.kind==='leaderboard-entries' && m.sample.encounterId===selected.id);
-      if(metric?.rank) assert.equal(cell.text.match(/#(\d+)/)?.[1],String(metric.rank));
-      assert.match(cell.text,/Checked .*UTC/);
-      if(metric) assert.match(cell.text,/Latest log .*UTC/);
+      assert.deepEqual(wclCellSays(cell),wclCellExpected(cuts,spec,'mplus',selected.id),
+        `${width}px ${cell.cls} ${cell.spec}: the cell must say what its cut and sample say`);
     }
     assert.ok(new URLSearchParams((await page.evaluate(()=>location.hash)).slice(1)).get('ae')===String(selected.id),"selected encounter travels in the link");
     const bounds=await page.locator('#all-encounter').boundingBox();
@@ -897,6 +923,55 @@ ui("current WCL comparisons select one encounter and keep historical aggregates 
   assert.doesNotMatch(compare,/Live raid median|Live M\+ median/);
   await page.check('#cmp-archive');
   assert.equal(await page.locator('.cmp-table').getByText('Historical WCL raid aggregate',{exact:true}).count(),1);
+});
+
+/* Which date states the test above meets depends on the night's data; it met its first failed
+   cut on 2026-10-06. This test sets all three in the selected dungeon before drawing it, with
+   a failed cut carrying no entry count and no check time as src/wcl-coverage.mjs writes it,
+   and puts each date on its own day so a cell that printed the wrong date would read wrong.
+   The fixture runs in Node on the parsed payload and in the page on SPECS and WCL_CUTS (its
+   defaults), so the expected cells and the drawn ones come from the same state. */
+function applyWclFixture(plan,specs=SPECS,cuts=WCL_CUTS){
+  for(const {cut,observedAt} of plan){
+    cuts.set(`${cut.class}|${cut.spec}|${cut.bracket}|${cut.encounterId}`,cut);
+    const metrics=specs.find(s=>s.class===cut.class && s.spec===cut.spec).metrics;
+    const i=metrics.findIndex(m=>m.source==='warcraftlogs' && m.bracket===cut.bracket
+      && m.sample?.kind==='leaderboard-entries' && String(m.sample.encounterId)===String(cut.encounterId));
+    if(i<0) throw new Error(`no leaderboard sample for ${cut.class} ${cut.spec}`);
+    if(observedAt===null) metrics.splice(i,1); else metrics[i].sample.observedAt=observedAt;
+  }
+}
+
+ui("a WCL cell dates what it shows: the cut's own check, the sample it kept, or nothing", async page => {
+  const data=payload(), bracket='mplus', selected=data.wclCoverage.encounters.mplus.at(-1);
+  const run=data.wclCoverage.checkedAt, daysBefore=n=>new Date(Date.parse(run)-n*864e5).toISOString();
+  const [checked,kept,undated]=data.specs.filter(s=>wclMetricOf(s,bracket,selected.id));
+  assert.ok(undated,`fixture has three leaderboard samples in ${selected.name}`);
+  const cut=(s,status)=>({class:s.class,spec:s.spec,bracket,encounterId:selected.id,status,
+    ...(status==='failed'?{}:{entries:3}),checkedAt:status==='failed'?null:run});
+  const plan=[
+    {cut:cut(checked,'insufficient'),observedAt:daysBefore(1)}, // checked tonight; sample kept from the night before
+    {cut:cut(kept,'failed'),observedAt:daysBefore(2)},          // collection failed; sample kept from two nights before
+    {cut:cut(undated,'failed'),observedAt:null}];               // collection failed; no sample at all
+  const cuts=wclCutsOf(data);
+  applyWclFixture(plan,data.specs,cuts);
+  await page.evaluate(applyWclFixture,plan);
+  await page.click('#allbtn');
+  await page.click(`#all-bkt [data-bkt="${bracket}"]`);
+  await page.selectOption('#all-encounter',String(selected.id));
+  const cells=await wclCells(page);
+  assert.equal(cells.length,data.specs.length,"every spec has a row to check");
+  for(const cell of cells){
+    const spec=data.specs.find(s=>s.class===cell.cls && s.spec===cell.spec);
+    assert.deepEqual(wclCellSays(cell),wclCellExpected(cuts,spec,bracket,selected.id),
+      `${cell.cls} ${cell.spec}: the cell must say what its cut and sample say`);
+  }
+  const said=s=>wclCellSays(cells.find(c=>c.cls===s.class && c.spec===s.spec));
+  assert.deepEqual(said(checked).dates,[`Checked ${run.slice(0,10)} UTC`],'a checked cut is dated by its check, not by the sample it kept');
+  assert.equal(said(kept).status,'Collection failed · historical data retained');
+  assert.deepEqual(said(kept).dates,[`Last sample checked ${daysBefore(2).slice(0,10)} UTC`],'a failed cut is dated by the sample it kept');
+  assert.deepEqual(said(undated),{rank:null,status:'Collection failed',dates:['Collection date unavailable'],latest:[]},
+    'a failed cut with no sample claims no date');
 });
 
 // The committed receipt holds only what the last nightly collected (every raid cut has read
