@@ -427,8 +427,11 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   2026-07-08: pull everything every run). The server replies "Use the API … instead of
   scraping HTML" without the XHR header, so always send the XHR header + browser UA +
   Referer. The sanctioned path is a free v2 GraphQL client (warcraftlogs.com/api/v2/client)
-  — the runner uses it (datacenter IPs get Cloudflare-blocked on the HTML endpoint); the
-  HTML endpoint works from a residential IP for local runs.
+  — the runner uses it (datacenter IPs get Cloudflare-blocked on the HTML endpoint).
+  *(Corrected 2026-10-06: the HTML endpoint no longer works from a residential IP either.
+  curl has been redirected to `/human-challenge` since 2026-08-10 (the `curl` bullet
+  below), and the 2026-09-05 correction rules out working around that, so it is not a
+  local-run lane.)*
 - **WCL API correction (2026-09-05):** the official schema defines `rdps`, `ndps`
   and `cdps` as **FFXIV-only**. Their rejection was incorrectly diagnosed as a WoW
   outage in older logs and instructions. Supported WoW `dps`/`hps` work with existing

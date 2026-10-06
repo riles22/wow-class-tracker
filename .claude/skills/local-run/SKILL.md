@@ -15,10 +15,14 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
 
 ## Why local runs exist
 
-- **Residential IP**: WCL HTML statistics endpoints and YouTube transcripts work from
-  home and not from CI runners. The 07-28 "evening restore" unfroze five WCL canonical
-  series that CI could not fetch for 19 days. Transcript catch-up is the standing case
-  (see watch-creators — CI-blocked videos queue as pending and land in local runs).
+- **Residential IP**: two things work from home and not from GitHub's runners. YouTube
+  transcripts are the standing case (see watch-creators — CI-blocked videos queue as
+  pending and land in local runs). Icy Veins' six tier-list pages have answered the
+  runners with a Cloudflare 403 since 2026-09-23 and a home curl with a 200; see Scope.
+  WCL used to be a third (the 07-28 "evening restore" unfroze five WCL series that CI
+  could not fetch for 19 days). That lane is closed: a home curl has been redirected to
+  `/human-challenge` since 2026-08-10, and the 2026-09-05 correction rules out working
+  around the challenge (refresh-metrics, "WCL API correction").
 - **Human-acked fixes**: a change the nightly's gates would rightly block — like the
   07-30 Archon Popularity repair, a 40-row ~100% value move — is exactly what a local
   run is for. The human review replaces the `value_move_ack` input (or `anomaly_ack`, or
@@ -112,9 +116,32 @@ scheduled nightlies were created after 14:05 UTC; step 1 and the push rule do.
 the things a datacenter runner physically cannot do:
 
 - drain `data/pending-transcripts.json` with yt-dlp (datacenter IPs hit YouTube's bot wall);
-- re-fetch the WCL cuts the nightly recorded `unreachable` (the HTML statistics endpoints
-  work from a residential IP, not from CI);
+- refresh Icy Veins, all six registered pages, every run (below);
 - verify-and-log what CI already refreshed today rather than rewriting it.
+
+The WCL rows the nightly records `unreachable` are not in scope: nothing reaches them from
+home any more (see "Why local runs exist").
+
+**Icy Veins, every local run** (audit 2026-10-04, F1). The nightly records it `blocked`, so
+a local run is the only thing that refreshes one of the four consensus lists, and its
+heartbeat key goes red once the stored `snapshot` is more than 4 days old (`maxAgeDays` in
+`data/required-sources.json`).
+1. Do it **first**, before any other skill writes to `data/`, so step 3 can restore two
+   whole files without touching anyone else's work.
+2. Follow refresh-tiers for the fetch, era check, parse and `apply-ratings.mjs` merge, with
+   curl as the transport (its "Icy Veins transport" note), and stamp `snapshot` and
+   `published` the way it says. A page that still answers 403, or parses short, changes
+   nothing: its stored letters and dates stay, and the report says so.
+3. Run `node src/check-refresh.mjs --manifest` straight after the merge. Its
+   `source churn vs HEAD:` line counts the letters each list changed; ignore the failures
+   step 5 below expects of a partial run. A failure that starts
+   `mass-movement anomaly (one source's own list): icyveins:` or
+   `tier movement anomaly vs last snapshot` means the change is bigger than the nightly
+   would publish without a human ack. With Riley at the keyboard, show them the counts, the
+   page dates and the parse checks; their go-ahead, recorded in the commit message, is the
+   ack (see "Human-acked fixes"). A scheduled run is unattended and cannot ack: restore
+   with `git checkout -- data/specs.json data/sources.json`, carry on with the rest of the
+   run, and put the pairs, the counts and the page dates at the top of the report.
 
 Independently regenerating data CI already produced is what makes a push unmergeable —
 two independently regenerated datasets do not merge mechanically (proven 2026-07-31,
@@ -152,7 +179,8 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
    key or clear a review hold. A direct API run requires the latest trusted state
    and coordinated persistence back to the nightly; see
    `docs/transcript-operations.md`. Residential catch-up keeps its existing lane.
-3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. 🛑 **Do not apply WoWMeta
+3. **`refresh-tiers` / `refresh-metrics`** — scoped per above, which means Icy Veins every
+   run, done first. 🛑 **Do not apply WoWMeta
    M+ rows or re-stamp their `snapshot`** while that source is under review (see
    `refresh-tiers/log.md`, 2026-07-31).
 4. **Gearing guide harvest** (a separate weekly workflow since 2026-09-05, with
@@ -190,8 +218,10 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 
 ## Report shape
 
-Builds/hotfixes found; 12.2 PTR announcement check; videos processed and queue count
-before→after; gearing guide harvest run-or-skipped and why;
+Icy Veins first: refreshed, held for an ack, or still blocked, with the letters changed
+per bracket and each page's own date; then builds/hotfixes found; 12.2 PTR announcement
+check; videos processed and queue count before→after; gearing guide harvest
+run-or-skipped and why;
 takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether the
 manifest was rewritten or deliberately left alone and why; what `check-refresh
 --manifest` printed; what was rebuilt; whether you pushed, or held the push and for which

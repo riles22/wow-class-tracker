@@ -750,9 +750,13 @@ is an inference from those step durations, not a per-request measurement.
 403 on all six Icy Veins tier-list pages. The nightly has written the row `blocked` in all
 13 runs it published from 2026-09-23 to 10-06, and the stored letters come from local run
 `4c672d9` (2026-09-27, a residential IP). Removing Icy Veins would change 27 of the 80
-consensus letters, and launch week is when tier lists move most. Refresh it in a local run
-at launch +1, then at least every 4 days (its `maxAgeDays`). The local-run skill's default
-scope leaves Icy Veins out, so ask for it by name.
+consensus letters, and launch week is when tier lists move most. Refresh it at launch +1,
+then at least every 4 days (its `maxAgeDays`). The local-run skill now does it first in
+every run (audit 2026-10-04, F1), so the scheduled `wow-ptr-watch` task covers it; that
+task skips 10-13, which makes its 10-14 run the launch +1 refresh. A large rewrite needs
+Riley's ack: when `check-refresh --manifest` prints the per-source churn line for
+`icyveins` (or the consensus movement line), an unattended run keeps the stored letters
+and reports the counts, and Riley reviews them in an attended local run.
 
 **C4. Gearing: Kith'ix loot and Venomstones** once live tooltips resolve (all 12 Kith'ix item
 ids returned 404 before launch). A reviewed code change: `harvest-raid.mjs` and

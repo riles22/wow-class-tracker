@@ -184,6 +184,14 @@ letters, not just a wasted run.
   If the prose `N. Spec Class (X Tier)` list is ever used as a fallback it is typo-ridden:
   normalise `X-Tier` → `X Tier` and match `[SABCDF]\+?` (a `[+-]?` pattern invented 13
   phantom `S-`/`A-`/`B-` moves, 07-30 / 08-02) and tolerate a missing `\(?`.
+- **Icy Veins transport: curl from a home connection.** GitHub's runners have drawn a
+  Cloudflare 403 ("Attention Required!", about 5.5 KB, no `tier-list-entry`) on all six
+  pages since 2026-09-23, so the nightly records the row `blocked` and changes nothing, and
+  every local run does the refresh (local-run skill, Scope). From home, curl with a browser
+  user agent plus `Accept` and `Accept-Language` returns 200, while Node's `fetch` with the
+  same headers still gets the 403, so the block keys on the client as well as the IP
+  (2026-09-27). No proxy and no challenge solving. Count `tier-list-entry` in each body
+  before parsing: a 403 page is not an empty list.
 - **Icy Veins: take the FIRST `alt=` after each `class="tier-list-entry"`, and look the
   `"Spec Class"` string up WHOLE.** The first-alt rule is what excludes the spell-icon alts
   inside the expandable details blocks without needing an allow-list (2026-07-31). Splitting
