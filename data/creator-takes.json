@@ -7233,7 +7233,7 @@
       "patchContext": "Season 2 live — week-three Mythic+ meta and composition breakdown, revising the negative Mythic+ read from his 2026-08-06 patch-notes review",
       "url": "https://youtu.be/oGfnWqTcrZA?t=577",
       "claim": "Three weeks into Season 2, with the top of the ladder pushing 20s and a handful of timed 21s in CN, he reads the Mythic+ meta as having opened up for physical and hybrid compositions in a way that finally gives Brewmaster a home — a marked softening of his 2026-08-06 advice that anyone on the fence should swap to another tank. He describes a three-tank picture at 20 and above where Blood Death Knight, Guardian Druid and Brewmaster all get representation, and is explicit that Blood DK is 'a little bit stronger', crediting it with doing an insane amount of damage and no longer needing careful routing to survive big pulls. He is deliberately careful about Brewmaster's own sample: on US at 20+ he counts four Brewmaster occurrences and four Mistweaver occurrences that are mostly the same players, himself among them, so this is representation appearing at all rather than a spec taking over. His comp reasoning is where the spec read lives: he plays Brewmaster, Feral Druid, Arms Warrior, Arcane Mage and Restoration Shaman, and says the physical package is what carries it — Arms buffing the Feral and the Brewmaster, Feral's versatility going to everyone, Shaman mastery to everyone. Against the CN-style magic comp built on Arcane Mage, Elemental Shaman, Arms and Holy Paladin, he says he would not play Brewmaster; to slot it you would have to drop Elemental Shaman for something more physical such as Outlaw Rogue or Feral. He also notes the meta is unsettled and expects the 12.1.5 patch, further class tuning, best-in-slot cantrips and route optimisation to move it.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -7449,7 +7449,7 @@
       "patchContext": "12.1.5 PTR preview — NOT LIVE. His unedited reaction, recorded straight off the plane from BlizzCon, to the 2026-09-15 update of the official 12.1.5 PTR development notes (Soulforged Blades 18% crit, Voidpurge 2.5s, and The Hunt / Eradicate moving from the final gate to the middle gate); nothing here describes the live 12.1 spec, and his 2026-08-09 Season 2 guide read stands alongside it. Supersedes his 2026-09-03 reaction to the first 12.1.5 notes.",
       "url": "https://youtu.be/lgKrVkwJcfc?t=156",
       "claim": "He is happy with the changes and says they do exactly what Blizzard said: the bottom gate is no longer pressured, and having The Hunt in the middle gate makes Void-Scarred life a lot easier. But it does not necessarily solve Devourer's problems — if he puts the points back into the melee talents he is still in the 'Collapsing Star bad, AFK-ing good' problem. What has him 'kind of stoked' is a speculative Void-Scarred caster-cleave build that drops Hungering Slash, Devourer's Bite, Soulforged Blades and Void Rush for four points in Midnight while keeping The Hunt for free — an improved version of the old caster-cleave he calls a middle ground, with his own warning that it is 1 a.m. plane conjecture that is 'extremely likely' to be bad.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -8720,6 +8720,30 @@
       "patchContext": "Season 2 live — \"How Is Healing in Midnight Season 2?\" (published 2026-10-06), his end-of-season summation of healing after his guild killed Mythic Ula’tek and he finished his +20s as both Holy and Discipline Priest. His Holy Paladin and Restoration Shaman passages in the same video are mana-economy design criticism rather than spec-strength reads and are deliberately not distilled, and his one Preservation Evoker sentence is an illustration of the raid-versus-dungeon tuning tension, not a current standing read, so it is left out too. Supersedes his 2026-08-15 raid Mistweaver read.",
       "claim": "He offers Mistweaver as his example of a spec hurt by late changes: Blizzard started reworking its mastery very late in the previous PTR cycle, and in his view that landed the spec in a very poor position in raid as a result. He raises it as the argument for settling that kind of change from day one of a beta rather than at the end of a PTR.",
       "url": "https://youtu.be/v-h_ahehYaA?t=806",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Brewmaster",
+      "creator": "Sha",
+      "date": "2026-10-06",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live — \"Brewmaster Was Buffed This Week...\" (published 2026-10-06, recorded on the Tuesday of the reset), his read of the Brewmaster lines in the October 6 class tuning that went live with that week's maintenance (Quick Sip 8% of Stagger, was 5%; Pretense of Instability 10% dodge for 8 seconds, was 5). Supersedes his 2026-09-06 live Mythic+ read; his 2026-08-21 raid read stays live, since this video is about dungeons.",
+      "claim": "He calls the two durability buffs good overall — 'all in all, these buffs are good' — while disagreeing with how Blizzard chose to deliver them. The Pretense of Instability change is the one he likes outright: his own +21 log shows the dodge buff already sitting around 70–75% uptime with small gaps, and the longer duration closes those gaps without touching any other talent. The Quick Sip buff he reads as strong enough to take Staggering Strikes out of the conversation, but he dislikes that more passive purification means less stagger left for well-timed Purifying Brews and so slightly less purify-driven self-healing, and he would rather Blizzard had raised visible healing sources (he names Vital Flame, Celestial Fortune and Celestial Infusion) that players can read on a meter. He does not think the change targets the highest keys, pointing to Raider.IO's all-region tank leaderboard where Brewmasters appear well before Vengeance or Protection tanks, and he closes that Brewmaster is doing very well on the ladder right now and is a pretty strong tank in a physical composition, though not so much outside one.",
+      "url": "https://youtu.be/lmNYCSAM5ZA?t=360",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Nintern",
+      "date": "2026-10-06",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "12.1.5 PTR preview — NOT LIVE. \"Let’s Talk About Void-Scarred...\" (published 2026-10-06, recorded the Monday night before), his read of how the 12.1.5 talent changes — releasing the following week — play out for the Void-Scarred hero tree, ahead of his 12.1.5 guide; nothing here describes the live 12.1 spec. Supersedes his 2026-09-16 12.1.5 PTR-preview take; his 2026-10-02 live Season 2 take stays live beside it, because 12.1.5 is not live.",
+      "claim": "He says the Devourer talent tree as a whole is getting really great changes in 12.1.5 and singles out The Hunt's move up the tree as really good, but calls the patch 'one step forward, two steps back' for Void-Scarred. His objection is the new Collapsing Star interaction that resets The Hunt's cooldown: demonstrating it on a dummy, he spends around ten seconds in full melee range to play the sequence, which he argues will get players killed and lose damage on movement-heavy fights in raid and Mythic+. He grants that sims put Void-Scarred about 8.5% ahead of Annihilator in pure single target, but says that assumes nothing interrupts you, and states that his 12.1.5 guide will recommend Annihilator for everything — Void-Scarred only for players confident they can pull it off. He would like a further rework in 12.2 and more nodes in what he calls the smallest spec tree in the game.",
+      "url": "https://youtu.be/GqFmO7zvSTc?t=664",
       "superseded": false
     }
   ],

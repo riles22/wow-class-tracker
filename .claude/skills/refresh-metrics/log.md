@@ -16,6 +16,12 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-06 (nightly, THIRD run of the day) — every numeric feed verified, nothing moved; WCL M+ now `success` (320 rows), raid `partial` (287)
+
+- WCL (collector, attemptedAt 22:36:41Z): raid partial "287 median rows; 30 empty/sparse cuts; 3 failed/unattempted cuts"; M+ success "320 median rows; 0 empty/sparse; 0 failed". Legacy wcl-live-* unreachable as recorded. check-wcl-metrics passes.
+- Murlok (source date 2026-10-03) + Mythicstats (period 1083, 38 rows, sum 100.2) via the trusted collector only; 78 metrics applied; check-stable-metrics passes.
+- WoWMeta: snapshotDate still 2026-09-15; 40/40 lowerBound identical to stored. SimC MID2_Raid.txt HEAD cafc27227e (hotfix 2026-10-03), 24 specs identical. Bloodmallet 23/27 charts MID2, ptr "0", all 2026-09-30, byte-identical; Balance, Augmentation, Devastation, Subtlety error 3/3. Archon walled.
+
 ## 2026-10-06 (nightly, SECOND run of the day) — **every numeric feed verified and NOTHING moved**: SimC flat on an unchanged git HEAD, WoWMeta's moved values already merged by the 17:27 run, Bloodmallet 23/27 byte-identical at 2026-09-30, Murlok + Mythicstats confirmed via the trusted collector, WCL raid **and** M+ `partial`; Archon walled day 42
 
 - **Murlok — `partial`.** Verified by the trusted pre-agent `fetch-stable-metrics.mjs` step and merged ONLY via `node src/apply-metrics.mjs metrics-fetch/updates.json`; no second parser was written. Receipt (checkedAt 2026-10-06T21:49:39Z): status `success`, three meta pages HTTP 200 (71,309 / 42,298 / 40,902 B, one attempt each), **40 rows** (27 DPS + 7 healer + 6 tank), `omittedSpecs: []`, `dateBasis: source-time-datetime`. `partial` because `asOf` is the source's own `<time datetime>` — **2026-10-03** (pages stamp 10:10:23Z / 10:13:12Z / 10:11:13Z) — three days before the run, so the stored coverage date cannot be within one day of it. All 40 values and all 40 dates identical to stored: an unchanged same-day recheck that advanced no source-owned date. `check-stable-metrics.mjs` passes.

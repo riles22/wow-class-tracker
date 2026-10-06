@@ -16,6 +16,15 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-06 (nightly, THIRD run of the day) — all 5 queued transcripts arrived: **2 takes**, **3 verified skips**; queue 5 → 0
+
+- **Discovery:** 44 channelIds polled, 44 OK. Seen-set 1,339 (structured lanes + take/metaNote urls). 401 unseen in-cycle (bound 2026-06-18) — the same backlog the earlier run filtered minutes before; no new in-scope upload since, so nothing queued (drops stay UNSEEN).
+- **Transcripts** (summary verdict ok, 5 requested / 5 fetched, 54 counted requests in 30 days, limit null):
+  - `lmNYCSAM5ZA` Sha "Brewmaster Was Buffed This Week..." → 1 take, Brewmaster `mplus`/buff (Season 2 live): the Oct 6 Quick Sip / Pretense buffs read as good, though he wanted visible healing buffs; BrM "doing very well" on the ladder in physical comps. Supersedes his 2026-09-06 M+ take; 08-21 raid take stays.
+  - `GqFmO7zvSTc` Nintern "Let's Talk About Void-Scarred..." → 1 take, Devourer `both`/mixed, framed "12.1.5 PTR preview — NOT LIVE" (12.1.5 ships 10-13; LABEL_FLIP_DUE not passed). Supersedes his 2026-09-16 12.1.5-preview take; his 10-02 live take stays.
+  - `uZ0J_64LF_4` Supatease "Midnight Class Tuning Update" → skipped (PvP-framed notes read-aloud; no read on his scoped specs).
+  - `Vnk287HGguA` / `gpE3J7s5_zM` Musguete hero-talent guides (Trickster vs Deathstalker; Fatebound vs Deathstalker) → skipped (guide-shaped; build choice inside the spec, not a spec-strength read).
+
 ## 2026-10-06 (nightly, SECOND run of the day) — **all 4 queued transcripts arrived and all 4 were distilled**: 11 takes + 11 metaNotes, 17 older records superseded; queue 4 → 5
 
 - **Discovery**: 44 distinct channelIds polled inline in the foreground (41 class creators with a `channelId` and `transcribable !== false`, plus all 3 `generalCreators`) — **44 OK, 0 failures**, no 404 retry needed. Seen-set rebuilt from STRUCTURED DATA only: **1,333** ids across `videos[]` + `skipped[]` + `seen[]` + every `youtu.be` id in a take or metaNote url. **408 unseen videos**, all at or after the cycle bound **2026-06-18** (derived as the OLDEST date in `ptr-builds.json`, never `builds[0]`). This is the NIGHTLY, so the keyword filter stays: **135 kept, 273 dropped** (WoW: Forever / Classic, PvP, stream-shaped and no-signal titles). The drops stay **UNSEEN** on purpose — they are budget and title judgments, not durable ones, so a local run reconsiders them.

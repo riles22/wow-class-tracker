@@ -1,42 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "lmNYCSAM5ZA",
-      "creator": "Sha",
-      "title": "Brewmaster Was Buffed This Week...",
-      "published": "2026-10-06",
-      "queuedAt": "2026-10-06"
-    },
-    {
-      "id": "GqFmO7zvSTc",
-      "creator": "Nintern",
-      "title": "Let’s Talk About Void-Scarred...",
-      "published": "2026-10-06",
-      "queuedAt": "2026-10-06"
-    },
-    {
-      "id": "uZ0J_64LF_4",
-      "creator": "Supatease",
-      "title": "Midnight Class Tuning Update",
-      "published": "2026-10-06",
-      "queuedAt": "2026-10-06"
-    },
-    {
-      "id": "Vnk287HGguA",
-      "creator": "Musguete",
-      "title": "Is Sub Rogue Back To Trickster?! Trickster VS Deathstalker Breakdown",
-      "published": "2026-10-03",
-      "queuedAt": "2026-10-06"
-    },
-    {
-      "id": "gpE3J7s5_zM",
-      "creator": "Musguete",
-      "title": "What Is Assa Rogue Better With? Fatebond vs Deathstalker Analysis",
-      "published": "2026-09-28",
-      "queuedAt": "2026-10-06"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3187,6 +3151,27 @@
       "title": "State of DK DPS (Podcast with Bicepsump, Obli & Waalpen)",
       "reason": "Transcript fetched locally via yt-dlp 2026-10-04 and read in full (~56 min). It is the same three-speaker Bicepspump / Obli / waalpen podcast already verified and skipped from Obli's channel as cUeoz6js3OY on 2026-10-03, re-uploaded on Bicepspump's channel with a new spoken intro. The intro (t=8) says it was recorded BEFORE the October 6 Blightfall nerf that halves its damage, so its Unholy strength talk is pre-nerf by the host's own account. The caption track carries no speaker labels, and every comparative Unholy/Frost read (Unholy S tier in M+, single-target kings, Frost confined to Twin Fangs in raid) sits in an unattributable turn; the only passages anchored by name are the closing design wish-lists (Obli at t=3299: buff Frost cooldowns, no more raid AoE checks), which carry no spec-strength read. Declined under the ASR-speaker rule; the rest is rotation min-maxing and Great Vault/bonus-roll gearing discussion. 0 takes, 0 metaNotes.",
       "verifiedAt": "2026-10-04"
+    },
+    {
+      "id": "uZ0J_64LF_4",
+      "creator": "Supatease",
+      "title": "Midnight Class Tuning Update",
+      "reason": "Transcript read (Supadata, 2026-10-06): a read-aloud of the October 6 class-tuning post, PvP-framed throughout. The PvE section (Unholy, Devourer, Brewmaster, Mistweaver, Subtlety Trickster, Enhancement) is the notes read out with brief reactions and no spec-strength read; the Enhancement passage gives no assessment, and every scoped spec he holds (Shaman, Affliction, Arms, Protection Warrior) appears only in PvP-talent lines, which are out of scope. Nothing to distil.",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "Vnk287HGguA",
+      "creator": "Musguete",
+      "title": "Is Sub Rogue Back To Trickster?! Trickster VS Deathstalker Breakdown",
+      "reason": "Transcript read (Supadata, 2026-10-06): a Subtlety hero-talent guide comparing Trickster with Deathstalker ahead of the October 6 Trickster buffs — rotation, macros and which tree to pick. Its only read is relative between the two hero trees (Trickster slightly behind, possibly level or ahead after the buffs, 'need to check next week'), which is a build choice inside the spec, not a spec-strength read. Guide-shaped; nothing to distil.",
+      "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "gpE3J7s5_zM",
+      "creator": "Musguete",
+      "title": "What Is Assa Rogue Better With? Fatebond vs Deathstalker Analysis",
+      "reason": "Transcript read (Supadata, 2026-10-06): an Assassination hero-talent guide comparing Fatebound with Deathstalker — ease of play, funnel damage for high keys, 1–3% single-target gap, trinket timing, haste targets and talent swaps. A build choice inside the spec with no read on Assassination's standing against other specs. Guide-shaped; nothing to distil.",
+      "verifiedAt": "2026-10-06"
     }
   ],
   "seen": [

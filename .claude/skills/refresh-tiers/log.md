@@ -16,6 +16,12 @@ they interleave, and refresh-tiers was chronologically scrambled before this pru
 by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
 else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
 
+## 2026-10-06 (nightly, THIRD run of the day) — Method + Wowhead refetched and re-parsed, **0 of 160 letters moved**; Icy Veins Cloudflare-403 (day 13); Archon wall (letters RETAINED)
+
+- Method: direct GET, 184,377 / 172,248 B; 40 + 40 rows, M+ dungeon block rejected by roster match (8 dungeon names). "Last Updated" 5th October 2026 (M+) / 10th August 2026 (raid); era "Midnight Season 2", Devourer present → s2.
+- Wowhead: six pages 200, 27/7/6 per bracket = 80 rows, 0 unmatched; titles "Midnight Season 2"; dateModified unchanged (08-28 … 09-10).
+- Icy Veins: 6 × HTTP 403, 5,487 B "Attention Required! | Cloudflare". Archon: 403 "Just a moment...", no __NEXT_DATA__ (matches source-health receipt). No seasonVerified changed, no freeze needed.
+
 ## 2026-10-06 (nightly, SECOND run of the day) — Method + Wowhead refetched and re-parsed, **0 of 160 letters moved**; Icy Veins Cloudflare-403 day **13**; Archon wall day **42** (letters RETAINED); **0 consensus letters moved**; per-source churn gate: no letter changed
 
 - **Method — `success`, 40/40 both brackets.** Direct browser-header GET, HTTP 200, 184,377 B (mythic-plus) and 172,248 B (raiding). Parsed per `.tierlist` container: each `.tier__tier` block's `.tier__title` letter against its `.tier__entries` `data-original-title` labels. Counts printed and reconciled to the roster shape: **40 rows, 40 unique specs, 0 duplicates, 0 unmatched** per bracket; M+ S4/A13/B19/C4, raid S6/A11/B17/C6. The M+ page's extra dungeon-difficulty tierlist was rejected by **ROSTER MATCH, not position** — its eight labels (King's Rest, Den of Nalorakk, Murder Row, The Blinding Vale, Ruby Life Pools, Voidscar Arena, Temple of Sethraliss, Altar of Fangs) simply fail to map. Era-verified from the BODY: both pages say "Midnight Season 2" in their own prose, the raid page names The Venomous Abyss, Devourer is present (A in both brackets), and the only `12.1` string is a "Patch 12.1 Guides" nav tile → `seasonVerified` stays **s2**. Page own-dates re-read: **5th October 2026** (M+) and **10th August 2026** (raid), matching the stored `published` values and the independent published-evidence receipt exactly. All 80 letters identical to stored after the M+ rebuild the 17:27 run merged, so nothing moved and no source-owned date advanced.
