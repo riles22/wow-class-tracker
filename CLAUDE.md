@@ -1710,3 +1710,12 @@ workflow keeps browsers outside publication and verifies all three public HTML
 pages after deployment against the normalized hashes from that build's separate
 SHA-bound artifact. A stale or mismatched page fails the deploy workflow after
 bounded propagation retries; a successful upload alone is not verification.
+
+**Runner image pin (2026-10-06):** every job runs on `ubuntu-24.04`, not `ubuntu-latest`.
+GitHub moves `ubuntu-latest` to Ubuntu 26.04 in a rollout from 2026-10-19 to 11-19
+(actions/runner-images issue 14748), inside the first weeks after 12.1.5 launches, and a
+job on the floating label would change OS when the rollout reached it rather than in a
+reviewed commit. `test/refresh-workflows.test.mjs` requires every `runs-on` to be one
+explicit `ubuntu-NN.NN` image, shared by all workflows. Moving to 26.04 is one commit
+that edits every `runs-on` line together, best tried once launch week and the WCL raid
+switch are behind us.

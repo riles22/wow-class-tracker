@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
 
 test('all four page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
@@ -38,11 +38,28 @@ test("weekly guide publication isolates failed sources and keeps explicit valida
   assert.doesNotMatch(text,/git add \.|git add -A|git rebase|git push[^\n]*--force/);
 });
 
+test("every job pins one explicit Ubuntu image, so the runner OS changes only by a reviewed commit", () => {
+  /* GitHub moves ubuntu-latest to Ubuntu 26.04 in a rollout from 2026-10-19 to 11-19
+     (actions/runner-images issue 14748), inside 12.1.5's first post-launch weeks. A job on
+     ubuntu-latest switches when that rollout reaches it, not when a commit says so, and a mixed
+     fleet would run collect, refresh and publish on different images. Moving to a newer image
+     stays one reviewed commit that edits every runs-on line together. */
+  const dir = new URL("../.github/workflows/", import.meta.url), images = new Map();
+  for (const f of readdirSync(dir).filter(f => /\.ya?ml$/.test(f))) {
+    for (const [, image] of readFileSync(new URL(f, dir), "utf8").matchAll(/^\s*runs-on:\s*(\S+)\s*$/gm)) {
+      assert.match(image, /^ubuntu-\d{2}\.\d{2}$/, `${f}: runs-on ${image} is not an explicit Ubuntu image`);
+      images.set(image, [...(images.get(image) ?? []), f]);
+    }
+  }
+  assert.ok(images.size > 0, "no runs-on line found in .github/workflows");
+  assert.equal(images.size, 1, `one image across every workflow: ${JSON.stringify(Object.fromEntries(images))}`);
+});
+
 const job = (text, name) => text.slice(text.indexOf(`  ${name}:\n`)).split(/\n  [a-z][a-z0-9_-]*:\n/)[0];
 
 test("collectors, agents and publisher have separate jobs and provider credentials never enter agent execution", () => {
   const text = workflow('nightly'), collect = job(text, 'collect'), refresh = job(text, 'refresh'), publish = job(text, 'publish');
-  assert.match(collect, /runs-on: ubuntu-latest/);
+  assert.match(collect, /runs-on: ubuntu-\d{2}\.\d{2}\b/);
   assert.doesNotMatch(collect, /claude-code-action|CLAUDE_CODE_OAUTH_TOKEN|contents: write|actions: write/);
   assert.match(refresh, /needs: collect/);
   assert.match(refresh, /persist-credentials: false/);

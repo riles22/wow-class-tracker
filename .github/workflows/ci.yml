@@ -32,7 +32,7 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Validate test commit
         run: |
@@ -69,7 +69,7 @@ jobs:
   # test/ui-invariants.test.mjs skips itself when playwright is absent, so the job above
   # stays green and fast.
   ui-invariants:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
