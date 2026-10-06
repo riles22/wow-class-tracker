@@ -1,5 +1,5 @@
 name: Nightly tracker refresh
-run-name: "Nightly tracker refresh (${{ inputs.agent_model || 'claude-opus-5' }})"
+run-name: "Nightly tracker refresh (${{ inputs.agent_model || 'claude-opus-5-5' }})"
 
 # Machine-off nightly automation. Three separate runners form the trust boundary:
 #   collect: deterministic source collectors and transcript reservations/outcomes.
@@ -57,9 +57,9 @@ on:
       agent_model:
         description: >-
           Claude model for BOTH refresh agents, this run only (one-off trials, e.g.
-          claude-fable-5 or claude-sonnet-5). Scheduled runs always use the default.
+          claude-fable-5-1 or claude-sonnet-5-5). Scheduled runs always use the default.
         required: false
-        default: "claude-opus-5"
+        default: "claude-opus-5-5"
       transcript_state_initialize:
         description: "First installation only: initialize transcript usage state if no prior artifact exists. Never use to reset known request history."
         type: boolean
@@ -371,7 +371,7 @@ jobs:
       - name: Primary full refresh (Claude Code, read-only token)
         id: primary_agent
         continue-on-error: true
-        uses: anthropics/claude-code-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1
+        uses: anthropics/claude-code-action@cab360f6565aa35a51d6ce9e43f1f4287c0a32ea # v1
         timeout-minutes: 55    # the 07-24 primary ran 39m05s against the old 42 (audit A7)
         with:
           github_token: ${{ github.token }}
@@ -380,7 +380,7 @@ jobs:
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 250
-            --model ${{ inputs.agent_model || 'claude-opus-5' }}
+            --model ${{ inputs.agent_model || 'claude-opus-5-5' }}
             --disallowedTools "Agent,Task"
           prompt: |
             Maintain the WoW Midnight tracker in this checked-out repository. You are the
@@ -546,7 +546,7 @@ jobs:
 
       - name: Recovery pass for incomplete refresh
         if: steps.primary_agent.outcome != 'success' || steps.primary_check.outcome != 'success'
-        uses: anthropics/claude-code-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1
+        uses: anthropics/claude-code-action@cab360f6565aa35a51d6ce9e43f1f4287c0a32ea # v1
         timeout-minutes: 35
         with:
           github_token: ${{ github.token }}
@@ -555,7 +555,7 @@ jobs:
           claude_args: |
             --permission-mode bypassPermissions
             --max-turns 180
-            --model ${{ inputs.agent_model || 'claude-opus-5' }}
+            --model ${{ inputs.agent_model || 'claude-opus-5-5' }}
             --disallowedTools "Agent,Task"
           prompt: |
             The primary nightly agent exited without satisfying the deterministic refresh
