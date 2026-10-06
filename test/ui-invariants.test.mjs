@@ -869,11 +869,19 @@ ui("current WCL comparisons select one encounter and keep historical aggregates 
       const col=[...document.querySelectorAll('table.alltab thead tr:first-child th')].findIndex(h=>h.dataset.k==='m:wcl');
       return rows.map(row=>({cls:row.dataset.cls,spec:row.dataset.spec,text:row.children[col].textContent}));
     });
+    assert.equal(cells.length,data.specs.length,"every spec has a row to check");
     for(const cell of cells){
       const spec=data.specs.find(s=>s.class===cell.cls && s.spec===cell.spec);
       const metric=spec.metrics.find(m=>m.bracket==='mplus' && m.sample?.kind==='leaderboard-entries' && m.sample.encounterId===selected.id);
+      const cut=data.wclCoverage.cuts.find(c=>c.class===cell.cls && c.spec===cell.spec && c.bracket==='mplus' && String(c.encounterId)===String(selected.id));
       if(metric?.rank) assert.equal(cell.text.match(/#(\d+)/)?.[1],String(metric.rank));
-      assert.match(cell.text,/Checked .*UTC/);
+      // Which date label is right depends on the night's data: a cut that failed has no
+      // checkedAt, so the cell keeps its last sample and says so (wclDatesHTML). This
+      // asserted "Checked" on every cell until a failed cut landed in this dungeon on
+      // 2026-10-06 and turned every browser red.
+      const label=cut?.checkedAt ? /Checked \d{4}-\d{2}-\d{2} UTC/ : metric?.sample?.observedAt ? /Last sample checked \d{4}-\d{2}-\d{2} UTC/ : /Collection date unavailable/;
+      assert.match(cell.text,label,`${cell.cls} ${cell.spec}`);
+      if(cut?.status==='failed') assert.match(cell.text,metric?/Collection failed · historical data retained/:/Collection failed/,`${cell.cls} ${cell.spec}`);
       if(metric) assert.match(cell.text,/Latest log .*UTC/);
     }
     assert.ok(new URLSearchParams((await page.evaluate(()=>location.hash)).slice(1)).get('ae')===String(selected.id),"selected encounter travels in the link");
