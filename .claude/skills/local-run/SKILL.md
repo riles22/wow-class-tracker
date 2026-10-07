@@ -161,12 +161,9 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
    key or clear a review hold. A direct API run requires the latest trusted state
    and coordinated persistence back to the nightly; see
    `docs/transcript-operations.md`. Residential catch-up keeps its existing lane.
-3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. WoWMeta is a `metrics`
-   source, not a tier list: refresh-tiers does not fetch it, and its M+ numbers follow the
-   refresh-metrics recipe. *(Corrected 2026-10-06: this line said not to apply WoWMeta M+
-   rows or re-stamp their `snapshot` while that source was under review, citing a
-   refresh-tiers log entry since pruned. The review ended the same day, 2026-07-31, in the
-   retype to `metrics`.)*
+3. **`refresh-tiers` / `refresh-metrics`** — scoped per above. 🛑 **Do not apply WoWMeta
+   M+ rows or re-stamp their `snapshot`** while that source is under review (see
+   `refresh-tiers/log.md`, 2026-07-31).
 4. **Gearing guide harvest** (a separate weekly workflow since 2026-09-05, with
    local catch-up when a provider fails):
    when `gearing/data/guides/*.json` `harvestedAt` ages past ~7 days during the launch
