@@ -257,7 +257,11 @@ locally, and distill them into cited per-spec takes in `data/creator-takes.json`
    it only to a video this run distilled, or write an explicit non-claim ("queued 2026-08-10,
    NOT yet distilled"). This is uniform across lanes: the `generalCreators` fields hold
    distilled one-line reads too (izen's is a full meta summary), so overwriting one with a
-   fresh title trades information for recency; (d) note processed videoIds in `log.md`'s seen-set like any other creator.
+   fresh title trades information for recency. A creator entry carrying
+   `managedBy: "overrides"` (MadSkillzzTV's six class entries, as of 2026-10-06) is
+   owner-pinned: `apply-community-overrides.mjs` rewrites it from the owner's file at every
+   prebuild, so an edit to its `latest` reverts inside the same run (learned 2026-09-05).
+   Record that distillation in `log.md` instead; (d) note processed videoIds in `log.md`'s seen-set like any other creator.
 5. `npm run test:quiet && npm run build`; **PREPEND** date · videos processed · takes added · metaNotes added to `log.md` — insert directly under the header block, never `cat >>` at the end. The log is NEWEST-FIRST and says so in its own header; this said "append" until 2026-08-15 and the next nightly re-scrambled three of the four logs by obeying it. If any data/ file changed this run, finish with `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the current state, so ordering vs the build is safe).
 
 ## Gotchas
@@ -357,8 +361,15 @@ pruned.
   SCOPE ONLY — logging his M+ reads feeds `consensusFor` and `expertRead` from one voice on the
   same cell. Carry the constraint to any new class entry and re-verify it against the live guide
   page rather than assuming; three runs missed it and logged M+ takes anyway. **Pre-existing
-  violations are an owner decision, not yours** — two live M+ Prot Paladin takes have been
-  flagged (08-12, 08-13) and still await Riley. Flag, never retire.
+  violations are an owner decision, not yours** — two live M+ Prot Paladin takes were flagged
+  (08-12, 08-13); the 08-09 one was superseded on 2026-08-14 as stale (a creator's older live
+  take dilutes the newer), and the 08-10 one still awaits Riley. Flag, never retire.
+  **Wowhead's bylines do not trigger this firewall** (owner decision 2026-10-06): a Wowhead
+  list counts as the site's, not its byline author's. Dratnos (raid DPS and raid tank),
+  tettles (M+ DPS), AutomaticJak (M+ healer) and YoDaTV (M+ tank) all author Wowhead lists
+  (first flagged 2026-08-27). Log their takes in every bracket their scope allows, and leave
+  their live takes alone (19 sat in the bracket and role their author writes on 2026-10-06).
+  The firewall still applies to every other registered list, Method's included.
 - **Read the lens from `patchContext` when `bracket` is absent, and never treat (creator, spec,
   date) as a unique key (2026-08-05).** A missing bracket is not "whole spec". Write an explicit
   `bracket` on every new take, and bracket-split a video whose read genuinely differs. A naive

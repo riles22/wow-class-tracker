@@ -4,7 +4,7 @@ import { execFileSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, renameSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { checkSkillLogs } from "../src/check-skill-logs.mjs";
+import { checkSkillLogs, checkoutBytes, oversizedLogsAt, LOG_WARN_BYTES, READ_GATE_BYTES } from "../src/check-skill-logs.mjs";
 
 function fixture(t, names = ["ptr-watch", "a $(literal) [name] 'é'"]) {
   const root = mkdtempSync(path.join(tmpdir(), "tracker-skill-logs-"));
@@ -68,6 +68,40 @@ test("missing HEAD and nonregular log replacements fail closed", t => {
   assert.throws(() => checkSkillLogs(f.root), /regular file/);
   rmSync(path.join(f.root, ".git"), { recursive: true, force: true });
   assert.throws(() => checkSkillLogs(f.root));
+});
+
+test("a log past the size line warns as a Windows checkout would measure it, changed or not (audit 2026-10-04, F11)", t => {
+  assert.ok(LOG_WARN_BYTES < READ_GATE_BYTES);
+  assert.equal(checkoutBytes("a\nb\n"), 6);
+  assert.equal(checkoutBytes("a\r\nb\r\n"), 6, "a CRLF working tree is not counted twice");
+  // Distinct 199-byte LF lines (200 with CRLF), so the retention check sees real lines.
+  const entries = (from, count) => Array.from({ length: count }, (_, i) => String(from + i).padStart(6, "0") + "x".repeat(192) + "\n").join("");
+  const atLine = entries(0, 1000);
+  assert.equal(Buffer.byteLength(atLine), 199_000);
+  assert.equal(checkoutBytes(atLine), LOG_WARN_BYTES);
+  const f = fixture(t);
+  f.put(f.logs[0], atLine); // exactly on the line: quiet
+  f.git(["add", "."]); f.git(["commit", "-qm", "at the line"]);
+  assert.deepEqual(checkSkillLogs(f.root).warnings, []);
+  assert.deepEqual(oversizedLogsAt("HEAD", f.root), []);
+
+  // One more line pushes it over, though the LF blob is still 199,199 bytes. Committed
+  // and untouched by this run, it warns from HEAD.
+  f.put(f.logs[0], atLine + entries(1000, 1));
+  f.git(["add", "."]); f.git(["commit", "-qm", "over"]);
+  const warnings = checkSkillLogs(f.root).warnings;
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /^"\.claude\/skills\/ptr-watch\/log\.md" is 200,200 bytes in a Windows checkout, past the 200,000-byte warning line \(a Read returns nothing over 262,144\)/);
+  assert.match(warnings[0], /prune to the newest ~20$/);
+  assert.deepEqual(oversizedLogsAt("HEAD", f.root), [{ file: f.logs[0], bytes: 200_200 }]);
+
+  // This run's own text decides for a log it changed: a prune that keeps the newest 30%
+  // clears the warning before HEAD knows about it, and growth in the other log is caught.
+  f.put(f.logs[0], entries(701, 300));
+  f.put(f.logs[1], "header\n" + entries(0, 1200) + "old 1\nold 2\nold 3\nold 4\n");
+  const after = checkSkillLogs(f.root).warnings;
+  assert.equal(after.length, 1, after.join("\n"));
+  assert.match(after[0], /^"\.claude\/skills\/a \$\(literal\) \[name\] 'é'\/log\.md" is 240,036 bytes/);
 });
 
 test("nightly admits and stages skill logs through the checked helper and forwards both approvals", () => {

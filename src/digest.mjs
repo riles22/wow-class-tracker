@@ -4,8 +4,8 @@
  * and each tier-list source), creator-video activity (distilled / skipped /
  * queued, from the pending-transcripts queue diff), new creator takes/meta
  * notes, official-note revisions, new patch-feed entries (each labelled live or PTR by its
- * realm), writeup-verdict changes, and the run's health line
- * from the manifest.
+ * realm), writeup-verdict changes, the run's health line
+ * from the manifest, and any skill log nearing the Read tool's size gate.
  *
  * The publish job posts this as a comment on the pinned "Nightly digest" issue;
  * GitHub's own notification mail delivers it to the subscribed owner. Deterministic,
@@ -18,6 +18,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildPayload, feedEntryLabel } from "./render.mjs";
 import { OFFICIAL_NOTE_SOURCES, noteUrl } from "./official-notes.mjs";
+import { LOG_WARN_BYTES, READ_GATE_BYTES, oversizedLogsAt, skillOf } from "./check-skill-logs.mjs";
 
 const keyOf = s => `${s.class}|${s.spec}`;
 const TIER_LABEL = { raid: "Raid", mplus: "M+" };
@@ -167,7 +168,7 @@ const md = s => String(s ?? "")
   .replace(/@|#(?=\d)/g, "$&\u200B")
   .trim();
 
-export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null }) {
+export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPending = null, newPending = null, skillLogs = [] }) {
   const takeId = t => `${t.creator}|${t.spec}|${t.url}`;
   const noteId = n => `${n.creator}|${n.spec}|${n.patchContext}|${n.url}`;
   /* A post number is unique only WITHIN its topic. Every live "Class Tuning Incoming" pass is
@@ -250,6 +251,12 @@ export function digestMarkdown({ oldPayload, newPayload, manifest, runUrl, oldPe
       : "Quiet run: every source re-verified fresh — no tier moves, no new takes, no new builds. (That's honest stability, not a stuck pipeline.)");
   }
   if (degraded.length) lines.push(`_Health: ${degraded.length} source${degraded.length === 1 ? "" : "s"} degraded (${degraded.map(r => md(r.source)).join(", ")}) — details in the run manifest._`);
+  // A skill log past the warning line (check-skill-logs.mjs) is otherwise only a ::warning::
+  // annotation nobody reads, and agents prune only when a run happens to notice the size (the
+  // 2026-09-30 nightly found two logs within 25 KB of the gate), so the owner sees it here
+  // every night until it is pruned (audit 2026-10-04, F11).
+  const kb = bytes => `${Math.round(bytes / 1000)} KB`;
+  if (skillLogs?.length) lines.push(`_Skill logs past the ${kb(LOG_WARN_BYTES)} warning line: ${skillLogs.map(l => `${md(skillOf(l.file))} ${kb(l.bytes)}`).join(", ")}. A Read returns nothing over ${kb(READ_GATE_BYTES)}, so in a local run (a nightly cannot commit SKILL.md) prune each to its newest ~20 entries after moving any lesson that lives only in old entries into its SKILL.md._`);
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 }
 
@@ -305,6 +312,8 @@ if (isMain) {
   try { manifest = showJson(newRev, "run-manifest.json"); } catch { /* digest still renders without it */ }
   const pendingAt = rev => { try { return showJson(rev, "pending-transcripts.json"); } catch { return null; } };
   const runUrl = process.env.DIGEST_RUN_URL || null;
+  let skillLogs = [];
+  try { skillLogs = oversizedLogsAt(newRev); } catch { /* a size check never blocks the digest */ }
   console.log(digestMarkdown({ oldPayload: payloadAt(oldRev), newPayload: payloadAt(newRev), manifest, runUrl,
-    oldPending: pendingAt(oldRev), newPending: pendingAt(newRev) }));
+    oldPending: pendingAt(oldRev), newPending: pendingAt(newRev), skillLogs }));
 }

@@ -1,8 +1,14 @@
 # refresh-metrics run log
 
-Keep the newest ~20 entries; prune older ones when appending — and MEAN it. Pruned
-2026-08-15 (these four logs held 64-78 entries each, and none had ever been pruned): watch-creators had
-reached 270KB, over the Read tool's 262,144-byte gate, so a bare Read of it returned NOTHING.
+Keep the newest ~20 entries. Prune only in a local or interactive run, and first move into
+SKILL.md any lesson that lives only in the entries being dropped: the nightly publishes data/,
+dist/ and these logs but never SKILL.md, so a nightly prune can delete a rule but cannot save
+it. Pruned 2026-08-15 (these four logs held 64-78 entries each, and none had ever been pruned):
+watch-creators had reached 270KB, over the Read tool's 262,144-byte gate, so a bare Read of it
+returned NOTHING. Pruned again: refresh-metrics and watch-creators by the 2026-09-30
+nightly, ptr-watch and refresh-tiers on 2026-10-06.
+check-skill-logs.mjs warns, and the nightly digest names the log, once one passes 200,000
+bytes in a Windows checkout.
 
 This file holds NO machine state. The seen-set moved to structured data on 2026-08-08
 (pending-transcripts.json seen[]/skipped[]/videos[] plus take urls) precisely because
@@ -13,8 +19,10 @@ prunable. Durable RULES belong in SKILL.md, not here — the 2026-08-15 prune ha
 
 Entries are sorted NEWEST FIRST by date. Two forms are in use ("- <date>" and "## <date>"),
 they interleave, and refresh-tiers was chronologically scrambled before this prune — so sort
-by parsed DATE, never by position. Do not cite lines of this file by NUMBER from anywhere
-else; grep for a phrase (docs/s2-flip-runbook.md used to do that and would have broken).
+by parsed DATE, never by position. Never cite this file from anywhere else, by line NUMBER
+or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at refresh-tiers
+entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
+history matters, cite the commit that added it.
 
 ## 2026-10-06 (nightly, THIRD run of the day) — every numeric feed verified, nothing moved; WCL M+ now `success` (320 rows), raid `partial` (287)
 

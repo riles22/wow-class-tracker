@@ -19,8 +19,8 @@ same "gate pointed at nothing" class.
 
 ## The incident this closes
 
-Found 2026-08-04 during the local run (full account: `.claude/skills/refresh-tiers/log.md`,
-2026-08-04 entry). Icy Veins rebuilt its 12.1 PTR tier lists on **08-02** ("Update #4",
+Found 2026-08-04 during the local run (full account: the refresh-tiers log's 2026-08-04
+entry, added in commit a72674e and pruned by the 2026-08-21 nightly). Icy Veins rebuilt its 12.1 PTR tier lists on **08-02** ("Update #4",
 22 tier moves, both TBDs resolved). For the next four runs the nightly's manifest recorded
 `result: success` for `icyveins-ptr` while asserting the page's published date "is STILL
 2026-07-26" — and stored ratings sat frozen at their 07-31 state. The page carried exactly
