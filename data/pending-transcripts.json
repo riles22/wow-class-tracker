@@ -2,17 +2,10 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "45LBv6YijrQ",
-      "creator": "izen (Izenhart)",
-      "title": "Mythic+ & Mythic Raid Gear ilvl GAP | How Big & How Much It Matters",
-      "published": "2026-10-06",
-      "queuedAt": "2026-10-07"
-    },
-    {
-      "id": "nCgFxapXjs8",
-      "creator": "LBNinja7",
-      "title": "Mistweaver Healing Buffed AGAIN 10/6 #wow #healer #mistweaver #lbninja7",
-      "published": "2026-10-02",
+      "id": "noa76kgKui0",
+      "creator": "YoDaTV",
+      "title": "Three Things They DON'T Tell You About Blood DK",
+      "published": "2026-10-07",
       "queuedAt": "2026-10-07"
     }
   ],
@@ -3187,6 +3180,13 @@
       "title": "What Is Assa Rogue Better With? Fatebond vs Deathstalker Analysis",
       "reason": "Transcript read (Supadata, 2026-10-06): an Assassination hero-talent guide comparing Fatebound with Deathstalker — ease of play, funnel damage for high keys, 1–3% single-target gap, trinket timing, haste targets and talent swaps. A build choice inside the spec with no read on Assassination's standing against other specs. Guide-shaped; nothing to distil.",
       "verifiedAt": "2026-10-06"
+    },
+    {
+      "id": "45LBv6YijrQ",
+      "creator": "izen (Izenhart)",
+      "title": "Mythic+ & Mythic Raid Gear ilvl GAP | How Big & How Much It Matters",
+      "reason": "Transcript read (Supadata, 2026-10-07): a gearing explainer on the item-level gap between Mythic raiders and Mythic+-only players (about 3–3.5 item levels at most, roughly 3% damage, slowed by kill counts and bonus rolls, with 12.1.5's extra bonus roll and Voidforge noted). No spec is named or assessed; no meta read to distil.",
+      "verifiedAt": "2026-10-07"
     }
   ],
   "seen": [

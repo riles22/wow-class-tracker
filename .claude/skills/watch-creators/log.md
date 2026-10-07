@@ -24,6 +24,15 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly re-run, ~17:35 UTC) — 2 transcripts → 1 take, 1 skip; 1 queued
+
+- Discovery: 44/44 feeds HTTP 200 (Tettles/Tactyks/Clandon 404s from the morning cleared). 401 unseen in-cycle uploads, the handed-forward backlog, left UNSEEN.
+- Transcripts (Supadata, verdict ok, 2/2 fetched; usage 55 counted / 30 days, limit null):
+  - LBNinja7 `nCgFxapXjs8` "Mistweaver Healing Buffed AGAIN 10/6" (Short, published 2026-10-02 23:00Z, the evening "Incoming Class Tuning - October 6" posted) → 1 raid **buff** take (t=53). Same date as his 10-02 "WORST Healer Spells" raid nerf take, so per invariant 3 neither supersedes the other; both live.
+  - izen `45LBv6YijrQ` gear ilvl gap → skipped[] (no spec named; gearing explainer).
+- Queued 1: YoDaTV `noa76kgKui0` "Three Things They DON'T Tell You About Blood DK" (in his Blood scope; may turn out guide-shaped — verify by transcript). Not queued: Dalaran Gaming 12.1.5 DH/Evoker/Rogue recap (DH/Evoker outside his scope; Rogue part is visuals), streams, WoW Forever, PvP, Shorts.
+- 0 metaNotes.
+
 ## 2026-10-07 (local scheduled, after today's nightly) — queue drain attempted: **0 of 1 transcripts**; caption 429 persists; 1 video queued after a metadata probe; queue 1 → 2
 
 - izen `45LBv6YijrQ` (yt-dlp 2026.07.04, default client, --sleep-requests 3): player fetch fine, subtitle request **HTTP 429**. One probe only, caption traffic stopped (persistent timedtext shape, same as 10-04..10-06). Stays queued for the nightly's Supadata lane.

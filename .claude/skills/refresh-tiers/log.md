@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly re-run, ~17:35 UTC) — Method + Wowhead 0 moved; Icy Veins 403; Archon walled
+
+- Method (direct GET): 40/40 per bracket, 8 M+ dungeon names rejected by roster match; Last Updated 5 Oct (M+) / 10 Aug (raid). 0 moves.
+- Wowhead (full browser headers): 27/7/6 × 2 = 80, one tier-list block per page, dateModified unchanged. 0 moves.
+- Icy Veins: 403 ×6 (5,485 B, 0 tier-list-entry) from the runner; stored letters are this morning's home refresh (d54164c), untouched.
+- Archon: 403 "Just a moment..." (3,318 B). Retained letters unchanged. encounter-tiers.json still s1 / 2026-08-17.
+
 ## 2026-10-07 (local scheduled, after today's nightly) — Icy Veins refreshed from home: 80/80, **3 M+ letters moved**, 0 raid; 0 consensus letters moved
 
 - Transport: curl with browser UA + Accept + Accept-Language, all six pages HTTP 200 (325/267/240/387/259/249 KB), tier-list-entry markers present on each. Parse: styles stripped, one table.tier-list per page, letter from the first td, spec from the first alt looked up whole.

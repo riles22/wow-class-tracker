@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly re-run, ~17:35 UTC) — SimC re-sim merged (24); Mythicstats 1084 landed (80 via collector); others flat
+
+- **SimC — success, merged 24.** MID2_Raid.txt HEAD e3fa778a86 (hotfix 2026-10-07; was cafc27227e / 10-03). 23 of 24 moved; Devourer +5.0% (10-06 buffs), Enhancement +4.2%, the rest within ±0.1%. asOf 2026-10-07.
+- **Mythicstats — success.** Collector: period 1084 now HTTP 200 (the morning's 404 cleared), 40 rows, sum 100.2, 0 retired. Murlok — partial, source date 10-03 (collector applied, values unchanged dates).
+- **Bloodmallet — success, nothing merged.** 24 charts MID2, ptr "0", all dated 2026-10-07, byte-identical to stored; Balance/Augmentation/Devastation error 3/3.
+- **WoWMeta — partial.** snapshotDate 2026-09-15; 40/40 identical.
+- WCL (collector): raid partial 289 rows (2 invalid: Feral 3421, Demonology 3429; 29 sparse); M+ success 320. Archon walled (6 numeric rows blocked).
+
 ## 2026-10-07 (nightly) — Bloodmallet weekly re-sim merged (24 charts, 2026-10-07); everything else flat or stale upstream
 
 - **Bloodmallet — success.** 24 charts MID2, ptr "0", all timestamped 2026-10-07 (Subtlety returned after erroring since 10-03); merged all 24, max move 4.7% (Devourer and Enhancement up after the Oct 6 buffs). Balance, Augmentation, Devastation still error 3/3. 12.1.5 hold not armed (LABEL_FLIP_DUE 2026-10-13).

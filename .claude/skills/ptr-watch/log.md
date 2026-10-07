@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly re-run, ~17:35 UTC) — no new tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved.
+- Wowhead RSS (40 items), news index and blue tracker: nothing new since the morning run but WoW Forever items (news=383292/383284/383259, blue topic 2375129 — Forever PvP, out of scope). "Incoming Class Tuning - October 6" (2370266) still v1. 12.1 thread 2317811 unchanged.
+- No new forecast cycle; PHASES.ptr null. 12.1.5 releases 2026-10-13 (LABEL_FLIP_DUE).
+
 ## 2026-10-07 (nightly) — quiet on every official channel; ledger unchanged at v56; feed holds at 47 (one citation upgraded)
 
 - **Revision ledger:** official-notes receipt (checkedAt 2026-10-07T05:22:56Z) both sources success; live-hotfixes 2336376 post 1 still v56 (2026-10-06T22:36:40Z), ptr-preview 2344395 posts 1/4/5/6 at v3/v1/v1/v1. pending.json vs ledger: 0 added / 0 edited / 0 removed, 0 unresolved; only the two checkedAt stamps moved. check-official-notes --base=HEAD passes.
