@@ -522,5 +522,5 @@ under "Lessons promoted from `log.md` (2026-10-06 prune)": forum `.json` redirec
 posts that look like blue posts, Wowhead news ids, checking a lead against the forum, the
 lifecycle of a "Class Tuning Incoming" post, silent edits, the Wowhead mirror's lag, set-bonus
 keywords, a running topic's lagging title, and attribution by heading. Three practices that
-grew up in this range without an owner decision are listed there as open questions. The rest
-was run narrative.
+grew up in this range without an owner decision were settled by Riley the same day and are
+recorded there as owner decisions. The rest was run narrative.

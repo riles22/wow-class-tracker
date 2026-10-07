@@ -453,5 +453,5 @@ under "Lessons promoted from `log.md` (2026-10-06 prune)": Icy Veins' letter cel
 data, the order of `published` evidence, and Method's markup. Two stale statements in SKILL.md
 were corrected with them: Archon's season status, and which of a page's title, meta tags and
 ranking body decides its era. The Wowhead byline overlap this log first flagged on 2026-08-27
-is now recorded in watch-creators' SKILL.md, as an open owner decision. The rest was run
-narrative.
+was settled on 2026-10-06 (Wowhead bylines do not trigger the firewall) and is recorded in
+watch-creators' SKILL.md. The rest was run narrative.

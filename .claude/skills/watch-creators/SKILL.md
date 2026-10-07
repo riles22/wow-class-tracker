@@ -364,13 +364,12 @@ pruned.
   violations are an owner decision, not yours** — two live M+ Prot Paladin takes were flagged
   (08-12, 08-13); the 08-09 one was superseded on 2026-08-14 as stale (a creator's older live
   take dilutes the newer), and the 08-10 one still awaits Riley. Flag, never retire.
-  Wowhead's bylines put four more registered creators in the same position (first flagged
-  2026-08-27): Dratnos (raid DPS and raid tank), tettles (M+ DPS), AutomaticJak (M+ healer)
-  and YoDaTV (M+ tank). Whether the firewall reaches them is an owner decision, open since
-  then; as of 2026-10-06, 19 live takes sit in the bracket and role their author writes, the
-  newest dated 10-06. No published number moves while `expertRead` is dormant (`PHASES.ptr`
-  null); the double count starts when the next PTR cycle opens. Until Riley decides, log as
-  today, name any new take in that bracket and role in the run report, and never retire one.
+  **Wowhead's bylines do not trigger this firewall** (owner decision 2026-10-06): a Wowhead
+  list counts as the site's, not its byline author's. Dratnos (raid DPS and raid tank),
+  tettles (M+ DPS), AutomaticJak (M+ healer) and YoDaTV (M+ tank) all author Wowhead lists
+  (first flagged 2026-08-27). Log their takes in every bracket their scope allows, and leave
+  their live takes alone (19 sat in the bracket and role their author writes on 2026-10-06).
+  The firewall still applies to every other registered list, Method's included.
 - **Read the lens from `patchContext` when `bracket` is absent, and never treat (creator, spec,
   date) as a unique key (2026-08-05).** A missing bracket is not "whole spec". Write an explicit
   `bracket` on every new take, and bracket-split a video whose read genuinely differs. A naive

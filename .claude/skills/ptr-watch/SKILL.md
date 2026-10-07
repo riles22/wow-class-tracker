@@ -436,7 +436,9 @@ posture above.
    and log the first-ingest parse counts.
 8. `npm run test:quiet && npm run build`. If any `data/` file changed this run, also run
    `node src/snapshot.mjs` (movement baseline; loadData skips baselines identical to the
-   current state, so ordering vs the build is safe). **PREPEND** to `log.md` — insert the new
+   current state, so ordering vs the build is safe), except in a local run whose only data
+   change is bookkeeping such as the ledger's `checkedAt` stamps (owner decision 2026-10-06,
+   at the end of this file). **PREPEND** to `log.md` — insert the new
    entry directly under the header block, never `cat >>` at the end: the file is NEWEST-FIRST
    and its own header says so. (Corrected 2026-08-15: this line said "Append", and the very
    next nightly after the 08-15 prune re-scrambled three of the four logs by obeying it. A
@@ -598,22 +600,33 @@ run looked healthy and recorded something false.
   a bare CLASS heading is `Class (class-wide)` even when its text names specs. Read the post
   with its `<ul>` nesting intact; a flattened copy cannot show which heading a line sits under.
 
-**Open owner questions (raised 2026-10-06).** Until Riley decides, follow current practice
-and say in the run report when a case comes up.
+**Owner decisions (2026-10-06).** Three practices grew up in the pruned range without a
+recorded decision; Riley settled them on 2026-10-06.
 - **A line under a bare hero-talent heading** (a `Hero Talents › <Tree>` block that is a
-  sibling of the spec blocks, with no spec heading over it). Current practice logs it as
-  `Class (class-wide) — <Tree>: …` (2026-08-27 Rogue/Deathstalker, 08-28 Shaman/Farseer,
-  09-10 Mage/Spellslinger, 09-18 Druid/Wildstalker), and each of those four lines reaches every
-  spec of its class. `specBuildChanges` in render.mjs was written to stop that for hero-tree
-  scopes: a `Class (<Tree> hero talents)` line attaches only to specs the entry's
-  `specsAffected` names outright.
-- **A standalone official topic with no class content** (encounter or trinket tuning).
-  Current practice since 2026-09-14 logs it as `kind: "hotfix", realm: "live"` with
-  `specsAffected: []`, a `Non-class:` highlight, `forumUrl: null` and the topic cited in the
-  label; it reaches no drawer and casts no vote. Earlier runs logged nothing for the same
-  shape (08-27 Coiled Altar, 09-01 Vashnik).
-- **A history snapshot after a local run that changed only bookkeeping** (the ledger's
-  `checkedAt` stamps). Step 8 says to write one whenever a data file changed, and the
-  2026-09-18 local run did. The 2026-09-13 local run skipped it: a snapshot dated after the
-  newest manifest reads as proof of life to the freshness heartbeat and can hide a missed
-  nightly (the 2026-09-02 case in CLAUDE.md).
+  sibling of the spec blocks, with no spec heading over it) is logged in the hero-tree form,
+  `Class (<Tree> hero talents) — …`, as on the 2026-08-18 and 08-20 Hellcaller entries, and
+  the entry's `specsAffected` names the specs that can take that tree. Take those specs from
+  a fetched source (the notes' own wording, or the tree's hero-talent page), never from
+  memory. If nothing fetched settles it, name none and say so in the run report: render.mjs
+  stays silent rather than guess. `specBuildChanges` attaches a hero-tree line only to specs
+  the entry names outright, and since `specsAffected` is per entry, the line also reaches a
+  spec of that class that the entry names for another line; that is a known limit. The four
+  earlier lines logged as `Class (class-wide) — <Tree>: …` (2026-08-27 Rogue/Deathstalker,
+  08-28 Shaman/Farseer, 09-10 Mage/Spellslinger, 09-18 Druid/Wildstalker) stay as they are and
+  still reach every spec of their class: the decision covers new entries only, so no outlook
+  arrow moves after the fact.
+- **A standalone official topic with no class content** (encounter or trinket tuning) gets a
+  feed entry, as it has since 2026-09-14 (the 09-14 raid and 09-15 trinket tuning topics, the
+  10-06 encounter tuning): `kind: "hotfix"` with an explicit `realm: "live"`,
+  `specsAffected: []`, `Non-class:` highlights, and the label naming the topic and post.
+  validate.mjs requires `realm` on every entry dated on or after `BUILD_REALM_REQUIRED_FROM`
+  (the 09-14 and 09-15 entries predate it and read live by the kind default), makes a hotfix
+  cite its Wowhead round-up as `wowheadUrl`, and refuses a hotfix `forumUrl` or
+  `forumPostNumber`, which is why the topic lives in the label. The entry reaches no drawer
+  and casts no vote, and it keeps the feed a complete record of official tuning. (Runs
+  before 09-14 logged nothing for the same shape: 08-27 Coiled Altar, 09-01 Vashnik.)
+- **No history snapshot after a local run whose only data change is bookkeeping**, such as
+  the ledger's `checkedAt` stamps (step 8). A snapshot dated after the newest manifest reads
+  as proof of life to the freshness heartbeat and can hide a missed nightly (the 2026-09-02
+  case in CLAUDE.md). The 2026-09-13 local run skipped it and the 09-18 one wrote one;
+  skipping is the rule now.

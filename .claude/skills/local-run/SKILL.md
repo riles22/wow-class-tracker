@@ -90,7 +90,11 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
    movement baseline and the freshness heartbeat's proof-of-life for runs that skip
    the manifest (a snapshot only counts if strictly newer than the manifest date, so a
    local run on the same calendar day as a completed nightly does not extend the
-   heartbeat — fine, the nightly already did).
+   heartbeat — fine, the nightly already did). Skip it when the only data change is
+   bookkeeping, such as the official-notes ledger's `checkedAt` stamps (owner decision
+   2026-10-06): that snapshot would vouch for a refresh that did not happen, and one dated
+   after the newest manifest hides a missed nightly from the heartbeat (the 2026-09-02
+   case in CLAUDE.md).
 7. **Rebuild after the snapshot** (`npm run build`) so the drawer Timeline includes
    the point you just wrote — the same ordering the nightly publish learned on 07-31.
 8. **Commit with the run's story, then push master directly, but only once the push rule
