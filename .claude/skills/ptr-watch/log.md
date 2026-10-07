@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly) — quiet on every official channel; ledger unchanged at v56; feed holds at 47 (one citation upgraded)
+
+- **Revision ledger:** official-notes receipt (checkedAt 2026-10-07T05:22:56Z) both sources success; live-hotfixes 2336376 post 1 still v56 (2026-10-06T22:36:40Z), ptr-preview 2344395 posts 1/4/5/6 at v3/v1/v1/v1. pending.json vs ledger: 0 added / 0 edited / 0 removed, 0 unresolved; only the two checkedAt stamps moved. check-official-notes --base=HEAD passes.
+- **Topics re-fetched** (curl -L on /t/x/<id>.json): 2336376 v56; 2344395 newest staff post #6 (2026-09-29); 2370266 v1; 2373623 v2; closed 2317811 13 posts, last 2026-07-31. Nothing new.
+- **Wowhead:** RSS 40 items (top news=383282), news index top 383282, blue tracker 50 entries — newest relevant topic still the Oct 6 compilation. The one new live-12.1 item, news=383282 "Class Changes, Raid Tuning - Patch 12.1 Hotfixes for October 6th" (2026-10-06 18:11 US-Central), was read from its RSS body and matches the stored 2026-10-06 entry's class and raid lines exactly; it replaces the blue-tracker mirror as that entry's wowheadUrl (label amended to say so). No new entry, no set bonus touched.
+- 12.1.5 material: nothing new beyond news=383233 (logged 10-06). No new forecast cycle. Dormant WCL PTR lanes skipped.
+
 ## 2026-10-06 (nightly, THIRD run of the day) — **the hotfix compilation gained its October 6 block (v53 → v56, edited 22:36:40Z)**: 18 new sections, all dispositioned; one new feed entry (46 → 47); 12.1.5 preview lane unchanged
 
 - **Revision ledger:** topic 2336376 post 1 moved v53 → v56 ("World of Warcraft: Midnight Hotfixes - October 6"). 18 new sections, 0 edited, 0 removed: 5 Classes (Unholy DK, Devourer DH, Brewmaster + Mistweaver Monk, Subtlety › Trickster, Enhancement Shaman) and 13 Player versus Player. Every Classes line was diffed against the 2026-10-02 "Incoming Class Tuning - October 6" entry (topic 2370266) and matches exactly, so all five are `irrelevant` as already carried (the 2026-09-22 precedent — no double count). All 13 PvP sections `irrelevant` under rule 3c (PvP talents / "in PvP combat"). The Dungeons and Raids block is the Ula'tek tuning already logged from topic 2373623; the compilation files Toxic Burn and Caustic Waves under General where the stored entry lists them with Stage 03 (same values). ptr-preview (topic 2344395): 4 staff posts, all versions unchanged; only checkedAt moved. `check-official-notes --base=HEAD` passes.

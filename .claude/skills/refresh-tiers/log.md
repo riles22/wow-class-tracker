@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly) — Method + Wowhead 80/80 each, 0 moved; Icy Veins 403 x6; Archon walled
+
+- Method (direct GET, div.tier__tier parse): 40/40 per bracket, 0 unmatched, Season 2 body + Devourer; Last Updated 5 Oct 2026 (M+) / 10 Aug 2026 (raid), unchanged. 0 of 80 moved.
+- Wowhead (full browser headers, unescape then [tier-list=rows]): 27/7/6 raid + 27/7/6 M+, 0 unmatched, titles "Midnight Season 2"; dateModified 2026-08-28 … 2026-09-10 unchanged. 0 of 80 moved.
+- Snapshots for both set to 2026-10-07; seasonVerified unchanged (s2), so no freeze-season step needed.
+- Icy Veins: 403 on all six pages (0 tier-list-entry) — blocked, unchanged since 2026-09-27. Archon: 403 "Just a moment...", 0 __NEXT_DATA__; source-health receipt agrees.
+
 ## 2026-10-06 (nightly, THIRD run of the day) — Method + Wowhead refetched and re-parsed, **0 of 160 letters moved**; Icy Veins Cloudflare-403 (day 13); Archon wall (letters RETAINED)
 
 - Method: direct GET, 184,377 / 172,248 B; 40 + 40 rows, M+ dungeon block rejected by roster match (8 dungeon names). "Last Updated" 5th October 2026 (M+) / 10th August 2026 (raid); era "Midnight Season 2", Devourer present → s2.

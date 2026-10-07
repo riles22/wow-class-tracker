@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly) — Bloodmallet weekly re-sim merged (24 charts, 2026-10-07); everything else flat or stale upstream
+
+- **Bloodmallet — success.** 24 charts MID2, ptr "0", all timestamped 2026-10-07 (Subtlety returned after erroring since 10-03); merged all 24, max move 4.7% (Devourer and Enhancement up after the Oct 6 buffs). Balance, Augmentation, Devastation still error 3/3. 12.1.5 hold not armed (LABEL_FLIP_DUE 2026-10-13).
+- **SimC — partial.** MID2_Raid.txt same HEAD cafc27227e (hotfix 2026-10-03); 24 specs identical; nothing merged.
+- **WoWMeta — partial.** snapshotDate 2026-09-15; rankings Last-Modified 2026-10-06 but all 40 values identical.
+- **Murlok — partial** via collector (40 rows, source date 2026-10-03). **Mythicstats — unreachable** (collector pending: /period/1084 404; series preserved). check-stable-metrics passes.
+- **WCL** from the trusted receipt: leaderboard raid partial (288 rows, 29 sparse, 3 invalid), M+ success (320); legacy aggregates unreachable. check-wcl-metrics passes. Archon walled (all six numeric rows blocked).
+
 ## 2026-10-06 (nightly, THIRD run of the day) — every numeric feed verified, nothing moved; WCL M+ now `success` (320 rows), raid `partial` (287)
 
 - WCL (collector, attemptedAt 22:36:41Z): raid partial "287 median rows; 30 empty/sparse cuts; 3 failed/unattempted cuts"; M+ success "320 median rows; 0 empty/sparse; 0 failed". Legacy wcl-live-* unreachable as recorded. check-wcl-metrics passes.

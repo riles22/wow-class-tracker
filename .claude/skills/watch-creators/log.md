@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (nightly) — queue was empty, 0 transcripts; 1 video queued (izen); no takes or metaNotes
+
+- **Discovery:** 44 channelIds; 41 HTTP 200 after paced retries, 3 still 404 after 6 attempts each (Tettles UCQxhna2XRWA_Pts6abbpEIg, Tactyks UC_0qsnA6yJ_DzEvKsm-XdvQ, Clandon UCxy6bJJ49XFSTxSPiU9wmpw — the transient-404 shape; recheck next run). Seen-set 1,339 from structured lanes; 357 unseen in the polled feeds, the handed-forward backlog, left UNSEEN.
+- **Transcripts:** summary verdict ok, 0 requested (nothing was queued), usage 54 counted / 30 days, limit null.
+- **Queued 1:** `45LBv6YijrQ` izen "Mythic+ & Mythic Raid Gear ilvl GAP | How Big & How Much It Matters" (2026-10-06) — description names the S2 M+ meta; generalCreators lane, so metaNotes only if it carries per-spec reads. Every other upload since the last run was a stream VOD, WoW Forever, PvP or a Short (e.g. Dratnos "Big Nerfs to Ula'tek" is encounter tuning, "Weekly Vault" is loot) — not queued, not marked seen.
+- Note for a local run: the poll is faster as parallel curl with -m timeouts; a bare Node fetch with no timeout hung on one feed this run.
+
 ## 2026-10-06 (nightly, THIRD run of the day) — all 5 queued transcripts arrived: **2 takes**, **3 verified skips**; queue 5 → 0
 
 - **Discovery:** 44 channelIds polled, 44 OK. Seen-set 1,339 (structured lanes + take/metaNote urls). 401 unseen in-cycle (bound 2026-06-18) — the same backlog the earlier run filtered minutes before; no new in-scope upload since, so nothing queued (drops stay UNSEEN).
