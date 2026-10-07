@@ -265,6 +265,11 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
   because their age measures the missing endpoint, not a lapse in collection. Ordinary statistics
   pages still present verification challenges, which are not bypassed. An Archon aggregate
   [access request](docs/archon-access-request-2026-09-05.md) is prepared for Riley to send.
+- **Icy Veins tier lists**: GitHub's runners have drawn a Cloudflare 403 on all six pages
+  since 2026-09-23, so the nightly records the source `blocked` and keeps the stored
+  letters and dates. Every local run refreshes them from a home connection with curl and
+  ordinary browser headers (Node's `fetch` gets the same 403 there, 2026-09-27). No proxy
+  and no challenge solving.
 - **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
 - **YouTube transcripts**: two transports, same captions. On the nightly runner the
