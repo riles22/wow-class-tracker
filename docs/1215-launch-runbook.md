@@ -384,10 +384,11 @@ git status --short
 ```
 
 `build` runs before `test:quiet` so that every UI invariant reads the launch page. The
-suite's build smoke test (`test/build.test.mjs`) also rewrites `dist/` partway through the
-run. With the tests first, which page an invariant read depended on timing: on 2026-10-06
-the previews invariant ran against master's page when its file ran alone, and skipped in
-the full run.
+invariants read the built `dist/index.html`, and nothing in the suite rebuilds it, so with
+the tests first they would check whatever page was built last. Until PR 94 the suite's
+build smoke test (`test/build.test.mjs`) also rewrote `dist/` partway through the run, so
+which page an invariant read depended on timing: on 2026-10-06 the previews invariant ran
+against master's page when its file ran alone, and skipped in the full run.
 
 Pass means: the loop throws nothing; `test:quiet` reads `fail 0`, and its skip line says
 `(UI invariants ran)` and names exactly these four tests:
