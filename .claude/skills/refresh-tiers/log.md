@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (local scheduled, after today's nightly) — Icy Veins refreshed from home: 80/80, **3 M+ letters moved**, 0 raid; 0 consensus letters moved
+
+- Transport: curl with browser UA + Accept + Accept-Language, all six pages HTTP 200 (325/267/240/387/259/249 KB), tier-list-entry markers present on each. Parse: styles stripped, one table.tier-list per page, letter from the first td, spec from the first alt looked up whole.
+- Counts (rows / non-null / expected): raid 27/27/27, 7/7/7, 6/6/6; M+ 27/27/27, 7/7/7, 6/6/6. 0 unmatched, 0 TBD. Devourer present on both DPS pages. No "12.1.5 PTR" text on any page; bodies rank Season 2 (raid-healer title still says "Patch 12.0.7", known); seasonVerified stays s2, so freeze-season had nothing to do.
+- dateModified: raid DPS 2026-09-24, raid healer 09-01, raid tank 08-29, M+ DPS **2026-10-06** (was 09-23), M+ healer 09-24, M+ tank 09-24. Only the M+ DPS published value changed; all six snapshots 2026-09-27 → 2026-10-07.
+- Moves (M+ DPS): Devourer DH A → A+, Balance Druid A+ → A, Unholy DK A+ → A. Churn gate: icyveins:mplus 3 (0 two-step). Consensus scores moved (Devourer M+ 77 → 81, Balance 64 → 60, Unholy 74 → 70); no consensus letter changed.
+
 ## 2026-10-07 (nightly) — Method + Wowhead 80/80 each, 0 moved; Icy Veins 403 x6; Archon walled
 
 - Method (direct GET, div.tier__tier parse): 40/40 per bracket, 0 unmatched, Season 2 body + Devourer; Last Updated 5 Oct 2026 (M+) / 10 Aug 2026 (raid), unchanged. 0 of 80 moved.

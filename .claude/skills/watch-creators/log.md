@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-07 (local scheduled, after today's nightly) — queue drain attempted: **0 of 1 transcripts**; caption 429 persists; 1 video queued after a metadata probe; queue 1 → 2
+
+- izen `45LBv6YijrQ` (yt-dlp 2026.07.04, default client, --sleep-requests 3): player fetch fine, subtitle request **HTTP 429**. One probe only, caption traffic stopped (persistent timedtext shape, same as 10-04..10-06). Stays queued for the nightly's Supadata lane.
+- Metadata probe (info endpoint, no captions) settled the two candidates the 10-06 nightly could not measure: `nCgFxapXjs8` LBNinja7 Mistweaver clip is **78 s**, not_live, uploaded 2026-10-02 → **queued** (in his Mistweaver scope, title carries spec signal); `VlZU7aqD4PA` YoDaTV Vengeance bug PSA is **148 s** → left UNSEEN, not queued (bug PSA, guide-shaped; neither is sub-minute, so neither goes to seen[]).
+- Discovery from home: 44 channelIds, 401 unseen in-cycle (bound 2026-06-18) — the standing backlog, not swept while captions 429.
+- 0 takes, 0 metaNotes.
+
 ## 2026-10-07 (nightly) — queue was empty, 0 transcripts; 1 video queued (izen); no takes or metaNotes
 
 - **Discovery:** 44 channelIds; 41 HTTP 200 after paced retries, 3 still 404 after 6 attempts each (Tettles UCQxhna2XRWA_Pts6abbpEIg, Tactyks UC_0qsnA6yJ_DzEvKsm-XdvQ, Clandon UCxy6bJJ49XFSTxSPiU9wmpw — the transient-404 shape; recheck next run). Seen-set 1,339 from structured lanes; 357 unseen in the polled feeds, the handed-forward backlog, left UNSEEN.
