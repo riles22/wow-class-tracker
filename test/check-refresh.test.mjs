@@ -827,6 +827,9 @@ test("the source-churn ack is a third human-only token, wired through all three 
   }
   assert.match(src, /failures\.push\([^)]*\.\.\.churn\.errors\)/, "a churn breach must fail the run");
   assert.match(src, /waived by source-churn ack/, "a human must see WHAT their ack waived");
+  // The agents' evidence for a churn breach travels in anomalyAckProposal, so the CLI must
+  // print it on a churn-only failure too, not only on a consensus anomaly.
+  assert.match(src, /\(a\.errors\.length \|\| churn\.errors\.length\) && typeof proposal === "string"/);
 
   /* Forwarded to the same three steps as the other two acks (audit 2026-09-04, F8): an ack
      only at publish would leave the primary check failing on the approved change, start a
@@ -842,6 +845,25 @@ test("the source-churn ack is a third human-only token, wired through all three 
     assert.ok(wf.slice(start, next < 0 ? undefined : next).includes(envLine), `${name} must receive the churn ack`);
   }
   assert.equal(wf.split(envLine).length - 1, 3, "…and no other step, least of all an agent step, may see it");
+});
+
+test("both agent prompts hand a churn breach to the human: the gate's label, anomalyAckProposal, source_churn_ack", async () => {
+  /* The agents never hold source_churn_ack (the test above), so a real outlet rebuild fails
+     the night until a human re-runs with it. Unless both prompts recognise the gate's own
+     error label and send the evidence to the field the CLI prints, that night fails with no
+     word on which pairs moved or why. */
+  const before = churnWorld();
+  const [error] = churnOf(relist(before, "method", "raid", () => "S"), before).errors;
+  const label = error.slice(0, error.indexOf(":"));
+  const wf = (await readFile(new URL("../.github/workflows/nightly.yml", import.meta.url), "utf8")).replace(/\s+/g, " ");
+  for (const name of ["Primary full refresh", "Recovery pass for incomplete refresh"]) {
+    const start = wf.indexOf(`- name: ${name}`);
+    assert.ok(start >= 0, name);
+    const prompt = wf.slice(wf.indexOf("prompt: |", start), wf.indexOf(" - name:", start + 1));
+    for (const must of [label, "anomalyAckProposal", "source_churn_ack", "source:bracket"]) {
+      assert.ok(prompt.includes(must), `${name}: the prompt must mention ${must}`);
+    }
+  }
 });
 
 test("checkValueMove covers sims and Dummy Dome, not just spec.metrics", () => {

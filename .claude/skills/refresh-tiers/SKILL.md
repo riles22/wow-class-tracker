@@ -147,11 +147,12 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   `data/required-sources.json`). That is the whole-list parse-bug shape of the 2026-07-09
   Method shift, which the consensus anomaly gate cannot see. A bracket whose
   `seasonVerified` advanced this run is exempt. Otherwise check the parse first. If the
-  outlet really rebuilt its list, leave the letters as verified and put the evidence (the
-  page's own date and what changed) in `anomalyAckProposal`; a human re-runs with the
-  `source_churn_ack` input naming the `source:bracket` pair. If the parse is wrong,
-  re-parse, or revert that source's letters and record `parse_error`. Never change
-  `seasonVerified` to earn the exemption.
+  outlet really rebuilt its list, leave the letters as verified and put the evidence in
+  `anomalyAckProposal`: each `source:bracket` pair the gate named, the outlet's page URL,
+  the page's own date and what changed, then the `source_churn_ack` value a human would
+  re-run with (it waives only the pairs it names). Never pass `--churn-ack` yourself. If
+  the parse is wrong, re-parse, or revert that source's letters and record `parse_error`.
+  Never change `seasonVerified` to earn the exemption.
 
 ### Parser traps promoted from `log.md` (2026-08-15 context audit)
 

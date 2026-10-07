@@ -30,6 +30,11 @@ runs (2026-07-31), which were sound but left drift the next nightly had to absor
   commit message**: name what was corrupt, what the fix is, and how it was verified.
   That commit message is the ack record; without it the history shows a mass value move
   with no explanation, indistinguishable from the corruption it fixed.
+  An unattended run (the scheduled task under Scope) has no human review to stand in for
+  any of these inputs: if `check-refresh --manifest` prints a finding one of them would
+  waive, do not push. Report it with the evidence the nightly agents would put in
+  `anomalyAckProposal` (for a churn breach: each `source:bracket` pair, the outlet's page
+  and the page's own date) and stop.
 
 ## The procedure
 

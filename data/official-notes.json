@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-10-06T16:57:07.388Z",
+      "checkedAt": "2026-10-06T22:38:46.224Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -432,10 +432,287 @@
         {
           "id": 29891478,
           "postNumber": 1,
-          "version": 53,
-          "updatedAt": "2026-10-02T00:02:37.783Z",
-          "bodySha256": "e92c9ba6755bd2ad57c2adeac38f563751c9625c1d58708c118bf1631dde1d92",
+          "version": 56,
+          "updatedAt": "2026-10-06T22:36:40.299Z",
+          "bodySha256": "afb787a273c09fb93fb084619a35492f0a134ac2123616b0cf5f9bee409050c4",
           "sections": [
+            {
+              "id": "2336376:1:2026-10-06:classes:death-knight:1",
+              "date": "2026-10-06",
+              "category": "Classes",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Unholy"
+              ],
+              "sha256": "d7932bfdbd54d848a267f8086a67cd211db60b652e757fc7530a4e2c6470598f",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. Scoped change: Unholy — Blightfall now deals 100% of the remaining plague damage (was 200%), plus the fix stopping Augmentation Evoker Reattribution damage from plague erupt effects being attributed to the Death Knight — matched against the 10-02 entry's Unholy Death Knight highlight. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-10-02 — “Incoming Class Tuning - October 6” (Linxy, official topic 2370266, post 1, version 1), the announcement of the pass that took effect with the October 6 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-09-22 precedent in this ledger); the new 2026-10-06 hotfix feed entry records, as a Non-class line, that this pass went live unchanged. No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:classes:demon-hunter:1",
+              "date": "2026-10-06",
+              "category": "Classes",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "f74995ea6562ff5b8e261b0f65bb338fbd7db6a58b4c4f4ffe4967e6742da338",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. Scoped change: Devourer — Consume/Devour, Reap/Cull, Eradicate primary target and Collapsing Star primary target +8%; The Hunt initial damage and Voidblade +10%, all PvE-only — matched against the 10-02 entry's Devourer Demon Hunter highlight. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-10-02 — “Incoming Class Tuning - October 6” (Linxy, official topic 2370266, post 1, version 1), the announcement of the pass that took effect with the October 6 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-09-22 precedent in this ledger); the new 2026-10-06 hotfix feed entry records, as a Non-class line, that this pass went live unchanged. No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:classes:monk:1",
+              "date": "2026-10-06",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Brewmaster",
+                "Monk|Mistweaver"
+              ],
+              "sha256": "e7cc63e0dc64ef6b3ed2dcd9f508aeb7faa2b1e6801547fd2962e24c5eae674d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. Scoped changes: Brewmaster (Quick Sip 8% of Stagger, was 5%; Pretense of Instability 10% dodge for 8 seconds, was 5) and Mistweaver (Invigorating Mists +15%; Enveloping Mist +15%, PvE-only) — matched against the 10-02 entry's Brewmaster Monk and Mistweaver Monk highlights. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-10-02 — “Incoming Class Tuning - October 6” (Linxy, official topic 2370266, post 1, version 1), the announcement of the pass that took effect with the October 6 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-09-22 precedent in this ledger); the new 2026-10-06 hotfix feed entry records, as a Non-class line, that this pass went live unchanged. No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:classes:rogue:1",
+              "date": "2026-10-06",
+              "category": "Classes",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Subtlety"
+              ],
+              "sha256": "b79093be52425c4193a9602ad8a379b74ddf630c3c52e7a708459f01bca6a500",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. Scoped change: Subtlety › Trickster (hero-talent block nested inside the Subtlety heading) — Fazed 7% (was 5%), Unseen Blade +15%, Coup de Grace +10%, all PvE-only — matched against the 10-02 entry's Subtlety Rogue highlight. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-10-02 — “Incoming Class Tuning - October 6” (Linxy, official topic 2370266, post 1, version 1), the announcement of the pass that took effect with the October 6 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-09-22 precedent in this ledger); the new 2026-10-06 hotfix feed entry records, as a Non-class line, that this pass went live unchanged. No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:classes:shaman:1",
+              "date": "2026-10-06",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Enhancement"
+              ],
+              "sha256": "687c9260eb6e7dfb08c74d4e6330182b6dabe98a64e6be6a71fec5113ee7e974",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. Scoped change: Enhancement — all ability and auto-attack damage +4% and Lava Lash +35%, both PvE-only — matched against the 10-02 entry's Enhancement Shaman highlight. Every change in this section is already carried, at the same values and with the same PvP qualifiers, by the existing feed entry dated 2026-10-02 — “Incoming Class Tuning - October 6” (Linxy, official topic 2370266, post 1, version 1), the announcement of the pass that took effect with the October 6 weekly maintenance. Excluded from reapplication so the same tuning is not counted twice in the feed or the outlook tally (the 2026-09-22 precedent in this ledger); the new 2026-10-06 hotfix feed entry records, as a Non-class line, that this pass went live unchanged. No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:death-knight:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Blood",
+                "Death Knight|Frost",
+                "Death Knight|Unholy"
+              ],
+              "sha256": "291675deeef4545b81151ecc3ae6a7e006357a2887d93cda9d40099efb4c31ad",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Dark Simulacrum (PvP Talent), Blood's Death Chain and Price of Progress (PvP Talents) and Frost's Death's Cold Embrace (PvP Talent). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:demon-hunter:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer",
+                "Demon Hunter|Havoc",
+                "Demon Hunter|Vengeance"
+              ],
+              "sha256": "a8100678598729fb4d5559a8f24447681aa8da8fb914c1b9d6af064580290f46",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Cover of Darkness (a PvP talent effect on Darkness) and Havoc's and Vengeance's Illidan's Grasp (a PvP talent). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:druid:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Balance",
+                "Druid|Restoration"
+              ],
+              "sha256": "961c4731fdaa85e36180ddfa877f0303761c32136d3eced5e72d5c9f9c927ae3",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Balance's Moon and Stars and Tireless Pursuit and Restoration's Ancient of Lore: Mass Blooming (all PvP talents). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:evoker:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Augmentation",
+                "Evoker|Devastation",
+                "Evoker|Preservation"
+              ],
+              "sha256": "c2d60dfca83e039234f4ab47a5081f30928fc6d7937c08e292c1d6d92217d4a9",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Dreamwalker's Embrace, Augmentation's “All spell and ability damage increased by 8% in PvP combat” and Seismic Slam (PvP talents). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:hunter:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Beast Mastery",
+                "Hunter|Marksmanship",
+                "Hunter|Survival"
+              ],
+              "sha256": "9922e79be53cb1a6a4981b296b5f8829684ac7589ac4bb5ab8d33f429cdc09f8",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Hunting Pack (PvP Talent) and Beast Mastery's Dire Beast: Hawk (PvP Talent). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:mage:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire",
+                "Mage|Frost"
+              ],
+              "sha256": "d192cc38a8ea801c3322ec9512a726dbdd85fd38e1f06de01dbb7de7a9eda333",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Fire's World in Flames and Glass Cannon and Frost's Frost Bomb and Icy Feet (all PvP talents). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:monk:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Brewmaster",
+                "Monk|Mistweaver",
+                "Monk|Windwalker"
+              ],
+              "sha256": "32e903d7f3ee7b8c64f8f39ca28dd80574eeb29aa852be9eac94bb98ad886db2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Mighty Ox Kick, Mistweaver's Healing Sphere and Windwalker's Perpetual Paralysis (all labelled PvP Talent). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:paladin:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy",
+                "Paladin|Protection",
+                "Paladin|Retribution"
+              ],
+              "sha256": "0c2e803d5b8e09319452c5e151c59968990ee678406679b34c920d9405ae4763",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Spellbreaker and Retribution's Ultimate Retribution (PvP talents). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:priest:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Discipline",
+                "Priest|Holy",
+                "Priest|Shadow"
+              ],
+              "sha256": "804cc442601b9a068fa605254806d4114319b98ff877f9e131768667e55914fe",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Absolute Faith and Improved Mass Dispel (PvP talents). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:rogue:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination",
+                "Rogue|Outlaw",
+                "Rogue|Subtlety"
+              ],
+              "sha256": "55f78b269d080440e2f1b31b03f70f847fb526e453c871e8f4e3cefbeecbce1a",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Thick as Thieves and Death from Above (PvP talents) and Outlaw's “All damage increased by 5% in PvP combat”. Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:shaman:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Elemental",
+                "Shaman|Enhancement",
+                "Shaman|Restoration"
+              ],
+              "sha256": "3710a0b167fcae973b1e3788c3658d9613ee001f381f77d35e0615ff8b08f2b2",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Electrocute (a PvP talent) and Restoration's Earth Shield block — Call of Al’Akir, Earth Shield healing +15% “in PvP combat” and Earthen Harmony (8% “in PvP combat”, 200% missing-health scaling), under a developers' note about PvP Earth Shield play. Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:warlock:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "a25fbe5bdb2ec65718e566d94a3916fb1530b4d54aeefe3ec229f23222593bcd",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Bonds of Fel, Bloodstone and Demonology's Call Fel Lord (all PvP talents). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2336376:1:2026-10-06:player-versus-player:warrior:1",
+              "date": "2026-10-06",
+              "category": "Player versus Player",
+              "class": "Warrior",
+              "specKeys": [
+                "Warrior|Arms",
+                "Warrior|Fury",
+                "Warrior|Protection"
+              ],
+              "sha256": "704e3bfbb27bf34a06c4e411d52dac312513dd06518750891be09a1932f8621d",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-06 (nightly) against official hotfix topic 2336376, post 1, version 56 (last edited 2026-10-06T22:36:40.299Z), read from the deterministic receipt text with its list nesting intact and independently re-fetched from the topic JSON this run. This is the post's October 6 Player versus Player section, under the block's developers' note that the pass buffs underperforming PvP Talents, and every line in it is PvP-only: Dragon Charge (a PvP talent). Lines that carry no explicit “in PvP combat” qualifier sit under the Player versus Player heading and name PvP talents. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
             {
               "id": "2336376:1:2026-10-01:classes:druid:1",
               "date": "2026-10-01",
@@ -2379,7 +2656,7 @@
       "topicId": 2344395,
       "patch": "12.1.5",
       "era": "ptr",
-      "checkedAt": "2026-10-06T16:57:07.388Z",
+      "checkedAt": "2026-10-06T22:38:46.224Z",
       "removedSections": [],
       "posts": [
         {
