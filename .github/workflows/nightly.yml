@@ -333,7 +333,7 @@ jobs:
   refresh:
     needs: collect
     runs-on: ubuntu-24.04
-    timeout-minutes: 110
+    timeout-minutes: 135
     permissions:
       contents: read
       actions: read
@@ -372,7 +372,7 @@ jobs:
         id: primary_agent
         continue-on-error: true
         uses: anthropics/claude-code-action@cab360f6565aa35a51d6ce9e43f1f4287c0a32ea # v1
-        timeout-minutes: 55    # the 07-24 primary ran 39m05s against the old 42 (audit A7)
+        timeout-minutes: 80    # 12.1 launch night took 54m48s of the old 55 (F57); the job's 135 keeps recovery's 35
         with:
           github_token: ${{ github.token }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

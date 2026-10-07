@@ -100,6 +100,21 @@ test("collectors, agents and publisher have separate jobs and provider credentia
   assert.ok(collect.indexOf('collector-receipts.mjs check-key') < collect.indexOf('fetch-wcl.mjs'), 'missing handoff key fails before provider requests');
 });
 
+test("the refresh job outlasts a primary agent that uses its whole limit and then a full recovery pass (audit 2026-10-04, F57)", () => {
+  const refresh = job(workflow("nightly"), "refresh");
+  const step = name => {
+    const at = refresh.indexOf(`- name: ${name}`);
+    assert.ok(at >= 0, `${name} step present`);
+    return Number(/\n        timeout-minutes: (\d+)\b/.exec(refresh.slice(at).split(/\n      - /)[0])?.[1]);
+  };
+  const jobLimit = Number(/\n    timeout-minutes: (\d+)\n/.exec(refresh)?.[1]);
+  const primary = step("Primary full refresh"), recovery = step("Recovery pass");
+  assert.ok(primary >= 80, `primary ${primary}: the 12.1 launch night's primary took 54m48s of the old 55`);
+  assert.ok(recovery > 0);
+  assert.ok(jobLimit >= primary + recovery + 10,
+    `job ${jobLimit} must cover primary ${primary} + recovery ${recovery} + about 10 for setup and gates`);
+});
+
 test("agent and publisher inputs bind collector artifact ID, archive digest, manifest digest and exact file bytes", () => {
   const text = workflow('nightly'), collect = job(text, 'collect'), refresh = job(text, 'refresh'), publish = job(text, 'publish');
   for (const output of ['artifact_id: ${{ steps.receipts.outputs.artifact-id }}',
