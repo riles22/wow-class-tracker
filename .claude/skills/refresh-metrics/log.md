@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-08 (nightly, ~17:40 UTC) — Murlok landed (10-08); SimC new run, ≤0.1% noise; others flat
+
+- Murlok + Mythicstats: applied metrics-fetch/updates.json only (80 rows; Murlok <time> 2026-10-08, Mythicstats period 1084, sum 100.1, 0 retired). check-stable-metrics passes.
+- SimC MID2_Raid.txt: HEAD db768b52b4 (was e3fa778a86), same hotfix 2026-10-07/69933; 24 specs, all moved ≤0.1%; merged at 2026-10-07.
+- Bloodmallet: 24 charts MID2, all dated 2026-10-07, identical to stored; Balance / Augmentation / Devastation error body 3/3. 12.1.5 hold not engaged.
+- WoWMeta: snapshotDate 2026-09-15, rankings Last-Modified 2026-10-06, 40/40 identical; partial.
+- WCL (receipt only): raid partial 291 rows (2 invalid: Feral 3421, Demonology 3429), M+ success 320. Archon walled.
+
 ## 2026-10-07 (nightly re-run, ~17:35 UTC) — SimC re-sim merged (24); Mythicstats 1084 landed (80 via collector); others flat
 
 - **SimC — success, merged 24.** MID2_Raid.txt HEAD e3fa778a86 (hotfix 2026-10-07; was cafc27227e / 10-03). 23 of 24 moved; Devourer +5.0% (10-06 buffs), Enhancement +4.2%, the rest within ±0.1%. asOf 2026-10-07.

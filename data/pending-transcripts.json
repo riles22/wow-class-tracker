@@ -2,11 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "noa76kgKui0",
-      "creator": "YoDaTV",
-      "title": "Three Things They DON'T Tell You About Blood DK",
+      "id": "LguroEYBiIc",
+      "creator": "izen (Izenhart)",
+      "title": "Mythic+ Week 7 - Pre 12.1.5 Edition | Best Specs & Growing Top Picks",
       "published": "2026-10-07",
-      "queuedAt": "2026-10-07"
+      "queuedAt": "2026-10-08"
     }
   ],
   "skipped": [
@@ -3187,6 +3187,13 @@
       "title": "Mythic+ & Mythic Raid Gear ilvl GAP | How Big & How Much It Matters",
       "reason": "Transcript read (Supadata, 2026-10-07): a gearing explainer on the item-level gap between Mythic raiders and Mythic+-only players (about 3–3.5 item levels at most, roughly 3% damage, slowed by kill counts and bonus rolls, with 12.1.5's extra bonus roll and Voidforge noted). No spec is named or assessed; no meta read to distil.",
       "verifiedAt": "2026-10-07"
+    },
+    {
+      "id": "noa76kgKui0",
+      "creator": "YoDaTV",
+      "title": "Three Things They DON'T Tell You About Blood DK",
+      "reason": "Transcript read (Supadata, 2026-10-08): a Blood Death Knight how-to with Mythic Ula'tek footage — Anti-Magic Shell timing at low health, holding Boiling Point procs for add aggro, using Voracious Heart about 8 seconds before Dancing Rune Weapon, and a lust-burn rotation. No read on Blood's standing against other tanks. Guide-shaped; nothing to distil.",
+      "verifiedAt": "2026-10-08"
     }
   ],
   "seen": [

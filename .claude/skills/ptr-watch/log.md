@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-08 (nightly, ~17:40 UTC) — no new tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved.
+- Wowhead RSS (40 items, top news=383313), news index and blue tracker: WoW Forever items plus two 12.1.5 system articles, run report only — news=383281 "New Curios and New Ranks - Delve Curio Changes in Patch 12.1.5" (2026-10-08) and news=383252 "Myth Track Gear Awarded from Delve Labyrinths in Patch 12.1.5" (2026-10-07); no class tuning in either title. 2370266 still v1, 2373623 v2, 12.1 thread 2317811 unchanged. Forum search "class tuning order:latest": player topics only.
+- No new forecast cycle; PHASES.ptr null. 12.1.5 releases 2026-10-13 (LABEL_FLIP_DUE).
+
 ## 2026-10-07 (nightly re-run, ~17:35 UTC) — no new tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved.

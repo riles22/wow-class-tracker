@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-08 (nightly, ~17:40 UTC) — 1 transcript → 1 skip; 1 queued
+
+- 44/44 feeds HTTP 200. Supadata verdict ok, 1/1 fetched.
+- noa76kgKui0 (YoDaTV, Blood DK tips) → skipped[]: AMS timing, Boiling Point aggro, Voracious Heart before DRW; no standing read.
+- Queued LguroEYBiIc (izen, "Mythic+ Week 7 - Pre 12.1.5 Edition | Best Specs", 2026-10-07) for metaNotes.
+- Left unseen (keyword filter / guide-shaped): Obli DHWMKaQfphs (Kith'ix loot), MadSkillzzTV Z0WNzR_0za0 (trinket short), plus streams, WoW Forever and PvP uploads.
+
 ## 2026-10-08 (local scheduled, before today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
 
 - YoDaTV `noa76kgKui0` (yt-dlp 2026.07.04, --sleep-requests 3): player fetch fine, subtitle request **HTTP 429** — fifth day of the same shape. One probe only, caption traffic stopped; stays queued for the nightly's Supadata lane. No discovery sweep (the nightly polls; backlog unchanged). 0 takes, 0 metaNotes.
