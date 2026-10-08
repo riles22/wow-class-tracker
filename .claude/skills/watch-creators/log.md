@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-08 (local scheduled, before today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
+
+- YoDaTV `noa76kgKui0` (yt-dlp 2026.07.04, --sleep-requests 3): player fetch fine, subtitle request **HTTP 429** — fifth day of the same shape. One probe only, caption traffic stopped; stays queued for the nightly's Supadata lane. No discovery sweep (the nightly polls; backlog unchanged). 0 takes, 0 metaNotes.
+
 ## 2026-10-07 (nightly re-run, ~17:35 UTC) — 2 transcripts → 1 take, 1 skip; 1 queued
 
 - Discovery: 44/44 feeds HTTP 200 (Tettles/Tactyks/Clandon 404s from the morning cleared). 401 unseen in-cycle uploads, the handed-forward backlog, left UNSEEN.
