@@ -1,14 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "LguroEYBiIc",
-      "creator": "izen (Izenhart)",
-      "title": "Mythic+ Week 7 - Pre 12.1.5 Edition | Best Specs & Growing Top Picks",
-      "published": "2026-10-07",
-      "queuedAt": "2026-10-08"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

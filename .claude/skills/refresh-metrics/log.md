@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-09 (nightly, ~17:15 UTC) — Murlok + Mythicstats via collector; SimC new run ≤0.2%; others flat
+
+- Murlok: collector success, 40 rows, source date still 10-08. Mythicstats: period 1084, 38 rows; Devastation Evoker and Fire Mage omitted and retired (stored shares under the 0.5 bound).
+- SimC MID2_Raid.txt: HEAD eed909156d (was db768b52b4), same hotfix 2026-10-07/69933; 24 specs, max move −0.18% (Arcane); merged at 2026-10-07 → partial (2 days old).
+- Bloodmallet: 24 MID2 charts, all 10-07, identical → nothing merged, partial; Balance/Aug/Dev error body 3/3. WoWMeta: snapshotDate 09-15, 40/40 identical, partial. Archon numerics blocked. WCL from the collector: raid partial 292 rows (26 sparse, 2 invalid), M+ success 320.
+
 ## 2026-10-08 (nightly, ~17:40 UTC) — Murlok landed (10-08); SimC new run, ≤0.1% noise; others flat
 
 - Murlok + Mythicstats: applied metrics-fetch/updates.json only (80 rows; Murlok <time> 2026-10-08, Mythicstats period 1084, sum 100.1, 0 retired). check-stable-metrics passes.

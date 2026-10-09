@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-09 (nightly, ~17:15 UTC) — 1 transcript → 10 metaNotes; queue 1 → 0
+
+- Supadata summary verdict ok, 1/1 fetched (usage 49 counted / 30 days, limit null).
+- izen LguroEYBiIc ("Mythic+ Week 7 - Pre 12.1.5 Edition | Best Specs & Growing Top Picks", 2026-10-07) distilled into 10 M+-outlook metaNotes (bracket mplus, "Season 2 live — M+ outlook"; published before LABEL_FLIP_DUE so live framing): Assassination, Elemental, Holy Paladin, Guardian positive; Unholy, Arms, Arcane, Havoc, Devourer, Blood mixed. Superseded his prior M+-lens izen notes for those specs (12 notes: 10-03 Unholy/Devourer, 10-02 Blood/Guardian, 09-30 Arms/Assassination/Elemental/Arcane, 09-23 Holy Paladin/Blood, 09-22 Holy Paladin, 09-15 Havoc). Demonology's popularity drop was mentioned only in passing and not distilled. izen `latest` advanced to this video.
+- 44/44 feeds polled, all 200. Nothing new queued: uploads since the 10-08 nightly are streams, key/raid VODs, a Kith'ix boss guide (Tactyks), WoW Forever, PvP, and Dalaran Gaming's 12.1.5 DH/Evoker recap (V_NtYQjgXCk) and gearing/12.1.5 prep (pJTWndBcJ4I) — DH/Evoker are outside his registered scope. All left unseen.
+
 ## 2026-10-09 (local scheduled, before today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
 - izen LguroEYBiIc ("Mythic+ Week 7 - Pre 12.1.5 Edition", 2026-10-07): anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on `timedtext`. Stopped on the first error; no cookies.txt supplied, so no authenticated fallback. Stays in `videos[]` for the nightly's Supadata lane. No takes, no metaNotes.
 
