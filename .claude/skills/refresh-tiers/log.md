@@ -24,6 +24,9 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-09 (local scheduled, before today's nightly) — Icy Veins refreshed from home, 0 moved
+- Icy Veins (curl, browser UA + Accept + Accept-Language): all six pages HTTP 200, one `table.tier-list` each after stripping `<style>`; 27/7/6 × 2 = 80 rows, 80 non-null, 0 unmatched, Devourer present on both DPS pages. **0 letters changed.** dateModified unchanged on every page (raid 09-24 / 09-01 / 08-29, M+ 10-06 / 09-24 / 09-24), so `published` stays; `snapshot` → 2026-10-09, `seasonVerified` stays s2 (raid-healer title still says "Patch 12.0.7"; body ranks S2). Churn gate: no letter changed. No history snapshot (no movement).
+
 ## 2026-10-08 (nightly, ~17:40 UTC) — Method + Wowhead 0 moved; Icy Veins 403; Archon walled
 
 - Method (direct GET): 40 mplus + 40 raid, 8 dungeon names rejected by roster match; Last Updated 5 Oct (M+) / 10 Aug (raid); Season 2 + Devourer in both. 0 moved.

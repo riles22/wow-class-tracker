@@ -24,6 +24,9 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-09 (local scheduled, before today's nightly) — RSS scan only; 0 feed entries
+- Wowhead news RSS: no live hotfix or class-tuning post, no 12.2 PTR announcement. One 12.1.5 preview item after yesterday's nightly: "Preservation Evoker and Murder Row Dungeon - Updates to 12.1.5 Patch Notes" (2026-10-08 16:05 CDT). That is 12.1.5 pre-launch material, so it goes in the run report, not `ptr-builds.json`; the nightly's official-notes collector owns the preview ledger. No data written.
+
 ## 2026-10-08 (nightly, ~17:40 UTC) — no new tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved.

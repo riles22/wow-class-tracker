@@ -24,6 +24,9 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-09 (local scheduled, before today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
+- izen LguroEYBiIc ("Mythic+ Week 7 - Pre 12.1.5 Edition", 2026-10-07): anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on `timedtext`. Stopped on the first error; no cookies.txt supplied, so no authenticated fallback. Stays in `videos[]` for the nightly's Supadata lane. No takes, no metaNotes.
+
 ## 2026-10-08 (nightly, ~17:40 UTC) — 1 transcript → 1 skip; 1 queued
 
 - 44/44 feeds HTTP 200. Supadata verdict ok, 1/1 fetched.
