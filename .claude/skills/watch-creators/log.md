@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-10 (local scheduled, after today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
+
+- Shadarek aoDFvHbKJGc ("Why your Aldrachi Reaver sim DPS has dropped", 2026-10-10): anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on timedtext. Stopped on the first error; no cookies.txt supplied. Stays in videos[] for the nightly's Supadata lane. No takes, no metaNotes.
+
 ## 2026-10-10 (nightly, ~16:00 UTC) — 0 transcripts; 1 video queued
 
 - Supadata summary verdict ok, queue empty so 0 requested (usage 48 counted / 30 days, limit null).

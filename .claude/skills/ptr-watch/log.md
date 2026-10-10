@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-10 (local scheduled, after today's nightly) — RSS scan only; 0 feed entries
+
+- Wowhead news RSS (lastBuildDate 10-10 11:30 CDT): top item still news=383362, the one the nightly already read, so nothing new: no live tuning, no 12.2 PTR announcement, no new 12.1.5 material. No data written.
+
 ## 2026-10-10 (nightly, ~16:00 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts unchanged); pending differed from stored only in checkedAt; 0 unresolved.
