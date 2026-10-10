@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-10 (nightly, ~16:00 UTC) — 0 transcripts; 1 video queued
+
+- Supadata summary verdict ok, queue empty so 0 requested (usage 48 counted / 30 days, limit null).
+- 44/44 feeds polled, all 200. Queued: Shadarek aoDFvHbKJGc "Why your Aldrachi Reaver sim DPS has dropped" (2026-10-10; Havoc sim analysis — the SimC report this run also shows Havoc −1.0%).
+- Left unseen (keyword cut / guide-shaped / not current retail): WoW Forever uploads (Supatease, Psybear, Dalaran Gaming, NeekapHere, Shindigg, Tactyks R6VWr2MbjkQ), streams and key/raid VODs (Bansherz, LBNinja7, YoDaTV, Critcake, Shadarek Z-O88NKUVIA/KrdwFeogsWQ, Kalamazi, Whispyr, Clandon, Hopeful, Kesslive, Musguete, AutomaticJak, Reholy), dungeon/boss guides (Shadarek -05GCCswMeI and QIRAm-7lyJs, Megasett JVcRp-WY6B8, Tactyks qEDjHal4GL4 Kith'ix, YoDaTV y7xsCK3wTMg), gear/loot (izen llH4wMjWyoE 12.1.5 gear upgrades, Obli DHWMKaQfphs Kith'ix loot, MadSkillzzTV Z0WNzR_0za0 trinket short), news recap (Dalaran Gaming pJTWndBcJ4I), PvP duels (Dalaran Gaming).
+- 0 takes, 0 metaNotes.
+
 ## 2026-10-09 (nightly, ~17:15 UTC) — 1 transcript → 10 metaNotes; queue 1 → 0
 
 - Supadata summary verdict ok, 1/1 fetched (usage 49 counted / 30 days, limit null).

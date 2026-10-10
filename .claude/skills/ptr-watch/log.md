@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-10 (nightly, ~16:00 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts unchanged); pending differed from stored only in checkedAt; 0 unresolved.
+- Wowhead RSS (40 items, top news=383362), news index and blue tracker: WoW Forever items; blue 24307306 "Midnight's 12.1.5 Content Update Arrives October 13" (10-09, release-date announcement); news=383357 "Ruby Life Pools Nerfs on Patch 12.1.5 PTR" (10-09, datamined 12.1.5 PTR dungeon tuning — run report only); news=383359 "2nd Boss Murder Row Hotfixed" (10-09, a live dungeon bug fix reported by Wowhead, no class content, not yet in Blizzard's hotfix compilation — nothing logged until an official source carries it). 2370266 still v1, 2373623 v2, 12.1 thread 2317811 unchanged (posts_count 13, highest 19). Forum search "tuning order:latest": player topics only.
+- No new forecast cycle; PHASES.ptr null. 12.1.5 releases 2026-10-13 (LABEL_FLIP_DUE).
+
 ## 2026-10-09 (nightly, ~17:15 UTC) — no new tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved.

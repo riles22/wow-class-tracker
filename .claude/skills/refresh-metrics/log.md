@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-10 (nightly, ~16:00 UTC) — Murlok + Mythicstats via collector; SimC new run (≤1%); others flat
+
+- Murlok: collector success, 40 rows, source date still 2026-10-08 → partial.
+- Mythicstats: collector success, period 1084, 37 rows (sum 100.3); Frost Mage RETIRED (omitted, stored share ≤0.5); Devastation and Fire still absent. Coverage 2026-10-10.
+- SimC MID2_Raid.txt: HEAD 71a76b73cc (was eed909156d), same hotfix 2026-10-07/69933; 24 specs, max move −1.0% (Havoc, Aldrachi Reaver), rest ≤0.2%; merged at 2026-10-07 → partial.
+- Bloodmallet: 24 charts, all MID2 / 2026-10-07, identical to stored, nothing merged; Balance, Augmentation, Devastation error body 3/3 → partial.
+- WoWMeta: snapshotDate still 2026-09-15, 40/40 identical → partial. Archon numbers: walled. WCL: collector-applied (raid partial 291 rows, 5 invalid cuts; M+ success 320).
+
 ## 2026-10-09 (nightly, ~17:15 UTC) — Murlok + Mythicstats via collector; SimC new run ≤0.2%; others flat
 
 - Murlok: collector success, 40 rows, source date still 10-08. Mythicstats: period 1084, 38 rows; Devastation Evoker and Fire Mage omitted and retired (stored shares under the 0.5 bound).

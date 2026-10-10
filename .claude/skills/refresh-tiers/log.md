@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-10 (nightly, ~16:00 UTC) — Method + Wowhead 0 moved; Icy Veins + Archon walled
+
+- Method (direct GET, 200): 40/40 per bracket, 0 null, Devourer present, body Season 2; Last Updated 5 Oct (M+) / 10 Aug (raid). 0 moves.
+- Wowhead (direct full-header GET, 200): 27+7+6 per bracket = 80, one [tier-list=rows] block per page, 0 unmatched; titles Midnight Season 2; dateModified unchanged (08-28 … 09-10). 0 moves. Snapshots → 2026-10-10.
+- Icy Veins: HTTP 403 on all six (runner block), nothing parsed. Archon: HTTP 403 "Just a moment...", nothing parsed; retained letters unchanged.
+
 ## 2026-10-09 (nightly, ~17:15 UTC) — Method + Wowhead 0 moved; Icy Veins + Archon walled
 
 - Method (direct GET, 200): 40/40 per bracket, 0 null, 0 moved; Last Updated 5 Oct 2026 (M+) / 10 Aug 2026 (raid). Wowhead (full browser headers, 200): 27+7+6 ×2 = 80, 0 null, 0 moved; dateModified 08-28…09-10. Both seasonVerified s2; snapshots → 2026-10-09.
