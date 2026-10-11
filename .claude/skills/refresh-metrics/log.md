@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-11 (nightly, ~16:30 UTC) — SimC new run (Havoc −5.5%, sim-bug fix); collectors flat; others unchanged
+
+- Murlok via collector: 40 rows, source date still 10-08. Mythicstats via collector: period 1084, 37 rows, no value changes, none newly retired (Devastation/Fire/Frost already retired).
+- SimC MID2_Raid.txt (240,711 B, complete): HEAD af05b9e2e1 (was 71a76b73cc), same 10-07 hotfix; 24 specs merged at asOf 2026-10-07; 23 ≤0.1%, Havoc 268,679 → 254,015 (−5.5%; best variant now Fel-Scarred). Shadarek's aoDFvHbKJGc explains it: Thrill of the Fight's 8% haste was applied twice in Aldrachi Reaver sims.
+- Bloodmallet: 24 MID2 charts, all dated 10-07 and identical to stored; Balance/Augmentation/Devastation still error body. WoWMeta: snapshotDate 09-15, 40/40 identical. Archon: walled. WCL: leaderboard raid partial (293 rows), M+ success (320) from the collector receipt.
+
 ## 2026-10-10 (nightly, ~16:00 UTC) — Murlok + Mythicstats via collector; SimC new run (≤1%); others flat
 
 - Murlok: collector success, 40 rows, source date still 2026-10-08 → partial.

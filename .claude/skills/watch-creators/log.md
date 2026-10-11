@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-11 (nightly, ~16:30 UTC) — 1 transcript read (skipped); 1 video queued; queue 1 → 1
+
+- 44/44 feeds HTTP 200. Supadata fetched aoDFvHbKJGc (Shadarek, "Why your Aldrachi Reaver sim DPS has dropped"): a SimC bug explainer (Thrill of the Fight haste double-applied; his sim −6.5%, in-game damage unchanged, stats unchanged), no spec-strength read → skipped[].
+- Queued izen I4n-gNLIlxI "Mythic+'s Best DPS Profile" (10-10, general-creator lane). New uploads otherwise streams, key VODs, WoW Forever or PvP (Supatease "CLASS BALANCE HAS CHANGED SO MUCH" is Forever/PvP framed) — left unseen. 0 takes, 0 metaNotes.
+
 ## 2026-10-11 (local scheduled, before today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
 
 - Shadarek aoDFvHbKJGc ("Why your Aldrachi Reaver sim DPS has dropped", 2026-10-10): anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on timedtext. Stopped on the first error; no cookies.txt supplied. Stays in videos[] for the nightly's Supadata lane. No takes, no metaNotes.

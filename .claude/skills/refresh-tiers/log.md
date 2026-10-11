@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-11 (nightly, ~16:30 UTC) — Method + Wowhead 0 moved; Icy Veins + Archon walled
+
+- Method (direct GET, 200): 40/40 raid + 40/40 M+, 0 null, 0 moves; Last Updated 5 Oct (M+) / 10 Aug (raid). Wowhead (full browser headers, 200): 27/7/6 + 27/7/6, 0 null, 0 moves; dateModified unchanged. Snapshots → 2026-10-11.
+- Icy Veins: 403 "Just a moment..." on all six from the runner (stored 2026-10-11 letters from this morning's home run untouched). Archon: 403 challenge on all six letter pages; retained letters unchanged.
+
 ## 2026-10-11 (local scheduled, before today's nightly) — Icy Veins verified from home; 0 letters moved
 
 - Icy Veins (home curl, browser UA + Accept + Accept-Language): all six pages HTTP 200, one tier-list table each after stripping <style>; 27/7/6 per bracket = 80 rows, 80 non-null, 0 unmatched, Devourer on both DPS pages. dateModified unchanged on every page (raid 09-24 / 09-01 / 08-29, M+ 10-06 / 09-24 / 09-24), so published stays; snapshot → 2026-10-11. Churn line: no letter changed.

@@ -2,11 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "aoDFvHbKJGc",
-      "creator": "Shadarek",
-      "title": "Why your Aldrachi Reaver sim DPS has dropped",
+      "id": "I4n-gNLIlxI",
+      "creator": "izen (Izenhart)",
+      "title": "Mythic+'s Best DPS Profile | Zug Zug AoE is Good...but there's better",
       "published": "2026-10-10",
-      "queuedAt": "2026-10-10"
+      "queuedAt": "2026-10-11"
     }
   ],
   "skipped": [
@@ -3194,6 +3194,13 @@
       "title": "Three Things They DON'T Tell You About Blood DK",
       "reason": "Transcript read (Supadata, 2026-10-08): a Blood Death Knight how-to with Mythic Ula'tek footage — Anti-Magic Shell timing at low health, holding Boiling Point procs for add aggro, using Voracious Heart about 8 seconds before Dancing Rune Weapon, and a lust-burn rotation. No read on Blood's standing against other tanks. Guide-shaped; nothing to distil.",
       "verifiedAt": "2026-10-08"
+    },
+    {
+      "id": "aoDFvHbKJGc",
+      "creator": "Shadarek",
+      "title": "Why your Aldrachi Reaver sim DPS has dropped",
+      "reason": "Transcript read (Supadata, 2026-10-11): a SimulationCraft bug explainer. Thrill of the Fight’s 8% haste was being applied twice in Aldrachi Reaver Havoc sims; with the fix his sim fell about 6.5% (roughly 253k to 237k). He says in-game damage is unchanged — the sim now matches real play — stat priorities do not move, and Fount of Venomous Rage likely sims better than Heart of Ula’tek on raid bosses. A tooling correction, not a read on Havoc’s strength; nothing to distil.",
+      "verifiedAt": "2026-10-11"
     }
   ],
   "seen": [
