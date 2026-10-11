@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-11 (local scheduled, before today's nightly) — Icy Veins verified from home; 0 letters moved
+
+- Icy Veins (home curl, browser UA + Accept + Accept-Language): all six pages HTTP 200, one tier-list table each after stripping <style>; 27/7/6 per bracket = 80 rows, 80 non-null, 0 unmatched, Devourer on both DPS pages. dateModified unchanged on every page (raid 09-24 / 09-01 / 08-29, M+ 10-06 / 09-24 / 09-24), so published stays; snapshot → 2026-10-11. Churn line: no letter changed.
+
 ## 2026-10-10 (local scheduled, after today's nightly) — Icy Veins verified from home; 0 letters moved
 
 - Icy Veins (home curl, browser UA + Accept + Accept-Language): all six pages HTTP 200, one tier-list table each after stripping <style>; 27/7/6 per bracket = 80 rows, 80 non-null, 0 unmatched, Devourer on both DPS pages. dateModified unchanged on every page (raid 09-24 / 09-01 / 08-29, M+ 10-06 / 09-24 / 09-24), so published stays; snapshot → 2026-10-10. Churn line: no letter changed.

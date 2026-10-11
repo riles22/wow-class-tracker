@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-11 (local scheduled, before today's nightly) — RSS scan only; 0 feed entries
+
+- Wowhead news RSS (lastBuildDate 10-11 10:16 CDT): new since the 10-10 nightly's top item (news=383362) are news=383363 "All Melee Swings Cause 'Phantom Damage' to Health Bars in Midnight" (10-10, a live display bug, no class tuning) and news=383366 (WoW Forever). No live tuning, no 12.2 PTR announcement, no new 12.1.5 material. No data written; the official-notes ledger is left to the nightly's collector.
+
 ## 2026-10-10 (local scheduled, after today's nightly) — RSS scan only; 0 feed entries
 
 - Wowhead news RSS (lastBuildDate 10-10 11:30 CDT): top item still news=383362, the one the nightly already read, so nothing new: no live tuning, no 12.2 PTR announcement, no new 12.1.5 material. No data written.
