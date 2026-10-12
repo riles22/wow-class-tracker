@@ -2,11 +2,25 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "I4n-gNLIlxI",
+      "id": "IeaJEfWoVzI",
+      "creator": "Nintern",
+      "title": "We're BACK! | Devourer 12.1.5 Raid & M+ Guide | Midnight Season 2",
+      "published": "2026-10-12",
+      "queuedAt": "2026-10-12"
+    },
+    {
+      "id": "Thj8U5iBBwA",
+      "creator": "leak",
+      "title": "Survival Hunter Updates for 12.1.5 | New BIS Gear from Kith'ix",
+      "published": "2026-10-12",
+      "queuedAt": "2026-10-12"
+    },
+    {
+      "id": "58-AeS9Jxeo",
       "creator": "izen (Izenhart)",
-      "title": "Mythic+'s Best DPS Profile | Zug Zug AoE is Good...but there's better",
-      "published": "2026-10-10",
-      "queuedAt": "2026-10-11"
+      "title": "Mythic+ Keys & Best DPS Habits | Maximizing CDs for Better DPS",
+      "published": "2026-10-12",
+      "queuedAt": "2026-10-12"
     }
   ],
   "skipped": [

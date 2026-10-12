@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-12 (nightly, ~20:00 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved of 156 sections.
+- Wowhead RSS (40 items, top news=383378), news index and blue tracker: WoW Forever items, news=383384 (12.1.5 content update trailer), news=383376 (Venomous Abyss Hall of Fame full), and an EU repost of the 12.1.5 release-date blue (24307306, already logged). No live class tuning, no 12.2 PTR. 2370266 still v1, 2373623 v2, 12.1 thread 2317811 unchanged (posts_count 13, highest 19). Forum search "tuning order:latest": player topics only.
+- No new forecast cycle; PHASES.ptr null. 12.1.5 releases 2026-10-13 US (LABEL_FLIP_DUE); the launch commit is an owner action.
+
 ## 2026-10-11 (nightly, ~16:30 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved.

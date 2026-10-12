@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-12 (nightly, ~20:00 UTC) — 1 transcript distilled (5 metaNotes); 3 videos queued; queue 1 → 3
+
+- 44/44 feeds HTTP 200. Supadata verdict ok, 1 requested / 1 fetched (49 counted requests in the 30-day window, limit null).
+- izen I4n-gNLIlxI "Mythic+'s Best DPS Profile" (2026-10-10): a funnel / priority-damage PSA. Distilled 5 M+ metaNotes with their own damage-profile patchContext — Arcane, Assassination, Havoc positive (his "three strongest" funnel specs; Havoc via Wounded Quarry), Elemental and Demonology mixed (flat AoE). Arms deliberately NOT distilled: he praises its main-target damage in one pull and lists it in a poor-priority comp later, so no single read. Shadow's one "decent focus" line is a passing mention. His 10-07 week-seven score-based M+ metaNotes were NOT superseded: this is a different lens (damage profile, not average score), so both stay live.
+- Queued (keyword-filtered): Nintern IeaJEfWoVzI (Devourer 12.1.5 Raid & M+ guide), leak Thj8U5iBBwA (Survival 12.1.5 updates / Kith'ix gear), izen 58-AeS9Jxeo (M+ cooldown habits PSA). Left unseen: key VODs, streams, WoW Forever, PvP duels, izen llH4wMjWyoE (12.1.5 gear PSA), Tettles -socgPKgxy8 (general retail discussion).
+
 ## 2026-10-11 (nightly, ~16:30 UTC) — 1 transcript read (skipped); 1 video queued; queue 1 → 1
 
 - 44/44 feeds HTTP 200. Supadata fetched aoDFvHbKJGc (Shadarek, "Why your Aldrachi Reaver sim DPS has dropped"): a SimC bug explainer (Thrill of the Fight haste double-applied; his sim −6.5%, in-game damage unchanged, stats unchanged), no spec-strength read → skipped[].
