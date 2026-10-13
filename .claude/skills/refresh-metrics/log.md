@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-13 (nightly, ~17:50 UTC) — Murlok 40 new (source 10-13); WoWMeta re-cut merged; Bloodmallet 12.1.5 hold engaged
+
+- Murlok (collector): 40 rows, all moved, source date 2026-10-13 → success. Mythicstats (collector): period 1084, 37 rows, 0 moved, none newly retired.
+- WoWMeta: snapshotDate still 2026-09-15 but rankings Last-Modified 2026-10-13; all 40 lowerBound/n moved (max 3.1%), merged at 1 dp under asOf 2026-09-15; partial.
+- SimC MID2_Raid.txt: new HEAD eaf8c4670b, same 12.1.0.69933 / hotfix 10-07; 24 specs, max move 0.10%; asOf stays 10-07.
+- Bloodmallet: 24/27 charts, all MID2 dated 10-07, identical. 12.1.5 HOLD ENGAGED from today (LABEL_FLIP_DUE 2026-10-13, livePatch null): 0 of 24 charts dated ≥ 10-13, nothing merged; adopt wholesale only once every chart is dated on or after the release date. Balance/Augmentation/Devastation error 3/3.
+- Archon walled. WCL (collector): raid partial 294 rows (7 invalid, 19 sparse) AND now supersededBy partition 2 "12.1.5" (held on pinned partition 1 pending the reviewed switch); M+ success 320 rows.
+
 ## 2026-10-12 (nightly, ~20:00 UTC) — SimC same-build re-run (≤0.1%); Mythicstats 29 shares moved; others unchanged
 
 - Murlok (collector): 40 rows, 0 changed, source date 2026-10-08. Mythicstats (collector): period 1084, 37 rows, sum 100.2, 29 shares moved in-period (dated today), 8 unchanged; no new retirements.

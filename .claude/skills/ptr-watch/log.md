@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-13 (nightly, ~17:50 UTC, 12.1.5 release day) — no live class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (40 items, top news=383396), news index and blue tracker: WoW Forever items, news=383393 "Subtlety Rogue Buff - Updates to 12.1.5 Patch Notes" (12.1.5 notes revision) and Linxy US topic 2380514 "Dungeon and Raid Tuning -- October 13" (post 1 v1, created 2026-10-12T22:43Z; encounter-only: Altar of Fangs, Murder Row, Ruby Life Pools, Temple of Sethraliss, Blinding Vale, Coiled Altar Mythic, Voidscar Arena; the post says it goes live WITH the 12.1.5 content update). Both are 12.1.5 launch material: run report only, not the feed, while the displayed live patch is 12.1 (launch runbook B6/B8 is the owner's lane). Wowhead mirrors: news=383389 / 383388.
+- 2370266 still v1, 2373623 v2, 12.1 thread 2317811 unchanged (posts_count 13, highest 19). Forum search "hotfixes"/"tuning" order:latest: player topics plus 2380514. No 12.2 PTR; PHASES.ptr null. WCL lists raid partition 2 "12.1.5" (collector receipt), so 12.1.5 appears live in the US; the launch commit is an owner action.
+
 ## 2026-10-12 (local scheduled, after today's nightly) — no live class tuning; 12.1.5 notes revised (report only)
 
 - Wowhead RSS since the nightly: "Subtlety Rogue Buff - Updates to 12.1.5 Patch Notes" (12 Oct 19:45 CDT) — pre-launch 12.1.5 notes material, so run report only, never the feed while PHASES.ptr is null; the next nightly's official-notes collector should pick up the revision. Also weekly-reset dungeon/encounter tuning (Mythic Coiled Altar nerfs, Altar of Fangs M+ nerf) and Venomous Abyss Hall of Fame closing — not class tuning. No 12.2 PTR. Official-notes receipts not re-collected locally (nightly lane).

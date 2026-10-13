@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-13 (nightly, ~17:50 UTC) — 3 transcripts skipped, 1 queued, 0 takes
+
+- 44/44 feeds polled (41 class channelIds + 3 generalCreators), all 200.
+- Supadata verdict ok, 3/3 fetched; all moved to skipped[]: Nintern IeaJEfWoVzI (12.1.5 Devourer build/rotation guide, Annihilator recommended over Void-Scarred; no standing read), leak Thj8U5iBBwA (says Survival has no 12.1.5 spec changes; Kith'ix gear only), izen 58-AeS9Jxeo (M+ cooldown-habits explainer; Assassination/Elemental only as illustrations).
+- Queued: Jedith THRLOvU7vH4 "How to Play Annihilator Devourer Demon Hunter in 12.1.5" (likely guide-shaped; the queue keeps title-relevant spec videos).
+- Left unseen: streams/key VODs (Sha, Shadarek, Whispyr, Shindigg, Hopeful, MadSkillzzTV, LBNinja7, AutomaticJak, Bansherz, Megasett, Critcake, Reholy, YoDaTV, Kesslive, Maximum), WoW Forever and PvP uploads, dungeon/raid tuning recaps (Dratnos QTcHyEQjaQY, Shadarek yyVBUXOxB_I, Sha 2x43jeVbz_k), J-Funk Kith'ix boss guide, Dalaran Gaming 12.1.5 content guides, Tettles/NeekapHere commentary.
+- 12.1.5 framing note for the next distil: LABEL_FLIP_DUE 2026-10-13 is reached, so content published from today about the live game is "Season 2 live (12.1.5) — …" (step 4).
+
 ## 2026-10-12 (local scheduled, after today's nightly) — 0 of 3 transcripts; caption 429 persists; queue 3 → 3
 
 - izen 58-AeS9Jxeo: anonymous yt-dlp 2026.07.04 reached the subtitle step and got HTTP 429 on timedtext. Stopped on the first error; Nintern IeaJEfWoVzI and leak Thj8U5iBBwA not attempted. All three stay in videos[] for the nightly's Supadata lane. No takes, no metaNotes.

@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-13 (nightly) — Method only; Wowhead NEW AWS WAF wall; Icy Veins + Archon walled
+
+- Method (direct GET, 200): 40/40 per bracket, 0 dups, 0 moved; Last Updated 5 Oct (M+) / 10 Aug (raid); snapshots → 2026-10-13.
+- Wowhead: NEW — all six guide pages HTTP 202 with a 2,020-byte AWS WAF JS challenge (awsWafCookieDomainList / gokuProps), on two attempts; published-evidence receipt also 202. News/RSS/blue tracker on the same host still 200. Not solved; letters and snapshots (10-12) unchanged; row blocked. Watch whether it persists or is runner-IP specific (a local run can test from home).
+- Icy Veins: Cloudflare 403 on all six (block since 09-23). Archon: 403 on all six; encounter-tiers still s1 / 2026-08-17.
+- Churn vs HEAD: no letter changed; 0 consensus tier moves.
+
 ## 2026-10-12 (local scheduled, after today's nightly) — Icy Veins HELD: all six pages re-rated "for Patch 12.1.5" a day before release
 
 - Icy Veins (home curl, browser UA + Accept + Accept-Language): all six HTTP 200, one tier-list table each after stripping <style>; 27/7/6 per bracket = 80 rows, 80 non-null, 0 unmatched, Devourer on both DPS pages, body still Season 2. Every title now reads "(12.1.5)"; changelogs: raid DPS and M+ DPS "12 Oct. 2026: Updated for Patch 12.1.5", raid healer "11 Oct. 2026: Updated for Patch 12.1" (title 12.1.5). dateModified raid 10-12 / 10-11 / 08-29, M+ 10-12 / 10-12 / 10-12.

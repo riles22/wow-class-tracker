@@ -2,25 +2,11 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "IeaJEfWoVzI",
-      "creator": "Nintern",
-      "title": "We're BACK! | Devourer 12.1.5 Raid & M+ Guide | Midnight Season 2",
-      "published": "2026-10-12",
-      "queuedAt": "2026-10-12"
-    },
-    {
-      "id": "Thj8U5iBBwA",
-      "creator": "leak",
-      "title": "Survival Hunter Updates for 12.1.5 | New BIS Gear from Kith'ix",
-      "published": "2026-10-12",
-      "queuedAt": "2026-10-12"
-    },
-    {
-      "id": "58-AeS9Jxeo",
-      "creator": "izen (Izenhart)",
-      "title": "Mythic+ Keys & Best DPS Habits | Maximizing CDs for Better DPS",
-      "published": "2026-10-12",
-      "queuedAt": "2026-10-12"
+      "id": "THRLOvU7vH4",
+      "creator": "Jedith",
+      "title": "How to Play Annihilator Devourer Demon Hunter in 12.1.5",
+      "published": "2026-10-13",
+      "queuedAt": "2026-10-13"
     }
   ],
   "skipped": [
@@ -3215,6 +3201,27 @@
       "title": "Why your Aldrachi Reaver sim DPS has dropped",
       "reason": "Transcript read (Supadata, 2026-10-11): a SimulationCraft bug explainer. Thrill of the Fight’s 8% haste was being applied twice in Aldrachi Reaver Havoc sims; with the fix his sim fell about 6.5% (roughly 253k to 237k). He says in-game damage is unchanged — the sim now matches real play — stat priorities do not move, and Fount of Venomous Rage likely sims better than Heart of Ula’tek on raid bosses. A tooling correction, not a read on Havoc’s strength; nothing to distil.",
       "verifiedAt": "2026-10-11"
+    },
+    {
+      "id": "IeaJEfWoVzI",
+      "creator": "Nintern",
+      "title": "We're BACK! | Devourer 12.1.5 Raid & M+ Guide | Midnight Season 2",
+      "reason": "Transcript read (Supadata, 2026-10-13): a 12.1.5 Devourer build-and-rotation guide recorded while the PTR was down. Annihilator recommended for raid and M+; Void-Scarred sims about 8.5% higher but is not recommended because the Collapsing Star / The Hunt reset keeps it in melee and punishes disruption. Talent repositioning (Eradicate no longer a capstone), Consume now preferred over Soul Immolation in combat, and Kith’ix gear (ring, chest and tendril trinket). No read on Devourer’s standing against other specs. Guide-shaped; nothing to distil.",
+      "verifiedAt": "2026-10-13"
+    },
+    {
+      "id": "Thj8U5iBBwA",
+      "creator": "leak",
+      "title": "Survival Hunter Updates for 12.1.5 | New BIS Gear from Kith'ix",
+      "reason": "Transcript read (Supadata, 2026-10-13): he says Survival gets no spec changes in 12.1.5; the video covers only the Kith’ix cantrip gloves, ring and tendril trinket and the resulting trinket pairings by fight type, from his sims. Gear guide; no spec-strength read, nothing to distil.",
+      "verifiedAt": "2026-10-13"
+    },
+    {
+      "id": "58-AeS9Jxeo",
+      "creator": "izen (Izenhart)",
+      "title": "Mythic+ Keys & Best DPS Habits | Maximizing CDs for Better DPS",
+      "reason": "Transcript read (Supadata, 2026-10-13): a Mythic+ habits explainer on when to spend DPS cooldowns (on cooldown by default, held for dangerous packs such as the Blinding Vale belcher or Murder Row punisher). Assassination funnel and Elemental blanket AoE appear only as illustrations of matching a cooldown to a pack, a point his 10-12 video (already distilled) made; no new meta read. Nothing to distil.",
+      "verifiedAt": "2026-10-13"
     }
   ],
   "seen": [
