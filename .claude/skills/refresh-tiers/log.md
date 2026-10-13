@@ -24,7 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
-## 2026-10-12 (nightly, ~20:00 UTC) — Method + Wowhead 0 moved; Icy Veins + Archon walled
+## 2026-10-12 (local scheduled, after today's nightly) — Icy Veins HELD: all six pages re-rated "for Patch 12.1.5" a day before release
+
+- Icy Veins (home curl, browser UA + Accept + Accept-Language): all six HTTP 200, one tier-list table each after stripping <style>; 27/7/6 per bracket = 80 rows, 80 non-null, 0 unmatched, Devourer on both DPS pages, body still Season 2. Every title now reads "(12.1.5)"; changelogs: raid DPS and M+ DPS "12 Oct. 2026: Updated for Patch 12.1.5", raid healer "11 Oct. 2026: Updated for Patch 12.1" (title 12.1.5). dateModified raid 10-12 / 10-11 / 08-29, M+ 10-12 / 10-12 / 10-12.
+- Parsed 9 changed letters (7 raid, 2 M+): raid Balance A+→A, Devourer B→A, Elemental A→B, Destruction A→B, Resto Druid A→S, Preservation S→A, Holy Paladin A→B; M+ Guardian A+→S, Vengeance A→A+. Within the churn limits.
+- NOT merged, snapshot and published NOT stamped: 12.1.5 releases 2026-10-13 and the site still names 12.1 live, so these are pre-launch 12.1.5 ratings (SKILL.md: "any pre-launch 12.1.5 preview" is not a live ranking). The stored 10-11 snapshot stays inside maxAgeDays 4 until 10-15; the 10-14 scheduled run is the launch +1 refresh (1215-launch-runbook) and should take these letters then, after re-reading the pages.
 
 - Method (direct GET, 200): 40 + 40 rows, 0 dup, 0 null; Last Updated 5 Oct (M+) / 10 Aug (raid). Wowhead (full browser headers, 200): 27/7/6 per bracket = 80, 0 unmatched; dateModified 08-28 … 09-10 unchanged. 0 of 160 letters moved; snapshots → 2026-10-12.
 - Icy Veins: HTTP 403 Cloudflare on all six (~5.9 KB, 0 tier-list-entry). Archon: HTTP 403 on all six letter pages, source-health receipt blocked. Stored letters and dates untouched.

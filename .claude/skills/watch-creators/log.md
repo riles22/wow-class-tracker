@@ -24,7 +24,9 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
-## 2026-10-12 (nightly, ~20:00 UTC) — 1 transcript distilled (5 metaNotes); 3 videos queued; queue 1 → 3
+## 2026-10-12 (local scheduled, after today's nightly) — 0 of 3 transcripts; caption 429 persists; queue 3 → 3
+
+- izen 58-AeS9Jxeo: anonymous yt-dlp 2026.07.04 reached the subtitle step and got HTTP 429 on timedtext. Stopped on the first error; Nintern IeaJEfWoVzI and leak Thj8U5iBBwA not attempted. All three stay in videos[] for the nightly's Supadata lane. No takes, no metaNotes.
 
 - 44/44 feeds HTTP 200. Supadata verdict ok, 1 requested / 1 fetched (49 counted requests in the 30-day window, limit null).
 - izen I4n-gNLIlxI "Mythic+'s Best DPS Profile" (2026-10-10): a funnel / priority-damage PSA. Distilled 5 M+ metaNotes with their own damage-profile patchContext — Arcane, Assassination, Havoc positive (his "three strongest" funnel specs; Havoc via Wounded Quarry), Elemental and Demonology mixed (flat AoE). Arms deliberately NOT distilled: he praises its main-target damage in one pull and lists it in a poor-priority comp later, so no single read. Shadow's one "decent focus" line is a passing mention. His 10-07 week-seven score-based M+ metaNotes were NOT superseded: this is a different lens (damage profile, not average score), so both stay live.

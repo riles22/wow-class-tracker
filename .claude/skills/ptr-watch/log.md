@@ -24,7 +24,9 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
-## 2026-10-12 (nightly, ~20:00 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+## 2026-10-12 (local scheduled, after today's nightly) — no live class tuning; 12.1.5 notes revised (report only)
+
+- Wowhead RSS since the nightly: "Subtlety Rogue Buff - Updates to 12.1.5 Patch Notes" (12 Oct 19:45 CDT) — pre-launch 12.1.5 notes material, so run report only, never the feed while PHASES.ptr is null; the next nightly's official-notes collector should pick up the revision. Also weekly-reset dungeon/encounter tuning (Mythic Coiled Altar nerfs, Altar of Fangs M+ nerf) and Venomous Abyss Hall of Fame closing — not class tuning. No 12.2 PTR. Official-notes receipts not re-collected locally (nightly lane).
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved of 156 sections.
 - Wowhead RSS (40 items, top news=383378), news index and blue tracker: WoW Forever items, news=383384 (12.1.5 content update trailer), news=383376 (Venomous Abyss Hall of Fame full), and an EU repost of the 12.1.5 release-date blue (24307306, already logged). No live class tuning, no 12.2 PTR. 2370266 still v1, 2373623 v2, 12.1 thread 2317811 unchanged (posts_count 13, highest 19). Forum search "tuning order:latest": player topics only.
