@@ -13,7 +13,7 @@ import { buildGuidePayload, canonicalRosters, canonicalSlot, decodeEntities, nam
   normApostrophes, normalizeDropSource, normalizeStatRun, parseSoftCaps, resolveDropSource }
   from "../src/lib-guides.mjs";
 import { articleDate, harvestSpec, parseIcyVeinsBis, parseIcyVeinsPriorities,
-  parseIcyVeinsTrinketTiers } from "../src/harvest-guide-icyveins.mjs";
+  parseIcyVeinsTrinketTiers, tierPieceIds } from "../src/harvest-guide-icyveins.mjs";
 import { gathererNames, guideAuthor, guideBody, guideDate, parseWowheadBis,
   parseWowheadPriorities } from "../src/harvest-guide-wowhead.mjs";
 import { methodDate, parseMethodBis, parseMethodPriorities }
@@ -22,6 +22,7 @@ import { methodDate, parseMethodBis, parseMethodPriorities }
 const fixture = (name) => readFile(new URL(`./fixtures/guides/${name}`, import.meta.url), "utf8");
 const json = async (path) => JSON.parse(await readFile(new URL(`../${path}`, import.meta.url), "utf8"));
 const rosters = canonicalRosters(await json("data/raid-items.json"), await json("data/dungeon-items.json"));
+const tierPieces = tierPieceIds(await json("data/tier-items.json"));
 
 test("name joins absorb apostrophe placement, entities, and leading articles", () => {
   assert.equal(nameKey("King's Rest"), nameKey("Kings' Rest"));
@@ -128,7 +129,7 @@ test("Icy Veins: BiS grid pair parses items, names, and normalized sources", asy
 test("Icy Veins 2026-10 markup: tooltip ids, Catalyst rows keyed to the base, trinket tiers", async () => {
   const html = await fixture("icyveins-frost-bis-2026-10.html");
   assert.equal(articleDate(html), "2026-10-12");
-  const rows = parseIcyVeinsBis(html, rosters);
+  const rows = parseIcyVeinsBis(html, rosters, tierPieces);
   const overall = rows.filter((r) => r.list === "overall");
   const raid = rows.filter((r) => r.list === "raid");
   assert.equal(overall.length, 16);
@@ -161,6 +162,33 @@ test("Icy Veins 2026-10 markup: tooltip ids, Catalyst rows keyed to the base, tr
     { tier: "B", itemIds: ["274493", "251792", "270169"] },
     { tier: "C", itemIds: ["193757", "251785", "270168", "251786", "251784"] },
   ]);
+});
+
+test("Icy Veins: original= marks a Catalyst row only on a tier piece that differs from it", async () => {
+  // Both shapes appeared in the 2026-10-14 harvest. Windwalker Monk's shoulders and
+  // Elemental Shaman's hands named their own id. Devastation Evoker's Mythic+ boots
+  // (159388) named a pair of legs (159375), which put Icy Veins' vote on the legs.
+  // The excerpt is edited here to reproduce each one.
+  const html = (await fixture("icyveins-frost-bis-2026-10.html"))
+    // The raid list's shoulders: a tier piece shown with no original.
+    .replace('wow/item/271562?bonus=12854:13335:13694:13697"',
+      'wow/item/271562?bonus=12854:13335:13694:13697&amp;original=271562"')
+    // The raid list's legs, which are not a tier piece, naming a pair of boots.
+    .replace('wow/item/268236?bonus=12854"', 'wow/item/268236?bonus=12854&amp;original=268255"');
+  // The expected rows match the unedited page, so check that both edits landed.
+  assert.ok(html.includes("271562?bonus=12854:13335:13694:13697&amp;original=271562")
+    && html.includes("268236?bonus=12854&amp;original=268255"), "fixture edits did not apply");
+  const raid = parseIcyVeinsBis(html, rosters, tierPieces).filter((r) => r.list === "raid");
+  const shoulder = raid.find((r) => r.slot === "Shoulder");
+  assert.deepEqual([shoulder.itemId, shoulder.itemName, "catalyzedResultId" in shoulder],
+    ["271562", "Primal Leywarden's Manaflux", false]);
+  const legs = raid.find((r) => r.slot === "Legs");
+  assert.deepEqual([legs.itemId, legs.itemName, "catalyzedResultId" in legs, legs.boss],
+    ["268236", "Initiate's Sacrificial Tights", false, "Nek'zali the Soulcoiler"]);
+  // A Catalyst row is still read as one.
+  assert.equal(raid.find((r) => r.slot === "Head").catalyzedResultId, "271564");
+  // Without the tier pieces the parser cannot tell, so it refuses rather than guess.
+  assert.throws(() => parseIcyVeinsBis(html, rosters), /pass the tier pieces/);
 });
 
 test("Icy Veins: a fetched BiS page that parses no rows fails the spec as drift", async () => {

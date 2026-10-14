@@ -28,7 +28,8 @@
 //     08-12 recon), in one of two markups — see refOf. Until October 2026 it was
 //     data-wowhead="item=NNN&bonus=..."; by 2026-10-14 every page had moved to
 //     data-iv-tooltip="wow/item/NNN?bonus=...", with a Catalyst result naming its base
-//     item in `original=`. bonus= runs 1-6 segments, never assume triplets. Scope the
+//     item in `original=` (which some non-Catalyst rows carry too; see parseIcyVeinsBis).
+//     bonus= runs 1-6 segments, never assume triplets. Scope the
 //     item parse to the FIRST spell_icon_span per block or gems/enchants from
 //     bis_item_extras leak in as gear.
 //   - Drop source is <span class="bis_item_drop">, now usually an anchor to Icy Veins'
@@ -36,6 +37,7 @@
 //     stronger kind signal than the free text, which still exists ("Crafted by …").
 //   - The enhancements page (gems / enchants / consumables) has its own recipe — see
 //     the block comment above parseIcyVeinsEnhancements.
+import { readFile } from "node:fs/promises";
 import { runGuideHarvest } from "./lib-guide-runner.mjs";
 import { BROWSER_HEADERS, canonicalRosters, canonicalSlot, fetchText, fetchTextCurl, normApostrophes,
   resolveDropSource, normalizeStatRun, parseSoftCaps, ENHANCEMENT_CONSUMABLE_KEYS, validateEnhancements }
@@ -76,8 +78,9 @@ const headingBefore = (all, index) => {
 /** The first item or spell reference in a fragment, as { kind, id, original }, in either
  *  markup Icy Veins has served:
  *  - data-iv-tooltip="wow/item/NNN?bonus=...&amp;original=NNN" (every page by 2026-10-14).
- *    The database prefix varies: the 12.1.5 Kith'ix trinket is wowxptr/item/NNN. `original`
- *    is present only on a Catalyst result and names the base item it is made from.
+ *    The database prefix varies: the 12.1.5 Kith'ix trinket is wowxptr/item/NNN. On a
+ *    Catalyst result `original` names the base item it is made from; parseIcyVeinsBis
+ *    decides which rows those are.
  *  - data-wowhead="item=NNN&bonus=..." (until October 2026), on the outer element or the
  *    inner name span. */
 function refOf(fragment) {
@@ -147,8 +150,14 @@ export function parseIcyVeinsPriorities(html) {
   return out;
 }
 
-/** h3-anchored BiS grids -> per-slot rows. */
-export function parseIcyVeinsBis(html, rosters) {
+/** The ids of every tier-set piece in tier-items.json. The Catalyst only ever produces
+ *  these, so parseIcyVeinsBis reads `original=` as a Catalyst base only on one of them. */
+export const tierPieceIds = (tier) =>
+  new Set(tier.sets.flatMap((set) => set.items.map((item) => String(item.id))));
+
+/** h3-anchored BiS grids -> per-slot rows. `tierPieces` (tierPieceIds) is required once
+ *  a row's `original=` names another item. */
+export function parseIcyVeinsBis(html, rosters, tierPieces = null) {
   const heads = headings(html);
   const rows = [];
   const grids = [...html.matchAll(/<div class="bis_items_grid[^"]*">[\s\S]*?(?=<div class="bis_items_grid|<h[23]|<div class="heading_container|$)/gi)];
@@ -170,10 +179,17 @@ export function parseIcyVeinsBis(html, rosters) {
       // A Catalyst result names its base in `original`. The base is what drops, so it is
       // the candidate and the result rides as catalyzedResultId (the Wowhead harvester's
       // rule). The page shows only the result's name, so such a row carries no itemName
-      // rather than the result's name under the base's id.
+      // rather than the result's name under the base's id. `original` alone does not
+      // make a Catalyst row. In the 2026-10-14 harvest, Windwalker Monk's shoulders and
+      // Elemental Shaman's hands named their own id, and Devastation Evoker's Mythic+
+      // boots named a pair of legs. So the displayed item must be a tier piece and
+      // differ from its `original`.
       const { id, original } = item.ref;
-      const itemId = original || id;
-      const itemName = original ? null : item.name || null;
+      if (original && original !== id && !tierPieces)
+        throw new Error(`item ${id} names original=${original}; pass the tier pieces to tell a Catalyst result`);
+      const base = original && original !== id && tierPieces.has(id) ? original : null;
+      const itemId = base || id;
+      const itemName = base ? null : item.name || null;
       const dropHtml = (block.match(/<span class="bis_item_drop"[^>]*>([\s\S]*?)<\/span>/i) || [])[1] || "";
       const dropText = textOnly(dropHtml);
       // The anchor HREF is a stronger kind signal than the free text (recon 2026-08-18):
@@ -186,7 +202,7 @@ export function parseIcyVeinsBis(html, rosters) {
         : instanceAnchor
           ? resolveDropSource(textOnly(instanceAnchor[2]), itemId, rosters)
           : resolveDropSource(dropText, itemId, rosters);
-      rows.push({ list, slot, itemId, itemName, ...(original ? { catalyzedResultId: id } : {}),
+      rows.push({ list, slot, itemId, itemName, ...(base ? { catalyzedResultId: id } : {}),
         sourceText: dropText, ...source });
     }
   }
@@ -398,14 +414,15 @@ export function parseIcyVeinsEnhancements(html) {
   return Object.keys(enh).length ? enh : null;
 }
 
-export async function harvestSpec(spec, fetchPage = fetchText, rosters = harvestSpec.rosters) {
+export async function harvestSpec(spec, fetchPage = fetchText, rosters = harvestSpec.rosters,
+  tierPieces = harvestSpec.tierPieces) {
   const base = `https://www.icy-veins.com/wow/${slug(spec.spec)}-${slug(spec.class)}-pve-${roleSlug(spec.role)}`;
   const statHtml = await fetchPage(`${base}-stat-priority`);
   const bisHtml = await fetchPage(`${base}-gear-best-in-slot`);
   if (!statHtml && !bisHtml) return null; // no guide published for this spec (recorded)
   const enhHtml = await fetchPage(`${base}-gems-enchants-consumables`);
   const priorities = statHtml ? parseIcyVeinsPriorities(statHtml) : [];
-  const bis = bisHtml ? parseIcyVeinsBis(bisHtml, rosters) : [];
+  const bis = bisHtml ? parseIcyVeinsBis(bisHtml, rosters, tierPieces) : [];
   if (!priorities.length && !bis.length)
     throw new Error("pages fetched but neither priorities nor BiS parsed — recipe drift?");
   // A fetched BiS page that yields no rows is drift, not an empty guide: all 40 specs had
@@ -433,6 +450,8 @@ export async function harvestSpec(spec, fetchPage = fetchText, rosters = harvest
 const isMain = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/").split("/").pop());
 if (isMain) {
   const fetchPage = icyVeinsFetcher(process.argv.slice(2));
+  harvestSpec.tierPieces = tierPieceIds(JSON.parse(
+    await readFile(new URL("../data/tier-items.json", import.meta.url), "utf8")));
   await runGuideHarvest({ sourceId: "icyveins", sourceName: "Icy Veins", dated: true,
     harvestSpec: async (spec, { raid, dungeons }) => {
       harvestSpec.rosters = harvestSpec.rosters || canonicalRosters(raid, dungeons);
