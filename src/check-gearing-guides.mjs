@@ -37,7 +37,10 @@ function inspectGuide(doc, id, roster, { today, allowLegacy }) {
   if ((doc.coverage.specsPending || []).length)
     fail("pending or failed retrievals are not verified coverage");
   const dates = new Map();
-  let priorities = 0, bis = 0;
+  // Enhancement candidates and tiered trinkets count like BiS rows. On 2026-10-14 an Icy
+  // Veins markup change emptied BiS, enhancements and trinket tiers together, and only
+  // BiS was counted here, so a parser that lost just the other two lanes would publish.
+  let priorities = 0, bis = 0, enhancements = 0, trinketTiers = 0;
   const addReceipt = (key, date) => {
     if (!roster.includes(key)) fail(`unknown roster spec ${JSON.stringify(key)}`);
     if (dates.has(key)) fail(`duplicate/conflicting roster outcome for ${JSON.stringify(key)}`);
@@ -62,8 +65,23 @@ function inspectGuide(doc, id, roster, { today, allowLegacy }) {
         || typeof row.slot !== "string" || !row.slot || typeof row.list !== "string" || !row.list)
         fail(`${key}: malformed BiS row`);
     }
+    const enh = record.enhancements;
+    if (enh != null) {
+      if (!object(enh) || (enh.enchants != null && !Array.isArray(enh.enchants))
+        || (enh.gems != null && !object(enh.gems)) || (enh.consumables != null && !object(enh.consumables)))
+        fail(`${key}: malformed enhancements block`);
+      const lists = [...(enh.enchants ?? []).map((row) => row?.candidates), enh.gems?.unique, enh.gems?.filler,
+        ...Object.entries(enh.consumables ?? {}).filter(([lane]) => lane !== "note").map(([, list]) => list)];
+      if (lists.some((list) => list != null && !Array.isArray(list))) fail(`${key}: malformed enhancements block`);
+      enhancements += lists.reduce((sum, list) => sum + (list?.length ?? 0), 0);
+    }
+    const tiers = record.trinketTiers ?? [];
+    if (!Array.isArray(tiers) || tiers.some((row) => !object(row) || typeof row.tier !== "string"
+      || !Array.isArray(row.itemIds) || row.itemIds.some((itemId) => !/^\d+$/.test(String(itemId)))))
+      fail(`${key}: malformed trinket tier row`);
     priorities += record.priorities.length;
     bis += record.bis.length;
+    trinketTiers += tiers.reduce((sum, row) => sum + row.itemIds.length, 0);
   }
   for (const absence of doc.coverage.specsAbsent) {
     if (!object(absence) || typeof absence.spec !== "string"
@@ -78,7 +96,7 @@ function inspectGuide(doc, id, roster, { today, allowLegacy }) {
   if (dates.size !== roster.length) fail("guide outcomes do not account for the complete trusted roster");
   const oldest = [...dates.values()].sort()[0];
   if (sourceDate !== oldest) fail(`harvestedAt must equal oldest verification (${oldest})`);
-  return { counts: { specs: records.length, priorities, bis }, dates };
+  return { counts: { specs: records.length, priorities, bis, enhancements, trinketTiers }, dates };
 }
 
 export function checkGearingGuides(previous, current, { roster,
@@ -132,5 +150,5 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   if (process.argv.length !== 2) throw new Error("usage: node src/check-gearing-guides.mjs");
   const result = checkGearingGuideFiles();
   for (const source of result.sources)
-    console.log(`${source.sourceId}: ${source.changed ? "accepted refresh" : "unchanged"}; ${source.after.specs} specs, ${source.after.priorities} priorities, ${source.after.bis} BiS rows; verified through ${source.verifiedThrough}`);
+    console.log(`${source.sourceId}: ${source.changed ? "accepted refresh" : "unchanged"}; ${source.after.specs} specs, ${source.after.priorities} priorities, ${source.after.bis} BiS rows, ${source.after.enhancements} enhancement candidates, ${source.after.trinketTiers} tiered trinkets; verified through ${source.verifiedThrough}`);
 }

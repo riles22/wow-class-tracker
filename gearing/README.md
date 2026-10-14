@@ -91,7 +91,8 @@ weekly CI refresh keeps the default transport; whether curl passes from a GitHub
 is untested.
 The weekly publisher runs `node src/check-gearing-guides.mjs` from the repository root
 before tests/build. It compares each source against trusted HEAD, requires complete
-verification receipts, and refuses more than 25% loss of specs, priorities, or BiS rows.
+verification receipts, and refuses more than 25% loss of specs, priorities, BiS rows,
+enhancement candidates, or tiered trinkets.
 Successful providers may publish independently; failed providers keep their previous
 files, and the workflow still finishes red to surface the failure. Staging artifacts
 are diagnostic only; a new scheduled run performs a new verification attempt.
