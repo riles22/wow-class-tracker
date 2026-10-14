@@ -766,6 +766,12 @@ ids returned 404 before launch). A reviewed code change: `harvest-raid.mjs` and
 `WOW_ACCEPT_LOOT_CHANGES=1`. Launch day, 2026-10-13, is a Tuesday, so the weekly
 gearing-refresh (08:37 UTC) runs that day and may end red, as it did on 2026-09-29 and
 10-06; failed providers keep their files by design.
+Blocked as of 2026-10-14: Wowhead, which `harvest-raid.mjs` reads, served an AWS WAF
+challenge from home and from CI. Until C4 lands, guide rows that cite Kith'ix resolve to
+`unknown` (147 Icy Veins rows in the 2026-10-14 harvest), and the unknown-row cap in
+`gearing/test/guides.test.mjs` leaves them out. Once the raid catalog has the boss, that
+test fails while any guide still holds such a row, so the C4 change also re-harvests the
+guides. Icy Veins needs a local run with `--curl`.
 
 **C5. Freshness expectations.** Compare `check-refresh --age` at launch +3 days against the
 baseline. Expected because of 12.1.5: `wcl-leaderboard-raid` partial from the day WCL adds
