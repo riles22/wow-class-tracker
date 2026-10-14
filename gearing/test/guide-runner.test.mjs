@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createServer } from "node:http";
 import { runGuideHarvest } from "../src/lib-guide-runner.mjs";
-import { BROWSER_UA, buildGuidePayload, fetchText, fetchTextCurl } from "../src/lib-guides.mjs";
+import { BROWSER_HEADERS, BROWSER_UA, buildGuidePayload, fetchText, fetchTextCurl } from "../src/lib-guides.mjs";
 import { icyVeinsFetcher } from "../src/harvest-guide-icyveins.mjs";
 
 const json = async path => JSON.parse(await readFile(new URL(`../${path}`, import.meta.url), "utf8"));
@@ -160,11 +160,13 @@ test("fetch transports distinguish origin 404 from HTTP errors and timeouts", as
   }
 });
 
-test("curl sends the headers it is given, so a host refusing curl's own User-Agent can be read", async t => {
-  // Icy Veins' behaviour from a residential connection on 2026-10-14: plain curl 403,
-  // curl with a browser User-Agent 200.
+test("curl sends the headers it is given, names as given, so a host refusing curl's own User-Agent can be read", async t => {
+  // Icy Veins from a residential connection on 2026-10-14: plain curl 403, BROWSER_HEADERS
+  // 200, and the same User-Agent on a lowercase `user-agent:` line 403. This server answers
+  // only the exact name, so a header set "normalised" to lowercase fails here first.
   const server = createServer((req, res) => {
-    res.statusCode = req.headers["user-agent"] === BROWSER_UA ? 200 : 403;
+    const at = req.rawHeaders.findIndex((name, i) => i % 2 === 0 && name === "User-Agent");
+    res.statusCode = at >= 0 && req.rawHeaders[at + 1] === BROWSER_UA ? 200 : 403;
     res.end("guide body ".repeat(200));
   });
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
@@ -172,10 +174,11 @@ test("curl sends the headers it is given, so a host refusing curl's own User-Age
   const url = `http://127.0.0.1:${server.address().port}/stat-priority`;
   const opts = { tries: 1, delayMs: 0 };
   await assert.rejects(fetchTextCurl(url, opts), /HTTP 403/);
-  assert.match(await fetchTextCurl(url, { ...opts, headers: { "user-agent": BROWSER_UA } }), /^guide body/);
+  await assert.rejects(fetchTextCurl(url, { ...opts, headers: { "user-agent": BROWSER_UA } }), /HTTP 403/);
+  assert.match(await fetchTextCurl(url, { ...opts, headers: BROWSER_HEADERS }), /^guide body/);
 });
 
-test("the Icy Veins harvester uses curl with a browser User-Agent only under --curl", async () => {
+test("the Icy Veins harvester uses curl with the browser header set only under --curl", async () => {
   const calls = [];
   const transports = {
     curl: async (url, opts) => { calls.push(["curl", url, opts]); return "page"; },
@@ -185,7 +188,7 @@ test("the Icy Veins harvester uses curl with a browser User-Agent only under --c
   await icyVeinsFetcher(["--force", "--curl"], transports)("https://example.test/b");
   assert.deepEqual(calls, [
     ["node", "https://example.test/a", undefined],
-    ["curl", "https://example.test/b", { headers: { "user-agent": BROWSER_UA } }],
+    ["curl", "https://example.test/b", { headers: BROWSER_HEADERS }],
   ]);
 });
 

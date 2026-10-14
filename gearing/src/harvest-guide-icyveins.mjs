@@ -2,11 +2,12 @@
 //
 //   node src/harvest-guide-icyveins.mjs [--force] [--spec "Frost Mage"] [--curl]
 //
-// `--curl` fetches through curl with a browser User-Agent instead of Node's fetch. Icy
-// Veins answers Node's fetch with HTTP 403 from CI and from a residential connection, and
-// plain curl with 403 too; curl sending a browser User-Agent got 200 from home on
-// 2026-10-14. It is opt-in for local runs: the weekly CI refresh keeps Node's fetch, since
-// whether curl passes from a GitHub runner has not been tested.
+// `--curl` fetches through curl with BROWSER_HEADERS (a browser User-Agent, Accept and
+// Accept-Language: the set the tier-list refresh sends) instead of Node's fetch. Icy Veins
+// answers Node's fetch with HTTP 403 from CI and from a residential connection, and plain
+// curl with 403 too; curl with that header set got 200 from home on 2026-10-14. It is
+// opt-in for local runs: the weekly CI refresh keeps Node's fetch, since whether curl
+// passes from a GitHub runner has not been tested.
 //
 // Three pages per spec, patterns verified live 2026-08-18:
 //   stat priority: https://www.icy-veins.com/wow/<spec>-<class>-pve-<role>-stat-priority
@@ -33,15 +34,15 @@
 //   - The enhancements page (gems / enchants / consumables) has its own recipe — see
 //     the block comment above parseIcyVeinsEnhancements.
 import { runGuideHarvest } from "./lib-guide-runner.mjs";
-import { BROWSER_UA, canonicalRosters, canonicalSlot, fetchText, fetchTextCurl, normApostrophes,
+import { BROWSER_HEADERS, canonicalRosters, canonicalSlot, fetchText, fetchTextCurl, normApostrophes,
   resolveDropSource, normalizeStatRun, parseSoftCaps, ENHANCEMENT_CONSUMABLE_KEYS, validateEnhancements }
   from "./lib-guides.mjs";
 
-/** The page fetcher a run uses: curl with a browser User-Agent under `--curl`, else
- *  Node's fetch. The transports are injectable so the choice is testable offline. */
+/** The page fetcher a run uses: curl with BROWSER_HEADERS under `--curl`, else Node's
+ *  fetch. The transports are injectable so the choice is testable offline. */
 export function icyVeinsFetcher(args, { curl = fetchTextCurl, node = fetchText } = {}) {
   return args.includes("--curl")
-    ? (url) => curl(url, { headers: { "user-agent": BROWSER_UA } })
+    ? (url) => curl(url, { headers: BROWSER_HEADERS })
     : (url) => node(url);
 }
 
