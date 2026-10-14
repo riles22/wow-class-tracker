@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-14 (local scheduled, before today's nightly) — Icy Veins MERGED, 9 letters (7 raid, 2 M+); Wowhead WAF also walls home
+
+- Icy Veins: home curl (browser UA + Accept + Accept-Language), all six HTTP 200, 240–388 KB, one `tier-list` table each after stripping `<style>`. 80/80 rows, 80 non-null, 0 unmatched/dups/role mismatches (27/7/6 per bracket).
+- Era: every page ranks Midnight Season 2 "Updated for Patch 12.1.5"; titles carry "(Midnight (12.1.5))" / "(Patch 12.1.5 / Midnight)". 12.1.5 went live 2026-10-13 (Wowhead news=383399 "Blizzard Releases Known Issues for Patch 12.1.5"), so the 10-12 hold reason (pre-launch preview) no longer applies: a live in-season patch list, seasonVerified stays s2. The site's livePatch is still null (owner launch commit not landed); that is a display label and does not gate letters.
+- Moves (the same 9 the 10-12 run measured): raid Balance A+→A, Devourer B→A, Elemental A→B, Destruction A→B, Resto Druid A→S, Preservation S→A, Holy Paladin A→B; M+ Guardian A+→S, Vengeance A→A+. Churn gate: icyveins:raid 7 (6 two-step), icyveins:mplus 2 (0) — under 25/10; no anomaly finding.
+- published from JSON-LD dateModified: raid DPS 10-12, healer 10-11, tank 08-29 (unchanged), M+ DPS/healer/tank 10-12. snapshot 2026-10-14.
+- Wowhead from HOME: all six guide pages HTTP 202, 2,020 B AWS WAF challenge (gokuProps), 0 tier-list blocks — the wall is not runner-specific. Not solved; letters untouched. Archon not attempted (residential scope).
+
 ## 2026-10-13 (nightly) — Method only; Wowhead NEW AWS WAF wall; Icy Veins + Archon walled
 
 - Method (direct GET, 200): 40/40 per bracket, 0 dups, 0 moved; Last Updated 5 Oct (M+) / 10 Aug (raid); snapshots → 2026-10-13.

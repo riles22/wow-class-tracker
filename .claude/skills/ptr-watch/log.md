@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-14 (local scheduled, before today's nightly) — no live class tuning; ledger unchanged; 0 feed entries
+
+- fetch-official-notes from home: both sources success (2336376 post 1 still v56, updated 10-06; 2344395 posts 1/4/5/6 v3/v1/v1/v1). Pending differed from the stored ledger only in checkedAt, so data/official-notes.json was left alone (bookkeeping only; the nightly rewrites it).
+- Wowhead RSS (from home, 200) since the 10-13 nightly: news=383399 "Blizzard Releases Known Issues for Patch 12.1.5", 383395 12.1.5 guide compendium, 383406/383409 campaign and Labyrinth bugs, 383400 Mythic Kith'ix world first. No class tuning, no hotfix round-up, no 12.2 PTR. 12.1.5 is live; its consolidated notes enter the feed only after the owner's launch commit moves the displayed live patch (livePatch still null on master).
+
 ## 2026-10-13 (nightly, ~17:50 UTC, 12.1.5 release day) — no live class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
