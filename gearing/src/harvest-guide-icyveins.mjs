@@ -1,6 +1,12 @@
 // Icy Veins guide harvester (Phase B, gearing-s2-scope G4).
 //
-//   node src/harvest-guide-icyveins.mjs [--force] [--spec "Frost Mage"]
+//   node src/harvest-guide-icyveins.mjs [--force] [--spec "Frost Mage"] [--curl]
+//
+// `--curl` fetches through curl with a browser User-Agent instead of Node's fetch. Icy
+// Veins answers Node's fetch with HTTP 403 from CI and from a residential connection, and
+// plain curl with 403 too; curl sending a browser User-Agent got 200 from home on
+// 2026-10-14. It is opt-in for local runs: the weekly CI refresh keeps Node's fetch, since
+// whether curl passes from a GitHub runner has not been tested.
 //
 // Three pages per spec, patterns verified live 2026-08-18:
 //   stat priority: https://www.icy-veins.com/wow/<spec>-<class>-pve-<role>-stat-priority
@@ -27,9 +33,17 @@
 //   - The enhancements page (gems / enchants / consumables) has its own recipe — see
 //     the block comment above parseIcyVeinsEnhancements.
 import { runGuideHarvest } from "./lib-guide-runner.mjs";
-import { canonicalRosters, canonicalSlot, fetchText, normApostrophes, resolveDropSource,
-  normalizeStatRun, parseSoftCaps, ENHANCEMENT_CONSUMABLE_KEYS, validateEnhancements }
+import { BROWSER_UA, canonicalRosters, canonicalSlot, fetchText, fetchTextCurl, normApostrophes,
+  resolveDropSource, normalizeStatRun, parseSoftCaps, ENHANCEMENT_CONSUMABLE_KEYS, validateEnhancements }
   from "./lib-guides.mjs";
+
+/** The page fetcher a run uses: curl with a browser User-Agent under `--curl`, else
+ *  Node's fetch. The transports are injectable so the choice is testable offline. */
+export function icyVeinsFetcher(args, { curl = fetchTextCurl, node = fetchText } = {}) {
+  return args.includes("--curl")
+    ? (url) => curl(url, { headers: { "user-agent": BROWSER_UA } })
+    : (url) => node(url);
+}
 
 const slug = (s) => s.toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const roleSlug = (r) => (/tank/i.test(r) ? "tank" : /heal/i.test(r) ? "healing" : "dps");
@@ -344,12 +358,12 @@ export function parseIcyVeinsEnhancements(html) {
   return Object.keys(enh).length ? enh : null;
 }
 
-async function harvestSpec(spec) {
+async function harvestSpec(spec, fetchPage = fetchText) {
   const base = `https://www.icy-veins.com/wow/${slug(spec.spec)}-${slug(spec.class)}-pve-${roleSlug(spec.role)}`;
-  const statHtml = await fetchText(`${base}-stat-priority`);
-  const bisHtml = await fetchText(`${base}-gear-best-in-slot`);
+  const statHtml = await fetchPage(`${base}-stat-priority`);
+  const bisHtml = await fetchPage(`${base}-gear-best-in-slot`);
   if (!statHtml && !bisHtml) return null; // no guide published for this spec (recorded)
-  const enhHtml = await fetchText(`${base}-gems-enchants-consumables`);
+  const enhHtml = await fetchPage(`${base}-gems-enchants-consumables`);
   const priorities = statHtml ? parseIcyVeinsPriorities(statHtml) : [];
   const bis = bisHtml ? parseIcyVeinsBis(bisHtml, harvestSpec.rosters) : [];
   if (!priorities.length && !bis.length)
@@ -373,9 +387,10 @@ async function harvestSpec(spec) {
 
 const isMain = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, "/").split("/").pop());
 if (isMain) {
+  const fetchPage = icyVeinsFetcher(process.argv.slice(2));
   await runGuideHarvest({ sourceId: "icyveins", sourceName: "Icy Veins", dated: true,
     harvestSpec: async (spec, { raid, dungeons }) => {
       harvestSpec.rosters = harvestSpec.rosters || canonicalRosters(raid, dungeons);
-      return harvestSpec(spec);
+      return harvestSpec(spec, fetchPage);
     } });
 }

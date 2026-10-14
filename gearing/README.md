@@ -81,6 +81,11 @@ timeout, or unusable response is a failure. Only a completed, validated attempt
 replaces the source, through an atomic rename.
 Three consecutive block/rate-limit/server/transport failures stop that source early;
 the command retains successful staging and leaves its published data unchanged.
+Icy Veins refuses Node's fetch (HTTP 403 from CI and from a residential connection,
+2026-10-14) and refuses curl's own User-Agent too. From home,
+`node src/harvest-guide-icyveins.mjs --force --curl` fetches through curl with a
+browser User-Agent instead, which Icy Veins served. The weekly CI refresh keeps the
+default transport; whether curl passes from a GitHub runner is untested.
 The weekly publisher runs `node src/check-gearing-guides.mjs` from the repository root
 before tests/build. It compares each source against trusted HEAD, requires complete
 verification receipts, and refuses more than 25% loss of specs, priorities, or BiS rows.
