@@ -24,9 +24,12 @@
 //     id (overall-best-in-slot / best-gear-from-raid / best-gear-from-mythic) names the
 //     list, and BOTH grids after one h3 belong to it (the off-by-one trap: anchor the h3
 //     immediately preceding each grid, never positional walking).
-//   - Item identity lives in data-wowhead="item=NNN&bonus=..." attributes (NOT hrefs —
-//     changed since the 08-12 recon); bonus= runs 1-6 segments, never assume triplets.
-//     Scope the item parse to the FIRST spell_icon_span per block or gems/enchants from
+//   - Item identity lives on the spell_icon_span element (NOT hrefs — changed since the
+//     08-12 recon), in one of two markups — see refOf. Until October 2026 it was
+//     data-wowhead="item=NNN&bonus=..."; by 2026-10-14 every page had moved to
+//     data-iv-tooltip="wow/item/NNN?bonus=...", with a Catalyst result naming its base
+//     item in `original=`. bonus= runs 1-6 segments, never assume triplets. Scope the
+//     item parse to the FIRST spell_icon_span per block or gems/enchants from
 //     bis_item_extras leak in as gear.
 //   - Drop source is <span class="bis_item_drop">, now usually an anchor to Icy Veins'
 //     own boss/dungeon guide — the href suffix (-raid-guide / -dungeon-guide) is a
@@ -70,6 +73,61 @@ const headingBefore = (all, index) => {
   return best;
 };
 
+/** The first item or spell reference in a fragment, as { kind, id, original }, in either
+ *  markup Icy Veins has served:
+ *  - data-iv-tooltip="wow/item/NNN?bonus=...&amp;original=NNN" (every page by 2026-10-14).
+ *    The database prefix varies: the 12.1.5 Kith'ix trinket is wowxptr/item/NNN. `original`
+ *    is present only on a Catalyst result and names the base item it is made from.
+ *  - data-wowhead="item=NNN&bonus=..." (until October 2026), on the outer element or the
+ *    inner name span. */
+function refOf(fragment) {
+  const iv = fragment.match(/data-iv-tooltip="wow[a-z]*\/(item|spell)\/(\d+)(?:\?([^"]*))?"/i);
+  if (iv) {
+    const query = new URLSearchParams((iv[3] || "").replace(/&amp;/g, "&"));
+    return { kind: iv[1].toLowerCase(), id: iv[2], original: query.get("original") };
+  }
+  const wh = fragment.match(/data-wowhead="(item|spell)=(\d+)/i);
+  return wh ? { kind: wh[1].toLowerCase(), id: wh[2], original: null } : null;
+}
+
+/** The name one spell_icon_span element shows: a quality-classed inner span (the older
+ *  markup, and enchant cells in the newer one), else the plain inner span after the icon
+ *  (the newer markup's `<span>Name</span>`), else the icon's alt text minus " Icon". A
+ *  "+29 Mastery"-style stat string takes the alt too. */
+function iconName(el) {
+  let name = (el.match(/<span[^>]*class="(?:q\d|spell)\b[^"]*"[^>]*>([\s\S]*?)<\/span>/i) || [])[1];
+  name = name ? textOnly(name) : "";
+  if (!name) name = textOnly((el.match(/<img[^>]*>\s*<span>([\s\S]*?)<\/span>/i) || [])[1] || "");
+  if (!name || /^[+-]?\d/.test(name)) {
+    const alt = (el.match(/\balt="([^"]*)"/i) || [])[1];
+    const fromAlt = alt ? textOnly(alt.replace(/\s*Icon\s*$/i, "")) : "";
+    if (fromAlt) name = fromAlt;
+  }
+  return name;
+}
+
+/** Every spell_icon_span element in a chunk, in page order, as { el, ref, name }. The
+ *  class list may lead with another class (the newer "wow-tooltip spell_icon_span q4").
+ *  Ref-less chips (the inline hero-talent icons) come back with ref null. */
+function iconElements(chunk) {
+  const out = [];
+  const open = /<span class="(?:[^"]*\s)?spell_icon_span\b[^"]*"[^>]*>/gi;
+  let m;
+  while ((m = open.exec(chunk))) {
+    const tag = /<\/?span\b[^>]*>/gi; // balanced scan — the outer span nests the name span
+    tag.lastIndex = open.lastIndex;
+    let depth = 1, end = chunk.length, t;
+    while ((t = tag.exec(chunk))) {
+      depth += t[0][1] === "/" ? -1 : 1;
+      if (!depth) { end = t.index + t[0].length; break; }
+    }
+    const el = chunk.slice(m.index, end);
+    open.lastIndex = end;
+    out.push({ el, ref: refOf(el), name: iconName(el) });
+  }
+  return out;
+}
+
 /** Scoped stat-priority widgets. */
 export function parseIcyVeinsPriorities(html) {
   const heads = headings(html);
@@ -107,11 +165,15 @@ export function parseIcyVeinsBis(html, rosters) {
       if (!slot) continue; // Shirt/Tabard fall out here too when not --empty-flagged
       // FIRST spell_icon_span only — extras (gems/enchants) come after bis_item_extras.
       const head = block.split(/bis_item_extras|bis_item_enchant/)[0];
-      const item = head.match(/data-wowhead="item=(\d+)(?:&(?:amp;)?bonus=([0-9:]*))?[^"]*"[^>]*>[\s\S]*?<span[^>]*class="q\d[^"]*"[^>]*>([\s\S]*?)<\/span>/i)
-        || head.match(/data-wowhead="item=(\d+)(?:&(?:amp;)?bonus=([0-9:]*))?[^"]*"/i);
+      const item = iconElements(head).find((e) => e.ref?.kind === "item");
       if (!item) continue;
-      const itemId = item[1];
-      const itemName = item[3] ? textOnly(item[3]) : null;
+      // A Catalyst result names its base in `original`. The base is what drops, so it is
+      // the candidate and the result rides as catalyzedResultId (the Wowhead harvester's
+      // rule). The page shows only the result's name, so such a row carries no itemName
+      // rather than the result's name under the base's id.
+      const { id, original } = item.ref;
+      const itemId = original || id;
+      const itemName = original ? null : item.name || null;
       const dropHtml = (block.match(/<span class="bis_item_drop"[^>]*>([\s\S]*?)<\/span>/i) || [])[1] || "";
       const dropText = textOnly(dropHtml);
       // The anchor HREF is a stronger kind signal than the free text (recon 2026-08-18):
@@ -124,7 +186,8 @@ export function parseIcyVeinsBis(html, rosters) {
         : instanceAnchor
           ? resolveDropSource(textOnly(instanceAnchor[2]), itemId, rosters)
           : resolveDropSource(dropText, itemId, rosters);
-      rows.push({ list, slot, itemId, itemName, sourceText: dropText, ...source });
+      rows.push({ list, slot, itemId, itemName, ...(original ? { catalyzedResultId: id } : {}),
+        sourceText: dropText, ...source });
     }
   }
   return rows;
@@ -143,7 +206,9 @@ export function parseIcyVeinsTrinketTiers(html) {
   const tiers = [];
   const matches = [...section.matchAll(/([SABCDF]) Tier([\s\S]*?)(?=[SABCDF] Tier|$)/g)];
   for (const m of matches) {
-    const ids = [...new Set([...m[2].matchAll(/data-wowhead="item=(\d+)/g)].map((x) => x[1]))];
+    // Either item markup (see refOf); the tier table names trinkets, never Catalyst results.
+    const ids = [...new Set([...m[2].matchAll(/data-(?:wowhead="item=|iv-tooltip="wow[a-z]*\/item\/)(\d+)/g)]
+      .map((x) => x[1]))];
     if (ids.length) tiers.push({ tier: m[1], itemIds: ids });
   }
   return tiers;
@@ -170,7 +235,7 @@ export function parseIcyVeinsTrinketTiers(html) {
      else combatPotion); the Warlock Healthstone (item 5512) is a handout, not a
      consumable you stock — note-only, never a candidate.
    - faq-block__wrapper / cta-block__wrapper-new are stripped BEFORE extraction:
-     Frost Mage's FAQ dropdown holds data-wowhead refs that would pollute the lists. */
+     Frost Mage's FAQ dropdown holds item and spell refs that would pollute the lists. */
 const CONSUMABLE_SECTION_KEYS = { flask: "flask", potions: "potions", "food-buff": "food",
   "augment-rune": "augmentRune", tea: "tea" };
 
@@ -192,39 +257,13 @@ function stripBoilerplate(html) {
   return html;
 }
 
-/** Every spell_icon_span element in a chunk, as { el, cand }. The data-wowhead ref may
- *  sit on the OUTER span or the INNER name span (both occur live), so it is matched
- *  anywhere within the element, like the BiS parser. Ref-less chips (the inline
- *  hero-talent icons) are skipped. */
+/** Every spell_icon_span element in a chunk that carries a ref and a name, as { el, cand }.
+ *  The ref may sit on the OUTER span or the INNER name span (both occur live), so refOf
+ *  reads the whole element, like the BiS parser. Ref-less chips (the inline hero-talent
+ *  icons) are skipped. */
 function iconCands(chunk) {
-  const out = [];
-  const open = /<span class="spell_icon_span[^"]*"[^>]*>/gi;
-  let m;
-  while ((m = open.exec(chunk))) {
-    const tag = /<\/?span\b[^>]*>/gi; // balanced scan — the outer span nests the name span
-    tag.lastIndex = open.lastIndex;
-    let depth = 1, end = chunk.length, t;
-    while ((t = tag.exec(chunk))) {
-      depth += t[0][1] === "/" ? -1 : 1;
-      if (!depth) { end = t.index + t[0].length; break; }
-    }
-    const el = chunk.slice(m.index, end);
-    open.lastIndex = end;
-    const ref = el.match(/data-wowhead="(item|spell)=(\d+)/i);
-    if (!ref) continue;
-    let name = (el.match(/<span[^>]*class="(?:q\d|spell)"[^>]*>([\s\S]*?)<\/span>/i) || [])[1];
-    name = name ? textOnly(name) : "";
-    // "+29 Mastery"-style stat strings: the img alt (minus trailing " Icon") is the name
-    if (!name || /^[+-]?\d/.test(name)) {
-      const alt = (el.match(/\balt="([^"]*)"/i) || [])[1];
-      const fromAlt = alt ? textOnly(alt.replace(/\s*Icon\s*$/i, "")) : "";
-      if (fromAlt) name = fromAlt;
-    }
-    if (!name) continue;
-    out.push({ el, cand: ref[1].toLowerCase() === "spell"
-      ? { spellId: ref[2], name } : { id: ref[2], name } });
-  }
-  return out;
+  return iconElements(chunk).filter(({ ref, name }) => ref && name).map(({ el, ref, name }) =>
+    ({ el, cand: ref.kind === "spell" ? { spellId: ref.id, name } : { id: ref.id, name } }));
 }
 
 const dedupeCands = (cands) => {
@@ -359,16 +398,21 @@ export function parseIcyVeinsEnhancements(html) {
   return Object.keys(enh).length ? enh : null;
 }
 
-async function harvestSpec(spec, fetchPage = fetchText) {
+export async function harvestSpec(spec, fetchPage = fetchText, rosters = harvestSpec.rosters) {
   const base = `https://www.icy-veins.com/wow/${slug(spec.spec)}-${slug(spec.class)}-pve-${roleSlug(spec.role)}`;
   const statHtml = await fetchPage(`${base}-stat-priority`);
   const bisHtml = await fetchPage(`${base}-gear-best-in-slot`);
   if (!statHtml && !bisHtml) return null; // no guide published for this spec (recorded)
   const enhHtml = await fetchPage(`${base}-gems-enchants-consumables`);
   const priorities = statHtml ? parseIcyVeinsPriorities(statHtml) : [];
-  const bis = bisHtml ? parseIcyVeinsBis(bisHtml, harvestSpec.rosters) : [];
+  const bis = bisHtml ? parseIcyVeinsBis(bisHtml, rosters) : [];
   if (!priorities.length && !bis.length)
     throw new Error("pages fetched but neither priorities nor BiS parsed — recipe drift?");
+  // A fetched BiS page that yields no rows is drift, not an empty guide: all 40 specs had
+  // rows in the 2026-09-22 harvest, and the first run to meet the new item markup
+  // (2026-10-14) staged 24 priorities-only records as verified before it was stopped.
+  if (bisHtml && !bis.length)
+    throw new Error("BiS page fetched but no BiS rows parsed — recipe drift?");
   const record = {
     guideUrl: `${base}-gear-best-in-slot`,
     published: articleDate(bisHtml || statHtml),
