@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-14 (nightly, ~15:30 UTC) — 1 transcript skipped, 0 queued, 0 takes
+
+- 44/44 feeds polled (41 class channelIds + 3 generalCreators), all 200. 424 ids remain unseen in total (budget/keyword dismissals stay unseen); 41 published since 10-13.
+- Supadata verdict ok, 1/1 fetched: Jedith THRLOvU7vH4 — 12.1.5 Devourer build/rotation guide (theorycrafters now recommend Annihilator over Void-Scarred for raid and M+); a hero-tree choice, no spec-strength read → skipped[]. Queue 1 → 0.
+- Left unseen (nightly keyword cut): patch-day streams and key/raid VODs (Bansherz incl. 2BG49CSl2uk, Tactyks, leak, Preheat, Whispyr, Shadarek, Critcake, Sha, Hopeful, Kesslive, MadSkillzzTV, LBNinja7, AutomaticJak, Maximum), WoW Forever (Psybear, Shindigg), PvP (Dalaran Gaming duels), loot/what-to-do recaps (Dratnos mlxvxi1Eph4, Zorthas 2uyuNRM-W58, NeekapHere), dungeon-tuning recap (izen vNB-0y3Dle8), Tettles commentary, shorts.
+
 ## 2026-10-14 (local scheduled, before today's nightly) — 0 of 1 transcripts; caption 429 persists; queue 1 → 1
 
 - Jedith THRLOvU7vH4: anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; the video stays in videos[] for the nightly's Supadata lane. No cookies.txt supplied, so no authenticated fallback. No takes, no metaNotes, no RSS sweep (queue-only scope).

@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-14 (nightly, ~15:30 UTC) — no live class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (40 items, top news=383417), news index and blue tracker: WoW Forever items, 12.1.5 launch posts (Known Issues 2381312, "12.1.5 Content Update is Now Live", content-update notes news 24304162) and Blizzard's "Hotfixes: October 13, 2026" news post (24296142) — read in full: dungeon and raid tuning only (Altar of Fangs, Murder Row, Ruby Life Pools, Temple of Sethraliss, Blinding Vale, Sszorak and Coiled Altar Mythic, Voidscar Arena), the same content as topic 2380514 (now v2, edited 10-13 18:39). No class section. 12.1.5 launch material: run report only while the displayed live patch is 12.1 (launch runbook B6/B8 is the owner's lane).
+- 2370266 still v1, 2373623 v2, 12.1 thread 2317811 unchanged (posts_count 13, highest 19). Forum search "tuning"/"hotfixes" order:latest: player topics only. No 12.2 PTR; PHASES.ptr null; livePatch still null.
+
 ## 2026-10-14 (local scheduled, before today's nightly) — no live class tuning; ledger unchanged; 0 feed entries
 
 - fetch-official-notes from home: both sources success (2336376 post 1 still v56, updated 10-06; 2344395 posts 1/4/5/6 v3/v1/v1/v1). Pending differed from the stored ledger only in checkedAt, so data/official-notes.json was left alone (bookkeeping only; the nightly rewrites it).

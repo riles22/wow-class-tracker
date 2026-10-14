@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-14 (nightly, ~15:30 UTC) — Method only (0 moved); Wowhead WAF, Icy Veins + Archon walled
+
+- Method: both pages 200 (186/174 KB), 40/40 rows each, 0 off-scale, era body "Midnight Season 2", Devourer present; 0 of 80 letters moved; Last Updated 5 Oct (M+) / 10 Aug (raid); snapshots → 2026-10-14.
+- Icy Veins: 403 Cloudflare on all six (runner); today's local-run letters and snapshots (10-14) untouched. Wowhead: 202 AWS WAF on all six. Archon: 403 on all six. Nothing parsed from any of the three. Churn 0.
+
 ## 2026-10-14 (local scheduled, before today's nightly) — Icy Veins MERGED, 9 letters (7 raid, 2 M+); Wowhead WAF also walls home
 
 - Icy Veins: home curl (browser UA + Accept + Accept-Language), all six HTTP 200, 240–388 KB, one `tier-list` table each after stripping `<style>`. 80/80 rows, 80 non-null, 0 unmatched/dups/role mismatches (27/7/6 per bracket).

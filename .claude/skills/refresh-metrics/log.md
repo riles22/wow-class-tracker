@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-14 (nightly, ~15:30 UTC) — Bloodmallet 12.1.5 re-sims adopted wholesale; SimC first 12.1.5 build; Mythicstats new period invalid
+
+- Bloodmallet: 24/27 charts, all MID2, ptr "0", every timestamp 2026-10-14 02:55–02:59 → every stored-pool chart is on/after LABEL_FLIP_DUE 2026-10-13, so the 12.1.5 hold lifts; 24 profiles merged wholesale (targets 1/2/3/5/8/15, asOf 10-14), max move 8.9%. Balance/Augmentation/Devastation error 3/3.
+- SimC MID2_Raid.txt: 1.45 MB, header 12.1.5.70391 Live (hotfix 2026-10-14/70391, HEAD 1bd2e09595); 24 specs merged at asOf 10-14. Devourer −8.7%, Marksmanship −8.4%, Assassination −4.0%, Subtlety −3.8%, Havoc +2.7%, rest ≤1.2%.
+- Murlok (collector): 40 rows, source dates 10-13/10-14 → success. Mythicstats (collector): period 1085 INVALID ("top-2000 population could not be verified"), 0 rows, stored period-1084 series preserved → parse_error.
+- WoWMeta: rankings Last-Modified still 10-13 09:14, 40/40 identical to stored; snapshotDate 09-15 → partial. Archon walled. WCL (collector): raid partial 294 rows (7 invalid, 19 sparse, supersededBy partition 2 "12.1.5"); M+ success 320 rows. Robydoby not fetched (closed PTR cycle, best-effort lane).
+
 ## 2026-10-13 (nightly, ~17:50 UTC) — Murlok 40 new (source 10-13); WoWMeta re-cut merged; Bloodmallet 12.1.5 hold engaged
 
 - Murlok (collector): 40 rows, all moved, source date 2026-10-13 → success. Mythicstats (collector): period 1084, 37 rows, 0 moved, none newly retired.

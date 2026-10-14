@@ -1,14 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "THRLOvU7vH4",
-      "creator": "Jedith",
-      "title": "How to Play Annihilator Devourer Demon Hunter in 12.1.5",
-      "published": "2026-10-13",
-      "queuedAt": "2026-10-13"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3222,6 +3214,13 @@
       "title": "Mythic+ Keys & Best DPS Habits | Maximizing CDs for Better DPS",
       "reason": "Transcript read (Supadata, 2026-10-13): a Mythic+ habits explainer on when to spend DPS cooldowns (on cooldown by default, held for dangerous packs such as the Blinding Vale belcher or Murder Row punisher). Assassination funnel and Elemental blanket AoE appear only as illustrations of matching a cooldown to a pack, a point his 10-12 video (already distilled) made; no new meta read. Nothing to distil.",
       "verifiedAt": "2026-10-13"
+    },
+    {
+      "id": "THRLOvU7vH4",
+      "creator": "Jedith",
+      "title": "How to Play Annihilator Devourer Demon Hunter in 12.1.5",
+      "reason": "Transcript read (Supadata, 2026-10-14): a 12.1.5 Devourer build/rotation guide. Jedith says the Devourer theorycrafters and guide writers now recommend Annihilator over Void-Scarred for raid and M+ (Void-Scarred sims well but is impractical to execute), then covers talents, opener, soul/Voidfall/tier-set mechanics and UI. A hero-tree choice within the spec, not a read on Devourer's strength against other specs; nothing to distil.",
+      "verifiedAt": "2026-10-14"
     }
   ],
   "seen": [
