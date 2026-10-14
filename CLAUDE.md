@@ -14,12 +14,17 @@ maintaining separate procedures. `npm run instructions:check` detects adapter
 drift before both test commands; regenerate after discovery metadata changes with
 `npm run instructions:sync`. Local credentials and scratch remain ignored.
 
-**Current preview policy (2026-09-05):** 12.1.5 has a separate notes-only preview
-and official-note revision ledger in `data/official-notes.json`. It is not a new
-forecast cycle: `PHASES.ptr` stays null, live S2 rankings and the frozen 12.1 forecast
-keep their existing inputs, and archived PTR observations retain their old scope.
-Read ptr-watch for collection and per-section resolution; an older paragraph about
-waiting for 12.2 does not supersede this approved 12.1.5 notes lane.
+**12.1.5 is live (since 2026-10-13):** 12.1.5 is a mid-season patch inside Season 2, not a new
+season or forecast cycle. The chip reads 12.1.5 through `PHASES.livePatch`; `PHASES.ptr`
+stays null, and `liveSeason`, `liveLabel`, `SNAPSHOT_PHASE`, `LIVE_LEADERBOARDS`, the live
+S2 rankings and the frozen 12.1 forecast keep their existing inputs; archived PTR
+observations retain their old scope. The launch commit retired the 12.1.5 notes-only
+preview (the `ptr-preview` official-notes source, topic 2344395, which ran from
+2026-09-05): live 12.1.5 notes and hotfixes are logged per ptr-watch with
+`realm: "live"`, and the official-note ledger in `data/official-notes.json` tracks the
+live hotfix compilation only. `docs/1215-launch-runbook.md` holds the launch and
+post-launch checklist, the WCL raid partition switch included. The 2026-09-05 preview
+policy this replaces, and any older paragraph about waiting for 12.2, are history.
 
 ## Commands
 
@@ -381,14 +386,15 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   the forecast report card grades the frozen pre-launch projection against, so nothing
   downstream can infer the boundary if this is missed. Recorded here because a code
   comment is invisible to whoever notices 12.1 going live (2026-07-24 audit, X3).
-- **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label, DORMANT (`null`)
-  until 12.1.5 ships** (added 2026-09-25). 12.1.5 is a mid-season patch inside Season 2,
+- **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label,
+  `{ label: "12.1.5", since }` since the 12.1.5 launch commit** (added 2026-09-25, `null`
+  until then). 12.1.5 is a mid-season patch inside Season 2,
   not a new season: `liveSeason`, `liveLabel` "12.1", `liveSince`, `SNAPSHOT_PHASE`,
   `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. **For the label, the
-  owner launch commit makes three edits** (it carries more than the label — the ptr-preview
-  retirement and the nightly prompt wording among them; the 12.1.5 launch runbook in
-  `docs/` lists the whole commit): it sets `livePatch = { label: "12.1.5", since: "<launch
-  date>" }`, updates the literal pin in `test/normalize.test.mjs`, and changes the gearing
+  owner launch commit made three edits** (it carried more than the label — the ptr-preview
+  retirement and the nightly prompt wording among them; `docs/1215-launch-runbook.md`
+  lists the whole commit): it set `livePatch`, updated the literal pin in
+  `test/normalize.test.mjs`, and changed the gearing
   page's chip (`pc-full`/`pc-short` in `gearing/src/app.template.html`, then
   `npm run gearing:build`). Gearing's chip is a hand-kept literal, like the rest of the
   mirrored bar, so `livePatch` does not reach it; a root build test compares it with the
@@ -420,7 +426,8 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   rather than "different", it goes quiet once the chip reaches 12.1.5 and stays quiet at
   later in-season patches and after the next season flip. That flip must set `livePatch`
   back to `null` (a normalize test reds while its `since` does not postdate `liveSince`);
-  nothing else needs retiring.
+  nothing else needs retiring. Since the 12.1.5 launch commit the chip names 12.1.5, so the
+  gate is silent whatever `LABEL_FLIP_DUE` holds.
 - **`dataHealth()` (`render.mjs`)** computes the frozen-series banner: every metric,
   `ptrDummy` and `fightProfile` date, grouped BY SOURCE so a stalled non-WCL feed is never
   announced as a Warcraft Logs outage. Staleness is relative to the data's own newest
@@ -1025,8 +1032,8 @@ outside patch notes, votes in the outlook tally — a PTR entry naming the live 
 patch, carrying next-patch material; and, while a cycle is open, the cycle patch's
 consolidated notes logged as a PTR build (log them as patch notes once the patch launches).
 All are on the logger. Next-patch material posted early goes in the run report instead, and while
-`PHASES.ptr` is null PTR builds and hotfix rounds for an upcoming in-season patch (12.1.5)
-are not logged here at all (ptr-watch skill). Canonical source: the official forum thread
+`PHASES.ptr` is null PTR builds and hotfix rounds for an upcoming in-season patch (as
+12.1.5's were before it went live) are not logged here at all (ptr-watch skill). Canonical source: the official forum thread
 (`thread` key) — each PTR build is a new reply post, machine-readable via Discourse
 `.json`. **A new patch cycle means a NEW thread** — re-discover via Wowhead news RSS.
 **`specsAffected` and `highlights` must agree** — a coverage gate in validate.mjs fails

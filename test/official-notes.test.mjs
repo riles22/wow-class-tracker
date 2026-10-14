@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { OFFICIAL_NOTE_SOURCES, sectionsForPost, postReceipt, pendingLedger, validateOfficialNotes, officialNotesView, noteHash } from "../src/official-notes.mjs";
@@ -9,30 +10,40 @@ import { buildPayload, PHASES } from "../src/render.mjs";
 import { loadData } from "../src/validate.mjs";
 
 const NOW = new Date("2026-09-05T12:00:00Z");
+/* The 12.1.5 notes-only preview was retired at the 12.1.5 launch (its config row, ledger
+   block and contract entry left together). The era "ptr" staff-posts lane stays in the
+   code for the next patch's preview, so these tests exercise it through a fixture source
+   with the retired row's exact shape, injected wherever the real config would be read.
+   The real config is pinned separately at the end of this file. */
+const LIVE = OFFICIAL_NOTE_SOURCES.find(s => s.id === "live-hotfixes");
+const PREVIEW = Object.freeze({ id: "ptr-preview", topicId: 2344395, slug: "midnight-1215-ptr-development-notes", patch: "12.1.5", era: "ptr", mode: "staff-posts" });
+const SOURCES = Object.freeze([LIVE, PREVIEW]);
 const roster = [{ class: "Mage", spec: "Fire" }, { class: "Mage", spec: "Frost" }, { class: "Warrior", spec: "Protection" }];
 const classHTML = `<p><strong>September 4, 2026</strong></p><p><strong>Classes</strong></p><ul><li><strong>Mage</strong><ul><li><strong>Fire</strong><ul><li>Damage increased by 5%.</li></ul></li></ul></li></ul>`;
 function post(source, html = classHTML, number = 1) {
   return { id: source.topicId + number, topic_id: source.topicId, post_number: number, staff: true, version: 3,
     created_at: "2026-09-03T16:00:00Z", updated_at: "2026-09-05T01:00:00Z", cooked: html };
 }
-function evidence() {
-  return { schemaVersion: 1, checkedAt: NOW.toISOString(), sources: Object.fromEntries(OFFICIAL_NOTE_SOURCES.map(s => [s.id, {
+function evidence(sources = SOURCES) {
+  return { schemaVersion: 1, checkedAt: NOW.toISOString(), sources: Object.fromEntries(sources.map(s => [s.id, {
     topicId: s.topicId, patch: s.patch, era: s.era, status: "success", posts: [postReceipt(post(s), s, roster)] }])) };
 }
 const ptrBuilds = { builds: [{ date: "2026-09-04", kind: "hotfix", label: "Official compilation: https://us.forums.blizzard.com/en/wow/t/hotfixes/2336376/1.", specsAffected: ["Fire Mage"], highlights: ["Fire Mage — Damage increased by 5%."] }] };
-function resolved(e = evidence()) {
-  const ledger = pendingLedger(e);
+function resolved(e = evidence(), sources = SOURCES) {
+  const ledger = pendingLedger(e, undefined, sources);
   for (const source of Object.values(ledger.sources)) for (const p of source.posts) for (const section of p.sections) {
     section.resolution = source.era === "live" ? { disposition: "applied", reason: "Verified exact feed entry.", references: [{ kind: "build", date: "2026-09-04", highlight: ptrBuilds.builds[0].highlights[0] }] }
       : { disposition: "applied", reason: "Notes-only review.", notes: [{ specKey: "Mage|Fire", summary: "The proposed change raises damage." }] };
   }
   return ledger;
 }
-const check = (ledger, e = evidence(), baseLedger = ledger) => checkOfficialNotes({ ledger, evidence: e, baseLedger, specs: roster, ptrBuilds, now: NOW });
+const check = (ledger, e = evidence(), baseLedger = ledger) => checkOfficialNotes({ ledger, evidence: e, baseLedger, specs: roster, ptrBuilds, now: NOW, sources: SOURCES });
+const validate = (ledger, options = {}) => validateOfficialNotes(ledger, { specs: roster, ptrBuilds, now: NOW, ...options, sources: SOURCES });
+const pending = (e, previous) => pendingLedger(e, previous, SOURCES);
 
 test("official notes preserve class/spec/hero nesting, dates, entities, and category boundaries", () => {
   const html = classHTML.replace("Damage increased by 5%.", "Flames &amp; sparks.<ul><li>Hero talent</li></ul>") + `<p><strong>Player versus Player</strong></p><ul><li><strong>Warrior</strong><ul><li><strong>Protection</strong><ul><li>Shield changes.</li></ul></li></ul></li></ul><p><strong>Items</strong></p><ul><li>Other changes.</li></ul>`;
-  const sections = sectionsForPost(post(OFFICIAL_NOTE_SOURCES[0], html), OFFICIAL_NOTE_SOURCES[0], roster);
+  const sections = sectionsForPost(post(LIVE, html), LIVE, roster);
   assert.equal(sections.length, 2);
   assert.deepEqual(sections[0].specKeys, ["Mage|Fire"]);
   assert.match(sections[0].text, /Flames & sparks\.\n      - Hero talent/);
@@ -60,7 +71,7 @@ const struckWarriorHTML = `<h2><strong>CLASSES</strong></h2>
 </ul>`;
 
 test("struck-through lines are marked reverted, never read as current; live lines are unchanged", () => {
-  const source = OFFICIAL_NOTE_SOURCES[1], [section] = sectionsForPost(post(source, struckWarriorHTML, 4), source, roster);
+  const source = PREVIEW, [section] = sectionsForPost(post(source, struckWarriorHTML, 4), source, roster);
   const struck = ["Execute no longer consumes additional Rage for additional damage.", "Execute damage increased by 100%."];
   assert.deepEqual(section.specKeys, ["Warrior|Protection"]);
   assert.equal(section.text, [
@@ -86,7 +97,7 @@ test("a struck heading keeps the section's identity; the marker lives only in th
   // Headings are identity (id, date, category, class, spec scope) and must match on the
   // unmarked text: marking them once widened a struck spec to its whole class, renamed a
   // struck class to "[reverted: Warrior]", and dropped a struck class outside Classes.
-  const source = OFFICIAL_NOTE_SOURCES[0], wide = [...roster, { class: "Warrior", spec: "Arms" }, { class: "Warrior", spec: "Fury" }];
+  const source = LIVE, wide = [...roster, { class: "Warrior", spec: "Arms" }, { class: "Warrior", spec: "Fury" }];
   const identity = html => sectionsForPost(post(source, html), source, wide).map(s => [s.id, s.date, s.category, s.class, s.specKeys.join(",")]);
   const strike = (html, text) => html.replace(`<strong>${text}</strong>`, `<strong><s>${text}</s></strong>`);
   for (const category of ["Classes", "Player versus Player"]) {
@@ -98,7 +109,7 @@ test("a struck heading keeps the section's identity; the marker lives only in th
 });
 
 test("unknown Classes items are reviewable; layout loss and non-staff posts fail closed", () => {
-  const source = OFFICIAL_NOTE_SOURCES[0];
+  const source = LIVE;
   const unknown = sectionsForPost(post(source, `<h3>Classes</h3><ul><li>Unexpected new category<ul><li>A change</li></ul></li></ul>`), source, roster);
   assert.equal(unknown.length, 1); assert.deepEqual(unknown[0].specKeys, []);
   assert.throws(() => sectionsForPost(post(source, `<h3>Classes</h3><div>Unrecognized structure</div>`), source, roster), /no class sections/);
@@ -110,25 +121,25 @@ test("unchanged section receipts retain review; edited old dated sections reopen
   next.checkedAt = "2026-09-05T13:00:00Z";
   next.sources["live-hotfixes"].posts[0].version++;
   next.sources["live-hotfixes"].posts[0].sections[0].sha256 = noteHash("changed old note");
-  const pending = pendingLedger(next, old);
-  assert.equal(pending.sources["live-hotfixes"].posts[0].sections[0].resolution.disposition, "unresolved");
-  assert.deepEqual(pending.sources["ptr-preview"].posts[0].sections[0].resolution, old.sources["ptr-preview"].posts[0].sections[0].resolution);
-  assert.ok(check(pending, next, old).errors.some(e => e.includes("unresolved")));
+  const ledger = pending(next, old);
+  assert.equal(ledger.sources["live-hotfixes"].posts[0].sections[0].resolution.disposition, "unresolved");
+  assert.deepEqual(ledger.sources["ptr-preview"].posts[0].sections[0].resolution, old.sources["ptr-preview"].posts[0].sections[0].resolution);
+  assert.ok(check(ledger, next, old).errors.some(e => e.includes("unresolved")));
 });
 
 test("removed sections leave tombstones and cannot disappear from the review gate", () => {
   const e = evidence(), old = resolved(e);
   e.sources["live-hotfixes"].posts[0].sections = [];
-  const pending = pendingLedger(e, old), source = pending.sources["live-hotfixes"];
+  const ledger = pending(e, old), source = ledger.sources["live-hotfixes"];
   assert.equal(source.removedSections.length, 1);
   assert.equal(source.removedSections[0].resolution.disposition, "unresolved");
-  assert.equal(officialNotesView(pending).unresolved.length, 1);
+  assert.equal(officialNotesView(ledger, SOURCES).unresolved.length, 1);
   source.removedSections = [];
-  assert.ok(check(pending, e, old).errors.some(e => e.includes("removed-section")));
-  source.removedSections = pendingLedger(e, old).sources["live-hotfixes"].removedSections;
+  assert.ok(check(ledger, e, old).errors.some(e => e.includes("removed-section")));
+  source.removedSections = pending(e, old).sources["live-hotfixes"].removedSections;
   source.removedSections[0].resolution = { disposition: "irrelevant", reason: "Reviewed removal; the original feed is a dated historical receipt." };
-  assert.deepEqual(check(pending, e, old).errors, []);
-  assert.deepEqual(pendingLedger(e, pending).sources["live-hotfixes"].removedSections, source.removedSections);
+  assert.deepEqual(check(ledger, e, old).errors, []);
+  assert.deepEqual(pending(e, ledger).sources["live-hotfixes"].removedSections, source.removedSections);
 });
 
 test("new class sections, stale receipts and source identity edits cannot pass", () => {
@@ -146,28 +157,28 @@ test("new class sections, stale receipts and source identity edits cannot pass",
 test("unreachable sources retain committed evidence without advancing their dates", () => {
   const e = evidence(), old = resolved(e);
   e.sources["live-hotfixes"] = { ...e.sources["live-hotfixes"], status: "unreachable", details: "HTTP 403", posts: [] };
-  const pending = pendingLedger(e, old);
-  assert.deepEqual(pending.sources["live-hotfixes"], old.sources["live-hotfixes"]);
-  assert.equal(check(pending, e, old).warnings.length, 1);
-  assert.deepEqual(check(pending, e, old).errors, []);
-  pending.sources["live-hotfixes"].checkedAt = "2026-09-05T12:01:00Z";
-  assert.ok(check(pending, e, old).errors.some(e => e.includes("unchanged")));
+  const ledger = pending(e, old);
+  assert.deepEqual(ledger.sources["live-hotfixes"], old.sources["live-hotfixes"]);
+  assert.equal(check(ledger, e, old).warnings.length, 1);
+  assert.deepEqual(check(ledger, e, old).errors, []);
+  ledger.sources["live-hotfixes"].checkedAt = "2026-09-05T12:01:00Z";
+  assert.ok(check(ledger, e, old).errors.some(e => e.includes("unchanged")));
 });
 
 test("applied sections require complete spec coverage and references that still exist", () => {
   const ledger = resolved(), source = ledger.sources["live-hotfixes"].posts[0].sections[0];
   source.resolution.references[0].highlight = "Fire Mage — Not actually in the feed.";
-  assert.ok(validateOfficialNotes(ledger, { specs: roster, ptrBuilds, now: NOW }).some(e => e.includes("applied reference missing")));
+  assert.ok(validate(ledger).some(e => e.includes("applied reference missing")));
   const preview = resolved(); preview.sources["ptr-preview"].posts[0].sections[0].specKeys.push("Mage|Frost");
-  assert.ok(validateOfficialNotes(preview, { specs: roster, ptrBuilds, now: NOW }).some(e => e.includes("preview omitted Mage|Frost")));
+  assert.ok(validate(preview).some(e => e.includes("preview omitted Mage|Frost")));
 });
 
 test("preview and live dispositions cannot cross lanes; exclusions are visibly separate", () => {
   const ledger = resolved();
   ledger.sources["ptr-preview"].posts[0].sections[0].resolution.references = [{ kind: "build" }];
-  assert.ok(validateOfficialNotes(ledger, { specs: roster, ptrBuilds, now: NOW }).some(e => e.includes("preview may not reference live")));
+  assert.ok(validate(ledger).some(e => e.includes("preview may not reference live")));
   const excluded = resolved(); excluded.sources["live-hotfixes"].posts[0].sections[0].resolution = { disposition: "irrelevant", reason: "Historical baseline; no backfill claim." };
-  const view = officialNotesView(excluded);
+  const view = officialNotesView(excluded, SOURCES);
   assert.equal(view.irrelevant, 1); assert.equal(view.applied, 1); assert.equal(view.previews.length, 1);
 });
 
@@ -175,32 +186,35 @@ test("old PTR lines and same-day unrelated topics cannot resolve current live se
   const ledger = resolved(), old = structuredClone(ptrBuilds);
   old.builds[0].date = "2026-06-18"; old.builds[0].kind = "build";
   ledger.sources["live-hotfixes"].posts[0].sections[0].resolution.references[0].date = "2026-06-18";
-  assert.ok(validateOfficialNotes(ledger, { specs: roster, ptrBuilds: old, requireResolved: true, now: NOW }).some(e => e.includes("applied reference missing")));
+  assert.ok(validate(ledger, { ptrBuilds: old, requireResolved: true }).some(e => e.includes("applied reference missing")));
   const wrong = structuredClone(ptrBuilds); wrong.builds[0].label = "Unrelated: https://us.forums.blizzard.com/en/wow/t/hotfixes/2344395/1";
-  assert.ok(validateOfficialNotes(resolved(), { specs: roster, ptrBuilds: wrong, requireResolved: true, now: NOW }).some(e => e.includes("official topic")));
+  assert.ok(validate(resolved(), { ptrBuilds: wrong, requireResolved: true }).some(e => e.includes("official topic")));
 });
 
-test("notes-only preview leaves all 80 consensus/frozen forecast cells and model inputs identical", async () => {
+test("the notes lane leaves all 80 consensus/frozen forecast cells and model inputs identical", async () => {
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const data = await loadData(root);
   const without = buildPayload({ ...data, officialNotes: null });
-  const withNotes = buildPayload({ ...data, officialNotes: resolved() });
-  assert.equal(PHASES.ptr, null, "12.1.5 notes preview must not reopen the old forecast cycle");
+  const withNotes = buildPayload({ ...data, officialNotes: resolved(evidence(OFFICIAL_NOTE_SOURCES), OFFICIAL_NOTE_SOURCES) });
+  assert.equal(PHASES.ptr, null, "12.1.5 going live must not reopen the old forecast cycle");
   assert.deepEqual(withNotes.specs, without.specs);
   assert.deepEqual(withNotes.meta, without.meta);
   assert.deepEqual(withNotes.ptrBuilds, without.ptrBuilds);
-  assert.equal(withNotes.officialNotes.previews.length, 1);
+  assert.equal(withNotes.officialNotes.previews.length, 0);
+  // A ledger that still carried the retired preview block would render no preview either:
+  // the view reads configured sources only (validation refuses such a ledger outright).
+  assert.equal(buildPayload({ ...data, officialNotes: resolved() }).officialNotes.previews.length, 0);
 });
 
 test("collector checks all staff PTR pages while ignoring public replies and duplicate live replies", async () => {
   const seen = [];
   const fetchJSON = async url => {
-    seen.push(url); const source = OFFICIAL_NOTE_SOURCES.find(s => url.includes(String(s.topicId)));
+    seen.push(url); const source = SOURCES.find(s => url.includes(String(s.topicId)));
     if (url.includes("/posts.json?")) return { post_stream: { posts: [{ ...post(source, classHTML, 2), id: source.topicId + 2 }, { ...post(source, classHTML, 3), staff: false, id: source.topicId + 3 }] } };
     return { id: source.topicId, title: source.era === "ptr" ? "Midnight: 12.1.5 PTR Development Notes" : "World of Warcraft: Midnight Hotfixes - September 4",
       post_stream: { posts: [post(source)], stream: [source.topicId + 1, source.topicId + 2, source.topicId + 3] } };
   };
-  const result = await fetchOfficialNotes({ specs: roster, fetchJSON, now: NOW });
+  const result = await fetchOfficialNotes({ specs: roster, fetchJSON, now: NOW, sources: SOURCES });
   assert.equal(result.evidence.sources["live-hotfixes"].posts.length, 1);
   assert.equal(result.evidence.sources["ptr-preview"].posts.length, 2);
   assert.equal(seen.length, 3);
@@ -208,9 +222,9 @@ test("collector checks all staff PTR pages while ignoring public replies and dup
 
 test("a changed patch title or failed source does not rewrite its existing ledger", async () => {
   const previous = resolved();
-  const result = await fetchOfficialNotes({ specs: roster, previous, now: NOW, fetchJSON: async url => {
+  const result = await fetchOfficialNotes({ specs: roster, previous, now: NOW, sources: SOURCES, fetchJSON: async url => {
     if (url.includes("2336376")) throw Error("HTTP 403");
-    return { id: 2344395, title: "Midnight: 12.2 PTR Development Notes", post_stream: { posts: [post(OFFICIAL_NOTE_SOURCES[1])], stream: [] } };
+    return { id: 2344395, title: "Midnight: 12.2 PTR Development Notes", post_stream: { posts: [post(PREVIEW)], stream: [] } };
   } });
   assert.deepEqual(result.pending, previous);
   assert.match(result.evidence.sources["ptr-preview"].details, /title/);
@@ -219,14 +233,48 @@ test("a changed patch title or failed source does not rewrite its existing ledge
 });
 
 test("HTTP failure halfway through a staff-post inventory is an outage, not a parser error", async () => {
-  const result = await fetchOfficialNotes({ specs: roster, previous: resolved(), now: NOW, fetchJSON: async url => {
+  const result = await fetchOfficialNotes({ specs: roster, previous: resolved(), now: NOW, sources: SOURCES, fetchJSON: async url => {
     if (url.includes("/posts.json?")) throw Error("HTTP 503");
-    const source = OFFICIAL_NOTE_SOURCES.find(s => url.includes(String(s.topicId)));
+    const source = SOURCES.find(s => url.includes(String(s.topicId)));
     return { id: source.topicId, title: source.era === "ptr" ? "Midnight: 12.1.5 PTR Development Notes" : "World of Warcraft: Midnight Hotfixes",
       post_stream: { posts: [post(source)], stream: [source.topicId + 1, source.topicId + 2] } };
   } });
   assert.equal(result.evidence.sources["ptr-preview"].status, "unreachable");
   assert.deepEqual(check(result.pending, result.evidence, resolved()).errors, []);
+});
+
+/* 12.1.5 launch: the real configuration after the preview retirement. */
+test("12.1.5 launch: the live compilation is the only configured source and the refresh contract names exactly it", async () => {
+  assert.deepEqual(OFFICIAL_NOTE_SOURCES.map(s => s.id), ["live-hotfixes"]);
+  assert.ok(!OFFICIAL_NOTE_SOURCES.some(s => s.topicId === PREVIEW.topicId), "the retired 12.1.5 PTR notes thread must not return");
+  // Both edits are one owner change: a contract entry with no config row would read as a
+  // missing receipt in the freshness heartbeat, and a config row with no contract entry
+  // would never age. Reds on the pre-staged branch until the launch-morning data edit.
+  const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+  const contract = JSON.parse(await readFile(path.join(root, "data/required-sources.json"), "utf8"));
+  assert.deepEqual(contract.officialNotes.sources, OFFICIAL_NOTE_SOURCES.map(s => s.id));
+});
+
+test("12.1.5 launch: a current ledger may not keep the retired block, while a base ledger that does is ignored", () => {
+  const live = evidence(OFFICIAL_NOTE_SOURCES), current = resolved(live, OFFICIAL_NOTE_SOURCES);
+  const stale = structuredClone(current); stale.sources["ptr-preview"] = resolved().sources["ptr-preview"];
+  assert.ok(validateOfficialNotes(stale, { specs: roster, ptrBuilds, now: NOW }).includes("official-notes.json: unknown source ptr-preview"));
+  // The launch-morning gate: HEAD's ledger still carries the block, the edited one does not.
+  const gate = checkOfficialNotes({ ledger: current, evidence: live, baseLedger: stale, specs: roster, ptrBuilds, now: NOW });
+  assert.deepEqual(gate, { errors: [], warnings: [] });
+  // Evidence from a pre-launch collector (two sources) is refused rather than half-read.
+  assert.ok(checkOfficialNotes({ ledger: current, evidence: evidence(), baseLedger: stale, specs: roster, ptrBuilds, now: NOW }).errors.includes("Official-note evidence source inventory differs"));
+});
+
+test("12.1.5 launch: the collector requests only the live compilation topic", async () => {
+  const seen = [];
+  const result = await fetchOfficialNotes({ specs: roster, now: NOW, fetchJSON: async url => {
+    seen.push(url);
+    return { id: LIVE.topicId, title: "World of Warcraft: Midnight Hotfixes", post_stream: { posts: [post(LIVE)], stream: [LIVE.topicId + 1] } };
+  } });
+  assert.deepEqual(seen, [`https://us.forums.blizzard.com/en/wow/t/${LIVE.topicId}.json`]);
+  assert.deepEqual(Object.keys(result.evidence.sources), ["live-hotfixes"]);
+  assert.deepEqual(Object.keys(result.pending.sources), ["live-hotfixes"]);
 });
 
 test("HTTP transport rejects challenge HTML, wrong origin and oversized JSON", async () => {

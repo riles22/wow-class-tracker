@@ -1,6 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown, officialNoteChanges, forumTopicOf } from "../src/digest.mjs";
+import { tierMoves, newEntries, verdictChanges, videoActivity, digestMarkdown, officialNoteChanges as realNoteChanges, forumTopicOf } from "../src/digest.mjs";
+import { OFFICIAL_NOTE_SOURCES } from "../src/official-notes.mjs";
+/* The 12.1.5 notes-only preview was retired at the 12.1.5 launch. The digest's era "ptr"
+   lane stays for the next patch's preview, so its tests inject a fixture source with the
+   retired row's shape; the real-config behavior is pinned in its own test below. */
+const NOTE_SOURCES = Object.freeze([...OFFICIAL_NOTE_SOURCES,
+  Object.freeze({ id: "ptr-preview", topicId: 2344395, slug: "midnight-1215-ptr-development-notes", patch: "12.1.5", era: "ptr", mode: "staff-posts" })]);
+const officialNoteChanges = (oldLedger, newLedger) => realNoteChanges(oldLedger, newLedger, NOTE_SOURCES);
 
 const spec = (cls, sp, over = {}) => ({ class: cls, spec: sp, ...over });
 const payload = (specs, extra = {}) => ({
@@ -284,10 +291,10 @@ test("official-note refresh timestamps and unrelated post edits stay quiet; sect
   source.posts[0].bodySha256 = "unrelated-post-edit";
   previewSection(next).resolution.reason = "Rechecked without changing the summary.";
   assert.deepEqual(officialNoteChanges(first, next), []);
-  assert.match(digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: first }), newPayload: payload([],{ officialNotesLedger: next }) }), /Quiet run/);
+  assert.match(digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: first }), newPayload: payload([],{ officialNotesLedger: next }), noteSources: NOTE_SOURCES }), /Quiet run/);
   previewSection(next).sha256 = "new-section-hash";
   assert.equal(officialNoteChanges(first, next)[0].kind, "edited");
-  const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: first }), newPayload: payload([],{ officialNotesLedger: next }) });
+  const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: first }), newPayload: payload([],{ officialNotesLedger: next }), noteSources: NOTE_SOURCES });
   assert.match(text, /official section revised; tracked summary unchanged/);
   assert.doesNotMatch(text, /Quiet run/);
 });
@@ -299,7 +306,7 @@ test("official-note digest includes live amendments, historical patch attributio
     ...previewSection(old), id: "2336376:1:2026-09-04:classes:mage:1", resolution: { disposition: "applied", references: [{ kind: "build", date: "2026-09-04", highlight: "Fire Mage — Corrected damage." }] },
   }] }] };
   next.sources["live-hotfixes"] = source;
-  const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: old }), newPayload: payload([],{ officialNotesLedger: next }) });
+  const text = digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: old }), newPayload: payload([],{ officialNotesLedger: next }), noteSources: NOTE_SOURCES });
   assert.match(text, /Official-note changes \(2\)/);
   assert.match(text, /12\.1\.5 PTR preview/);
   // The compilation-mode live thread is named for the expansion, not its patch identity
@@ -317,6 +324,15 @@ test("official-note digest includes live amendments, historical patch attributio
   const historic = officialNoteChanges(null, historical)[0];
   assert.equal(historic.patch, "older-patch");
   assert.equal(historic.url, "https://us.forums.blizzard.com/en/wow/t/123/4");
+});
+
+test("12.1.5 launch: dropping the retired preview block from the ledger is not announced as removed notes", () => {
+  // The launch commit deletes the ptr-preview block. The digest reads configured sources
+  // only, so that night's digest stays quiet about it instead of listing every preview
+  // summary as withdrawn (accepted in the launch plan: the source simply stops listing).
+  const before = officialLedger(), after = { schemaVersion: 1, sources: {} };
+  assert.deepEqual(realNoteChanges(before, after), []);
+  assert.match(digestMarkdown({ oldPayload: payload([],{ officialNotesLedger: before }), newPayload: payload([],{ officialNotesLedger: after }) }), /Quiet run/);
 });
 
 test("official-note ordering changes do not invent edits and section identity distinguishes same-spec notes", () => {
