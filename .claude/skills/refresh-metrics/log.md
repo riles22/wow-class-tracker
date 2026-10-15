@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-15 (nightly, ~15:25 UTC) — SimC new 12.1.5 build merged; Mythicstats period 1085 merged; Murlok held (date regress)
+
+- SimC MID2_Raid.txt: same hotfix 2026-10-14/70391, new git build 3dcabb94dd (was 1bd2e09595); 24 specs merged at 10-14. Subtlety +7.2%, MM +5.5%, Assassination +2.0%.
+- Mythicstats collector success: period 1085, 40 rows, sum 100.4 — merged via updates.json.
+- Murlok collector INVALID: healer page <time> 2026-10-13 < stored Holy Paladin 2026-10-14; nothing merged.
+- Bloodmallet 24 charts, all 10-14 MID2, identical to stored; Balance/Aug/Dev still error. WoWMeta unchanged (snapshotDate 09-15). Archon walled.
+- WCL receipt: raid partial (295 rows, partition 2 "12.1.5" supersession held), M+ success (320).
+
 ## 2026-10-14 (nightly, ~15:30 UTC) — Bloodmallet 12.1.5 re-sims adopted wholesale; SimC first 12.1.5 build; Mythicstats new period invalid
 
 - Bloodmallet: 24/27 charts, all MID2, ptr "0", every timestamp 2026-10-14 02:55–02:59 → every stored-pool chart is on/after LABEL_FLIP_DUE 2026-10-13, so the 12.1.5 hold lifts; 24 profiles merged wholesale (targets 1/2/3/5/8/15, asOf 10-14), max move 8.9%. Balance/Augmentation/Devastation error 3/3.

@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-15 (nightly, ~15:25 UTC) — 0 transcripts (queue was empty); 2 queued; 0 takes
+
+- 44/44 feeds 200. 69 unseen uploads since 10-13 triaged by title/description; streams, VODs, raid guides, WoW Forever, PvP, Shorts, dungeon-tuning recaps left unseen.
+- Queued: Whispyr A-w7jDLpxiU (Assassination 12.1.5 mid-season update), YoDaTV WcUCsRCjnFo (Bear vs Blood DK for S2 keys). Not queued: Sha wnyRXt7X2Eg "Is Guardian Druid Meta Again?" (Sha's scope is Brewmaster only).
+
 ## 2026-10-15 (local scheduled, before today's nightly) — queue empty; caption 429 persists; 0 takes
 
 - Queue 0 → 0 (the 10-14 nightly drained Jedith THRLOvU7vH4). One anonymous yt-dlp caption probe (android client, pinned 2026.07.04) on izen vNB-0y3Dle8: HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; vNB-0y3Dle8 stays unseen (transport failure, not a dismissal). No cookies.txt supplied, so no authenticated fallback and no breadth sweep. No takes, no metaNotes.

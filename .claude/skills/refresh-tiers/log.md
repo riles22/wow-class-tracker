@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-15 (nightly, ~15:25 UTC) — Method M+ re-dated 10-14, 3 letters up; Icy Veins/Wowhead/Archon walled
+
+- Method (direct GET, 200): 40/40 per bracket, 0 off-scale. M+ "Last Updated 14th October 2026" (published 10-05 -> 10-14): Guardian Druid A->S, Assassination Rogue A->S, Havoc DH B->A. Raid unchanged (10 Aug). Churn gate: method:mplus 3, 0 two-step.
+- Icy Veins 403 Cloudflare x6 (stored 10-15 from the local run kept); Wowhead 202 AWS WAF x6; Archon 403 challenge. Nothing parsed for those.
+
 ## 2026-10-15 (local scheduled, before today's nightly) — Icy Veins verified from home, 0 letters moved
 
 - Icy Veins, curl from home (browser UA + Accept + Accept-Language): all six pages HTTP 200, one `table.tier-list` each after stripping `<style>`; rows/non-null 27/27, 7/7, 6/6 (raid) and 27/27, 7/7, 6/6 (M+), 0 unmatched, 0 off-scale, 0 TBD. Titles name 12.1.5 (raid tank page "Season 2 Tier List"); bodies rank Season 2 with Devourer present, so seasonVerified stays "s2". dateModified unchanged from stored `published` (raid DPS 10-12, raid healer 10-11, raid tank 08-29, M+ 10-12 ×3). 0 of 80 letters changed (check-refresh churn: no letter changed); snapshots → 2026-10-15. Method, Wowhead and Archon not attempted (nightly lane).
