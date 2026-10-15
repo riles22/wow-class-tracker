@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-15 (local scheduled, before today's nightly) — NEW hotfix topic 2382684 outside the ledger; 0 feed entries
+
+- fetch-official-notes from home: live-hotfixes success (138 class sections), ptr-preview success (18); pending identical to the stored ledger apart from checkedAt, so data/official-notes.json left alone.
+- Wowhead RSS (200 from home) since news=383417: 383424 "Many Labyrinth Bug Fixes - Patch 12.1.5 Hotfixes" (10-14 19:55) is the only class-relevant item; the article page answered 403 direct, read via r.jina.ai. Its source is a NEW staff forum topic, https://us.forums.blizzard.com/en/wow/t/2382684 "World of Warcraft: Midnight Hotfixes - October 14" (Linxy, created 2026-10-15T00:53Z, post 1 v1), not the compilation 2336376 the ledger reads (still unchanged). Class section: Druid — Guardian (Rebirth in Bear Form mana cost, Bear Form Heart of the Wild uncastable, Persistence armor amount) and Restoration (Nature's Bounty dropping Abundance early), all bug fixes. Also seen: topic 2380514 "Dungeon and Raid Tuning -- October 13" (v2, no class section). Not logged to ptr-builds.json: these are 12.1.5 live hotfixes and the displayed live patch is still 12.1 (livePatch null; launch PR #102 open). Owner action per the launch runbook: the new "Midnight Hotfixes" topic needs an OFFICIAL_NOTE_SOURCES row + required-sources entry, or it is missed silently.
+- No 12.2 PTR. PHASES.ptr null.
+
 ## 2026-10-14 (nightly, ~15:30 UTC) — no live class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.

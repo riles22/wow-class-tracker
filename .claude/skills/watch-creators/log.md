@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-15 (local scheduled, before today's nightly) — queue empty; caption 429 persists; 0 takes
+
+- Queue 0 → 0 (the 10-14 nightly drained Jedith THRLOvU7vH4). One anonymous yt-dlp caption probe (android client, pinned 2026.07.04) on izen vNB-0y3Dle8: HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; vNB-0y3Dle8 stays unseen (transport failure, not a dismissal). No cookies.txt supplied, so no authenticated fallback and no breadth sweep. No takes, no metaNotes.
+
 ## 2026-10-14 (nightly, ~15:30 UTC) — 1 transcript skipped, 0 queued, 0 takes
 
 - 44/44 feeds polled (41 class channelIds + 3 generalCreators), all 200. 424 ids remain unseen in total (budget/keyword dismissals stay unseen); 41 published since 10-13.
