@@ -239,3 +239,121 @@ test("every workflow the bot dispatches ends with the alert job, gated on a bot 
   // A red publish job already posts its gate output through its own `if: failure()` step.
   assert.match(job(workflow("nightly"), "dispatched-run-alert"), / && needs\.publish\.result != 'failure' && /);
 });
+
+// The alert job above reports a run that exists and fails. A dispatch that creates no run
+// never reaches it: on 2026-10-14 the nightly's Tests dispatch for 8ddbe61 returned HTTP 500
+// and nothing alerted. So that step confirms the run itself and comments on issue 15.
+const testsDispatch = () => {
+  const publish = job(workflow("nightly"), "publish");
+  const start = publish.indexOf("      - name: Run the UI invariants against what we just pushed\n");
+  const step = publish.slice(start, publish.indexOf("\n      - name: ", start + 1));
+  const lines = (runBlocks(step)[0] ?? "").split("\n").slice(1);
+  const indent = lines.find(line => line.trim())?.search(/\S/) ?? 0;
+  return { publish, start, step, script: lines.map(line => line.slice(indent)).join("\n") };
+};
+
+test("the nightly's Tests dispatch never fails the publish and alerts issue 15 when no Tests run appears", () => {
+  const { publish, start, step, script } = testsDispatch();
+  const commit = publish.indexOf("      - name: Commit and push explicit paths\n");
+  const deploy = publish.indexOf("      - name: Trigger Pages deploy when site inputs changed\n");
+  assert.ok(commit > 0 && commit < deploy && deploy < start, "after the push and the deploy dispatch");
+  assert.ok(start < publish.indexOf("      - name: Post run digest to the pinned issue\n"));
+  // It also runs after a failed deploy dispatch, so the Tests leg never depends on the deploy leg.
+  assert.match(step, /\n        if: \$\{\{ !cancelled\(\) && steps\.commit\.outputs\.pushed == 'true' \}\}\n/);
+  assert.match(step, /\n        continue-on-error: true\n/);
+  assert.match(step, /\n        timeout-minutes: \d+\n/);
+  assert.match(step, /\n          GH_TOKEN: \$\{\{ github\.token \}\}\n/);
+  assert.match(step, /\n          ALERT_ISSUE: "15"\n/);
+  assert.match(publish, /\n      actions: write\b/);
+  assert.match(publish, /\n      issues: write\b/);
+  assert.equal(runBlocks(step).length, 1);
+  assert.doesNotMatch(script, /\$\{\{/, "context values reach the shell only through env");
+  const kept = text => /tr -cd '([^']+)'/.exec(text)?.[1];
+  assert.equal(kept(script), kept(workflow("dispatched-run-alert")), "the alert file's body filter");
+  const guard = script.indexOf(`grep -qE '@|#[0-9]' "$body"`);
+  assert.ok(guard > 0 && guard < script.indexOf(`gh issue comment "$ALERT_ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$body"`));
+});
+
+test("the Tests dispatch retries until a run exists, never repeats one a failed call created, and alerts only when none appears", t => {
+  const probe = spawnSync("bash", ["-c", "printf ok"], { encoding: "utf8" });
+  if (probe.error || probe.stdout !== "ok") return t.skip("bash is not on PATH");
+  const { step, script } = testsDispatch();
+  const sha = "0123456789abcdef0123456789abcdef01234567";
+  // The step's own script under `bash -e` (the runner's default), with git, gh, timeout and
+  // sleep replaced by functions that write a trace. Each `gh workflow run` follows the plan:
+  // ok = accepted and the run exists; accepted = accepted but no run; 500 = fails, no run;
+  // 500+run = fails although GitHub created the run; hang = killed by timeout (exit 124).
+  const run = plan => {
+    const stubs = `
+export GITHUB_REPOSITORY=owner/repo ALERT_ISSUE=15 GH_TOKEN=unused
+export REPO_URL=https://github.com/owner/repo RUN_URL=https://github.com/owner/repo/actions/runs/7
+RUNNER_TEMP="$(mktemp -d)"; export RUNNER_TEMP
+plan=(${plan.join(" ")}) n=0 runs=0 bounded=0
+trace="$RUNNER_TEMP/trace"; : > "$trace"
+trap 'echo "TRACE>"; cat "$trace"; echo "<TRACE"; rm -rf "$RUNNER_TEMP"' EXIT
+git() { echo ${sha}; }
+sleep() { echo "sleep $1" >> "$trace"; }
+timeout() { echo "limit $1" >> "$trace"; shift; bounded=1 "$@"; }
+gh() {
+  [ "$bounded" = 1 ] || echo "unbounded gh $*" >> "$trace"
+  local args=" $* " want
+  case "$1 $2" in
+    "workflow run")
+      n=$((n + 1)); local r="\${plan[n-1]:-extra}"; echo "dispatch $r" >> "$trace"
+      for want in " ci.yml " " --repo owner/repo " " --ref master " " commit_sha=${sha} "; do
+        case "$args" in *"$want"*) ;; *) echo "bad dispatch:$args" >> "$trace"; return 2;; esac
+      done
+      case "$r" in
+        ok) runs=1;;
+        accepted) ;;
+        hang) return 124;;
+        500+run) runs=1; echo "could not create workflow dispatch event: HTTP 500" >&2; return 1;;
+        500) echo "could not create workflow dispatch event: HTTP 500" >&2; return 1;;
+        *) echo "bad plan $r" >> "$trace"; return 2;;
+      esac;;
+    "run list")
+      for want in " --repo owner/repo " " --workflow ci.yml " " --commit ${sha} "; do
+        case "$args" in *"$want"*) ;; *) echo "bad list:$args" >> "$trace"; return 2;; esac
+      done
+      if [ "$runs" = 1 ]; then echo "https://github.com/owner/repo/actions/runs/9"; fi;;
+    "issue comment")
+      echo "comment$args" >> "$trace"; echo "BODY>"; cat "\${@: -1}"; echo "<BODY";;
+    *) echo "unexpected gh $*" >> "$trace"; return 2;;
+  esac
+}
+`;
+    const r = spawnSync("bash", ["-e", "-s"], { input: stubs + script, encoding: "utf8" });
+    const between = (open, close) => r.stdout.includes(open)
+      ? r.stdout.slice(r.stdout.indexOf(open) + open.length, r.stdout.indexOf(close)).trim() : null;
+    const trace = (between("TRACE>", "<TRACE") ?? "").split("\n").map(line => line.trim());
+    return {
+      status: r.status, stdout: r.stdout, trace, body: between("BODY>", "<BODY"),
+      dispatches: trace.filter(line => line.startsWith("dispatch ")).length,
+      comments: trace.filter(line => line.startsWith("comment ")),
+      seconds: trace.filter(line => /^(sleep|limit) /.test(line)).reduce((sum, line) => sum + Number(line.split(" ")[1]), 0),
+    };
+  };
+  for (const [plan, dispatches] of [[["ok"], 1], [["500", "500", "ok"], 3], [["500+run"], 1]]) {
+    const r = run(plan);
+    assert.equal(r.status, 0, `${plan}: ${r.stdout}`);
+    assert.equal(r.dispatches, dispatches, `${plan}: once a run exists the dispatch is not repeated`);
+    assert.deepEqual(r.comments, [], `${plan}: no alert while a run exists`);
+    assert.match(r.stdout, /::notice::Tests run for 0123456: https:\/\/github\.com\/owner\/repo\/actions\/runs\/9\n/);
+    assert.doesNotMatch(r.trace.join("\n"), /^(unbounded|bad|unexpected) /m, `${plan}: ${r.trace}`);
+  }
+  const failed = run(["500", "hang", "accepted"]);
+  assert.equal(failed.status, 1, "the step fails by itself; continue-on-error keeps the job green");
+  assert.equal(failed.dispatches, 3);
+  assert.match(failed.stdout, /::warning::No Tests run found for 0123456 after three dispatch attempts \(1: HTTP 500, 2: timed out, 3: accepted\)/);
+  assert.equal(failed.comments.length, 1);
+  assert.match(failed.comments[0], /^comment issue comment 15 --repo owner\/repo --body-file \S+\/tests-dispatch-alert\.md$/);
+  assert.match(failed.body, /^### ❌ Tests dispatch failed: /);
+  assert.match(failed.body, /\n- Attempts: 1: HTTP 500, 2: timed out, 3: accepted\n/);
+  assert.match(failed.body, new RegExp(`\\n- Commit: \\[0123456\\]\\(https://github\\.com/owner/repo/commit/${sha}\\)\\n`));
+  assert.match(failed.body, /\n- Run: https:\/\/github\.com\/owner\/repo\/actions\/runs\/7\n/);
+  assert.doesNotMatch(failed.body, /@|#\d/);
+  assert.doesNotMatch(failed.trace.join("\n"), /^(unbounded|bad|unexpected) /m, `${failed.trace}`);
+  // Every gh call is bounded, so the worst case is the sum of the bounds and the waits.
+  const budget = Number(/\n        timeout-minutes: (\d+)\n/.exec(step)?.[1]) * 60;
+  assert.ok(failed.seconds < budget, `worst case ${failed.seconds}s must fit timeout-minutes (${budget}s)`);
+});
