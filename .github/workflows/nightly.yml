@@ -1059,15 +1059,18 @@ jobs:
       # ci.yml run reddens on its own if the invariants actually fail, and its
       # dispatched-run-alert job reports that on issue 15. A dispatch that creates NO run
       # reddens nothing: on 2026-10-14 the dispatch for 8ddbe61 returned HTTP 500, no Tests
-      # run existed, and nothing said so. So after each try the step looks for a ci.yml run
-      # at the pushed commit (the check a person makes before merging), tries the dispatch
-      # up to three times, and when no run appears warns and comments on issue 15 itself,
-      # under dispatched-run-alert.yml's body rules. It looks before retrying because a 5xx
-      # can still create the run, and a second dispatch would cancel it (ci.yml's
-      # concurrency group). Worst case about 260s, inside timeout-minutes. Its exit 1 marks
-      # only this step, never the job, so the comment goes out whoever started the run:
-      # a green job emails nobody. `!cancelled()` because a failed deploy dispatch above
-      # must not also cost the commit its Tests.
+      # run existed, and nothing said so. So after each try the step confirms the run,
+      # tries the dispatch up to three times, and when no run appears warns and comments on
+      # issue 15 itself, under dispatched-run-alert.yml's body rules. The confirmation is
+      # the run URL gh prints when GitHub returns the created run. Only without one (a 204
+      # or an error) does it look for a ci.yml run at the pushed commit: a dispatched run's
+      # head is master's tip at dispatch time, so if master moved after the push, that
+      # lookup misses a run that still tests this commit through commit_sha. It looks
+      # before retrying because a 5xx can still create the run, and a second dispatch would
+      # cancel it (ci.yml's concurrency group). Worst case about 260s, inside
+      # timeout-minutes. Its exit 1 marks only this step, never the job, so the comment goes
+      # out whoever started the run: a green job emails nobody. `!cancelled()` because a
+      # failed deploy dispatch above must not also cost the commit its Tests.
       - name: Run the UI invariants against what we just pushed
         if: ${{ !cancelled() && steps.commit.outputs.pushed == 'true' }}
         continue-on-error: true
@@ -1080,8 +1083,9 @@ jobs:
         run: |
           set -uo pipefail
           sha="$(git rev-parse HEAD)"
+          out="$RUNNER_TEMP/tests-dispatch.out"
           err="$RUNNER_TEMP/tests-dispatch.err"
-          # Any ci.yml run at this exact commit.
+          # Fallback: any ci.yml run whose head is this exact commit.
           tests_run() {
             timeout 10 gh run list --repo "$GITHUB_REPOSITORY" --workflow ci.yml --commit "$sha" \
               --limit 1 --json url --jq '.[0].url // empty' 2>/dev/null || true
@@ -1089,8 +1093,12 @@ jobs:
           url="" attempts=""
           for attempt in 1 2 3; do
             rc=0
-            timeout 20 gh workflow run ci.yml --ref master -f commit_sha="$(git rev-parse HEAD)" --repo "$GITHUB_REPOSITORY" 2>"$err" || rc=$?
+            timeout 20 gh workflow run ci.yml --ref master -f commit_sha="$(git rev-parse HEAD)" --repo "$GITHUB_REPOSITORY" >"$out" 2>"$err" || rc=$?
+            cat "$out"
             cat "$err" >&2
+            # The created run, when GitHub returns it.
+            url="$(grep -oE "$REPO_URL/actions/runs/[0-9]+" "$out" | head -n 1 || true)"
+            [ -z "$url" ] || break
             case "$rc" in
               0) outcome="accepted" ;;
               124) outcome="timed out" ;;
