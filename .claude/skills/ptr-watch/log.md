@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-16 (local scheduled, after today's nightly) — nothing new since the nightly; 0 feed entries
+
+- Wowhead RSS from home (200, ~15:40 UTC): newest items are news=383461/383464, both already swept by the nightly; nothing class-relevant after them (WoW Forever, 12.1.7 pets, shop). No new hotfix round-up, no 12.2 PTR. Official-notes receipts not re-collected locally (the nightly ran them minutes earlier). Topic 2382684 (Oct 14 Guardian/Restoration Druid bug fixes) remains unconfigured in the ledger and unlogged while livePatch is null — owner action stands.
+
 ## 2026-10-16 (nightly, ~15:05 UTC) — no new class tuning; 12.1.7 PTR notes posted (no class content); 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
