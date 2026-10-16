@@ -8492,7 +8492,7 @@
       "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-24 Guardian read from the emergency tier-list update.",
       "claim": "He leaves Guardian in S but behind Vengeance DH and says outright that he does not believe in the spec and does not think it belongs in that tier. His stated basis for keeping it there is other players' results rather than his own view — he has heard it is overtaking the EU pushing leaderboard — set against Chinese groups still winning by a mile with Blood DK.",
       "url": "https://youtu.be/CKGXuJMtgXI?t=226",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8504,7 +8504,7 @@
       "patchContext": "Season 2 live — \"Unholy DK Nerfed! (Tierlist Update and Meta Analysis)\" (published 2026-10-03), his updated Mythic+ tier list and leaderboard read after the announced October 6 class tuning. He reads the current top-key comps off the leaderboard before revising the list. Supersedes his 2026-09-22 Blood read from the class-tuning reaction video.",
       "claim": "He reads the Chinese top-key meta as settled on a comp built around Blood DK with Holy Paladin, a Rogue, Elemental Shaman and Arms Warrior, and places that comp in S+, saying the top three to five groups are all running it and that Chinese groups are still winning by a mile with Blood. The counterweight he states himself is that he rates Vengeance DH above it and thinks Vengeance could potentially be the better tank.",
       "url": "https://youtu.be/CKGXuJMtgXI?t=231",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -8756,6 +8756,30 @@
       "patchContext": "Season 2 live — raid outlook, reacting to announced live tuning. \"Mistweaver Healing Buffed AGAIN 10/6\" (YouTube Short, published 2026-10-02, the evening Blizzard posted \"Incoming Class Tuning - October 6\"), on the Invigorating Mists +15% and Enveloping Mist +15% changes. Same-dated as his 2026-10-02 \"WORST Healer Spells\" raid take, so neither supersedes the other.",
       "url": "https://youtu.be/nCgFxapXjs8?t=53",
       "claim": "LBNinja7 calls the October 6 Mistweaver changes excellent buffs aimed at raid healing: Invigorating Mists, which carries Vivify's cleave onto every Renewing Mist, adds up to a lot of healing over a raid, and the Enveloping Mist increase gives the HoT more punch and helps Mythic+ a little too. He says Mistweaver was already climbing toward the middle of the healer pack and these buffs should bring it more in line with the other healers.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-10-14",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Is Bear BETTER Than Blood DK for Midnight Season 2 Keys?\" (published 2026-10-14, the day after the 12.1.5 release), a head-to-head of a +22 Ruby Life Pools Blood DK log against a Guardian Druid log, answering viewers who claim the two tanks are close. He deliberately compares pre-12.1.5 logs and corrects for the Guardian's missing raid gear (about 6% by his sim). Supersedes his 2026-10-03 Blood read from the tier-list update.",
+      "claim": "He says Blood DK is miles ahead of Guardian in keys and does not expect that to change soon. In his comparison Blood did about 400k overall against the Guardian's 287k, roughly double the Guardian's damage to a priority target thanks to Blood's funnel, and it took less damage and needed less healing on Murder Row and the first boss. His one hedge is that something in 12.1.5, such as the new trinkets, could change it.",
+      "url": "https://youtu.be/WcUCsRCjnFo?t=289",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-10-14",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Is Bear BETTER Than Blood DK for Midnight Season 2 Keys?\" (published 2026-10-14, the day after the 12.1.5 release), a head-to-head of a +22 Ruby Life Pools Blood DK log against a Guardian Druid log, answering viewers who claim the two tanks are close. He deliberately compares pre-12.1.5 logs and corrects for the Guardian's missing raid gear (about 6% by his sim). Supersedes his 2026-10-03 Guardian read from the tier-list update.",
+      "claim": "He rejects the claims that Guardian matches Blood DK in damage once Mark of the Wild is counted, or in survivability. By his arithmetic Mark of the Wild closes only about half of the overall damage gap, leaving Guardian roughly 50k behind. He calls Bear anti-funnel: it was 65k against Blood's 120k on a priority target. It also took about 20% more damage on Murder Row and received more healing. He concludes Bear is nowhere close to Blood unless 12.1.5 changes something.",
+      "url": "https://youtu.be/WcUCsRCjnFo?t=56",
       "superseded": false
     }
   ],

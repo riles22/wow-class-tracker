@@ -24,6 +24,16 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-16 (nightly, ~15:05 UTC) — Murlok 40, Mythicstats 39 (+1 retired), SimC 24 merged
+
+- Murlok: collector success, 40 rows, all pages dated 2026-10-16 (the 10-15 healer-page date regression has cleared).
+- Mythicstats: collector success, period 1085, 39 rows; Fire Mage absent from the chart and RETIRED (stored share within the 0.5-point bound), shown blank.
+- SimC MID2_Raid.txt: hotfix 2026-10-15/70391, HEAD 76f8118cf3 (new). 24 specs merged at 2026-10-15; Subtlety +2.8%, the rest within 0.1%.
+- Bloodmallet: 24 charts, MID2, all still dated 2026-10-14, identical values; partial (2 days old). Balance, Augmentation and Devastation still error.
+- WoWMeta: snapshotDate 2026-09-15, rankings Last-Modified 10-13, 40 rows identical; partial.
+- WCL (pre-agent): raid leaderboard partial (295 rows, partition 2 "12.1.5" supersession held on pinned partition 1), M+ success (320). Legacy aggregates unreachable.
+- Archon: all six numeric families blocked by the wall. Robydoby not fetched (closed PTR series, outside the contract).
+
 ## 2026-10-15 (nightly, ~15:25 UTC) — SimC new 12.1.5 build merged; Mythicstats period 1085 merged; Murlok held (date regress)
 
 - SimC MID2_Raid.txt: same hotfix 2026-10-14/70391, new git build 3dcabb94dd (was 1bd2e09595); 24 specs merged at 10-14. Subtlety +7.2%, MM +5.5%, Assassination +2.0%.

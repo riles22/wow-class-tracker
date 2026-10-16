@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "A-w7jDLpxiU",
-      "creator": "Whispyr",
-      "title": "Kith'ix Loot? Deathstalker? Assassination Rogue 12.1.5 Mid Season Update",
-      "published": "2026-10-15",
-      "queuedAt": "2026-10-15"
-    },
-    {
-      "id": "WcUCsRCjnFo",
-      "creator": "YoDaTV",
-      "title": "Is Bear BETTER Than Blood DK for Midnight Season 2 Keys?",
-      "published": "2026-10-14",
-      "queuedAt": "2026-10-15"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3236,6 +3221,13 @@
       "title": "How to Play Annihilator Devourer Demon Hunter in 12.1.5",
       "reason": "Transcript read (Supadata, 2026-10-14): a 12.1.5 Devourer build/rotation guide. Jedith says the Devourer theorycrafters and guide writers now recommend Annihilator over Void-Scarred for raid and M+ (Void-Scarred sims well but is impractical to execute), then covers talents, opener, soul/Voidfall/tier-set mechanics and UI. A hero-tree choice within the spec, not a read on Devourer's strength against other specs; nothing to distil.",
       "verifiedAt": "2026-10-14"
+    },
+    {
+      "id": "A-w7jDLpxiU",
+      "creator": "Whispyr",
+      "title": "Kith'ix Loot? Deathstalker? Assassination Rogue 12.1.5 Mid Season Update",
+      "reason": "Transcript read (Supadata, 2026-10-16): a 12.1.5 gearing and Q&A video for Assassination. It covers Kith'ix items (chest, ring and trinket all best-in-slot), how the Kith'ix trinket's first-strike stacks work and why single-target sims and logs undervalue it, Deathstalker against Fatebound by group type, manual against automatic Thistle Tea, talent picks, and why stat priorities differ by sim fight style. He says the spec's rotation is unchanged. No read on Assassination's strength against other specs; nothing to distil.",
+      "verifiedAt": "2026-10-16"
     }
   ],
   "seen": [

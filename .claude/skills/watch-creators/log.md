@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-16 (nightly, ~15:05 UTC) — 2 transcripts read; 2 takes; 1 skipped; 0 queued
+
+- 44/44 feeds 200. Supadata verdict ok: 2 requested, 2 fetched (usage 55 counted in 30 days, no configured limit).
+- YoDaTV WcUCsRCjnFo "Is Bear BETTER Than Blood DK for Midnight Season 2 Keys?" (10-14): 2 M+ takes, framed "Season 2 live (12.1.5)" because it was published on/after LABEL_FLIP_DUE 2026-10-13 (his comparison uses pre-12.1.5 logs, which the patchContext says). Blood DK buff (t=289), Guardian nerf (t=56). These supersede his 10-03 Blood and Guardian mplus takes. The Wowhead-byline firewall does not apply (owner decision 2026-10-06). YoDaTV latest updated on his 6 class entries.
+- Whispyr A-w7jDLpxiU (Assassination 12.1.5 mid-season update) moved to skipped[]: Kith'ix gear, trinket mechanics, Deathstalker vs Fatebound by group type, Thistle Tea, stat sims. "Rotationally everything is the same." No strength read.
+- 59 unseen uploads since 10-14 12:00 triaged by title and RSS description; none queued. Left unseen: streams, key/raid PoVs, WoW Forever, PvP duels, Shorts. Also left unseen as guide-shaped: Dalaran Gaming I343ch3oBX4 "SUB ROGUE IS BACK! 12.1.5 Complete Talent Guide" (chapters are per-spec builds), VooDooSaurus DmHR6qThF2w Devourer 12.1.5 guide, Sha A-ouBwsNWLc bonus rolls. AutomaticJak eUyjYh7tSpQ "They Want You To Raid" (chapters: raid participation, region differences) and LBNinja7 cA_0thjvfII (healer damage in M+) are design commentary. A yt-dlp metadata probe hit the runner bot wall on the first video; stopped after 4.
+
 ## 2026-10-15 (nightly, ~15:25 UTC) — 0 transcripts (queue was empty); 2 queued; 0 takes
 
 - 44/44 feeds 200. 69 unseen uploads since 10-13 triaged by title/description; streams, VODs, raid guides, WoW Forever, PvP, Shorts, dungeon-tuning recaps left unseen.
