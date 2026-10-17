@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-17 (local scheduled, after today's nightly) — caption 429 persists; queue 2 → 2; 0 takes
+
+- One anonymous yt-dlp caption probe (android client, pinned 2026.07.04) on the first queued video, izen qMhQLUu-1C4: HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; both queued videos (izen qMhQLUu-1C4, Bansherz oKekMrQ9abY) stay queued for the nightly's Supadata drain. No cookies.txt, so no authenticated fallback and no breadth sweep. No takes, no metaNotes.
+
 ## 2026-10-17 (nightly, ~14:00 UTC) — 0 transcripts (queue was empty); 2 queued; 0 takes
 
 - 44/44 feeds 200. Supadata verdict ok, 0 requested (usage 55 counted in 30 days, no configured limit).

@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-17 (local scheduled, after today's nightly) — nothing new since the nightly; 0 feed entries
+
+- Wowhead RSS from home (200, ~16:50 UTC): only two items postdate the nightly's top (383478), news=383469 (Labyrinth has no mid-run save points) and 383412 (WoW: Forever layering); neither has class content. No new hotfix round-up, no 12.2 PTR. Official-notes receipts not re-collected locally (the nightly ran them earlier today). Topic 2382684 remains flagged for the owner, unchanged.
+
 ## 2026-10-17 (nightly, ~14:00 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
