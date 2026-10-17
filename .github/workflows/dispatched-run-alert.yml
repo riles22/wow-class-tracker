@@ -27,6 +27,9 @@ name: Alert on a failed dispatched run
 #
 # The comment goes to issue 15 (the nightly digest thread). It carries no @mention and
 # no #number reference: GitHub links both after rendering, and escaping does not stop it.
+#
+# A dispatch that creates no run never reaches this file. nightly.yml's Tests dispatch
+# looks for its own run and reports that case on issue 15 itself, under the same rules.
 
 on:
   workflow_call:
