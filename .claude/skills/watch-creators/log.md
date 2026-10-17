@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-17 (nightly, ~14:00 UTC) — 0 transcripts (queue was empty); 2 queued; 0 takes
+
+- 44/44 feeds 200. Supadata verdict ok, 0 requested (usage 55 counted in 30 days, no configured limit).
+- ~45 unseen uploads since 10-15 triaged by title/description; streams, key/raid PoVs, WoW Forever, PvP duels, Shorts, gear/BiS and trinket videos (Shadarek pQypcKfbLZU, 951m7CEQ9SA) left unseen.
+- Queued: izen qMhQLUu-1C4 "12.1.5 Mythic+ Happenings | Subtlety Now Best DPS" (general creator, metaNote candidate); Bansherz oKekMrQ9abY "Is hunter good in 12.1.5?" (BM key PoV whose title asks a strength question). Queue 0 -> 2.
+
 ## 2026-10-16 (local scheduled, after today's nightly) — queue empty; caption 429 persists; 0 takes
 
 - Queue 0 → 0. One anonymous yt-dlp caption probe (android client, pinned 2026.07.04) on izen vNB-0y3Dle8: HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; the video stays unseen (transport failure, not a dismissal). No cookies.txt supplied, so no authenticated fallback and no breadth sweep. No takes, no metaNotes.

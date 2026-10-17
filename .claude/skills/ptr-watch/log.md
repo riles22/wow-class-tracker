@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-17 (nightly, ~14:00 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383478 "Many More Labyrinth Fixes - Patch 12.1.5 Hotfixes", 10-16 21:18 CDT: Murder Row barrel visual, Coiled Altar achievement, Labyrinth/Valeera fixes; no Classes section), news index (top 383478), blue tracker swept. Topic 2382684 post 1 now v5, retitled "Midnight Hotfixes - October 16" (edited 10-17 01:37Z); its only Classes section is still the Oct 14 Guardian/Restoration Druid fixes, flagged for the owner and unlogged while livePatch is null. 2336376 v56, 2370266 v1, 2380514 v2 unchanged.
+- No 12.2 PTR; PHASES.ptr null.
+
 ## 2026-10-16 (local scheduled, after today's nightly) — nothing new since the nightly; 0 feed entries
 
 - Wowhead RSS from home (200, ~15:40 UTC): newest items are news=383461/383464, both already swept by the nightly; nothing class-relevant after them (WoW Forever, 12.1.7 pets, shop). No new hotfix round-up, no 12.2 PTR. Official-notes receipts not re-collected locally (the nightly ran them minutes earlier). Topic 2382684 (Oct 14 Guardian/Restoration Druid bug fixes) remains unconfigured in the ledger and unlogged while livePatch is null — owner action stands.

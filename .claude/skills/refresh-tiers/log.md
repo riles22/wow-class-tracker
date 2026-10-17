@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-17 (nightly) — Method 0 moves; Icy Veins / Wowhead / Archon walled
+
+- Method: both pages 200 (190,634 / 173,786 B), 40/40 per bracket, 8 dungeon names rejected by roster match, S2 body + Devourer present; Last Updated M+ 14 Oct, raid 10 Aug. 0 of 80 letters moved; snapshots -> 2026-10-17.
+- Icy Veins: 403 Cloudflare on all six (runner block); stored 10-16 letters untouched. Wowhead: 202 WAF challenge on all six. Archon: 403/human-verification wall. Transport: curl with browser headers.
+
 ## 2026-10-16 (local scheduled, after today's nightly) — Icy Veins verified from home, 0 letters moved
 
 - Icy Veins, curl from home (browser UA + Accept + Accept-Language): all six pages HTTP 200 (241–389 KB), one `table.tier-list` each after stripping `<style>`; rows/non-null 27/27, 7/7, 6/6 (raid) and 27/27, 7/7, 6/6 (M+), 0 unmatched, 0 off-scale, 0 TBD. Titles name 12.1.5; bodies rank Season 2 with Devourer, so seasonVerified stays "s2". dateModified unchanged from stored `published` (raid DPS 10-12, raid healer 10-11, raid tank 08-29, M+ 10-12 ×3). apply-ratings left specs.json byte-identical; check-refresh churn: no letter changed. Snapshots → 2026-10-16. Method, Wowhead and Archon not attempted (nightly lane).

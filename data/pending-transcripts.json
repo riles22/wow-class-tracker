@@ -1,6 +1,21 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "qMhQLUu-1C4",
+      "creator": "izen (Izenhart)",
+      "title": "12.1.5 Mythic+ Happenings | Subtlety Now Best DPS in the game...for now",
+      "published": "2026-10-16",
+      "queuedAt": "2026-10-17"
+    },
+    {
+      "id": "oKekMrQ9abY",
+      "creator": "Bansherz",
+      "title": "Is hunter good in 12.1.5? | +22 Voidscar Arena | BM Hunter PoV",
+      "published": "2026-10-16",
+      "queuedAt": "2026-10-17"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
