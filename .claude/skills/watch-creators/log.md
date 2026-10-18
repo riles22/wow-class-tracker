@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-18 (nightly, ~14:15 UTC) — 44/44 feeds; queue 2 → 0; 9 metaNotes, 0 takes
+
+- Supadata fetched both queued videos (verdict ok). izen qMhQLUu-1C4 "12.1.5 Mythic+ Happenings" (2026-10-16) distilled into 9 M+ metaNotes framed "Season 2 live (12.1.5)" (LABEL_FLIP_DUE 10-13 has passed): Subtlety positive (strongest M+ DPS, 12% of keys, nerf expected), Elemental/Arms/Guardian/Holy Paladin positive, Assassination/Arcane/Blood mixed, Unholy negative. Superseded his 8 matching 10-07 week-seven recap notes; his 10-10 damage-profile PSA notes left live (different lens). Devourer ("too early"), Havoc/Windwalker (list mentions) not distilled. izen latest updated.
+- Bansherz oKekMrQ9abY "Is hunter good in 12.1.5?" -> skipped[]: uncommentated +22 key run with party chat, no BM read. His newer "Can hunter be meta?"/"Does hunter actually do good damage?"/"Can BM Hunter Top Meters?" uploads are the same PoV shape (descriptions are log links) and were left unseen, not queued.
+- Other new uploads since the last nightly: key PoVs and streams (Critcake, Shadarek, YoDaTV, Megasett, Kalamazi, Hopeful), WoW Forever/duel tournament (Shindigg, Psybear, Supatease, Preheat, Dalaran), Tactyks route guide, Shadarek 12.1.7 BiS list, Dalaran 12.1.7 preview. None queued.
+
 ## 2026-10-17 (local scheduled, after today's nightly) — caption 429 persists; queue 2 → 2; 0 takes
 
 - One anonymous yt-dlp caption probe (android client, pinned 2026.07.04) on the first queued video, izen qMhQLUu-1C4: HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; both queued videos (izen qMhQLUu-1C4, Bansherz oKekMrQ9abY) stay queued for the nightly's Supadata drain. No cookies.txt, so no authenticated fallback and no breadth sweep. No takes, no metaNotes.

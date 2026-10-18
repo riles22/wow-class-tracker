@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-18 (nightly, ~14:15 UTC) — Method 80/80 verified, 0 moves; Icy Veins / Wowhead / Archon walled
+
+- Method: both pages HTTP 200 (190,634 / 173,786 B), 40/40 rows per bracket, Devourer present, "Midnight Season 2" body; Last Updated M+ 14 Oct, raid 10 Aug (unchanged). 0 letters moved; snapshots -> 2026-10-18.
+- Icy Veins: 403 "Just a moment..." on all six from the runner (stored 10-17 from the home run unchanged). Wowhead: HTTP 202 AWS WAF challenge (2,020 B) on all six. Archon: 403 Cloudflare challenge. Nothing parsed for those three.
+
 ## 2026-10-17 (local scheduled, after today's nightly) — Icy Veins verified from home, 0 letters moved
 
 - Icy Veins, curl from home (browser UA + Accept + Accept-Language): all six pages HTTP 200 (241–389 KB), one `table.tier-list` each after stripping `<style>`; rows/non-null 27/27, 7/7, 6/6 (raid) and 27/27, 7/7, 6/6 (M+), 0 unmatched, 0 off-scale, 0 TBD. Titles name 12.1.5; bodies rank Season 2 with Devourer, so seasonVerified stays "s2". dateModified unchanged from stored `published` (raid DPS 10-12, raid healer 10-11, raid tank 08-29, M+ 10-12 ×3). apply-ratings left specs.json byte-identical; check-refresh churn: no letter changed. Snapshots → 2026-10-17. Method, Wowhead and Archon not attempted (nightly lane).
