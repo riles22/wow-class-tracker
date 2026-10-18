@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-18 (local scheduled, after today's nightly) — caption 429 persists; queue 0 → 1; 0 takes
+
+- RSS re-read for uploads since 2026-10-18T00:00Z (79/79 channel feeds 200). One title-relevant upload after the nightly: izen NARw20LSu00 "12.1.5 Mythic+ & Mythic Raid Specs Tierlist" (18:47 UTC, general creator, metaNote candidate). One anonymous yt-dlp caption probe (android client, pinned 2026.07.04): HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error and queued it for the nightly's Supadata drain. No cookies.txt, so no authenticated fallback and no breadth sweep.
+- Left unseen, not queued: key/raid PoVs and streams (Shadarek ×4, Critcake ×2, AutomaticJak, Hopeful ×2, Kalamazi, YoDaTV, Megasett Short), Bansherz "Can hunter be meta?" (same uncommentated BM PoV shape as the skipped oKekMrQ9abY), WoW Forever/duel tournament (Shindigg ×3, Supatease ×3, Psybear ×2), Dalaran Gaming 12.1.7 PTR new-class talents (next-patch material, not a live read). No takes, no metaNotes.
+
 ## 2026-10-18 (nightly, ~14:15 UTC) — 44/44 feeds; queue 2 → 0; 9 metaNotes, 0 takes
 
 - Supadata fetched both queued videos (verdict ok). izen qMhQLUu-1C4 "12.1.5 Mythic+ Happenings" (2026-10-16) distilled into 9 M+ metaNotes framed "Season 2 live (12.1.5)" (LABEL_FLIP_DUE 10-13 has passed): Subtlety positive (strongest M+ DPS, 12% of keys, nerf expected), Elemental/Arms/Guardian/Holy Paladin positive, Assassination/Arcane/Blood mixed, Unholy negative. Superseded his 8 matching 10-07 week-seven recap notes; his 10-10 damage-profile PSA notes left live (different lens). Devourer ("too early"), Havoc/Windwalker (list mentions) not distilled. izen latest updated.

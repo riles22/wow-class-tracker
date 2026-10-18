@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-18 (local scheduled, after today's nightly) — nothing new since the nightly; 0 feed entries
+
+- Wowhead news RSS (HTTP 200) re-read: the only items after the nightly are the Kindo'jan glove-enchant article (18:00 UTC) and a WoW: Forever battleground note (14:00) — no hotfix round-up, no class tuning post, no 12.2 PTR announcement. Official-notes receipts not re-collected locally (the nightly ran them earlier today). Topic 2382684 (Oct 14 Guardian/Restoration Druid fixes) remains flagged for the owner, unlogged while livePatch is null. 0 feed entries.
+
 ## 2026-10-18 (nightly, ~14:15 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
