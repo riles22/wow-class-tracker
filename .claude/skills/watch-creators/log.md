@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-19 (local scheduled, before today's nightly) — caption 429 persists; queue 1 → 1; 0 takes
+
+- RSS re-read for uploads since 2026-10-18T18:00Z (44/44 channel feeds 200). Nothing title-relevant to queue: key PoVs and streams (Shadarek ×2, Kesslive ×2, AutomaticJak, Hopeful, YoDaTV ×2, Bansherz raid stream, Megasett), WoW Forever (Psybear ×2, Supatease, Shindigg), Dalaran Gaming Unholy DK PvP duels (PvP, out of PvE scope), NeekapHere mega-delve review, LBNinja7 opinion piece, Tettles Venomous Abyss series. Left unseen, not queued.
+- One anonymous yt-dlp caption probe (android client, pinned 2026.07.04) on the queued izen NARw20LSu00: HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error; it stays queued for the nightly's Supadata drain. No cookies.txt, so no authenticated fallback and no breadth sweep. No takes, no metaNotes.
+
 ## 2026-10-18 (local scheduled, after today's nightly) — caption 429 persists; queue 0 → 1; 0 takes
 
 - RSS re-read for uploads since 2026-10-18T00:00Z (79/79 channel feeds 200). One title-relevant upload after the nightly: izen NARw20LSu00 "12.1.5 Mythic+ & Mythic Raid Specs Tierlist" (18:47 UTC, general creator, metaNote candidate). One anonymous yt-dlp caption probe (android client, pinned 2026.07.04): HTTP 429 on timedtext, as on every local run since late September. Stopped on the first error and queued it for the nightly's Supadata drain. No cookies.txt, so no authenticated fallback and no breadth sweep.

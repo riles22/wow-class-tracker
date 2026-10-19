@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-19 (local scheduled, before today's nightly) — nothing new; ledger checkedAt only; 0 feed entries
+
+- Official-notes receipts collected locally (fetch-official-notes: live-hotfixes 138 sections, ptr-preview 18, both success). Post versions identical to the ledger (2336376 post 1 v56; 2344395 unchanged), 0 new/changed/unresolved sections, removedSections 27 = 27; the only difference is checkedAt, so the ledger was left for the nightly to stamp (bookkeeping only, no snapshot).
+- Wowhead news RSS from home (200, ~15:00 UTC): two items newer than yesterday's sweep, news=383272 (WoW: Forever flight paths) and 383450 (12.1.7 PTR Trading Post rewards datamine); neither has class content. No hotfix round-up, no class tuning post, no 12.2 PTR. Topic 2382684 (Oct 14 Guardian/Restoration Druid fixes) remains flagged for the owner, unlogged while livePatch is null. 0 feed entries.
+
 ## 2026-10-18 (local scheduled, after today's nightly) — nothing new since the nightly; 0 feed entries
 
 - Wowhead news RSS (HTTP 200) re-read: the only items after the nightly are the Kindo'jan glove-enchant article (18:00 UTC) and a WoW: Forever battleground note (14:00) — no hotfix round-up, no class tuning post, no 12.2 PTR announcement. Official-notes receipts not re-collected locally (the nightly ran them earlier today). Topic 2382684 (Oct 14 Guardian/Restoration Druid fixes) remains flagged for the owner, unlogged while livePatch is null. 0 feed entries.
