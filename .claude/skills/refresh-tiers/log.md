@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-19 (nightly, ~17:15 UTC) — Method 0 moves; Icy Veins / Wowhead / Archon walled
+
+- Method (direct GET, 200): 40/40 per bracket, S/A/B/C, 8 dungeon names rejected by roster match; body "Midnight Season 2", Devourer present; Last Updated M+ 14 Oct, raid 10 Aug. 0 of 80 moved; snapshots -> 10-19.
+- Icy Veins: 403 Cloudflare on all six from the runner (stored 10-19 snapshot is from today's home run). Wowhead: 202 AWS WAF 2,020 B on all six. Archon: 403 "Just a moment..." (source-health agrees). Nothing parsed from any of the three.
+
 ## 2026-10-19 (local scheduled, before today's nightly) — Icy Veins verified from home; 0 letters moved
 
 - Icy Veins, curl from home (browser UA + Accept + Accept-Language): all six pages HTTP 200, one `tier-list` table each after stripping `<style>`, 80/80 rows (27/7/6 per bracket), 80 rated, 0 TBD, 0 unmatched, Devourer present on both DPS pages. Titles name "Midnight (12.1.5)" / "Patch 12.1.5 / Midnight" with Season 2 bodies, so `seasonVerified` stays "s2". JSON-LD dateModified unchanged from stored `published` (raid DPS 10-12, raid healer 10-11, raid tank 08-29, M+ ×3 10-12). 0 letters changed; snapshots 2026-10-18 → 2026-10-19. check-refresh: "source churn vs HEAD: no letter changed".

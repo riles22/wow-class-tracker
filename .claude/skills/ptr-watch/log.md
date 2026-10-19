@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-19 (nightly, ~17:15 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383489, Hallow's End, 10-19 10:00 CDT), news index (same top) and blue tracker swept: nothing class-relevant since the local sweep (Hallow's End, WoW Forever, 12.1.7 datamines). Topic 2382684 post 1 still v5; its Oct 14 Guardian/Restoration Druid fixes stay flagged for the owner, unlogged while livePatch is null (Wowhead's weekly recap news=383465 says 12.1.5 is live).
+- No 12.2 PTR; PHASES.ptr null.
+
 ## 2026-10-19 (local scheduled, before today's nightly) — nothing new; ledger checkedAt only; 0 feed entries
 
 - Official-notes receipts collected locally (fetch-official-notes: live-hotfixes 138 sections, ptr-preview 18, both success). Post versions identical to the ledger (2336376 post 1 v56; 2344395 unchanged), 0 new/changed/unresolved sections, removedSections 27 = 27; the only difference is checkedAt, so the ledger was left for the nightly to stamp (bookkeeping only, no snapshot).

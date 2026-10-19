@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-19 (nightly, ~17:15 UTC) — izen 12.1.5 season tier list -> 36 metaNotes; queue 1 -> 0; 0 takes
+
+- 44 channels / 79 transcribable entries polled, all 200. Supadata summary ok, 1 fetched (NARw20LSu00).
+- Distilled izen NARw20LSu00 ("12.1.5 Mythic+ & Mythic Raid Specs Tierlist", published 10-18) as bracket "both" metaNotes (one per spec he names: a combined raid + M+ season sit-rep, framed "Season 2 live (12.1.5)" per LABEL_FLIP_DUE). Superseded 13 of his older whole-spec ("both") notes for the same specs; his raid- and M+-lens notes left live. Not distilled: the healer "trio" he calls best in raid (never named in audio), and Marksmanship (only "the hunters other than Survival"). No creator-predictions panel: a category chart, not a native rank order readable from audio.
+- New uploads since the last nightly (Tettles 100-hour series, LBNinja7 opinion, Bansherz BM key PoVs, Dalaran PvP, streams, WoW Forever) left unseen by title/description; nothing queued.
+
 ## 2026-10-19 (local scheduled, before today's nightly) — caption 429 persists; queue 1 → 1; 0 takes
 
 - RSS re-read for uploads since 2026-10-18T18:00Z (44/44 channel feeds 200). Nothing title-relevant to queue: key PoVs and streams (Shadarek ×2, Kesslive ×2, AutomaticJak, Hopeful, YoDaTV ×2, Bansherz raid stream, Megasett), WoW Forever (Psybear ×2, Supatease, Shindigg), Dalaran Gaming Unholy DK PvP duels (PvP, out of PvE scope), NeekapHere mega-delve review, LBNinja7 opinion piece, Tettles Venomous Abyss series. Left unseen, not queued.
