@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-20 (local scheduled, before today's nightly) — caption 429 persists; queue 0 → 0; 0 takes
+
+- RSS re-read for uploads since 2026-10-19T15:00Z (44/44 channel feeds 200), 22 uploads. Nothing queued: key PoVs and streams (Bansherz ×2, AutomaticJak, Megasett, Kesslive, YoDaTV, MadSkillzzTV, LBNinja7), boss POVs/guides (Obli Kith'ix Mythic Frost DK POV, Reholy Ula'tek BDK POV, Whispyr Assassination, Shadarek Mythic Ula'tek Havoc guide), WoW Forever (Supatease ×3, Psybear, NeekapHere, Shindigg), Dalaran Gaming (12.1.7 mounts; PvP duels), izen M+ vault video, NeekapHere weekly news. Left unseen.
+- One anonymous yt-dlp caption probe (android client, 2026.07.04) on Obli Uq7BcST2qhk: HTTP 429 on subtitles, as on every local run since late September. Stopped there. No takes, no metaNotes.
+
 ## 2026-10-19 (nightly, ~17:15 UTC) — izen 12.1.5 season tier list -> 36 metaNotes; queue 1 -> 0; 0 takes
 
 - 44 channels / 79 transcribable entries polled, all 200. Supadata summary ok, 1 fetched (NARw20LSu00).

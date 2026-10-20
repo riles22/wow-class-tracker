@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-20 (local scheduled, before today's nightly) — nothing new; ledger checkedAt only; 0 feed entries
+
+- Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only).
+- Wowhead news RSS from home (200, ~14:20 UTC). New since the last sweep: news=383493 "Phantom Damage" melee bug fixed (article page 403 from home, and topic 2336376 post 1 is still v56, so no new official hotfix text), 383496 NA maintenance, 383494 Labyrinth bugs, 383500 store, 383495 WoW Forever. No class tuning post, no 12.2 PTR. Topic 2382684 stays flagged for the owner. 0 feed entries.
+
 ## 2026-10-19 (nightly, ~17:15 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
