@@ -98,7 +98,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 1
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
 
@@ -122,7 +122,7 @@ jobs:
       # Individual artifacts remain diagnostic receipts. Publication uses the sealed
       # collector bundle ID and digests below, never these name lookups.
       - name: Publish WCL fetch evidence (collector diagnostics)
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: wcl-evidence
           overwrite: true
@@ -134,7 +134,7 @@ jobs:
         run: node src/fetch-source-health.mjs
 
       - name: Save public-source availability evidence
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: source-health
           overwrite: true
@@ -145,7 +145,7 @@ jobs:
         run: node src/fetch-stable-metrics.mjs
 
       - name: Save stable metric receipts before the agents run
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: stable-metrics
           overwrite: true
@@ -157,7 +157,7 @@ jobs:
         run: node src/fetch-official-notes.mjs
 
       - name: Save official note receipts before the agents run
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: official-notes
           overwrite: true
@@ -181,7 +181,7 @@ jobs:
 
       - name: Restore last transcript reservation or completed state
         if: steps.transcript_state.outputs.found == 'true'
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           artifact-ids: ${{ steps.transcript_state.outputs.artifact_id }}
           run-id: ${{ steps.transcript_state.outputs.run_id }}
@@ -205,7 +205,7 @@ jobs:
 
       - name: Download reviewed transcript completion for reconciliation
         if: steps.transcript_state.outputs.reconcile_found == 'true'
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           artifact-ids: ${{ steps.transcript_state.outputs.reconcile_artifact_id }}
           run-id: ${{ steps.transcript_state.outputs.reconcile_run_id }}
@@ -254,7 +254,7 @@ jobs:
 
       - name: Save transcript reservation before requests
         id: transcript_reserved
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: transcript-state-reserved
           path: |
@@ -284,7 +284,7 @@ jobs:
 
       - name: Save transcript outcomes before the agents run
         if: always() && steps.transcript_complete_signature.outcome == 'success'
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: transcript-state-complete
           path: |
@@ -307,7 +307,7 @@ jobs:
         run: node src/fetch-published.mjs
 
       - name: Publish published-date evidence (collector diagnostics)
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: published-evidence
           overwrite: true
@@ -323,7 +323,7 @@ jobs:
 
       - name: Upload the exact trusted collector bundle
         id: receipts
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: collector-receipts-${{ github.run_attempt }}
           path: ${{ runner.temp }}/collector-receipts/
@@ -342,14 +342,14 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 1
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
       - name: Install pinned yt-dlp
         run: pipx install "yt-dlp==$(sed -n 's/^yt-dlp==//p' requirements.txt)"
 
       - name: Download exact collector inputs for the agents
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           artifact-ids: ${{ needs.collect.outputs.artifact_id }}
           path: ${{ runner.temp }}/collector-receipts
@@ -371,7 +371,7 @@ jobs:
       - name: Primary full refresh (Claude Code, read-only token)
         id: primary_agent
         continue-on-error: true
-        uses: anthropics/claude-code-action@cab360f6565aa35a51d6ce9e43f1f4287c0a32ea # v1
+        uses: anthropics/claude-code-action@f27be6b65a4652f08a2ba3cff79114829b588967 # v1
         timeout-minutes: 80    # 12.1 launch night took 54m48s of the old 55 (F57); the job's 135 keeps recovery's 35
         with:
           github_token: ${{ github.token }}
@@ -565,7 +565,7 @@ jobs:
 
       - name: Recovery pass for incomplete refresh
         if: steps.primary_agent.outcome != 'success' || steps.primary_check.outcome != 'success'
-        uses: anthropics/claude-code-action@cab360f6565aa35a51d6ce9e43f1f4287c0a32ea # v1
+        uses: anthropics/claude-code-action@f27be6b65a4652f08a2ba3cff79114829b588967 # v1
         timeout-minutes: 35
         with:
           github_token: ${{ github.token }}
@@ -707,7 +707,7 @@ jobs:
       # repo carrying the agents' reasoning over already-public pages — accepted.
       - name: Upload agent transcripts (diagnosis)
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: agent-transcripts
           retention-days: 7
@@ -721,7 +721,7 @@ jobs:
       # rebuilds it from source, so a tampered build artifact can't ride along.
       - name: Upload refresh output for publication or debugging
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: nightly-refresh
           include-hidden-files: true
@@ -753,7 +753,7 @@ jobs:
           ref: master
           fetch-depth: 0 # movement baselines + row-drop baseline + refresh-base ancestry check
 
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "22"
 
@@ -769,7 +769,7 @@ jobs:
         run: node src/check-refresh-base.mjs
 
       - name: Download refresh output
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: nightly-refresh
           path: ${{ runner.temp }}/untrusted-refresh
@@ -782,7 +782,7 @@ jobs:
       # The agent runner cannot choose the artifact identity or the manifest digest.
       # Download outside its overlay, verify all bytes, then install only receipt files.
       - name: Download exact collector receipts for publication
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           artifact-ids: ${{ needs.collect.outputs.artifact_id }}
           path: ${{ runner.temp }}/collector-receipts
