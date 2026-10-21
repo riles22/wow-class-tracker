@@ -7353,7 +7353,7 @@
       "patchContext": "Season 2 live — \"Which Rogue Spec is META right now?\", published 2026-09-14. A comparative read of all three Rogue specs against his own live meters and the Warcraft Logs boards for the last two weeks of the raid and for keys; the video gives no letter tiers and no strict rank list, only prose placements, so it is distilled as takes and not as a predictions panel.",
       "url": "https://youtu.be/4Y_CUMgHwp8?t=232",
       "claim": "For raid he names Subtlety the best of the three Rogue specs right now — 'a little bit ahead' of Assassination and Outlaw and the one to pick for maximum performance across all the bosses — and calls its single target one of the best in the game at the moment, with sustained damage that holds up even outside the burst window because Secret Technique now procs properly with Ancient Arts. He reads it off the two-week boss boards, where Subtlety sits near the middle of the whole field, and adds that in a number of fights Assassination is actually better, so the raid lead is overall rather than per boss. For keys he is less specific: Subtlety is 'very good' and viable, may be the better choice on single-target-heavy keys where Assassination's energy is tight, but is not the spec he recommends for most players because it carries a lot of Deathstalker min-maxing. Popularity is a separate observation — Rogue is one of the least played classes this tier, which he does not treat as a strength signal.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -8361,7 +8361,7 @@
       "patchContext": "12.1.5 PTR preview — NOT LIVE. His read of the Rogue section of the 12.1.5 patch notes (\"Patch 12.1.5 Rogue Changes: Everything You Need to Know\", published 2026-10-01, a 4-minute read-through of the whole Rogue section). 12.1.5 releases October 13, so this is a pre-release read and it stands BESIDE his live Season 2 takes rather than superseding them; he is explicit that the sim sites are not updated for these changes yet. Assassination is deliberately NOT given a take from this video: he reports its only 12.1.5 entries as cosmetic (a Mutilate weapon trail, a Crimson Tempest animation) and offers no performance read on it.",
       "url": "https://youtu.be/zQgeZR1ag0Q?t=160",
       "claim": "His read on Subtlety's 12.1.5 shadow-damage rework is an explicitly uncommitted lean toward a slight nerf. He reads the change out in full — every shadow-damage modifier reworked so the bonus applies consistently to individual shadow-damage abilities (he names Secret Technique secondary hits, Shadow finisher attacks and shadow clone attacks) and to effects that scale off the damage of the triggering attack (Shadow Blades, Goremaw's Bite, Lingering Shadow), so that they benefit correctly when the input attack is physical and no longer double dip when the output is shadow. He twice declines to call it: he says we still do not know whether it is a buff or a nerf, giving as his reason that the simming sites are not yet updated for the change and that Blizzard's own note says the damage impact is still under review, and he says he does not want to call it a nerf for that reason — but asked for his opinion from what he can see, he believes it might be a slight nerf. He gives no placement and no comparison against other specs or classes, so this is a read on the direction of one change rather than on where Subtlety lands.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8780,6 +8780,18 @@
       "patchContext": "Season 2 live (12.1.5) — \"Is Bear BETTER Than Blood DK for Midnight Season 2 Keys?\" (published 2026-10-14, the day after the 12.1.5 release), a head-to-head of a +22 Ruby Life Pools Blood DK log against a Guardian Druid log, answering viewers who claim the two tanks are close. He deliberately compares pre-12.1.5 logs and corrects for the Guardian's missing raid gear (about 6% by his sim). Supersedes his 2026-10-03 Guardian read from the tier-list update.",
       "claim": "He rejects the claims that Guardian matches Blood DK in damage once Mark of the Wild is counted, or in survivability. By his arithmetic Mark of the Wild closes only about half of the overall damage gap, leaving Guardian roughly 50k behind. He calls Bear anti-funnel: it was 65k against Blood's 120k on a priority target. It also took about 20% more damage on Murder Row and received more healing. He concludes Bear is nowhere close to Blood unless 12.1.5 changes something.",
       "url": "https://youtu.be/WcUCsRCjnFo?t=56",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Musguete",
+      "date": "2026-10-21",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — \"Why You Need to Play Trickster RIGHT NOW! 12.1.5 Subtlety Guide\", published 2026-10-21, an 8-minute Trickster rotation guide recorded on live 12.1.5 raid bosses and keys after what he calls the recent changes and buffs. It supersedes his 2026-10-01 12.1.5 preview read, which leaned toward a slight nerf without committing, and his 2026-09-14 Season 2 placement. He gives no tier letters or rank list, so there is no predictions panel.",
+      "url": "https://youtu.be/TJSgk0Kyw2g?t=169",
+      "claim": "He now recommends Trickster Subtlety to everyone, saying the hero talent is clearly the way to go after the recent buffs. Off his own meters he calls the damage very good and very consistent in AoE and on single target, describes the single target as one of the best in the game at the moment, and says two- and three-target damage is much higher than in past weeks, enough that he expects it to compete better there. He adds that Trickster is much easier to play than Deathstalker, with fewer min-max decisions and only two or three macros. He does not expect a meaningful nerf, because several other classes are doing damage close to Subtlety's, and if one comes he expects it to be small, so he places Subtlety in a really good position for at least this part of the season. He says he was away most of the week and has not finished testing, especially on two and three targets.",
       "superseded": false
     }
   ],

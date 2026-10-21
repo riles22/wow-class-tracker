@@ -1,6 +1,21 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "hLGtqpH_2hA",
+      "creator": "Obli",
+      "title": "What to upgrade as a Frost/Unholy DK with your Venomstones?",
+      "published": "2026-10-21",
+      "queuedAt": "2026-10-21"
+    },
+    {
+      "id": "lzryMz8Q_-M",
+      "creator": "Sha",
+      "title": "Temple of Sethraliss +21 vs Brewmaster | Midnight Season 2",
+      "published": "2026-10-20",
+      "queuedAt": "2026-10-21"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3235,6 +3250,13 @@
       "title": "Is hunter good in 12.1.5? | +22 Voidscar Arena | BM Hunter PoV",
       "reason": "Transcript read (Supadata, 608 chunks): an uncommentated +22 Voidscar Arena key run with party voice chat only (pulls, interrupts, dungeon nerfs to trash). Despite the title it never assesses Beast Mastery's 12.1.5 strength; nothing to distil.",
       "verifiedAt": "2026-10-18"
+    },
+    {
+      "id": "_Lxdr3ulpjk",
+      "creator": "Zorthas",
+      "title": "How To Farm Ascendant Venomstones",
+      "reason": "Transcript read (yt-dlp json3, local): a 6-minute farming guide for Ascendant Venomstones (sources, stones per activity, a weekly route, and an item-level track oddity). It gives no spec, class or meta read; nothing to distil.",
+      "verifiedAt": "2026-10-21"
     }
   ],
   "seen": [

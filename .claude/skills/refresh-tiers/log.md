@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-21 (local scheduled, before today's nightly) — Icy Veins verified: 0 letters moved; M+ Subtlety still listed twice
+
+- Icy Veins, curl from home (browser UA + Accept + Accept-Language): all six pages HTTP 200 (245–395 KB), one `tier-list` table each after stripping `<style>`, 0 unmatched, 0 off-scale, 0 role mismatches, 0 TBD, Devourer present on both DPS pages; titles name 12.1.5 over Season 2 bodies, so `seasonVerified` stays "s2". Rows: raid 27/7/6, M+ 27/7/6 unique (28 entries on M+ DPS).
+- **M+ DPS still lists Subtlety Rogue twice** (S+ and A+, both `data-change="-"`), as on 10-20. The row stays out of the merge and the stored **A+** stands.
+- 0 of 80 letters changed (the 10-20 raid Subtlety S+ holds). JSON-LD `dateModified` matches the stored `published` on all six (raid DPS 10-17, healer 10-11, tank 08-29, M+ DPS 10-17, M+ healer/tank 10-12). Snapshots 10-20 → 10-21.
+
 ## 2026-10-20 (local scheduled, before today's nightly) — Icy Veins: raid Subtlety Rogue A → S+; M+ Subtlety listed twice upstream, held
 
 - Icy Veins, curl from home (browser UA + Accept + Accept-Language): all six pages HTTP 200 (245–395 KB), one `tier-list` table each after stripping `<style>`, 0 unmatched, 0 off-scale, 0 role mismatches, 0 TBD, Devourer present on both DPS pages; titles name 12.1.5 over Season 2 bodies, so `seasonVerified` stays "s2". Rows: raid 27/7/6, M+ **28**/7/6.

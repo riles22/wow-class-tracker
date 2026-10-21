@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-21 (local scheduled, before today's nightly) — no class tuning; ledger checkedAt only; 0 feed entries
+
+- Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only). The 10-20 nightly failed its publish (4 successful sources against the floor of 5), so the stored ledger is still the 10-19 one.
+- Wowhead news RSS from home (200, ~14:15 UTC). New since the last sweep: news=383519 "Spirit Conduit Loa Powers Can No Longer Be Used on Kindo'jan - Patch 12.1.5 Hotfixes" (Oct 20 round-up read from the RSS body: achievements, Labyrinth, items, PvP currency, quests; no class section; article page 403 from home), plus Venomstone, delve, WoW Forever and Hallow's End items. No class tuning post, no 12.2 PTR. Topic 2382684 stays flagged for the owner. 0 feed entries.
+
 ## 2026-10-20 (local scheduled, before today's nightly) — nothing new; ledger checkedAt only; 0 feed entries
 
 - Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only).

@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-21 (local scheduled, before today's nightly) — 2 captions before 429; 1 Musguete take; queue 0 → 2
+
+- RSS re-read for uploads since 2026-10-20T14:00Z (44/44 channel feeds 200), 35 uploads. yt-dlp (android client, 2026.07.04, json3) was tried on seven with any chance of a spec read: Musguete TJSgk0Kyw2g and Zorthas _Lxdr3ulpjk returned captions, the first anonymous success since late September; the next five (Obli hLGtqpH_2hA, Sha lzryMz8Q_-M and jExO31el750, izen QKBLya5J6Ws, Dratnos mLjt68pKnUg) drew HTTP 429, and the sweep stopped there.
+- **Musguete TJSgk0Kyw2g** ("Why You Need to Play Trickster RIGHT NOW! 12.1.5 Subtlety Guide", 10-21) → 1 Subtlety take (buff, both, "Season 2 live (12.1.5)" since LABEL_FLIP_DUE 10-13 has passed and livePatch is still null). It supersedes his 09-14 Subtlety placement and his 10-01 12.1.5 preview lean toward a slight nerf, both in the same "both" lens. His `latest` advanced to this video.
+- **Zorthas _Lxdr3ulpjk** (Venomstone farming guide) → `skipped[]`: sources and route only, no spec read.
+- Queued narrowly for the nightly's Supadata drain (spec named in the title): Obli hLGtqpH_2hA (Frost/Unholy Venomstone upgrades), Sha lzryMz8Q_-M (Brewmaster +21). Not queued (no class or spec in the title): Sha jExO31el750 (Temple tech), izen QKBLya5J6Ws (Venomstone farming), Dratnos mLjt68pKnUg (weekly vault).
+- Left unseen: streams and key or raid POVs (Bansherz ×2, LBNinja7, Critcake, Preheat, YoDaTV ×4, Hopeful, Kalamazi, Kesslive, Whispyr, MadSkillzzTV, Dalaran livestream), WoW Forever (leak, Supatease ×3, Psybear ×4, NeekapHere, Tactyks), Dalaran Hallow's End, Shindigg. No metaNotes.
+
 ## 2026-10-20 (local scheduled, before today's nightly) — caption 429 persists; queue 0 → 0; 0 takes
 
 - RSS re-read for uploads since 2026-10-19T15:00Z (44/44 channel feeds 200), 22 uploads. Nothing queued: key PoVs and streams (Bansherz ×2, AutomaticJak, Megasett, Kesslive, YoDaTV, MadSkillzzTV, LBNinja7), boss POVs/guides (Obli Kith'ix Mythic Frost DK POV, Reholy Ula'tek BDK POV, Whispyr Assassination, Shadarek Mythic Ula'tek Havoc guide), WoW Forever (Supatease ×3, Psybear, NeekapHere, Shindigg), Dalaran Gaming (12.1.7 mounts; PvP duels), izen M+ vault video, NeekapHere weekly news. Left unseen.
