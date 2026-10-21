@@ -95,7 +95,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4014,
+        "value": 4012,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -131,9 +131,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 372.4,
+        "value": 379.1,
         "unit": "rating",
-        "n": 95915,
+        "n": 86824,
         "asOf": "2026-09-15"
       },
       {
@@ -675,9 +675,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 260952,
+        "value": 260980,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -762,9 +762,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 366.1,
+        "value": 371.3,
         "unit": "rating",
-        "n": 28376,
+        "n": 26316,
         "asOf": "2026-09-15"
       },
       {
@@ -1171,14 +1171,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 260877,
-        "2": 386793,
-        "3": 491325,
-        "5": 725457,
-        "8": 1000364,
-        "15": 1571891
+        "1": 260865,
+        "2": 386985,
+        "3": 491842,
+        "5": 725438,
+        "8": 1000840,
+        "15": 1572487
       },
       "tier": "MID2"
     },
@@ -1333,9 +1333,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 253690,
+        "value": 253587,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -1420,9 +1420,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 368.5,
+        "value": 372.6,
         "unit": "rating",
-        "n": 31072,
+        "n": 24506,
         "asOf": "2026-09-15"
       },
       {
@@ -1829,14 +1829,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 239578,
-        "2": 341017,
-        "3": 388075,
-        "5": 546514,
-        "8": 775776,
-        "15": 1134024
+        "1": 240012,
+        "2": 340892,
+        "3": 388156,
+        "5": 547104,
+        "8": 775287,
+        "15": 1134579
       },
       "tier": "MID2"
     },
@@ -1988,9 +1988,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 260878,
+        "value": 261056,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -2065,9 +2065,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 363.1,
+        "value": 366.3,
         "unit": "rating",
-        "n": 38427,
+        "n": 33476,
         "asOf": "2026-09-15"
       },
       {
@@ -2484,14 +2484,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 260742,
-        "2": 333743,
-        "3": 395133,
-        "5": 508010,
-        "8": 632308,
-        "15": 812737
+        "1": 261119,
+        "2": 334179,
+        "3": 395309,
+        "5": 507637,
+        "8": 631850,
+        "15": 812576
       },
       "tier": "MID2"
     },
@@ -2647,9 +2647,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 253822,
+        "value": 253880,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -2734,9 +2734,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 372.3,
+        "value": 377.4,
         "unit": "rating",
-        "n": 39937,
+        "n": 39611,
         "asOf": "2026-09-15"
       },
       {
@@ -3143,14 +3143,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 248534,
-        "2": 321221,
-        "3": 393997,
-        "5": 465050,
-        "8": 626823,
-        "15": 896087
+        "1": 248867,
+        "2": 321952,
+        "3": 395013,
+        "5": 466016,
+        "8": 628328,
+        "15": 899341
       },
       "tier": "MID2"
     },
@@ -3276,7 +3276,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3861,
+        "value": 3860,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -3312,9 +3312,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 359.7,
+        "value": 364.1,
         "unit": "rating",
-        "n": 35589,
+        "n": 30078,
         "asOf": "2026-09-15"
       },
       {
@@ -3938,9 +3938,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 354.3,
+        "value": 359.1,
         "unit": "rating",
-        "n": 39221,
+        "n": 33714,
         "asOf": "2026-09-15"
       },
       {
@@ -4561,9 +4561,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 357.6,
+        "value": 363.8,
         "unit": "rating",
-        "n": 17526,
+        "n": 14863,
         "asOf": "2026-09-15"
       },
       {
@@ -4899,9 +4899,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 251421,
+        "value": 251646,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -4960,14 +4960,14 @@
     },
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 251501,
-        "2": 295871,
-        "3": 342516,
-        "5": 416086,
-        "8": 450184,
-        "15": 499814
+        "1": 251464,
+        "2": 295764,
+        "3": 342267,
+        "5": 416204,
+        "8": 450575,
+        "15": 499371
       },
       "tier": "MID2"
     }
@@ -5062,7 +5062,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4061,
+        "value": 4059,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -5088,9 +5088,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 374.4,
+        "value": 382.5,
         "unit": "rating",
-        "n": 98023,
+        "n": 96640,
         "asOf": "2026-09-15"
       },
       {
@@ -5582,7 +5582,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3794,
+        "value": 3795,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -5636,9 +5636,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 345.6,
+        "value": 350,
         "unit": "rating",
-        "n": 39269,
+        "n": 36300,
         "asOf": "2026-09-15"
       },
       {
@@ -6252,9 +6252,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 354.1,
+        "value": 361.2,
         "unit": "rating",
-        "n": 4421,
+        "n": 4137,
         "asOf": "2026-09-15"
       },
       {
@@ -6878,9 +6878,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 349,
+        "value": 353.6,
         "unit": "rating",
-        "n": 12847,
+        "n": 10627,
         "asOf": "2026-09-15"
       },
       {
@@ -7408,7 +7408,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3819,
+        "value": 3821,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -7462,9 +7462,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 348.6,
+        "value": 353.5,
         "unit": "rating",
-        "n": 14953,
+        "n": 13361,
         "asOf": "2026-09-15"
       },
       {
@@ -8010,9 +8010,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 252830,
+        "value": 252815,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -8097,9 +8097,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 357.3,
+        "value": 362.3,
         "unit": "rating",
-        "n": 124253,
+        "n": 111369,
         "asOf": "2026-09-15"
       },
       {
@@ -8482,14 +8482,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 250060,
-        "2": 287646,
-        "3": 319920,
-        "5": 394188,
-        "8": 466343,
-        "15": 616107
+        "1": 252722,
+        "2": 290252,
+        "3": 322909,
+        "5": 397506,
+        "8": 470885,
+        "15": 621536
       },
       "tier": "MID2"
     },
@@ -8636,9 +8636,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 232121,
+        "value": 232003,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -8714,9 +8714,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 345.8,
+        "value": 345.1,
         "unit": "rating",
-        "n": 13406,
+        "n": 10507,
         "asOf": "2026-09-15"
       },
       {
@@ -9123,14 +9123,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 219952,
-        "2": 275250,
-        "3": 320120,
-        "5": 409335,
-        "8": 508884,
-        "15": 651093
+        "1": 232083,
+        "2": 286432,
+        "3": 330093,
+        "5": 417741,
+        "8": 514546,
+        "15": 649015
       },
       "tier": "MID2"
     },
@@ -9283,9 +9283,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 247974,
+        "value": 247924,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -9350,9 +9350,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 357.9,
+        "value": 360.5,
         "unit": "rating",
-        "n": 8829,
+        "n": 7444,
         "asOf": "2026-09-15"
       },
       {
@@ -9721,14 +9721,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 248049,
-        "2": 325077,
-        "3": 394993,
-        "5": 532065,
-        "8": 696154,
-        "15": 878107
+        "1": 247707,
+        "2": 324837,
+        "3": 394947,
+        "5": 532296,
+        "8": 695921,
+        "15": 878746
       },
       "tier": "MID2"
     },
@@ -9882,9 +9882,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 220499,
+        "value": 220284,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -9969,9 +9969,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 372.6,
+        "value": 377.7,
         "unit": "rating",
-        "n": 146365,
+        "n": 125434,
         "asOf": "2026-09-15"
       },
       {
@@ -10378,14 +10378,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 202845,
-        "2": 288554,
-        "3": 364582,
-        "5": 514806,
-        "8": 619240,
-        "15": 790145
+        "1": 202945,
+        "2": 289348,
+        "3": 365979,
+        "5": 517323,
+        "8": 623646,
+        "15": 801122
       },
       "tier": "MID2"
     },
@@ -10502,9 +10502,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 229416,
+        "value": 229133,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -10589,9 +10589,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 339.5,
+        "value": 342.6,
         "unit": "rating",
-        "n": 5031,
+        "n": 4728,
         "asOf": "2026-09-15"
       },
       {
@@ -10934,14 +10934,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 229219,
-        "2": 303065,
-        "3": 425761,
-        "5": 664217,
-        "8": 1025320,
-        "15": 1402671
+        "1": 229294,
+        "2": 303365,
+        "3": 425121,
+        "5": 664620,
+        "8": 1024928,
+        "15": 1403181
       },
       "tier": "MID2"
     },
@@ -11086,9 +11086,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 227526,
+        "value": 227410,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -11173,9 +11173,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 331.8,
+        "value": 337.6,
         "unit": "rating",
-        "n": 19847,
+        "n": 18141,
         "asOf": "2026-09-15"
       },
       {
@@ -11566,14 +11566,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 227586,
-        "2": 284388,
-        "3": 340117,
-        "5": 453030,
-        "8": 579548,
-        "15": 707327
+        "1": 227503,
+        "2": 284923,
+        "3": 341274,
+        "5": 455459,
+        "8": 583673,
+        "15": 718126
       },
       "tier": "MID2"
     },
@@ -11701,7 +11701,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3885,
+        "value": 3894,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -11737,9 +11737,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 353.8,
+        "value": 359.5,
         "unit": "rating",
-        "n": 22299,
+        "n": 19427,
         "asOf": "2026-09-15"
       },
       {
@@ -12260,7 +12260,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3856,
+        "value": 3858,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -12314,9 +12314,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 358.2,
+        "value": 363.6,
         "unit": "rating",
-        "n": 28609,
+        "n": 24698,
         "asOf": "2026-09-15"
       },
       {
@@ -12862,9 +12862,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 257653,
+        "value": 257730,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -12949,9 +12949,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 365.8,
+        "value": 371.4,
         "unit": "rating",
-        "n": 29814,
+        "n": 26045,
         "asOf": "2026-09-15"
       },
       {
@@ -13358,14 +13358,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 257046,
-        "2": 342007,
-        "3": 454379,
-        "5": 678123,
-        "8": 848352,
-        "15": 1113941
+        "1": 257955,
+        "2": 342426,
+        "3": 454908,
+        "5": 678932,
+        "8": 849037,
+        "15": 1114885
       },
       "tier": "MID2"
     },
@@ -13553,9 +13553,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 378.9,
+        "value": 387,
         "unit": "rating",
-        "n": 105533,
+        "n": 97827,
         "asOf": "2026-09-15"
       },
       {
@@ -14076,7 +14076,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3901,
+        "value": 3902,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -14112,9 +14112,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 358.7,
+        "value": 363.3,
         "unit": "rating",
-        "n": 95710,
+        "n": 85516,
         "asOf": "2026-09-15"
       },
       {
@@ -14660,9 +14660,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 240305,
+        "value": 240255,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -14747,9 +14747,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 363.8,
+        "value": 368.7,
         "unit": "rating",
-        "n": 109769,
+        "n": 100621,
         "asOf": "2026-09-15"
       },
       {
@@ -15156,14 +15156,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 228347,
-        "2": 321949,
-        "3": 413245,
-        "5": 567431,
-        "8": 721949,
-        "15": 1036106
+        "1": 228615,
+        "2": 322124,
+        "3": 413343,
+        "5": 567967,
+        "8": 722215,
+        "15": 1035945
       },
       "tier": "MID2"
     },
@@ -15292,7 +15292,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3778,
+        "value": 3780,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -15346,9 +15346,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 345.2,
+        "value": 351.4,
         "unit": "rating",
-        "n": 19903,
+        "n": 17543,
         "asOf": "2026-09-15"
       },
       {
@@ -15839,7 +15839,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3878,
+        "value": 3874,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -15893,9 +15893,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 359.5,
+        "value": 364.7,
         "unit": "rating",
-        "n": 82322,
+        "n": 76706,
         "asOf": "2026-09-15"
       },
       {
@@ -16439,9 +16439,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 231360,
+        "value": 231372,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -16526,9 +16526,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 352.7,
+        "value": 358.2,
         "unit": "rating",
-        "n": 33379,
+        "n": 29455,
         "asOf": "2026-09-15"
       },
       {
@@ -16935,14 +16935,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 218634,
-        "2": 316668,
-        "3": 414192,
-        "5": 611460,
-        "8": 857887,
-        "15": 1330144
+        "1": 218889,
+        "2": 316715,
+        "3": 413959,
+        "5": 611525,
+        "8": 857750,
+        "15": 1328997
       },
       "tier": "MID2"
     },
@@ -17088,9 +17088,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 237610,
+        "value": 237568,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -17175,9 +17175,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 374.9,
+        "value": 367.9,
         "unit": "rating",
-        "n": 58835,
+        "n": 34593,
         "asOf": "2026-09-15"
       },
       {
@@ -17584,14 +17584,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 232955,
-        "2": 271118,
-        "3": 329994,
-        "5": 412447,
-        "8": 505259,
-        "15": 521037
+        "1": 237511,
+        "2": 275046,
+        "3": 333399,
+        "5": 416456,
+        "8": 509503,
+        "15": 521483
       },
       "tier": "MID2"
     },
@@ -17737,9 +17737,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 257025,
+        "value": 256820,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -17824,9 +17824,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 356.5,
+        "value": 356.6,
         "unit": "rating",
-        "n": 6881,
+        "n": 4853,
         "asOf": "2026-09-15"
       },
       {
@@ -18185,14 +18185,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 256287,
-        "2": 340724,
-        "3": 429108,
-        "5": 615735,
-        "8": 656737,
-        "15": 664446
+        "1": 256542,
+        "2": 344323,
+        "3": 428991,
+        "5": 614425,
+        "8": 655753,
+        "15": 663731
       },
       "tier": "MID2"
     },
@@ -18349,9 +18349,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 282998,
+        "value": 282905,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -18436,9 +18436,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 364.2,
+        "value": 394.5,
         "unit": "rating",
-        "n": 16315,
+        "n": 66959,
         "asOf": "2026-09-15"
       },
       {
@@ -18821,14 +18821,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 256538,
-        "2": 316598,
-        "3": 422244,
-        "5": 618068,
-        "8": 883043,
-        "15": 1202202
+        "1": 282958,
+        "2": 352639,
+        "3": 472565,
+        "5": 693770,
+        "8": 990996,
+        "15": 1358745
       },
       "tier": "MID2"
     },
@@ -18979,9 +18979,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 250972,
+        "value": 251090,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -19066,9 +19066,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 371.9,
+        "value": 380.1,
         "unit": "rating",
-        "n": 106949,
+        "n": 96881,
         "asOf": "2026-09-15"
       },
       {
@@ -19475,14 +19475,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 251831,
-        "2": 286114,
-        "3": 384588,
-        "5": 617003,
-        "8": 756309,
-        "15": 1057256
+        "1": 252344,
+        "2": 286942,
+        "3": 385929,
+        "5": 618866,
+        "8": 758550,
+        "15": 1060717
       },
       "tier": "MID2"
     },
@@ -19637,9 +19637,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 248325,
+        "value": 248138,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -19724,9 +19724,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 366.9,
+        "value": 373.7,
         "unit": "rating",
-        "n": 29109,
+        "n": 26233,
         "asOf": "2026-09-15"
       },
       {
@@ -20133,14 +20133,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 244631,
-        "2": 368071,
-        "3": 497998,
-        "5": 785881,
-        "8": 936523,
-        "15": 1171712
+        "1": 247998,
+        "2": 372076,
+        "3": 504567,
+        "5": 796331,
+        "8": 951548,
+        "15": 1199611
       },
       "tier": "MID2"
     },
@@ -20271,7 +20271,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 4021,
+        "value": 4019,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -20325,9 +20325,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 370.2,
+        "value": 377,
         "unit": "rating",
-        "n": 96289,
+        "n": 88217,
         "asOf": "2026-09-15"
       },
       {
@@ -20861,9 +20861,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 239075,
+        "value": 239095,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -20948,9 +20948,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 345.5,
+        "value": 349.5,
         "unit": "rating",
-        "n": 12384,
+        "n": 10603,
         "asOf": "2026-09-15"
       },
       {
@@ -21333,14 +21333,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 236900,
-        "2": 308204,
-        "3": 372609,
-        "5": 496377,
-        "8": 687204,
-        "15": 955845
+        "1": 236977,
+        "2": 308155,
+        "3": 372240,
+        "5": 496490,
+        "8": 687418,
+        "15": 955245
       },
       "tier": "MID2"
     },
@@ -21478,9 +21478,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 236085,
+        "value": 236133,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -21565,9 +21565,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 364.3,
+        "value": 368.9,
         "unit": "rating",
-        "n": 104059,
+        "n": 91682,
         "asOf": "2026-09-15"
       },
       {
@@ -21950,14 +21950,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 234814,
-        "2": 399971,
-        "3": 497957,
-        "5": 695752,
-        "8": 991527,
-        "15": 1450486
+        "1": 236035,
+        "2": 401677,
+        "3": 500353,
+        "5": 697897,
+        "8": 995725,
+        "15": 1456917
       },
       "tier": "MID2"
     },
@@ -22107,9 +22107,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 231462,
+        "value": 231577,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -22194,9 +22194,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 326.4,
+        "value": 330.5,
         "unit": "rating",
-        "n": 11924,
+        "n": 10554,
         "asOf": "2026-09-15"
       },
       {
@@ -22555,14 +22555,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 230562,
-        "2": 272211,
-        "3": 312856,
-        "5": 445609,
-        "8": 677965,
-        "15": 1270035
+        "1": 231364,
+        "2": 273276,
+        "3": 313919,
+        "5": 447897,
+        "8": 680401,
+        "15": 1275708
       },
       "tier": "MID2"
     },
@@ -22724,9 +22724,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 240836,
+        "value": 241015,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -22811,9 +22811,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 379.6,
+        "value": 387.9,
         "unit": "rating",
-        "n": 92610,
+        "n": 82933,
         "asOf": "2026-09-15"
       },
       {
@@ -23220,14 +23220,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 249355,
-        "2": 355442,
-        "3": 418875,
-        "5": 549356,
-        "8": 712012,
-        "15": 900736
+        "1": 249125,
+        "2": 355299,
+        "3": 418892,
+        "5": 549067,
+        "8": 712470,
+        "15": 901088
       },
       "tier": "MID2"
     },
@@ -23389,9 +23389,9 @@
         "source": "simulationcraft",
         "bracket": "raid",
         "name": "SimC nightly Patchwerk DPS",
-        "value": 257074,
+        "value": 257260,
         "unit": "DPS",
-        "asOf": "2026-10-17"
+        "asOf": "2026-10-20"
       },
       {
         "source": "warcraftlogs",
@@ -23476,9 +23476,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 352.4,
+        "value": 356.6,
         "unit": "rating",
-        "n": 16642,
+        "n": 16050,
         "asOf": "2026-09-15"
       },
       {
@@ -23837,14 +23837,14 @@
     ],
     "fightProfile": {
       "source": "bloodmallet",
-      "asOf": "2026-10-14",
+      "asOf": "2026-10-21",
       "targets": {
-        "1": 265928,
-        "2": 312489,
-        "3": 349852,
-        "5": 424438,
-        "8": 535922,
-        "15": 653876
+        "1": 266007,
+        "2": 312389,
+        "3": 349914,
+        "5": 424575,
+        "8": 536122,
+        "15": 654197
       },
       "tier": "MID2"
     },
@@ -23974,7 +23974,7 @@
         "source": "murlok",
         "bracket": "mplus",
         "name": "Top-50 avg M+ rating (ceiling)",
-        "value": 3825,
+        "value": 3817,
         "unit": "rating",
         "asOf": "2026-10-16"
       },
@@ -24000,9 +24000,9 @@
         "source": "wowmeta",
         "bracket": "mplus",
         "name": "M+ lower-bound 95% CI rating (Blizzard API, population-wide)",
-        "value": 348,
+        "value": 353.5,
         "unit": "rating",
-        "n": 39079,
+        "n": 36058,
         "asOf": "2026-09-15"
       },
       {

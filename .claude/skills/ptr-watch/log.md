@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-21 (nightly, ~15:40 UTC) — no class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383507 Hallow's End decor, 10-21 10:00), news index (same top; 403 on a short header set, 200 with the full browser set) and blue tracker swept: nothing class-relevant since the local sweep. Unconfigured topic 2382684 post 1 is now v7 (2026-10-21T00:07Z): it added Oct 16 and Oct 20 sections, neither with a Classes heading (labyrinth, items, PvP currency, quests, Murder Row/Coiled Altar fixes); its Oct 14 Druid fixes stay flagged for the owner. No 12.2 PTR. 0 feed entries.
+
 ## 2026-10-21 (local scheduled, before today's nightly) — no class tuning; ledger checkedAt only; 0 feed entries
 
 - Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only). The 10-20 nightly failed its publish (4 successful sources against the floor of 5), so the stored ledger is still the 10-19 one.

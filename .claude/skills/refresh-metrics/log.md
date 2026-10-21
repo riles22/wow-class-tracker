@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-21 (nightly, ~15:40 UTC) — Bloodmallet full re-sim 24 merged; SimC new build 24 merged; WoWMeta 40 moved; Murlok 12 moved; WCL oauth-failed
+
+- Bloodmallet: 24/27 charts, all MID2, ptr "0", every chart dated 2026-10-21 (wholesale, after LABEL_FLIP_DUE); merged, max cell move 13.0%. Balance/Augmentation/Devastation still error 3/3.
+- SimC MID2_Raid.txt: new build "12.1.5.70448 Live (hotfix 2026-10-20/70448, HEAD 7bc10711b5)" (was 5537d8813d); 24 specs merged at asOf 2026-10-20, max move 0.12%.
+- WoWMeta: snapshotDate still 2026-09-15 but rankings Last-Modified moved to 20 Oct; all 40 lowerBound/n changed (max 8.3%, Subtlety 364.2 → 394.5, n 16k → 67k); merged under the lagging 09-15 date, row partial.
+- Murlok (collector): 40 rows, page dates still 10-16, 12 values moved 1-9 points. Mythicstats (collector): pending, /period/1086 404, series retained.
+- WCL collector verdict oauth-failed (HTTP 503): no bracket receipts, 0 rows; leaderboard rows unreachable, stored rows unchanged. Archon walled.
+
 ## 2026-10-19 (nightly, ~17:15 UTC) — SimC 24 re-merged (same build re-run); Murlok/Mythicstats unchanged; Bloodmallet/WoWMeta unchanged
 
 - SimC MID2_Raid.txt: hotfix 2026-10-17/70448, HEAD 5537d8813d (unchanged) but the report was re-run (Last-Modified 10-19 07:28 GMT): all 24 values moved by noise, max 0.10% (Arcane). Merged at asOf 2026-10-17.

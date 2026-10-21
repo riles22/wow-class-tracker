@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-21 (nightly, ~15:40 UTC) — 44/44 feeds; queue 2 → 0; 0 takes, 0 metaNotes
+
+- Supadata summary ok, 2 fetched. Obli hLGtqpH_2hA (Frost/Unholy Venomstone upgrade order: main hand, active trinket, passive trinket, neck, off hand; plus farm sources) → skipped[], an item-priority PSA with no spec read. Sha lzryMz8Q_-M (+21 Temple of Sethraliss vs Brewmaster) → skipped[], uncommentated key run with party chat only.
+- Uploads after the local sweep: Tactyks WoW Forever addons, Shindigg/MadSkillzzTV streams, Psybear WoW Forever. Nothing queued; earlier uploads were triaged by the local run and stay unseen.
+
 ## 2026-10-21 (local scheduled, before today's nightly) — 2 captions before 429; 1 Musguete take; queue 0 → 2
 
 - RSS re-read for uploads since 2026-10-20T14:00Z (44/44 channel feeds 200), 35 uploads. yt-dlp (android client, 2026.07.04, json3) was tried on seven with any chance of a spec read: Musguete TJSgk0Kyw2g and Zorthas _Lxdr3ulpjk returned captions, the first anonymous success since late September; the next five (Obli hLGtqpH_2hA, Sha lzryMz8Q_-M and jExO31el750, izen QKBLya5J6Ws, Dratnos mLjt68pKnUg) drew HTTP 429, and the sweep stopped there.

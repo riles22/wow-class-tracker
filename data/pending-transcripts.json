@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "hLGtqpH_2hA",
-      "creator": "Obli",
-      "title": "What to upgrade as a Frost/Unholy DK with your Venomstones?",
-      "published": "2026-10-21",
-      "queuedAt": "2026-10-21"
-    },
-    {
-      "id": "lzryMz8Q_-M",
-      "creator": "Sha",
-      "title": "Temple of Sethraliss +21 vs Brewmaster | Midnight Season 2",
-      "published": "2026-10-20",
-      "queuedAt": "2026-10-21"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3256,6 +3241,20 @@
       "creator": "Zorthas",
       "title": "How To Farm Ascendant Venomstones",
       "reason": "Transcript read (yt-dlp json3, local): a 6-minute farming guide for Ascendant Venomstones (sources, stones per activity, a weekly route, and an item-level track oddity). It gives no spec, class or meta read; nothing to distil.",
+      "verifiedAt": "2026-10-21"
+    },
+    {
+      "id": "hLGtqpH_2hA",
+      "creator": "Obli",
+      "title": "What to upgrade as a Frost/Unholy DK with your Venomstones?",
+      "reason": "Transcript read (Supadata, 68 chunks): a two-minute Ascendant Venomstone upgrade-order PSA for Frost and Unholy (main hand first, then active trinket, passive trinket, neck, off hand) plus where to farm the stones. An item-priority guide with no read on either spec’s strength; nothing to distil.",
+      "verifiedAt": "2026-10-21"
+    },
+    {
+      "id": "lzryMz8Q_-M",
+      "creator": "Sha",
+      "title": "Temple of Sethraliss +21 vs Brewmaster | Midnight Season 2",
+      "reason": "Transcript read (Supadata, 343 chunks): an uncommentated +21 Temple of Sethraliss key run with party voice chat only (kicks, CC, positioning, boss call-outs). It never assesses Brewmaster or any spec; nothing to distil.",
       "verifiedAt": "2026-10-21"
     }
   ],
