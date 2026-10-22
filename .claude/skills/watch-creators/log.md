@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-22 (local scheduled, before today's nightly) — 44/44 feeds; caption 429 on the first try; 0 takes; queue 0 → 0
+
+- RSS re-read for uploads since 2026-10-21T14:00Z (44/44 channel feeds 200): 30 unseen. yt-dlp (android client, 2026.07.04, json3) on Sha blg6yeBA2Ns ("Altar of Fangs Strategies & Tech for Mythic Plus") drew HTTP 429 on the caption download, so the sweep stopped there; Sha jExO31el750 and Dratnos mLjt68pKnUg (yesterday's 429s) were not retried.
+- Not queued (no class or spec in the title): Sha blg6yeBA2Ns. Left unseen: streams and key or raid POVs (Bansherz ×4, Preheat, Critcake, MadSkillzzTV, AutomaticJak ×2, Megasett, Kalamazi, YoDaTV, Shindigg, Kesslive, Hopeful, LBNinja7 ×2), Dalaran Gaming (Venomstone farm, PvP duels, livestream), WoW Forever (Tactyks, Supatease ×5, Psybear ×3). No takes, no metaNotes.
+
 ## 2026-10-21 (nightly, ~15:40 UTC) — 44/44 feeds; queue 2 → 0; 0 takes, 0 metaNotes
 
 - Supadata summary ok, 2 fetched. Obli hLGtqpH_2hA (Frost/Unholy Venomstone upgrade order: main hand, active trinket, passive trinket, neck, off hand; plus farm sources) → skipped[], an item-priority PSA with no spec read. Sha lzryMz8Q_-M (+21 Temple of Sethraliss vs Brewmaster) → skipped[], uncommentated key run with party chat only.
