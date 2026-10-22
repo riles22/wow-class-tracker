@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-22 (nightly, ~15:40 UTC) — SimC new build 24 merged; Murlok 39 / Mythicstats 36 moved; WCL raid partial, M+ success
+
+- WCL (pre-agent receipt, read only): raid partial 295 rows (18 sparse, 7 invalid; partition 2 "12.1.5" listed, held on partition 1), M+ success 320 rows. check-wcl-metrics passes.
+- Murlok: source date 2026-10-22 (was 10-16), 40 rows, 39 values changed. Mythicstats: period 1086 landed (404 yesterday), 40 rows, sum 100.3, 36 changed, previously retired specs back. Both applied from metrics-fetch/updates.json only.
+- SimC MID2_Raid.txt: new build "12.1.5.70448 Live (hotfix 2026-10-21/70448, HEAD d080afd0a5)" (was 7bc10711b5); 24 specs merged at asOf 2026-10-21, max move 0.12%.
+- Bloodmallet: 24 MID2 charts, all still dated 2026-10-21 and byte-identical to stored; nothing merged. Balance/Augmentation/Devastation error body 3/3.
+- WoWMeta: snapshotDate 2026-09-15, rankings Last-Modified 20 Oct (unchanged); 40 rows identical, nothing merged (partial). Archon walled (all six numeric rows blocked).
+
 ## 2026-10-21 (nightly, ~15:40 UTC) — Bloodmallet full re-sim 24 merged; SimC new build 24 merged; WoWMeta 40 moved; Murlok 12 moved; WCL oauth-failed
 
 - Bloodmallet: 24/27 charts, all MID2, ptr "0", every chart dated 2026-10-21 (wholesale, after LABEL_FLIP_DUE); merged, max cell move 13.0%. Balance/Augmentation/Devastation still error 3/3.

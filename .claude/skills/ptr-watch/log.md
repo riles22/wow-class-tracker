@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-22 (nightly, ~15:40 UTC) — no class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383537 RP-PvP ruleset for WoW Forever, 10-22 10:33), news index (same top) and blue tracker swept: nothing class-relevant since the local sweep (Hallow's End, WoW Forever, store). Unconfigured topic 2382684 (Oct 21 hotfixes) post 1 still v9, no Classes section; its Oct 14 Druid fixes stay flagged for the owner. 12.1 thread 2317811 .json 404 (closed cycle). No 12.2 PTR. 0 feed entries.
+
 ## 2026-10-22 (local scheduled, before today's nightly) — no class tuning; ledger checkedAt only; 0 feed entries
 
 - Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only).
