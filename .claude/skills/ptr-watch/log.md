@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-23 (local scheduled, before today's nightly) — no class tuning; 12.1.7 PTR weekly notes are bug fixes only; 0 feed entries
+
+- Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only).
+- Wowhead news RSS from home (200, ~14:15 UTC). New since the last sweep: news=383550 "Patch 12.1.7 PTR Development Notes - Various Bug Fixes" (10-22), confirmed on the forum as topic 2383391 post 4 (Linxy, 2026-10-22T22:48Z, one line: various bug fixes and behind-the-scenes updates). No class content, and PTR material is not logged while `PHASES.ptr` is null. news=383552 "Item Level Changes for Ascended Venomforged Gear" (live hotfix: Ascendant Venomstone upgrades now crafted 337, non-crafted 341; items, not class tuning). news=383551 (12.1.7 Talebound titles) and WoW Forever/Hallow's End items. No 12.2 PTR. 0 feed entries.
+
 ## 2026-10-22 (nightly, ~15:40 UTC) — no class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt; 0 unresolved; check-official-notes passes.

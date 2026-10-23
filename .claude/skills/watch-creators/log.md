@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-23 (local scheduled, before today's nightly) — 44/44 feeds; caption 429 on the first try; queue 0 → 3; 0 takes
+
+- RSS re-read for uploads since 2026-10-22T14:00Z (44/44 channel feeds 200): 26 uploads. yt-dlp (android client, 2026.07.04, json3) on izen G5wOwgKeXEI drew HTTP 429 on the caption download, so the sweep stopped there.
+- Queued narrowly for the nightly's Supadata drain (spec read in the title): izen G5wOwgKeXEI ("Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN", general creator → metaNotes lane), YoDaTV P-FidfzJWag ("The FINAL Tierlist for Midnight Season 2 Mythic+"), Obli ixeTGwL58WM (Frost DK Cryogenic Chamber).
+- Not queued: Kalamazi Pd_LRm2IvLc (Rogue/Warlock interaction bug PSA, no spec read). Left unseen: key and raid PoVs and streams (Bansherz ×5, Shadarek, Whispyr, AutomaticJak, Critcake, Preheat, MadSkillzzTV, LBNinja7 ×3, Hopeful), WoW Forever (Supatease ×3, Psybear ×2, NeekapHere, Dalaran Gaming, Shindigg). No takes, no metaNotes.
+
 ## 2026-10-22 (nightly, ~15:40 UTC) — 44/44 feeds; queue 0 → 0; 0 takes, 0 metaNotes
 
 - 44/44 channel feeds 200 (79 transcribable entries). Transcript summary verdict ok, 0 requested (queue empty). 31 uploads since 2026-10-21T14:00Z not in any lane; new since the local sweep: MadSkillzzTV M7GH0DeJqsI (healer stream), LBNinja7 tGwDSHusF_8 (WoW terms explainer) and k7FXefKESVQ (stream), Bansherz -Ut5O768_aE / -qDzSGukKnc / 9HAJkmLfHZ8 (BM key PoVs, a Short), AutomaticJak vb9MHB-D4ik (sponsored game) and jd_Di04mLS8 (Priest key), Hopeful, Psybear rIjGYwAP19E (WoW Forever), Kesslive, Shindigg, YoDaTV, Kalamazi, Megasett, Supatease wBdYqOWleMs (WoW Forever). None carries a class/spec read in title or description; none queued, all left unseen. 0 takes, 0 metaNotes.
