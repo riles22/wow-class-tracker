@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-23 (nightly, ~15:40 UTC) — 9 YoDaTV takes, 7 izen metaNotes, 1 prediction panel; queue 3 -> 0
+
+- Supadata summary ok: 3 requested, 3 fetched (G5wOwgKeXEI, P-FidfzJWag, ixeTGwL58WM).
+- izen G5wOwgKeXEI "Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN" (10-22): 7 M+ metaNotes framed "Season 2 live (12.1.5)": Subtlety +, Assassination −, Arcane −, Elemental +, Arms +, Guardian +, Holy Paladin +. Superseded his older live M+ metaNotes for those seven specs (the 10-16 recap, plus the 10-10 funnel reads for Arcane/Assassination/Elemental and the 08-29 Arcane read), 11 in all. Not distilled: Blood (only "even" with Guardian), Unholy and Havoc (passing mentions). izen latest updated.
+- YoDaTV P-FidfzJWag "The FINAL Tierlist for Midnight Season 2 Mythic+..." (10-23): 9 M+ takes inside his scope, each superseding his previous live M+ take for that spec: Blood buff, Guardian mixed, Vengeance mixed (now behind Guardian), Prot Warrior nerf, Prot Paladin nerf, Brewmaster nerf, Holy Paladin buff, Retribution buff, Arms mixed. Rogue/Mage/DH DPS/etc. commentary is outside his scope and was not written as takes. Prediction panel yodatv-P-FidfzJWag-2026-10-23 records only the 12 placements he states with a tier (Subtlety S+; Outlaw, Windwalker, Fury, Arcane, BM A; Prot Warrior, Prot Paladin, Brewmaster, Balance, MM, Survival B). YoDaTV latest updated on his 6 class entries.
+- Obli ixeTGwL58WM (Cryogenic Chamber how-to) -> skipped[].
+- RSS: 44/44 channel feeds 200 (79 transcribable entries). 25 uploads since 2026-10-22T14:00Z not in any lane: key PoVs and streams (Bansherz ×4 incl. "Can Survival Top Meters?" uncommentated PoV, AutomaticJak, Whispyr, Shadarek, Critcake, Preheat, Hopeful, LBNinja7 ×2, MadSkillzzTV), Kalamazi Pd_LRm2IvLc (Subtlety/Demonology bug PSA), WoW Forever (Supatease ×3, Psybear ×3, Dalaran Gaming, NeekapHere, Shindigg, leak). None queued, left unseen.
+
 ## 2026-10-23 (local scheduled, before today's nightly) — 44/44 feeds; caption 429 on the first try; queue 0 → 3; 0 takes
 
 - RSS re-read for uploads since 2026-10-22T14:00Z (44/44 channel feeds 200): 26 uploads. yt-dlp (android client, 2026.07.04, json3) on izen G5wOwgKeXEI drew HTTP 429 on the caption download, so the sweep stopped there.

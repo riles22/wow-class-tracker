@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-23 (nightly, ~15:40 UTC) — Method 0 moves; Icy Veins / Wowhead / Archon walled
+
+- Method (direct browser-header GET, 200): 40/40 M+ (8 blocks, 8 dungeon names rejected by roster match), 40/40 raid (4 blocks); Devourer in both; body "Midnight Season 2"; Last Updated M+ 14 Oct, raid 10 Aug. 0 of 80 letters moved. Snapshots -> 2026-10-23.
+- Icy Veins 403 Cloudflare from the runner (stored 10-23 snapshots from today's local run unchanged). Wowhead 202 AWS WAF challenge. Archon 403 Cloudflare (source-health: raid 403, M+ human-verification). Nothing parsed for those three.
+
 ## 2026-10-23 (local scheduled, before today's nightly) — Icy Veins verified: 0 of 80 letters changed; M+ Subtlety still listed twice
 
 - All six pages HTTP 200 via home curl (browser UA + Accept + Accept-Language), one `<table class="tier-list">` each after stripping `<style>`. Counts: raid 27/7/6, M+ DPS 28 entries (27 unique), M+ healer 7, M+ tank 6; every letter non-null, 0 unmatched, 0 role mismatches.

@@ -1,28 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "G5wOwgKeXEI",
-      "creator": "izen (Izenhart)",
-      "title": "Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN",
-      "published": "2026-10-22",
-      "queuedAt": "2026-10-23"
-    },
-    {
-      "id": "P-FidfzJWag",
-      "creator": "YoDaTV",
-      "title": "The FINAL Tierlist for Midnight Season 2 Mythic+...",
-      "published": "2026-10-23",
-      "queuedAt": "2026-10-23"
-    },
-    {
-      "id": "ixeTGwL58WM",
-      "creator": "Obli",
-      "title": "This FROST DK ability is doing TONS of damage!",
-      "published": "2026-10-23",
-      "queuedAt": "2026-10-23"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3278,6 +3256,13 @@
       "title": "Temple of Sethraliss +21 vs Brewmaster | Midnight Season 2",
       "reason": "Transcript read (Supadata, 343 chunks): an uncommentated +21 Temple of Sethraliss key run with party voice chat only (kicks, CC, positioning, boss call-outs). It never assesses Brewmaster or any spec; nothing to distil.",
       "verifiedAt": "2026-10-21"
+    },
+    {
+      "id": "ixeTGwL58WM",
+      "creator": "Obli",
+      "title": "This FROST DK ability is doing TONS of damage!",
+      "reason": "Transcript read (Supadata, 2026-10-23): a Frost DK how-to on tracking and timing Cryogenic Chamber (Rime stacking, releasing it with Pillar of Frost near targets, Bonegrinder windows). No spec-strength or comparative read.",
+      "verifiedAt": "2026-10-23"
     }
   ],
   "seen": [

@@ -841,6 +841,173 @@
           "supersededAtFreeze": false
         }
       ]
+    },
+    {
+      "id": "yodatv-P-FidfzJWag-2026-10-23",
+      "label": "YoDaTV — 2026-10-23 final Season 2 Mythic+ tier list",
+      "creator": "YoDaTV",
+      "season": "s2",
+      "date": "2026-10-23",
+      "capturedAt": "2026-10-23",
+      "scope": {
+        "brackets": [
+          "mplus"
+        ],
+        "roles": [
+          "DPS",
+          "Healer",
+          "Tank"
+        ],
+        "keys": [
+          "Rogue|Subtlety",
+          "Rogue|Outlaw",
+          "Monk|Windwalker",
+          "Warrior|Fury",
+          "Mage|Arcane",
+          "Hunter|Beast Mastery",
+          "Warrior|Protection",
+          "Paladin|Protection",
+          "Monk|Brewmaster",
+          "Druid|Balance",
+          "Hunter|Marksmanship",
+          "Hunter|Survival"
+        ]
+      },
+      "scopeNote": "Live Season 2 Mythic+ (his own list), which he calls probably his last update of the season, made after Subtlety Rogue was not nerfed at the second 12.1.5 reset. Only placements he STATES with a tier are captured: the list is on screen and cannot be read from a transcript, so specs he discusses without naming a tier (Blood DK, Guardian, Vengeance, Retribution, Havoc, Unholy, Frost DK, Feral, Enhancement, Devourer, Demonology, Shadow Priest, the healers below Holy Paladin) are absent rather than reconstructed. nativeOrder records only the tiers the audio evidences.",
+      "nativeOrder": [
+        "S+",
+        "A",
+        "B"
+      ],
+      "pages": [
+        {
+          "url": "https://youtu.be/P-FidfzJWag",
+          "published": "2026-10-23",
+          "snapshot": "2026-10-23"
+        }
+      ],
+      "rows": [
+        {
+          "key": "Rogue|Subtlety",
+          "bracket": "mplus",
+          "tier": "S+",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=0",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: \"Subrogue is S+\", the main change on this list, because it does more than 10% more damage than every other DPS.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Rogue|Outlaw",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=262",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: the weakest Rogue spec, overshadowed by Subtlety, left in A.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Windwalker",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=280",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: \"Windwalker still an A tier\".",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Fury",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=299",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: Arms is better for the meta comp; he leaves Fury in A.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Mage|Arcane",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=388",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: probably the best caster after Elemental Shaman; he leaves it in A.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Hunter|Beast Mastery",
+          "bracket": "mplus",
+          "tier": "A",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=407",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: does a lot of damage but lacks a poison dispel or strong raid buff; left in A.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Warrior|Protection",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=430",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: opens his B tier with Protection Warrior, not good on self-sustain.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Paladin|Protection",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=472",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: probably the worst tank of the season; left in B.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Monk|Brewmaster",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=510",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: needs a lot of healing; left in B.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Druid|Balance",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=527",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: high overall damage mostly on small adds; left in B.",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Hunter|Marksmanship",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=546",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: \"The other hunters I think are just worse than BM, so we'll leave them in B.\"",
+          "supersededAtFreeze": false
+        },
+        {
+          "key": "Hunter|Survival",
+          "bracket": "mplus",
+          "tier": "B",
+          "date": "2026-10-23",
+          "url": "https://youtu.be/P-FidfzJWag?t=546",
+          "context": "Season 2 live — final M+ tier list, creator’s own placement",
+          "text": "Explicit: \"The other hunters I think are just worse than BM, so we'll leave them in B.\"",
+          "supersededAtFreeze": false
+        }
+      ]
     }
   ]
 }

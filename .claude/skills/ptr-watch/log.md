@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-23 (nightly, ~15:40 UTC) — no class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383529 BoA M+ gear chests, 10-23 10:00), news index (same top) and blue tracker swept. New since the local sweep: news=383511 (12.1.7 PTR decor costs), 383547 (WoW Forever podcast), 383542 (speculated Subtlety Rogue / Demonology pet pull bug, not tuning). Topic 2382684 post 1 still v9; 12.1.7 PTR thread 2383391 post 4 (bug fixes only) is PTR material, not logged. 12.1 thread 2317811 404. No 12.2 PTR. 0 feed entries.
+
 ## 2026-10-23 (local scheduled, before today's nightly) — no class tuning; 12.1.7 PTR weekly notes are bug fixes only; 0 feed entries
 
 - Official-notes receipts collected locally (live-hotfixes 138 sections, ptr-preview 18, both success); pending equals the ledger except checkedAt, 0 unresolved. Ledger left for the nightly to stamp (bookkeeping only).
