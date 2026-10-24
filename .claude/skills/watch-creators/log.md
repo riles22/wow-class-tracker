@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-24 (local scheduled, after today's nightly) — 2 of 6 queued captions fetched, then 429; 5 takes; queue 6 → 4
+
+- No RSS re-sweep: the nightly read 44/44 feeds about 20 minutes earlier. yt-dlp (android client, 2026.07.04, json3, `--sleep-requests` 1.5 then 3) fetched Kalamazi GDCit6vtR1c and Musguete DCJenKX1uXA, then drew HTTP 429 on the caption download for YoDaTV _2A45veCt-4. One retry without the android client (sleep-requests 15) also drew 429, so the sweep stopped there. _2A45veCt-4, JmnjFUK1_cs (LBNinja7), ZlqJuSOXVPc (Dalaran Gaming) and AznS7nxp3Z4 (Kesslive) stay queued.
+- Kalamazi "We Are Saved! BIG Warlock Buffs & Bug Fixes!" (2026-10-24): 4 live 12.1.5 takes on the October 27 Warlock tuning and the same-day summon/pet hotfix. Affliction raid (buff), Demonology raid (buff), Demonology M+ (buff), Destruction M+ (buff; he expects it not to move the M+ pick off Demonology). These supersede his 08-29 Affliction raid, 08-29 Demonology raid, 09-05 Demonology M+ and 08-29 Destruction M+ takes. His 08-29 Affliction M+ and 08-26 Destruction raid takes stay live (no new read in those lenses). The video's boss names are ASR-mangled, so the takes name no encounter.
+- Musguete "Are Sub Rogues Still Viable? Nerf Analysis" (2026-10-23): 1 live 12.1.5 Subtlety take (mixed, both brackets), superseding his 10-21 Trickster guide take: the 8% nerf leaves Subtlety on top in his 10%-off log check, and Trickster still beats Deathstalker.
+- Neither video publishes a tier list or rank order, so there are no predictions panels. 0 metaNotes. `latest` updated for both creators; both ids left `videos[]` in the same edit.
+
 ## 2026-10-24 (nightly, ~14:10 UTC) — 44/44 feeds; queue 0 -> 6; 0 takes, 0 metaNotes
 
 - Supadata summary ok, 0 requested (queue was empty).

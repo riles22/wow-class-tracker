@@ -2,20 +2,6 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "GDCit6vtR1c",
-      "creator": "Kalamazi",
-      "title": "We Are Saved! BIG Warlock Buffs & Bug Fixes!",
-      "published": "2026-10-24",
-      "queuedAt": "2026-10-24"
-    },
-    {
-      "id": "DCJenKX1uXA",
-      "creator": "Musguete",
-      "title": "Are Sub Rogues Still Viable? Nerf Analysis",
-      "published": "2026-10-23",
-      "queuedAt": "2026-10-24"
-    },
-    {
       "id": "_2A45veCt-4",
       "creator": "YoDaTV",
       "title": "Revisiting Bear vs BDK for Season 2 Midnight M+",

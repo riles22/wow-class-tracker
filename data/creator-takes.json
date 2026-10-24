@@ -6564,7 +6564,7 @@
       "claim": "He says Demonology is \"quite possibly the highest overall output damage spec in M+ right now\". His mechanism is that the buffs aimed at single target — Shadow Bolt, Demon Bolt, and above all the 20% to Dreadstalkers and to the demons summoned by Demonic Tyrant — also hit AoE, because those pets cleave; in his logs the Demonic Tyrant summons are the single largest damage source in a run and the Apex pets together make up close to 40% of damage in the burst window. He puts the single-target sim at roughly 205k before the buffs and 228-232k after, which he says is enough to be competitive with the better single-target specs while keeping an already strong stacked-cleave profile. The limiter he names is not damage but group utility: no Bloodlust, no Fortitude, no Chaos Brand, no Mystic Touch, no Power Infusion, so it needs a comp (he sketches Demo plus Elemental Shaman, Mage and a Paladin or DK) that can carry it. He expects more Demonology play into mid-September and the MDI."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Demonology",
       "creator": "Kalamazi",
@@ -6576,7 +6576,7 @@
       "claim": "He says Demonology has been \"taking over a bit\" in the raid over the past couple of days, pointing at Heroic and Mythic parses on Lost Explorers, Sszorak, Twin Fangs and Ula’tek where the cleave profile pays. He played Ula’tek as Demonology himself and says it felt pretty good if you can cleave the eggs without pulling off the boss, with the timings on the heart being the rough part. He does not expect Blizzard to touch Demonology before BlizzCon, and says if it is brought down it would most likely be a partial reversal of the Demonic Tyrant pet buff."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Affliction",
       "creator": "Kalamazi",
@@ -6600,7 +6600,7 @@
       "claim": "He says the Affliction changes are not being seen much in Mythic+ but probably could be — the Unstable Affliction change helps, the Agony buff is universal across builds, and he has seen hybrid builds running Seed of Corruption that look pretty good. His summary is that even if Demonology is knocked down, Affliction is looking pretty good in keys too. He is explicit that Affliction’s AoE, while lower peak than Demonology (roughly 1.3 million against 2.0 million in his sim), is more consistent and sustains higher on average."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Destruction",
       "creator": "Kalamazi",
@@ -7092,7 +7092,7 @@
       "claim": "He argues the raid tier is exposing fundamental flaws rather than a tuning gap. Wildfire Bomb only damages a mob when its cone reaches the CENTRE of that mob's hit box, where almost every other AoE spell in the game needs only to touch the hit box — so on Twin Fangs it is impossible to hit both bosses with one bomb, and on Ula'tek it cannot cleave the boss and the adds together, which he contrasts with Marksmanship's Explosive Shot doing exactly that. His second complaint is Takedown, which he calls one of the worst cooldowns in the game: 8 seconds for Pack Leader or 10 for Sentinel on a 90-second cooldown, with Savagery spending two talent points for 30 seconds of reduction against Beast Mastery's single point for 60 seconds off Bestial Wrath, and most of the window spent casting Kill Command for resources. Because the Venomous Abyss has several damage-amp phases, including on two of its hardest bosses, he says the weak cooldown compounds the cleave problem; reading heroic Ula'tek logs he puts Survival third from the bottom of all specs. His asks are to replace Wildfire Bomb with a player-based AoE carrying the same modifiers (a Butchery-style button, optionally with Wildfire Cluster returning) and to make Takedown more impactful, plus smaller notes that Outlaw Venom still gives 2% rather than the tooltip's 4% critical strike damage, that Wildfire Imbuement is undertuned even in single target, and that Open Fire's 5% fire damage loses to Stargazer."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Demonology",
       "creator": "Kalamazi",
@@ -8792,7 +8792,7 @@
       "patchContext": "Season 2 live (12.1.5) — \"Why You Need to Play Trickster RIGHT NOW! 12.1.5 Subtlety Guide\", published 2026-10-21, an 8-minute Trickster rotation guide recorded on live 12.1.5 raid bosses and keys after what he calls the recent changes and buffs. It supersedes his 2026-10-01 12.1.5 preview read, which leaned toward a slight nerf without committing, and his 2026-09-14 Season 2 placement. He gives no tier letters or rank list, so there is no predictions panel.",
       "url": "https://youtu.be/TJSgk0Kyw2g?t=169",
       "claim": "He now recommends Trickster Subtlety to everyone, saying the hero talent is clearly the way to go after the recent buffs. Off his own meters he calls the damage very good and very consistent in AoE and on single target, describes the single target as one of the best in the game at the moment, and says two- and three-target damage is much higher than in past weeks, enough that he expects it to compete better there. He adds that Trickster is much easier to play than Deathstalker, with fewer min-max decisions and only two or three macros. He does not expect a meaningful nerf, because several other classes are doing damage close to Subtlety's, and if one comes he expects it to be small, so he places Subtlety in a really good position for at least this part of the season. He says he was away most of the week and has not finished testing, especially on two and three targets.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8900,6 +8900,66 @@
       "patchContext": "Season 2 live (12.1.5) — \"The FINAL Tierlist for Midnight Season 2 Mythic+...\" (published 2026-10-23): what he calls probably his last Mythic+ tier-list update of the season, made after Subtlety Rogue went un-nerfed at the second 12.1.5 reset. His own list; placements are read from what he says aloud, since the list itself is on screen. Supersedes his earlier live M+ take for each spec it covers.",
       "claim": "He says Arms keeps its meta spot mainly for Battle Shout on Subtlety Rogue and its two-target damage, and rates it above Fury, but would not be surprised to see groups cut Arms for a second Subtlety Rogue, since Subtlety does about 15% more damage.",
       "url": "https://youtu.be/P-FidfzJWag?t=20",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "Kalamazi",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"We Are Saved! BIG Warlock Buffs & Bug Fixes!\", published 2026-10-24: his breakdown of the Warlock entries in the class tuning announced for the October 27 reset (Unstable Affliction +20%, Rain of Fire +20% for both Diabolist and Hellcaller) and of the same-day hotfix to Warlock summons and Diabolist pets that could target enemies outside combat. He ran no new sims; the Affliction figure is his own arithmetic on a current SimulationCraft profile, and the rest is read off live raid and Mythic+ logs. No tier letters or rank list, so there is no predictions panel.",
+      "claim": "He calls the 20% Unstable Affliction buff the change Affliction has needed for months and puts it at roughly a 4.5% single-target gain (about 237k to 249k on the profile he adjusted), which he says could make Affliction the best Warlock option on single-target fights. He expects it on the most single-target raid encounters and on burn phases where it already does well, but says Demonology stays the pick on stack-cleave fights, because Affliction cannot keep single-target damage while spreading Seed, and the spec still needs a talent overhaul in 12.2.",
+      "url": "https://youtu.be/GDCit6vtR1c?t=488",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"We Are Saved! BIG Warlock Buffs & Bug Fixes!\", published 2026-10-24: his breakdown of the Warlock entries in the class tuning announced for the October 27 reset (Unstable Affliction +20%, Rain of Fire +20% for both Diabolist and Hellcaller) and of the same-day hotfix to Warlock summons and Diabolist pets that could target enemies outside combat. He ran no new sims; the Affliction figure is his own arithmetic on a current SimulationCraft profile, and the rest is read off live raid and Mythic+ logs. No tier letters or rank list, so there is no predictions panel.",
+      "claim": "He says the raid answer is still Demonology on nearly every fight, with Affliction or Destruction taking only one or two, because Demonology cleaves stacked targets passively while keeping its single-target damage. He reads the Affliction buff as pressure on a handful of single-target fights rather than a threat to Demonology's place overall.",
+      "url": "https://youtu.be/GDCit6vtR1c?t=286",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "Kalamazi",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"We Are Saved! BIG Warlock Buffs & Bug Fixes!\", published 2026-10-24: his breakdown of the Warlock entries in the class tuning announced for the October 27 reset (Unstable Affliction +20%, Rain of Fire +20% for both Diabolist and Hellcaller) and of the same-day hotfix to Warlock summons and Diabolist pets that could target enemies outside combat. He ran no new sims; the Affliction figure is his own arithmetic on a current SimulationCraft profile, and the rest is read off live raid and Mythic+ logs. No tier letters or rank list, so there is no predictions panel.",
+      "claim": "He calls the hotfix the bigger news: Diabolist pets and Demonology summons no longer wander into enemies outside combat, a bug that pulled trash packs when grouped with a Subtlety Rogue, so the two can be played together in keys again. He says Demonology remains very strong in Mythic+, possibly a bit too strong, and expects a lot of Demonology play.",
+      "url": "https://youtu.be/GDCit6vtR1c?t=184",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "Kalamazi",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"We Are Saved! BIG Warlock Buffs & Bug Fixes!\", published 2026-10-24: his breakdown of the Warlock entries in the class tuning announced for the October 27 reset (Unstable Affliction +20%, Rain of Fire +20% for both Diabolist and Hellcaller) and of the same-day hotfix to Warlock summons and Diabolist pets that could target enemies outside combat. He ran no new sims; the Affliction figure is his own arithmetic on a current SimulationCraft profile, and the rest is read off live raid and Mythic+ logs. No tier letters or rank list, so there is no predictions panel.",
+      "claim": "He calls the 20% Rain of Fire buff substantial, about a 4% overall gain where Rain of Fire is roughly a fifth of Destruction's damage in heavy-AoE keys, and notes Destruction is already very strong in AoE as Diabolist with a few top players running it. He does not expect it to move the Mythic+ pick away from Demonology, beyond perhaps a little more Destruction in the heaviest AoE dungeons.",
+      "url": "https://youtu.be/GDCit6vtR1c?t=754",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Musguete",
+      "date": "2026-10-23",
+      "sentiment": "mixed",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — \"Are Sub Rogues Still Viable? Nerf Analysis\", published 2026-10-23: a 4-minute reaction to the Subtlety nerf in the class tuning announced for the October 27 reset (all ability damage -8%, plus a further Trickster reduction), checked by knocking 10% off top Subtlety players' current damage in logged keys. It supersedes his 2026-10-21 Trickster guide read, which expected no meaningful nerf. He says he still has to test the change in game. No tier letters or rank list, so there is no predictions panel.",
+      "claim": "He says the nerf sounds large but is not that bad: taking 10% off the damage of top Subtlety players in current logs still leaves them at the top of the meters, in one log still almost 100k ahead of a Shaman. Netting it against the earlier 14% buff he calls the result about a 6% gain overall, and expects Subtlety to stay the top damage spec. He still expects Trickster to outperform Deathstalker, which he calls harder to min-max.",
+      "url": "https://youtu.be/DCJenKX1uXA?t=81",
       "superseded": false
     }
   ],
