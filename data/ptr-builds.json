@@ -3,6 +3,34 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-10-23",
+      "kind": "build",
+      "realm": "live",
+      "label": "“Class Tuning Incoming - October 27” (Linxy, us.forums topic 2390748, post 1, created 2026-10-23T22:52:38.516Z, still VERSION 1 when read this run; the Wowhead mirror news=383568, RSS pubDate 2026-10-23T17:54:15-05:00, was compared against the forum JSON and carries the same lines; the forum wording is the one stored). A LIVE-realm tuning pass with its own standalone Blizzard topic, the same shape as the 08-15 / 08-22 / 08-28 / 09-18 / 10-02 entries; it applies with each region's weekly maintenance on October 27, so this entry records the ANNOUNCEMENT: the values are not live yet. The first class pass after 12.1.5 went live (Blizzard's own Subtlety note says the 12.1.5 compensation buff overshot and is being largely rolled back, with an extra Trickster nerf). Heading nesting kept INTACT: Subtlety's Trickster line sits under Rogue › Subtlety, so it is attributed to Subtlety Rogue. The separate PLAYER VERSUS PLAYER section is OUT OF SCOPE for this PvE tracker and is not distilled (Unholy DK, Devourer DH, Preservation Evoker, Marksmanship Hunter, Fire and Frost Mage, Mistweaver Monk, Holy Paladin, Holy Priest, Assassination Rogue and Restoration Shaman PvP-only lines); those specs that appear only there are absent from specsAffected. Every “Does not affect PvP combat” qualifier in the Classes section marks an ordinary PvE line, stored as “(PvE only)”. NO SET BONUS is touched (“set bonus”, “-piece”, “tier set” and “Venomous Abyss” appear zero times), so no spec.tierSet date moves.",
+      "forumPostNumber": 1,
+      "forumUrl": "https://us.forums.blizzard.com/en/wow/t/class-tuning-incoming-october-27/2390748",
+      "wowheadUrl": "https://www.wowhead.com/news=383568/subtlety-rogue-nerfs-and-feral-druid-buffs-class-tuning-incoming-with-weekly",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Feral Druid",
+        "Restoration Druid",
+        "Marksmanship Hunter",
+        "Fire Mage",
+        "Subtlety Rogue",
+        "Affliction Warlock",
+        "Destruction Warlock"
+      ],
+      "highlights": [
+        "Feral Druid — All damage done increased by 5% (PvE only).",
+        "Restoration Druid — Verdancy healing increased by 60%; Regrowth healing increased by 10%; Improved Swiftmend increases Swiftmend healing by 40% (was 30%) (all PvE only).",
+        "Marksmanship Hunter — Trick Shots now increases the ricochet damage of Aimed Shot and Rapid Fire by 85% (was 75%); Explosive Shot damage increased by 10%; Volley damage increased by 10%.",
+        "Fire Mage — All damage done increased by 5% (PvE only).",
+        "Subtlety Rogue — All ability damage reduced by 8%; Trickster: Fazed now increases damage by 5% (was 7%).",
+        "Affliction Warlock — Unstable Affliction damage increased by 20% (PvE only).",
+        "Destruction Warlock — Rain of Fire damage increased by 20%."
+      ]
+    },
+    {
       "date": "2026-10-06",
       "kind": "hotfix",
       "realm": "live",

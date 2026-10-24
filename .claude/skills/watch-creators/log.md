@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-24 (nightly, ~14:10 UTC) — 44/44 feeds; queue 0 -> 6; 0 takes, 0 metaNotes
+
+- Supadata summary ok, 0 requested (queue was empty).
+- RSS: 44/44 channel feeds 200 (79 transcribable entries). 31 uploads since 2026-10-23T14:00Z not in any lane; most react to the Oct 27 class tuning post (Sub nerf).
+- Queued (spec read in title, inside the creator's scope): Kalamazi GDCit6vtR1c (Aff/Destro buffs), Musguete DCJenKX1uXA (Sub nerf analysis), YoDaTV _2A45veCt-4 (Bear vs BDK M+), LBNinja7 JmnjFUK1_cs (healer balance), Dalaran Gaming ZlqJuSOXVPc (Sub nerfs + weekly tuning), Kesslive AznS7nxp3Z4 (why few play Evoker).
+- Not queued, left unseen: YoDaTV EnLSAMRqN1k and Shadarek XaobqfpJ8Ro (Sub Rogue nerf reactions, outside their scope), Supatease lJbugv3zssc / SJx7jbEOdBg / wSIRzX1qEJI / oNNOVOCqbrE / 2UX8auwV54w / yVX3i6dKFWU (Shorts, PvP, WoW Forever), key PoVs and streams (Bansherz ×2, Megasett, Shindigg, Hopeful ×2, Critcake, AutomaticJak, Shadarek, Tactyks, Dalaran Gaming duels), YoDaTV sk2F5EXip8c (route tech), Dalaran zWpvtPz_Vqo (gearing), WoW Forever (MadSkillzzTV, Jedith, Psybear ×2, leak).
+
 ## 2026-10-23 (nightly, ~15:40 UTC) — 9 YoDaTV takes, 7 izen metaNotes, 1 prediction panel; queue 3 -> 0
 
 - Supadata summary ok: 3 requested, 3 fetched (G5wOwgKeXEI, P-FidfzJWag, ixeTGwL58WM).

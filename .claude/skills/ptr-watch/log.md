@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-24 (nightly, ~14:10 UTC) — NEW live "Class Tuning Incoming - October 27" logged; ledger checkedAt only; 1 feed entry
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383544, 10-24 09:00), news index and blue tracker swept. NEW: Linxy "Class Tuning Incoming - October 27", us.forums topic 2390748 post 1 (created 2026-10-23T22:52:38Z, v1; post 2 is a post_type 3 moderation event), Wowhead mirror news=383568 matches line for line. Logged as kind build / realm live, dated 2026-10-23, no `patch` (displayed live patch is still 12.1 while livePatch is null). Seven PvE lines, one per spec: Feral +5%, Resto Druid (Verdancy +60%, Regrowth +10%, Improved Swiftmend 40% was 30%), MM (Trick Shots 85% was 75%, Explosive Shot +10%, Volley +10%), Fire +5%, Subtlety (all ability damage -8%, Trickster Fazed 5% was 7%; nested under Subtlety), Affliction (UA +20%), Destruction (Rain of Fire +20%). classifyHighlight: six buffs, Subtlety nerf. PvP section not distilled. Set-bonus keywords: 0 hits, no tierSet change. Re-read the post's version next runs until it ships 10-27; amend in place if it moves.
+- Unconfigured topic 2382684 (12.1.5 hotfix compilation) post 1 now v12: Oct 23 section has Classes lines (Enhancement Surging Elements Cooldown Manager display fix; Warlock summons / Diabolic Occuli out-of-combat targeting fix), no throughput tuning; flagged for the owner with the Oct 14 Druid fixes, not logged. news=383570 is its Wowhead mirror.
+- 12.1.7 PTR thread 2383391: posts 1 and 4 only, unchanged. 12.1 thread 2317811 404. No 12.2 PTR.
+
 ## 2026-10-23 (nightly, ~15:40 UTC) — no class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
