@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-25 (nightly, ~14:40 UTC) — SimC new build 24 merged; Murlok 40 updated; WCL raid partial, M+ success
+
+- Murlok (collector): 40 rows, source date 2026-10-25, all 40 rows updated. Mythicstats (collector): period 1086 again, 39 rows, 0 changed, Devastation still retired.
+- SimC MID2_Raid.txt: new build 12.1.5.70575 (hotfix 2026-10-24, HEAD 12aa5dc041, was 3af1a7573c); 24 DPS specs merged at asOf 2026-10-24, 23 moved, max 0.11%.
+- Bloodmallet: 24/27 charts, MID2, all dated 2026-10-21, identical to stored, nothing merged (Balance/Aug/Dev error 3/3).
+- WoWMeta: snapshotDate 2026-09-15, rankings Last-Modified 20 Oct, 40/40 identical, nothing merged.
+- WCL (receipt 14:32Z): raid partial 295 rows (partition 2 "12.1.5" supersededBy, held on 1), M+ success 320 rows. Archon numbers walled.
+
 ## 2026-10-24 (nightly, ~14:10 UTC)
 
 - Murlok (collector): 40 rows, source date 10-24, 38 values changed. Mythicstats (collector): period 1086 again, 39 rows, 0 changed, Devastation still retired.

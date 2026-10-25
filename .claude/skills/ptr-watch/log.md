@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-25 (nightly, ~14:40 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383562 Winter Veil 12.1.7, 10-25 09:00), news index (same top) and blue tracker swept. New since yesterday: 383562 and 383566 (12.1.7 PTR datamined XP potions), neither tuning. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1 (post 2 is a post_type 3 moderation event), so the 10-23 entry stands unamended; re-read until it ships 10-27. Unconfigured 12.1.5 hotfix compilation 2382684 still post 1 v12. 12.1.7 PTR thread 2383391 posts 1 (v2) and 4 unchanged, PTR material, not logged. No 12.2 PTR. 0 feed entries.
+
 ## 2026-10-24 (nightly, ~14:10 UTC) — NEW live "Class Tuning Incoming - October 27" logged; ledger checkedAt only; 1 feed entry
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

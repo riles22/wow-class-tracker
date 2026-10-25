@@ -24,6 +24,16 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-25 (nightly, ~14:40 UTC) — 4 queued transcripts distilled: 21 takes, 13 superseded; queue 4 -> 2
+
+- 44/44 feeds HTTP 200. Supadata summary verdict ok, 4 requested / 4 fetched (61 counted requests in the 30-day window).
+- YoDaTV _2A45veCt-4 (Bear vs BDK redo, 10-23): Blood M+ buff, Guardian M+ mixed. Same-dated as his 10-23 tier-list takes, so nothing superseded.
+- LBNinja7 JmnjFUK1_cs (healer balance, 10-24): raid (WCL final three Mythic bosses) Pres buff, Holy Priest buff, Resto Druid buff, Mistweaver mixed, Resto Shaman nerf, Holy Paladin nerf; M+ (leaderboard top 100-500) Holy Paladin buff, Resto Shaman buff, Holy Priest buff, Disc mixed, Resto Druid nerf, Mistweaver mixed. Disc raid not distilled (no spec read). Superseded his six 09-18 M+ takes, his 09-18 Holy Priest and Resto Shaman raid takes and both 10-02 Mistweaver raid takes.
+- Dalaran Gaming ZlqJuSOXVPc (Oct 27 tuning, 10-24): Feral buff, Resto Druid M+ buff, MM buff, Fire buff, Subtlety nerf. PvP section (Resto Shaman HST, Holy Paladin, Preservation, Frost, MM PvP lines) and the out-of-scope Warlock segment not distilled. Superseded his 10-04 Sub (both), 10-05 MM 12.1.5 preview (both) and 08-22 Resto Druid M+ takes.
+- Kesslive AznS7nxp3Z4 (why people don't play Evoker, 10-23): Devastation and Augmentation M+ nerf (bottom of 99th-percentile damage; Dev's reverse-execute mastery in keys). The rest is population/design discussion, not distilled.
+- Queued 2 (keyword filter): Shadarek AlIT9jruzMY "Which Demon Hunter spec is Best for Mythic+?", izen YUpQ1W71a9Y "First Specs Tuning of 12.1.5". Left unseen: Shadarek XaobqfpJ8Ro and YoDaTV EnLSAMRqN1k (Subtlety nerf takes, outside their registered scope), key PoVs, streams, WoW Forever and PvP uploads.
+- 0 metaNotes, 0 prediction panels (no tier list in any of the four).
+
 ## 2026-10-24 (local scheduled, after today's nightly) — 2 of 6 queued captions fetched, then 429; 5 takes; queue 6 → 4
 
 - No RSS re-sweep: the nightly read 44/44 feeds about 20 minutes earlier. yt-dlp (android client, 2026.07.04, json3, `--sleep-requests` 1.5 then 3) fetched Kalamazi GDCit6vtR1c and Musguete DCJenKX1uXA, then drew HTTP 429 on the caption download for YoDaTV _2A45veCt-4. One retry without the android client (sleep-requests 15) also drew 429, so the sweep stopped there. _2A45veCt-4, JmnjFUK1_cs (LBNinja7), ZlqJuSOXVPc (Dalaran Gaming) and AznS7nxp3Z4 (Kesslive) stay queued.

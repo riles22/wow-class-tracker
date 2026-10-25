@@ -6162,7 +6162,7 @@
       "patchContext": "Season 2 live — reaction to the announced August 25 tuning pass (posted 2026-08-22), week one of the season",
       "url": "https://youtu.be/3E_EY7ULmkw?t=128",
       "claim": "Reading the announced August 25 tuning pass: he relays Blizzard's own framing that Restoration 'has not really been feeling that great' in five-man content and takes the pass as a real dungeon-healing buff — the tier-set Genesis duration bonus going from 4 to 8 seconds, Rejuvenation and Germination healing 15% more ('a lot of raw healing'), and Wild Growth 10% more. He flags the trims riding along — Nature's Bounty replicating 10% of Regrowth healing instead of 20, Everloom healing five targets instead of six but for 48% of Lifebloom's final heal instead of 40 — and still lands on slightly better output overall.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -7512,7 +7512,7 @@
       "superseded": true
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "LBNinja7",
@@ -7524,7 +7524,7 @@
       "claim": "Holy Paladin is the spec his whole M+ dataset is built around: 354 of the top 500 healers on the leaderboard are Holy Paladin, and he attributes that stranglehold to the spec rather than to hype alone — excellent spot heals, great five-man healing, powerful cooldowns and great utility make it, in his words, the perfect healer for this environment this season. Asked which spec gives the best chance of grinding into the top 500, his answer is Holy Paladin."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "LBNinja7",
@@ -7536,7 +7536,7 @@
       "claim": "Restoration Shaman is the only healer he says can compete with Holy Paladin on representation in the top 100, sitting at a little under a third of the Holy Paladin count. He calls it a very safe pick and lists the reasons: it still has a kick in an expansion where healer interrupts are scarce, strong CC and utility, and it brings Bloodlust for compositions whose tank does not. He notes physical push compositions are opting for it specifically."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Holy",
       "creator": "LBNinja7",
@@ -7548,7 +7548,7 @@
       "claim": "Holy Priest is his breakout surprise of the season in keys: nobody expected any Holy Priest in the top 100 and there is one, and it keeps climbing where the other non-meta healers stall — 20 Holy Priests in the top 500 against 13 Mistweavers, despite Mistweaver starting ahead with five in the top 100. He frames the reason as its mana, saying it is a strange world where the infinite-mana Holy Priest gets it done better than Discipline. Later he explicitly hopes any raid correction does not break its chance of finally being part of the M+ meta."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Discipline",
       "creator": "LBNinja7",
@@ -7560,7 +7560,7 @@
       "claim": "Discipline Priest is his clearest negative M+ read. It is not represented at all through the top 400 — not a single player pushing on it — and only one appears in the top 500, which he calls shocking but logical: why play it when the better alternative exists. Set against its player base the conversion rate is among the lowest of the roster, so in his read anyone wanting to push the top 500 on Discipline has a very small chance."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "LBNinja7",
@@ -7572,7 +7572,7 @@
       "claim": "Restoration Druid sits with Discipline Priest at the bottom of his conversion table: the first one only appears around the top 300 and there are two in the top 500. He gives the same verdict for both — despite so few people playing them, the conversion of players into the top 500 is very low, so pushing high keys on Restoration Druid is, on this data, a very small chance."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Monk",
       "spec": "Mistweaver",
       "creator": "LBNinja7",
@@ -7596,7 +7596,7 @@
       "claim": "Mistweaver is the bottom of the raid HPS chart and he calls the size of the gap concerning. He argues a spec like Mistweaver normally has die-hard outliers stretching its maximum well above its median, and that this season it does not — very little skill expression showing in the spread. His own parse is his example: against a Holy Priest in the same raid he is 70k HPS behind, about a quarter of his own HPS, for a 12% worse parse. He says he has not seen a healer gap this big since he started playing in Shadowlands, and names Mistweaver first among the four healers whose raid floor he wants pushed up."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Priest",
       "spec": "Holy",
       "creator": "LBNinja7",
@@ -7608,7 +7608,7 @@
       "claim": "Holy Priest is the top of the raid chart on every measure he reads off it — significantly higher average HPS, a significantly higher maximum, and a significantly higher minimum, so its whole floor-to-ceiling band sits above the field. He treats it as the spec the rest of the roster is measured against, and the tuning question he puts to viewers is how Blizzard could bring its raid performance down without costing it the M+ standing it has only just earned."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "LBNinja7",
@@ -8432,7 +8432,7 @@
       "patchContext": "Season 2 live — raid outlook. \"The WORST Healer Spells in the GAME | Midnight S2\" (published 2026-10-02), an opinion ranking of healer spells rather than a tier list; distilled only where it makes a spec-level claim. Supersedes his 2026-09-18 raid read of Mistweaver. The spell-design complaints he makes about Resto Shaman's Healing Wave are tied to one dungeon boss and are deliberately not distilled as a spec read.",
       "url": "https://youtu.be/16WZvRFYF3s?t=711",
       "claim": "LBNinja7 says Mistweaver is suffering for Vivify's tuning in raid: with a build built around keeping as many Renewing Mists out as possible and cleaving Vivify onto 10 to 20 people a cast, he says a hundred Vivify casts over a raid fight still would not out-heal a Holy Priest's single-target Flash Heal, and he calls Vivify's spot the worst he has seen it, even after the buffs it has had. He adds that Revival is abysmal in raid — laughably low healing for a major raid cooldown next to Tranquility or Rewind — while conceding it is solid in Mythic+, which is why he keeps it out of his bottom five. He also calls most of Mistweaver's tuning outside its core rotation and Ancient Teachings bad.",
-      "superseded": false
+      "superseded": true
     },
     {
       "superseded": false,
@@ -8576,7 +8576,7 @@
       "patchContext": "Season 2 live — his walkthrough of the October 6 weekly-reset class tuning (\"Unholy DK NERFED, Huge Class Buffs & PvP Rework Next Reset!\", published 2026-10-04), PvE section. The video's later half is PvP talent tuning, which is out of scope for this PvE tracker and is not distilled. Supersedes his 2026-09-26 whole-spec Subtlety read.",
       "claim": "He reads the October 6 Trickster package as decent buffs across the board — Fazed raised from 5% to 7% and stackable twice under Cloud Cover for roughly 14% inside Shadow Blades, Unseen Blade physical damage +15% with Disorienting Strikes resetting it, and the Coup de Grace capstone +10% — and says it could make Trickster a more comfortable or more viable pick than the Deathstalker players feel forced into. He is explicit about the limit: he cannot tell yet whether the numbers are good enough to let Subtlety play Trickster comfortably in dungeons and raids.",
       "url": "https://youtu.be/65gAEPrNBlU?t=300",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -8612,7 +8612,7 @@
       "patchContext": "12.1.5 PTR preview — NOT LIVE. His review of the 12.1.5 PTR class-fix list (\"WoW 12.1.5 PTR: New Rogue Animations & Class Fixes\", published 2026-10-05), read off the official blue post about two weeks before the patch ships. The Augmentation Evoker, Preservation Evoker and Protection Warrior sections of the same video are outside the classes he is registered for and are deliberately not attributed to him, and the Assassination and Subtlety Rogue sections are animation-only — he says so himself — so they yield no take. This preview take stays live beside his Season 2 live reads: before the patch ships it is a different subject.",
       "claim": "He welcomes the Explosive Shot fix as a control improvement rather than a damage one: the ability would auto-select and fire at a nearby target instead of the one you had selected, which he says could pull enemies you never meant to tag. On the Dark Ranger side he is openly unconvinced — the Umbral Breach fix (Bleak Powder failing to generate Trick Shots when it hit two targets) might make the hero talent a little stronger, but he does not expect it to make Dark Ranger viable, and he says Hunters are very limited in the hero-talent options they effectively have access to.",
       "url": "https://youtu.be/sCij1D_cQoI?t=277",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -8756,7 +8756,7 @@
       "patchContext": "Season 2 live — raid outlook, reacting to announced live tuning. \"Mistweaver Healing Buffed AGAIN 10/6\" (YouTube Short, published 2026-10-02, the evening Blizzard posted \"Incoming Class Tuning - October 6\"), on the Invigorating Mists +15% and Enveloping Mist +15% changes. Same-dated as his 2026-10-02 \"WORST Healer Spells\" raid take, so neither supersedes the other.",
       "url": "https://youtu.be/nCgFxapXjs8?t=53",
       "claim": "LBNinja7 calls the October 6 Mistweaver changes excellent buffs aimed at raid healing: Invigorating Mists, which carries Vivify's cleave onto every Renewing Mist, adds up to a lot of healing over a raid, and the Enveloping Mist increase gives the HoT more punch and helps Mythic+ a little too. He says Mistweaver was already climbing toward the middle of the healer pack and these buffs should bring it more in line with the other healers.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -8960,6 +8960,258 @@
       "patchContext": "Season 2 live (12.1.5) — \"Are Sub Rogues Still Viable? Nerf Analysis\", published 2026-10-23: a 4-minute reaction to the Subtlety nerf in the class tuning announced for the October 27 reset (all ability damage -8%, plus a further Trickster reduction), checked by knocking 10% off top Subtlety players' current damage in logged keys. It supersedes his 2026-10-21 Trickster guide read, which expected no meaningful nerf. He says he still has to test the change in game. No tier letters or rank list, so there is no predictions panel.",
       "claim": "He says the nerf sounds large but is not that bad: taking 10% off the damage of top Subtlety players in current logs still leaves them at the top of the meters, in one log still almost 100k ahead of a Shaman. Netting it against the earlier 14% buff he calls the result about a 6% gain overall, and expects Subtlety to stay the top damage spec. He still expects Trickster to outperform Deathstalker, which he calls harder to min-max.",
       "url": "https://youtu.be/DCJenKX1uXA?t=81",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "YoDaTV",
+      "date": "2026-10-23",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Revisiting Bear vs BDK for Season 2 Midnight M+\" (published 2026-10-23), a redo of his week-old Bear-versus-Blood comparison, read off rank-one 100-parse logs in Den of Nalorak and Voidscar Arena (overall damage with Mark of the Wild counted, priority-target damage, damage taken) and the current key leaderboard. Same-dated as his 2026-10-23 M+ tier-list takes, so neither supersedes the other.",
+      "claim": "He concludes Blood is still the stronger Mythic+ tank than Guardian: overall damage is close once Mark of the Wild is counted, but on priority targets Blood out-damages the Bear by over 50% in both logs, and survivability is not an issue, with Blood players timing the same top key levels as the best Bears.",
+      "url": "https://youtu.be/_2A45veCt-4?t=463",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "YoDaTV",
+      "date": "2026-10-23",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Revisiting Bear vs BDK for Season 2 Midnight M+\" (published 2026-10-23), a redo of his week-old Bear-versus-Blood comparison, read off rank-one 100-parse logs in Den of Nalorak and Voidscar Arena (overall damage with Mark of the Wild counted, priority-target damage, damage taken) and the current key leaderboard. Same-dated as his 2026-10-23 M+ tier-list takes, so neither supersedes the other.",
+      "claim": "He finds Guardian roughly even with Blood on overall damage once Mark of the Wild, its new trinket and Subtlety Rogue support are counted, and calls Den of Nalorak, its best dungeon, a wash because Bears can soothe and pull bigger. On priority targets it trails Blood by about 50%, and he says its survivability at the top keys remains to be seen; he allows it may be easier to play.",
+      "url": "https://youtu.be/_2A45veCt-4?t=371",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. Raid outlook: read off the Warcraft Logs Mythic HPS charts for the final three bosses, which he cautions show throughput only.",
+      "claim": "He calls Preservation the biggest raid standout of the tier: it sits with Restoration Druid at the top of the throughput charts and is the healer that keeps surviving to the final boss while the other specs thin out, so players who picked it at the start of the tier \"won out\" in raid healing.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=431",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. Raid outlook: read off the Warcraft Logs Mythic HPS charts for the final three bosses, which he cautions show throughput only.",
+      "claim": "He calls Holy Priest a shining star in raid and a close second to Preservation, with a large share of parses on the late bosses and guilds stacking several of them.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=155",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. Raid outlook: read off the Warcraft Logs Mythic HPS charts for the final three bosses, which he cautions show throughput only.",
+      "claim": "He places Restoration Druid with Preservation as the two biggest raw-throughput healers on the late bosses, the top dog on throughput for much of the season, though its parse count halves again on the final boss.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=92",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. Raid outlook: read off the Warcraft Logs Mythic HPS charts for the final three bosses, which he cautions show throughput only.",
+      "claim": "He puts Mistweaver in the middle of the raid pack with very few kills on the final bosses, but argues the low count is mostly a player-base effect rather than power: long-time Monks left the spec before the buffs arrived. He adds that one player accounts for about a fifth of the Monk parses, so the average may be lower than the chart shows. Supersedes his two 2026-10-02 raid Mistweaver takes.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=307",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. Raid outlook: read off the Warcraft Logs Mythic HPS charts for the final three bosses, which he cautions show throughput only.",
+      "claim": "He puts Restoration Shaman at the bottom of the raid HPS charts, its Chain Heal not performing as it should, and doubts Blizzard can lift its raid healing without over-buffing its Mythic+ game; he notes it brings more to a raid than HPS shows.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=339",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "nerf",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. Raid outlook: read off the Warcraft Logs Mythic HPS charts for the final three bosses, which he cautions show throughput only.",
+      "claim": "He calls Holy Paladin's raid healing a little low, toward the bottom with Restoration Shaman, and says 20-man healing is the one thing it lacks this season, while noting it brings more to a raid than HPS shows.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=339",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. M+ outlook: read off the top 100-500 of the Mythic+ leaderboard.",
+      "claim": "He says Holy Paladin is still dominant in Mythic+, one of the two clear top healers with Restoration Shaman: big single-target and five-man throughput, which makes it the \"triage god\" of the season, with no reason for Blizzard to bring it down.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=918",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. M+ outlook: read off the top 100-500 of the Mythic+ leaderboard.",
+      "claim": "He names Restoration Shaman one of the two clear top Mythic+ healers: its weak single-target spot healing matters little in organised push keys, so the rest of its kit and utility shine, and it is what makes melee-heavy comps work.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=768",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. M+ outlook: read off the top 100-500 of the Mythic+ leaderboard.",
+      "claim": "He reads Holy Priest's showing as massive even with only a few players in the top 500: one reaches the top 100, and its throughput is near unlimited now that mana is barely a limiter.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=617",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Discipline",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. M+ outlook: read off the top 100-500 of the Mythic+ leaderboard.",
+      "claim": "He notes the top-ranked Priest on the Mythic+ leaderboard is now a Discipline Priest after the big healer tuning pass, so the potential is there, but few others appear in the top 500 and he still counts Discipline among the two bottom healers there: the buff came after players had left.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=677",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. M+ outlook: read off the top 100-500 of the Mythic+ leaderboard.",
+      "claim": "He says Restoration Druid only starts to appear around the top 300-400 of the Mythic+ leaderboard and is, with Discipline Priest, one of the two bottom healers there.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=737",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "LBNinja7",
+      "date": "2026-10-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Has Healer Balance Improved?? Where Are They NOW?\" (published 2026-10-24), his past-midseason check on where the healers landed after the tuning settled. M+ outlook: read off the top 100-500 of the Mythic+ leaderboard.",
+      "claim": "He sees the top Mistweaver push players back near the top of the Mythic+ leaderboard, then a gap below them, because the spec was buffed with a blanket increase rather than in a Mythic+-specific way.",
+      "url": "https://youtu.be/JmnjFUK1_cs?t=586",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — his walkthrough of the class tuning announced for the October 27 weekly reset (\"That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning\", published 2026-10-24), PvE section. The later PvP section (including the Resto Shaman totem, Holy Paladin, Preservation, Frost and Marksmanship PvP lines) is out of scope for this PvE tracker and is not distilled, and the Warlock segment is outside the classes he is registered for.",
+      "claim": "He reads Feral's 5% PvE damage increase as simple and not transformative, just more damage to help it stay competitive for the rest of the season.",
+      "url": "https://youtu.be/ZlqJuSOXVPc?t=60",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — his walkthrough of the class tuning announced for the October 27 weekly reset (\"That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning\", published 2026-10-24), PvE section. The later PvP section (including the Resto Shaman totem, Holy Paladin, Preservation, Frost and Marksmanship PvP lines) is out of scope for this PvE tracker and is not distilled, and the Warlock segment is outside the classes he is registered for.",
+      "claim": "He welcomes the Verdancy, Regrowth and Improved Swiftmend buffs as modest but useful, expecting them to help Restoration Druid with burst damage in dungeons, where he says it falls behind. Supersedes his 2026-08-22 Mythic+ read.",
+      "url": "https://youtu.be/ZlqJuSOXVPc?t=73",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — his walkthrough of the class tuning announced for the October 27 weekly reset (\"That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning\", published 2026-10-24), PvE section. The later PvP section (including the Resto Shaman totem, Holy Paladin, Preservation, Frost and Marksmanship PvP lines) is out of scope for this PvE tracker and is not distilled, and the Warlock segment is outside the classes he is registered for.",
+      "claim": "He says the Trick Shots, Explosive Shot and Volley buffs target Marksmanship's weak AoE and should make it a little better on raw output. Supersedes his 2026-10-05 12.1.5 PTR preview read, now that the patch is live.",
+      "url": "https://youtu.be/ZlqJuSOXVPc?t=90",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-24",
+      "sentiment": "buff",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — his walkthrough of the class tuning announced for the October 27 weekly reset (\"That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning\", published 2026-10-24), PvE section. The later PvP section (including the Resto Shaman totem, Holy Paladin, Preservation, Frost and Marksmanship PvP lines) is out of scope for this PvE tracker and is not distilled, and the Warlock segment is outside the classes he is registered for.",
+      "claim": "He calls Fire's 5% damage buff a pure output increase that changes nothing about how it plays, and says it is hard to tell whether it is enough to make Fire competitive with the now very popular Arcane.",
+      "url": "https://youtu.be/ZlqJuSOXVPc?t=136",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-24",
+      "sentiment": "nerf",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — his walkthrough of the class tuning announced for the October 27 weekly reset (\"That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning\", published 2026-10-24), PvE section. The later PvP section (including the Resto Shaman totem, Holy Paladin, Preservation, Frost and Marksmanship PvP lines) is out of scope for this PvE tracker and is not distilled, and the Warlock segment is outside the classes he is registered for.",
+      "claim": "He calls the 8% ability-damage cut and the Trickster debuff reduction (7% to 5%) an expected and notable nerf after Subtlety became the hardest-hitting spec of 12.1.5: top-end burst drops quite significantly, but he expects it to stay competitive and Trickster to remain the build in dungeons and raids. Supersedes his 2026-10-04 read.",
+      "url": "https://youtu.be/ZlqJuSOXVPc?t=182",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Devastation",
+      "creator": "Kesslive",
+      "date": "2026-10-23",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Why Don't People Play Evoker Specs?\" (published 2026-10-23), mostly a discussion of Evoker population and design (empowered spells, Dracthyr appearance, transmog); distilled only where he makes a performance read in his own voice. M+ outlook: he frames tuning by the 99th-percentile damage that players chase in dungeons.",
+      "claim": "He puts Devastation at the bottom of the 99th-percentile damage charts with Augmentation, and says that although it has been very good in raid for many seasons it always falls off in keys, where its reverse-execute mastery leaves it doing less damage as packs get low.",
+      "url": "https://youtu.be/AznS7nxp3Z4?t=65",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "Kesslive",
+      "date": "2026-10-23",
+      "sentiment": "nerf",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Why Don't People Play Evoker Specs?\" (published 2026-10-23), mostly a discussion of Evoker population and design (empowered spells, Dracthyr appearance, transmog); distilled only where he makes a performance read in his own voice. M+ outlook: he frames tuning by the 99th-percentile damage that players chase in dungeons.",
+      "claim": "He puts Augmentation, with Devastation, at the bottom of the 99th-percentile damage charts that players use to pick a dungeon spec.",
+      "url": "https://youtu.be/AznS7nxp3Z4?t=65",
       "superseded": false
     }
   ],

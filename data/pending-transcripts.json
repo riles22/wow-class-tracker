@@ -2,32 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "_2A45veCt-4",
-      "creator": "YoDaTV",
-      "title": "Revisiting Bear vs BDK for Season 2 Midnight M+",
-      "published": "2026-10-23",
-      "queuedAt": "2026-10-24"
+      "id": "AlIT9jruzMY",
+      "creator": "Shadarek",
+      "title": "Which Demon Hunter spec is Best for Mythic+? | Midnight Season 2",
+      "published": "2026-10-25",
+      "queuedAt": "2026-10-25"
     },
     {
-      "id": "JmnjFUK1_cs",
-      "creator": "LBNinja7",
-      "title": "Has Healer Balance Improved?? Where Are They NOW?",
+      "id": "YUpQ1W71a9Y",
+      "creator": "izen (Izenhart)",
+      "title": "First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed",
       "published": "2026-10-24",
-      "queuedAt": "2026-10-24"
-    },
-    {
-      "id": "ZlqJuSOXVPc",
-      "creator": "Dalaran Gaming",
-      "title": "That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning",
-      "published": "2026-10-24",
-      "queuedAt": "2026-10-24"
-    },
-    {
-      "id": "AznS7nxp3Z4",
-      "creator": "Kesslive",
-      "title": "Why Don't People Play Evoker Specs?",
-      "published": "2026-10-23",
-      "queuedAt": "2026-10-24"
+      "queuedAt": "2026-10-25"
     }
   ],
   "skipped": [
