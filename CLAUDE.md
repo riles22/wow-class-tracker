@@ -14,9 +14,7 @@ maintaining separate procedures. `npm run instructions:check` detects adapter
 drift before both test commands; regenerate after discovery metadata changes with
 `npm run instructions:sync`. Local credentials and scratch remain ignored.
 
-**12.1.5 is live (since 2099-01-01 — FIXTURE date staged before Blizzard announced the
-release date; the launch-morning edit replaces it with the US release date, together with
-`PHASES.livePatch.since`):** 12.1.5 is a mid-season patch inside Season 2, not a new
+**12.1.5 is live (since 2026-10-13):** 12.1.5 is a mid-season patch inside Season 2, not a new
 season or forecast cycle. The chip reads 12.1.5 through `PHASES.livePatch`; `PHASES.ptr`
 stays null, and `liveSeason`, `liveLabel`, `SNAPSHOT_PHASE`, `LIVE_LEADERBOARDS`, the live
 S2 rankings and the frozen 12.1 forecast keep their existing inputs; archived PTR
@@ -390,8 +388,7 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   comment is invisible to whoever notices 12.1 going live (2026-07-24 audit, X3).
 - **`PHASES.livePatch` (`normalize.mjs`) — the in-season patch label,
   `{ label: "12.1.5", since }` since the 12.1.5 launch commit** (added 2026-09-25, `null`
-  until then; on the pre-staged launch branch `since` is the FIXTURE `"2099-01-01"`, which
-  the launch-morning edit replaces with the release date). 12.1.5 is a mid-season patch inside Season 2,
+  until then). 12.1.5 is a mid-season patch inside Season 2,
   not a new season: `liveSeason`, `liveLabel` "12.1", `liveSince`, `SNAPSHOT_PHASE`,
   `LIVE_LEADERBOARDS.label` and the frozen 12.1 forecast do not move. **For the label, the
   owner launch commit made three edits** (it carried more than the label — the ptr-preview

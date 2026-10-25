@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { build } from "../src/build.mjs";
-import { buildPayload } from "../src/render.mjs";
+import { buildPayload, buildRealmOf, comparePatchVersions } from "../src/render.mjs";
 import { loadData } from "../src/validate.mjs";
 import { leaderboardPartitions } from "../src/wcl-live.mjs";
 
@@ -105,9 +105,10 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
      Built from the real object, "dormant" and "launched" become the same thing once the
      launch commit sets livePatch (nothing would move, 2026-09-25 review), and a later PTR
      cycle's ptr would outrank the fixture. Forced, this proves the same thing before the
-     launch commit, after it and during a PTR cycle, so this test needs no edit at launch
-     (the launch commit's deliberate edits are listed beside livePatch in CLAUDE.md). */
-  const { PHASES } = await import("../src/normalize.mjs");
+     launch commit, after it and during a PTR cycle, so its assertions needed no edit at
+     launch (the launch commit's deliberate edits are listed beside livePatch in CLAUDE.md).
+     Its copy of the feed did: see the filter before the dormant build below. */
+  const { PHASES, displayedLivePatch } = await import("../src/normalize.mjs");
   const { eraTokensFor } = await import("../src/build.mjs");
   const livePatch = { label: "12.1.5", since: "2026-12-01" };
   const between = { ...PHASES, ptr: null, livePatch: null };
@@ -145,13 +146,34 @@ test("a mid-season livePatch moves the chip, its phone form and the Live: stamp,
     __ERA_SHORT__: v => `<span class="pc-short">${v}</span>`,
     __ERA_TRACKED_STAMP__: v => `<span>${v}</span>`,
   };
-  const { mkdtemp, cp, rm } = await import("node:fs/promises");
+  const { mkdtemp, cp, rm, writeFile } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
   const root = await mkdtemp(path.join(tmpdir(), "tracker-livepatch-"));
   const saved = PHASES.livePatch;
   try {
     await cp(path.join(ROOT, "data"), path.join(root, "data"), { recursive: true });
     await cp(path.join(ROOT, "src"), path.join(root, "src"), { recursive: true });
+    /* Since the 12.1.5 launch the real feed holds entries naming 12.1.5 (its patch notes),
+       and validation refuses those with livePatch null, because the displayed live patch
+       then falls back to liveLabel. Found when the launch commit logged the notes: the
+       dormant build threw before comparing anything. Both builds read this copy, so make it
+       valid in both states and the comparison still isolates livePatch. Patch notes and PTR
+       entries must carry `patch`, so they leave the copy; on a live entry the field is
+       optional, so only the field goes, which keeps any official-notes reference to the
+       entry intact. An open cycle's PTR entries are bounded by the cycle's patch, not the
+       live one, so they stay. The smoke test above builds the whole feed. */
+    const feedPath = path.join(root, "data", "ptr-builds.json");
+    const feed = JSON.parse(await readFile(feedPath, "utf8"));
+    const dormantCeiling = displayedLivePatch({ ...PHASES, livePatch: null });
+    feed.builds = feed.builds.flatMap(b => {
+      if (b.patch == null || comparePatchVersions(b.patch, dormantCeiling) <= 0) return [b];
+      const ptrLane = b.kind !== "patch-notes" && buildRealmOf(b) === "ptr";
+      if (ptrLane && PHASES.ptr) return [b];
+      if (ptrLane || b.kind === "patch-notes") return [];
+      const { patch, ...rest } = b;
+      return [rest];
+    });
+    await writeFile(feedPath, JSON.stringify(feed, null, 2) + "\n");
     PHASES.livePatch = null;
     const before = await readFile((await build(root)).outPath, "utf8");
     PHASES.livePatch = livePatch;
