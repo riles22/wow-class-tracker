@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-25 (local scheduled, after today's nightly) — caption 429 on the first fetch; 0 takes; queue 2 → 2
+
+- No RSS re-sweep: the nightly read 44/44 feeds about an hour earlier. yt-dlp (2026.07.04, android client, json3, `--sleep-requests` 3) drew HTTP 429 on the caption download for izen YUpQ1W71a9Y; one retry without the android client (sleep-requests 15) also drew 429, so the lane stopped there. YUpQ1W71a9Y and Shadarek AlIT9jruzMY stay queued. 0 takes, 0 metaNotes, no predictions panels.
+
 ## 2026-10-25 (nightly, ~14:40 UTC) — 4 queued transcripts distilled: 21 takes, 13 superseded; queue 4 -> 2
 
 - 44/44 feeds HTTP 200. Supadata summary verdict ok, 4 requested / 4 fetched (61 counted requests in the 30-day window).
