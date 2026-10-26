@@ -121,6 +121,7 @@ jobs:
             if [ "$rc" = 0 ]; then break; fi
             case "$rc" in 124|137) why="ran past 3 minutes";; *) why="failed with exit $rc";; esac
             echo "::warning::Attempt $attempt of 3 to download the $PLAYWRIGHT_BROWSER system packages $why."
+            sleep 1; pgrep -a apt-get || echo "TEMP: no apt-get left after attempt $attempt"
             if [ "$attempt" = 3 ]; then
               echo "::error::Could not download the $PLAYWRIGHT_BROWSER system packages in three attempts."
               exit 1
