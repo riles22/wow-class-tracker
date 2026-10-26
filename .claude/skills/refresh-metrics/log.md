@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (nightly re-run, ~15:12 UTC) — nothing new upstream since the earlier run
+
+- Murlok 40 + Mythicstats 37 applied from metrics-fetch/updates.json, identical to HEAD. WoWMeta snapshotDate 2026-09-15, 40/40 identical. SimC MID2_Raid.txt HEAD 3ca15dedd4 (same run), 24/24 identical. Bloodmallet 24 charts MID2 dated 10-21, identical; Balance/Augmentation/Devastation error 3/3. Archon walled (403). WCL: collector raid partial 295 rows (partition 2 "12.1.5" supersededBy, pinned 1), M+ success 320 rows.
+
 ## 2026-10-26 (nightly, ~13:50 UTC) — SimC new run 24 merged; Murlok 40, Mythicstats 32 updated; WCL raid partial, M+ success
 
 - Murlok (collector): 40 rows, source date 2026-10-26. Mythicstats (collector): period 1086 again with new values, 37 rows, 32 changed; Marksmanship Hunter and Fire Mage not printed and retired to blank (owner rule), Devastation still retired.
