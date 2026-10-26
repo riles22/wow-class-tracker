@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-10-26T16:59:16.951Z",
+      "checkedAt": "2026-10-26T19:31:06.161Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -2646,6 +2646,97 @@
               "resolution": {
                 "disposition": "irrelevant",
                 "reason": "Reviewed 2026-09-05 against official hotfix topic 2336376, post 1, version 31. Coverage exists in the existing hotfix entry dated 2026-08-19 for this section's scoped changes (Restoration Shaman); excluded from reapplication to avoid duplicate feed/outlook inputs. Future section edits still require review."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "live-hotfixes-1215": {
+      "topicId": 2382684,
+      "patch": "12.1.5",
+      "era": "live",
+      "checkedAt": "2026-10-26T19:31:06.161Z",
+      "removedSections": [],
+      "posts": [
+        {
+          "id": 30477527,
+          "postNumber": 1,
+          "version": 12,
+          "updatedAt": "2026-10-24T00:19:11.392Z",
+          "bodySha256": "ad8ad1d9fc88d4fd8536ef06f5ba86ae32823fe4bae7edf88242118ec5f447c7",
+          "sections": [
+            {
+              "id": "2382684:1:2026-10-23:classes:shaman:1",
+              "date": "2026-10-23",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Enhancement"
+              ],
+              "sha256": "738a4e0f072227f5211311742723f709d6fa28dae7877921901d11f6edf221da",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-26 (local run) against official hotfix topic 2382684, post 1, version 12 (last edited 2026-10-24T00:19:11.392Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383570. Enhancement spec heading: a Cooldown Manager display fix for Surging Elements with no tuning value, logged as one spec line in the new 2026-10-23 hotfix feed entry. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-23",
+                    "highlight": "Enhancement Shaman — Resolved an issue causing Surging Elements to not appear on the Cooldown Manager."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-23:classes:warlock:1",
+              "date": "2026-10-23",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Demonology",
+                "Warlock|Destruction"
+              ],
+              "sha256": "9bc3d16b8de038025626734953772d122829f4b4b37bc84de2aeb878ce4d7088",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-26 (local run) against official hotfix topic 2382684, post 1, version 12 (last edited 2026-10-24T00:19:11.392Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383570. Bare Warlock heading with no spec block: one out-of-combat targeting fix for warlock summons and Diabolic Occuli with no tuning value, logged class-wide in the new 2026-10-23 hotfix feed entry (its text names Affliction, Demonology and Diabolist summons, but a line under a bare class heading stays class-wide); class-wide attribution covers all three Warlock specs by build membership. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-23",
+                    "highlight": "Warlock (class-wide) — Fixed issues that caused some warlock summons and Diabolic Occuli to sometimes incorrectly target enemies outside of combat. This corrects summons from Affliction’s Shadows of Nath’reza, Demonology’s Dominion of Argus, as well as Diabolist summons."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-21:player-versus-player:priest:1",
+              "date": "2026-10-21",
+              "category": "Player versus Player",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "ce4b6cb30849382a8efb8c1780efb3414a40b6ba63f1742e31df02410bb476f7",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-26 (local run) against official hotfix topic 2382684, post 1, version 12 (last edited 2026-10-24T00:19:11.392Z), read from the deterministic receipt text with its list nesting intact. This is the post's October 21 Player versus Player section: one Holy line, under the Player versus Player heading, fixing Sanctified Ground applying to allies interrupting channeled spells such as Divine Hymn. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-15:classes:druid:1",
+              "date": "2026-10-15",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Guardian",
+                "Druid|Restoration"
+              ],
+              "sha256": "a103a9b7f15bc98f67b06754e924c0c2b7585c697949aadc9003083047296a55",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-26 (local run) against official hotfix topic 2382684, post 1, version 12 (last edited 2026-10-24T00:19:11.392Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383424. Blizzard dates this block October 14; the collector files it under October 15 only because a broken bold leaves the “October 14, 2026” date line inside the last list item of the October 15 Quests block, where the date-heading reader cannot see it. Coverage exists in the new hotfix entry dated 2026-10-14 (official topic 2382684), which keeps Blizzard's date, for this section's scoped changes (Guardian Druid, Restoration Druid: four bug fixes, no tuning value); resolved irrelevant rather than applied because an applied reference must carry the section's own date, and dating the entry October 15 would misdate the fixes. No set bonus is touched. If Blizzard repairs the heading, this section is replaced by a 2026-10-14 one that applies against that entry. Future section edits still require review."
               }
             }
           ]
