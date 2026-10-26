@@ -107,6 +107,9 @@ jobs:
       # downloads run in bounded attempts, with apt in download-only mode so a kill can never
       # interrupt dpkg. Each retry keeps the files earlier attempts finished and drops the
       # Azure mirror from the image's list. The install then runs once, from apt's cache.
+      # The attempts run as root so the kill reaches apt-get. As the runner user, Playwright
+      # starts apt-get through its own sudo, and a kill from outside that sudo left apt-get
+      # running and holding apt's lock against the retry.
       - name: Install the browser's system packages (downloads bounded and retried)
         timeout-minutes: 14
         run: |
@@ -114,7 +117,7 @@ jobs:
           echo 'APT::Get::Download-Only "true";' | sudo tee "$only" > /dev/null
           for attempt in 1 2 3; do
             rc=0
-            timeout --kill-after=10s "$([ "$attempt" = 1 ] && echo 8s || echo 3m)" npx playwright install-deps "$PLAYWRIGHT_BROWSER" || rc=$?
+            sudo env "PATH=$PATH" timeout --kill-after=10s "$([ "$attempt" = 1 ] && echo 8s || echo 3m)" npx playwright install-deps "$PLAYWRIGHT_BROWSER" || rc=$?
             if [ "$rc" = 0 ]; then break; fi
             case "$rc" in 124|137) why="ran past 3 minutes";; *) why="failed with exit $rc";; esac
             echo "::warning::Attempt $attempt of 3 to download the $PLAYWRIGHT_BROWSER system packages $why."

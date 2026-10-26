@@ -378,7 +378,8 @@ gh() {
 // ci.yml's browser install. On 2026-10-26 the runner's apt mirror trickled the browsers'
 // system packages (WebKit's 107 MB took 49m46s) and nothing bounded the step. Every download
 // is now bounded and retried, and a kill can only land on a download: the attempts run apt in
-// download-only mode, and the install runs once, after them.
+// download-only mode, and the install runs once, after them. The attempts run as root, because
+// a kill from outside Playwright's own sudo left apt-get running (2026-10-26).
 const ciInstallStep = title => {
   const browserJob = job(workflow("ci"), "ui-invariants");
   const start = browserJob.indexOf(`      - name: ${title}\n`);
@@ -394,18 +395,25 @@ const BROWSER_DOWNLOAD = "Download the browser (bounded and retried)";
 
 // The step's own script under `bash -e`, with timeout, sudo and npx replaced by functions
 // that write a trace. Each npx call under timeout follows the plan: ok; slow = killed at the
-// bound (exit 124); fail = apt gave up (exit 100).
+// bound (exit 124); fail = apt gave up (exit 100). `sudo env NAME=value… command` runs the
+// command through the stubs as root and traces the names it sets.
 const runInstall = (script, plan) => {
   const stubs = `
 export PLAYWRIGHT_BROWSER=webkit
-plan=(${plan.join(" ")}) n=0 bounded=0
+plan=(${plan.join(" ")}) n=0 bounded=0 root=""
 trace="$(mktemp)"
 trap 'echo "TRACE>"; cat "$trace"; echo "<TRACE"; rm -f "$trace"' EXIT
 timeout() { local bounds=""; while [ "\${1#-}" != "$1" ]; do bounds="$bounds $1"; shift; done; echo "limit$bounds $1" >> "$trace"; shift; bounded=1 "$@"; }
-sudo() { if [ "$1" = tee ]; then echo "sudo $* <<< $(cat)" >> "$trace"; else echo "sudo $*" >> "$trace"; fi; }
+sudo() {
+  case "$1" in
+    env) shift; while [ "\${1#*=}" != "$1" ]; do echo "sudo env \${1%%=*}" >> "$trace"; shift; done; root="root " "$@";;
+    tee) echo "sudo $* <<< $(cat)" >> "$trace";;
+    *) echo "sudo $*" >> "$trace";;
+  esac
+}
 npx() {
-  if [ "$bounded" = 0 ]; then echo "unbounded npx $*" >> "$trace"; return 0; fi
-  n=$((n + 1)); local r="\${plan[n-1]:-extra}"; echo "npx $* ($r)" >> "$trace"
+  if [ "$bounded" = 0 ]; then echo "unbounded \${root}npx $*" >> "$trace"; return 0; fi
+  n=$((n + 1)); local r="\${plan[n-1]:-extra}"; echo "\${root}npx $* ($r)" >> "$trace"
   case "$r" in ok) ;; slow) return 124;; fail) return 100;; *) return 2;; esac
 }
 `;
@@ -442,8 +450,11 @@ test("ci.yml's apt downloads are bounded, retry without the Azure mirror, and le
     const r = runInstall(script, plan);
     assert.equal(r.status, 0, `${plan}: ${r.stdout}`);
     assert.equal(r.trace[0], on, `${plan}: download-only mode before the first attempt`);
-    assert.deepEqual(r.trace.filter(line => line.startsWith("npx ")),
-      plan.map(step => `npx playwright install-deps webkit (${step})`));
+    assert.deepEqual(r.trace.filter(line => /^(root )?npx /.test(line)),
+      plan.map(step => `root npx playwright install-deps webkit (${step})`),
+      `${plan}: each attempt runs as root, so the kill at the bound reaches apt-get`);
+    assert.equal(r.trace.filter(line => line === "sudo env PATH").length, plan.length,
+      `${plan}: root keeps the runner's PATH, where node and npx are`);
     assert.equal(r.trace.filter(line => line === drop).length, plan.length - 1, `${plan}: each retry drops the Azure mirror`);
     assert.deepEqual(r.trace.slice(-2), [off, install], `${plan}: dpkg runs once, after download-only mode is off`);
     assert.equal(r.stdout.match(/::warning::/g)?.length ?? 0, plan.length - 1);
@@ -472,7 +483,8 @@ test("ci.yml's browser download is bounded and retried once", t => {
   for (const plan of [["ok"], ["slow", "ok"]]) {
     const r = runInstall(script, plan);
     assert.equal(r.status, 0, `${plan}: ${r.stdout}`);
-    assert.deepEqual(r.trace.filter(line => line.startsWith("npx ")), plan.map(step => `npx playwright install webkit (${step})`));
+    assert.deepEqual(r.trace.filter(line => /^(root )?npx /.test(line)), plan.map(step => `npx playwright install webkit (${step})`),
+      `${plan}: the browser downloads as the runner user, into the runner's cache`);
   }
   const failed = runInstall(script, ["slow", "fail"]);
   assert.equal(failed.status, 1, failed.stdout);
