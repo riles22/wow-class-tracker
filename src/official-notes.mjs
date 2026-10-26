@@ -11,9 +11,17 @@ import { createHash } from "node:crypto";
    data/required-sources.json officialNotes entry leave together (validation refuses a
    ledger source this list does not name; a test pins the contract to this list). The era
    "ptr" staff-posts code path stays for the next patch's preview and is tested through an
-   injected fixture source. Live 12.1.5 hotfixes arrive in the live compilation below. */
+   injected fixture source. */
+/* Live 12.1.5 hotfixes arrive in a NEW compilation Blizzard opened on 2026-10-15 UTC (topic
+   2382684; runbook Phase C1). Its row joined with its ledger block and contract entry, the
+   same three places as above, and its `since` is the 12.1.5 launch date
+   (PHASES.livePatch.since), the floor for its applied references. The 12.1 compilation
+   stays configured: its post 1 can still be edited, and dropping the row would drop its
+   reviewed ledger history. Every compilation passes the title check, so the collector never
+   notices a newer thread by itself; adding the next one is again an owner edit. */
 export const OFFICIAL_NOTE_SOURCES = Object.freeze([
   { id: "live-hotfixes", topicId: 2336376, slug: "world-of-warcraft-midnight-hotfixes", patch: "12.1", era: "live", mode: "compilation", since: "2026-08-18" },
+  { id: "live-hotfixes-1215", topicId: 2382684, slug: "world-of-warcraft-midnight-hotfixes", patch: "12.1.5", era: "live", mode: "compilation", since: "2026-10-13" },
 ]);
 export const noteHash = value => createHash("sha256").update(typeof value === "string" ? value : JSON.stringify(value)).digest("hex");
 export const noteUrl = (source, postNumber = 1) => `https://us.forums.blizzard.com/en/wow/t/${source.slug}/${source.topicId}/${postNumber}`;

@@ -22,7 +22,9 @@ observations retain their old scope. The launch commit retired the 12.1.5 notes-
 preview (the `ptr-preview` official-notes source, topic 2344395, which ran from
 2026-09-05): live 12.1.5 notes and hotfixes are logged per ptr-watch with
 `realm: "live"`, and the official-note ledger in `data/official-notes.json` tracks the
-live hotfix compilation only. `docs/1215-launch-runbook.md` holds the launch and
+live hotfix compilations only: the 12.1 thread (topic 2336376, `live-hotfixes`) and the
+12.1.5 thread Blizzard opened on 2026-10-15 UTC (topic 2382684, `live-hotfixes-1215`,
+added after launch per runbook Phase C1). `docs/1215-launch-runbook.md` holds the launch and
 post-launch checklist, the WCL raid partition switch included. The 2026-09-05 preview
 policy this replaces, and any older paragraph about waiting for 12.2, are history.
 
@@ -1525,6 +1527,11 @@ Nobody receives that red run by email, though: GitHub mails a failure only to wh
 triggered the run and starts no `workflow_run` listener for a run github-actions[bot] began
 (observed 2026-10-06), so ci.yml, deploy.yml and nightly.yml now end with a
 `dispatched-run-alert.yml` job that comments on issue 15 when a bot-started run fails.
+That job needs a run to exist. On 2026-10-14 the nightly's dispatch for 8ddbe61 returned
+HTTP 500 and created none, and nothing alerted, so the dispatch step now confirms a run
+after each try (the run URL GitHub returns, else a ci.yml run at the pushed commit),
+dispatches up to three times, and when no run appears warns and comments on issue 15
+itself. It still never fails the publish, and it runs after a failed deploy dispatch too.
 
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC).
 **Since the September 15 isolation fix, collection, agent work, and publication use

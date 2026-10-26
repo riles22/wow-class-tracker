@@ -24,6 +24,18 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (nightly re-run, ~16:57 UTC) — nothing new upstream except the WCL re-collection
+
+- Murlok 40 rows / Mythicstats 37 rows (period 1086) applied from metrics-fetch/updates.json: 0 value changes. WCL collector re-merged leaderboard rows (31 values moved, raid partial 295 rows with partition 2 "12.1.5" superseding, M+ success 320). Bloodmallet 24/27 MID2 charts, all 2026-10-21, identical (Balance/Augmentation/Devastation error 3/3). SimC MID2_Raid.txt same build HEAD 3ca15dedd4 / Last-Modified as the earlier run. WoWMeta snapshotDate 2026-09-15, 40/40 identical. Archon walled.
+
+## 2026-10-26 (nightly re-run, ~15:50 UTC) — nothing new upstream since the earlier runs
+
+- Murlok 40 + Mythicstats 37 (period 1086) applied from metrics-fetch/updates.json, identical to HEAD. WoWMeta snapshotDate 2026-09-15, 40/40 identical. SimC MID2_Raid.txt HEAD 3ca15dedd4 (same run), 24/24 identical. Bloodmallet 24 charts MID2 dated 10-21, identical; Balance/Augmentation/Devastation error 3/3. Archon walled. WCL from the collector: raid partial 295 rows (partition 2 "12.1.5" supersededBy), M+ success 320.
+
+## 2026-10-26 (nightly re-run, ~15:12 UTC) — nothing new upstream since the earlier run
+
+- Murlok 40 + Mythicstats 37 applied from metrics-fetch/updates.json, identical to HEAD. WoWMeta snapshotDate 2026-09-15, 40/40 identical. SimC MID2_Raid.txt HEAD 3ca15dedd4 (same run), 24/24 identical. Bloodmallet 24 charts MID2 dated 10-21, identical; Balance/Augmentation/Devastation error 3/3. Archon walled (403). WCL: collector raid partial 295 rows (partition 2 "12.1.5" supersededBy, pinned 1), M+ success 320 rows.
+
 ## 2026-10-26 (nightly, ~13:50 UTC) — SimC new run 24 merged; Murlok 40, Mythicstats 32 updated; WCL raid partial, M+ success
 
 - Murlok (collector): 40 rows, source date 2026-10-26. Mythicstats (collector): period 1086 again with new values, 37 rows, 32 changed; Marksmanship Hunter and Fire Mage not printed and retired to blank (owner rule), Devastation still retired.

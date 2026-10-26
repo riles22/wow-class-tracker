@@ -31,6 +31,44 @@
       ]
     },
     {
+      "date": "2026-10-23",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Live 12.1.5 hotfixes for October 23 — two class bug fixes (Enhancement Shaman; Warlock, class-wide) with no tuning value, plus dungeon and item fixes. Read from the canonical source: Linxy's running 12.1.5 hotfix compilation (us.forums topic 2382684, title now “World of Warcraft: Midnight Hotfixes - October 23”, post 1 at version 12, last edited 2026-10-24T00:19:11Z), via the deterministic official-notes receipt fetched fresh this local run (checkedAt 2026-10-26T14:03:43Z) with its heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383570 (RSS pubDate 2026-10-24T00:23:57Z). Logged three days late: the topic sat outside the official-notes ledger, flagged for the owner by each nightly, until this change configured it as source live-hotfixes-1215 (runbook Phase C1). The Enhancement line sits under an explicit SPEC heading (Shaman › Enhancement) and is a Cooldown Manager display fix. The Warlock line sits under a BARE Warlock heading with no spec block, so it is logged class-wide (the 09-21 Evoker precedent) and covers all three Warlock specs by build membership, although its text names Affliction, Demonology and Diabolist summons. NO SET BONUS IS TOUCHED, so no spec.tierSet date advances. The dungeon lines are encounter bug fixes, not tuning. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-october-23/2382684/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383570/den-of-nalorakk-and-murder-row-bug-fixes-patch-12-1-5-hotfixes",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Enhancement Shaman",
+        "Warlock (class-wide)"
+      ],
+      "highlights": [
+        "Enhancement Shaman — Resolved an issue causing Surging Elements to not appear on the Cooldown Manager.",
+        "Warlock (class-wide) — Fixed issues that caused some warlock summons and Diabolic Occuli to sometimes incorrectly target enemies outside of combat. This corrects summons from Affliction’s Shadows of Nath’reza, Demonology’s Dominion of Argus, as well as Diabolist summons.",
+        "Non-class: Dungeons — Den of Nalorakk: addressed an issue where Nalorakk’s Echoing Maul can sometimes happen in the wrong location; Murder Row: addressed an issue where Nibbles’ Fel Spray can hit targets outside of the intended area. Items — fixed an issue that caused items upgraded with Ascendant Venomstones to have incorrect item levels. Also a Hallow’s End neighborhood fix (players can now exit combat with the Shade of Seabreaker Skoloth) and a Labyrinth respawn fix in Jan’alai’s Refuge."
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Live 12.1.5 hotfixes for October 14 — four Druid bug fixes (three Guardian, one Restoration) with no tuning value, plus Labyrinth, delve and quest fixes. Read from the canonical source: Linxy's running 12.1.5 hotfix compilation (us.forums topic 2382684, opened 2026-10-15T00:53:57Z as “World of Warcraft: Midnight Hotfixes - October 14”; post 1 read at version 12, last edited 2026-10-24T00:19:11Z), via the deterministic official-notes receipt fetched fresh this local run (checkedAt 2026-10-26T14:03:43Z) with its heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383424 (listed 2026/10/14 7:55 PM on Wowhead's news index). Logged twelve days late: the 12.1.5 hotfixes waited for the launch commit that made 12.1.5 the displayed live patch, and the topic sat outside the official-notes ledger until this change configured it as source live-hotfixes-1215 (runbook Phase C1). DATE NOTE: Blizzard dates this block October 14, but in post 1 a broken bold leaves the “October 14, 2026” date line inside the last list item of the October 15 Quests block, so the collector cannot see it and files the Druid section under October 15 (2382684:1:2026-10-15:classes:druid:1). This entry keeps Blizzard's date, and the ledger resolves that section as covered here. Both Druid blocks sit under explicit SPEC headings (Druid › Guardian, Druid › Restoration). NO SET BONUS IS TOUCHED, so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-october-23/2382684/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news/many-labyrinth-bug-fixes-patch-12-1-5-hotfixes-383424",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Guardian Druid",
+        "Restoration Druid"
+      ],
+      "highlights": [
+        "Guardian Druid — Fixed an issue causing Rebirth in Bear Form to have an incorrect mana cost; Fixed an issue preventing the Bear Form version of Heart of the Wild from being cast; Fixed an issue causing Persistence to grant an incorrect amount of armor.",
+        "Restoration Druid — Fixed an issue where Nature’s Bounty could cause Abundance to fall off the Druid early.",
+        "Non-class: Labyrinth — the Ancient Hash’ey Battle Art enchantment’s maximum item level increased to 344 (was 334), and its effects no longer trigger outside of delves and The Labyrinth of Kindo’jan; the Kindo’jan encounter no longer fails to complete when Kindo’jan reaches 1 health; players can no longer cleanse Cursed Energy in the “Fools and Curses” scenario; plus boss kill-credit, “Returning the Bounty”, spawn and terrain fixes. Aqir Invasions — the final boss again randomizes between its three types. Delves — Dundun has returned to Bountiful delves. Quests — Ancient Foes in the Vaults of Atal’Utek now reward Primordial Venom Motes in raid groups, and Amani’Zar Village NPCs are visible during “De Legend of de Hash’ey”."
+      ]
+    },
+    {
       "date": "2026-10-13",
       "kind": "patch-notes",
       "realm": "live",

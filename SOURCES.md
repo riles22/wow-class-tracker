@@ -165,9 +165,10 @@ future PTR announcements. **The 12.1.5 notes-only preview (2026-09-05 until the
 12.1.5 launch) is retired**; a new notes thread never reopens the closed empirical or
 forecast cycle automatically.
 
-The deterministic official-note collector reads Blizzard's [live hotfix
-compilation](https://us.forums.blizzard.com/en/wow/t/2336376) through ordinary Discourse
-JSON. The [12.1.5 PTR development
+The deterministic official-note collector reads Blizzard's live hotfix compilations,
+[12.1](https://us.forums.blizzard.com/en/wow/t/2336376) and
+[12.1.5](https://us.forums.blizzard.com/en/wow/t/2382684) (opened 2026-10-15 UTC, configured
+after the 12.1.5 launch), through ordinary Discourse JSON. The [12.1.5 PTR development
 notes](https://us.forums.blizzard.com/en/wow/t/midnight-1215-ptr-development-notes/2344395)
 were a second, notes-only preview source from 2026-09-05 until the 12.1.5 launch retired
 it with its ledger block and contract entry; their summaries no longer render. `data/official-notes.json` records source revisions

@@ -24,6 +24,21 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (nightly re-run, ~16:57 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: live-hotfixes 2336376 success, post 1 still v56; pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383573), news index (same top) and blue tracker swept: nothing new since the ~15:50 run. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1 (post 2 a post_type 3 moderation event); entry stands, ships 10-27. Unconfigured 12.1.5 hotfix compilation 2382684 post 1 still v12, Linxy post_count 6. 12.1.7 PTR thread 2383391 posts 1 (v2) and 4 unchanged, not logged. No 12.2 PTR. 0 feed entries.
+
+## 2026-10-26 (nightly re-run, ~15:50 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: live-hotfixes 2336376 success, post 1 still v56; pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383573, 10-26 10:00), news index (same top) and blue tracker swept: nothing new since the ~15:12 run. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1 (post 2 a post_type 3 moderation event); entry stands, ships 10-27. Unconfigured 12.1.5 hotfix compilation 2382684 post 1 still v12, Linxy post_count 6. 12.1.7 PTR thread 2383391 posts 1 (v2) and 4 unchanged, not logged. No 12.2 PTR. 0 feed entries.
+
+## 2026-10-26 (nightly re-run, ~15:12 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: live-hotfixes 2336376 success, post 1 still v56; pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383573 WoW Forever podcast, 10-26 10:00), news index (same top) and blue tracker swept. New since the ~13:50 run: 383573 and 383565 (Talebound toy), neither tuning. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1, Linxy post_count 1; entry stands, ships 10-27. Unconfigured 12.1.5 hotfix compilation 2382684 post 1 still v12, Linxy post_count 6 (unchanged). 12.1.7 PTR thread 2383391 posts 1 (v2) and 4 unchanged, not logged. No 12.2 PTR. 0 feed entries.
+
 ## 2026-10-26 (nightly, ~13:50 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: the one configured source (live-hotfixes 2336376) success, post 1 still v56 (138 sections); the ptr-preview source no longer appears (retired at the 12.1.5 launch commit). Pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
