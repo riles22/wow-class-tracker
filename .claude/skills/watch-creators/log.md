@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (nightly re-run, ~15:50 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes
+
+- Supadata summary ok, 0 requested (queue empty). 44/44 channel feeds HTTP 200 (660 entries). No uploads since the ~15:12 poll (newest still Bansherz 7vgH5COPUL0, 14:00Z). None queued. 0 takes, 0 metaNotes.
+
 ## 2026-10-26 (nightly re-run, ~15:12 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes
 
 - Supadata summary ok, 0 requested (queue empty). 44/44 channel feeds HTTP 200 (660 entries). Since the ~13:50 poll: Bansherz 7vgH5COPUL0 (charity raid-affix stream) and Psybear 3g81U26wrBI (WoW Forever Feral), neither in scope; left unseen, none queued. 0 takes, 0 metaNotes.
