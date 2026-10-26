@@ -13,7 +13,7 @@ const ok = data => ({ status: 200, json: { data } });
 const options = { roster, now, phases, pause: async () => {} };
 function zoneOf(cfg) {
   return { id: cfg.zoneId, name: cfg.zoneName, frozen: false,
-    partitions: [{ id: cfg.partition, name: cfg.partitionName }], difficulties: [{ id: cfg.difficulty, sizes: [cfg.size] }],
+    partitions: cfg.reviewedPartitions.map(p => ({ ...p })), difficulties: [{ id: cfg.difficulty, sizes: [cfg.size] }],
     encounters: [...cfg.encounters, ...cfg.excludedEncounters].map(e => ({ ...e })),
     ...(cfg.bracketMetadata ? { brackets: { ...cfg.bracketMetadata } } : {}) };
 }
@@ -51,16 +51,17 @@ function fakeQuery({ mutateZone, mutateCut, mutateResponse, rate, record = [] } 
   };
 }
 
-test("collects exact per-encounter medians for all 40 specs in <=128 ranked requests", async () => {
+test("collects exact per-encounter medians for all 40 specs in <=136 ranked requests", async () => {
   const record = [], original = JSON.stringify(roster);
   const result = await collectLeaderboards({ ...options, query: fakeQuery({ record }) });
-  assert.equal(result.updates.metrics.length, 640);
-  assert.equal(result.querySummary.rankedBatches, 128); assert.equal(result.querySummary.budgetChecks, 8);
+  assert.equal(result.updates.metrics.length, 680);
+  assert.equal(result.querySummary.rankedBatches, 136); assert.equal(result.querySummary.budgetChecks, 9);
   assert.equal(result.querySummary.abortReason, null); assert.equal(JSON.stringify(roster), original);
   assert.ok(record.every(q => !q.includes("encounter(id: 3379)")));
   for (const cfg of LIVE_LEADERBOARDS.brackets) {
-    assert.equal(result.brackets[cfg.key].status, "success"); assert.equal(result.brackets[cfg.key].cuts.length, 320);
-    assert.equal(result.brackets[cfg.key].rows, 320); assert.equal(result.brackets[cfg.key].verifiedCuts, 320);
+    const cuts = cfg.bracket === "raid" ? 360 : 320;
+    assert.equal(result.brackets[cfg.key].status, "success"); assert.equal(result.brackets[cfg.key].cuts.length, cuts);
+    assert.equal(result.brackets[cfg.key].rows, cuts); assert.equal(result.brackets[cfg.key].verifiedCuts, cuts);
     for (const row of result.updates.metrics.filter(r => r.bracket === cfg.bracket)) {
       assert.equal(row.era, "live"); assert.equal(row.value, 951); assert.equal(row.n, 100);
       assert.equal(row.asOf, "2026-09-01"); assert.equal(row.sample.kind, "leaderboard-entries");
@@ -80,7 +81,7 @@ test("pins live zone identity and +10 bracket mapping; only curly apostrophes no
   const result = await collectLeaderboards({ ...options, query: fakeQuery({ mutateZone: zone => {
     zone.encounters.forEach(e => e.name = e.name.replace(/'/g, "’"));
   } }) });
-  assert.equal(result.updates.metrics.length, 640);
+  assert.equal(result.updates.metrics.length, 680);
   const wrong = await collectLeaderboards({ ...options, query: fakeQuery({ mutateZone: (zone, cfg) => {
     if (cfg.bracket === "mplus") zone.brackets.min = 1;
     else zone.name = "Different Raid";
@@ -105,7 +106,7 @@ test("empty final boss and sparse cuts are explicit omissions, never invented me
     }
   } }) });
   assert.equal(result.brackets["wcl-leaderboard-raid"].status, "success");
-  assert.equal(result.brackets["wcl-leaderboard-raid"].rows, 280); assert.equal(result.brackets["wcl-leaderboard-raid"].omissions.length, 40);
+  assert.equal(result.brackets["wcl-leaderboard-raid"].rows, 320); assert.equal(result.brackets["wcl-leaderboard-raid"].omissions.length, 40);
   assert.ok(!result.updates.metrics.some(r => r.sample.encounterId === 3492));
   const cut = result.brackets["wcl-leaderboard-mplus"].cuts.find(c => c.encounterId === 12993 && c.spec === "Blood");
   assert.equal(cut.status, "sparse"); assert.equal(cut.samples, 9);
@@ -118,7 +119,7 @@ test("too little verified coverage stays partial even with no request failures",
   } }) });
   for (const cfg of LIVE_LEADERBOARDS.brackets) {
     assert.equal(result.brackets[cfg.key].status, "partial"); assert.equal(result.brackets[cfg.key].rows, 40);
-    assert.equal(result.brackets[cfg.key].verifiedCuts, 320); assert.equal(result.brackets[cfg.key].failures.length, 0);
+    assert.equal(result.brackets[cfg.key].verifiedCuts, cfg.bracket === "raid" ? 360 : 320); assert.equal(result.brackets[cfg.key].failures.length, 0);
   }
 });
 
@@ -163,7 +164,7 @@ test("aliased query failure preserves other valid cuts in the same request", asy
       response.json.data.worldData.encounter.s0 = null;
     }
   } }) });
-  assert.equal(result.brackets["wcl-leaderboard-raid"].rows, 312);
+  assert.equal(result.brackets["wcl-leaderboard-raid"].rows, 352);
   assert.equal(result.brackets["wcl-leaderboard-raid"].failures.length, 8);
   assert.equal(result.brackets["wcl-leaderboard-mplus"].status, "success");
 });
@@ -198,14 +199,15 @@ test("overall deadline bounds both pauses and an unresponsive query", async () =
 });
 
 /* Partition supersession guard (2026-09-25). zoneOf() lists exactly the partitions the
-   2026-09-25 zone probe recorded for zones 53 and 55, so the first test here is today. */
+   2026-10-26 probe recorded for zones 53 and 55 (the reviewed sets), so the first test here
+   is today. */
 test("today's reviewed partition shape leaves the receipt unchanged: no supersededBy key, success detail", async () => {
   const result = await collectLeaderboards({ ...options, query: fakeQuery() });
   for (const cfg of LIVE_LEADERBOARDS.brackets) {
     const receipt = result.brackets[cfg.key];
     assert.equal(partitionSupersession(zoneOf(cfg), cfg), null);
     assert.equal(receipt.status, "success"); assert.equal(Object.hasOwn(receipt, "supersededBy"), false);
-    assert.equal(receipt.detail, `320 median rows; 0 empty/sparse cuts; 0 failed/unattempted cuts; minimum ${cfg.minRows} rows`);
+    assert.equal(receipt.detail, `${cfg.bracket === "raid" ? 360 : 320} median rows; 0 empty/sparse cuts; 0 failed/unattempted cuts; minimum ${cfg.minRows} rows`);
   }
 });
 
@@ -214,17 +216,21 @@ test("a partition WCL adds after review holds the bracket partial while rows sta
   const record = [];
   // Fixture name only: the real partition name is whatever WCL lists when it lists it.
   const result = await collectLeaderboards({ ...options, query: fakeQuery({ record, mutateZone: (zone, cfg) => {
-    if (cfg.bracket === "raid") zone.partitions.push({ id: 2, name: "12.1.5" });
+    if (cfg.bracket === "raid") zone.partitions.push({ id: 3, name: "12.2" });
   } }) });
   const raid = result.brackets["wcl-leaderboard-raid"];
-  assert.equal(raid.status, "partial"); assert.equal(raid.rows, 320); assert.equal(raid.failures.length, 0);
+  assert.equal(raid.status, "partial"); assert.equal(raid.rows, 360); assert.equal(raid.failures.length, 0);
   assert.equal(raid.discoveryVerified, true);
-  assert.deepEqual(raid.supersededBy, [{ id: 2, name: "12.1.5" }]);
-  assert.match(raid.detail, /partition 2 "12\.1\.5" outside the reviewed recipe \(pinned partition 1 "12\.1"\)/);
-  assert.match(raid.detail, /held there until the reviewed switch, which waits for Mythic Kith'ix \(3513\) ranked entries and parity on the reviewed bosses, both on the new partition$/);
+  assert.deepEqual(raid.supersededBy, [{ id: 3, name: "12.2" }]);
+  assert.match(raid.detail, /partition 3 "12\.2" outside the reviewed recipe \(pinned partition 2 "12\.1\.5"\)/);
+  assert.match(raid.detail, /held there until the reviewed switch, which waits for owner review of the new partition$/);
   assert.deepEqual(result.updates, clean.updates);
+  // Each bracket ranks on its own pin: the raid moved to 2 on 2026-10-26, M+ is still on 1.
   const ranked = record.filter(q => q.includes("characterRankings"));
-  assert.ok(ranked.length > 0 && ranked.every(q => q.includes("partition: 1,") && !q.includes("partition: 2")));
+  const raidRanked = ranked.filter(q => q.includes("difficulty: 5, size: 20")), mplusRanked = ranked.filter(q => q.includes("difficulty: 10, size: 5"));
+  assert.ok(raidRanked.length > 0 && mplusRanked.length > 0 && raidRanked.length + mplusRanked.length === ranked.length);
+  assert.ok(raidRanked.every(q => q.includes("partition: 2,") && !q.includes("partition: 3")));
+  assert.ok(mplusRanked.every(q => q.includes("partition: 1,")));
   assert.equal(result.brackets["wcl-leaderboard-mplus"].status, "success");
   assert.equal(Object.hasOwn(result.brackets["wcl-leaderboard-mplus"], "supersededBy"), false);
 });
@@ -250,17 +256,17 @@ test("the guard flags unreviewed or renamed partitions below the pin, not only h
   assert.equal(partitionSupersession({ partitions: [{ id: 1, name: "A’s" }] }, { partition: 1, reviewedPartitions: [{ id: 1, name: "A's" }] }), null);
 });
 
-test("reviewed partitions, switch trigger and derived ceiling are pinned (a recipe change must edit these)", () => {
+test("reviewed partitions, the Kith'ix switch and derived ceiling are pinned (a recipe change must edit these)", () => {
   const [raid, mplus] = LIVE_LEADERBOARDS.brackets;
-  assert.deepEqual(raid.reviewedPartitions, [{ id: 1, name: "12.1" }]);
+  assert.deepEqual(raid.reviewedPartitions, [{ id: 1, name: "12.1" }, { id: 2, name: "12.1.5" }]);
   assert.deepEqual(mplus.reviewedPartitions, [{ id: 1, name: "Season 2" }]);
-  assert.equal(raid.switchWaitsFor, "Mythic Kith'ix (3513) ranked entries and parity on the reviewed bosses, both on the new partition");
-  assert.ok(raid.excludedEncounters.some(e => e.id === 3513));
+  assert.equal(Object.hasOwn(raid, "switchWaitsFor"), false);
+  assert.ok(raid.encounters.some(e => e.id === 3513) && !raid.excludedEncounters.some(e => e.id === 3513));
   for (const cfg of LIVE_LEADERBOARDS.brackets) {
     assert.ok(cfg.reviewedPartitions.some(p => p.id === cfg.partition && p.name === cfg.partitionName));
   }
-  assert.deepEqual(leaderboardPartitions(), [{ zoneId: 53, id: 1, name: "12.1" }, { zoneId: 55, id: 1, name: "Season 2" }]);
-  assert.equal(leaderboardCeiling(roster.length), 640);
+  assert.deepEqual(leaderboardPartitions(), [{ zoneId: 53, id: 1, name: "12.1" }, { zoneId: 53, id: 2, name: "12.1.5" }, { zoneId: 55, id: 1, name: "Season 2" }]);
+  assert.equal(leaderboardCeiling(roster.length), 680);
 });
 
 test("lockstep: the real PHASES matches the reviewed leaderboard phase, and any drift disarms collection", async () => {

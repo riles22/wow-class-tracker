@@ -3,9 +3,10 @@
    Besides zone identity and one smoke cut per bracket, it prints what a reviewed WCL
    partition switch needs (docs/wcl-supported-collection.md): each Midnight zone's
    partitions, with the collector's own supersession verdict for the reviewed zones;
-   Kith'ix (3513) ranked-entry counts per partition, difficulty and size; and, per raid
-   partition, the per-spec counts the owner's switch trigger reads (Kith'ix at the
-   reviewed Mythic cut, plus the eight reviewed bosses on any partition not yet pinned). */
+   Kith'ix (3513) ranked-entry counts per partition, difficulty and size; per raid
+   partition, Kith'ix's per-spec counts at the reviewed Mythic cut; and, on each raid
+   partition that verdict reports, per-spec parity counts for the other reviewed bosses.
+   Its 2026-10-26 run met the owner's trigger for the 12.1.5 raid switch. */
 import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -65,6 +66,7 @@ export async function runProbe({ query, roster, log = console.log, pause = () =>
   const storedRows = roster.flatMap(s => (s.metrics ?? []).filter(m => m.bracket === "raid" && m.sample?.kind === "leaderboard-entries")
     .map(m => ({ key: `${s.class}|${s.spec}`, encounterId: m.sample.encounterId })));
   const storedSpecs = new Set(storedRows.map(r => r.key)), storedCuts = new Set(storedRows.map(r => `${r.key}|${r.encounterId}`));
+  const flagged = new Set((partitionSupersession(home, raid) ?? []).map(p => p.id));
   for (const partition of Array.isArray(home.partitions) ? home.partitions : []) {
     for (const difficulty of Array.isArray(home.difficulties) ? home.difficulties : []) {
       for (const size of [...(Array.isArray(difficulty.sizes) ? difficulty.sizes : []), null]) {
@@ -79,13 +81,12 @@ export async function runProbe({ query, roster, log = console.log, pause = () =>
           entries: entriesOf(cut), hasMorePages: cut?.hasMorePages ?? null, ...blobError(cut) }));
       }
     }
-    // The owner's switch trigger (docs/wcl-supported-collection.md): on the new partition,
-    // at the reviewed Mythic cut, Kith'ix reaches minSamples entries, and the reviewed
-    // bosses reach it for every (spec, boss) cut stored today. Which specs Kith'ix must
-    // cover awaits owner confirmation: `shortOfTrigger` applies the strictest reading
-    // (every spec holding any stored raid row), while `atMinimum` and `short` let a
-    // reviewer apply another. Counts come from the collector's own query; the probe
-    // prints them and leaves the call to the reviewer.
+    // Kith'ix per spec at the reviewed Mythic cut. The owner decided on 2026-09-26 that any
+    // Mythic ranking was enough for the 12.1.5 switch ("Kith'ix just has to exist"; a cut
+    // under minSamples stays absent), so `shortOfTrigger` and `atMinimum` apply a
+    // superseded reading (minSamples for every spec holding a stored raid row) and are
+    // informational. Counts come from the collector's own query; the probe prints them
+    // and leaves the call to the reviewer (docs/wcl-supported-collection.md).
     const cfg = { ...raid, partition: partition.id };
     const kithix = await perSpec(cfg, KITHIX);
     log(JSON.stringify({ encounter: KITHIX.id, trigger: "mythic-entries", partition: partition.id, partitionName: partition.name,
@@ -93,10 +94,12 @@ export async function runProbe({ query, roster, log = console.log, pause = () =>
       withEntries: kithix.filter(c => c.entries > 0).length, atMinimum: kithix.filter(c => c.entries >= minimum).length,
       shortOfTrigger: kithix.filter(c => storedSpecs.has(c.key) && !(c.entries >= minimum)).length,
       short: kithix.filter(c => !(c.entries >= minimum)).map(({ key, ...c }) => ({ ...c, storedRaidRow: storedSpecs.has(key) })) }));
-    if (partition.id === raid.partition) continue;   // parity with itself is today's state
+    // Parity only for a partition the guard reports: the pin is today's state, and a
+    // reviewed partition the recipe has moved off (12.1 since 2026-10-26) is retired.
+    if (!flagged.has(partition.id)) continue;
     const parity = [];
-    // Kith'ix is measured above; once the switch moves it into `encounters` it must not be
-    // queried a second time here.
+    // Kith'ix is measured above and has been in `encounters` since the 12.1.5 switch; it
+    // must not be queried a second time here.
     for (const encounter of raid.encounters.filter(e => e.id !== KITHIX.id)) {
       const cuts = await perSpec(cfg, encounter), stored = cuts.filter(c => storedCuts.has(`${c.key}|${encounter.id}`));
       const missing = stored.filter(c => !(c.entries >= minimum));

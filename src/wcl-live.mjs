@@ -10,28 +10,25 @@ export const LIVE_LEADERBOARDS = {
   budgetReserve: 50, estimatedPointsPerCut: 1,
   brackets: [
     { key: "wcl-leaderboard-raid", bracket: "raid", zoneId: 53, zoneName: "The Venomous Abyss",
-      partition: 1, partitionName: "12.1", difficulty: 5, size: 20, minRows: 200,
+      partition: 2, partitionName: "12.1.5", difficulty: 5, size: 20, minRows: 200,
       // Every partition this zone listed when the recipe was last reviewed (the
-      // 2026-09-25 zone probe). See partitionSupersession below.
-      reviewedPartitions: [{ id: 1, name: "12.1" }],
-      // Owner decision (2026-09-25): the raid switch waits for Mythic Kith'ix, not a reset,
-      // and for parity on the reviewed bosses. docs/wcl-supported-collection.md has the text.
-      switchWaitsFor: "Mythic Kith'ix (3513) ranked entries and parity on the reviewed bosses, both on the new partition",
+      // 2026-10-26 probe). See partitionSupersession below.
+      reviewedPartitions: [{ id: 1, name: "12.1" }, { id: 2, name: "12.1.5" }],
+      // Switched from partition 1 "12.1" on 2026-10-26, when that probe met the owner's
+      // trigger (docs/wcl-supported-collection.md): WCL listed 12.1.5, every stored (spec,
+      // boss) cut had at least minSamples entries there, and Mythic Kith'ix was ranked.
+      // Kith'ix (The Unbinding of Kith'ix), the patch 12.1.5 boss, joined the recipe in the
+      // same commit; a Kith'ix cut with fewer than minSamples entries stays absent.
       encounters: [
         { id: 3470, name: "Nek'zali the Soulcoiler" }, { id: 3445, name: "Entombed Sentinels" },
         { id: 3455, name: "Vashnik the Malignant" }, { id: 3497, name: "The Lost Explorers" },
         { id: 3420, name: "Sszorak" }, { id: 3421, name: "The Twin Fangs" },
         { id: 3429, name: "The Coiled Altar" }, { id: 3492, name: "Ula'tek" },
+        { id: 3513, name: "Kith'ix" },
       ],
       // WCL lists this world boss in the raid zone and even returns Mythic-filtered
       // rankings for it. Successful API output alone cannot establish raid membership.
-      // Kith'ix (The Unbinding of Kith'ix) is the patch 12.1.5 boss. WCL registered it
-      // in this zone during PTR testing (first seen 2026-09-17), and since then the
-      // unknown id has made zone validation refuse every raid cut. It stays excluded until
-      // the reviewed partition switch, which waits for Mythic Kith'ix (owner decision
-      // 2026-09-25), not merely for 12.1.5 going live; moving it into `encounters` is part
-      // of that reviewed recipe commit.
-      excludedEncounters: [{ id: 3379, name: "Nymrissa Wavecaller" }, { id: 3513, name: "Kith'ix" }],
+      excludedEncounters: [{ id: 3379, name: "Nymrissa Wavecaller" }],
     },
     { key: "wcl-leaderboard-mplus", bracket: "mplus", zoneId: 55, zoneName: "Mythic+ Season 2",
       partition: 1, partitionName: "Season 2", difficulty: 10, size: 5, minRows: 280,

@@ -4902,30 +4902,6 @@
         "value": 251473,
         "unit": "DPS",
         "asOf": "2026-10-24"
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 256864,
-        "unit": "DPS",
-        "n": 32,
-        "asOf": "2026-10-03",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-04T15:29:51.461Z",
-          "oldestRun": "2026-09-06T21:25:07.386Z",
-          "newestRun": "2026-10-03T08:11:03.857Z",
-          "hasMorePages": false
-        }
       }
     ],
     "survivability": {
@@ -5420,54 +5396,6 @@
           "oldestRun": "2026-09-07T11:10:14.578Z",
           "newestRun": "2026-10-26T11:58:35.704Z",
           "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 143939,
-        "unit": "DPS",
-        "n": 65,
-        "asOf": "2026-10-09",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-09T17:10:31.438Z",
-          "oldestRun": "2026-09-16T03:31:01.396Z",
-          "newestRun": "2026-10-09T14:52:13.580Z",
-          "hasMorePages": false
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 126358,
-        "unit": "DPS",
-        "n": 17,
-        "asOf": "2026-10-09",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-09T17:10:38.774Z",
-          "oldestRun": "2026-09-08T05:38:59.205Z",
-          "newestRun": "2026-10-09T15:45:49.997Z",
-          "hasMorePages": false
         }
       }
     ],
@@ -18784,30 +18712,6 @@
           "oldestRun": "2026-09-04T01:16:21.087Z",
           "newestRun": "2026-10-13T14:46:20.529Z",
           "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 225361,
-        "unit": "DPS",
-        "n": 70,
-        "asOf": "2026-10-11",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-11T16:25:22.232Z",
-          "oldestRun": "2026-09-16T13:11:34.229Z",
-          "newestRun": "2026-10-11T13:53:44.002Z",
-          "hasMorePages": false
         }
       }
     ],
