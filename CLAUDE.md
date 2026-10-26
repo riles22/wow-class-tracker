@@ -22,7 +22,9 @@ observations retain their old scope. The launch commit retired the 12.1.5 notes-
 preview (the `ptr-preview` official-notes source, topic 2344395, which ran from
 2026-09-05): live 12.1.5 notes and hotfixes are logged per ptr-watch with
 `realm: "live"`, and the official-note ledger in `data/official-notes.json` tracks the
-live hotfix compilation only. `docs/1215-launch-runbook.md` holds the launch and
+live hotfix compilations only: the 12.1 thread (topic 2336376, `live-hotfixes`) and the
+12.1.5 thread Blizzard opened on 2026-10-15 UTC (topic 2382684, `live-hotfixes-1215`,
+added after launch per runbook Phase C1). `docs/1215-launch-runbook.md` holds the launch and
 post-launch checklist, the WCL raid partition switch included. The 2026-09-05 preview
 policy this replaces, and any older paragraph about waiting for 12.2, are history.
 

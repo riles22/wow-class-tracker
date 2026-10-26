@@ -16,11 +16,15 @@ const NOW = new Date("2026-09-05T12:00:00Z");
    with the retired row's exact shape, injected wherever the real config would be read.
    The real config is pinned separately at the end of this file. */
 const LIVE = OFFICIAL_NOTE_SOURCES.find(s => s.id === "live-hotfixes");
+const LIVE_1215 = OFFICIAL_NOTE_SOURCES.find(s => s.id === "live-hotfixes-1215");
 const PREVIEW = Object.freeze({ id: "ptr-preview", topicId: 2344395, slug: "midnight-1215-ptr-development-notes", patch: "12.1.5", era: "ptr", mode: "staff-posts" });
 const SOURCES = Object.freeze([LIVE, PREVIEW]);
 const roster = [{ class: "Mage", spec: "Fire" }, { class: "Mage", spec: "Frost" }, { class: "Warrior", spec: "Protection" }];
 const classHTML = `<p><strong>September 4, 2026</strong></p><p><strong>Classes</strong></p><ul><li><strong>Mage</strong><ul><li><strong>Fire</strong><ul><li>Damage increased by 5%.</li></ul></li></ul></li></ul>`;
-function post(source, html = classHTML, number = 1) {
+/* The 12.1.5 compilation's fixture post is dated inside its own window (since 2026-10-13)
+   and cited by its own feed entry below. NOW gates receipt times only, not section dates. */
+const defaultHTML = source => source.topicId === LIVE_1215.topicId ? classHTML.replace("September 4, 2026", "October 23, 2026") : classHTML;
+function post(source, html = defaultHTML(source), number = 1) {
   return { id: source.topicId + number, topic_id: source.topicId, post_number: number, staff: true, version: 3,
     created_at: "2026-09-03T16:00:00Z", updated_at: "2026-09-05T01:00:00Z", cooked: html };
 }
@@ -28,11 +32,12 @@ function evidence(sources = SOURCES) {
   return { schemaVersion: 1, checkedAt: NOW.toISOString(), sources: Object.fromEntries(sources.map(s => [s.id, {
     topicId: s.topicId, patch: s.patch, era: s.era, status: "success", posts: [postReceipt(post(s), s, roster)] }])) };
 }
-const ptrBuilds = { builds: [{ date: "2026-09-04", kind: "hotfix", label: "Official compilation: https://us.forums.blizzard.com/en/wow/t/hotfixes/2336376/1.", specsAffected: ["Fire Mage"], highlights: ["Fire Mage — Damage increased by 5%."] }] };
+const ptrBuilds = { builds: [{ date: "2026-09-04", kind: "hotfix", label: "Official compilation: https://us.forums.blizzard.com/en/wow/t/hotfixes/2336376/1.", specsAffected: ["Fire Mage"], highlights: ["Fire Mage — Damage increased by 5%."] },
+  { date: "2026-10-23", kind: "hotfix", realm: "live", label: "Official compilation: https://us.forums.blizzard.com/en/wow/t/hotfixes/2382684/1.", specsAffected: ["Fire Mage"], highlights: ["Fire Mage — Damage increased by 5%."] }] };
 function resolved(e = evidence(), sources = SOURCES) {
   const ledger = pendingLedger(e, undefined, sources);
   for (const source of Object.values(ledger.sources)) for (const p of source.posts) for (const section of p.sections) {
-    section.resolution = source.era === "live" ? { disposition: "applied", reason: "Verified exact feed entry.", references: [{ kind: "build", date: "2026-09-04", highlight: ptrBuilds.builds[0].highlights[0] }] }
+    section.resolution = source.era === "live" ? { disposition: "applied", reason: "Verified exact feed entry.", references: [{ kind: "build", date: section.date, highlight: ptrBuilds.builds[0].highlights[0] }] }
       : { disposition: "applied", reason: "Notes-only review.", notes: [{ specKey: "Mage|Fire", summary: "The proposed change raises damage." }] };
   }
   return ledger;
@@ -243,13 +248,17 @@ test("HTTP failure halfway through a staff-post inventory is an outage, not a pa
   assert.deepEqual(check(result.pending, result.evidence, resolved()).errors, []);
 });
 
-/* 12.1.5 launch: the real configuration after the preview retirement. */
-test("12.1.5 launch: the live compilation is the only configured source and the refresh contract names exactly it", async () => {
-  assert.deepEqual(OFFICIAL_NOTE_SOURCES.map(s => s.id), ["live-hotfixes"]);
+/* The real configuration: the 12.1 live compilation, joined after the 12.1.5 launch by the
+   compilation Blizzard opened for 12.1.5 (topic 2382684, 2026-10-15; runbook Phase C1).
+   The preview stays retired. */
+test("live config: both hotfix compilations are configured, the preview stays retired, and the refresh contract names exactly them", async () => {
+  assert.deepEqual(OFFICIAL_NOTE_SOURCES.map(s => s.id), ["live-hotfixes", "live-hotfixes-1215"]);
   assert.ok(!OFFICIAL_NOTE_SOURCES.some(s => s.topicId === PREVIEW.topicId), "the retired 12.1.5 PTR notes thread must not return");
+  // `since` is the 12.1.5 launch date (PHASES.livePatch.since), the floor for applied references.
+  assert.deepEqual({ ...LIVE_1215 }, { id: "live-hotfixes-1215", topicId: 2382684, slug: "world-of-warcraft-midnight-hotfixes", patch: "12.1.5", era: "live", mode: "compilation", since: "2026-10-13" });
   // Both edits are one owner change: a contract entry with no config row would read as a
   // missing receipt in the freshness heartbeat, and a config row with no contract entry
-  // would never age. Reds on the pre-staged branch until the launch-morning data edit.
+  // would never age.
   const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   const contract = JSON.parse(await readFile(path.join(root, "data/required-sources.json"), "utf8"));
   assert.deepEqual(contract.officialNotes.sources, OFFICIAL_NOTE_SOURCES.map(s => s.id));
@@ -262,19 +271,37 @@ test("12.1.5 launch: a current ledger may not keep the retired block, while a ba
   // The launch-morning gate: HEAD's ledger still carries the block, the edited one does not.
   const gate = checkOfficialNotes({ ledger: current, evidence: live, baseLedger: stale, specs: roster, ptrBuilds, now: NOW });
   assert.deepEqual(gate, { errors: [], warnings: [] });
-  // Evidence from a pre-launch collector (two sources) is refused rather than half-read.
-  assert.ok(checkOfficialNotes({ ledger: current, evidence: evidence(), baseLedger: stale, specs: roster, ptrBuilds, now: NOW }).errors.includes("Official-note evidence source inventory differs"));
+  // Evidence from an older collector is refused rather than half-read: the pre-launch one
+  // (live + preview) has no receipt for the 12.1.5 compilation, and the launch-day one
+  // (live only) has the wrong source inventory.
+  const older = e => checkOfficialNotes({ ledger: current, evidence: e, baseLedger: stale, specs: roster, ptrBuilds, now: NOW }).errors;
+  assert.ok(older(evidence()).includes("live-hotfixes-1215: evidence identity/status invalid"));
+  assert.ok(older(evidence([LIVE])).includes("Official-note evidence source inventory differs"));
 });
 
-test("12.1.5 launch: the collector requests only the live compilation topic", async () => {
+test("12.1.5 compilation: its first ledger block passes the gate only once every section is reviewed", () => {
+  const live = evidence(OFFICIAL_NOTE_SOURCES), current = resolved(live, OFFICIAL_NOTE_SOURCES);
+  const base = structuredClone(current); delete base.sources["live-hotfixes-1215"];
+  assert.ok(validateOfficialNotes(base, { specs: roster, ptrBuilds, now: NOW }).includes("official-notes.json: missing live-hotfixes-1215"));
+  const gate = ledger => checkOfficialNotes({ ledger, evidence: live, baseLedger: base, specs: roster, ptrBuilds, now: NOW });
+  assert.deepEqual(gate(current), { errors: [], warnings: [] });
+  // The collector's block for a source the base ledger lacks marks every section unresolved,
+  // so configuring the row without reviewing its sections cannot publish.
+  const unreviewed = pendingLedger(live, base);
+  assert.equal(unreviewed.sources["live-hotfixes-1215"].posts[0].sections[0].resolution.disposition, "unresolved");
+  assert.ok(gate(unreviewed).errors.some(e => e.includes("unresolved")));
+});
+
+test("live config: the collector requests both compilation topics and nothing else", async () => {
   const seen = [];
   const result = await fetchOfficialNotes({ specs: roster, now: NOW, fetchJSON: async url => {
     seen.push(url);
-    return { id: LIVE.topicId, title: "World of Warcraft: Midnight Hotfixes", post_stream: { posts: [post(LIVE)], stream: [LIVE.topicId + 1] } };
+    const source = OFFICIAL_NOTE_SOURCES.find(s => url === `https://us.forums.blizzard.com/en/wow/t/${s.topicId}.json`);
+    return { id: source.topicId, title: "World of Warcraft: Midnight Hotfixes - October 23", post_stream: { posts: [post(source)], stream: [source.topicId + 1] } };
   } });
-  assert.deepEqual(seen, [`https://us.forums.blizzard.com/en/wow/t/${LIVE.topicId}.json`]);
-  assert.deepEqual(Object.keys(result.evidence.sources), ["live-hotfixes"]);
-  assert.deepEqual(Object.keys(result.pending.sources), ["live-hotfixes"]);
+  assert.deepEqual(seen, [2336376, 2382684].map(id => `https://us.forums.blizzard.com/en/wow/t/${id}.json`));
+  assert.deepEqual(Object.values(result.evidence.sources).map(s => s.status), ["success", "success"]);
+  assert.deepEqual(Object.keys(result.pending.sources), ["live-hotfixes", "live-hotfixes-1215"]);
 });
 
 test("HTTP transport rejects challenge HTML, wrong origin and oversized JSON", async () => {

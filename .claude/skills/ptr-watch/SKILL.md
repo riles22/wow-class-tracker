@@ -17,17 +17,20 @@ ledger inventories every class section rather than trusting the latest feed date
 1. Read `official-notes/evidence.json` and `official-notes/pending.json`, produced by
    the trusted pre-agent `node src/fetch-official-notes.mjs` step. In an interactive
    local run, run that command first. Do not overwrite a nightly's trusted receipts.
-   The configured source is Blizzard's running live hotfix compilation (topic
-   2336376, post 1). The 12.1.5 development thread (topic 2344395, the `ptr-preview`
-   source) was retired at the 12.1.5 launch together with its ledger block and its
-   contract entry. Public replies are excluded. Source IDs and patch identity are pinned
-   in code; a new topic or forecast cycle is an owner configuration change.
+   The configured sources are Blizzard's running live hotfix compilations, each read at
+   post 1: 12.1 (topic 2336376, `live-hotfixes`) and 12.1.5 (topic 2382684,
+   `live-hotfixes-1215`, opened 2026-10-15 UTC and configured after the launch). New
+   12.1.5 hotfixes land in 2382684. The 12.1.5 development thread (topic 2344395, the
+   `ptr-preview` source) was retired at the 12.1.5 launch together with its ledger block
+   and its contract entry. Public replies are excluded. Source IDs and patch identity are
+   pinned in code; a new topic or forecast cycle is an owner configuration change.
    **Watch for a NEW "Midnight Hotfixes" compilation topic** every run (blue tracker,
-   Wowhead news, the forum's hotfix listings). Topic 2336376 still passes the title check,
-   so if Blizzard opens a fresh compilation for 12.1.5 the collector keeps reading the old
-   one and nothing reds. Report a new topic in the run report and `log.md` (URL, first
-   post date); adding it is a new `OFFICIAL_NOTE_SOURCES` row plus its
-   `required-sources.json` entry, one owner edit, never an agent edit.
+   Wowhead news, the forum's hotfix listings). Every configured compilation still passes
+   the title check, so when Blizzard opens a fresh one (as it did for 12.1.5) the collector
+   keeps reading the old ones and nothing reds. Report a new topic in the run report and
+   `log.md` (URL, first post date); adding it is a new `OFFICIAL_NOTE_SOURCES` row, its
+   `required-sources.json` entry and a reviewed ledger block, one owner change, never an
+   agent edit.
 2. Compare pending sections against `data/official-notes.json`. Each source records
    its check time and every official post's revision/updated time/body hash. Each
    class section preserves date, category, class/spec scope, and its own outline hash.
@@ -622,11 +625,12 @@ run looked healthy and recorded something false.
     `version` every run until it ships; when it moves, amend the existing entry's highlights
     in place and note the version and edit time in its `label`. A second entry would count
     the restated lines twice in the outlook tally.
-  · When it ships, the running hotfix compilation (topic 2336376) restates it as new Classes
-    sections. Diff each against the stored entry and resolve the matching ones `irrelevant`,
-    giving that reason, never `applied`: `buildRefCovers` needs the referenced entry to cite
-    the compilation's own topic, and applying would double-count. Only lines that appear
-    nowhere but the compilation earn a new entry.
+  · When it ships, the running hotfix compilation (topic 2382684 for 12.1.5; 2336376 was
+    12.1's) restates it as new Classes sections. Diff each against the stored entry and
+    resolve the matching ones `irrelevant`, giving that reason, never `applied`:
+    `buildRefCovers` needs the referenced entry to cite the compilation's own topic, and
+    applying would double-count. Only lines that appear nowhere but the compilation earn a
+    new entry.
 - **Amend the same way when an applied section is edited without a new date or reply**
   (2026-09-11: a 09-09 Shaman fix was re-attributed from Totemic to Stormbringer). Correct
   the stored highlight to the new verbatim wording, note the version and edit time in that
@@ -648,6 +652,13 @@ run looked healthy and recorded something false.
   under a SPEC heading stays with that spec even when its text names a hero tree. A line under
   a bare CLASS heading is `Class (class-wide)` even when its text names specs. Read the post
   with its `<ul>` nesting intact; a flattened copy cannot show which heading a line sits under.
+- **A date line nested inside a list item is invisible to the collector** (2026-10-26, topic
+  2382684): a broken bold left “October 14, 2026**” inside the last item of the October 15
+  Quests list, so the Druid section after it is dated 2026-10-15. Its feed entry keeps
+  Blizzard's date, 2026-10-14, and the section resolves `irrelevant` as covered there,
+  because an applied reference must carry the section's own date. If Blizzard repairs the
+  heading, the section is replaced by a 2026-10-14 one: resolve the removal as superseded by
+  the repaired heading and apply the new section against the 2026-10-14 entry.
 
 **Owner decisions (2026-10-06).** Three practices grew up in the pruned range without a
 recorded decision; Riley settled them on 2026-10-06.

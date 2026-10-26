@@ -562,7 +562,9 @@ input, naming each `source:bracket` pair, e.g. `icyveins:mplus`. 12.1.5 does not
 check the page itself before acking. Never give an ack blind or in advance. Watch the forums for a NEW "Midnight Hotfixes" topic: the
 old topic 2336376 still passes the title check, so a new thread would be missed silently.
 Adding it is a new `OFFICIAL_NOTE_SOURCES` row plus its `data/required-sources.json`
-entry, one owner edit.
+entry, one owner edit. **Done for 12.1.5 (2026-10-26):** Blizzard opened topic 2382684 on
+2026-10-15 UTC; it is configured as `live-hotfixes-1215` (`since` 2026-10-13) with a
+reviewed ledger block and feed entries for its October 14 and October 23 class fixes.
 
 **C2. The WCL raid switch: one reviewed owner commit.**
 
