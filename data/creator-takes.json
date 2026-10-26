@@ -8232,7 +8232,7 @@
       "claim": "After the roughly 9% Aldrachi Reaver buff, Shadarek's sims put Aldrachi about 17% ahead of what he would otherwise run in pure single target (at least 15% ahead on the more single-target-leaning build) and 13% ahead at two targets regardless of which of the two Aldrachi builds is played — where before the buff the two-target case was within a couple of percent. He says it was already simming ahead and the gap now matters even though live performance had not matched the sims. The soul-generation chance increase makes it noticeably more consistent to play, with big RNG swings remaining. In logs his boss damage is drastically ahead of the other melee stuck on the boss, with little AoE padding; he cautions his own raid numbers understate it because of gear. He recommends Aldrachi on essentially everything, with Fel-Scarred possibly still preferred for the Ula'tek add-pad phases."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Demon Hunter",
       "spec": "Havoc",
       "creator": "Shadarek",
@@ -8384,7 +8384,7 @@
       "patchContext": "Season 2 live — \"Devourer Buffs & Unholy DK Nerfs | September 6th Class Tuning\" (published 2026-10-03; the title's \"September 6th\" is a slip, the video itself says the October 6 NA / October 7 EU reset). A short solo walkthrough of the announced October 6 pass, recorded before it is live, with his own hand-computed percentages. Read as Mythic+ only: he frames every figure per key and closes on what it means for M+ comps, and never discusses raid.",
       "url": "https://youtu.be/5-aEKR25QIA?t=217",
       "claim": "Shadarek reads the Devourer single-target package as a real Mythic+ gain: the 8% lines (Consume/Devour, Reap/Cull, Eradicate primary, Collapsing Star primary) plus the 10% lines (The Hunt initial, Voidblade) come to roughly a 6% single-target buff for Annihilator and about 5% for Void's Guard, which he puts closer to about 3% across a whole dungeon, with all of it landing on the priority target. He flags one uncertainty of his own: if the Reap/Cull line is separate from the Eradicate line it would also buff Eradicate's AoE portion, which cannot be settled until it hits live. He already thought Devourer was a good overall spec in keys and in a powerful spot despite little play, and expects these buffs to bring it a lot more play in high-end groups — he says he expects to play it himself. Nothing in Void Ray, the Annihilator stars or Hungering Slash is buffed.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -9212,6 +9212,30 @@
       "patchContext": "Season 2 live (12.1.5) — \"Why Don't People Play Evoker Specs?\" (published 2026-10-23), mostly a discussion of Evoker population and design (empowered spells, Dracthyr appearance, transmog); distilled only where he makes a performance read in his own voice. M+ outlook: he frames tuning by the 99th-percentile damage that players chase in dungeons.",
       "claim": "He puts Augmentation, with Devastation, at the bottom of the 99th-percentile damage charts that players use to pick a dungeon spec.",
       "url": "https://youtu.be/AznS7nxp3Z4?t=65",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Havoc",
+      "creator": "Shadarek",
+      "date": "2026-10-25",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Which Demon Hunter spec is Best for Mythic+? | Midnight Season 2\" (published 2026-10-25), his Mythic+ spec-choice explainer for Demon Hunter built on his own dungeon-route sims (a +20 Den of Nalorakk route) and his own key logs. Read as Mythic+ only: he frames every comparison per key and never discusses raid.",
+      "claim": "Shadarek says Aldrachi Reaver, which the top Havoc players run, is not the default recommendation: its priority-target and funnel damage is tuned to what he calls an unhealthy level, but its AoE is poor (he sometimes loses to his tank on AoE) and its value depends on an organized group with a known route and priority targets. In his dungeon-route sims Fel-Scarred is about 12% ahead of Aldrachi and easier to play, and he recommends Fel-Scarred for anyone pugging. He still thinks Aldrachi Havoc is much stronger than the meta shows and may be one of the top specs of the season when played and routed around properly.",
+      "url": "https://youtu.be/AlIT9jruzMY?t=950",
+      "superseded": false
+    },
+    {
+      "class": "Demon Hunter",
+      "spec": "Devourer",
+      "creator": "Shadarek",
+      "date": "2026-10-25",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Which Demon Hunter spec is Best for Mythic+? | Midnight Season 2\" (published 2026-10-25), his Mythic+ spec-choice explainer for Demon Hunter built on his own dungeon-route sims (a +20 Den of Nalorakk route) and his own key logs. Read as Mythic+ only: he frames every comparison per key and never discusses raid.",
+      "claim": "Shadarek calls Devourer (Annihilator) another great Mythic+ option: in his dungeon-route sims it goes from about 439k on Fel-Scarred Havoc to about 494k, roughly 12% ahead of Fel-Scarred and about 26% ahead of Aldrachi Reaver, and he thinks the Annihilator sim may still undercount its AoE. Its priority damage is much better than before after several single-target buffs this season, though single target is still not its strength. He finds it easier to play than last season, very tanky up to about +22, but harder to survive than Havoc around +22 to +23 because Blur is weaker and it lacks physical damage reduction. He rates Fel-Scarred Havoc and Devourer as close, decided by group buffs (Battle Shout favours Havoc, Arcane Intellect favours Devourer) and personal preference.",
+      "url": "https://youtu.be/AlIT9jruzMY?t=736",
       "superseded": false
     }
   ],
@@ -12097,7 +12121,7 @@
       "note": "He singles Outlaw out among the mid-tier DPS as the one holding a genuine composition advantage, saying it can anchor a physical Mythic+ group and that looking at the high keys it appears repeatedly at the 20 level in King's Rest and Ruby Life Pools. He places it at the end of the A tier on that basis, expecting higher representation at launch than its raw position would imply."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Hunter",
       "spec": "Marksmanship",
       "creator": "izen (Izenhart)",
@@ -12109,7 +12133,7 @@
       "note": "He calls the Marksmanship situation unfortunate, saying that nerf after nerf through the cycle has stripped progressively more value from it, and compounds that by noting it does not even have the melee-composition fallback that lifts Outlaw out of the same tier."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Warlock",
       "spec": "Destruction",
       "creator": "izen (Izenhart)",
@@ -13645,7 +13669,7 @@
       "note": "He says Restoration Druid is doing okay-ish overall and sits balanced in the middle of the healers, doing even better when you filter to Mythic. He notes this vindicates his own PTR position that Resto Druid was stronger than the PTR testing suggested, once players adapted to the Abundance rework, and finds the 4% healing buff a bit surprising in that light."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -13657,7 +13681,7 @@
       "note": "He says the flat 4% healing buff is not very helpful where Resto Druid actually needs it: in Mythic+ it is currently the least represented healer in high keys and is not doing well on overall population either. He would have wanted a Mythic+ targeted buff instead."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Feral",
       "creator": "izen (Izenhart)",
@@ -13669,7 +13693,7 @@
       "note": "He says Feral had the weakest overall performance of any spec in Mythic and was still doing very poorly on Heroic. He prices the buff at about 6.5% (5% all damage plus the auto-attack and Ferocious Bite increases), with Shred adding essentially nothing."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Druid",
       "spec": "Feral",
       "creator": "izen (Izenhart)",
@@ -14460,7 +14484,7 @@
       "note": "At the very highest keys Feral suddenly pops up in multiple flavours of physical melee comps — it is the 'hipster pick' there, and on average score it sits among the melee specs above everything but Elemental and Arcane — but that disappears as soon as you go down to 15s, where the only Druid he sees is Balance. Feral has if anything slightly increased over time while Balance lost out far more, yet it remains unpopular (Balance is played more than twice as much) despite significantly lower parses than most specs.",
       "patchContext": "Season 2 live — \"Season 2 Mythic+ Week 4 | Meta Specs, Best Comps &...Havoc? Feral? What is this?\" (published 2026-09-15), his weekly Mythic+ state-of-the-meta recap read off spec popularity, average score and high-key (15+ and 20+) group compositions at the end of the first month of the season, eight days after the Week 3 recap. M+ outlook.",
       "url": "https://youtu.be/7ZaRcXRH8u4?t=763",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -14933,7 +14957,7 @@
       "note": "The growth of the first couple of weeks has not stuck. Demonology is still in two of the four most popular comps at 15+, but at 20+ its share falls to roughly 3–5% of keys and it is outdone by Assassination. His reasons are specific: it brings nothing to the party beyond a combat res and a Healthstone, and its damage profile excels at nothing — no priority damage and no elite single-target boss damage — so even in a flattering key it is roughly even with the other DPS on three bosses in a row and loses the priority pull to Arcane.",
       "patchContext": "Season 2 live — M+ outlook, his weekly Mythic+ meta and performance recap for the end of week five (\"Elemental Even Higher | Mythic+ Meta & Specs Performance Recap - Week 5\", published 2026-09-22), read off live representation and average-score data at 15+ and 20+ keys, with the September 22 tuning landing the same day and its effects explicitly not yet measured.",
       "url": "https://youtu.be/yDyEKvcZ3VM?t=741",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -15029,7 +15053,7 @@
       "note": "The Druid changes are, in his words, not particularly relevant to Restoration's healing in either bracket — and he notes that as interesting precisely because Restoration Druid is \"pretty strong right now in the raid\" without them. The read is about the spec's current standing, not about the tuning.",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=308",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -15089,7 +15113,7 @@
       "note": "Marksmanship gets the larger AoE buff of the two — Volley and the Trick Shots ricochet — and he says it is needed: it has been slipping further down the overall Mythic+ damage results even in the better-populated previous week, and is \"currently hanging out towards the very bottom\". His conclusion is that the current state is so low that the buff \"won't really be changing much\", and that not much should be expected from it in keys.",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=401",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -15101,7 +15125,7 @@
       "note": "The raid is \"a very different situation\": he says Marksmanship is better at single target and at lower-target-count cleave, which makes it \"way more valuable in the raid than they are in Mythic+\". He is careful that the buff itself is a weaker fit here — the Volley increase is not worth much in the raid — but the extra Trick Shots ricochet is fine on two to three targets and works on real add packs in the tier, so he reads more value from it in the raid than in keys.",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=416",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Hunter",
@@ -15369,7 +15393,7 @@
       "note": "Of the smaller buffs in the pass he says Marksmanship is the only one that visibly went up from September 22 to patch day. He argues the buffs read as AoE — Volley and extra Trick Shots ricochet damage — but still convert in this raid, naming Twin Fangs' add spawns, Nexxus-Val'e and Vashj'ir as fights with cleave to use, while conceding it will not count on every boss. He adds that across the three Hunter specs Marksmanship has been doing the best, not just this week but in general.",
       "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
       "url": "https://youtu.be/jBVWrW2ibOw?t=581",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -15446,7 +15470,7 @@
       "note": "He reads Restoration Druid as continuing to climb in raid healing results, though he is careful that the September 22 change was only a 4% healing compensation attached to a bug fix and that the other healers are rising too on gear alone, so that change itself did not move the needle much. The stronger claim is about trajectory: after the back-to-back buffs to Rejuvenation, Wild Growth and its HoTs the spec is now firmly a HoT build rather than the Regrowth-spam battery it looked like in the season's first weeks, it has come very close to Preservation Evoker, and he expects it to continue to do well and likely match or pass Preservation.",
       "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
       "url": "https://youtu.be/jBVWrW2ibOw?t=784",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -15945,7 +15969,7 @@
       "patchContext": "Season 2 live — M+ outlook, damage-profile PSA \"Mythic+'s Best DPS Profile | Zug Zug AoE is Good...but there's better\" (published 2026-10-10): his explainer of funnel / priority damage on the big, dangerous mob in a trash pull, read off Murder Row and Temple of Sethraliss pulls and their per-target damage meters. A read on which specs bring that damage profile, not a ranking by average score; it sits beside his 2026-10-07 week-seven Mythic+ recap and does not replace it.",
       "note": "He reads Demonology as mostly flat AoE: Dominion of Argus demons, the Tyrant and Diabolic Ritual hit the main target no harder than the rest, and its only real extra is Wild Imps following the Hand of Gul'dan target. He warns that a group of Demonology, Elemental and Arms has poor priority damage, while still crediting it with more overall AoE than Havoc.",
       "url": "https://youtu.be/I4n-gNLIlxI?t=819",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -16365,7 +16389,7 @@
       "patchContext": "Season 2 live (12.1.5) — season review, raid + M+ combined. \"12.1.5 Mythic+ & Mythic Raid Specs Tierlist | Meta, Popularity & Performance of Specs\" (published 2026-10-18): his sit-rep two months into the season at the 12.1.5 release, placing each spec in one category (meta in both activities, good and popular, niche but good, \"hipster\" pick, or bad) by weighing raid throughput and popularity together with Mythic+ performance and popularity. A whole-spec read across both activities, not a bracket-specific one.",
       "note": "He groups Affliction with Destruction, Balance and Shadow as multi-target specs that did well early in the raid, lost value on the single-target later bosses, and have never been present in Mythic+.",
       "url": "https://youtu.be/NARw20LSu00?t=906",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -16497,7 +16521,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN\" (published 2026-10-22): his weekly Mythic+ meta recap at the start of week 10, the second week of 12.1.5, read off spec popularity and average score in 20+ keys and the most popular group compositions. He notes the new reset is only a couple of days old (about 6,000 runs). It replaces his 2026-10-16 recap for the specs it covers.",
       "note": "He says Subtlety is now, at least temporarily, the most played spec in 20+ keys (about 12% of them) and the highest average-score spec in high keys, roughly 120 points ahead of Arcane, after fully replacing Assassination in the Rogue slot. He notes Blizzard has not yet announced a nerf.",
       "url": "https://youtu.be/G5wOwgKeXEI?t=120",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -16509,7 +16533,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN\" (published 2026-10-22): his weekly Mythic+ meta recap at the start of week 10, the second week of 12.1.5, read off spec popularity and average score in 20+ keys and the most popular group compositions. He notes the new reset is only a couple of days old (about 6,000 runs). It replaces his 2026-10-16 recap for the specs it covers.",
       "note": "He says Assassination is the biggest loser of Subtlety's rise: after growing to about 7.4% of 20+ keys it was replaced almost overnight as Rogue players switched to Subtlety, even though it brings much better priority damage.",
       "url": "https://youtu.be/G5wOwgKeXEI?t=151",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Mage",
@@ -16521,7 +16545,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN\" (published 2026-10-22): his weekly Mythic+ meta recap at the start of week 10, the second week of 12.1.5, read off spec popularity and average score in 20+ keys and the most popular group compositions. He notes the new reset is only a couple of days old (about 6,000 runs). It replaces his 2026-10-16 recap for the specs it covers.",
       "note": "He names Arcane the main spec losing out to Subtlety: instead of becoming the remaining priority-damage pick, it has lost players for two resets, now trails Subtlety, Elemental and Arms in 20+ keys, and is the spec most often replaced by Subtlety in the most popular composition.",
       "url": "https://youtu.be/G5wOwgKeXEI?t=282",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -16569,6 +16593,162 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ Meta in 12.1.5 | Arcane Had To Lose For Subtlety to WIN\" (published 2026-10-22): his weekly Mythic+ meta recap at the start of week 10, the second week of 12.1.5, read off spec popularity and average score in 20+ keys and the most popular group compositions. He notes the new reset is only a couple of days old (about 6,000 runs). It replaces his 2026-10-16 recap for the specs it covers.",
       "note": "He says Holy Paladin remains the main healer pick in Mythic+ with no relevant change this reset, keeping only a caveat that it might eventually lack throughput at the very highest keys.",
       "url": "https://youtu.be/G5wOwgKeXEI?t=1095",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He reads the Subtlety nerf as about 10% overall and about 14% inside Shadow Blades, yet expects it to stay the best AoE spec and the Rogue pick of choice in keys: in recent high keys it out-damaged the other meta specs by 20% or more, so the nerf moves it closer to the rest without dropping it below any of them.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=525",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Assassination's falling numbers in keys are not because it got weaker: the best Rogue players moved to Subtlety, which dragged its average down, and it could still pass 450k as before. He does not expect the Subtlety nerf to be enough to bring Assassination back into the popular compositions.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=279",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Arcane is the spec that keeps losing its group slot as Subtlety rises, while Elemental and Arms are unchanged, and he does not expect the Subtlety nerf to change the composition.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=431",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Feral is still one of the least played DPS specs in Mythic+, yet has the fifth-highest average score in high keys because its few players are dedicated pushers, and calls the 5% buff more than fine for that niche physical-damage comp.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=555",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Feral",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Feral is not doing particularly well in the raid and is not popular there at all, so the 5% buff helps, though he sees it as mainly relevant for Mythic+.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=586",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Restoration Druid already does not need help in the raid: the buffs it has received are more than enough to make it the meta raid healer.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=616",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Restoration Druid is still unpopular in Mythic+, sitting in the bottom half of healer picks in high keys, and does not expect the Verdancy, Regrowth and Swiftmend buffs to make it much more powerful there.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=676",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Marksmanship has had the weakest AoE of the three Hunter specs and is the least popular in Mythic+, where Beast Mastery is far ahead, and expects the AoE buff to do little.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=708",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Marksmanship has done better than Beast Mastery and Survival in the raid through two-target cleave, but its single target remains weak and it is probably behind the other two Hunter specs on a pure single-target boss.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=738",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Fire is barely played (11 logs of it in 12.1.5 in his data) and expects the 5% buff to leave it short in keys: its flat AoE profile is a far cry from Elemental's, and it would still have to contend with Arcane for the Mage slot.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=770",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Destruction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He says Destruction is nearly absent from Mythic+ (about 21 of 85,000 DPS in his sample, against Demonology's roughly 1,000) and calls the 20% Rain of Fire buff okay but not at all impressive.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=831",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Affliction",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "negative",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — raid and M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He calls Affliction one of the two poor Warlock specs: the 20% Unstable Affliction buff is a single-target change that does little in keys, and its single target has been reasonably poor in the raid too.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=862",
+      "superseded": false
+    },
+    {
+      "class": "Warlock",
+      "spec": "Demonology",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-24",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
+      "note": "He calls Demonology a decent, good high-end Mythic+ spec right now and says the bug fix stopping Warlock summons from pulling distant out-of-combat targets, triggered by Subtlety Rogue shadow clones, matters more than either Warlock buff because it lets Demonology into the Subtlety compositions.",
+      "url": "https://youtu.be/YUpQ1W71a9Y?t=924",
       "superseded": false
     }
   ]

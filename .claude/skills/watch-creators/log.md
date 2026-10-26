@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (nightly, ~13:50 UTC) — 44/44 feeds; queue 2 -> 0; 2 takes, 13 metaNotes
+
+- Supadata summary ok: 2 requested, 2 fetched (AlIT9jruzMY, YUpQ1W71a9Y).
+- Shadarek AlIT9jruzMY "Which Demon Hunter spec is Best for Mythic+?" (10-25): 2 M+ takes framed "Season 2 live (12.1.5)". Havoc mixed (Fel-Scarred sims about 12% over Aldrachi Reaver and is his pug pick; Aldrachi a funnel spec for organized groups that he still thinks may be a top spec this season). Devourer buff (Annihilator sims about 12% over Fel-Scarred, 26% over Aldrachi; easier than last season; tanky to about +22). Superseded his 09-23 Havoc M+ and 10-03 Devourer M+ takes; his 09-23 Havoc raid and 09-19 Devourer both-lens takes stay live. No tier list, no panel.
+- izen YUpQ1W71a9Y "First Specs Tuning of 12.1.5" (10-24, on the announced Oct 27 tuning): 13 metaNotes. M+: Subtlety +, Assassination mixed, Arcane −, Feral mixed, Restoration Druid −, Marksmanship −, Fire −, Destruction −, Demonology +. Raid: Feral −, Restoration Druid +, Marksmanship mixed. Both: Affliction −. Superseded 17 older izen metaNotes in the same spec and lens (exact bracket, or the patchContext's raid/M+ outlook where bracket is absent). Elemental and Arms ("nothing changed") not distilled. izen latest updated.
+- RSS: 44/44 channel feeds 200 (660 entries). 16 uploads since 2026-10-25T14:00Z not in any lane: WoW Forever (Tactyks, Psybear ×2, Supatease ×2, NeekapHere, Kalamazi), streams and key PoVs (Bansherz ×3, Hopeful ×2, Megasett, YoDaTV, Shindigg), Dalaran Gaming PvP duels. None queued, left unseen.
+
 ## 2026-10-25 (local scheduled, after today's nightly) — caption 429 on the first fetch; 0 takes; queue 2 → 2
 
 - No RSS re-sweep: the nightly read 44/44 feeds about an hour earlier. yt-dlp (2026.07.04, android client, json3, `--sleep-requests` 3) drew HTTP 429 on the caption download for izen YUpQ1W71a9Y; one retry without the android client (sleep-requests 15) also drew 429, so the lane stopped there. YUpQ1W71a9Y and Shadarek AlIT9jruzMY stay queued. 0 takes, 0 metaNotes, no predictions panels.

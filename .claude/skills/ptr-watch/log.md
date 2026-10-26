@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (nightly, ~13:50 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: the one configured source (live-hotfixes 2336376) success, post 1 still v56 (138 sections); the ptr-preview source no longer appears (retired at the 12.1.5 launch commit). Pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383571 WoW Forever PvP tournament, 10-26 08:00), news index (same top) and blue tracker swept. New since yesterday: 383571 and 383516 (12.1.7 book decor), neither tuning. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1, Linxy post_count 1 (post 2 is the post_type 3 moderation event), so the 10-23 entry stands; it ships 10-27, so read the compilation's Classes sections next run. Unconfigured 12.1.5 hotfix compilation 2382684 post 1 still v12 (Linxy replies #72/#91/#110/#120/#127, the newest 10-24, nothing after). 12.1.7 PTR thread 2383391 posts 1 (v2) and 4 unchanged, PTR material, not logged. No 12.2 PTR. 0 feed entries. Writeup gap unchanged: Demonology Warlock only (read-only between cycles).
+
 ## 2026-10-25 (nightly, ~14:40 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: both sources success (2336376 post 1 still v56; 2344395 posts 1/4/5/6 v3/v1/v1/v1); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
