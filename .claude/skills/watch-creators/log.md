@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-26 (local scheduled, after today's nightly) — queue empty; no fetch; 0 takes
+
+- The nightly drained the queue (2 -> 0) and read 44/44 feeds about 20 minutes earlier, so there was nothing queued to fetch and no RSS re-sweep. No yt-dlp request made, so whether the caption 429 of 10-24/10-25 has cleared is untested. 0 takes, 0 metaNotes.
+
 ## 2026-10-26 (nightly, ~13:50 UTC) — 44/44 feeds; queue 2 -> 0; 2 takes, 13 metaNotes
 
 - Supadata summary ok: 2 requested, 2 fetched (AlIT9jruzMY, YUpQ1W71a9Y).
