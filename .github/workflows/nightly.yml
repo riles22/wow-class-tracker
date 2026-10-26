@@ -1061,13 +1061,90 @@ jobs:
       # ci.yml states that the browser lives nowhere near the release path, and the owner
       # chose (2026-08-23) to keep that and accept finding out after the push instead.
       # continue-on-error because a dispatch hiccup must never redden a good publish — the
-      # ci.yml run reddens on its own if the invariants actually fail.
+      # ci.yml run reddens on its own if the invariants actually fail, and its
+      # dispatched-run-alert job reports that on issue 15. A dispatch that creates NO run
+      # reddens nothing: on 2026-10-14 the dispatch for 8ddbe61 returned HTTP 500, no Tests
+      # run existed, and nothing said so. So after each try the step confirms the run,
+      # tries the dispatch up to three times, and when no run appears warns and comments on
+      # issue 15 itself, under dispatched-run-alert.yml's body rules. The confirmation is
+      # the run URL gh prints when GitHub returns the created run. Only without one (a 204
+      # or an error) does it look for a ci.yml run at the pushed commit: a dispatched run's
+      # head is master's tip at dispatch time, so if master moved after the push, that
+      # lookup misses a run that still tests this commit through commit_sha. It looks
+      # before retrying because a 5xx can still create the run, and a second dispatch would
+      # cancel it (ci.yml's concurrency group). Worst case about 260s, inside
+      # timeout-minutes. Its exit 1 marks only this step, never the job, so the comment goes
+      # out whoever started the run: a green job emails nobody. `!cancelled()` because a
+      # failed deploy dispatch above must not also cost the commit its Tests.
       - name: Run the UI invariants against what we just pushed
-        if: steps.commit.outputs.pushed == 'true'
+        if: ${{ !cancelled() && steps.commit.outputs.pushed == 'true' }}
         continue-on-error: true
+        timeout-minutes: 5
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run ci.yml --ref master -f commit_sha="$(git rev-parse HEAD)"
+          ALERT_ISSUE: "15"
+          REPO_URL: ${{ github.server_url }}/${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -uo pipefail
+          sha="$(git rev-parse HEAD)"
+          out="$RUNNER_TEMP/tests-dispatch.out"
+          err="$RUNNER_TEMP/tests-dispatch.err"
+          # Fallback: any ci.yml run whose head is this exact commit.
+          tests_run() {
+            timeout 10 gh run list --repo "$GITHUB_REPOSITORY" --workflow ci.yml --commit "$sha" \
+              --limit 1 --json url --jq '.[0].url // empty' 2>/dev/null || true
+          }
+          url="" attempts=""
+          for attempt in 1 2 3; do
+            rc=0
+            timeout 20 gh workflow run ci.yml --ref master -f commit_sha="$(git rev-parse HEAD)" --repo "$GITHUB_REPOSITORY" >"$out" 2>"$err" || rc=$?
+            cat "$out"
+            cat "$err" >&2
+            # The created run, when GitHub returns it.
+            url="$(grep -oE "$REPO_URL/actions/runs/[0-9]+" "$out" | head -n 1 || true)"
+            [ -z "$url" ] || break
+            case "$rc" in
+              0) outcome="accepted" ;;
+              124) outcome="timed out" ;;
+              *) outcome="$(grep -oE 'HTTP [0-9]{3}' "$err" | tail -n 1 || true)"; outcome="${outcome:-exit $rc}" ;;
+            esac
+            # Look for the run before trying again: a 5xx can still have created it.
+            for wait in 5 10 15; do
+              sleep "$wait"
+              url="$(tests_run)"
+              [ -z "$url" ] || break 2
+            done
+            attempts="${attempts:+$attempts, }$attempt: $outcome"
+            echo "::notice::Tests dispatch attempt $attempt ($outcome): no ci.yml run at ${sha:0:7} after 30s"
+          done
+          if [ -n "$url" ]; then
+            echo "::notice::Tests run for ${sha:0:7}: $url"
+            exit 0
+          fi
+          echo "::warning::No Tests run found for ${sha:0:7} after three dispatch attempts ($attempts). Start one with: gh workflow run ci.yml --ref master -f commit_sha=$sha"
+          # dispatched-run-alert.yml's body rules: no @mention and no #number reach the body.
+          clean() { printf '%s' "$1" | tr -cd '[:alnum:] &()._,:=-'; }
+          body="$RUNNER_TEMP/tests-dispatch-alert.md"
+          {
+            echo "### ❌ Tests dispatch failed: no ci.yml run found for the nightly commit"
+            echo
+            echo "The publish succeeded, but after three tries to dispatch ci.yml this step found no Tests run for the commit, so its UI invariants are unconfirmed. The step never fails the publish, so this comment is the notice."
+            echo
+            echo "- Attempts: $(clean "$attempts")"
+            echo "- Commit: [${sha:0:7}]($REPO_URL/commit/$sha)"
+            echo "- Run: $RUN_URL"
+            echo "- Check: \`gh run list --workflow ci.yml --commit $sha\`"
+            echo "- Start the tests: \`gh workflow run ci.yml --ref master -f commit_sha=$sha\`"
+          } > "$body"
+          cat "$body"
+          if grep -qE '@|#[0-9]' "$body"; then
+            echo "::error::Not posting: the alert body contains an @mention or a #number reference."
+            exit 1
+          fi
+          timeout 20 gh issue comment "$ALERT_ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$body" ||
+            echo "::warning::Could not comment on issue $ALERT_ISSUE either; the warning above is the only notice."
+          exit 1
 
       # Owner-facing change digest (owner-requested 2026-07-17): deterministic diff
       # of the just-pushed commit vs its parent (same derivation the site uses),

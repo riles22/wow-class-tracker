@@ -1527,6 +1527,11 @@ Nobody receives that red run by email, though: GitHub mails a failure only to wh
 triggered the run and starts no `workflow_run` listener for a run github-actions[bot] began
 (observed 2026-10-06), so ci.yml, deploy.yml and nightly.yml now end with a
 `dispatched-run-alert.yml` job that comments on issue 15 when a bot-started run fails.
+That job needs a run to exist. On 2026-10-14 the nightly's dispatch for 8ddbe61 returned
+HTTP 500 and created none, and nothing alerted, so the dispatch step now confirms a run
+after each try (the run URL GitHub returns, else a ci.yml run at the pushed commit),
+dispatches up to three times, and when no run appears warns and comments on issue 15
+itself. It still never fails the publish, and it runs after a failed deploy dispatch too.
 
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC).
 **Since the September 15 isolation fix, collection, agent work, and publication use
