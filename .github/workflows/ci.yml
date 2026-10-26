@@ -117,11 +117,10 @@ jobs:
           echo 'APT::Get::Download-Only "true";' | sudo tee "$only" > /dev/null
           for attempt in 1 2 3; do
             rc=0
-            sudo env "PATH=$PATH" timeout --kill-after=10s "$([ "$attempt" = 1 ] && echo 8s || echo 3m)" npx playwright install-deps "$PLAYWRIGHT_BROWSER" || rc=$?
+            sudo env "PATH=$PATH" timeout --kill-after=10s 3m npx playwright install-deps "$PLAYWRIGHT_BROWSER" || rc=$?
             if [ "$rc" = 0 ]; then break; fi
             case "$rc" in 124|137) why="ran past 3 minutes";; *) why="failed with exit $rc";; esac
             echo "::warning::Attempt $attempt of 3 to download the $PLAYWRIGHT_BROWSER system packages $why."
-            sleep 1; pgrep -a apt-get || echo "TEMP: no apt-get left after attempt $attempt"
             if [ "$attempt" = 3 ]; then
               echo "::error::Could not download the $PLAYWRIGHT_BROWSER system packages in three attempts."
               exit 1
@@ -137,7 +136,7 @@ jobs:
         run: |
           for attempt in 1 2; do
             rc=0
-            timeout --kill-after=10s "$([ "$attempt" = 1 ] && echo 2s || echo 3m)" npx playwright install "$PLAYWRIGHT_BROWSER" || rc=$?
+            timeout --kill-after=10s 3m npx playwright install "$PLAYWRIGHT_BROWSER" || rc=$?
             if [ "$rc" = 0 ]; then exit 0; fi
             case "$rc" in 124|137) why="ran past 3 minutes";; *) why="failed with exit $rc";; esac
             echo "::warning::Attempt $attempt of 2 to download $PLAYWRIGHT_BROWSER $why."
