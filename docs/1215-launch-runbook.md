@@ -568,6 +568,14 @@ reviewed ledger block and feed entries for its October 14 and October 23 class f
 
 **C2. The WCL raid switch: one reviewed owner commit.**
 
+**Done (2026-10-26):** `wcl-probe.yml` run 40339175277 met all three triggers on partition
+2 "12.1.5" (Mythic Kith'ix at size 20: 100 entries), and the switch commit followed this
+section. It went two steps further: it dropped the four stored partition-1 raid rows whose
+cuts had failed in every nightly for at least two weeks (WCL: "Ranking amount must be
+positive"), so a repeat failure cannot leave a 12.1 row in a 12.1.5 rank pool, and it limits
+the probe's parity check to partitions the guard reports. The first nightly after the merge
+is still the real test; read it as the end of this section describes.
+
 Trigger, all three, read from a `wcl-probe.yml` log:
 
 - (a) The zone-53 line has `supersededBy` non-null: the collector's guard sees the new
