@@ -33,6 +33,7 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10    # backstop: the job takes about a minute, and GitHub's default is 6 hours
     steps:
       - name: Validate test commit
         run: |
@@ -70,6 +71,7 @@ jobs:
   # stays green and fast.
   ui-invariants:
     runs-on: ubuntu-24.04
+    timeout-minutes: 30    # backstop: the install steps bound themselves, and a healthy job takes 1 to 3 minutes
     strategy:
       fail-fast: false
       matrix:
@@ -97,9 +99,47 @@ jobs:
       - name: Build the artifact under test
         run: npm run build
       - name: Install Playwright (not saved — never becomes a repo dependency)
+        run: npm install --no-save playwright@1.61.1
+      # apt fetches the browser's system packages, and the runner's mirror sometimes trickles
+      # them for a whole job: on 2026-10-26 azure.archive.ubuntu.com sent WebKit's 107 MB in
+      # 49m46s (35.8 kB/s) while other runners in the same runs took seconds. The image falls
+      # back to archive.ubuntu.com only when a fetch fails, and a trickle never fails. So the
+      # downloads run in bounded attempts, with apt in download-only mode so a kill can never
+      # interrupt dpkg. Each retry keeps the files earlier attempts finished and drops the
+      # Azure mirror from the image's list. The install then runs once, from apt's cache.
+      - name: Install the browser's system packages (downloads bounded and retried)
+        timeout-minutes: 14
         run: |
-          npm install --no-save playwright@1.61.1
-          npx playwright install --with-deps "$PLAYWRIGHT_BROWSER"
+          only=/etc/apt/apt.conf.d/zz-ci-download-only
+          echo 'APT::Get::Download-Only "true";' | sudo tee "$only" > /dev/null
+          for attempt in 1 2 3; do
+            rc=0
+            timeout --kill-after=10s 3m npx playwright install-deps "$PLAYWRIGHT_BROWSER" || rc=$?
+            if [ "$rc" = 0 ]; then break; fi
+            case "$rc" in 124|137) why="ran past 3 minutes";; *) why="failed with exit $rc";; esac
+            echo "::warning::Attempt $attempt of 3 to download the $PLAYWRIGHT_BROWSER system packages $why."
+            if [ "$attempt" = 3 ]; then
+              echo "::error::Could not download the $PLAYWRIGHT_BROWSER system packages in three attempts."
+              exit 1
+            fi
+            sudo sed -i '/azure\.archive\.ubuntu\.com/d' /etc/apt/apt-mirrors.txt || echo "::notice::No apt mirror list to change; the retry uses the same mirrors."
+          done
+          sudo rm "$only"
+          npx playwright install-deps "$PLAYWRIGHT_BROWSER"
+      # Playwright's CDN has sent every browser in seconds so far. The bound and one retry keep
+      # a stalled download from holding the job.
+      - name: Download the browser (bounded and retried)
+        timeout-minutes: 8
+        run: |
+          for attempt in 1 2; do
+            rc=0
+            timeout --kill-after=10s 3m npx playwright install "$PLAYWRIGHT_BROWSER" || rc=$?
+            if [ "$rc" = 0 ]; then exit 0; fi
+            case "$rc" in 124|137) why="ran past 3 minutes";; *) why="failed with exit $rc";; esac
+            echo "::warning::Attempt $attempt of 2 to download $PLAYWRIGHT_BROWSER $why."
+          done
+          echo "::error::Could not download $PLAYWRIGHT_BROWSER in two attempts."
+          exit 1
       - name: UI invariants
         run: node --test test/ui-invariants.test.mjs test/forecast-report-ui.test.mjs test/season-archive-ui.test.mjs gearing/test/ui-invariants.test.mjs
 
