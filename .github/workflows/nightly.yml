@@ -417,9 +417,11 @@ jobs:
             Reconcile data/official-notes.json per ptr-watch: every changed class
             section needs an applied reference, an explicit irrelevant reason, or
             an unresolved disposition. Unresolved sections block publication until
-            handled. This includes edits to older posts. The 12.1.5 PTR lane is
-            NOTES ONLY: never change PHASES, write 12.1.5 material into ptr-builds
-            or ptr verdicts, reopen forecasts, or relabel archived 12.1 PTR metrics.
+            handled. This includes edits to older posts. 12.1.5 is LIVE inside
+            Season 2: log its live notes and hotfixes per ptr-watch with realm
+            live. Never change PHASES or SNAPSHOT_PHASE, never write 12.1.5 into
+            spec ptr verdicts, never reopen forecasts, and never relabel archived
+            12.1 PTR metrics.
             Run node src/check-official-notes.mjs before finishing.
 
             WARCRAFT LOGS: you hold NO WCL credentials. The deterministic collector
@@ -618,8 +620,11 @@ jobs:
             OFFICIAL NOTES: reconcile official-notes/evidence.json and pending.json
             into data/official-notes.json per ptr-watch. Resolve each changed class
             section with a verifiable applied reference or an irrelevant reason;
-            unresolved sections block publication. Keep 12.1.5 notes in the separate
-            preview lane only, with PHASES and the frozen forecasts unchanged.
+            unresolved sections block publication. 12.1.5 is live inside Season 2:
+            log its live notes and hotfixes per ptr-watch with realm live, with
+            PHASES, SNAPSHOT_PHASE and the frozen forecasts unchanged.
+            Never write 12.1.5 into spec ptr verdicts, never reopen forecasts,
+            and never relabel archived 12.1 PTR metrics.
             Run node src/check-official-notes.mjs before finishing.
 
             Rebuild data/run-manifest.json from scratch with a current UTC startedAt and one

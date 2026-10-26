@@ -840,9 +840,10 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
        on the PTR and "12.2" once it launches, and both mean patch 12.2, as in snapshot.mjs
        predictionSeason. The first draft of this rule tested the raw label, so the "12.2 PTR"
        convention matched no dotted version and every PTR entry of an open cycle was refused
-       as if no cycle were open. Between cycles — 12.1.5 has a notes-only preview, not a
-       cycle — nothing may. An entry other than patch notes whose realm is unknown (a value
-       outside BUILD_REALMS, or none where one is required) is not ceiling-checked: its lane
+       as if no cycle were open. Between cycles nothing may: an in-season patch on the PTR
+       is not a cycle (12.1.5 was one until its launch, and has since been the displayed
+       live patch that bounds live entries). An entry other than patch notes whose realm
+       is unknown (a value outside BUILD_REALMS, or none where one is required) is not ceiling-checked: its lane
        cannot be told, and the realm error above already fires. Patch notes are always live,
        so they are checked either way; the spelling rule never depends on the realm. */
     if (build.patch != null && (typeof build.patch !== "string" || !PATCH_VERSION.test(build.patch))) {

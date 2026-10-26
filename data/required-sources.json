@@ -5,8 +5,7 @@
     "comment": "Separate deterministic intake receipts, checked by check-official-notes against the pre-agent artifact. These are verification instants, not tuning dates. Every edited class section needs an applied reference or explicit irrelevant reason; unresolved sections fail publication. A missed or unreachable source is also visible here after 48 hours, independent of the run-manifest's other sources.",
     "maxAgeHours": 48,
     "sources": [
-      "live-hotfixes",
-      "ptr-preview"
+      "live-hotfixes"
     ]
   },
   "minSuccessfulSources": 5,

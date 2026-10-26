@@ -102,7 +102,7 @@ export const PHASES = {
      is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
      page's chip is a hand-kept literal that must name the same live patch; a root build
      test compares the two. */
-  livePatch: null,
+  livePatch: { label: "12.1.5", since: "2026-10-13" },
   seasonOrder: ["s1", "s2"],
   seasonLabels: { s1: "12.0.7", s2: "12.1" },
 };

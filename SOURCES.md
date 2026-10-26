@@ -157,22 +157,26 @@ shown in each drawer's Source ratings box.
 contract rows were removed at the flip; the fetch recipes are retired in
 `src/fetch-wcl.mjs` awaiting the 12.2 zone ids), and the dev-notes thread is closed.
 What stays LIVE from this layer: the Wowhead RSS discovery lane, now watching for
-**live 12.1 tuning** (hotfix round-ups → `kind: "hotfix"` feed entries; each new one
+**live 12.1.5 tuning** (12.1.5 is live inside Season 2 since the owner launch commit;
+hotfix round-ups → `kind: "hotfix"` feed entries; each new one
 records `realm: "live"`, while older live hotfixes rely on the kind default — the realm,
 not the kind, decides where an entry is shown) and for the
-future PTR announcements. **12.1.5 currently has a notes-only preview**, separate
-from every forecast and live-ranking input; a new notes thread never reopens the
-closed empirical or forecast cycle automatically.
+future PTR announcements. **The 12.1.5 notes-only preview (2026-09-05 until the
+12.1.5 launch) is retired**; a new notes thread never reopens the closed empirical or
+forecast cycle automatically.
 
 The deterministic official-note collector reads Blizzard's [live hotfix
-compilation](https://us.forums.blizzard.com/en/wow/t/2336376) and [12.1.5 PTR
-development notes](https://us.forums.blizzard.com/en/wow/t/midnight-1215-ptr-development-notes/2344395)
-through ordinary Discourse JSON. `data/official-notes.json` records source revisions
+compilation](https://us.forums.blizzard.com/en/wow/t/2336376) through ordinary Discourse
+JSON. The [12.1.5 PTR development
+notes](https://us.forums.blizzard.com/en/wow/t/midnight-1215-ptr-development-notes/2344395)
+were a second, notes-only preview source from 2026-09-05 until the 12.1.5 launch retired
+it with its ledger block and contract entry; their summaries no longer render. `data/official-notes.json` records source revisions
 and class-section hashes, with applied references, explicit irrelevant reasons or
 unresolved sections. Source edits invalidate the affected section's prior
 resolution. Historical sections seeded before September 4 are explicitly a
-baseline, not a claim of exhaustive backfill. Preview summaries are attributed
-notes in their own display lane; they never become tier letters or PTR verdicts.
+baseline, not a claim of exhaustive backfill. When a preview source is configured,
+its summaries are attributed notes in their own display lane; they never become tier
+letters or PTR verdicts.
 `check-official-notes.mjs` checks the ledger against a separate pre-agent artifact;
 the heartbeat alerts when intake verification is more than 48 hours old.
 
