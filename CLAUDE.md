@@ -1533,6 +1533,13 @@ after each try (the run URL GitHub returns, else a ci.yml run at the pushed comm
 dispatches up to three times, and when no run appears warns and comments on issue 15
 itself. It still never fails the publish, and it runs after a failed deploy dispatch too.
 
+The browser job's install is bounded (2026-10-26). The runner's apt mirror once trickled
+WebKit's system packages for 50 minutes, so `ci.yml` downloads them in up to three
+3-minute attempts (apt in download-only mode, so a kill never interrupts dpkg; each retry
+drops the Azure mirror for archive.ubuntu.com), installs them once from apt's cache, and
+gives the browser download two 3-minute attempts. A `ui-invariants` job that fails in an
+install step is a mirror or CDN outage, not a UI break: re-run the job.
+
 Nightly automation lives in `.github/workflows/nightly.yml` (cron 10:37 UTC).
 **Since the September 15 isolation fix, collection, agent work, and publication use
 three separate runners.** The trusted `collect` job runs WCL, public source-health,

@@ -374,3 +374,122 @@ gh() {
   const budget = Number(/\n        timeout-minutes: (\d+)\n/.exec(step)?.[1]) * 60;
   assert.ok(failed.seconds < budget, `worst case ${failed.seconds}s must fit timeout-minutes (${budget}s)`);
 });
+
+// ci.yml's browser install. On 2026-10-26 the runner's apt mirror trickled the browsers'
+// system packages (WebKit's 107 MB took 49m46s) and nothing bounded the step. Every download
+// is now bounded and retried, and a kill can only land on a download: the attempts run apt in
+// download-only mode, and the install runs once, after them. The attempts run as root, because
+// a kill from outside Playwright's own sudo left apt-get running (2026-10-26).
+const ciInstallStep = title => {
+  const browserJob = job(workflow("ci"), "ui-invariants");
+  const start = browserJob.indexOf(`      - name: ${title}\n`);
+  assert.ok(start > 0, `ci.yml has the step "${title}"`);
+  const step = browserJob.slice(start, browserJob.indexOf("\n      - name: ", start + 1));
+  const lines = (runBlocks(step)[0] ?? "").split("\n").slice(1);
+  const indent = lines.find(line => line.trim())?.search(/\S/) ?? 0;
+  return { script: lines.map(line => line.slice(indent)).join("\n"),
+    budget: Number(/\n        timeout-minutes: (\d+)\n/.exec(step)?.[1]) * 60 };
+};
+const SYSTEM_PACKAGES = "Install the browser's system packages (downloads bounded and retried)";
+const BROWSER_DOWNLOAD = "Download the browser (bounded and retried)";
+
+// The step's own script under `bash -e`, with timeout, sudo and npx replaced by functions
+// that write a trace. Each npx call under timeout follows the plan: ok; slow = killed at the
+// bound (exit 124); fail = apt gave up (exit 100). `sudo env NAME=value… command` runs the
+// command through the stubs as root and traces the names it sets.
+const runInstall = (script, plan) => {
+  const stubs = `
+export PLAYWRIGHT_BROWSER=webkit
+plan=(${plan.join(" ")}) n=0 bounded=0 root=""
+trace="$(mktemp)"
+trap 'echo "TRACE>"; cat "$trace"; echo "<TRACE"; rm -f "$trace"' EXIT
+timeout() { local bounds=""; while [ "\${1#-}" != "$1" ]; do bounds="$bounds $1"; shift; done; echo "limit$bounds $1" >> "$trace"; shift; bounded=1 "$@"; }
+sudo() {
+  case "$1" in
+    env) shift; while [ "\${1#*=}" != "$1" ]; do echo "sudo env \${1%%=*}" >> "$trace"; shift; done; root="root " "$@";;
+    tee) echo "sudo $* <<< $(cat)" >> "$trace";;
+    *) echo "sudo $*" >> "$trace";;
+  esac
+}
+npx() {
+  if [ "$bounded" = 0 ]; then echo "unbounded \${root}npx $*" >> "$trace"; return 0; fi
+  n=$((n + 1)); local r="\${plan[n-1]:-extra}"; echo "\${root}npx $* ($r)" >> "$trace"
+  case "$r" in ok) ;; slow) return 124;; fail) return 100;; *) return 2;; esac
+}
+`;
+  const r = spawnSync("bash", ["-e", "-s"], { input: stubs + script, encoding: "utf8" });
+  const trace = (r.stdout.split("TRACE>")[1] ?? "").split("<TRACE")[0].trim().split("\n").map(line => line.trim());
+  const seconds = trace.filter(line => line.startsWith("limit ")).flatMap(line => line.split(" ").slice(1))
+    .reduce((sum, bound) => {
+      const [, n, unit] = /(\d+)([sm]?)$/.exec(bound);
+      return sum + Number(n) * (unit === "m" ? 60 : 1);
+    }, 0);
+  return { status: r.status, stdout: r.stdout, trace, seconds };
+};
+
+test("ci.yml's browser job has a backstop timeout that covers its bounded install steps", () => {
+  const ci = workflow("ci");
+  const jobMinutes = name => Number(/\n    timeout-minutes: (\d+)\b/.exec(job(ci, name))?.[1]);
+  assert.ok(jobMinutes("test") > 0, "the test job has a backstop too");
+  assert.doesNotMatch(ci, /--with-deps/, "no apt download outside the bounded attempts");
+  assert.match(ci, /\n        run: npm install --no-save playwright@\d+\.\d+\.\d+\n/);
+  const steps = (ciInstallStep(SYSTEM_PACKAGES).budget + ciInstallStep(BROWSER_DOWNLOAD).budget) / 60;
+  assert.ok(steps + 5 <= jobMinutes("ui-invariants"),
+    `the install steps' ${steps} minutes, plus 5 for the build and the tests, must fit the job's timeout`);
+});
+
+test("ci.yml's apt downloads are bounded, retry without the Azure mirror, and leave dpkg to one install after them", t => {
+  const probe = spawnSync("bash", ["-c", "printf ok"], { encoding: "utf8" });
+  if (probe.error || probe.stdout !== "ok") return t.skip("bash is not on PATH");
+  const { script, budget } = ciInstallStep(SYSTEM_PACKAGES);
+  const on = 'sudo tee /etc/apt/apt.conf.d/zz-ci-download-only <<< APT::Get::Download-Only "true";';
+  const off = "sudo rm /etc/apt/apt.conf.d/zz-ci-download-only";
+  const drop = "sudo sed -i /azure\\.archive\\.ubuntu\\.com/d /etc/apt/apt-mirrors.txt";
+  const install = "unbounded npx playwright install-deps webkit";
+  for (const plan of [["ok"], ["slow", "ok"], ["fail", "slow", "ok"]]) {
+    const r = runInstall(script, plan);
+    assert.equal(r.status, 0, `${plan}: ${r.stdout}`);
+    assert.equal(r.trace[0], on, `${plan}: download-only mode before the first attempt`);
+    assert.deepEqual(r.trace.filter(line => /^(root )?npx /.test(line)),
+      plan.map(step => `root npx playwright install-deps webkit (${step})`),
+      `${plan}: each attempt runs as root, so the kill at the bound reaches apt-get`);
+    assert.equal(r.trace.filter(line => line === "sudo env PATH").length, plan.length,
+      `${plan}: root keeps the runner's PATH, where node and npx are`);
+    assert.equal(r.trace.filter(line => line === drop).length, plan.length - 1, `${plan}: each retry drops the Azure mirror`);
+    assert.deepEqual(r.trace.slice(-2), [off, install], `${plan}: dpkg runs once, after download-only mode is off`);
+    assert.equal(r.stdout.match(/::warning::/g)?.length ?? 0, plan.length - 1);
+  }
+  const failed = runInstall(script, ["slow", "fail", "slow"]);
+  assert.equal(failed.status, 1, failed.stdout);
+  assert.match(failed.stdout, /::warning::Attempt 1 of 3 to download the webkit system packages ran past 3 minutes\./);
+  assert.match(failed.stdout, /::warning::Attempt 2 of 3 to download the webkit system packages failed with exit 100\./);
+  assert.match(failed.stdout, /::error::Could not download the webkit system packages in three attempts\./);
+  assert.ok(!failed.trace.includes(install), "nothing installs after a failed download");
+  assert.ok(failed.seconds + 120 <= budget,
+    `worst case ${failed.seconds}s, plus 2 minutes for the install, must fit timeout-minutes (${budget}s)`);
+  // The retry's edit removes only the Azure line from the mirror list that the runner image
+  // writes (runner-images configure-apt-sources.sh).
+  const expression = /sudo sed -i '([^']+)' \/etc\/apt\/apt-mirrors\.txt/.exec(script)?.[1];
+  const mirrors = "http://azure.archive.ubuntu.com/ubuntu/\tpriority:1\n"
+    + "https://archive.ubuntu.com/ubuntu/\tpriority:2\nhttps://security.ubuntu.com/ubuntu/\tpriority:3\n";
+  const edited = spawnSync("bash", ["-c", 'sed "$1"', "-", expression], { input: mirrors, encoding: "utf8" });
+  assert.equal(edited.stdout, mirrors.slice(mirrors.indexOf("https://archive")));
+});
+
+test("ci.yml's browser download is bounded and retried once", t => {
+  const probe = spawnSync("bash", ["-c", "printf ok"], { encoding: "utf8" });
+  if (probe.error || probe.stdout !== "ok") return t.skip("bash is not on PATH");
+  const { script, budget } = ciInstallStep(BROWSER_DOWNLOAD);
+  for (const plan of [["ok"], ["slow", "ok"]]) {
+    const r = runInstall(script, plan);
+    assert.equal(r.status, 0, `${plan}: ${r.stdout}`);
+    assert.deepEqual(r.trace.filter(line => /^(root )?npx /.test(line)), plan.map(step => `npx playwright install webkit (${step})`),
+      `${plan}: the browser downloads as the runner user, into the runner's cache`);
+  }
+  const failed = runInstall(script, ["slow", "fail"]);
+  assert.equal(failed.status, 1, failed.stdout);
+  assert.match(failed.stdout, /::warning::Attempt 1 of 2 to download webkit ran past 3 minutes\./);
+  assert.match(failed.stdout, /::error::Could not download webkit in two attempts\./);
+  assert.doesNotMatch(failed.trace.join("\n"), /^(unbounded|sudo) /m, "every download is bounded");
+  assert.ok(failed.seconds <= budget, `worst case ${failed.seconds}s must fit timeout-minutes (${budget}s)`);
+});
