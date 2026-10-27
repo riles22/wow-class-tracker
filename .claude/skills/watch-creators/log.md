@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (local scheduled, after today's nightly) — caption 429 persists; queue 2 -> 2; 0 takes
+
+- Tried the first queued video (izen L4LNAG87abo) with yt-dlp: info fetch fine, caption download HTTP 429 with `player_client=android`, and again on one paced retry without it. Same IP-scoped timedtext flag as 10-24/10-25, now four days. Stopped there per the one-probe rule; AutomaticJak FY6vocZJIyw not attempted. Both stay queued for the nightly's Supadata lane. No RSS re-sweep (the nightly read 44/44 feeds about an hour earlier). 0 takes, 0 metaNotes.
+
 ## 2026-10-27 (nightly, ~14:05 UTC) — 44/44 feeds; queue 0 -> 2; 0 takes
 
 - 44/44 channel feeds HTTP 200 (660 entries). Supadata summary ok, 0 requested (queue was empty). Queued (keyword-matched, in scope): izen L4LNAG87abo "Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results" (general creator, metaNotes lane) and AutomaticJak FY6vocZJIyw "Season 2's Massive Falloff". Other uploads since the last poll are key PoVs / streams (Bansherz tLllOxDF55I MM key PoV, Shindigg acKjoqRMFr8, Sha tYGd8Eq_q34, Megasett, Kesslive, Critcake, Whispyr), WoW Forever and PvP duel content: left unseen. 0 takes, 0 metaNotes.

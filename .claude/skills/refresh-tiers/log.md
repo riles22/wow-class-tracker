@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (local scheduled, after today's nightly) — Icy Veins refreshed: 4 of 80 letters changed; M+ Subtlety duplicate gone
+
+- All six pages HTTP 200 via home curl (browser UA + Accept + Accept-Language), one `<table class="tier-list">` each after stripping `<style>`. Counts: raid 27/7/6, M+ 27/7/6, every letter non-null, 0 unmatched, 0 role mismatches, Devourer present on both DPS pages; titles name 12.1.5 over Season 2 bodies, so `seasonVerified` stays "s2". Both DPS pages re-dated by the publisher: dateModified 2026-10-25 (changelog "Updated based on the 24th of October Class Hotfixes"); healer/tank dates unchanged (raid 10-11 / 08-29, M+ 10-12 / 10-12).
+- **M+ DPS no longer lists Subtlety Rogue twice** (the 10-20..10-26 S+/A+ duplicate is gone; it is listed once, at S+), so all 80 rows merged.
+- Moves: raid Subtlety Rogue S+ -> S, raid Fire Mage B -> A (two-step), M+ Subtlety Rogue A+ -> S+ (two-step), M+ Havoc DH A -> A+. Churn icyveins:raid 2 (1 two-step), icyveins:mplus 2 (1 two-step), well inside 25/10. Snapshots -> 2026-10-27; `published` raid DPS and M+ DPS -> 2026-10-25.
+
 ## 2026-10-27 (nightly, ~14:05 UTC) — Method 0 moves; Icy Veins / Wowhead / Archon walled
 
 - Method (direct browser-header GET, 200): M+ 40/40, raid 40/40, all letters in scale, 8 dungeon names rejected by roster match; body "Midnight Season 2", Devourer in both; Last Updated M+ 14th October 2026, raid 10th August 2026 (match published evidence). 0 of 80 letters moved; snapshots 2026-10-26 -> 2026-10-27.

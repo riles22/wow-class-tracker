@@ -161,15 +161,15 @@
             "bracket": "raid",
             "role": "DPS",
             "url": "https://www.icy-veins.com/wow/dps-rankings-tier-list",
-            "snapshot": "2026-10-26",
-            "published": "2026-10-17",
+            "snapshot": "2026-10-27",
+            "published": "2026-10-25",
             "seasonVerified": "s2"
           },
           {
             "bracket": "raid",
             "role": "Healer",
             "url": "https://www.icy-veins.com/wow/healer-rankings-tier-list",
-            "snapshot": "2026-10-26",
+            "snapshot": "2026-10-27",
             "published": "2026-10-11",
             "seasonVerified": "s2"
           },
@@ -177,7 +177,7 @@
             "bracket": "raid",
             "role": "Tank",
             "url": "https://www.icy-veins.com/wow/tank-rankings-tier-list",
-            "snapshot": "2026-10-26",
+            "snapshot": "2026-10-27",
             "published": "2026-08-29",
             "seasonVerified": "s2"
           },
@@ -185,15 +185,15 @@
             "bracket": "mplus",
             "role": "DPS",
             "url": "https://www.icy-veins.com/wow/mythic-dps-tier-list",
-            "snapshot": "2026-10-26",
-            "published": "2026-10-17",
+            "snapshot": "2026-10-27",
+            "published": "2026-10-25",
             "seasonVerified": "s2"
           },
           {
             "bracket": "mplus",
             "role": "Healer",
             "url": "https://www.icy-veins.com/wow/mythic-healer-tier-list",
-            "snapshot": "2026-10-26",
+            "snapshot": "2026-10-27",
             "published": "2026-10-12",
             "seasonVerified": "s2"
           },
@@ -201,7 +201,7 @@
             "bracket": "mplus",
             "role": "Tank",
             "url": "https://www.icy-veins.com/wow/mythic-tank-tier-list",
-            "snapshot": "2026-10-26",
+            "snapshot": "2026-10-27",
             "published": "2026-10-12",
             "seasonVerified": "s2"
           }
@@ -1011,7 +1011,7 @@
       },
       "scores": {
         "raid": 43,
-        "mplus": 66
+        "mplus": 70
       },
       "consensusSources": {
         "raid": [
@@ -1047,7 +1047,7 @@
           "archon": "C"
         },
         "mplus": {
-          "icyveins": "A",
+          "icyveins": "A+",
           "method": "A",
           "wowhead": "B",
           "archon": "A"
@@ -2156,7 +2156,7 @@
     },
     "Mage|Fire": {
       "consensus": {
-        "raid": "C",
+        "raid": "B",
         "mplus": "B"
       },
       "ranks": {
@@ -2188,7 +2188,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 22
       },
       "scores": {
-        "raid": 39,
+        "raid": 43,
         "mplus": 49
       },
       "consensusSources": {
@@ -2219,7 +2219,7 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "B",
+          "icyveins": "A",
           "method": "C",
           "wowhead": "C",
           "archon": "B"
@@ -3286,8 +3286,8 @@
         "score": 20
       },
       "scores": {
-        "raid": 73,
-        "mplus": 74
+        "raid": 71,
+        "mplus": 79
       },
       "consensusSources": {
         "raid": [
@@ -3317,13 +3317,13 @@
       },
       "sourceRatings": {
         "raid": {
-          "icyveins": "S+",
+          "icyveins": "S",
           "method": "B",
           "wowhead": "A",
           "archon": "A"
         },
         "mplus": {
-          "icyveins": "A+",
+          "icyveins": "S+",
           "method": "A",
           "wowhead": "A",
           "archon": "A"
