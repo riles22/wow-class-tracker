@@ -1801,30 +1801,6 @@
           "newestRun": "2026-10-14T11:15:05.531Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 385576,
-        "unit": "DPS",
-        "n": 31,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:55.381Z",
-          "oldestRun": "2026-09-28T09:41:06.832Z",
-          "newestRun": "2026-10-14T17:40:48.343Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -3115,30 +3091,6 @@
           "newestRun": "2026-10-14T14:45:31.332Z",
           "hasMorePages": false
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 340326,
-        "unit": "DPS",
-        "n": 15,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:55.381Z",
-          "oldestRun": "2026-09-26T13:42:33.558Z",
-          "newestRun": "2026-10-14T18:29:32.053Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -3667,54 +3619,6 @@
           "observedAt": "2026-10-26T16:57:42.329Z",
           "oldestRun": "2026-09-06T01:38:42.396Z",
           "newestRun": "2026-10-14T12:39:34.145Z",
-          "hasMorePages": false
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 97130,
-        "unit": "DPS",
-        "n": 21,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:49.705Z",
-          "oldestRun": "2026-09-18T02:07:00.755Z",
-          "newestRun": "2026-10-14T12:27:17.845Z",
-          "hasMorePages": false
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 171880,
-        "unit": "DPS",
-        "n": 12,
-        "asOf": "2026-10-12",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:56.159Z",
-          "oldestRun": "2026-10-02T02:25:39.899Z",
-          "newestRun": "2026-10-12T19:45:34.227Z",
           "hasMorePages": false
         }
       }
@@ -7163,54 +7067,6 @@
           "newestRun": "2026-10-26T14:03:37.563Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 234070,
-        "unit": "DPS",
-        "n": 21,
-        "asOf": "2026-10-11",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:50.522Z",
-          "oldestRun": "2026-09-20T18:19:37.735Z",
-          "newestRun": "2026-10-11T18:54:56.167Z",
-          "hasMorePages": false
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 392543,
-        "unit": "DPS",
-        "n": 17,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:56.963Z",
-          "oldestRun": "2026-09-29T02:43:08.578Z",
-          "newestRun": "2026-10-13T20:03:56.279Z",
-          "hasMorePages": false
-        }
       }
     ],
     "survivability": {
@@ -9597,54 +9453,6 @@
           "newestRun": "2026-10-14T13:26:32.523Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Sszorak, top 100)",
-        "value": 212556,
-        "unit": "DPS",
-        "n": 100,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3420,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:37.248Z",
-          "oldestRun": "2026-09-10T02:09:50.349Z",
-          "newestRun": "2026-10-14T15:45:08.934Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 258462,
-        "unit": "DPS",
-        "n": 33,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:43.990Z",
-          "oldestRun": "2026-09-18T02:20:47.733Z",
-          "newestRun": "2026-10-13T19:27:37.010Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -10778,78 +10586,6 @@
           "newestRun": "2026-10-26T15:18:37.209Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)",
-        "value": 173093,
-        "unit": "DPS",
-        "n": 100,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3445,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:15.131Z",
-          "oldestRun": "2026-09-09T20:06:12.854Z",
-          "newestRun": "2026-10-13T21:02:52.826Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)",
-        "value": 320366,
-        "unit": "DPS",
-        "n": 100,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3455,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:22.626Z",
-          "oldestRun": "2026-09-10T03:47:23.987Z",
-          "newestRun": "2026-10-13T15:35:01.732Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Sszorak, top 100)",
-        "value": 189814,
-        "unit": "DPS",
-        "n": 58,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3420,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:37.248Z",
-          "oldestRun": "2026-09-13T20:28:18.584Z",
-          "newestRun": "2026-10-13T18:46:50.554Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -11449,30 +11185,6 @@
           "oldestRun": "2026-09-10T20:42:05.008Z",
           "newestRun": "2026-10-14T14:48:30.076Z",
           "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 234949,
-        "unit": "DPS",
-        "n": 29,
-        "asOf": "2026-10-12",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:51.304Z",
-          "oldestRun": "2026-09-23T13:06:06.886Z",
-          "newestRun": "2026-10-12T12:01:25.300Z",
-          "hasMorePages": false
         }
       },
       {
@@ -12613,30 +12325,6 @@
           "observedAt": "2026-10-26T16:57:52.154Z",
           "oldestRun": "2026-09-17T19:34:23.500Z",
           "newestRun": "2026-10-14T12:27:17.845Z",
-          "hasMorePages": false
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median HPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 426192,
-        "unit": "HPS",
-        "n": 19,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "hps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:58.532Z",
-          "oldestRun": "2026-10-05T18:41:58.342Z",
-          "newestRun": "2026-10-14T18:47:30.200Z",
           "hasMorePages": false
         }
       }
@@ -14413,30 +14101,6 @@
           "newestRun": "2026-10-14T14:06:54.851Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 189210,
-        "unit": "DPS",
-        "n": 21,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:58.532Z",
-          "oldestRun": "2026-09-30T19:13:01.081Z",
-          "newestRun": "2026-10-14T17:12:40.336Z",
-          "hasMorePages": false
-        }
       }
     ],
     "survivability": {
@@ -15373,54 +15037,6 @@
           "observedAt": "2026-10-26T16:57:31.459Z",
           "oldestRun": "2026-09-03T20:01:59.898Z",
           "newestRun": "2026-10-13T15:47:49.853Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median HPS (S2 Mythic: Sszorak, top 100)",
-        "value": 376377,
-        "unit": "HPS",
-        "n": 100,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "hps",
-          "zoneId": 53,
-          "encounterId": 3420,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:38.962Z",
-          "oldestRun": "2026-08-31T18:42:00.783Z",
-          "newestRun": "2026-10-13T13:09:18.644Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 402121,
-        "unit": "HPS",
-        "n": 100,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "hps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:45.691Z",
-          "oldestRun": "2026-09-04T03:23:40.403Z",
-          "newestRun": "2026-10-13T18:34:47.217Z",
           "hasMorePages": true
         }
       },
@@ -18053,54 +17669,6 @@
           "newestRun": "2026-10-26T00:18:08.296Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Sszorak, top 100)",
-        "value": 230668,
-        "unit": "DPS",
-        "n": 100,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3420,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:38.962Z",
-          "oldestRun": "2026-09-16T03:42:59.904Z",
-          "newestRun": "2026-10-14T13:32:56.339Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 256205,
-        "unit": "DPS",
-        "n": 95,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:45.691Z",
-          "oldestRun": "2026-09-09T04:43:26.589Z",
-          "newestRun": "2026-10-14T12:24:56.233Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -19977,54 +19545,6 @@
           "newestRun": "2026-10-14T15:17:17.249Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 215236,
-        "unit": "DPS",
-        "n": 21,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:53.799Z",
-          "oldestRun": "2026-09-20T11:45:31.338Z",
-          "newestRun": "2026-10-13T18:42:04.351Z",
-          "hasMorePages": false
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)",
-        "value": 416098,
-        "unit": "DPS",
-        "n": 13,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3492,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:58:00.138Z",
-          "oldestRun": "2026-09-29T12:44:45.540Z",
-          "newestRun": "2026-10-14T12:53:20.274Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -21176,30 +20696,6 @@
           "oldestRun": "2026-09-17T00:34:29.970Z",
           "newestRun": "2026-10-13T15:58:04.783Z",
           "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 259157,
-        "unit": "DPS",
-        "n": 51,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:46.533Z",
-          "oldestRun": "2026-09-08T20:36:46.039Z",
-          "newestRun": "2026-10-14T14:01:57.104Z",
-          "hasMorePages": false
         }
       },
       {
@@ -22405,30 +21901,6 @@
           "observedAt": "2026-10-26T16:59:04.746Z",
           "oldestRun": "2026-08-21T22:47:44.482Z",
           "newestRun": "2026-10-25T16:03:37.054Z",
-          "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: Sszorak, top 100)",
-        "value": 176373,
-        "unit": "DPS",
-        "n": 100,
-        "asOf": "2026-10-14",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3420,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:40.658Z",
-          "oldestRun": "2026-09-01T03:17:42.209Z",
-          "newestRun": "2026-10-14T14:59:17.723Z",
           "hasMorePages": true
         }
       },
@@ -23713,30 +23185,6 @@
           "newestRun": "2026-10-25T22:11:53.155Z",
           "hasMorePages": true
         }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)",
-        "value": 252087,
-        "unit": "DPS",
-        "n": 31,
-        "asOf": "2026-10-13",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3421,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:47.365Z",
-          "oldestRun": "2026-09-23T20:22:16.407Z",
-          "newestRun": "2026-10-13T00:40:12.714Z",
-          "hasMorePages": false
-        }
       }
     ],
     "fightProfile": {
@@ -24260,30 +23708,6 @@
           "oldestRun": "2026-09-03T01:26:45.376Z",
           "newestRun": "2026-10-13T12:46:18.618Z",
           "hasMorePages": true
-        }
-      },
-      {
-        "source": "warcraftlogs",
-        "bracket": "raid",
-        "name": "Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)",
-        "value": 109123,
-        "unit": "DPS",
-        "n": 13,
-        "asOf": "2026-10-11",
-        "era": "live",
-        "sample": {
-          "kind": "leaderboard-entries",
-          "cap": 100,
-          "metric": "dps",
-          "zoneId": 53,
-          "encounterId": 3429,
-          "partition": 1,
-          "difficulty": 5,
-          "size": 20,
-          "observedAt": "2026-10-26T16:57:54.569Z",
-          "oldestRun": "2026-09-24T14:26:48.762Z",
-          "newestRun": "2026-10-11T18:11:52.734Z",
-          "hasMorePages": false
         }
       }
     ],

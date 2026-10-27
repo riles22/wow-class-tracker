@@ -576,6 +576,17 @@ positive"), so a repeat failure cannot leave a 12.1 row in a 12.1.5 rank pool, a
 the probe's parity check to partitions the guard reports. The first nightly after the merge
 is still the real test; read it as the end of this section describes.
 
+**First nightly (2026-10-26, run 40452209100): refused, then a follow-up owner commit.** Its
+collect job logged `WCL: merge-failed`. On partition 2, 330 raid cuts succeeded, 11 were
+sparse and 19 invalid ("Ranking amount must be positive": a zero-amount entry on a board
+under 100 entries). Nine of the invalid cuts still held a stored partition-1 row, so six rank
+pools would have mixed partitions, and validate refused the whole merge, M+ included. A
+refused merge fails the WCL gate by design, so nothing could publish and the run was
+cancelled. The follow-up commit dropped those 9 rows and the 15 stored partition-1 rows whose
+partition-2 board was still under one full page (30 to 98 entries), where one zero-amount
+entry would refuse the next night the same way. The 271 rows left sit on full boards, which a
+zero-amount entry cannot reach. The next nightly is the test; read it as below.
+
 Trigger, all three, read from a `wcl-probe.yml` log:
 
 - (a) The zone-53 line has `supersededBy` non-null: the collector's guard sees the new
