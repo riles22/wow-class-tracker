@@ -96,7 +96,9 @@ by hand — it is generated.
    as numbers and NEVER converted to letter grades. Murlok's number is a *top-50 ceiling*
    (avg rating of each spec's best 50 players), not popularity, and must stay labeled so.
    Archon raid tiers come from its **throughput** tier list (not the default popularity
-   grouping); Archon M+ tiers from its **score** tier list. Early-S2 the raid letters read
+   grouping); Archon M+ tiers from its **score** tier list. A browser read takes them only
+   through `src/archon-capture.mjs`, which selects both lists by metric name and refuses
+   popularity, the raid pages' FIRST list (2026-10-27). Early-S2 the raid letters read
    from the **Heroic** throughput list (owner decision 2026-08-25 — Mythic was 26/27 specs
    with six under 10 parses; the registry's methodology text carries the switch-back
    trigger, and the Mythic/Heroic NUMBERS stay separate metric families, never mixed).
@@ -1715,8 +1717,10 @@ The agent step's only secret is
 `CLAUDE_CODE_OAUTH_TOKEN` (~1-year validity — renew), the documented inherent
 residual in `docs/security-audit-2026-07.md`. YouTube transcripts may be
 IP-blocked on runners; those videos queue as "pending" and catch up in local runs. The
-old local scheduled task and claude.ai cloud routine are retired (docs/cloud-routine.md
-records why); the local task can still be run manually for transcript catch-up.
+claude.ai cloud routine is retired (docs/cloud-routine.md records why). The local
+scheduled task runs again (the owner's desktop task `wow-ptr-watch`, daily, verified
+2026-10-04) and catches up transcripts, Icy Veins and the browser lane (local-run skill,
+Scope).
 
 **Weekly guide publishing** (`gearing-refresh.yml`, 2026-09-05) shares the nightly
 publisher lock. Each of the three active guide harvesters runs independently with

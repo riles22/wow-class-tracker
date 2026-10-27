@@ -81,8 +81,13 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
 
 - **Archon raid pages carry THREE tierLists** (popularity/throughput/survivability).
   The default view groups by popularity — read the `metric: "throughput"` tierList.
-  M+ pages use `metric: "score"`. Parse the `<script id="__NEXT_DATA__">` JSON from
-  raw HTML; WebFetch's markdown conversion silently drops it.
+  M+ pages use `metric: "score"`. Select by the `metric` name, never by position:
+  popularity is the FIRST list and gave the same letter as throughput for only 15 of 40
+  raid specs (2026-10-27), so a first-list read looks like an upstream rebuild rather than
+  an error. A browser read goes through `src/archon-capture.mjs`: its snippet picks the
+  list by name and its checker refuses any other (local-run skill, browser lane).
+  Parse the `<script id="__NEXT_DATA__">` JSON from raw HTML; WebFetch's markdown
+  conversion silently drops it.
   **The registered raid pages are the HEROIC ones since 2026-08-25** (owner decision:
   early-S2 letter basis is Heroic while Mythic is sparse — see the archon methodology
   text in sources.json for the switch-back trigger). The registry URL is the authority
@@ -195,6 +200,13 @@ letters, not just a wasted run.
   same headers still gets the 403, so the block keys on the client as well as the IP
   (2026-09-27). No proxy and no challenge solving. Count `tier-list-entry` in each body
   before parsing: a 403 page is not an empty list.
+- **Wowhead and Archon transport: the owner's browser** (owner decision 2026-10-27). The
+  runners draw Wowhead's AWS WAF challenge and Archon's human-verification page, while
+  the owner's Brave loads both as ordinary pages, so a local run reads them through
+  Claude in Chrome (local-run skill, browser lane). Same parse, same merge, same gates.
+  Ordinary loads only: the first challenge ends that site's read, and it is never solved,
+  waited out or reloaded past. Log the transport, as "Transport can silently change the
+  DATA" requires of every run.
 - **Icy Veins: take the FIRST `alt=` after each `class="tier-list-entry"`, and look the
   `"Spec Class"` string up WHOLE.** The first-alt rule is what excludes the spell-icon alts
   inside the expandable details blocks without needing an allow-list (2026-07-31). Splitting
