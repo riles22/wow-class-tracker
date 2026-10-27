@@ -83,6 +83,16 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
 - **Archon numbers** (same `__NEXT_DATA__` JSON as tiers): "95th pct DPS (Mythic)",
   "95th pct HPS (Mythic)", "95th pct DPS (Heroic)", "95th pct HPS (Heroic)",
   "M+ score (95th pct)", "Popularity" (fraction × 100, unit "%").
+  **The route is the local run's browser lane** (owner decisions 2026-10-27). The runners
+  draw Archon's human-verification wall, so the nightly records these rows `blocked`, and
+  the numbers and survivability tiers sat at 2026-08-25 until the lane took them on. A
+  local run reads the six letter pages and the three "Mythic rankings" pages in the
+  owner's browser and checks them with `src/archon-capture.mjs` (local-run skill, browser
+  lane). That checker carries the recipe below: the column by role, the rounding,
+  `parses` as `n`, the date part of `lastUpdated` as `asOf`, Heroic popularity never
+  merged, the Popularity shape check, and survivability only from the Mythic pages' tier
+  lists. Merge its metrics file with `apply-metrics.mjs`; never hand-write the rows.
+  Per-boss and per-dungeon pages stay out of the lane.
   **Read them from `props.pageProps.page.specRankingsSection.table.data[]`** — each row is
   `{item: "<ActorIcon type='Class-Spec'>…", dps, survivability, popularity, parses}` (raid
   DPS/healer pages carry `dps`/`hps` + `popularity`; the M+ page carries the score +
@@ -101,7 +111,7 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   the measured scales are close enough (Heroic ≈ 0.88–1.01x Mythic) that nothing else
   would catch it. Heroic popularity is deliberately NOT merged — the stored "Popularity"
   family is the Mythic cut.
-  Refresh every run; **emit a manifest row for ALL SIX Archon
+  Refresh every run that reaches the pages; **emit a manifest row for ALL SIX Archon
   numeric requirements — `archon-metrics` (95th-pct DPS, Mythic raid), `archon-hps`
   (95th-pct HPS, Mythic raid healers), `archon-heroic-dps`, `archon-heroic-hps`,
   `archon-mplus-score` (M+ score 95th pct) and `archon-popularity`** — each
@@ -115,7 +125,8 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   as a long decimal. Each row's **`parses` IS the series' `n`**: omitting it silently DELETES
   `n` from all 80 stored rows (it surfaced as 290 deletions against 170 insertions). Before
   merging **Popularity**, shape-check — every value a plausible percentage, each of the six
-  (role × bracket) groups summing to ~100 (~600 across all 80 rows), and no row equal to that
+  (role × bracket) groups summing to ~100 (~600 across all 80 rows; the checker allows
+  rows × 0.05, the most that rounding to 0.1 can explain), and no row equal to that
   spec's "95th pct DPS (Mythic)". A prior run merged the `dps` column in and 40 rows carried
   DPS magnitudes under unit `%` (Devourer 178,800%) through **three consecutive nights**.
 - 🛑 **PER-BOSS survivability is NOT a substitute for the aggregate — measured dead end,

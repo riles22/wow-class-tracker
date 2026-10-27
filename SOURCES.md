@@ -275,7 +275,15 @@ as reliability mechanics (so fetches succeed / avoid bot-blocks), not as pull li
   letters and dates. Every local run refreshes them from a home connection with curl and
   ordinary browser headers (Node's `fetch` gets the same 403 there, 2026-09-27). No proxy
   and no challenge solving.
-- **Archon / Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
+- **Archon**: the runners draw its human-verification wall, so the nightly records the
+  `archon-*` rows `blocked` and keeps the stored data and dates. Since the owner decisions
+  of 2026-10-27, a local run with Claude in Chrome reads the six letter pages and the three
+  Mythic rankings pages in the owner's own browser as ordinary page loads: letters, the
+  Mythic and Heroic numbers, Popularity, M+ score and the survivability tiers, checked by
+  `src/archon-capture.mjs` (local-run skill, browser lane). The first verification page
+  ends the read; none is solved, waited out or reloaded past. Per-boss and per-dungeon
+  pages stay out.
+- **Murlok / Bloodmallet / Blizzard forums / YouTube RSS**: plain fetches every
   run, retry-with-backoff on transient 404s (reliability, not a cap).
 - **YouTube transcripts**: two transports, same captions. On the nightly runner the
   deterministic `src/fetch-transcripts.mjs` step (the only holder of the optional

@@ -126,7 +126,8 @@ the things a datacenter runner physically cannot do:
 
 - drain `data/pending-transcripts.json` with yt-dlp (datacenter IPs hit YouTube's bot wall);
 - refresh Icy Veins, all six registered pages, every run (below);
-- read the browser lane (Wowhead and Archon letter pages, queued captions) when Claude in
+- read the browser lane (Wowhead letter pages; Archon's letter pages and its three Mythic
+  rankings pages, for letters, numbers and survivability; queued captions) when Claude in
   Chrome is connected (below);
 - verify-and-log what CI already refreshed today rather than rewriting it.
 
@@ -154,41 +155,114 @@ heartbeat key goes red once the stored `snapshot` is more than 4 days old (`maxA
    with `git checkout -- data/specs.json data/sources.json`, carry on with the rest of the
    run, and put the pairs, the counts and the page dates at the top of the report.
 
-**Browser lane, every local run** (owner decision 2026-10-27). The runners draw Wowhead's
+**Browser lane, every local run** (owner decisions 2026-10-27). The runners draw Wowhead's
 AWS WAF challenge and Archon's human-verification page, so the nightly refreshes neither;
 the owner's own browser loads both as ordinary pages. A local run with Claude in Chrome
-connected reads them there, right after Icy Veins.
+connected reads them there, right after Icy Veins. For Archon that is the only route to
+its letters, its numeric families and its survivability tiers: the numbers and tiers had
+not moved since 2026-08-25 when the lane took them on.
 1. Check the browser first (`list_connected_browsers`, then `tabs_context_mcp`). No Chrome
    tools, no connected browser, or a site-permission prompt nobody answers: skip the lane
    and say so at the top of the report.
 2. Ordinary page loads only, one registered page at a time, each in a tab this run opens
-   and closes. The registry is the page list: the six Wowhead tier-list pages and the six
-   Archon pages without a `label`. Never the labeled Archon pages (numeric families,
-   refresh-metrics' lane) and never the Warcraft Logs website (the API is its lane).
+   and closes. The registry (`data/sources.json`) is the page list:
+   - the six Wowhead tier-list pages;
+   - the six Archon pages without a `label`: letters, plus "95th pct DPS/HPS (Heroic)" on
+     the raid pages, or "M+ score (95th pct)" and M+ "Popularity" on the M+ pages;
+   - the three Archon pages labeled "Mythic rankings — …": "95th pct DPS/HPS (Mythic)",
+     raid "Popularity" (the stored raid Popularity is the Mythic cut) and the survivability
+     tiers, never letters. The DPS one is also registered as "Survivability tiers (Mythic
+     raid)": one page load serves both entries.
+
+   Never the per-boss or per-dungeon Archon pages (the checker refuses them), and never
+   the Warcraft Logs website (the API is its lane).
 3. **Stop at the first challenge.** A page without its data (Archon: no `__NEXT_DATA__`;
    Wowhead: no `[tier-list=rows]` block) or showing a verification or "checking your
    browser" page ends that site's read for the run. Never click, wait out, reload past or
    solve one, never ask the owner to clear one so the run can go on, and never replay
    cookies or use a proxy. Pages already read are applied as usual; the rest keep their
-   stored letters and dates, and the report names the page and what it showed.
+   stored letters, numbers and dates, and the report names the page and what it showed.
+   For Archon, a series that needed a page the read never reached is refused whole.
 4. **Archon:** run the expression `node src/archon-capture.mjs --snippet` prints in each
-   page (javascript_tool), save the outputs as `{ capturedAt, transport, pages: [...] }`
-   in the scratchpad, then `node src/archon-capture.mjs <capture.json> <rows.json>`. It
-   takes the raid **throughput** and M+ **score** lists by metric name and refuses any
-   other: popularity is the FIRST list on a raid page and gave the same letter as
-   throughput for only 15 of 40 specs (2026-10-27), so a first-list read looks like an
-   upstream rebuild, not like an error. Its hash refuses tier lines mistyped in the copy.
+   of the nine pages (javascript_tool), save the outputs as
+   `{ capturedAt, transport, pages: [...] }` in the scratchpad, then check the capture:
+   ```
+   node src/archon-capture.mjs <capture.json> <ratings.json> <metrics.json>
+   ```
+   - **Letters**, from the unlabeled pages only: it takes the raid **throughput** and M+
+     **score** lists by metric name and refuses any other. Popularity is the FIRST list on
+     a raid page and gave the same letter as throughput for only 15 of 40 specs
+     (2026-10-27), so a first-list read looks like an upstream rebuild, not like an error.
+   - **Numbers**, one line per rankings row at stored precision: the role's column rounded
+     (`dps` on DPS and tank pages, `hps` on healer pages, `score` on M+), popularity × 100
+     at 0.1, and `parses`, which becomes `n`. `asOf` is the date part of the page's
+     `lastUpdated`. Heroic popularity is read but never merged.
+   - **Survivability**: the Mythic pages' `survivability` tier lists, never the numeric
+     survivability column and never a per-boss page (refresh-metrics).
+   - Its hash covers every line it reads, so it refuses lines mistyped in the copy.
+
+   It reports per page and per series, and writes each series whole or not at all: six
+   letter series, seven number series (`archon-popularity` is raid plus M+ Popularity) and
+   survivability. A spec missing upstream refuses its series: apply-metrics has no archon
+   retire path, and dropping or holding a spec is an owner decision. A series whose values
+   and parse counts all equal the stored rows prints `=` and is not written, because
+   `lastUpdated` is a page date, not a data date. An empty survivability list prints `–`
+   and writes nothing (Archon published it empty 2026-08-16..21); the stored tiers stand.
+   Exit 0: everything passed, unchanged or empty. Exit 2: something was refused (✗) and
+   the two files hold only the ✓ series. Exit 1: nothing written.
    Era-verify from each page's title and season cue (refresh-tiers step 2; the checker
-   already requires the full roster, Devourer included), then
-   `node src/apply-ratings.mjs <rows.json>` and stamp `snapshot` on those pages (Archon
-   publishes no page date of its own; `lastUpdated` is not one).
+   already requires the full roster, Devourer included), then merge both files:
+   ```
+   node src/apply-ratings.mjs <ratings.json>
+   node src/apply-metrics.mjs <metrics.json>
+   ```
+   Then stamp `snapshot` with the run date on exactly the entries the checker lists under
+   "stamp `snapshot`": a letter page whose letters merged, a "Mythic rankings" page whose
+   "95th pct DPS/HPS (Mythic)" family merged, and "Survivability tiers (Mythic raid)" only
+   when survivability tiers merged (that `snapshot` is the `archon-survivability` date, so
+   any other stamp would fake a refresh). Never `published`: Archon publishes no page date
+   of its own, and `lastUpdated` is not one.
 5. **Wowhead:** read the page's `WH.markup` block in-page and parse it with refresh-tiers'
    Wowhead recipe, then `apply-ratings.mjs` and stamp `snapshot` and `published`.
 6. Before each site's merge, copy `data/specs.json` and `data/sources.json` to the
    scratchpad; the Icy Veins step 3 gate then applies per site. With the owner at the
    keyboard their go-ahead is the ack. An unattended run copies the two files back (a
    `git checkout` would also undo Icy Veins), carries on, and reports the counts.
-7. **Captions:** while the anonymous caption lane is 429-blocked, watch-creators step
+   Archon's numbers add the value-move guard to that gate. After `apply-metrics`,
+   `node src/check-refresh.mjs --manifest` compares them with HEAD and prints
+   `value move:` for a row past `maxValueMovePct` and `family median move:` for a family
+   past `maxFamilyMedianMovePct` (limits in `data/required-sources.json`); the checker's
+   `check-refresh --manifest will flag:` lines show the same findings before the merge.
+   They are what the nightly would need `value_move_ack` for. With the owner at the
+   keyboard, show them each finding with the checker's series line (median and largest
+   move, parse counts, Archon's `lastUpdated`); their go-ahead, recorded in the commit
+   message, is the ack (see "Human-acked fixes"). `--value-ack="REASON"` only re-prints
+   the findings as `waived by value ack:` and records nothing. An unattended run cannot
+   ack: it copies the two files back, which also undoes that run's Archon letters, and
+   reports the findings at the top. The first refresh after 2026-08-25 spans two months
+   of gear growth and may trip the family-median limit, so run that one attended.
+7. **Archon manifest rows.** A full refresh (the manifest rule above) writes one row for
+   each of `archon-tiers`, `archon-metrics`, `archon-hps`, `archon-heroic-dps`,
+   `archon-heroic-hps`, `archon-mplus-score`, `archon-popularity` and
+   `archon-survivability`. `previousAsOf` and `newAsOf` are the key's stored date before
+   and after the lane, read the way `check-refresh` reads it: the rows' `asOf` for the six
+   number keys, the registry `snapshot` for the other two.
+   - `success` only when the key's series were all written and its stored date is within a
+     day of the run, which `--manifest` enforces: `archon-popularity` needs both Popularity
+     series, `archon-survivability` the stamped Survivability entry, and `archon-tiers` all
+     six letter pages.
+   - `partial`, with a detail, when the key's series were unchanged (`=`), survivability
+     came back empty (`–`), a spec was missing upstream, only part of the key landed, or
+     Archon's `lastUpdated` trails the run by more than a day (the rows keep Archon's own
+     date, as WoWMeta's do; refresh-metrics).
+   - `parse_error` with the checker's message when a refusal was about the capture itself
+     (hash, column, list, popularity shape); `blocked` with what the page showed when step 3
+     stopped the site; `skipped` with the reason when step 1 skipped the lane.
+
+   `archon-encounters` stays out of the lane: record it `blocked` with the reason the
+   nightly gives. A partial run leaves the manifest alone and puts the same results in the
+   report.
+8. **Captions:** while the anonymous caption lane is 429-blocked, watch-creators step
    2(b)'s interactive lane runs in the same browser, queue-only. Long `was_live` VODs have
    no browser route.
 
@@ -273,8 +347,11 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
 ## Report shape
 
 Icy Veins first: refreshed, held for an ack, or still blocked, with the letters changed
-per bracket and each page's own date; then builds/hotfixes found; 12.2 PTR announcement
-check; videos processed and queue count before→after; gearing guide harvest
+per bracket and each page's own date; then the browser lane: each site read, stopped (by
+what) or skipped, Archon's series lines (✓ written, = unchanged, – empty, ✗ refused and
+why) and any value-move finding with how it was acked or held; then builds/hotfixes
+found; 12.2 PTR announcement check; videos processed and queue count before→after;
+gearing guide harvest
 run-or-skipped and why;
 takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether the
 manifest was rewritten or deliberately left alone and why; what `check-refresh
