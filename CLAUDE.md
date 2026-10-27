@@ -1690,10 +1690,14 @@ entry (a date that is not a real `YYYY-MM-DD`, `reviewBy` before `since`, an emp
 reason, an unknown field, an entry on a pipeline key, or one placed anywhere but those two
 positions) accepts nothing and raises the pipeline key `accepted-stale-invalid`, checked
 every day even while its key is fresh.
-As of 2026-10-06: the nine `archon-*` keys are accepted until 2026-11-01 (`since`
-2026-09-25, the day the owner first accepted them in the old pattern) and
-`method-published` until 2026-10-21. `wowmeta` deliberately carries none (owner note
-2026-08-21 on its row), and neither does `icyveins`.
+As of 2026-10-27 (owner decisions that day): `archon-encounters` is accepted until
+2026-12-01 (the per-boss and per-dungeon pages stay outside the browser lane);
+`icyveins-published` until 2026-12-01 (only its raid tank page lags); `method-published`
+until 2026-11-15, with the owner's pre-decision to drop Method's raid page if it still
+self-dates 2026-08-10 then. `archon-tiers` carries none, because the browser lane refreshes
+it. The other seven `archon-*` keys keep their 2026-11-01 entries (`since` 2026-09-25) until
+the lane's Mythic-page extension refreshes them, and are not renewed. `wowmeta`
+deliberately carries none (owner note 2026-08-21 on its row).
 `wcl-live-raid`/`wcl-live-mplus` no longer age at all: their `maxAgeDays` is null, the
 same form `blizzard-ptr` and `creators` already used, so the heartbeat skips them while
 the manifest row, the WCL evidence cross-check and the row floor still hold them to

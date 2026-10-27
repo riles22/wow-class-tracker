@@ -925,9 +925,10 @@ test("age gate: the flip is NOT nagged before its due date", () => {
 /* The dated floor-restore gate (2026-08-19 audit, D1) — same one-shot shape as the
    phase-flip gate: 152dcc6 lowered minSuccessfulSources 7 -> 5 for the S2 transition
    with "restore ~09-01" recorded only in prose, and nothing would have noticed the date
-   passing. The gate keys on the VALUE, so restoring it silences the check permanently. */
+   passing. The gate keys on the VALUE, so restoring it silences the check permanently.
+   Settled 2026-10-27: FULL_FLOOR is 5, the standing floor, so the fixture lowers below it. */
 test("age gate: a below-full floor is nagged past its restore date, and only then", () => {
-  const lowered = { ...config, minSuccessfulSources: 5 };
+  const lowered = { ...config, minSuccessfulSources: 4 };
   // Before the due date: the transition window is legitimate, no nag.
   const before = checkFreshness(lowered, goodManifest(), freshData(), "2026-08-25");
   assert.ok(!before.violations.some(v => v.includes("minSuccessfulSources")), before.violations.join("\n"));
@@ -937,10 +938,10 @@ test("age gate: a below-full floor is nagged past its restore date, and only the
   // with it instead of reddening it.
   const dayAfter = new Date(Date.parse(FLOOR_RESTORE_DUE) + 86400000).toISOString().slice(0, 10);
   const after = checkFreshness(lowered, goodManifest(), freshData(), dayAfter);
-  assert.ok(after.violations.some(v => v.includes("minSuccessfulSources is still 5")), after.violations.join("\n"));
+  assert.ok(after.violations.some(v => v.includes("minSuccessfulSources is 4, below the standing floor of 5")), after.violations.join("\n"));
   assert.ok(after.fingerprint.includes("min-sources-floor"));
   // Restored (or absent — the fixture default): quiet at any date, forever.
-  const restored = checkFreshness({ ...config, minSuccessfulSources: 7 }, goodManifest(), freshData(), "2027-01-01");
+  const restored = checkFreshness({ ...config, minSuccessfulSources: 5 }, goodManifest(), freshData(), "2027-01-01");
   assert.ok(!restored.violations.some(v => v.includes("minSuccessfulSources")), restored.violations.join("\n"));
   const absent = checkFreshness(config, goodManifest(), freshData(), "2027-01-01");
   assert.ok(!absent.fingerprint.includes("min-sources-floor"));

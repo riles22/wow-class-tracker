@@ -441,7 +441,7 @@ export function checkValueMove(config, data, prevData, ack = null) {
 
 /* --- the heartbeat ----------------------------------------------------------------- */
 
-export const FLOOR_RESTORE_DUE = "2026-11-01", FULL_FLOOR = 7;
+export const FLOOR_RESTORE_DUE = "2026-11-01", FULL_FLOOR = 5;
 
 /* OWNER-ACCEPTED STANDING STALENESS (owner decision 2026-10-06). Until then the heartbeat's
    Monday reminder skipped every key matching one regex in freshness.yml (ACCEPTED_KEYS,
@@ -628,9 +628,17 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
      endpoint), 12 of 23 requirements cannot succeed from a runner. The
      nightlies 2026-09-19..09-25 landed 7, 7, 6, 7, 5, 8, 6 successes of 23 (09-23 at exactly
      5; counted from each nightly commit's data/run-manifest.json), so restoring 7 on 10-01
-     would have redded three of those seven nights for a wall no run can fix. */
+     would have redded three of those seven nights for a wall no run can fix.
+     SETTLED AT 5 (owner decision 2026-10-27, reviewed edit): FULL_FLOOR 7 -> 5, so 5 is the standing
+     floor and this gate is quiet at today's value. The walls did not lift, and the sources
+     behind them moved to local runs for good: Icy Veins by home curl, Wowhead and Archon
+     through the browser lane (owner decision 2026-10-27). The 19 run manifests committed
+     2026-10-12..10-27 landed 5-8 successes of 23, every one from 10-25 on at 6, so a floor
+     of 7 would have refused 12 of them. The gate stays the guard it was written to be: a
+     lowering below 5 reds the heartbeat past FLOOR_RESTORE_DUE unless the same reviewed
+     edit moves the date. */
   if ((config.minSuccessfulSources ?? FULL_FLOOR) < FULL_FLOOR && dateOf(nowDate) > FLOOR_RESTORE_DUE) {
-    violations.push(`minSuccessfulSources is still ${config.minSuccessfulSources} past ${FLOOR_RESTORE_DUE} — the S2-transition lowering (152dcc6) was dated "restore ~2026-09-01" and extended twice (2026-09-03, 2026-09-25) to ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs if the window must extend.`);
+    violations.push(`minSuccessfulSources is ${config.minSuccessfulSources}, below the standing floor of ${FULL_FLOOR} (settled 2026-10-27), past ${FLOOR_RESTORE_DUE}. Put it back to ${FULL_FLOOR} in data/required-sources.json, or move FLOOR_RESTORE_DUE in src/check-refresh.mjs in the same reviewed edit if a temporary lowering must run longer.`);
     keys.push("min-sources-floor");
   }
   /* Owner acceptances (PIPELINE_KEYS above). Every entry is validated before any age is

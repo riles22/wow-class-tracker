@@ -796,7 +796,7 @@ a partition until C2; Bloodmallet partial or stale until wholesale adoption; M+ 
 if WCL unexpectedly adds a partition to zone 55. Pre-existing, not 12.1.5: the Archon wall,
 wowmeta, murlok, the Method page self-date, `icyveins` (listed whenever the last local Icy
 Veins refresh is more than 4 days old; see C3), `wcl-live-raid`/`wcl-live-mplus`, and the
-gearing verification and loot-age rows. The floor stays 5 until 2026-11-01.
+gearing verification and loot-age rows. The floor is 5 for good (owner decision 2026-10-27).
 
 **Launch +7: review the retained letters** (owner decision 2026-10-04: keep retention,
 disclose it, review it here). Two of the four consensus sources carry letters that predate
