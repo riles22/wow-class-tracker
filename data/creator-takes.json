@@ -12349,7 +12349,7 @@
       "note": "He puts Preservation in the top healer group with the biggest ceiling for uncapped raid healing — the more raid damage goes out the better it does — but notes it runs out of mana far more easily than Discipline."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Paladin",
       "spec": "Holy",
       "creator": "izen (Izenhart)",
@@ -12361,7 +12361,7 @@
       "note": "He calls Holy Paladin the default strongest spot healer and places it in the top healer group."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Shaman",
       "spec": "Restoration",
       "creator": "izen (Izenhart)",
@@ -14319,7 +14319,7 @@
       "note": "izen reads Holy Priest as the biggest mover of the healer field. The back-to-back buffs to its overall healing and to Oracle let it drop the five talents a mana-intensive Prayer of Healing build needed and respend them elsewhere, so its mana problem is now effectively gone and its main buttons are much stronger (he cites roughly 30% on one and about 50% and 25-30% on two others). The result, he says, is very high overall healing that has passed Discipline, and it can now hold the composition's spot-healer role he describes as previously belonging to Holy Paladin. He also expects it to gain relatively more value on the easier, lower-damage bosses.",
       "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
       "url": "https://youtu.be/TJe8OnXl3pY?t=843",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -14352,7 +14352,7 @@
       "note": "izen argues players overvalued Holy Paladin's power level off the PTR dummy healing tests, which he says were unrealistic about the damage you actually heal in this raid — real fights ask for burst coverage in small windows, where he calls Preservation Evoker much stronger than Paladin. He also has Holy Priest taking over the composition's spot-healer role he describes as having been effectively Holy Paladin's.",
       "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
       "url": "https://youtu.be/TJe8OnXl3pY?t=1067",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -14363,7 +14363,7 @@
       "note": "izen names Restoration Shaman alongside Holy Paladin as a spec whose power level players overvalued on the strength of the PTR dummy healing tests, which he says did not reflect the burst-window damage taken in this raid's fights.",
       "patchContext": "Season 2 live — raid outlook, \"12.1 Raid Results | The Best DPS & Healers In Week 3 - BEWARE of the “Overall Results” Bait\" (published 2026-09-08), the raid half of his pair of week-3 weekly-reset recaps. His central caveat is the point of the video: the overall raid DPS ranking is dominated by the early, easy, multi-target bosses that carry almost all of the logs, so the caster cluster at the top is a logging artifact rather than a spec-strength ordering — he reads per-boss damage profiles instead, and says the overall numbers \"mean basically nothing\" until the harder bosses have representation. Healers, he notes, vary far less by boss than DPS do.",
       "url": "https://youtu.be/TJe8OnXl3pY?t=1075",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -15065,7 +15065,7 @@
       "note": "He reads the Evoker buffs against how poorly Augmentation has done across the expansion. The increases skew towards AoE, and his positive is structural rather than numeric: Augmentation had far more room to improve on the later, harder raid bosses, and being higher up on the last few bosses of a tier is worth more in general, so he calls the raid side good for it. He does not claim the buffs are large.",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=322",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -15257,7 +15257,7 @@
       "note": "He reads the Shadow changes as a large-looking set that amounts to a single-target buff, and compares it directly to Windwalker's: a spec that was weaker in the raid and weaker in single target getting exactly that fixed. He calls the paired AoE cut odd, because Shadow's AoE was nowhere near the level that justified compensation, and concludes that Shadow should do better in the raid on the stronger single target. (He adds that in Mythic+ it was never that high to begin with.)",
       "patchContext": "Season 2 live — his walkthrough of how the September 22 tuning is actually landing now that it is live (\"How Did The Buffs Affect Specs? | Mythic+ & Raid Specs & Weekly Balance Tuning Effects\", published 2026-09-23), each buffed spec weighed against its current raid and Mythic+ results. He frames the pass as buffs across the board and asks which of them can move a spec rather than which look big. Supersedes his 2026-09-19 pre-live read of the same tuning pass where it covers the same spec.",
       "url": "https://youtu.be/mYt-nBOsKus?t=983",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -15481,7 +15481,7 @@
       "note": "He expects Preservation Evoker to keep losing ground as the tier goes on, and gives a mechanism rather than a number: Preservation is the better burst-healing spec, so the less damage there is to heal back — more item level, more raid-buff stacking, more healing increases — the less its burst is worth, whereas constant HoT healing keeps its value even on fights where less damage goes out. He has Restoration Druid arriving very close to it and expects it to match or pass it.",
       "patchContext": "Season 2 live — raid outlook, \"Raid Top DPS & HPS Results Post-Tuning | Week 6 | New Rising Faces\" (published 2026-09-26): his read of how the September 22 balance tuning actually landed in Venomous Abyss logs, taken mid-week through the first reset that carries it. He reads the pre- vs post-tuning window from September 13 onward rather than the whole tier.",
       "url": "https://youtu.be/jBVWrW2ibOw?t=846",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -15701,7 +15701,7 @@
       "patchContext": "Season 2 live — raid outlook, \"12.1 Week 7 Raid Rankings | A New Mage? Lizards? Unholy Nerfs?\" (published 2026-10-04), read off week-seven raid logs from a point between the tuning round that went live the previous week and the October 6 round three days out. Raid outlook. Supersedes his 2026-08-25 raid read of the spec.",
       "note": "He reads Arcane as having come down from the clear lead it held weeks earlier: it now sits marginally behind Frost on average overall raid results, and on at least one boss he puts it technically behind both Fire and Frost. On the tier’s pure single-target fight he says none of the mage specs do particularly well, because casters have a hard time there. He still expects Arcane’s damage profile to leave it the best of the three mages overall.",
       "url": "https://youtu.be/qYVsRrr7xg8?t=226",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -15723,7 +15723,7 @@
       "patchContext": "Season 2 live — raid outlook, \"12.1 Week 7 Raid Rankings | A New Mage? Lizards? Unholy Nerfs?\" (published 2026-10-04), read off week-seven raid logs from a point between the tuning round that went live the previous week and the October 6 round three days out. Raid outlook. Supersedes his 2026-09-26 raid read of the spec.",
       "note": "He groups Augmentation with Devastation in the top third of week-seven raid results, a position he says it has held for most of the tier, and says the previous week’s buffs are likewise hard to see in the numbers because the spec was already there. Where it does show near the very top is the later bosses’ burst phases.",
       "url": "https://youtu.be/qYVsRrr7xg8?t=240",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -15734,7 +15734,7 @@
       "patchContext": "Season 2 live — raid outlook, \"12.1 Week 7 Raid Rankings | A New Mage? Lizards? Unholy Nerfs?\" (published 2026-10-04), read off week-seven raid logs from a point between the tuning round that went live the previous week and the October 6 round three days out. Raid outlook. Supersedes his 2026-09-26 raid read of the spec.",
       "note": "He says the previous week’s single-target buff made things slightly better but leaves Shadow’s single target still poor, and that single target was never the spec’s strong point. He reads its high average raid scores as an early-boss artifact — spread-cleave value on adds that die faster as item level rises — and expects it to do less the deeper guilds go into the tier, unless a fight’s mechanics force the raid to stay apart.",
       "url": "https://youtu.be/qYVsRrr7xg8?t=321",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Monk",
@@ -15789,7 +15789,7 @@
       "patchContext": "Season 2 live — raid outlook, \"12.1 Week 7 Raid Rankings | A New Mage? Lizards? Unholy Nerfs?\" (published 2026-10-04), read off week-seven raid logs from a point between the tuning round that went live the previous week and the October 6 round three days out. Raid outlook. Supersedes his 2026-10-03 raid outlook read of the spec.",
       "note": "He reads the back-to-back buff rounds — the previous week’s 5% to all healing plus Vivify and the single-target chain gift, and the October 6 Invigorating Mists and Enveloping Mist increases at 15% each — as worth more in the raid than in Mythic+, and expects them to start moving Mistweaver toward the middle of the healer field. He is explicit that it is still not a well-performing or popular spec this tier and sits among the bottom raid healers, which he calls a fall from grace for the spec that was the race-to-world-first meta healer in the previous tier. He also names the structural tailwind: as guilds gear and bosses die faster with less burst damage, continuous-throughput healers gain and burst healers lose.",
       "url": "https://youtu.be/qYVsRrr7xg8?t=589",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -16665,7 +16665,7 @@
       "patchContext": "Season 2 live (12.1.5) — raid outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
       "note": "He says Restoration Druid already does not need help in the raid: the buffs it has received are more than enough to make it the meta raid healer.",
       "url": "https://youtu.be/YUpQ1W71a9Y?t=616",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -16749,6 +16749,126 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"First Specs Tuning of 12.1.5 | Subtlety Nerfed, Fire, Feral, MM & Warlocks Buffed\" (published 2026-10-24): his walkthrough of the announced October 27 (NA) / 28 (EU) weekly-reset class tuning (us.forums topic 2390748), read against current spec popularity and performance in high keys and the raid. The tuning was announced, not yet live, when he recorded.",
       "note": "He calls Demonology a decent, good high-end Mythic+ spec right now and says the bug fix stopping Warlock summons from pulling distant out-of-combat targets, triggered by Subtlety Rogue shadow clones, matters more than either Warlock buff because it lets Demonology into the Subtlety compositions.",
       "url": "https://youtu.be/YUpQ1W71a9Y?t=924",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He shows Subtlety about 15% ahead of the second-best raid DPS spec and more than 20% above the average, and expects it to stay the strongest raid spec even after the roughly 10-12% average nerf arriving at the next weekly reset.",
+      "url": "https://youtu.be/L4LNAG87abo?t=61",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Augmentation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He says Augmentation has become the second-best raid performer over the last few weeks, and that it does best on the later, high-pull progression bosses, ranking sixth, fifth and fourth on the last three.",
+      "url": "https://youtu.be/L4LNAG87abo?t=123",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "neutral",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He names Arcane as the spec that fell the most: the best raid performer before 12.1.5, it has dropped to a more average position since.",
+      "url": "https://youtu.be/L4LNAG87abo?t=153",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Shadow",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He says Shadow's high all-boss raid average comes from ranged cleave on the split early bosses; on the higher-pull bosses that matter for progression it is last on one and in the bottom six on another, recovering only where a fight has adds to cleave.",
+      "url": "https://youtu.be/L4LNAG87abo?t=276",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He places Restoration Druid in the top healer trio with Holy Priest and Preservation, a gap that formed in mid-September and has held through 12.1.5; its HoTs and mastery suit the lower-burst raid healing that rising item level and boss nerfs produce.",
+      "url": "https://youtu.be/L4LNAG87abo?t=641",
+      "superseded": false
+    },
+    {
+      "class": "Priest",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He places Holy Priest in the top raid healer trio, saying its spread HoT healing fits the slower, lower-burst healing the raid needs as the season goes on.",
+      "url": "https://youtu.be/L4LNAG87abo?t=794",
+      "superseded": false
+    },
+    {
+      "class": "Evoker",
+      "spec": "Preservation",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "positive",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He keeps Preservation in the top raid healer trio with the highest maximum burst of any healer, while noting that edge shrinks deeper into the season and the more Restoration Druids and Holy Priests share the group.",
+      "url": "https://youtu.be/L4LNAG87abo?t=824",
+      "superseded": false
+    },
+    {
+      "class": "Monk",
+      "spec": "Mistweaver",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He puts Mistweaver in the bottom four raid healers, saying it was expected to stay poor even after its buffs.",
+      "url": "https://youtu.be/L4LNAG87abo?t=702",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "negative",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He puts Restoration Shaman in the bottom four raid healers, saying it was expected to be quite poor.",
+      "url": "https://youtu.be/L4LNAG87abo?t=702",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-26",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — raid outlook, \"Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results\" (published 2026-10-26): his recap of raid spec performance across all bosses and boss by boss over the three weekly resets since his previous raid recap, i.e. 12.1.5 against the weeks just before it. Recorded before the October 27 weekly-reset class tuning (us.forums topic 2390748) applied.",
+      "note": "He puts Holy Paladin in the bottom four raid healers because it is target-capped, with the lowest maximum HPS even in top logs (about 20% below Mistweaver), but still calls it a very good and popular raid healing profile.",
+      "url": "https://youtu.be/L4LNAG87abo?t=732",
       "superseded": false
     }
   ]

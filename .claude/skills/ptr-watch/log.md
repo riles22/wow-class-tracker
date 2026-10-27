@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~16:05 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: live-hotfixes 2336376 post 1 still v56; live-hotfixes-1215 2382684 post 1 still v14 (edited 2026-10-27T01:01Z); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383602, WoW: Forever racial tuning — a separate product, out of scope), news index (same top) and blue tracker swept: nothing new for Midnight class tuning since the ~14:05 run; no new hotfix compilation topic. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1 (post 2 a post_type 3 moderation event); its 2026-10-23 entry stands and applies with today's maintenance. 12.1.7 PTR items (Talebound test, decor datamines) not logged (PHASES.ptr null). No 12.2 PTR. Writeup gap: Demonology Warlock only (deliberate null). 0 feed entries.
+
 ## 2026-10-27 (nightly, ~14:05 UTC) — Oct 26 live hotfix logged; 3 ledger sections resolved; 1 feed entry
 
 - Official ledger: live-hotfixes (2336376) post 1 still v56, unchanged but for checkedAt. live-hotfixes-1215 (2382684) post 1 moved v12 -> v14 (edited 2026-10-27T01:01:16Z, title "World of Warcraft: Midnight Hotfixes - October 26"), adding three October 26 sections: Shaman › Enhancement (Voltaic Blaze not hitting secondary targets when Ula'tek is the main target) and Warlock › Affliction (Cooldown Manager / Summon Darkglare display) resolved applied against a new 2026-10-26 kind hotfix, realm live entry (wowheadUrl news=383599, cross-checked line for line); the Player versus Player › Paladin › Holy section (Spreading the Word / Cleanse) resolved irrelevant as PvP-only. 0 unresolved; check-official-notes passes. No set-bonus keyword in the block.

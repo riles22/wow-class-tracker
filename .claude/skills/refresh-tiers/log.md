@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~16:05 UTC) — Method 0 moves; IV, Wowhead, Archon walled
+
+- Method (direct curl, browser headers): mplus 40 (27/7/6) and raid 40 (27/7/6), div.tier__tier parse, 8 dungeon names rejected by roster match; "Midnight Season 2" + Devourer in both; Last Updated M+ 14 Oct, raid 10 Aug (matches published-evidence). 0 of 80 moved; snapshots stay 2026-10-27.
+- Icy Veins: all six pages 403 "Just a moment..." (~5.8 KB, 0 tier-list-entry). Wowhead: all six guide pages 202 AWS WAF challenge (2,020 bytes); stored letters are this morning's owner browser-lane read. Archon: 403 Cloudflare on raid heroic and M+ pages (source-health agrees). Nothing parsed from any of the three; letters retained.
+
 ## 2026-10-27 (interactive local, afternoon) — Wowhead refreshed through the owner's Brave: 23 of 80 letters changed; first read since 10-12
 
 - Transport: the owner's Brave browser driven by Claude in Chrome (owner decision 2026-10-27, browser lane). Ordinary page loads with no challenge shown and none solved; the `WH.markup` tier-list block read in-page after unescaping `\/`, one `[tier-list=rows]` block per page. Counts: raid 27/7/6, M+ 27/7/6, every letter on Wowhead's scale, 0 unmatched, 0 duplicates; titles "Midnight Season 2", Devourer on both DPS pages, so `seasonVerified` stays "s2".

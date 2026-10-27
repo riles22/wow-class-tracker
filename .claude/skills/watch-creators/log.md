@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~16:05 UTC) — 44/44 feeds; queue 2 -> 0; 10 metaNotes
+
+- Supadata ok, 2 fetched. izen L4LNAG87abo "Best Raid Specs in 12.1.5" (2026-10-26) distilled into 10 raid metaNotes framed "Season 2 live (12.1.5) — raid outlook": Subtlety positive, Augmentation positive, Arcane neutral (fell to average), Shadow mixed, Restoration Druid / Holy Priest / Preservation positive, Mistweaver and Restoration Shaman negative, Holy Paladin mixed. 13 older live izen raid-lens notes for those specs superseded (bracket "both" and M+ notes left live). Deaths/squishiness and per-boss Windwalker/Assassination swings not distilled (fight artifacts); Unholy, Devourer, Discipline remarks too thin. izen `latest` advanced. Boss names avoided in notes (ASR mangles them).
+- AutomaticJak FY6vocZJIyw "Season 2's Massive Falloff" read and moved to skipped[] (M+ participation and gearing incentives, no spec read).
+- New since the last poll: leak a-mgbJoJhlE (WoW Forever pet guide, other product) and Megasett ZlHhDlfZ_7w (key stream): left unseen, not queued.
+
 ## 2026-10-27 (local scheduled, after today's nightly) — caption 429 persists; queue 2 -> 2; 0 takes
 
 - Tried the first queued video (izen L4LNAG87abo) with yt-dlp: info fetch fine, caption download HTTP 429 with `player_client=android`, and again on one paced retry without it. Same IP-scoped timedtext flag as 10-24/10-25, now four days. Stopped there per the one-probe rule; AutomaticJak FY6vocZJIyw not attempted. Both stay queued for the nightly's Supadata lane. No RSS re-sweep (the nightly read 44/44 feeds about an hour earlier). 0 takes, 0 metaNotes.
