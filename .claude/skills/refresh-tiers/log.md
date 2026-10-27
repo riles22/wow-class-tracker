@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~20:06 UTC) — Method 0 moves; IV/Wowhead/Archon walled
+
+- Method (direct browser-header GET, 200): 40/40 per bracket (27/7/6), Devourer A both, Season 2 body; M+ Last Updated 14 Oct, raid 10 Aug; 0 moves. Icy Veins 403 x6 (Cloudflare, 0 tier-list-entry), Wowhead 202 x6 (AWS WAF, 0 tier-list blocks), Archon raid 403 Cloudflare: nothing parsed, stored letters/snapshots (2026-10-27 from the owner local run) kept. No seasonVerified change, so no freeze-season.
+
 ## 2026-10-27 (interactive local, read ~15:30 UTC, applied after the ~16:05 nightly re-run) — Archon refreshed through the owner's Brave: 47 of 80 letters changed, raid churn owner-acked; first read since the 08-24 data
 
 - Transport: the owner's Brave browser driven by Claude in Chrome (same browser lane, owner decision 2026-10-27). Ordinary page loads, no verification page shown and none solved; `__NEXT_DATA__` read in-page. All six registered letter pages report `lastUpdated` 2026-10-26T12:00Z. Counts: raid 27/7/6, M+ 27/7/6, every letter on Archon's S/A/B/C scale, 0 unmatched (resolved from the icon `Class-Spec` token, never the display name); raid bodies name the Venomous Abyss, M+ bodies say Season 2, Devourer on both DPS pages, so `seasonVerified` stays "s2".

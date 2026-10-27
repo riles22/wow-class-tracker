@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~20:06 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
+
+- Ledger: live-hotfixes 2336376 post 1 still v56; live-hotfixes-1215 2382684 post 1 still v14 (title "Midnight Hotfixes - October 26"); pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (top news=383610, WoW: Forever portal room), news index (same top) and blue tracker swept: nothing new for Midnight class tuning; no new hotfix compilation topic. "Class Tuning Incoming - October 27" (topic 2390748) still post 1 v1 (post 2 a post_type 3 moderation event); its 2026-10-23 entry stands. 12.1.7 PTR dev notes (topic 2383391) and decor/Talebound items not logged (PHASES.ptr null). No 12.2 PTR. Writeup gap: Demonology Warlock only (deliberate null). 0 feed entries.
+
 ## 2026-10-27 (nightly re-run, ~16:05 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: live-hotfixes 2336376 post 1 still v56; live-hotfixes-1215 2382684 post 1 still v14 (edited 2026-10-27T01:01Z); pending differed from stored only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

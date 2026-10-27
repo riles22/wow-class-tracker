@@ -817,7 +817,7 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 11,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 9,
         "archon|raid|95th pct DPS (Heroic)": 27,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 13,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 12,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 10,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 9,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 10,
@@ -833,7 +833,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 3,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 8,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 10,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 15
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 13
       },
       "scores": {
         "raid": 66,
@@ -911,15 +911,16 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 4,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 11,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 14,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 18,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 18,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 14,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 14,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 16,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 14,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 20,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 4,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 17
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 17,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 18
       },
       "dummy": {
         "rank": 7,
@@ -982,7 +983,7 @@
         "archon|mplus|Popularity": 15,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 8,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 16,
-        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
         "mythicstats|mplus|Top-2000 keys representation": 5,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 4,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 20,
@@ -999,7 +1000,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 9,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 8,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 9,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 10,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 11,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 5,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 11,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 7,
@@ -1094,7 +1095,8 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 9,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 13,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 14,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 16
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 21
       },
       "dummy": {
         "rank": 6,
@@ -1174,9 +1176,9 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 5,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 5,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 3,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 4,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 2,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 3
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 6
       },
       "scores": {
         "raid": 49,
@@ -1262,7 +1264,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 7,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 9,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 15,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 15,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 16,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 8
       },
       "dummy": {
@@ -1337,7 +1339,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 23,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 24,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 17,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 17,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 16,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 23,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 17,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 16,
@@ -1347,7 +1349,8 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 25,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 15,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 11,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 24
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 25
       },
       "scores": {
         "raid": 33,
@@ -1424,7 +1427,10 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 2,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 1,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 2,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 5
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 2
       },
       "scores": {
         "raid": 64,
@@ -1501,7 +1507,7 @@
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 2,
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 2,
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 3,
-        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 5,
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 2,
         "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 2,
         "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Coiled Altar, top 100)": 2,
@@ -1583,7 +1589,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 27,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 27,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 27,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 25,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 27,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 27,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 27,
@@ -1648,7 +1654,7 @@
         "archon|mplus|Popularity": 17,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 12,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 23,
-        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 23,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 22,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 19,
         "robydoby|raid|99th pct DPS (12.1 PTR Mythic raid testing, Robydoby)": 3,
         "warcraftlogs|raid|Median raw DPS (12.1 PTR Dummy Dome, 1T)": 12,
@@ -1674,7 +1680,8 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 20,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 20,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 20,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 20
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 15
       },
       "dummy": {
         "rank": 4,
@@ -1843,7 +1850,8 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 3,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 18,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 25,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 13
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 14,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 17
       },
       "scores": {
         "raid": 34,
@@ -2009,13 +2017,13 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 25,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 22,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 25,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 24,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 22,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 24,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 23,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 21,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 21,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 23,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 26,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 23
       },
       "scores": {
@@ -2181,11 +2189,13 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 23,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 26,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 26,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 24,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 25,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 23,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 24,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 23,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 24,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 22
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 27,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 27,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 25
       },
       "scores": {
         "raid": 37,
@@ -2266,7 +2276,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 21,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 21,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 22,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 25,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 26,
         "mythicstats|mplus|Top-2000 keys representation": 15,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 19
       },
@@ -2350,9 +2360,9 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 6,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 6,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 6,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 5,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 4,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 4
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 5,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 5
       },
       "scores": {
         "raid": 54,
@@ -2504,7 +2514,7 @@
         "warcraftlogs|mplus|Median raw DPS (12.1 PTR M+ keys, pooled)": 2,
         "wowmeta|mplus|M+ lower-bound 95% CI rating (Blizzard API, population-wide)": 8,
         "archon|raid|95th pct DPS (Heroic)": 17,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 12,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Nek'zali the Soulcoiler, top 100)": 13,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Entombed Sentinels, top 100)": 12,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 4,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Lost Explorers, top 100)": 14,
@@ -2513,7 +2523,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 6,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 3,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 8,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 4,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 3,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 5,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 4,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 8,
@@ -2680,7 +2690,9 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 3,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 3,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 1,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 2
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 2,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 3
       },
       "scores": {
         "raid": 71,
@@ -2739,7 +2751,7 @@
         "archon|mplus|Popularity": 4,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 21,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 6,
-        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 5,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 6,
         "mythicstats|mplus|Top-2000 keys representation": 6,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 16,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 18,
@@ -2846,7 +2858,8 @@
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 3,
         "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Coiled Altar, top 100)": 7,
         "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Twin Fangs, top 100)": 7,
-        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Kith'ix, top 100)": 7
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Kith'ix, top 100)": 7,
+        "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Sszorak, top 100)": 7
       },
       "scores": {
         "raid": 72,
@@ -3007,7 +3020,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 22,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 16,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 18,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 16,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 17,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 14,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 15,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 17,
@@ -3079,7 +3092,7 @@
         "archon|mplus|Popularity": 14,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 25,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 14,
-        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 22,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 23,
         "mythicstats|mplus|Top-2000 keys representation": 15,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 18,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 9,
@@ -3096,7 +3109,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 15,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 15,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 15,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 13,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 14,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 19,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 16,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 18,
@@ -3187,8 +3200,8 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 25,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 26,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 20,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 22,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 26
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 24,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 27
       },
       "dummy": {
         "rank": 10,
@@ -3276,7 +3289,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 1,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 1,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 1,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 5,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 1,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 3,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 1
@@ -3364,7 +3377,7 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 4,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 5,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 4,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 3,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 4,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 9,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 5,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 4,
@@ -3453,7 +3466,7 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 18,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 13,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 13,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 11,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 10,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 12,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 13,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 13,
@@ -3544,7 +3557,7 @@
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Murder Row, top 100)": 6,
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Ruby Life Pools, top 100)": 6,
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Temple of Sethraliss, top 100)": 5,
-        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 5,
+        "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: The Blinding Vale, top 100)": 4,
         "warcraftlogs|mplus|Leaderboard median HPS (S2 M+10: Voidscar Arena, top 100)": 6,
         "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: The Coiled Altar, top 100)": 5,
         "warcraftlogs|raid|Leaderboard median HPS (S2 Mythic: Ula'tek, top 100)": 6,
@@ -3628,8 +3641,9 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 17,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Vashnik the Malignant, top 100)": 26,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 2,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 17,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 18
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 20,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 18,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 23
       },
       "scores": {
         "raid": 54,
@@ -3773,7 +3787,7 @@
         "archon|mplus|Popularity": 17,
         "warcraftlogs|raid|Median rDPS (Mythic, all bosses)": 13,
         "warcraftlogs|mplus|Median rDPS (M+, all dungeons)": 27,
-        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 25,
+        "murlok|mplus|Top-50 avg M+ rating (ceiling)": 26,
         "mythicstats|mplus|Top-2000 keys representation": 15,
         "simulationcraft|raid|SimC nightly Patchwerk DPS": 21,
         "warcraftlogs|mplus|Median rDPS (12.1 PTR M+ testing)": 12,
@@ -3795,11 +3809,12 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 23,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 25,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 26,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 24,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 25,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 21,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 17,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 18,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 19
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 21,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 19,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 27
       },
       "scores": {
         "raid": 55,
@@ -3880,14 +3895,14 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 14,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 11,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 7,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 14,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 13,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 10,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 10,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 11,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 11,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 3,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 4,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 7,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 14
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 15
       },
       "dummy": {
         "rank": 1,
@@ -3966,13 +3981,15 @@
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Sszorak, top 100)": 19,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Altar of Fangs, top 100)": 20,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Den of Nalorakk, top 100)": 18,
-        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 18,
+        "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Kings' Rest, top 100)": 17,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Murder Row, top 100)": 21,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Ruby Life Pools, top 100)": 18,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Temple of Sethraliss, top 100)": 17,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 15,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 16,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 21
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 22,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 26
       },
       "scores": {
         "raid": 34,
@@ -4050,9 +4067,9 @@
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: The Blinding Vale, top 100)": 4,
         "warcraftlogs|mplus|Leaderboard median DPS (S2 M+10: Voidscar Arena, top 100)": 4,
         "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Twin Fangs, top 100)": 2,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 3,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 3,
-        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 2
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: The Coiled Altar, top 100)": 4,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)": 6,
+        "warcraftlogs|raid|Leaderboard median DPS (S2 Mythic: Kith'ix, top 100)": 4
       },
       "scores": {
         "raid": 67,
