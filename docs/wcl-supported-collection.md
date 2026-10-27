@@ -117,7 +117,11 @@ changes:
   26 parity counts found no sparse cut. The switch dropped the 12.1 rows of the four cuts
   that had failed every nightly since October 6 to 12 (the refresh log blames a zero-amount
   entry for the earliest, Feral on The Twin Fangs), so a repeat failure leaves a gap, not a
-  mixed pool.
+  mixed pool. Sparse is not the only risk: the first nightly on partition 2 found 19 invalid
+  cuts (a zero-amount entry on a board under 100 entries), 9 of them still held a 12.1 row,
+  and the all-or-nothing merge refused every WCL row that night. The follow-up commit dropped
+  those 9 rows and 15 more whose new board was under one full page. At the next switch, drop
+  the old row of every cut whose new board is not yet a full page (`hasMorePages`).
 - The update ceiling and the sample-provenance checks follow the config (40 specs x 17
   encounters = 680 rows). Literal count pins are deliberate tripwires and changed in the
   same commit: `test/wcl-live.test.mjs` (row, cut and batch counts),
