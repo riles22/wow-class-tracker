@@ -125,8 +125,15 @@ changes:
   mixed pool. Sparse is not the only risk: the first nightly on partition 2 found 19 invalid
   cuts (a zero-amount entry on a board under 100 entries), 9 of them still held a 12.1 row,
   and the all-or-nothing merge refused every WCL row that night. The follow-up commit dropped
-  those 9 rows and 15 more whose new board was under one full page. At the next switch, drop
-  the old row of every cut whose new board is not yet a full page (`hasMorePages`).
+  those 9 rows and 15 more whose new board was under one full page. The nightly now does
+  this itself (owner decision 2026-10-27). Once a pool has a row refreshed on the pin,
+  `partitionRetirements` in `fetch-wcl.mjs` lists the older-partition row of each cut in it
+  that WCL answered as sparse or invalid there. The list rides in `updates.json` as
+  `retire`, sealed by `updatesSha256`. `apply-metrics.mjs` drops those rows in the same
+  merge, `evidence.retired` counts them per bracket, and `check-wcl-metrics.mjs` checks each
+  one against the baseline and its cut receipt. An unreachable cut retires nothing, so that
+  night's merge still refuses. Zero-amount entries no longer void a cut (same date), so a
+  switch commit no longer drops rows by hand.
 - The update ceiling and the sample-provenance checks follow the config (40 specs x 17
   encounters = 680 rows). Literal count pins are deliberate tripwires and changed in the
   same commit: `test/wcl-live.test.mjs` (row, cut and batch counts),

@@ -27,7 +27,7 @@ import path from "node:path";
 import { applyMetrics } from "./apply-metrics.mjs";
 import { PHASES } from "./normalize.mjs";
 import { createHash } from "node:crypto";
-import { collectLeaderboards } from "./wcl-live.mjs";
+import { collectLeaderboards, LIVE_LEADERBOARDS } from "./wcl-live.mjs";
 import { createWclCoverage } from "./wcl-coverage.mjs";
 
 // Header recipe proven by the 2026-07-14 run (see refresh-metrics SKILL.md, "WCL v2
@@ -280,6 +280,31 @@ async function fetchRawRecipe(token, recipe) {
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
+/* Partition-switch cleanup (owner decision 2026-10-27). After a reviewed switch (runbook
+   C2) each rank pool moves to the new pin as its cuts refresh. A cut the new partition
+   cannot refresh would keep its old-partition row and mix the pool, and validation then
+   refuses every WCL row that night (2026-10-26, fixed by hand in #108). Such a row is
+   retired instead, but only when it sits on a partition other than its bracket's pin, the
+   same pool has a refreshed row this run, and WCL answered for the cut on the pin (sparse
+   or invalid there). An unreachable cut retires nothing: the merge then refuses, and
+   publication holds every WCL row. The list rides in updates.json as `retire`, sealed by
+   updatesSha256, and check-wcl-metrics verifies each entry against the baseline. */
+export function partitionRetirements(roster, updates, brackets) {
+  const roles = new Map(roster.map(s => [`${s.class}|${s.spec}`, s.role]));
+  const pool = (cls, spec, m) => `${roles.get(`${cls}|${spec}`)}|${m.bracket}|${m.name}`;
+  const refreshed = new Set(updates.metrics.map(r => pool(r.class, r.spec, r)));
+  const upserted = new Set(updates.metrics.map(r => `${r.class}|${r.spec}|${r.source}|${r.bracket}|${r.name}`));
+  const retire = [];
+  for (const s of roster) for (const m of s.metrics ?? []) {
+    const cfg = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === m.bracket);
+    if (m.source !== "warcraftlogs" || m.sample?.kind !== "leaderboard-entries" || !cfg || m.sample.partition === cfg.partition
+      || upserted.has(`${s.class}|${s.spec}|${m.source}|${m.bracket}|${m.name}`) || !refreshed.has(pool(s.class, s.spec, m))) continue;
+    const cut = brackets[cfg.key]?.cuts?.find(c => c.class === s.class && c.spec === s.spec && c.encounterId === m.sample.encounterId);
+    if (["sparse", "invalid"].includes(cut?.status)) retire.push({ class: s.class, spec: s.spec, source: m.source, bracket: m.bracket, name: m.name });
+  }
+  return retire;
+}
+
 export async function runWcl({ root = rootDir, outDir = "wcl-fetch", id = process.env.WCL_CLIENT_ID,
   secret = process.env.WCL_CLIENT_SECRET } = {}) {
   const roster = JSON.parse(await readFile(path.join(root, "data/specs.json"), "utf8"));
@@ -308,6 +333,8 @@ export async function runWcl({ root = rootDir, outDir = "wcl-fetch", id = proces
         const result = await collectLeaderboards({ roster, query: q => gql(state.oauth.token, q) });
         evidence.brackets = state.brackets = result.brackets;
         updates = result.updates;
+        const retire = partitionRetirements(roster, updates, result.brackets);
+        if (retire.length) updates.retire = retire; // absent otherwise, so today's updates.json is unchanged
         evidence.querySummary = result.querySummary;
       }
     }
@@ -322,6 +349,11 @@ export async function runWcl({ root = rootDir, outDir = "wcl-fetch", id = proces
       await applyMetrics(updatePath, root);
       for (const [key, b] of Object.entries(evidence.brackets)) {
         if (b.rows > 0) evidence.landed[key] = { rows: b.rows };
+      }
+      // Like landed, recorded only once the merge applied them; absent when nothing was retired.
+      for (const r of updates.retire ?? []) {
+        const key = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === r.bracket).key;
+        ((evidence.retired ??= {})[key] ??= { rows: 0 }).rows++;
       }
     } catch (error) {
       evidence.verdict = "merge-failed";

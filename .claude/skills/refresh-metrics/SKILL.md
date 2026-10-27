@@ -57,7 +57,9 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   (minimum10), not population medians or unique-player medians. Entries may repeat
   characters. The date range spans the partition's included logs, not a rolling week;
   `asOf` is the newest log date and `sample.observedAt` is the check instant. Empty or
-  sparse cuts remain missing/retain prior observations. No pooling across encounters.
+  sparse cuts remain missing/retain prior observations, except an older-partition row after
+  a reviewed switch: the collector retires it once its pool has refreshed on the pin
+  (`updates.retire`, owner decision 2026-10-27). No pooling across encounters.
   Raid: zone53, partition2 (12.1.5, reviewed switch 2026-10-26), difficulty5, size20, nine
   pinned raid bosses (Kith'ix 3513 joined in the switch) excluding Nymrissa3379. M+: zone55, partition1, difficulty10, size5, **bracket9 = key+10**;
   validate `brackets.min=2,bucket=1` and each returned `hardModeLevel=bracketData=10`.

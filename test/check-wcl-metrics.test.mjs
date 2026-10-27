@@ -54,18 +54,23 @@ function fixture() {
 }
 const currentRow = (f, row = f.updates.metrics[0]) => f.current.find(s => s.class === row.class && s.spec === row.spec).metrics.find(m => m.source === row.source && m.bracket === row.bracket && m.name === row.name);
 function reseal(f) { f.evidence.updatesSha256 = wclDigest(f.updates); f.current = merge(f.baseline, f.updates); }
-function omitFirst(f, status = "unreachable") {
-  const removed = f.updates.metrics.shift(), cfg = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === removed.bracket);
-  const receipt = f.evidence.brackets[cfg.key];
-  const cut = receipt.cuts.find(c => c.class === removed.class && c.spec === removed.spec && c.encounterId === removed.sample.encounterId);
-  Object.assign(cut, { status, samples: status === "sparse" ? 5 : 0 });
-  delete cut.value; delete cut.asOf;
-  receipt.rows--; receipt.status = "partial";
-  f.evidence.landed[cfg.key].rows--; f.evidence.verdict = "partial";
-  f.manifest.sources.find(s => s.source === cfg.key).result = "partial";
+// Drops every update row the predicate picks and records its cut as `status` instead.
+function omitWhere(f, predicate, status = "unreachable") {
+  const removed = f.updates.metrics.filter(predicate);
+  f.updates.metrics = f.updates.metrics.filter(row => !removed.includes(row));
+  for (const row of removed) {
+    const cfg = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === row.bracket), receipt = f.evidence.brackets[cfg.key];
+    const cut = receipt.cuts.find(c => c.class === row.class && c.spec === row.spec && c.encounterId === row.sample.encounterId);
+    Object.assign(cut, { status, samples: status === "sparse" ? 5 : 0 });
+    delete cut.value; delete cut.asOf;
+    receipt.rows--; receipt.status = "partial";
+    f.evidence.landed[cfg.key].rows--; f.evidence.verdict = "partial";
+    f.manifest.sources.find(s => s.source === cfg.key).result = "partial";
+  }
   reseal(f);
   return removed;
 }
+const omitFirst = (f, status) => omitWhere(f, (_, i) => i === 0, status)[0];
 const reject = (f, pattern) => assert.match(checkWclMetrics(f).join("\n"), pattern);
 
 test("WCL gate binds the public coverage summary to the independent receipt", () => {
@@ -189,6 +194,76 @@ test("WCL gate retains failed and sparse cuts exactly, without blocking successf
     target.metrics = target.metrics.filter(m => !same({ ...m, class: target.class, spec: target.spec }, omitted));
     reject(f, /Canonical WCL rows differ/);
   }
+});
+
+/* Partition-switch retirement (fetch-wcl.mjs partitionRetirements, owner decision
+   2026-10-27): baseline[0]'s stored raid row sits on the older reviewed partition, its cut
+   came back `status` on the pin, and the rest of its (Tank) pool refreshed. */
+const RAID = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid");
+const rehash = f => { f.evidence.updatesSha256 = wclDigest(f.updates); return f; };
+function retireFixture(status = "sparse") {
+  const f = fixture(), gone = omitFirst(f, status), owner = f.baseline[0];
+  owner.metrics.find(m => same({ ...m, class: owner.class, spec: owner.spec }, gone)).sample.partition = 1;
+  f.evidence.baselineSha256 = wclDigest(storedWclRows(f.baseline));
+  f.updates.retire = [{ class: gone.class, spec: gone.spec, source: gone.source, bracket: gone.bracket, name: gone.name }];
+  f.evidence.retired = { [RAID.key]: { rows: 1 } };
+  reseal(f);
+  const target = f.current.find(s => s.class === gone.class && s.spec === gone.spec);
+  target.metrics = target.metrics.filter(m => !same({ ...m, class: target.class, spec: target.spec }, gone));
+  return f;
+}
+
+test("WCL gate accepts a sealed partition-switch retirement of an old-partition row whose cut WCL answered sparse or invalid", () => {
+  assert.equal(retireFixture().baseline[0].metrics.at(-1).sample.partition, 1, "fixture retires an old-partition row");
+  for (const status of ["sparse", "invalid"]) assert.deepEqual(checkWclMetrics(retireFixture(status)), []);
+  // The public summary stays bound to the receipt: the retired cut reads as a cut, never as a kept value.
+  const covered = retireFixture(); covered.coverage = createWclCoverage(covered.evidence, covered.baseline);
+  assert.deepEqual(checkWclMetrics(covered), []);
+  assert.equal(covered.coverage.cuts.find(c => c.class === covered.baseline[0].class && c.spec === covered.baseline[0].spec
+    && c.bracket === "raid" && c.encounterId === RAID.encounters[0].id).status, "insufficient");
+});
+
+test("WCL gate refuses every partition retirement it cannot tie to an old row, a refreshed pool and an answered cut", () => {
+  const bad = /Invalid WCL partition retirement/;
+  reject(retireFixture("unreachable"), bad); // may still answer tomorrow; the merge refuses and WCL holds
+  const pinned = retireFixture(); pinned.baseline[0].metrics.at(-1).sample.partition = RAID.partition;
+  pinned.evidence.baselineSha256 = wclDigest(storedWclRows(pinned.baseline));
+  reject(pinned, bad);
+  for (const change of [
+    entry => entry.name = "Historical population median fixture", // not a leaderboard row
+    entry => entry.name += " (not stored)", entry => entry.source = "mythicstats", entry => entry.value = 1,
+  ]) {
+    const f = retireFixture(); change(f.updates.retire[0]); reject(rehash(f), bad);
+  }
+  const twice = retireFixture(); twice.updates.retire.push({ ...twice.updates.retire[0] }); twice.evidence.retired[RAID.key].rows = 2;
+  reject(rehash(twice), bad);
+  // Same series name, but only the DPS pool refreshed; the Tank pool held whole, so nothing in it may go.
+  const held = retireFixture(), role = s => roster.find(r => r.class === s.class && r.spec === s.spec).role;
+  const gone = held.updates.retire[0];
+  omitWhere(held, row => row.bracket === "raid" && row.name === gone.name && role(row) === role(gone), "sparse");
+  assert.ok(held.updates.metrics.some(row => row.bracket === "raid" && row.name === gone.name), "the DPS pool still refreshed");
+  reject(held, bad);
+});
+
+test("WCL gate binds partition retirements to the sealed updates, the retired receipt and the canonical rows", () => {
+  const unsealed = retireFixture(); unsealed.updates.retire.push({ ...unsealed.updates.retire[0], spec: "Other" });
+  reject(unsealed, /WCL updates differ from the trusted receipt/);
+  const empty = retireFixture(); empty.updates.retire = []; delete empty.evidence.retired;
+  reject(rehash(empty), /WCL updates differ from the trusted receipt/);
+  const unreceipted = retireFixture(); delete unreceipted.evidence.retired;
+  reject(unreceipted, /wcl-leaderboard-raid: retired receipt does not match the sealed retirements/);
+  const overstated = retireFixture(); overstated.evidence.retired[RAID.key].rows = 2;
+  reject(overstated, /retired receipt does not match/);
+  const stray = retireFixture(); stray.evidence.retired["wcl-live-raid"] = { rows: 0 };
+  reject(stray, /WCL retired receipt names an unknown bracket/);
+  // A sealed retirement the merge did not carry out leaves the old row in canonical data.
+  const kept = retireFixture(); kept.current = merge(kept.baseline, kept.updates);
+  reject(kept, /Canonical WCL rows differ/);
+  // Without a retirement the old row must be retained exactly, as before.
+  const plain = retireFixture(); delete plain.updates.retire; delete plain.evidence.retired;
+  reject(rehash(plain), /Canonical WCL rows differ/);
+  plain.current = merge(plain.baseline, plain.updates);
+  assert.deepEqual(checkWclMetrics(plain), []);
 });
 
 test("WCL gate refuses changed legacy rows and relocated metrics with forged ownership", () => {

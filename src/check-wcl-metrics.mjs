@@ -33,7 +33,10 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
     if (evidence?.schemaVersion !== 2 || evidence.liveSeason !== PHASES.liveSeason || !iso(evidence.attemptedAt)
       || Date.parse(evidence.attemptedAt) > +now || +now - Date.parse(evidence.attemptedAt) > 24 * 3600_000
       || evidence.baselineSha256 !== wclDigest(before)) throw new Error("WCL receipt is missing, stale, future, wrong-season, or bound to a different baseline");
-    if (!updates || Object.keys(updates).join() !== "metrics" || !Array.isArray(updates.metrics) || updates.metrics.length > leaderboardCeiling(baseline.length)
+    // `retire` (fetch-wcl.mjs partitionRetirements) is present only when it lists something.
+    const keys = Object.keys(updates ?? {}).join(), retire = updates?.retire ?? [];
+    if (!updates || !["metrics", "metrics,retire"].includes(keys) || !Array.isArray(updates.metrics) || updates.metrics.length > leaderboardCeiling(baseline.length)
+      || !Array.isArray(retire) || (keys === "metrics,retire" && !retire.length)
       || evidence.updatesSha256 !== wclDigest(updates)) throw new Error("WCL updates differ from the trusted receipt");
     if (manifest !== undefined && !Array.isArray(manifest?.sources)) throw new Error("WCL manifest source rows are missing");
     const bySpec = new Map(baseline.map(s => [`${s.class}|${s.spec}`, s]));
@@ -101,7 +104,31 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
       if (evidence.landed?.[key] || (manifest?.sources ?? []).some(s => s.source === key && s.result === "success"))
         throw new Error(`${key}: leaderboards cannot vouch for historical population medians`);
     }
+    /* Partition-switch retirements (fetch-wcl.mjs partitionRetirements). Each must name a
+       stored leaderboard row on a reviewed partition other than its pin, in a pool this run
+       refreshed, whose cut WCL answered on the pin as sparse or invalid. Validation still
+       refuses any pool the merge would leave mixed. */
+    const retired = new Set(), roleOf = row => bySpec.get(`${row.class}|${row.spec}`)?.role;
+    for (const entry of retire) {
+      const cfg = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === entry?.bracket);
+      const old = before.find(row => tuple(row) === tuple(entry ?? {}));
+      const cut = old && evidence.brackets?.[cfg?.key]?.cuts?.find(c => c.class === old.class && c.spec === old.spec && c.encounterId === old.sample?.encounterId);
+      if (!isDeepStrictEqual(Object.keys(entry ?? {}), ["class", "spec", "source", "bracket", "name"]) || entry.source !== "warcraftlogs"
+        || !cfg || !old || old.sample?.kind !== "leaderboard-entries" || old.sample.partition === cfg.partition
+        || !cfg.reviewedPartitions.some(p => p.id === old.sample.partition) || seen.has(tuple(entry)) || retired.has(tuple(entry))
+        || !updates.metrics.some(row => row.bracket === entry.bracket && row.name === entry.name && roleOf(row) === roleOf(entry))
+        || !["sparse", "invalid"].includes(cut?.status))
+        throw new Error("Invalid WCL partition retirement: it must name a stored row on an older reviewed partition, in a refreshed pool, whose cut WCL answered as sparse or invalid");
+      retired.add(tuple(entry));
+    }
+    for (const cfg of LIVE_LEADERBOARDS.brackets) {
+      if ((evidence.retired?.[cfg.key]?.rows ?? 0) !== retire.filter(r => r.bracket === cfg.bracket).length)
+        throw new Error(`${cfg.key}: retired receipt does not match the sealed retirements`);
+    }
+    if (Object.keys(evidence.retired ?? {}).some(key => !LIVE_LEADERBOARDS.brackets.some(c => c.key === key)))
+      throw new Error("WCL retired receipt names an unknown bracket");
     const expected = new Map(before.map(row => [tuple(row), row]));
+    for (const key of retired) expected.delete(key);
     for (const row of updates.metrics) {
       expected.set(tuple(row), row);
     }
@@ -130,6 +157,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     }
     const errors = await runWclCheck(options);
     if (errors.length) throw new Error(errors.join("\n"));
-    console.log("WCL leaderboard metrics match trusted collection; historical and failed/sparse cuts retained exactly.");
+    console.log("WCL leaderboard metrics match trusted collection; every WCL row it did not refresh or retire is retained exactly.");
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

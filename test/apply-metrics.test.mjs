@@ -70,12 +70,45 @@ test("retire removes one stored Mythicstats share at or below the bound (blank, 
   assert.equal((await applyMetrics(await input({ retire: [tuple("Outlaw")] }), root)).metricsRetired, 0, "an already-absent tuple is a no-op");
   const before_ = await readFile(specsPath(), "utf8");
   await assert.rejects(applyMetrics(await input({ retire: [tuple("Assassination")] }), root), /stores 0\.6%, above the 0\.5% retirement bound — nothing written/);
-  for (const other of [{ source: "murlok" }, { source: "warcraftlogs", bracket: "raid", name: "Retire probe" }, { name: "Meta presence" }, { bracket: "raid" }]) {
+  for (const other of [{ source: "murlok" }, { name: "Meta presence" }, { bracket: "raid" }]) {
     await assert.rejects(applyMetrics(await input({ retire: [{ ...tuple("Assassination"), ...other }] }), root), /only the Mythicstats "Top-2000 keys representation" M\+ series can be retired; nothing written/);
   }
+  await assert.rejects(applyMetrics(await input({ retire: [{ ...tuple("Assassination"), source: "warcraftlogs", bracket: "raid", name: "Retire probe" }] }), root),
+    /names no stored leaderboard row on a reviewed partition other than the raid pin — nothing written/);
   await assert.rejects(applyMetrics(await input({ retire: [tuple("Swashbuckler")] }), root), /did not match any spec — nothing written/);
   await assert.rejects(applyMetrics(await input({ metrics: [share("Outlaw", 0.4)], retire: [tuple("Outlaw")] }), root), /also upserted — nothing written/);
   assert.equal(await readFile(specsPath(), "utf8"), before_);
+});
+
+/* The WCL partition-switch lane (fetch-wcl.mjs partitionRetirements, owner decision
+   2026-10-27): a pool moving to the pin may drop the old row of a cut the pin cannot
+   refresh. Without that retirement the same merge mixes partitions and is refused. */
+test("retire drops an old-partition WCL leaderboard row so a moving pool lands whole, and refuses every other WCL shape", async () => {
+  const specs = await readSpecs(), pin = 2;
+  const pool = specs.filter(s => s.role === "DPS").map(s => [s, s.metrics.find(m => m.bracket === "raid" && m.sample?.kind === "leaderboard-entries"
+    && m.sample.encounterId === 3470)]).filter(([, m]) => m);
+  assert.ok(pool.length >= 3, "fixture needs a real multi-spec raid pool");
+  for (const [, m] of pool) m.sample.partition = 1; // the whole pool still on the older reviewed partition
+  await writeFile(specsPath(), JSON.stringify(specs, null, 2) + "\n");
+  const [[left, leftRow], ...rest] = pool;
+  const moved = rest.map(([s, m]) => ({ class: s.class, spec: s.spec, ...structuredClone(m), sample: { ...m.sample, partition: pin } }));
+  const tuple = { class: left.class, spec: left.spec, source: "warcraftlogs", bracket: "raid", name: leftRow.name };
+  const unchanged = await readFile(specsPath(), "utf8");
+  await assert.rejects(applyMetrics(await input({ metrics: moved }), root), /mixes WCL partitions/);
+  await assert.rejects(applyMetrics(await input({ metrics: moved, retire: [tuple, { ...tuple, name: "Not stored" }] }), root),
+    /names no stored leaderboard row on a reviewed partition other than the raid pin — nothing written/);
+  await assert.rejects(applyMetrics(await input({ metrics: moved, retire: [{ ...tuple, class: rest[0][0].class, spec: rest[0][0].spec }] }), root), /also upserted — nothing written/);
+  assert.equal(await readFile(specsPath(), "utf8"), unchanged);
+  const result = await applyMetrics(await input({ metrics: moved, retire: [tuple] }), root);
+  assert.deepEqual([result.metricsApplied, result.wclRetired, result.metricsRetired], [moved.length, 1, 0]);
+  // Tanks share the DPS series name in their own pool, which this merge leaves alone.
+  const after = await readSpecs(), rows = after.filter(s => s.role === "DPS")
+    .flatMap(s => s.metrics.filter(m => m.name === leftRow.name).map(m => [s.class, s.spec, m.sample.partition]));
+  assert.deepEqual(rows.filter(([cls, spec]) => cls === left.class && spec === left.spec), [], "absent, not zeroed");
+  assert.ok(rows.length === moved.length && rows.every(([, , partition]) => partition === pin));
+  // A row already on the pin is no longer an old-partition row, so it cannot be retired.
+  await assert.rejects(applyMetrics(await input({ retire: [{ ...tuple, class: rest[0][0].class, spec: rest[0][0].spec }] }), root),
+    /names no stored leaderboard row on a reviewed partition other than the raid pin — nothing written/);
 });
 
 test("ptrdummy merge replaces spec.ptrDummy wholesale with defaults applied", async () => {

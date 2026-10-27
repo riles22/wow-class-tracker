@@ -4,8 +4,9 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { verdictFor, spacedName, medianOf, buildDummyRawRows, buildPooledRawRows, RAW_RECIPES,
-  oauthToken, gql } from "../src/fetch-wcl.mjs";
+  oauthToken, gql, partitionRetirements } from "../src/fetch-wcl.mjs";
 import { checkManifest } from "../src/check-refresh.mjs";
+import { LIVE_LEADERBOARDS, expectedMetricName } from "../src/wcl-live.mjs";
 
 const noPause = async () => {};
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -44,6 +45,29 @@ test("supported WoW collection verdicts distinguish complete and partial collect
   assert.equal(verdictFor({ ...common, brackets: { raid: { status: "partial", rows: 20 } } }).verdict, "partial");
   assert.equal(verdictFor(common).verdict, "network-failed");
   assert.deepEqual(RAW_RECIPES, [], "closed PTR recipes stay retired");
+});
+
+/* Partition-switch cleanup (owner decision 2026-10-27): only an old-partition row in a
+   pool this run refreshed, and only when WCL answered for its cut on the pin. */
+test("partitionRetirements retires an old-partition row only when its pool moved and WCL answered sparse or invalid", () => {
+  const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid"), [boss, other] = raid.encounters;
+  const old = (encounterId, partition = 1, name = expectedMetricName(raid, raid.encounters.find(e => e.id === encounterId), "dps")) =>
+    ({ source: "warcraftlogs", bracket: "raid", name, value: 900, sample: { kind: "leaderboard-entries", partition, encounterId } });
+  const spec = (cls, role, ...metrics) => ({ class: cls, spec: "S", role, metrics });
+  const roster = [
+    spec("Sparse", "DPS", old(boss.id)), spec("Invalid", "DPS", old(boss.id)), spec("Unreachable", "DPS", old(boss.id)),
+    spec("Refreshed", "DPS", old(boss.id)), spec("Pinned", "DPS", old(boss.id, raid.partition)),
+    spec("Unmoved", "DPS", old(other.id)), spec("Healer", "Healer", old(boss.id, 1, expectedMetricName(raid, boss, "dps"))),
+    spec("History", "DPS", { source: "warcraftlogs", bracket: "raid", name: "Historical population median", value: 1 }),
+  ];
+  const fresh = { class: "Refreshed", spec: "S", source: "warcraftlogs", bracket: "raid", name: old(boss.id).name, sample: { partition: raid.partition } };
+  const status = { Sparse: "sparse", Invalid: "invalid", Unreachable: "unreachable", Refreshed: "success", Pinned: "sparse", Unmoved: "sparse", Healer: "sparse" };
+  const cuts = Object.entries(status).flatMap(([cls, s]) => [boss, other].map(e => ({ class: cls, spec: "S", encounterId: e.id, status: s })));
+  const retire = partitionRetirements(roster, { metrics: [fresh] }, { [raid.key]: { cuts } });
+  // The healer row sits in a different (role) pool, which nothing refreshed.
+  assert.deepEqual(retire, ["Sparse", "Invalid"].map(cls => ({ class: cls, spec: "S", source: "warcraftlogs", bracket: "raid", name: fresh.name })));
+  assert.deepEqual(partitionRetirements(roster, { metrics: [] }, { [raid.key]: { cuts } }), [], "a pool nothing refreshed is held whole");
+  assert.deepEqual(partitionRetirements(roster, { metrics: [fresh] }, {}), [], "no receipt, no retirement");
 });
 
 test("WCL transport: transient responses retry once with deadlines; API errors and credential rejections do not retry", async () => {

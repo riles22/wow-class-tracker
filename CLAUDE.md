@@ -1230,7 +1230,11 @@ and the page's own `published` date rides alongside `snapshot`.
    next partition waits for owner review; `wcl-probe.yml` prints its evidence.
    Validation, the update ceiling and the drawer's partition name read `LIVE_LEADERBOARDS`;
    a rank pool may not mix partitions; a test pins `PHASES` and `LIVE_LEADERBOARDS` in
-   lockstep. Procedure: `docs/wcl-supported-collection.md`.
+   lockstep. After a switch the nightly retires the older-partition row of each cut WCL
+   answered as sparse or invalid on the pin, once that pool has a refreshed row
+   (`partitionRetirements` in `fetch-wcl.mjs`, sealed as `retire` in `updates.json`; owner
+   decision 2026-10-27). An unreachable cut retires nothing, and the merge still refuses.
+   Procedure: `docs/wcl-supported-collection.md`.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm run test:quiet && npm run build`.
