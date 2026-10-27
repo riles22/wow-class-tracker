@@ -1189,6 +1189,10 @@ and the page's own `published` date rides alongside `snapshot`.
    **Leaderboard median DPS/HPS (S2 Mythic/M+10: encounter, top 100)** rows with sample
    provenance. Run `node src/check-wcl-metrics.mjs` before finishing; publication checks
    against the independent pre-agent artifact. These numeric series never feed letters.
+   A refused merge (`merge-failed`) lands nothing: both leaderboard manifest rows are
+   `parse_error` with `evidence.detail`, every WCL row stays exactly as committed, and
+   the rest of the night still publishes while the refresh job goes red as the alert
+   (owner decision 2026-10-27; before that it blocked the whole night).
    The fixed recipe covers 9 raid bosses (zone 53, partition 2 "12.1.5" since the reviewed
    switch of 2026-10-26, Mythic difficulty 5, size 20: the eight 12.1 bosses plus Kith'ix
    3513, which joined in that switch; excludes world boss Nymrissa 3379) and 8 dungeons

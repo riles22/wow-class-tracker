@@ -266,6 +266,37 @@ test("WCL gate binds partition retirements to the sealed updates, the retired re
   assert.deepEqual(checkWclMetrics(plain), []);
 });
 
+/* A refused merge (owner decision 2026-10-27): nothing landed or was retired, so the night
+   may publish only with every WCL row held exactly and no manifest success. */
+function refusedFixture(f = fixture()) {
+  Object.assign(f.evidence, { verdict: "merge-failed", detail: "Collected rows failed canonical validation: fixture", landed: {} });
+  for (const s of f.manifest.sources) if (s.source.startsWith("wcl-leaderboard-")) s.result = "parse_error";
+  f.current = structuredClone(f.baseline);
+  return f;
+}
+
+test("a refused WCL merge passes only with every WCL row held exactly and no manifest success", () => {
+  assert.deepEqual(checkWclMetrics(refusedFixture()), []);
+  const covered = refusedFixture(); covered.coverage = createWclCoverage(covered.evidence, covered.baseline);
+  assert.deepEqual(checkWclMetrics(covered), []);
+  assert.ok(covered.coverage.cuts.every(c => c.status === "failed"), "the public summary verifies no cut");
+  // A sealed retirement is held too: the old row stays and nothing is counted as retired.
+  const retiring = refusedFixture(retireFixture()); delete retiring.evidence.retired;
+  assert.deepEqual(checkWclMetrics(retiring), []);
+  reject(refusedFixture(retireFixture()), /wcl-leaderboard-raid: retired receipt does not match the sealed retirements/);
+  const landed = refusedFixture(); landed.current = merge(landed.baseline, landed.updates);
+  reject(landed, /The WCL merge was refused, so every canonical WCL row must equal the baseline exactly/);
+  const changed = refusedFixture(); changed.current[0].metrics.at(-1).value++;
+  reject(changed, /must equal the baseline exactly/);
+  const counted = refusedFixture(); counted.evidence.landed = fixture().evidence.landed;
+  reject(counted, /coverage\/landed receipt does not match collected rows/);
+  const claimed = refusedFixture(); claimed.manifest.sources.find(s => s.source === RAID.key).result = "success";
+  reject(claimed, /wcl-leaderboard-raid: the WCL merge was refused, so nothing landed and the manifest cannot claim success/);
+  // The refused updates stay bound to their receipt.
+  const tampered = refusedFixture(); tampered.updates.metrics[0].value++;
+  reject(tampered, /WCL updates differ from the trusted receipt/);
+});
+
 test("WCL gate refuses changed legacy rows and relocated metrics with forged ownership", () => {
   const changed = fixture(); changed.current[0].metrics[0].value++;
   reject(changed, /Canonical WCL rows differ/);

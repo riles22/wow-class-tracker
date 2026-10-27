@@ -39,6 +39,11 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
       || !Array.isArray(retire) || (keys === "metrics,retire" && !retire.length)
       || evidence.updatesSha256 !== wclDigest(updates)) throw new Error("WCL updates differ from the trusted receipt");
     if (manifest !== undefined && !Array.isArray(manifest?.sources)) throw new Error("WCL manifest source rows are missing");
+    /* A refused merge (fetch-wcl.mjs: merge-failed) landed and retired nothing. Publication
+       goes ahead with every WCL row held exactly as the baseline (owner decision
+       2026-10-27); the refresh job's final gate still goes red as the alert. The updates
+       and receipts are checked as usual, so the receipt stays bound to what was refused. */
+    const held = evidence.verdict === "merge-failed";
     const bySpec = new Map(baseline.map(s => [`${s.class}|${s.spec}`, s]));
     const seen = new Set();
     for (const row of updates.metrics) {
@@ -74,7 +79,7 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
         if (rows.length || landed || !["no-credentials", "oauth-failed", "network-failed"].includes(evidence.verdict)) throw new Error(`${cfg.key}: missing collection receipt`);
       } else {
         if (!["success", "partial", "invalid", "unreachable"].includes(receipt.status)
-          || receipt.rows !== rows.length || landed !== rows.length || receipt.cuts?.length !== cfg.encounters.length * baseline.length)
+          || receipt.rows !== rows.length || landed !== (held ? 0 : rows.length) || receipt.cuts?.length !== cfg.encounters.length * baseline.length)
           throw new Error(`${cfg.key}: coverage/landed receipt does not match collected rows`);
         const cuts = new Map();
         for (const cut of receipt.cuts) {
@@ -98,6 +103,8 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
         const entries = manifest.sources.filter(s => s.source === cfg.key);
         if (entries.length !== 1 || (entries[0].result === "success" && receipt?.status !== "success"))
           throw new Error(`${cfg.key}: manifest success needs complete trusted collection`);
+        if (held && entries[0].result === "success")
+          throw new Error(`${cfg.key}: the WCL merge was refused, so nothing landed and the manifest cannot claim success`);
       }
     }
     for (const key of ["wcl-live-raid", "wcl-live-mplus"]) {
@@ -122,17 +129,19 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
       retired.add(tuple(entry));
     }
     for (const cfg of LIVE_LEADERBOARDS.brackets) {
-      if ((evidence.retired?.[cfg.key]?.rows ?? 0) !== retire.filter(r => r.bracket === cfg.bracket).length)
+      if ((evidence.retired?.[cfg.key]?.rows ?? 0) !== (held ? 0 : retire.filter(r => r.bracket === cfg.bracket).length))
         throw new Error(`${cfg.key}: retired receipt does not match the sealed retirements`);
     }
     if (Object.keys(evidence.retired ?? {}).some(key => !LIVE_LEADERBOARDS.brackets.some(c => c.key === key)))
       throw new Error("WCL retired receipt names an unknown bracket");
     const expected = new Map(before.map(row => [tuple(row), row]));
-    for (const key of retired) expected.delete(key);
-    for (const row of updates.metrics) {
-      expected.set(tuple(row), row);
+    if (!held) {
+      for (const key of retired) expected.delete(key);
+      for (const row of updates.metrics) expected.set(tuple(row), row);
     }
-    if (!isDeepStrictEqual(sorted([...expected.values()]), sorted(after))) throw new Error("Canonical WCL rows differ from trusted updates; failed/sparse cuts and historical data must be retained exactly");
+    if (!isDeepStrictEqual(sorted([...expected.values()]), sorted(after))) throw new Error(held
+      ? "The WCL merge was refused, so every canonical WCL row must equal the baseline exactly"
+      : "Canonical WCL rows differ from trusted updates; failed/sparse cuts and historical data must be retained exactly");
     if (coverage !== undefined && !isDeepStrictEqual(coverage, createWclCoverage(evidence, baseline)))
       throw new Error("Public WCL coverage differs from the trusted collection receipt");
   } catch (error) { errors.push(error.message); }
@@ -157,6 +166,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     }
     const errors = await runWclCheck(options);
     if (errors.length) throw new Error(errors.join("\n"));
-    console.log("WCL leaderboard metrics match trusted collection; every WCL row it did not refresh or retire is retained exactly.");
+    const evidencePath = path.join(options.evidenceDir ?? path.join(ROOT, "wcl-fetch"), "evidence.json");
+    if (JSON.parse(await readFile(evidencePath, "utf8")).verdict === "merge-failed") {
+      console.log("::warning title=WCL held::The WCL merge was refused (merge-failed). Every WCL row is held exactly as last published; nothing new landed.");
+    } else console.log("WCL leaderboard metrics match trusted collection; every WCL row it did not refresh or retire is retained exactly.");
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

@@ -53,7 +53,13 @@ The collector merges valid cuts, preserves failed/sparse cuts, and emits aggrega
 are saved. These files upload independently before the agent runs. Publication downloads
 that copy after the agent's output and runs `src/check-wcl-metrics.mjs`, verifying the
 baseline hash, exact updates, cut coverage, manifest claims, and retention of every
-historical or unrefreshed WCL row. Canonical schema validation also requires sample
+historical or unrefreshed WCL row. If canonical validation refuses the merge
+(`merge-failed`), nothing lands. Since October 27 (owner decision) the night still
+publishes: the gate then requires every WCL row to equal the baseline exactly, no
+`landed` or `retired` count and no manifest `success` for either leaderboard bracket,
+while the public coverage marks every cut failed. The refresh job's final gate still goes
+red as the alert. Before that, a refused merge blocked the whole night, as on October 26.
+Canonical schema validation also requires sample
 provenance and the correct role/metric relationship.
 
 The new requirements are `wcl-leaderboard-raid` and `wcl-leaderboard-mplus`. The original

@@ -67,7 +67,9 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   hourly-budget checks, three consecutive failures stop, and12-minute total budget.
   Success for `wcl-leaderboard-raid/mplus` requires the collector's successful bracket
   status and matching landed rows; exact trusted updates and retained rows are checked
-  independently on publication. The old `wcl-live-raid/mplus` requirements remain
+  independently on publication. On `merge-failed` nothing landed: record both rows
+  `parse_error` with `evidence.detail`. Publication then holds every WCL row exactly and
+  still publishes the rest (owner decision 2026-10-27). The old `wcl-live-raid/mplus` requirements remain
   unreachable until a genuine aggregate endpoint is validated. New leaderboard data
   cannot refresh their old medians. **Partition supersession (guard since 2026-09-25):**
   when WCL lists a zone partition above the pinned one or outside the recipe's
