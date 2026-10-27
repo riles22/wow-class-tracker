@@ -126,6 +126,8 @@ the things a datacenter runner physically cannot do:
 
 - drain `data/pending-transcripts.json` with yt-dlp (datacenter IPs hit YouTube's bot wall);
 - refresh Icy Veins, all six registered pages, every run (below);
+- read the browser lane (Wowhead and Archon letter pages, queued captions) when Claude in
+  Chrome is connected (below);
 - verify-and-log what CI already refreshed today rather than rewriting it.
 
 The WCL rows the nightly records `unreachable` are not in scope: nothing reaches them from
@@ -151,6 +153,47 @@ heartbeat key goes red once the stored `snapshot` is more than 4 days old (`maxA
    ack (see "Human-acked fixes"). A scheduled run is unattended and cannot ack: restore
    with `git checkout -- data/specs.json data/sources.json`, carry on with the rest of the
    run, and put the pairs, the counts and the page dates at the top of the report.
+
+**Browser lane, every local run** (owner decision 2026-10-27). The runners draw Wowhead's
+AWS WAF challenge and Archon's human-verification page, so the nightly refreshes neither;
+the owner's own browser loads both as ordinary pages. A local run with Claude in Chrome
+connected reads them there, right after Icy Veins.
+1. Check the browser first (`list_connected_browsers`, then `tabs_context_mcp`). No Chrome
+   tools, no connected browser, or a site-permission prompt nobody answers: skip the lane
+   and say so at the top of the report.
+2. Ordinary page loads only, one registered page at a time, each in a tab this run opens
+   and closes. The registry is the page list: the six Wowhead tier-list pages and the six
+   Archon pages without a `label`. Never the labeled Archon pages (numeric families,
+   refresh-metrics' lane) and never the Warcraft Logs website (the API is its lane).
+3. **Stop at the first challenge.** A page without its data (Archon: no `__NEXT_DATA__`;
+   Wowhead: no `[tier-list=rows]` block) or showing a verification or "checking your
+   browser" page ends that site's read for the run. Never click, wait out, reload past or
+   solve one, never ask the owner to clear one so the run can go on, and never replay
+   cookies or use a proxy. Pages already read are applied as usual; the rest keep their
+   stored letters and dates, and the report names the page and what it showed.
+4. **Archon:** run the expression `node src/archon-capture.mjs --snippet` prints in each
+   page (javascript_tool), save the outputs as `{ capturedAt, transport, pages: [...] }`
+   in the scratchpad, then `node src/archon-capture.mjs <capture.json> <rows.json>`. It
+   takes the raid **throughput** and M+ **score** lists by metric name and refuses any
+   other: popularity is the FIRST list on a raid page and gave the same letter as
+   throughput for only 15 of 40 specs (2026-10-27), so a first-list read looks like an
+   upstream rebuild, not like an error. Its hash refuses tier lines mistyped in the copy.
+   Era-verify from each page's title and season cue (refresh-tiers step 2; the checker
+   already requires the full roster, Devourer included), then
+   `node src/apply-ratings.mjs <rows.json>` and stamp `snapshot` on those pages (Archon
+   publishes no page date of its own; `lastUpdated` is not one).
+5. **Wowhead:** read the page's `WH.markup` block in-page and parse it with refresh-tiers'
+   Wowhead recipe, then `apply-ratings.mjs` and stamp `snapshot` and `published`.
+6. Before each site's merge, copy `data/specs.json` and `data/sources.json` to the
+   scratchpad; the Icy Veins step 3 gate then applies per site. With the owner at the
+   keyboard their go-ahead is the ack. An unattended run copies the two files back (a
+   `git checkout` would also undo Icy Veins), carries on, and reports the counts.
+7. **Captions:** while the anonymous caption lane is 429-blocked, watch-creators step
+   2(b)'s interactive lane runs in the same browser, queue-only. Long `was_live` VODs have
+   no browser route.
+
+Gearing guide pages are not in the lane yet (the harvesters fetch by URL and take no saved
+page). Bloodmallet, Murlok and Mythicstats answer plain HTTP, so they stay out of it.
 
 Independently regenerating data CI already produced is what makes a push unmergeable —
 two independently regenerated datasets do not merge mechanically (proven 2026-07-31,
@@ -190,10 +233,10 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
    and coordinated persistence back to the nightly; see
    `docs/transcript-operations.md`. Residential catch-up keeps its existing lane.
 3. **`refresh-tiers` / `refresh-metrics`** — scoped per above, which means Icy Veins every
-   run, done first. WoWMeta has been a metrics source since 2026-07-31: it never gets
-   tier-list rows, and when it is in scope it follows refresh-metrics' WoWMeta recipe.
-   (Until 2026-10-06 this line said to hold WoWMeta while it was under review, citing a
-   refresh-tiers log entry pruned long ago.)
+   run, done first, then the browser lane. WoWMeta has been a metrics source since
+   2026-07-31: it never gets tier-list rows, and when it is in scope it follows
+   refresh-metrics' WoWMeta recipe. (Until 2026-10-06 this line said to hold WoWMeta while
+   it was under review, citing a refresh-tiers log entry pruned long ago.)
 4. **Gearing guide harvest** (a separate weekly workflow since 2026-09-05, with
    local catch-up when a provider fails):
    when `gearing/data/guides/*.json` `harvestedAt` ages past ~7 days during the launch
