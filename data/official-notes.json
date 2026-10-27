@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-10-26T19:31:06.161Z",
+      "checkedAt": "2026-10-27T14:02:46.309Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -2656,16 +2656,72 @@
       "topicId": 2382684,
       "patch": "12.1.5",
       "era": "live",
-      "checkedAt": "2026-10-26T19:31:06.161Z",
+      "checkedAt": "2026-10-27T14:02:46.309Z",
       "removedSections": [],
       "posts": [
         {
           "id": 30477527,
           "postNumber": 1,
-          "version": 12,
-          "updatedAt": "2026-10-24T00:19:11.392Z",
-          "bodySha256": "ad8ad1d9fc88d4fd8536ef06f5ba86ae32823fe4bae7edf88242118ec5f447c7",
+          "version": 14,
+          "updatedAt": "2026-10-27T01:01:16.745Z",
+          "bodySha256": "776c1b77c7b4d9546a3266ec3474d19ecc3bee956c02e550998c1db667fd8e61",
           "sections": [
+            {
+              "id": "2382684:1:2026-10-26:classes:shaman:1",
+              "date": "2026-10-26",
+              "category": "Classes",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Enhancement"
+              ],
+              "sha256": "9e77c3951c29550a0ac291d44a78a6bf11751a1083f7bc9276ed5dcc8de78f9b",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-27 (nightly) against official hotfix topic 2382684, post 1, version 14 (last edited 2026-10-27T01:01:16.745Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383599. Enhancement spec heading: a Voltaic Blaze bug fix (secondary targets were not hit when Ula’tek is the main target) with no stated tuning value, logged as one spec line in the new 2026-10-26 hotfix feed entry. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-26",
+                    "highlight": "Enhancement Shaman — Resolved an issue causing Voltaic Blaze to not hit secondary targets when Ula’tek is the main target."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-26:classes:warlock:1",
+              "date": "2026-10-26",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction"
+              ],
+              "sha256": "bc74eadacc63e47e1ae961a0a5cf27edb40e86e5d96f30a05a97a9d161838cd6",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-27 (nightly) against official hotfix topic 2382684, post 1, version 14 (last edited 2026-10-27T01:01:16.745Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383599. Affliction spec heading: a Cooldown Manager display fix for Summon Darkglare with no tuning value, logged as one spec line in the new 2026-10-26 hotfix feed entry. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-26",
+                    "highlight": "Affliction Warlock — Fixed an issue where the Cooldown Manager would sometimes not display Summon Darkglare correctly."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-26:player-versus-player:paladin:1",
+              "date": "2026-10-26",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy"
+              ],
+              "sha256": "2bd1ef826a5e3c753f9bd2d71b23b1ef32fc851bc063f480b60053dc98e6b826",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-27 (nightly) against official hotfix topic 2382684, post 1, version 14 (last edited 2026-10-27T01:01:16.745Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383599. This is the post's October 26 Player versus Player section: one Holy line, under the Player versus Player heading, fixing Spreading the Word placing Cleanse on cooldown when casting Blessing of Protection. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
             {
               "id": "2382684:1:2026-10-23:classes:shaman:1",
               "date": "2026-10-23",

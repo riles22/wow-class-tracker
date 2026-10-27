@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly, ~14:05 UTC) — SimC new run 24 merged; Murlok/Mythicstats from collector; WCL raid on partition 2
+
+- Murlok 40 rows (time datetime 2026-10-27) + Mythicstats 37 rows (period 1086; Affliction Warlock retired to blank, Devastation and Fire still unprinted) applied from metrics-fetch/updates.json (77 metrics, 1 retire); check-stable-metrics passes.
+- SimC MID2_Raid.txt: new run HEAD 426ad85ecb (was 3ca15dedd4), same game build 12.1.5.70575, hotfix 2026-10-24, Last-Modified Tue 27 Oct 07:29:59 GMT; 24 DPS specs merged at asOf 2026-10-24, 24 moved, max 0.71%.
+- Bloodmallet: 24/27 charts, all MID2 ptr "0", all dated 2026-10-21, identical to stored; Balance, Augmentation, Devastation error body 3/3. Nothing merged.
+- WoWMeta: snapshotDate 2026-09-15, rankings Last-Modified 20 Oct, 40/40 identical. Archon walled.
+- WCL (collector): raid now partition 2 "12.1.5" (reviewed switch), partial 331 rows (19 invalid "Ranking amount must be positive", 10 sparse); M+ success 320. check-wcl-metrics passes.
+
 ## 2026-10-26 (nightly re-run, ~16:57 UTC) — nothing new upstream except the WCL re-collection
 
 - Murlok 40 rows / Mythicstats 37 rows (period 1086) applied from metrics-fetch/updates.json: 0 value changes. WCL collector re-merged leaderboard rows (31 values moved, raid partial 295 rows with partition 2 "12.1.5" superseding, M+ success 320). Bloodmallet 24/27 MID2 charts, all 2026-10-21, identical (Balance/Augmentation/Devastation error 3/3). SimC MID2_Raid.txt same build HEAD 3ca15dedd4 / Last-Modified as the earlier run. WoWMeta snapshotDate 2026-09-15, 40/40 identical. Archon walled.

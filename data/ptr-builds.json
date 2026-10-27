@@ -3,6 +3,25 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-10-26",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Live 12.1.5 hotfixes for October 26 — two class bug fixes (Enhancement Shaman: Voltaic Blaze secondary targets on Ula’tek; Affliction Warlock: a Cooldown Manager display fix) with no stated tuning value, plus Hallow’s End and Labyrinth fixes. Read from the canonical source: Linxy's running 12.1.5 hotfix compilation (us.forums topic 2382684, title now “World of Warcraft: Midnight Hotfixes - October 26”, post 1 at version 14, last edited 2026-10-27T01:01:16Z), via the deterministic official-notes receipt (checkedAt 2026-10-27T14:02:46Z) with its heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383599 (RSS pubDate 2026-10-26T22:22:27). Both class lines sit under explicit SPEC headings (Shaman › Enhancement, Warlock › Affliction). The section's Player versus Player block (one Holy Paladin Spreading the Word fix) is OUT OF SCOPE for this PvE tracker and is not distilled. NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “Venomous Abyss” appear zero times in the October 26 block), so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-october-26/2382684/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383599/more-labyrinth-and-class-bug-fixes-patch-12-1-5-hotfixes-for-october-26th",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Enhancement Shaman",
+        "Affliction Warlock"
+      ],
+      "highlights": [
+        "Enhancement Shaman — Resolved an issue causing Voltaic Blaze to not hit secondary targets when Ula’tek is the main target.",
+        "Affliction Warlock — Fixed an issue where the Cooldown Manager would sometimes not display Summon Darkglare correctly.",
+        "Non-class: Hallow’s End — Neighborhoods: now only one chest will spawn when capturing Shade of Seabreaker Skoloth. Labyrinth — three scenario fixes (“The Wandering” Remnant pausing, “Containment Breach” double-counted Flame of Jan’alai brazier, “Come to Your Senses” completing multiple times outside “Encroaching Darkness”)."
+      ]
+    },
+    {
       "date": "2026-10-23",
       "kind": "build",
       "realm": "live",

@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly, ~14:05 UTC) — 44/44 feeds; queue 0 -> 2; 0 takes
+
+- 44/44 channel feeds HTTP 200 (660 entries). Supadata summary ok, 0 requested (queue was empty). Queued (keyword-matched, in scope): izen L4LNAG87abo "Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results" (general creator, metaNotes lane) and AutomaticJak FY6vocZJIyw "Season 2's Massive Falloff". Other uploads since the last poll are key PoVs / streams (Bansherz tLllOxDF55I MM key PoV, Shindigg acKjoqRMFr8, Sha tYGd8Eq_q34, Megasett, Kesslive, Critcake, Whispyr), WoW Forever and PvP duel content: left unseen. 0 takes, 0 metaNotes.
+
 ## 2026-10-26 (nightly re-run, ~16:57 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes
 
 - 44/44 feeds 200 (660 entries). Transcript summary ok, 0 requested. New since ~15:50: 8 YoDaTV uploads 16:33-16:45 (seven +22/+24 key PoVs; z_svWOkNWWI "How to Survive the First Boss of Murder Row as Prot Paladin!", a boss-survival guide, guide-shaped). None queued, all left unseen. 0 takes, 0 metaNotes.
