@@ -1189,13 +1189,12 @@ and the page's own `published` date rides alongside `snapshot`.
    **Leaderboard median DPS/HPS (S2 Mythic/M+10: encounter, top 100)** rows with sample
    provenance. Run `node src/check-wcl-metrics.mjs` before finishing; publication checks
    against the independent pre-agent artifact. These numeric series never feed letters.
-   The fixed recipe covers 8 raid bosses (zone 53, partition 1, Mythic difficulty 5,
-   size 20; excludes world boss Nymrissa 3379 and Kith'ix 3513, which WCL registered in
-   zone 53 during PTR testing and which stays excluded until the reviewed partition switch
-   below — corrected 2026-09-25 from "until 12.1.5 is live", which the owner's switch
-   trigger superseded) and 8 dungeons (zone 55, partition 1,
-   difficulty 10, size 5, exactly +10). WCL bracket **9** selects +10; bracket 10 selects
-   +11. Validate the source bracket metadata AND returned key levels every run.
+   The fixed recipe covers 9 raid bosses (zone 53, partition 2 "12.1.5" since the reviewed
+   switch of 2026-10-26, Mythic difficulty 5, size 20: the eight 12.1 bosses plus Kith'ix
+   3513, which joined in that switch; excludes world boss Nymrissa 3379) and 8 dungeons
+   (zone 55, partition 1, difficulty 10, size 5, exactly +10). WCL bracket **9** selects
+   +10; bracket 10 selects +11. Validate the source bracket metadata AND returned key
+   levels every run.
    It reads page 1, up to 100 ranked ENTRIES per spec per encounter, with at least 10
    required. Entries may repeat characters. Keep each encounter separate; no pooled
    raid median, no unique-player claim, no all-population percentile, no recent-week
@@ -1218,19 +1217,18 @@ and the page's own `published` date rides alongside `snapshot`.
    description of current WoW rankings. `RAW_RECIPES` stays empty. `wcl-probe.mjs` is a
    read-only supported-API diagnostic, not a data refresh. New cycle/zone configuration
    needs a reviewed recipe change; never infer identity from shared names or ID patterns.
-   **Partition supersession (dormant guard, 2026-09-25):** WCL has added a partition per
+   **Partition supersession (guard since 2026-09-25):** WCL has added a partition per
    patch to its raid zones (not reliably to M+ zones), and the `default` flag is not a
    usable signal. When discovery lists a partition above the pinned one or outside the
    recipe's `reviewedPartitions`, that bracket's receipt is `partial` with `supersededBy`,
    rows are still collected from the pinned partition, and the manifest row cannot be
-   `success`. The raid bracket is held there until the reviewed switch, which waits for
-   Mythic Kith'ix ranked entries plus parity on the reviewed bosses, both on the new
-   partition (owner decision; which specs Kith'ix must cover awaits owner confirmation);
-   `wcl-probe.yml` prints that evidence. A per-boss
-   zone/size override for Kith'ix is switch-time work only if the probe shows WCL files it
-   outside zone 53 / difficulty 5 / size 20. Validation, the update ceiling and the drawer's
-   partition name read `LIVE_LEADERBOARDS`; a rank pool may not mix partitions; a test pins
-   `PHASES` and `LIVE_LEADERBOARDS` in lockstep. Procedure: `docs/wcl-supported-collection.md`.
+   `success`. A switch is a reviewed recipe commit, never an agent edit. The raid switched
+   to 12.1.5 on 2026-10-26, once the probe showed Mythic Kith'ix ranked at all (owner
+   decision 2026-09-26) plus parity on the reviewed bosses, both on the new partition. The
+   next partition waits for owner review; `wcl-probe.yml` prints its evidence.
+   Validation, the update ceiling and the drawer's partition name read `LIVE_LEADERBOARDS`;
+   a rank pool may not mix partitions; a test pins `PHASES` and `LIVE_LEADERBOARDS` in
+   lockstep. Procedure: `docs/wcl-supported-collection.md`.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm run test:quiet && npm run build`.

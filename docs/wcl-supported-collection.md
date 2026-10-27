@@ -12,9 +12,10 @@ repeat characters; the collector preserves those entries and does not claim a
 unique-player population. This is a capped leaderboard sample, not the population
 median, a 95th percentile, or a random sample. Each boss/dungeon remains separate.
 
-- Raid: zone 53, partition 1 (12.1), Mythic difficulty 5, size 20. Eight reviewed raid
-  bosses; Nymrissa Wavecaller, a world boss listed in the same API zone, is excluded,
-  and so is Kith'ix 3513 until the reviewed partition switch described below.
+- Raid: zone 53, partition 2 (12.1.5) since the reviewed switch of October 26, Mythic
+  difficulty 5, size 20. Nine reviewed raid bosses: the eight 12.1 bosses and Kith'ix
+  3513, which joined in that switch. Nymrissa Wavecaller, a world boss listed in the same
+  API zone, is excluded.
 - M+: zone 55, partition 1 (Season 2), difficulty 10, size 5, exactly key level +10.
   API bracket 9 selects +10 because bracket numbering begins at 1 for key level 2.
   Both metadata and every returned row's key level must match. Eight dungeons.
@@ -37,7 +38,7 @@ sanctioned aggregate endpoint has been verified. The new receipts cannot clear t
 `src/fetch-wcl.mjs` holds credentials only in its deterministic pre-agent workflow step.
 `src/wcl-live.mjs` validates live phase, zone, partition, encounter, size, difficulty,
 spec identity, key bracket, sorted finite values, pagination shape, and log timestamps.
-Five spec aliases share each request: at most 128 ranking requests, plus zone discovery
+Five spec aliases share each request: at most 136 ranking requests, plus zone discovery
 and repeated hourly-budget checks. Requests pause 600 ms; transport retries once with
 a 20-second deadline. Three consecutive failures or the 12-minute total budget stop
 remaining queries. A partial response cannot authorize invented or relabeled values.
@@ -74,7 +75,8 @@ Within M+ Season 2) lists a single partition, "Season 2", and other M+ zones add
 seasonal ones such as "Post-Season". Zones 53 and 55 each listed one partition (12.1 and
 Season 2). The `default` flag is not a usable signal: zone 46 still marks 12.0.7 as
 default, and zone 50 likewise, although PTR zones 52 and 54 mark their newest partition.
-That zone 53 will gain a 12.1.5 partition is inferred from the raid pattern, not observed.
+The October 26 probe confirmed the raid pattern: zone 53 listed 12.1 (id 1) and 12.1.5
+(id 2, marked default), while zone 55 still listed only Season 2.
 
 **The guard (dormant today).** `reviewedPartitions` in `src/wcl-live.mjs` lists every
 partition each zone listed at the last review. When zone discovery lists a partition with
@@ -85,42 +87,49 @@ merge; `check-wcl-metrics.mjs` refuses a manifest `success` for that bracket. Wi
 zone shape the receipt is unchanged. The drawer shows a reviewed partition's name and falls
 back to the bare id for any other.
 
-**The switch trigger (owner decision, September 25).** The raid bracket is held on
-partition 1 until the reviewed switch, which happens when Kith'ix Mythic opens, not after a
-set number of resets. In the decision's words, the trigger is that "the new partition has
-Mythic Kith'ix ranked entries (>=10 per spec cut that has a stored row today) in addition to
-parity on the other 8 bosses". Parity means every (spec, boss) cut stored today reaches 10
-entries on the new partition. No Kith'ix cut has a stored row, so which specs Kith'ix must
-reach is not yet settled. The probe's `shortOfTrigger` count applies the strictest reading,
-every spec holding any stored raid row (all 40 on September 25), and that reading awaits
-owner confirmation. Its `atMinimum` count and `short` list let a reviewer apply another.
-M+ has no recorded trigger; a new zone 55 partition waits for owner review.
-`wcl-probe.yml` (dispatch-only, read-only) makes the trigger observable. It prints each
+**The 12.1.5 trigger (owner decisions, September 25 and 26).** The raid bracket was held on
+partition 1 until the reviewed switch, which waited for Kith'ix Mythic to open, not for a
+set number of resets. The September 25 decision asked for Mythic Kith'ix ranked entries
+plus parity on the other 8 bosses, both on the new partition. Parity means every (spec,
+boss) cut stored today reaches 10 entries on the new partition. On September 26 the owner
+settled the Kith'ix half: any Mythic Kith'ix ranking at the reviewed cut counts ("Kith'ix
+just has to exist"), and a Kith'ix cut with fewer than 10 entries simply stays absent. The
+probe's `shortOfTrigger` and `atMinimum` counts apply the superseded September 25 reading
+(10 or more per Kith'ix spec cut) and are informational. The October 26 probe met the
+trigger: zone 53 listed 12.1.5 as partition 2, every stored (spec, boss) cut had 10 or
+more entries there, and Mythic Kith'ix at size 20 returned a full first page. M+ has no
+recorded trigger; a new zone 55 partition, like the next raid partition, waits for owner
+review.
+`wcl-probe.yml` (dispatch-only, read-only) makes a trigger observable. It prints each
 Midnight zone's partitions with the guard's verdict, then Kith'ix entry counts for every
 zone 53 partition, difficulty and size, including size omitted. For each raid partition it
-adds per-spec Kith'ix counts at Mythic size 20. For a partition that is not pinned it also
+adds per-spec Kith'ix counts at Mythic size 20. For a partition the guard reports it also
 prints the reviewed bosses' parity counts, never querying Kith'ix a second time.
 
-**The switch is one reviewed recipe commit, never an agent edit:**
+**A switch is one reviewed recipe commit, never an agent edit.** The 12.1.5 switch
+(October 26; the full checklist is step C2 of `docs/1215-launch-runbook.md`) made these
+changes:
 - Raid config: point `partition`/`partitionName` at the new partition, append it to
   `reviewedPartitions` (keeping 1), and move 3513 from `excludedEncounters` to `encounters`.
 - `validate.mjs` requires each rank pool to sit on one partition. Merge each family
-  wholesale from the new partition. A cut that is sparse there would keep its partition-1
-  row and mix the pool, so drop that row or hold the whole family.
+  wholesale from the new partition. A cut that is sparse or fails there would keep its
+  partition-1 row and mix the pool, so drop that row or hold the whole family. The October
+  26 parity counts found no sparse cut. The switch dropped the 12.1 rows of the four cuts
+  that had failed every nightly since October 6 to 12 (the refresh log blames a zero-amount
+  entry for the earliest, Feral on The Twin Fangs), so a repeat failure leaves a gap, not a
+  mixed pool.
 - The update ceiling and the sample-provenance checks follow the config (40 specs x 17
-  encounters = 680 rows). Literal count pins are deliberate tripwires and change in the
-  same commit: `test/wcl-live.test.mjs` (the 640/128/320/280/312 row, cut and batch
-  counts), `test/check-wcl-metrics.test.mjs` (the 640 ceiling and its 680 fixture) and
-  `test/wcl-coverage.test.mjs` (640 cuts, eight raid encounters). The committed
-  `data/wcl-coverage.json` must match the new encounter inventory in that commit, because
-  `validateWclCoverage` checks it against the recipe; until it does, every test that
-  validates the real data fails too. Checked September 25 by moving 3513 alone: literal
-  pins failed in exactly those three files, every other failure traced to the coverage
-  check, and the probe tests stayed green.
+  encounters = 680 rows). Literal count pins are deliberate tripwires and changed in the
+  same commit: `test/wcl-live.test.mjs` (row, cut and batch counts),
+  `test/check-wcl-metrics.test.mjs` (the ceiling and its one-more-boss fixture),
+  `test/wcl-coverage.test.mjs` (cuts and raid encounters), `test/validate.test.mjs` (its
+  unreviewed-partition cases, moved to id 99) and `test/wcl-probe.test.mjs` (the zone
+  shape). The committed `data/wcl-coverage.json` must match the new encounter inventory in
+  that commit, because `validateWclCoverage` checks it against the recipe, so the switch
+  added the 40 Kith'ix cuts as `failed` (not yet collected) for the first nightly to replace.
 
 **Kith'ix outside zone 53 (owner decision, September 25).** The recipe holds one zone,
-difficulty and size per bracket, and raid membership follows the Encounter Journal. If the
-probe shows WCL files Kith'ix outside zone 53 / difficulty 5 / size 20, the switch commit
-adds a per-boss zone/size override inside the raid bracket config and keeps the single
-`wcl-leaderboard-raid` requirement. Nothing of that override is built until the probe shows
-it is needed.
+difficulty and size per bracket, and raid membership follows the Encounter Journal. Had the
+probe shown WCL filing Kith'ix outside zone 53 / difficulty 5 / size 20, the switch commit
+would have added a per-boss zone/size override inside the raid bracket config. The October
+26 probe found it in zone 53 at Mythic size 20, so no override was built.

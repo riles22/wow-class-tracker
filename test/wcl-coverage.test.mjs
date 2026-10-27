@@ -18,8 +18,8 @@ test("public coverage includes empty encounters without copying private/error pa
   for (const c of raid.filter(c => c.encounterId === 3492)) Object.assign(c, { status: "sparse", samples: 0 });
   raid[0].status = "unreachable";
   const coverage = createWclCoverage(e, specs);
-  assert.equal(coverage.cuts.length, 640);
-  assert.equal(coverage.encounters.raid.length, 8);
+  assert.equal(coverage.cuts.length, 680);
+  assert.equal(coverage.encounters.raid.length, 9);
   assert.equal(coverage.cuts.filter(c => c.status === "insufficient").length, 40);
   assert.equal(coverage.cuts[0].status, "failed");
   assert.equal(coverage.cuts[0].checkedAt, null);

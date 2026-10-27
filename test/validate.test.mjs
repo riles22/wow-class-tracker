@@ -1031,7 +1031,7 @@ test("partition guard: a rank pool mixing two reviewed WCL partitions fails; a w
 
 test("partition guard: leaderboard provenance comes from the reviewed recipe, and an unreviewed partition fails", async () => {
   const data = await loadData(ROOT);
-  const cases = [s => { s.partition = 2; }, s => { s.zoneId = 54; }, s => { s.difficulty = 4; }, s => { s.size = 25; }, s => { s.keystoneLevel = 10; }];
+  const cases = [s => { s.partition = 99; }, s => { s.zoneId = 54; }, s => { s.difficulty = 4; }, s => { s.size = 25; }, s => { s.keystoneLevel = 10; }];
   for (const mutate of cases) {
     const broken = structuredClone(data), [row] = leaderboardFamily(broken.specs);
     mutate(row.sample);
@@ -1042,7 +1042,7 @@ test("partition guard: leaderboard provenance comes from the reviewed recipe, an
   const provenance = errors => errors.filter(e => e.includes("invalid WCL leaderboard sample provenance"));
   const [raid, mplus] = LIVE_LEADERBOARDS.brackets;
   for (const [cfg, field, value] of [[raid, "zoneId", 54], [raid, "difficulty", 4], [raid, "size", 25],
-    [raid, "reviewedPartitions", [{ id: 2, name: "fixture partition" }]], [mplus, "keystoneLevel", 11]]) {
+    [raid, "reviewedPartitions", [{ id: 99, name: "fixture partition" }]], [mplus, "keystoneLevel", 11]]) {
     const saved = cfg[field]; cfg[field] = value;
     try { assert.ok(provenance(validateData(structuredClone(data))).length > 0, `${cfg.bracket}.${field}`); }
     finally { cfg[field] = saved; }

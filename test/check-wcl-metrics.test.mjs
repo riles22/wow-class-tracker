@@ -96,23 +96,23 @@ test("WCL gate rejects tampered canonical values, sample dates, labels and extra
   reject(added, /Canonical WCL rows differ/);
 });
 
-test("WCL update ceiling derives from the reviewed recipe (640 today) and refuses one row more", () => {
-  assert.equal(leaderboardCeiling(roster.length), 640);
-  const f = fixture(); assert.equal(f.updates.metrics.length, 640);
+test("WCL update ceiling derives from the reviewed recipe (680 today) and refuses one row more", () => {
+  assert.equal(leaderboardCeiling(roster.length), 680);
+  const f = fixture(); assert.equal(f.updates.metrics.length, 680);
   f.updates.metrics.push(structuredClone(f.updates.metrics.at(-1))); reseal(f);
   reject(f, /WCL updates differ from the trusted receipt/);
   // One more reviewed encounter moves the ceiling with it; no literal to forget. The gate
-  // itself must accept the full 680-row collection, which a restated 640 would refuse.
+  // itself must accept the full 720-row collection, which a restated 680 would refuse.
   const raid = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === "raid");
   raid.encounters.push({ id: 999999, name: "Fixture encounter" });
   try {
-    assert.equal(leaderboardCeiling(roster.length), 680);
-    const wider = fixture(); assert.equal(wider.updates.metrics.length, 680);
+    assert.equal(leaderboardCeiling(roster.length), 720);
+    const wider = fixture(); assert.equal(wider.updates.metrics.length, 720);
     assert.deepEqual(checkWclMetrics(wider), []);
     wider.updates.metrics.push(structuredClone(wider.updates.metrics.at(-1))); reseal(wider);
     reject(wider, /WCL updates differ from the trusted receipt/);
   } finally { raid.encounters.pop(); }
-  assert.equal(leaderboardCeiling(roster.length), 640);
+  assert.equal(leaderboardCeiling(roster.length), 680);
 });
 
 test("new WCL updates must come from the pinned partition, even one validation would accept as reviewed", () => {
