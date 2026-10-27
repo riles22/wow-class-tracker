@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "L4LNAG87abo",
-      "creator": "izen (Izenhart)",
-      "title": "Best Raid Specs in 12.1.5 | Post Mid-Season Patch DPS & HPS Results",
-      "published": "2026-10-26",
-      "queuedAt": "2026-10-27"
-    },
-    {
-      "id": "FY6vocZJIyw",
-      "creator": "AutomaticJak",
-      "title": "Season 2's Massive Falloff",
-      "published": "2026-10-27",
-      "queuedAt": "2026-10-27"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3278,6 +3263,13 @@
       "title": "This FROST DK ability is doing TONS of damage!",
       "reason": "Transcript read (Supadata, 2026-10-23): a Frost DK how-to on tracking and timing Cryogenic Chamber (Rime stacking, releasing it with Pillar of Frost near targets, Bonegrinder windows). No spec-strength or comparative read.",
       "verifiedAt": "2026-10-23"
+    },
+    {
+      "id": "FY6vocZJIyw",
+      "creator": "AutomaticJak",
+      "title": "Season 2's Massive Falloff",
+      "reason": "Transcript read (Supadata, 2026-10-27): Season 2 Mythic+ participation decline versus Season 1 and the raid-versus-M+ gearing incentive structure (Venom Stones, vault, bonus rolls), plus a sponsor read. No spec-strength or comparative read.",
+      "verifiedAt": "2026-10-27"
     }
   ],
   "seen": [
