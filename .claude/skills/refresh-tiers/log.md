@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~20:37 UTC) — Method 80/80, 0 moves; IV/Wowhead/Archon walled
+
+- Method (direct GET, 200): M+ 40 rows (8 tier blocks incl. dungeon blocks rejected by roster match), raid 40 rows; Devourer A both; S2 body; "Last Updated" 14 Oct (M+) / 10 Aug (raid). 0 letter moves.
+- Icy Veins 403 x6 (Cloudflare), Wowhead 202 x6 (AWS WAF 2,020 B), Archon 403 x7 (Cloudflare). Stored letters/snapshots/seasonVerified unchanged. No seasonVerified change, so no freeze-season.
+
 ## 2026-10-27 (nightly re-run, ~20:06 UTC) — Method 0 moves; IV/Wowhead/Archon walled
 
 - Method (direct browser-header GET, 200): 40/40 per bracket (27/7/6), Devourer A both, Season 2 body; M+ Last Updated 14 Oct, raid 10 Aug; 0 moves. Icy Veins 403 x6 (Cloudflare, 0 tier-list-entry), Wowhead 202 x6 (AWS WAF, 0 tier-list blocks), Archon raid 403 Cloudflare: nothing parsed, stored letters/snapshots (2026-10-27 from the owner local run) kept. No seasonVerified change, so no freeze-season.

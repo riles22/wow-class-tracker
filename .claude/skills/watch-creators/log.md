@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~20:35 UTC) — 44/44 feeds; queue 0; nothing distilled
+
+- Supadata ok, 0 requested (queue empty). No uploads newer than the ~20:06 poll. Dalaran Gaming hEkrgB_5EQU (Sub Rogue nerf livestream) still left unseen for its VOD; a yt-dlp metadata probe on it hit the runner "Sign in to confirm you're not a bot" wall, so I backed off. Bansherz tLllOxDF55I "Pre-Buff MM, Does it Need Buffs?" stays unseen as a key PoV (same call as the earlier run). 0 takes, 0 metaNotes.
+
 ## 2026-10-27 (nightly re-run, ~20:06 UTC) — 44/44 feeds; queue 0; nothing distilled
 
 - Supadata ok, 0 requested (queue empty). New since the ~16:05 poll: Supatease bu8_fZiE6mI and Dalaran Gaming Sl4ScXzWh90 (WoW Forever), AutomaticJak CowBQCRb91E, Critcake lBg8hwnYG0E, MadSkillzzTV vl9pQFltKaI (key streams): left unseen. Dalaran Gaming hEkrgB_5EQU "BIG SUBTLETY ROGUE NERF THIS WEEK!" is an upcoming livestream (yt-dlp: "live event will begin in 7 minutes"), left unseen so its VOD is picked up next run (Dalaran is unscoped on Rogue). 0 takes, 0 metaNotes.

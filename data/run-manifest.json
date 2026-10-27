@@ -1,6 +1,6 @@
 {
   "run": "2026-10-27",
-  "startedAt": "2026-10-27T20:05:57Z",
+  "startedAt": "2026-10-27T20:33:47Z",
   "summary": "Nightly re-run: Method 0 moves; WCL raid+M+ success (348/320); Murlok/Mythicstats from collector; 0 feed entries, 0 takes; IV/Wowhead/Archon walled; sims unchanged",
   "sources": [
     {
@@ -8,91 +8,91 @@
       "result": "blocked",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "Attempted all six registered pages by curl with browser UA + Accept + Accept-Language + sec-fetch headers: each HTTP 403 \"<title>Just a moment...\", 0 tier-list-entry markers (runner block since 2026-09-23; published-evidence receipt also 403 x6). Nothing parsed. Stored 80 letters, snapshots 2026-10-27 (from the owner local run), published dates and seasonVerified \"s2\" unchanged; this run did not verify them."
+      "detail": "All six registered pages by curl with browser UA + Accept + Accept-Language + sec-fetch headers: each HTTP 403 \"Just a moment...\" (~5.8 KB), 0 tier-list-entry markers (runner block since 2026-09-23; published-evidence receipt also 403 x6). Nothing parsed. Stored 80 letters, snapshots 2026-10-27 (owner local run), published dates and seasonVerified \"s2\" unchanged; not verified by this run."
     },
     {
       "source": "method",
       "result": "success",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "Both registered pages fetched fresh by direct browser-header GET, HTTP 200. Parsed per div.tier__tier (tier__title letter, data-original-title specs looked up whole): 40/40 rows per bracket (27 DPS / 7 healer / 6 tank), all letters on the method scale; the 8 dungeon-name tooltips on the M+ page fail roster match by design. Body ranks Midnight Season 2, Devourer present (A both brackets) -> seasonVerified s2. Page dates: M+ \"Last Updated 14th October 2026\", raid \"10th August 2026\" (match published evidence). apply-ratings: 80 applied, 0 letter moves."
+      "detail": "Both registered pages fetched fresh by direct browser-header GET, HTTP 200. Parsed per div.tier__tier (tier__title letter, data-original-title specs looked up whole): 40/40 rows per bracket (27 DPS / 7 healer / 6 tank), all letters on the method scale; the 8 dungeon-name tooltips on the M+ page fail roster match by design. Body ranks Midnight Season 2, Devourer A in both -> seasonVerified s2. Page dates: M+ \"Last Updated 14th October 2026\", raid \"10th August 2026\" (stored published unchanged). apply-ratings: 80 applied, 0 letter moves."
     },
     {
       "source": "wowhead",
       "result": "blocked",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "All six registered tier-list guide pages answered HTTP 202 with the 2,020-byte AWS WAF JavaScript challenge (0 tier-list blocks) on a full browser-header GET; news RSS, news index and blue tracker on the same host answered 200. No challenge solved or replayed, no proxy. Nothing parsed: stored 80 letters (from the owner browser-lane local run), snapshots 2026-10-27, published dates and seasonVerified \"s2\" unchanged; this run did not verify them."
+      "detail": "All six registered tier-list guide pages answered HTTP 202 with the 2,020-byte AWS WAF JavaScript challenge (0 tier-list=rows blocks) on a full browser-header GET; news RSS, news index and blue tracker on the same host answered 200. No challenge solved, no proxy. Nothing parsed: stored 80 letters, snapshots 2026-10-27, published dates and seasonVerified \"s2\" unchanged; not verified by this run."
     },
     {
       "source": "archon-tiers",
       "result": "blocked",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored letters (from the owner browser-lane local run), snapshots 2026-10-27 and seasonVerified \"s2\" retained per the owner-confirmed outage-retention rule; this run did not verify them."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored letters (owner browser-lane local run), snapshots 2026-10-27 and seasonVerified \"s2\" retained per the owner-confirmed outage-retention rule; this run did not verify them, and they are unchanged."
     },
     {
       "source": "archon-encounters",
       "result": "blocked",
       "previousAsOf": "2026-08-18",
       "newAsOf": "2026-08-18",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored encounter-tiers.json (S1 archive, quarantined) and its page snapshots 2026-08-18 unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; encounter-tiers.json (S1 archive, quarantined) and its page snapshots 2026-08-18 unchanged."
     },
     {
       "source": "archon-survivability",
       "result": "blocked",
       "previousAsOf": "2026-08-25",
       "newAsOf": "2026-08-25",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored survivability tiers and page snapshot 2026-08-25 unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored survivability tiers and page snapshot 2026-08-25 unchanged."
     },
     {
       "source": "archon-metrics",
       "result": "blocked",
       "previousAsOf": "2026-08-25",
       "newAsOf": "2026-08-25",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-metrics series rows and their own asOf dates (2026-08-25) unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-metrics series rows and their own asOf dates (2026-08-25) unchanged."
     },
     {
       "source": "archon-hps",
       "result": "blocked",
       "previousAsOf": "2026-08-25",
       "newAsOf": "2026-08-25",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-hps series rows and their own asOf dates (2026-08-25) unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-hps series rows and their own asOf dates (2026-08-25) unchanged."
     },
     {
       "source": "archon-heroic-dps",
       "result": "blocked",
       "previousAsOf": "2026-08-24",
       "newAsOf": "2026-08-24",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-heroic-dps series rows and their own asOf dates (2026-08-24) unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-heroic-dps series rows and their own asOf dates (2026-08-24) unchanged."
     },
     {
       "source": "archon-heroic-hps",
       "result": "blocked",
       "previousAsOf": "2026-08-24",
       "newAsOf": "2026-08-24",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-heroic-hps series rows and their own asOf dates (2026-08-24) unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-heroic-hps series rows and their own asOf dates (2026-08-24) unchanged."
     },
     {
       "source": "archon-mplus-score",
       "result": "blocked",
       "previousAsOf": "2026-08-25",
       "newAsOf": "2026-08-25",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-mplus-score series rows and their own asOf dates (2026-08-25) unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-mplus-score series rows and their own asOf dates (2026-08-25) unchanged."
     },
     {
       "source": "archon-popularity",
       "result": "blocked",
       "previousAsOf": "2026-08-25",
       "newAsOf": "2026-08-25",
-      "detail": "Attempted: ordinary browser-header GET of the registered Archon pages (raid heroic all-bosses) returned HTTP 403 Cloudflare \"Just a moment...\" with no __NEXT_DATA__, matching the pre-agent source-health receipt (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-popularity series rows and their own asOf dates (2026-08-25) unchanged."
+      "detail": "Attempted all registered Archon pages (heroic + mythic all-bosses raid, M+ this-week) by ordinary browser-header GET: each HTTP 403 Cloudflare \"Just a moment...\" (~5.9 KB, no __NEXT_DATA__); pre-agent source-health receipt agrees (raid 403 cloudflare-challenge, M+ 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the archon-popularity series rows and their own asOf dates (2026-08-25) unchanged."
     },
     {
       "source": "wowmeta",
       "result": "partial",
       "previousAsOf": "2026-09-15",
       "newAsOf": "2026-09-15",
-      "detail": "JSON API fetched (plain curl, HTTP 200): manifest snapshotDate still 2026-09-15 (completedAt 2026-09-15T14:25Z); rankings/midnight/mplus/all/0.json Last-Modified 20 Oct 2026, 44 blocks, 3 selected (dps/hps/tank, lowerBound, All Keys) -> 40 rows, all 40 lowerBound (1 dp) and n identical to stored. Nothing merged; source date lags the run, so partial."
+      "detail": "JSON API by plain curl, HTTP 200: manifest snapshotDate still 2026-09-15; rankings/midnight/mplus/all/0.json Last-Modified 20 Oct 2026, 44 blocks, 3 selected (dps/hps/tank, lowerBound, All Keys) -> 40 rows, all 40 lowerBound (1 dp) and n identical to stored. Nothing merged; source date lags the run, so partial."
     },
     {
       "source": "wcl-live-raid",
@@ -113,56 +113,56 @@
       "result": "success",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "Deterministic collector receipt (metrics-fetch/evidence.json): status success, 3 pages HTTP 200, 40 rows (27/7/6), source <time datetime> 2026-10-27. Applied only metrics-fetch/updates.json via apply-metrics.mjs; check-stable-metrics passes."
+      "detail": "Deterministic collector receipt (metrics-fetch/evidence.json): status success, 3 pages HTTP 200, 40 rows (27/7/6), source <time datetime> 2026-10-27 (18:10Z). Applied only metrics-fetch/updates.json via apply-metrics.mjs; check-stable-metrics passes."
     },
     {
       "source": "bloodmallet",
       "result": "partial",
       "previousAsOf": "2026-10-21",
       "newAsOf": "2026-10-21",
-      "detail": "Fetched talent_target_scaling/castingpatchwerk for all 27 DPS specs (3 attempts each on error): 24 charts OK, all simc_settings.tier MID2, ptr \"0\", every chart timestamp 2026-10-21 (on/after the 12.1.5 release 2026-10-13), all 24 identical to stored targets; Balance, Augmentation, Devastation returned the error body 3/3. Nothing merged; chart dates lag the run, so partial."
+      "detail": "Fetched talent_target_scaling/castingpatchwerk for all 27 DPS specs (3 attempts each on error): 24 charts OK, all simc_settings.tier MID2, ptr \"0\", every chart timestamp 2026-10-21 (on/after the 12.1.5 release 2026-10-13), all 24 identical to stored targets and asOf; Balance, Augmentation, Devastation returned the error body 3/3. Nothing merged; chart dates lag the run, so partial."
     },
     {
       "source": "simulationcraft",
       "result": "partial",
       "previousAsOf": "2026-10-24",
       "newAsOf": "2026-10-24",
-      "detail": "MID2_Raid.txt HTTP 200 (Last-Modified Tue 27 Oct 07:29:59 GMT): header \"12.1.5.70575 Live (hotfix 2026-10-24/70575, git build HEAD 426ad85ecb)\", the same run already merged. DPS Ranking block parsed by longest-prefix profile match: 24 DPS specs, 24/24 identical to stored (asOf 2026-10-24). Nothing merged; sim date lags the run, so partial."
+      "detail": "MID2_Raid.txt HTTP 200 (Last-Modified Tue 27 Oct 07:29:59 GMT): header \"12.1.5.70575 Live (hotfix 2026-10-24/70575, git build HEAD 426ad85ecb)\", the run already merged. DPS Ranking block, longest-prefix profile match: 46 profiles -> 24 DPS specs, 24/24 identical to stored (asOf 2026-10-24). Nothing merged; sim date lags the run, so partial."
     },
     {
       "source": "mythicstats",
       "result": "success",
       "previousAsOf": "2026-10-26",
       "newAsOf": "2026-10-26",
-      "detail": "Deterministic collector receipt: status success, /period/latest -> period 1086, 37 rows (24 DPS / 7 healer / 6 tank), role totals sum 100.2; Devastation Evoker, Fire Mage and Affliction Warlock unprinted (Affliction already retired to blank, 0 retired tonight). Undated source; unchanged observations keep their dates. Applied only metrics-fetch/updates.json; check-stable-metrics passes."
+      "detail": "Deterministic collector receipt: status success, /period/latest -> period 1086, 37 rows (24 DPS / 7 healer / 6 tank), role totals sum 100.2; Devastation Evoker, Fire Mage, Affliction Warlock unprinted (0 retired tonight). Undated source; unchanged observations keep their dates. Applied only metrics-fetch/updates.json; check-stable-metrics passes."
     },
     {
       "source": "blizzard-ptr",
       "result": "success",
       "previousAsOf": null,
       "newAsOf": null,
-      "detail": "Official ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v14 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes. Wowhead RSS (top news=383610), news index and blue tracker swept: no new class tuning or hotfix compilation topic; Class Tuning Incoming Oct 27 (topic 2390748) still post 1 v1, entry unchanged. 12.1.7 PTR dev notes (topic 2383391) not logged (PHASES.ptr null). No 12.2 PTR. 0 feed entries."
+      "detail": "Official ledger: live-hotfixes (2336376) post 1 v56 success; live-hotfixes-1215 (2382684) collector HTTP 503, prior ledger retained; my own retry read it at post 1 v14 (title \"Midnight Hotfixes - October 26\"), unchanged. Pending written as received; 0 unresolved; check-official-notes passes. Wowhead RSS (top news=383612), news index, blue tracker swept: no new class tuning or hotfix topic; Class Tuning Incoming Oct 27 (2390748) still v1. 12.1.7 PTR not logged (PHASES.ptr null). 0 feed entries."
     },
     {
       "source": "creators",
       "result": "success",
       "previousAsOf": null,
       "newAsOf": null,
-      "detail": "44/44 creator RSS feeds HTTP 200. Supadata summary ok: 0 requested (queue empty), 55 counted requests in window. No new in-scope uploads since the last poll: WoW Forever, PvP, key streams left unseen; Dalaran Gaming hEkrgB_5EQU (Sub Rogue nerf) is an upcoming livestream, left unseen for its VOD. 0 takes, 0 metaNotes, queue 0."
+      "detail": "44/44 creator RSS feeds HTTP 200. Supadata summary ok: 0 requested (queue empty), 55 counted requests in window. No new uploads since the ~20:06 poll; Dalaran Gaming hEkrgB_5EQU livestream still left unseen for its VOD (yt-dlp metadata hit the runner bot wall, backed off). 0 takes, 0 metaNotes, queue 0."
     },
     {
       "source": "wcl-leaderboard-raid",
       "result": "success",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "Deterministic collector (wcl-fetch/evidence.json): bracket status success - 348 median rows; 12 empty/sparse cuts; 0 failed/unattempted cuts; minimum 200 rows; landed 348 rows from zone 53 partition 2 (12.1.5); 0 rows retired. Per-encounter top-100-entry medians, not population medians; sparse cuts retain prior observations. check-wcl-metrics passes."
+      "detail": "Deterministic collector (wcl-fetch/evidence.json): bracket status success - 348 median rows; 12 sparse cuts; 0 failed/unattempted cuts; minimum 200; landed 348 rows from zone 53 partition 2 (12.1.5); 0 rows retired; no supersededBy. Per-encounter top-100-entry medians, not population medians; sparse cuts retain prior observations. check-wcl-metrics passes."
     },
     {
       "source": "wcl-leaderboard-mplus",
       "result": "success",
       "previousAsOf": "2026-10-27",
       "newAsOf": "2026-10-27",
-      "detail": "Deterministic collector: bracket status success - 320 median rows; 0 empty/sparse cuts; 0 failed/unattempted cuts; minimum 280 rows; landed 320 rows (zone 55, partition 1, +10). Per-encounter top-100-entry medians, not population medians. check-wcl-metrics passes."
+      "detail": "Deterministic collector: bracket status success - 320 median rows; 0 sparse cuts; 0 failed/unattempted cuts; minimum 280; landed 320 rows (zone 55, partition 1, +10); 0 retired. Per-encounter top-100-entry medians, not population medians. check-wcl-metrics passes."
     }
   ]
 }

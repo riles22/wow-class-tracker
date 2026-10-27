@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (nightly re-run, ~20:38 UTC) — collector feeds applied; sims/wowmeta unchanged; Archon walled
+
+- WCL collector: raid 348 rows (12 sparse, partition 2), M+ 320 rows; 0 retired; check-wcl-metrics passes. Murlok 40 rows (source 2026-10-27), Mythicstats period 1086 37 rows (Devastation/Fire/Affliction unprinted, 0 retired): applied metrics-fetch/updates.json (77), check-stable-metrics passes.
+- WoWMeta snapshotDate 2026-09-15, rankings Last-Modified 10-20, 40/40 identical. SimC MID2 HEAD 426ad85ecb (hotfix 10-24), 24/24 identical. Bloodmallet 24 charts MID2 dated 10-21, identical; Balance/Augmentation/Devastation error body 3/3. Archon 403 Cloudflare on every page: six numeric series unchanged.
+
 ## 2026-10-27 (nightly re-run, ~20:06 UTC) — Murlok/Mythicstats from collector; WCL raid now success
 
 - Murlok 40 rows (time datetime 2026-10-27) + Mythicstats 37 rows (period 1086; Devastation, Fire, Affliction unprinted, 0 retired) applied from metrics-fetch/updates.json (77 metrics); check-stable-metrics passes.
