@@ -92,8 +92,10 @@ Fetch the current Midnight tier lists live and merge them into `data/specs.json`
   early-S2 letter basis is Heroic while Mythic is sparse — see the archon methodology
   text in sources.json for the switch-back trigger). The registry URL is the authority
   as always — fetch what pages[] names, never assume a difficulty. Do NOT read letters
-  off the ancillary "Mythic rankings" pages; they feed the numeric "(Mythic)" families
-  only (refresh-metrics' lane). Same parse either way.
+  off the ancillary "Mythic rankings" pages; they feed only the numeric "(Mythic)"
+  families, raid Popularity and the survivability tiers (refresh-metrics). The browser
+  lane reads them in the same pass, and `src/archon-capture.mjs` takes no letters from
+  them. Same parse either way.
 - **Wowhead guide URLs move.** The tier lists live under
   `/guide/classes/tier-lists/{role}-rankings-{raids|mythic-plus}`; older URL shapes 404.
   Body is JS-rendered. **Transport, in this order — the r.jina.ai proxy is DEAD on
