@@ -149,6 +149,34 @@ test("WCL gate independently validates metric names, roles and source-time prove
   }
 });
 
+/* Skipped zero-amount entries (wcl-live.mjs readCut, 2026-10-27) sat on the returned page,
+   so n + zeroAmountEntries is the page size: at most 100, and exactly 100 when WCL said more
+   pages follow. The row and its cut receipt must agree on the count. */
+function withZeroes(f, shape) {
+  // An explicit cutZeroes: undefined means the receipt lacks the count, so no destructuring default.
+  const { n, zeroes, hasMorePages } = shape, cutZeroes = Object.hasOwn(shape, "cutZeroes") ? shape.cutZeroes : zeroes;
+  const row = f.updates.metrics[0], cfg = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === row.bracket);
+  const cut = f.evidence.brackets[cfg.key].cuts.find(c => c.class === row.class && c.spec === row.spec && c.encounterId === row.sample.encounterId);
+  row.n = cut.samples = n; row.sample.hasMorePages = cut.hasMorePages = hasMorePages;
+  if (zeroes === undefined) delete row.sample.zeroAmountEntries; else row.sample.zeroAmountEntries = zeroes;
+  if (cutZeroes === undefined) delete cut.zeroAmountEntries; else cut.zeroAmountEntries = cutZeroes;
+  reseal(f);
+  return f;
+}
+
+test("WCL gate accepts counted zero-amount entries only when they fit the returned page and match the receipt", () => {
+  assert.deepEqual(checkWclMetrics(withZeroes(fixture(), { n: 95, zeroes: 5, hasMorePages: true })), []);
+  assert.deepEqual(checkWclMetrics(withZeroes(fixture(), { n: 27, zeroes: 3, hasMorePages: false })), []);
+  for (const shape of [
+    { n: 96, zeroes: 5, hasMorePages: true }, { n: 94, zeroes: 5, hasMorePages: true },
+    { n: 98, zeroes: 3, hasMorePages: false }, { n: 95, zeroes: 0, hasMorePages: false },
+    { n: 27, zeroes: 2.5, hasMorePages: false }, { n: 27, zeroes: "3", hasMorePages: false },
+  ]) reject(withZeroes(fixture(), shape), /Invalid WCL leaderboard tuple, value, sample, or provenance/);
+  reject(withZeroes(fixture(), { n: 95, zeroes: 5, hasMorePages: true, cutZeroes: undefined }), /metric differs from its cut receipt/);
+  reject(withZeroes(fixture(), { n: 27, zeroes: 3, hasMorePages: false, cutZeroes: 4 }), /metric differs from its cut receipt/);
+  reject(withZeroes(fixture(), { n: 100, zeroes: undefined, hasMorePages: true, cutZeroes: 5 }), /metric differs from its cut receipt/);
+});
+
 test("WCL gate retains failed and sparse cuts exactly, without blocking successful cuts", () => {
   for (const status of ["unreachable", "invalid", "sparse"]) {
     const f = fixture(), omitted = omitFirst(f, status);

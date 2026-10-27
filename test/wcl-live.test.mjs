@@ -140,9 +140,45 @@ test("invalid returned key, class, value, timestamp or ordering never lands that
   const receipt = result.brackets["wcl-leaderboard-mplus"];
   assert.equal(receipt.status, "partial"); assert.equal(receipt.failures.length, 8);
   assert.equal(receipt.rows, 312); assert.ok(!result.updates.metrics.some(r => r.bracket === "mplus" && r.spec === "Blood"));
-  assert.match(receipt.failures.find(c => c.encounterId === 12825).detail, /amount must be positive/);
+  assert.match(receipt.failures.find(c => c.encounterId === 12825).detail, /amount is negative/);
   assert.match(receipt.failures.find(c => c.encounterId === 61762).detail, /predates the live season.*2026-08-17/);
   assert.match(receipt.failures.find(c => c.encounterId === 12813).detail, /in the future.*2026-09-06.*observed 2026-09-05/);
+});
+
+/* Owner decision 2026-10-27: an entry that recorded no damage or healing is skipped and
+   counted, not a reason to void the cut (19 raid cuts on the first 12.1.5 nightly). */
+test("zero-amount entries are skipped and counted, never ranked, and cannot void a cut", async () => {
+  const zero = row => ({ ...row, amount: 0 });
+  const result = await collectLeaderboards({ ...options, query: fakeQuery({ mutateCut: (page, spec, cfg, encounterId) => {
+    if (cfg.bracket !== "raid" || spec.className !== "Druid" || spec.specName !== "Feral") return;
+    // A board under one page whose last 3 of 30 entries recorded nothing.
+    if (encounterId === 3421) page.rankings = page.rankings.slice(0, 30).map((row, i) => i >= 27 ? zero(row) : row);
+    // Too few positive entries left: sparse, as any short board is.
+    else if (encounterId === 3470) page.rankings = page.rankings.slice(0, 12).map((row, i) => i >= 8 ? zero(row) : row);
+    // Nothing but zero-amount entries.
+    else if (encounterId === 3429) page.rankings = page.rankings.slice(0, 4).map(zero);
+    // A full page whose tail is zero: the positive entries are all on page 1.
+    else if (encounterId === 3445) page.rankings = page.rankings.map((row, i) => i >= 95 ? zero(row) : row);
+    // A zero ranked above a positive entry is disorder, not a skippable tail.
+    else if (encounterId === 3455) page.rankings[5].amount = 0;
+    else return;
+    page.count = page.rankings.length; page.hasMorePages = page.rankings.length === 100;
+  } }) });
+  const raid = result.brackets["wcl-leaderboard-raid"];
+  const cut = id => raid.cuts.find(c => c.spec === "Feral" && c.encounterId === id);
+  const row = id => result.updates.metrics.find(r => r.spec === "Feral" && r.sample.encounterId === id);
+  assert.deepEqual([cut(3421).status, cut(3421).samples, cut(3421).zeroAmountEntries], ["success", 27, 3]);
+  assert.deepEqual([row(3421).n, row(3421).value, row(3421).sample.zeroAmountEntries, row(3421).sample.hasMorePages], [27, 987, 3, false]);
+  assert.deepEqual([cut(3445).samples, row(3445).n, row(3445).value, row(3445).sample.zeroAmountEntries, row(3445).sample.hasMorePages], [95, 95, 953, 5, true]);
+  assert.deepEqual([cut(3470).status, cut(3470).samples, cut(3470).zeroAmountEntries], ["sparse", 8, 4]);
+  assert.equal(cut(3470).detail, "Only 8 entries; minimum is 10; 4 zero-amount entries skipped");
+  assert.deepEqual([cut(3429).status, cut(3429).samples, cut(3429).detail], ["sparse", 0, "No ranked entries; 4 zero-amount entries skipped"]);
+  assert.equal(row(3470), undefined); assert.equal(row(3429), undefined);
+  assert.equal(cut(3455).status, "invalid"); assert.match(cut(3455).detail, /not ordered from highest to lowest/);
+  // Untouched cuts carry no zeroAmountEntries key, so today's receipts and rows are unchanged.
+  assert.equal(Object.hasOwn(cut(3420), "zeroAmountEntries"), false);
+  assert.equal(Object.hasOwn(row(3420).sample, "zeroAmountEntries"), false);
+  assert.equal(raid.status, "partial"); assert.equal(raid.failures.length, 1); assert.equal(raid.rows, 357);
 });
 
 test("ranking diagnostics distinguish a malformed amount from a malformed epoch timestamp", async () => {

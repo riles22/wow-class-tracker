@@ -43,6 +43,8 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
       const sample = row.sample, spec = bySpec.get(`${row.class}|${row.spec}`);
       const encounter = cfg?.encounters.find(e => e.id === sample?.encounterId);
       const metric = spec?.role === "Healer" ? "hps" : "dps";
+      // Skipped zero-amount entries (wcl-live.mjs readCut) still sat on the returned page.
+      const zeroes = sample?.zeroAmountEntries, returned = row.n + (zeroes ?? 0);
       if (!spec || !encounter || row.source !== "warcraftlogs" || row.name !== expectedMetricName(cfg, encounter, metric)
         || row.era !== "live" || row.unit !== metric.toUpperCase() || !Number.isInteger(row.value) || row.value <= 0
         || !Number.isInteger(row.n) || row.n < 10 || row.n > 100 || seen.has(tuple(row))
@@ -51,11 +53,13 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
         || sample.oldestRun > sample.newestRun || sample.newestRun > sample.observedAt
         || Date.parse(sample.observedAt) < Date.parse(evidence.attemptedAt) || Date.parse(sample.observedAt) > +now
         || row.asOf !== sample.newestRun.slice(0, 10) || typeof sample.hasMorePages !== "boolean"
-        || (sample.hasMorePages && row.n !== 100)
+        || (zeroes !== undefined && (!Number.isInteger(zeroes) || zeroes < 1))
+        || returned > 100 || (sample.hasMorePages && returned !== 100)
         || !isDeepStrictEqual(sample, { kind: "leaderboard-entries", cap: 100, metric, zoneId: cfg.zoneId,
           encounterId: encounter.id, partition: cfg.partition, difficulty: cfg.difficulty, size: cfg.size,
           ...(cfg.keystoneLevel ? { keystoneLevel: cfg.keystoneLevel } : {}), observedAt: sample.observedAt,
-          oldestRun: sample.oldestRun, newestRun: sample.newestRun, hasMorePages: sample.hasMorePages })) throw new Error("Invalid WCL leaderboard tuple, value, sample, or provenance");
+          oldestRun: sample.oldestRun, newestRun: sample.newestRun, hasMorePages: sample.hasMorePages,
+          ...(zeroes !== undefined ? { zeroAmountEntries: zeroes } : {}) })) throw new Error("Invalid WCL leaderboard tuple, value, sample, or provenance");
       seen.add(tuple(row));
     }
     for (const cfg of LIVE_LEADERBOARDS.brackets) {
@@ -83,7 +87,8 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
           const c = cuts.get(`${row.class}|${row.spec}|${row.sample.encounterId}`);
           if (c?.status !== "success" || c.value !== row.value || c.samples !== row.n || c.asOf !== row.asOf
             || c.observedAt !== row.sample.observedAt || c.oldestRun !== row.sample.oldestRun || c.newestRun !== row.sample.newestRun
-            || c.metric !== row.sample.metric || c.hasMorePages !== row.sample.hasMorePages) throw new Error(`${cfg.key}: metric differs from its cut receipt`);
+            || c.metric !== row.sample.metric || c.hasMorePages !== row.sample.hasMorePages
+            || c.zeroAmountEntries !== row.sample.zeroAmountEntries) throw new Error(`${cfg.key}: metric differs from its cut receipt`);
         }
       }
       if (manifest !== undefined) {

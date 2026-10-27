@@ -15,7 +15,8 @@ import { LIVE_LEADERBOARDS, partitionSupersession, rankingQuery } from "./wcl-li
 
 export const KITHIX = { id: 3513, name: "Kith'ix" };
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-const entriesOf = cut => Array.isArray(cut?.rankings) ? cut.rankings.length : null;
+// Counts what the collector would: wcl-live.mjs readCut skips zero-amount entries (2026-10-27).
+const entriesOf = cut => Array.isArray(cut?.rankings) ? cut.rankings.filter(r => r?.amount !== 0).length : null;
 // WCL reports a bad partition/size inside the JSON scalar with HTTP 200 ("Invalid partition specified").
 const blobError = cut => typeof cut?.error === "string" ? { error: cut.error.replace(/[\r\n]+/g, " ").slice(0, 120) } : {};
 

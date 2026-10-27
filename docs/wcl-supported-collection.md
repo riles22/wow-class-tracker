@@ -25,6 +25,11 @@ median, a 95th percentile, or a random sample. Each boss/dungeon remains separat
   quality. These values never enter tier-letter consensus or the frozen forecast.
 - Page 1 is explicit. `count` is page-local. `hasMorePages` discloses truncation.
   Empty or fewer-than-10 cuts are explicit omissions, retaining any older observation.
+- Entries that recorded no damage or healing (amount 0) are skipped and counted (owner
+  decision, October 27). The median and `n` cover only the positive entries; the receipt
+  and the row's sample record `zeroAmountEntries`, and the drawer says how many sat on the
+  page. Before that, one such entry voided its whole cut. A negative amount, or a zero
+  ranked above a positive entry, still voids the cut. The probe counts entries the same way.
 - The window is the named partition's ranked entries, with mixed run dates and M+
   affixes. No rolling-week claim. `asOf` is the newest included log date; the UI also
   shows the oldest included log and the separate collection time.

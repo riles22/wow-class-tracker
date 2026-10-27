@@ -1196,7 +1196,9 @@ and the page's own `published` date rides alongside `snapshot`.
    +10; bracket 10 selects +11. Validate the source bracket metadata AND returned key
    levels every run.
    It reads page 1, up to 100 ranked ENTRIES per spec per encounter, with at least 10
-   required. Entries may repeat characters. Keep each encounter separate; no pooled
+   required. An entry with a zero amount (no damage or healing recorded) is skipped and
+   counted as `zeroAmountEntries`, never part of `n` (owner decision 2026-10-27; it used to
+   void the cut). Entries may repeat characters. Keep each encounter separate; no pooled
    raid median, no unique-player claim, no all-population percentile, no recent-week
    claim. `asOf` is the newest included log date; `sample.observedAt` is the collection
    time and the visible range shows the oldest/newest included log. DPS means WCL-ranked
