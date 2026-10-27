@@ -51,6 +51,17 @@ test("sample disclosures distinguish complete returned pages and escape data-der
   assert.match(html, /&lt;img/);
 });
 
+test("skipped zero-amount entries are disclosed only when the sample counted some", () => {
+  const visible = html => html.replace(/<[^>]*>/g, " ");
+  const skipped = metric({ n: 27 }); skipped.sample.hasMorePages = false; skipped.sample.zeroAmountEntries = 3;
+  assert.match(visible(render({ role: "DPS", metrics: [skipped] })), /No further entries returned\. 3 zero-amount entries not counted\./);
+  const one = metric(); one.sample.zeroAmountEntries = 1;
+  assert.match(visible(render({ role: "DPS", metrics: [one] })), /1 zero-amount entry not counted\./);
+  assert.doesNotMatch(render({ role: "DPS", metrics: [metric()] }), /zero-amount/);
+  const hostile = metric(); hostile.sample.zeroAmountEntries = "<b>3</b>";
+  assert.doesNotMatch(render({ role: "DPS", metrics: [hostile] }), /zero-amount|<b>3/);
+});
+
 test("older leaderboard samples are dated neutrally; ordinary metrics gain no leaderboard claims", () => {
   const old = metric(), fresh = metric({ sample: null, name: "A separate measurement", asOf: "2026-09-05" });
   const html = render({ role: "DPS", metrics: [old, fresh] });

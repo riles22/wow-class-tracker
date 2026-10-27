@@ -11,13 +11,18 @@
                   missing from this list, which is how a whole harvest came to omit it and left
                   the sim-tier guard passing vacuously until 2026-08-20.
      "retire":   [{ "class", "spec", "source": "mythicstats", "bracket": "mplus", "name" }]
-                  MYTHICSTATS ONLY — the stable-metric collector's lane for a spec that
+                  MYTHICSTATS — the stable-metric collector's lane for a spec that
                   dropped off a Mythicstats period with a stored share at or below
                   MYTHICSTATS_RETIRE_MAX_SHARE (owner decision 2026-09-25): that one stored
-                  row is removed so the spec reads blank, never a made-up 0. Any other
-                  source, series or bracket, a stored share above the bound, or a tuple also
-                  present in "metrics" refuses the whole merge; this is not a general delete
-                  path. A tuple with no stored row is a no-op.
+                  row is removed so the spec reads blank, never a made-up 0. A stored share
+                  above the bound refuses the whole merge; a tuple with no stored row is a
+                  no-op.
+                 [{ "class", "spec", "source": "warcraftlogs", "bracket", "name" }]
+                  WARCRAFT LOGS — fetch-wcl.mjs's partition-switch cleanup (owner decision
+                  2026-10-27): the tuple must name a stored leaderboard row on a reviewed
+                  partition other than its bracket's pin, or the whole merge is refused.
+                  Any other source or series, or a tuple also present in "metrics", refuses
+                  the whole merge; this is not a general delete path.
    Metrics upsert by (source, bracket, name); profiles replace fightProfile.
    Exact class+spec matching; refuses to write on any unmatched row or
    validation failure. */
@@ -28,6 +33,7 @@ import path from "node:path";
 import { validateData, loadData } from "./validate.mjs";
 import { MYTHICSTATS_RETIRE_MAX_SHARE } from "./fetch-stable-metrics.mjs";
 import { STABLE_SERIES } from "./stable-metric-parsers.mjs";
+import { LIVE_LEADERBOARDS } from "./wcl-live.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -53,12 +59,12 @@ export async function applyMetrics(dataPath, root = ROOT) {
     metricsApplied++;
   }
 
-  // Mythicstats retirement only (see the header). Every refusal throws before anything is written.
-  let metricsRetired = 0;
+  // Retirement lanes (see the header). Every refusal throws before anything is written.
+  let metricsRetired = 0, wclRetired = 0;
   const upserted = new Set((input.metrics ?? []).map(row => `${row.class}|${row.spec}|${row.source}|${row.bracket}|${row.name}`));
   for (const row of input.retire ?? []) {
-    const label = `retire: ${row?.class} / ${row?.spec} (${row?.source})`;
-    if (row?.source !== "mythicstats" || row.bracket !== "mplus" || row.name !== STABLE_SERIES.mythicstats.name) {
+    const label = `retire: ${row?.class} / ${row?.spec} (${row?.source})`, wcl = row?.source === "warcraftlogs";
+    if (!wcl && (row?.source !== "mythicstats" || row.bracket !== "mplus" || row.name !== STABLE_SERIES.mythicstats.name)) {
       throw new Error(`${label} — only the Mythicstats "${STABLE_SERIES.mythicstats.name}" M+ series can be retired; nothing written`);
     }
     const spec = byKey.get(`${row.class}|${row.spec}`);
@@ -67,6 +73,16 @@ export async function applyMetrics(dataPath, root = ROOT) {
       throw new Error(`${label} is also upserted — nothing written`);
     }
     const i = (spec.metrics ?? []).findIndex(m => m.source === row.source && m.bracket === row.bracket && m.name === row.name);
+    if (wcl) {
+      const recipe = LIVE_LEADERBOARDS.brackets.find(cfg => cfg.bracket === row.bracket), sample = spec.metrics?.[i]?.sample;
+      if (!recipe || sample?.kind !== "leaderboard-entries" || sample.partition === recipe.partition
+        || !recipe.reviewedPartitions.some(p => p.id === sample.partition)) {
+        throw new Error(`${label} names no stored leaderboard row on a reviewed partition other than the ${row.bracket} pin — nothing written`);
+      }
+      spec.metrics.splice(i, 1);
+      wclRetired++;
+      continue;
+    }
     if (i < 0) continue;
     if (!(spec.metrics[i].value <= MYTHICSTATS_RETIRE_MAX_SHARE)) {
       throw new Error(`${label} stores ${spec.metrics[i].value}%, above the ${MYTHICSTATS_RETIRE_MAX_SHARE}% retirement bound — nothing written`);
@@ -162,7 +178,7 @@ export async function applyMetrics(dataPath, root = ROOT) {
   }
 
   await writeFile(path.join(root, "data", "specs.json"), JSON.stringify(data.specs, null, 2) + "\n");
-  return { metricsApplied, metricsRetired, profilesApplied, survivabilityApplied, playstyleApplied, ptrDummyApplied, tierSetsApplied };
+  return { metricsApplied, metricsRetired, wclRetired, profilesApplied, survivabilityApplied, playstyleApplied, ptrDummyApplied, tierSetsApplied };
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
@@ -179,6 +195,7 @@ if (isMain) {
       `${result.survivabilityApplied} survivability tier(s)`, `${result.playstyleApplied} playstyle(s)`,
     ];
     if (result.metricsRetired) parts.push(`${result.metricsRetired} Mythicstats row(s) retired`);
+    if (result.wclRetired) parts.push(`${result.wclRetired} old-partition WCL row(s) retired`);
     if (result.ptrDummyApplied) parts.push(`${result.ptrDummyApplied} Dummy Dome`);
     if (result.tierSetsApplied) parts.push(`${result.tierSetsApplied} tier set(s)`);
     console.log(`✓ applied ${parts.join(", ")} → data/specs.json`);

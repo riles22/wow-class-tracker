@@ -124,33 +124,45 @@ function graphErrors(response) {
   return Array.isArray(errors) ? errors : [{ message: "Malformed GraphQL errors" }];
 }
 
+/* Zero-amount entries (owner decision 2026-10-27). WCL lists entries that recorded no damage
+   or healing at the bottom of a board still under one full page. They are not throughput
+   observations, yet one of them used to void the whole cut ("Ranking amount must be
+   positive": 19 raid cuts on the first 12.1.5 nightly), which also kept the bracket partial.
+   They are skipped and counted: the median and n cover only the positive entries, and the
+   receipt and the row's sample record zeroAmountEntries. A negative amount, or a zero ranked
+   above a positive entry, still voids the cut. */
 function readCut(raw, { spec, cfg, encounter, observedAt, minSamples, maxSamples }) {
   if (!raw || raw.page !== 1 || !Array.isArray(raw.rankings) || !Number.isInteger(raw.count)
     || raw.count !== raw.rankings.length || typeof raw.hasMorePages !== "boolean"
     || raw.rankings.length > maxSamples || (raw.hasMorePages && raw.rankings.length !== maxSamples)) throw new Error("Unexpected page/count/pagination shape");
   const start = Date.parse(LIVE_LEADERBOARDS.liveSince), end = Date.parse(observedAt), values = [], starts = [];
-  for (const [i, row] of raw.rankings.entries()) {
+  let zeroAmountEntries = 0, previous = Infinity;
+  for (const row of raw.rankings) {
     if (canonical(row?.class) !== canonical(spec.class) || canonical(row?.spec) !== canonical(spec.spec)) throw new Error("Ranking class/spec does not match requested spec");
     if (!Number.isFinite(row.amount)) throw new Error("Ranking amount is not a finite number");
-    if (row.amount <= 0) throw new Error("Ranking amount must be positive");
+    if (row.amount < 0) throw new Error("Ranking amount is negative");
+    if (row.amount > previous) throw new Error("Ranking values are not ordered from highest to lowest");
+    previous = row.amount;
+    if (row.amount === 0) { zeroAmountEntries++; continue; }
     if (!Number.isSafeInteger(row.startTime) || !Number.isFinite(new Date(row.startTime).getTime())) throw new Error("Ranking run timestamp is not a valid epoch-millisecond integer");
     if (row.startTime < start) throw new Error(`Ranking run predates the live season (${new Date(row.startTime).toISOString()} < ${LIVE_LEADERBOARDS.liveSince})`);
     if (row.startTime > end) throw new Error(`Ranking run timestamp is in the future (${new Date(row.startTime).toISOString()} > observed ${observedAt})`);
-    if (i && row.amount > values[i - 1]) throw new Error("Ranking values are not ordered from highest to lowest");
     if (cfg.keystoneLevel && (row.hardModeLevel !== cfg.keystoneLevel || row.bracketData !== cfg.keystoneLevel)) throw new Error("Returned keystone level differs from the reviewed +10 cut");
     values.push(row.amount); starts.push(row.startTime);
   }
   const samples = values.length, oldestRun = samples ? new Date(Math.min(...starts)).toISOString() : null;
   const newestRun = samples ? new Date(Math.max(...starts)).toISOString() : null;
+  const skipped = zeroAmountEntries ? { zeroAmountEntries } : {};
   const receipt = { ...identity(spec, encounter), status: samples < minSamples ? "sparse" : "success", samples,
-    metric: metricFor(spec), hasMorePages: raw.hasMorePages, observedAt, oldestRun, newestRun };
-  if (samples < minSamples) return { receipt: { ...receipt, detail: samples ? `Only ${samples} entries; minimum is ${minSamples}` : "No ranked entries" }, row: null };
+    metric: metricFor(spec), hasMorePages: raw.hasMorePages, observedAt, oldestRun, newestRun, ...skipped };
+  if (samples < minSamples) return { receipt: { ...receipt, detail: (samples ? `Only ${samples} entries; minimum is ${minSamples}` : "No ranked entries")
+    + (zeroAmountEntries ? `; ${zeroAmountEntries} zero-amount ${zeroAmountEntries === 1 ? "entry" : "entries"} skipped` : "") }, row: null };
   const middle = Math.floor(samples / 2), median = samples % 2 ? values[middle] : (values[middle - 1] + values[middle]) / 2;
   const row = { class: spec.class, spec: spec.spec, source: "warcraftlogs", bracket: cfg.bracket, era: "live",
     name: expectedMetricName(cfg, encounter, metricFor(spec)), value: Math.round(median), unit: metricFor(spec).toUpperCase(), n: samples,
     asOf: newestRun.slice(0, 10), sample: { kind: "leaderboard-entries", cap: maxSamples, metric: metricFor(spec),
       zoneId: cfg.zoneId, encounterId: encounter.id, partition: cfg.partition, difficulty: cfg.difficulty, size: cfg.size,
-      ...(cfg.keystoneLevel ? { keystoneLevel: cfg.keystoneLevel } : {}), observedAt, oldestRun, newestRun, hasMorePages: raw.hasMorePages } };
+      ...(cfg.keystoneLevel ? { keystoneLevel: cfg.keystoneLevel } : {}), observedAt, oldestRun, newestRun, hasMorePages: raw.hasMorePages, ...skipped } };
   return { receipt: { ...receipt, value: row.value, asOf: row.asOf }, row };
 }
 

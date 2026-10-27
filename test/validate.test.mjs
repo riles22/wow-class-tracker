@@ -1057,6 +1057,19 @@ test("partition guard: leaderboard provenance comes from the reviewed recipe, an
   assert.deepEqual(provenance(validateData(structuredClone(data))), []);
 });
 
+test("leaderboard provenance: a counted zero-amount skip is a positive integer that fits the page beside n", async () => {
+  const data = await loadData(ROOT);
+  const provenance = errors => errors.filter(e => e.includes("invalid WCL leaderboard sample provenance"));
+  const counted = structuredClone(data), [row] = leaderboardFamily(counted.specs);
+  row.n = 95; row.sample.zeroAmountEntries = 5;
+  assert.deepEqual(provenance(validateData(counted)), []);
+  for (const [n, zeroes] of [[95, 0], [95, 6], [27, 2.5], [27, "3"], [27, null]]) {
+    const broken = structuredClone(data), [bad] = leaderboardFamily(broken.specs);
+    bad.n = n; bad.sample.zeroAmountEntries = zeroes;
+    assert.ok(provenance(validateData(broken)).length > 0, `n ${n}, zeroAmountEntries ${JSON.stringify(zeroes)}`);
+  }
+});
+
 test("ptr-builds: realm is required from the cutoff and must be live or ptr", async () => {
   const data = await loadData(ROOT);
   // Kind cannot say where an entry happened: the live "Class Tuning Incoming" posts are

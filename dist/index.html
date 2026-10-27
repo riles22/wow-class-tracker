@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-EWlEvSLZLDWyu/t2LAXHVD4SlfYuhFAyd1P8uZHHwJE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-irGLsdMqO51sKOPSD8WsVK0kB7TfMcrtn3G53k5Eork='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -1923,7 +1923,10 @@ function leaderboardSampleHTML(m){
   // Reviewed partitions carry their WCL name (build.mjs, from LIVE_LEADERBOARDS); any other id stays a number.
   const named = (META.wclPartitions || []).find(p => p.zoneId === sample.zoneId && p.id === sample.partition);
   const partition = named ? `partition “${esc(named.name)}”` : `partition ${esc(sample.partition)}`;
-  return `<span class="mnote" style="display:block;margin-top:3px">Top ≤${esc(sample.cap)} entries per spec; ${partition} bests, mixed dates ${date(sample.oldestRun)}–${date(sample.newestRun)}; checked ${date(sample.observedAt)} (UTC). ${sample.hasMorePages?"Further entries omitted.":"No further entries returned."} <a href="${esc(url)}" target="_blank" rel="noopener">Source leaderboard</a></span>`;
+  // wcl-live.mjs skips entries that recorded no damage or healing; say how many sat on the page.
+  const zeroes = Number.isInteger(sample.zeroAmountEntries) && sample.zeroAmountEntries > 0
+    ? ` ${esc(sample.zeroAmountEntries)} zero-amount ${sample.zeroAmountEntries===1?"entry":"entries"} not counted.` : "";
+  return `<span class="mnote" style="display:block;margin-top:3px">Top ≤${esc(sample.cap)} entries per spec; ${partition} bests, mixed dates ${date(sample.oldestRun)}–${date(sample.newestRun)}; checked ${date(sample.observedAt)} (UTC). ${sample.hasMorePages?"Further entries omitted.":"No further entries returned."}${zeroes} <a href="${esc(url)}" target="_blank" rel="noopener">Source leaderboard</a></span>`;
 }
 
 function metricsHTML(s){

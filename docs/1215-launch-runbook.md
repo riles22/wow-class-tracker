@@ -615,6 +615,8 @@ The commit, all in one:
   delete `switchWaitsFor`.
 - Pools must not mix partitions (validate refuses it): delete the stored partition-1 row of
   any cut the probe lists as sparse on the new partition, or hold that whole family.
+  (2026-10-27: the nightly now retires these rows itself once their pool refreshes; see
+  the switch section of `docs/wcl-supported-collection.md`. The next switch skips this step.)
 - `data/wcl-coverage.json` must match the 9-boss inventory, or validate refuses the commit.
   Add the 40 unattempted Kith'ix cuts as `failed` (collection not completed, which is
   true); the first nightly after the switch rewrites the file from a real collection. Do

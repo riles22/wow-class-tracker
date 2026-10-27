@@ -33,9 +33,17 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
     if (evidence?.schemaVersion !== 2 || evidence.liveSeason !== PHASES.liveSeason || !iso(evidence.attemptedAt)
       || Date.parse(evidence.attemptedAt) > +now || +now - Date.parse(evidence.attemptedAt) > 24 * 3600_000
       || evidence.baselineSha256 !== wclDigest(before)) throw new Error("WCL receipt is missing, stale, future, wrong-season, or bound to a different baseline");
-    if (!updates || Object.keys(updates).join() !== "metrics" || !Array.isArray(updates.metrics) || updates.metrics.length > leaderboardCeiling(baseline.length)
+    // `retire` (fetch-wcl.mjs partitionRetirements) is present only when it lists something.
+    const keys = Object.keys(updates ?? {}).join(), retire = updates?.retire ?? [];
+    if (!updates || !["metrics", "metrics,retire"].includes(keys) || !Array.isArray(updates.metrics) || updates.metrics.length > leaderboardCeiling(baseline.length)
+      || !Array.isArray(retire) || (keys === "metrics,retire" && !retire.length)
       || evidence.updatesSha256 !== wclDigest(updates)) throw new Error("WCL updates differ from the trusted receipt");
     if (manifest !== undefined && !Array.isArray(manifest?.sources)) throw new Error("WCL manifest source rows are missing");
+    /* A refused merge (fetch-wcl.mjs: merge-failed) landed and retired nothing. Publication
+       goes ahead with every WCL row held exactly as the baseline (owner decision
+       2026-10-27); the refresh job's final gate still goes red as the alert. The updates
+       and receipts are checked as usual, so the receipt stays bound to what was refused. */
+    const held = evidence.verdict === "merge-failed";
     const bySpec = new Map(baseline.map(s => [`${s.class}|${s.spec}`, s]));
     const seen = new Set();
     for (const row of updates.metrics) {
@@ -43,6 +51,8 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
       const sample = row.sample, spec = bySpec.get(`${row.class}|${row.spec}`);
       const encounter = cfg?.encounters.find(e => e.id === sample?.encounterId);
       const metric = spec?.role === "Healer" ? "hps" : "dps";
+      // Skipped zero-amount entries (wcl-live.mjs readCut) still sat on the returned page.
+      const zeroes = sample?.zeroAmountEntries, returned = row.n + (zeroes ?? 0);
       if (!spec || !encounter || row.source !== "warcraftlogs" || row.name !== expectedMetricName(cfg, encounter, metric)
         || row.era !== "live" || row.unit !== metric.toUpperCase() || !Number.isInteger(row.value) || row.value <= 0
         || !Number.isInteger(row.n) || row.n < 10 || row.n > 100 || seen.has(tuple(row))
@@ -51,11 +61,13 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
         || sample.oldestRun > sample.newestRun || sample.newestRun > sample.observedAt
         || Date.parse(sample.observedAt) < Date.parse(evidence.attemptedAt) || Date.parse(sample.observedAt) > +now
         || row.asOf !== sample.newestRun.slice(0, 10) || typeof sample.hasMorePages !== "boolean"
-        || (sample.hasMorePages && row.n !== 100)
+        || (zeroes !== undefined && (!Number.isInteger(zeroes) || zeroes < 1))
+        || returned > 100 || (sample.hasMorePages && returned !== 100)
         || !isDeepStrictEqual(sample, { kind: "leaderboard-entries", cap: 100, metric, zoneId: cfg.zoneId,
           encounterId: encounter.id, partition: cfg.partition, difficulty: cfg.difficulty, size: cfg.size,
           ...(cfg.keystoneLevel ? { keystoneLevel: cfg.keystoneLevel } : {}), observedAt: sample.observedAt,
-          oldestRun: sample.oldestRun, newestRun: sample.newestRun, hasMorePages: sample.hasMorePages })) throw new Error("Invalid WCL leaderboard tuple, value, sample, or provenance");
+          oldestRun: sample.oldestRun, newestRun: sample.newestRun, hasMorePages: sample.hasMorePages,
+          ...(zeroes !== undefined ? { zeroAmountEntries: zeroes } : {}) })) throw new Error("Invalid WCL leaderboard tuple, value, sample, or provenance");
       seen.add(tuple(row));
     }
     for (const cfg of LIVE_LEADERBOARDS.brackets) {
@@ -67,7 +79,7 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
         if (rows.length || landed || !["no-credentials", "oauth-failed", "network-failed"].includes(evidence.verdict)) throw new Error(`${cfg.key}: missing collection receipt`);
       } else {
         if (!["success", "partial", "invalid", "unreachable"].includes(receipt.status)
-          || receipt.rows !== rows.length || landed !== rows.length || receipt.cuts?.length !== cfg.encounters.length * baseline.length)
+          || receipt.rows !== rows.length || landed !== (held ? 0 : rows.length) || receipt.cuts?.length !== cfg.encounters.length * baseline.length)
           throw new Error(`${cfg.key}: coverage/landed receipt does not match collected rows`);
         const cuts = new Map();
         for (const cut of receipt.cuts) {
@@ -83,24 +95,53 @@ export function checkWclMetrics({ baseline, current, evidence, updates, manifest
           const c = cuts.get(`${row.class}|${row.spec}|${row.sample.encounterId}`);
           if (c?.status !== "success" || c.value !== row.value || c.samples !== row.n || c.asOf !== row.asOf
             || c.observedAt !== row.sample.observedAt || c.oldestRun !== row.sample.oldestRun || c.newestRun !== row.sample.newestRun
-            || c.metric !== row.sample.metric || c.hasMorePages !== row.sample.hasMorePages) throw new Error(`${cfg.key}: metric differs from its cut receipt`);
+            || c.metric !== row.sample.metric || c.hasMorePages !== row.sample.hasMorePages
+            || c.zeroAmountEntries !== row.sample.zeroAmountEntries) throw new Error(`${cfg.key}: metric differs from its cut receipt`);
         }
       }
       if (manifest !== undefined) {
         const entries = manifest.sources.filter(s => s.source === cfg.key);
         if (entries.length !== 1 || (entries[0].result === "success" && receipt?.status !== "success"))
           throw new Error(`${cfg.key}: manifest success needs complete trusted collection`);
+        if (held && entries[0].result === "success")
+          throw new Error(`${cfg.key}: the WCL merge was refused, so nothing landed and the manifest cannot claim success`);
       }
     }
     for (const key of ["wcl-live-raid", "wcl-live-mplus"]) {
       if (evidence.landed?.[key] || (manifest?.sources ?? []).some(s => s.source === key && s.result === "success"))
         throw new Error(`${key}: leaderboards cannot vouch for historical population medians`);
     }
-    const expected = new Map(before.map(row => [tuple(row), row]));
-    for (const row of updates.metrics) {
-      expected.set(tuple(row), row);
+    /* Partition-switch retirements (fetch-wcl.mjs partitionRetirements). Each must name a
+       stored leaderboard row on a reviewed partition other than its pin, in a pool this run
+       refreshed, whose cut WCL answered on the pin as sparse or invalid. Validation still
+       refuses any pool the merge would leave mixed. */
+    const retired = new Set(), roleOf = row => bySpec.get(`${row.class}|${row.spec}`)?.role;
+    for (const entry of retire) {
+      const cfg = LIVE_LEADERBOARDS.brackets.find(c => c.bracket === entry?.bracket);
+      const old = before.find(row => tuple(row) === tuple(entry ?? {}));
+      const cut = old && evidence.brackets?.[cfg?.key]?.cuts?.find(c => c.class === old.class && c.spec === old.spec && c.encounterId === old.sample?.encounterId);
+      if (!isDeepStrictEqual(Object.keys(entry ?? {}), ["class", "spec", "source", "bracket", "name"]) || entry.source !== "warcraftlogs"
+        || !cfg || !old || old.sample?.kind !== "leaderboard-entries" || old.sample.partition === cfg.partition
+        || !cfg.reviewedPartitions.some(p => p.id === old.sample.partition) || seen.has(tuple(entry)) || retired.has(tuple(entry))
+        || !updates.metrics.some(row => row.bracket === entry.bracket && row.name === entry.name && roleOf(row) === roleOf(entry))
+        || !["sparse", "invalid"].includes(cut?.status))
+        throw new Error("Invalid WCL partition retirement: it must name a stored row on an older reviewed partition, in a refreshed pool, whose cut WCL answered as sparse or invalid");
+      retired.add(tuple(entry));
     }
-    if (!isDeepStrictEqual(sorted([...expected.values()]), sorted(after))) throw new Error("Canonical WCL rows differ from trusted updates; failed/sparse cuts and historical data must be retained exactly");
+    for (const cfg of LIVE_LEADERBOARDS.brackets) {
+      if ((evidence.retired?.[cfg.key]?.rows ?? 0) !== (held ? 0 : retire.filter(r => r.bracket === cfg.bracket).length))
+        throw new Error(`${cfg.key}: retired receipt does not match the sealed retirements`);
+    }
+    if (Object.keys(evidence.retired ?? {}).some(key => !LIVE_LEADERBOARDS.brackets.some(c => c.key === key)))
+      throw new Error("WCL retired receipt names an unknown bracket");
+    const expected = new Map(before.map(row => [tuple(row), row]));
+    if (!held) {
+      for (const key of retired) expected.delete(key);
+      for (const row of updates.metrics) expected.set(tuple(row), row);
+    }
+    if (!isDeepStrictEqual(sorted([...expected.values()]), sorted(after))) throw new Error(held
+      ? "The WCL merge was refused, so every canonical WCL row must equal the baseline exactly"
+      : "Canonical WCL rows differ from trusted updates; failed/sparse cuts and historical data must be retained exactly");
     if (coverage !== undefined && !isDeepStrictEqual(coverage, createWclCoverage(evidence, baseline)))
       throw new Error("Public WCL coverage differs from the trusted collection receipt");
   } catch (error) { errors.push(error.message); }
@@ -125,6 +166,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     }
     const errors = await runWclCheck(options);
     if (errors.length) throw new Error(errors.join("\n"));
-    console.log("WCL leaderboard metrics match trusted collection; historical and failed/sparse cuts retained exactly.");
+    const evidencePath = path.join(options.evidenceDir ?? path.join(ROOT, "wcl-fetch"), "evidence.json");
+    if (JSON.parse(await readFile(evidencePath, "utf8")).verdict === "merge-failed") {
+      console.log("::warning title=WCL held::The WCL merge was refused (merge-failed). Every WCL row is held exactly as last published; nothing new landed.");
+    } else console.log("WCL leaderboard metrics match trusted collection; every WCL row it did not refresh or retire is retained exactly.");
   } catch (error) { console.error(error.message); process.exitCode = 1; }
 }

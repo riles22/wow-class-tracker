@@ -431,6 +431,11 @@ jobs:
             evidence.brackets[key].status and evidence.landed[key].rows. Mark success
             only for a successful bracket; partial/invalid/unreachable cuts keep old
             observations unchanged and carry their actual reason (invalid -> parse_error).
+            If evidence.verdict is merge-failed, nothing landed: write both rows as
+            parse_error with evidence.detail in their detail. Every WCL row stays exactly
+            as committed and the rest of the night still publishes. After a partition
+            switch, evidence.retired[key].rows counts old-partition rows the collector
+            retired; report that count and never restore those rows.
             These are per-encounter top-100-entry medians, not population medians.
             The two older wcl-live-raid/mplus rows still record evidence.legacy[key]
             as unreachable: no verified exact aggregate endpoint exists. New series
@@ -599,7 +604,8 @@ jobs:
             updates.json are inputs. The collector already merged supported per-encounter
             leaderboards; never edit/recompute/refetch any WCL metric row. Account for
             all four requirements: wcl-leaderboard-raid/mplus from brackets[key] and
-            landed[key], wcl-live-raid/mplus from legacy[key] (still unreachable exact
+            landed[key] (both parse_error with evidence.detail when the verdict is
+            merge-failed), wcl-live-raid/mplus from legacy[key] (still unreachable exact
             aggregates). No leaderboards under legacy median names, no rdps outage
             diagnosis (that enum is FFXIV-only), no closed-PTR updates or HTML/proxy
             workarounds. Run node src/check-wcl-metrics.mjs --manifest data/run-manifest.json.
@@ -683,10 +689,15 @@ jobs:
           node src/check-stable-metrics.mjs --manifest data/run-manifest.json
           node src/check-official-notes.mjs
           # WCL credential/config rot is invisible to the agents (they never hold the
-          # secrets) — surface it deterministically as a red refresh job.
+          # secrets) — surface it deterministically as a red refresh job. A refused merge
+          # no longer blocks publication (owner decision 2026-10-27): publish holds every
+          # WCL row exactly, and this red job is the alert.
           verdict="$(node -e 'console.log(JSON.parse(require("fs").readFileSync("wcl-fetch/evidence.json","utf8")).verdict ?? "")' 2>/dev/null || echo unreadable)"
           case "$verdict" in
-            no-credentials|oauth-failed|merge-failed|unreadable)
+            merge-failed)
+              echo "::error::WCL merge refused (verdict: merge-failed) — every WCL row is held at its last published value and the publish job can still publish the rest; evidence.detail in the wcl-fetch receipt says what validation refused"
+              exit 1;;
+            no-credentials|oauth-failed|unreadable)
               echo "::error::WCL deterministic collection failed (verdict: $verdict) — inspect its receipt; authentication failures require checking WCL_CLIENT_ID/WCL_CLIENT_SECRET"
               exit 1;;
           esac

@@ -57,7 +57,9 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   (minimum10), not population medians or unique-player medians. Entries may repeat
   characters. The date range spans the partition's included logs, not a rolling week;
   `asOf` is the newest log date and `sample.observedAt` is the check instant. Empty or
-  sparse cuts remain missing/retain prior observations. No pooling across encounters.
+  sparse cuts remain missing/retain prior observations, except an older-partition row after
+  a reviewed switch: the collector retires it once its pool has refreshed on the pin
+  (`updates.retire`, owner decision 2026-10-27). No pooling across encounters.
   Raid: zone53, partition2 (12.1.5, reviewed switch 2026-10-26), difficulty5, size20, nine
   pinned raid bosses (Kith'ix 3513 joined in the switch) excluding Nymrissa3379. M+: zone55, partition1, difficulty10, size5, **bracket9 = key+10**;
   validate `brackets.min=2,bucket=1` and each returned `hardModeLevel=bracketData=10`.
@@ -65,7 +67,9 @@ Never commit config.json or echo the secret (env or file) into logs, commits, or
   hourly-budget checks, three consecutive failures stop, and12-minute total budget.
   Success for `wcl-leaderboard-raid/mplus` requires the collector's successful bracket
   status and matching landed rows; exact trusted updates and retained rows are checked
-  independently on publication. The old `wcl-live-raid/mplus` requirements remain
+  independently on publication. On `merge-failed` nothing landed: record both rows
+  `parse_error` with `evidence.detail`. Publication then holds every WCL row exactly and
+  still publishes the rest (owner decision 2026-10-27). The old `wcl-live-raid/mplus` requirements remain
   unreachable until a genuine aggregate endpoint is validated. New leaderboard data
   cannot refresh their old medians. **Partition supersession (guard since 2026-09-25):**
   when WCL lists a zone partition above the pinned one or outside the recipe's

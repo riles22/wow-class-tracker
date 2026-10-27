@@ -88,9 +88,14 @@ test("a new raid partition is reported by the collector's own guard, with Kith'i
   const compact = s => s.replace(/ /g, "");
   const { failures, json, record } = await probe({ zones,
     kithix: (partition, difficulty, size) => page(partition === 3 && difficulty === 5 && size === 20 ? 40 : 0),
-    // Partition 3 has 12 entries everywhere except one stored (spec, boss) cut, which has 5.
-    aliases: ({ partition, encounterId, className, specName }) => page(partition !== 3 ? 0
-      : encounterId === 3470 && className === compact(first.class) && specName === compact(first.spec) ? 5 : 12) });
+    // Partition 3 has 12 entries everywhere except one stored (spec, boss) cut, where 7 of
+    // its 12 recorded nothing: 5 count, as the collector would count them.
+    aliases: ({ partition, encounterId, className, specName }) => {
+      const cut = page(partition !== 3 ? 0 : 12);
+      if (partition === 3 && encounterId === 3470 && className === compact(first.class) && specName === compact(first.spec))
+        cut.rankings.slice(5).forEach(r => { r.amount = 0; });
+      return cut;
+    } });
   assert.equal(failures, 0);
   assert.deepEqual(json.find(l => l.zone === 53 && l.recipe).supersededBy, [{ id: 3, name: "fixture partition" }]);
   const matrix = json.filter(l => l.encounter === KITHIX.id && l.trigger === undefined);

@@ -400,7 +400,10 @@ export function validateData({ specs, sources, scales, community, ptrBuilds, cre
           || !recipe || !recipe.reviewedPartitions.some(p => p.id === sample.partition)
           || !Number.isInteger(sample.encounterId) || sample.encounterId <= 0
           || sample.zoneId !== recipe.zoneId || sample.difficulty !== recipe.difficulty || sample.size !== recipe.size
-          || (recipe.keystoneLevel ? sample.keystoneLevel !== recipe.keystoneLevel : sample.keystoneLevel != null)) {
+          || (recipe.keystoneLevel ? sample.keystoneLevel !== recipe.keystoneLevel : sample.keystoneLevel != null)
+          // Skipped zero-amount entries (wcl-live.mjs readCut) are counted, never part of n.
+          || (sample.zeroAmountEntries !== undefined && (!Number.isInteger(sample.zeroAmountEntries)
+            || sample.zeroAmountEntries < 1 || metric.n + sample.zeroAmountEntries > 100))) {
           errors.push(`specs.json: ${key} metric "${metric.name}" has invalid WCL leaderboard sample provenance`);
         }
       }

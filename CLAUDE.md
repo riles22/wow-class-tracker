@@ -1191,6 +1191,10 @@ and the page's own `published` date rides alongside `snapshot`.
    **Leaderboard median DPS/HPS (S2 Mythic/M+10: encounter, top 100)** rows with sample
    provenance. Run `node src/check-wcl-metrics.mjs` before finishing; publication checks
    against the independent pre-agent artifact. These numeric series never feed letters.
+   A refused merge (`merge-failed`) lands nothing: both leaderboard manifest rows are
+   `parse_error` with `evidence.detail`, every WCL row stays exactly as committed, and
+   the rest of the night still publishes while the refresh job goes red as the alert
+   (owner decision 2026-10-27; before that it blocked the whole night).
    The fixed recipe covers 9 raid bosses (zone 53, partition 2 "12.1.5" since the reviewed
    switch of 2026-10-26, Mythic difficulty 5, size 20: the eight 12.1 bosses plus Kith'ix
    3513, which joined in that switch; excludes world boss Nymrissa 3379) and 8 dungeons
@@ -1198,7 +1202,9 @@ and the page's own `published` date rides alongside `snapshot`.
    +10; bracket 10 selects +11. Validate the source bracket metadata AND returned key
    levels every run.
    It reads page 1, up to 100 ranked ENTRIES per spec per encounter, with at least 10
-   required. Entries may repeat characters. Keep each encounter separate; no pooled
+   required. An entry with a zero amount (no damage or healing recorded) is skipped and
+   counted as `zeroAmountEntries`, never part of `n` (owner decision 2026-10-27; it used to
+   void the cut). Entries may repeat characters. Keep each encounter separate; no pooled
    raid median, no unique-player claim, no all-population percentile, no recent-week
    claim. `asOf` is the newest included log date; `sample.observedAt` is the collection
    time and the visible range shows the oldest/newest included log. DPS means WCL-ranked
@@ -1230,7 +1236,11 @@ and the page's own `published` date rides alongside `snapshot`.
    next partition waits for owner review; `wcl-probe.yml` prints its evidence.
    Validation, the update ceiling and the drawer's partition name read `LIVE_LEADERBOARDS`;
    a rank pool may not mix partitions; a test pins `PHASES` and `LIVE_LEADERBOARDS` in
-   lockstep. Procedure: `docs/wcl-supported-collection.md`.
+   lockstep. After a switch the nightly retires the older-partition row of each cut WCL
+   answered as sparse or invalid on the pin, once that pool has a refreshed row
+   (`partitionRetirements` in `fetch-wcl.mjs`, sealed as `retire` in `updates.json`; owner
+   decision 2026-10-27). An unreachable cut retires nothing, and the merge still refuses.
+   Procedure: `docs/wcl-supported-collection.md`.
 2. Murlok meta pages: plain GET (r.jina.ai does NOT work on it).
 3. Write `{ "metrics": [...], "profiles": [...] }` to a scratch file →
    `node src/apply-metrics.mjs <file>`; `npm run test:quiet && npm run build`.

@@ -25,6 +25,11 @@ median, a 95th percentile, or a random sample. Each boss/dungeon remains separat
   quality. These values never enter tier-letter consensus or the frozen forecast.
 - Page 1 is explicit. `count` is page-local. `hasMorePages` discloses truncation.
   Empty or fewer-than-10 cuts are explicit omissions, retaining any older observation.
+- Entries that recorded no damage or healing (amount 0) are skipped and counted (owner
+  decision, October 27). The median and `n` cover only the positive entries; the receipt
+  and the row's sample record `zeroAmountEntries`, and the drawer says how many sat on the
+  page. Before that, one such entry voided its whole cut. A negative amount, or a zero
+  ranked above a positive entry, still voids the cut. The probe counts entries the same way.
 - The window is the named partition's ranked entries, with mixed run dates and M+
   affixes. No rolling-week claim. `asOf` is the newest included log date; the UI also
   shows the oldest included log and the separate collection time.
@@ -48,7 +53,13 @@ The collector merges valid cuts, preserves failed/sparse cuts, and emits aggrega
 are saved. These files upload independently before the agent runs. Publication downloads
 that copy after the agent's output and runs `src/check-wcl-metrics.mjs`, verifying the
 baseline hash, exact updates, cut coverage, manifest claims, and retention of every
-historical or unrefreshed WCL row. Canonical schema validation also requires sample
+historical or unrefreshed WCL row. If canonical validation refuses the merge
+(`merge-failed`), nothing lands. Since October 27 (owner decision) the night still
+publishes: the gate then requires every WCL row to equal the baseline exactly, no
+`landed` or `retired` count and no manifest `success` for either leaderboard bracket,
+while the public coverage marks every cut failed. The refresh job's final gate still goes
+red as the alert. Before that, a refused merge blocked the whole night, as on October 26.
+Canonical schema validation also requires sample
 provenance and the correct role/metric relationship.
 
 The new requirements are `wcl-leaderboard-raid` and `wcl-leaderboard-mplus`. The original
@@ -120,8 +131,15 @@ changes:
   mixed pool. Sparse is not the only risk: the first nightly on partition 2 found 19 invalid
   cuts (a zero-amount entry on a board under 100 entries), 9 of them still held a 12.1 row,
   and the all-or-nothing merge refused every WCL row that night. The follow-up commit dropped
-  those 9 rows and 15 more whose new board was under one full page. At the next switch, drop
-  the old row of every cut whose new board is not yet a full page (`hasMorePages`).
+  those 9 rows and 15 more whose new board was under one full page. The nightly now does
+  this itself (owner decision 2026-10-27). Once a pool has a row refreshed on the pin,
+  `partitionRetirements` in `fetch-wcl.mjs` lists the older-partition row of each cut in it
+  that WCL answered as sparse or invalid there. The list rides in `updates.json` as
+  `retire`, sealed by `updatesSha256`. `apply-metrics.mjs` drops those rows in the same
+  merge, `evidence.retired` counts them per bracket, and `check-wcl-metrics.mjs` checks each
+  one against the baseline and its cut receipt. An unreachable cut retires nothing, so that
+  night's merge still refuses. Zero-amount entries no longer void a cut (same date), so a
+  switch commit no longer drops rows by hand.
 - The update ceiling and the sample-provenance checks follow the config (40 specs x 17
   encounters = 680 rows). Literal count pins are deliberate tripwires and changed in the
   same commit: `test/wcl-live.test.mjs` (row, cut and batch counts),
