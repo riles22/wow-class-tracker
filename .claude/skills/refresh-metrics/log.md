@@ -24,6 +24,15 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (interactive local, read 2026-10-28 ~02:25 UTC = 10-27 19:25 PT) — Archon browser lane: seven number series and survivability refreshed; three value-move groups owner-acked
+
+- Transport and era checks as in refresh-tiers' entry for this run: the owner's Brave, nine ordinary page loads, `lastUpdated` 2026-10-27T12:00Z on all nine, so every row's `asOf` is 2026-10-27. The checker wrote 200 number rows and 40 survivability tiers. Fire Mage had no stored row in Mythic DPS or raid Popularity and now has one.
+- `check-refresh --manifest` failed on exactly the checker's findings and nothing else: 22 row moves over the 60% limit (Mythic DPS 16, largest Frost DK 140262 -> 297229, +112%; Heroic DPS 6, largest Frost DK 151700 -> 269128, +77%) and three family medians over 35% (Mythic DPS 168427 -> 284728, +69%; Heroic DPS 167317 -> 254680, +52%; Mythic HPS 299213 -> 411628, +38%). The owner approved all three groups in session; the commit message is the ack record.
+- Why the moves are real: the stored rows were launch-week reads (08-24/08-25) on far fewer parses. Mythic DPS parse-count median 61.5 (lowest 2), now 12,326; Mythic HPS 126 -> 20,624; Heroic DPS 10,446 -> 115,005. The new Mythic DPS values sit beside the tracker's own WCL S2 Mythic top-100 boss medians from the API (10-27): Arms 298445 vs 298218, Unholy 291240 vs 292325, Blood 146493 vs 145107, Frost DK 297229 vs 276251.
+- Under the limits: Heroic HPS rows median move +27.3%, largest +34.6% (Mistweaver), family median +30.3%; M+ score rows median move +24.0%, largest +32.3% (Subtlety 2993 -> 3960), family median +23.4%. Popularity largest moves 11.3 points raid (Holy Priest 16.3 -> 27.6) and 15.4 points M+ (Guardian 11.7 -> 27.1); every role still sums to 100 +/- 0.2. Survivability 40 tiers, 25 changed, six two-step: Frost Mage A -> C, Restoration Druid S -> B, Discipline A -> C, Holy Paladin A -> C, Protection Warrior B -> S, Protection Paladin S -> C.
+- Numbers above were recomputed from `HEAD` against the merged file before commit; the gate's own family medians (check-refresh takes the upper middle row) are the ones quoted for the three acked groups.
+- `snapshot` 2026-10-27 stamped on the three Mythic rankings entries and "Survivability tiers (Mythic raid)" (were 2026-08-25). Per-boss and per-dungeon pages not read; `encounter-tiers.json` unchanged. Manifest left alone (partial run).
+
 ## 2026-10-27 (nightly re-run, ~20:38 UTC) — collector feeds applied; sims/wowmeta unchanged; Archon walled
 
 - WCL collector: raid 348 rows (12 sparse, partition 2), M+ 320 rows; 0 retired; check-wcl-metrics passes. Murlok 40 rows (source 2026-10-27), Mythicstats period 1086 37 rows (Devastation/Fire/Affliction unprinted, 0 retired): applied metrics-fetch/updates.json (77), check-stable-metrics passes.

@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-27 (interactive local, read 2026-10-28 ~02:25 UTC = 10-27 19:25 PT) — Archon browser lane, all nine pages: 2 of 80 letters changed (M+ tanks)
+
+- Transport: Claude in Chrome in the owner's Brave, `navigator.brave` checked before any Archon load; ordinary page loads, one tab per page, no verification page shown, none solved. An earlier attempt the same evening went to a different connected browser, whose first Archon load showed a "Human Verification" page: the run stopped there per the lane rule (nothing clicked, waited out or solved; tab closed; nothing written), and the owner chose a fresh run in Brave. The connected-browser labels ("Browser 1/2/3") are positional and changed between listings, so pick the browser by its id and check `navigator.brave`.
+- All six letter pages `lastUpdated` 2026-10-27T12:00Z. Raid 27/7/6 and M+ 27/7/6, 0 unmatched; titles say Midnight, raid bodies name the Venomous Abyss, M+ bodies say Season 2, Devourer on both DPS pages, so `seasonVerified` stays "s2" and freeze-season had nothing to freeze. Letters by metric name (raid throughput, M+ score), hash-checked by `src/archon-capture.mjs`.
+- Moves: 2, both M+ Tank: Brewmaster B -> A, Protection Warrior C -> A (two-step). Consensus: 2 tier moves, 0 of two or more bands. The six letter pages keep snapshot 2026-10-27 (the read date in PT; UTC had reached 10-28).
+- The same run refreshed the Archon numbers and survivability tiers from the three Mythic rankings pages; refresh-metrics' log has that half.
+
 ## 2026-10-27 (nightly re-run, ~20:37 UTC) — Method 80/80, 0 moves; IV/Wowhead/Archon walled
 
 - Method (direct GET, 200): M+ 40 rows (8 tier blocks incl. dungeon blocks rejected by roster match), raid 40 rows; Devourer A both; S2 body; "Last Updated" 14 Oct (M+) / 10 Aug (raid). 0 letter moves.
