@@ -14,6 +14,12 @@ function documents({ legacy = false } = {}) {
       ...(!legacy ? { verifiedAt: "2026-09-01" } : {}),
       priorities: Array.from({ length: 2 }, () => ({ secondaries: ["Crit", "Haste", "Mast", "Vers"] })),
       bis: Array.from({ length: 4 }, (_, i) => ({ itemId: String(i + 1), slot: "Head", list: "overall" })),
+      trinketTiers: [{ tier: "S", itemIds: ["11", "12"] }, { tier: "A", itemIds: ["13", "14"] }],
+      enhancements: {
+        enchants: [{ slot: "Head", candidates: [{ id: "21", name: "Fixture Enchant" }] }],
+        gems: { unique: [{ id: "22", name: "Fixture Diamond" }], filler: [{ id: "23", name: "Fixture Garnet" }] },
+        consumables: { flask: [{ id: "24", name: "Fixture Flask" }], note: "prose is never a candidate" },
+      },
     }])), coverage: { specsHarvested: roster.length, specsAbsent: [] },
   }]));
 }
@@ -38,13 +44,14 @@ test("guide gate permits unchanged legacy receipts and fully migrated successful
   assert.deepEqual(checkGearingGuides(prior, clone(prior), options).changedSources, []);
   const result = checkGearingGuides(prior, refreshed(prior), options);
   assert.deepEqual(result.changedSources, Object.keys(GEARING_GUIDE_SOURCES));
-  assert.deepEqual(result.sources[0].after, { specs: 4, priorities: 8, bis: 16 });
+  assert.deepEqual(result.sources[0].after,
+    { specs: 4, priorities: 8, bis: 16, enhancements: 16, trinketTiers: 16 });
   const onlyOne = clone(prior);
   onlyOne.icyveins = refreshed(prior).icyveins;
   assert.deepEqual(checkGearingGuides(prior, onlyOne, options).changedSources, ["icyveins"]);
 });
 
-test("guide gate independently rejects large drops in spec, priority and BiS coverage", () => {
+test("guide gate independently rejects large drops in spec, priority, BiS, enhancement and trinket-tier coverage", () => {
   const prior = documents();
   const boundary = refreshed();
   absent(boundary.icyveins, roster.slice(0, 1));
@@ -59,6 +66,27 @@ test("guide gate independently rejects large drops in spec, priority and BiS cov
   const fewerItems = refreshed();
   for (const record of Object.values(fewerItems.method.specs)) record.bis.splice(2);
   assert.throws(() => checkGearingGuides(prior, fewerItems, options), /bis dropped by more than 25%/);
+  // the 2026-10-14 shape: BiS and priorities intact, the two side lanes parsed to nothing
+  const noEnhancements = refreshed();
+  for (const record of Object.values(noEnhancements.icyveins.specs)) delete record.enhancements;
+  assert.throws(() => checkGearingGuides(prior, noEnhancements, options), /enhancements dropped by more than 25%/);
+  const noTiers = refreshed();
+  for (const record of Object.values(noTiers.icyveins.specs)) record.trinketTiers = [];
+  assert.throws(() => checkGearingGuides(prior, noTiers, options), /trinketTiers dropped by more than 25%/);
+});
+
+test("guide gate rejects malformed enhancement and trinket-tier blocks", () => {
+  const prior = documents();
+  for (const enhancements of ["gems", { enchants: {} }, { gems: { unique: "x" } }, { consumables: { flask: 1 } }]) {
+    const next = refreshed();
+    next.icyveins.specs[roster[0]].enhancements = enhancements;
+    assert.throws(() => checkGearingGuides(prior, next, options), /malformed enhancements block/);
+  }
+  for (const trinketTiers of [{}, [null], [{ tier: "S" }], [{ tier: "S", itemIds: ["item=1"] }]]) {
+    const next = refreshed();
+    next.icyveins.specs[roster[0]].trinketTiers = trinketTiers;
+    assert.throws(() => checkGearingGuides(prior, next, options), /malformed trinket tier row/);
+  }
 });
 
 test("guide gate rejects identity/schema mutation and incomplete or conflicting roster coverage", () => {

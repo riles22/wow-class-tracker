@@ -81,9 +81,18 @@ timeout, or unusable response is a failure. Only a completed, validated attempt
 replaces the source, through an atomic rename.
 Three consecutive block/rate-limit/server/transport failures stop that source early;
 the command retains successful staging and leaves its published data unchanged.
+Icy Veins refuses Node's fetch (HTTP 403 from CI and from a residential connection,
+2026-10-14) and refuses curl's own User-Agent too. From home,
+`node src/harvest-guide-icyveins.mjs --force --curl` fetches through curl with the
+browser headers the tier-list refresh sends instead (`BROWSER_HEADERS`: User-Agent,
+Accept and Accept-Language, names capitalised as a browser sends them; the same
+User-Agent on a lowercase `user-agent:` line drew 403), which Icy Veins served. The
+weekly CI refresh keeps the default transport; whether curl passes from a GitHub runner
+is untested.
 The weekly publisher runs `node src/check-gearing-guides.mjs` from the repository root
 before tests/build. It compares each source against trusted HEAD, requires complete
-verification receipts, and refuses more than 25% loss of specs, priorities, or BiS rows.
+verification receipts, and refuses more than 25% loss of specs, priorities, BiS rows,
+enhancement candidates, or tiered trinkets.
 Successful providers may publish independently; failed providers keep their previous
 files, and the workflow still finishes red to surface the failure. Staging artifacts
 are diagnostic only; a new scheduled run performs a new verification attempt.
