@@ -164,6 +164,14 @@ not moved since 2026-08-25 when the lane took them on.
 1. Check the browser first (`list_connected_browsers`, then `tabs_context_mcp`). No Chrome
    tools, no connected browser, or a site-permission prompt nobody answers: skip the lane
    and say so at the top of the report.
+   - **Brave only, chosen by device id.** The extension's "Browser N" labels are positional
+     and change between listings. On 2026-10-27 the label led to another connected browser,
+     whose first Archon load drew the verification page; Brave then loaded all nine pages as
+     ordinary pages. So `select_browser` by `deviceId`, open a tab on the tracker's own
+     page (https://riles22.github.io/wow-class-tracker/, harmless in any browser), read
+     `typeof navigator.brave` and close the tab: `"object"` is Brave. Anything else: try
+     the next browser. No Brave among them: skip the lane and say so, and never read it
+     through another browser.
 2. Ordinary page loads only, one registered page at a time, each in a tab this run opens
    and closes. The registry (`data/sources.json`) is the page list:
    - the six Wowhead tier-list pages;
