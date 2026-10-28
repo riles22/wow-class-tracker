@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (local scheduled, ~14:10 UTC, before today's nightly) — Icy Veins and Wowhead verified: 0 of 160 letters changed; Archon unchanged cut, not re-read
+
+- Icy Veins: all six pages HTTP 200 via home curl (browser UA + Accept + Accept-Language), one `<table class="tier-list">` each after stripping `<style>`. Raid 27/7/6, M+ 27/7/6, every letter non-null, 0 unmatched, 0 role mismatches, 0 duplicates, Devourer on both DPS pages; titles name 12.1.5, bodies Season 2, so `seasonVerified` stays "s2". dateModified unchanged (raid 10-25 / 10-11 / 08-29, M+ 10-25 / 10-12 / 10-12). 0 of 80 letters moved; snapshots -> 2026-10-28.
+- Wowhead: owner's Brave via Claude in Chrome (picked by device id, `navigator.brave` = "object"), ordinary loads, no challenge. One `[tier-list=rows]` block per page after unescaping `\/`; raid 27/7/6, M+ 27/7/6, all slugs matched by role; titles say Midnight Season 2. dateModified unchanged (raid 10-12 / 08-31 / 10-12, M+ 10-22 / 10-13 / 10-23). 0 of 80 letters moved; snapshots -> 2026-10-28, `published` unchanged.
+- Archon: Heroic raid DPS page loaded normally in Brave, `lastUpdated` still 2026-10-27T12:00Z (the cut last night's interactive run merged), throughput letters 27/27 identical to stored. The other eight pages were not read and nothing Archon was written or stamped; snapshots stay 2026-10-27.
+- freeze-season: nothing to freeze. Churn: no letter changed.
+
 ## 2026-10-27 (interactive local, read 2026-10-28 ~02:25 UTC = 10-27 19:25 PT) — Archon browser lane, all nine pages: 2 of 80 letters changed (M+ tanks)
 
 - Transport: Claude in Chrome in the owner's Brave, `navigator.brave` checked before any Archon load; ordinary page loads, one tab per page, no verification page shown, none solved. An earlier attempt the same evening went to a different connected browser, whose first Archon load showed a "Human Verification" page: the run stopped there per the lane rule (nothing clicked, waited out or solved; tab closed; nothing written), and the owner chose a fresh run in Brave. The connected-browser labels ("Browser 1/2/3") are positional and changed between listings, so pick the browser by its id and check `navigator.brave`.

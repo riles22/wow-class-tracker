@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (local scheduled, ~14:10 UTC, before today's nightly) — queue 0 -> 0; one probe, no captions; 0 takes
+
+- Queue empty, so nothing to drain. One yt-dlp probe (android client) on Dalaran Gaming hEkrgB_5EQU "BIG SUBTLETY ROGUE NERF THIS WEEK!": metadata answered (8,684 s, `was_live` True, uploaded 2026-10-27) but no caption track was written; a long live VOD has no local route, so it stays unseen for the nightly's Supadata lane. No sweep after that. 0 takes, 0 metaNotes, nothing queued or skipped.
+
 ## 2026-10-27 (nightly re-run, ~20:35 UTC) — 44/44 feeds; queue 0; nothing distilled
 
 - Supadata ok, 0 requested (queue empty). No uploads newer than the ~20:06 poll. Dalaran Gaming hEkrgB_5EQU (Sub Rogue nerf livestream) still left unseen for its VOD; a yt-dlp metadata probe on it hit the runner "Sign in to confirm you're not a bot" wall, so I backed off. Bansherz tLllOxDF55I "Pre-Buff MM, Does it Need Buffs?" stays unseen as a key PoV (same call as the earlier run). 0 takes, 0 metaNotes.
