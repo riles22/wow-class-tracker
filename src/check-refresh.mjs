@@ -486,7 +486,7 @@ export function acceptanceProblem(entry, key) {
 }
 
 /* The JSON path of every acceptedStale in the contract that sits anywhere other than the two
-   places checkFreshness reads (a gearing dataset, the top level, a nested block). Such an
+   places checkFreshness reads (at the top level, say, or in a nested block). Such an
    entry accepts nothing while looking as if it does, so the heartbeat reports it as invalid. */
 const ACCEPTANCE_PATH = /^requirements\[\d+\](\.published)?\.acceptedStale$/;
 export function misplacedAcceptances(config) {
@@ -545,7 +545,7 @@ export function labelFlipViolation(now, { due = LABEL_FLIP_DUE, expected = LABEL
     `If the release slipped, move LABEL_FLIP_DUE instead.`;
 }
 
-export function checkFreshness(config, manifest, data, now, gearing = null, { labelFlip = {} } = {}) {
+export function checkFreshness(config, manifest, data, now, { labelFlip = {} } = {}) {
   const violations = [], report = [], keys = [];
   const nowDate = dateOf(now);
   const nowMs = ISO_INSTANT.test(String(now)) ? Date.parse(now) : utc(nowDate);
@@ -733,78 +733,6 @@ export function checkFreshness(config, manifest, data, now, gearing = null, { la
       .filter(section => section.resolution?.disposition === "unresolved").length;
     if (pending) {
       violations.push(`${key}: ${pending} official-note class section(s) still need review`); keys.push(`${key}-unresolved`);
-    }
-  }
-  /* GEARING FRESHNESS (2026-08-08). The gearing subproject had no staleness surface of any
-     kind: nothing in required-sources.json, check-refresh, freshness.yml, validate.mjs or
-     snapshot.mjs mentioned it, and its own validator's seven "stale" strings are all COUNT
-     assertions, never date comparisons. The nightly redeployed an 08-02 page every night and
-     nothing anywhere would have noticed it rotting.
-     Deliberately HEARTBEAT-ONLY, and deliberately a sibling of `requirements[]` rather than an
-     entry in it. requirements[] is consumed by checkManifest as well as this function, so a row
-     there would make the nightly publish gate demand a run-manifest entry for a subproject the
-     tracker manifest does not claim external gearing work — guides have a separate weekly workflow.
-     A sibling key is read only by the loop that iterates it. That is structural, not a
-     convention. It is also NOT in gearing/src/validate-data.mjs, so `npm test` (nightly Gate 1)
-     can never go red on a date the nightly has no way to fix.
-     Thresholds are loose because there is no observed re-harvest cadence to calibrate against;
-     the point is to make rot VISIBLE, not to nag about lag. */
-  if (config.gearing?.datasets?.length) {
-    if (!gearing?.present) {
-      report.push("gearing: not present in this checkout — freshness not evaluated");
-    } else {
-      for (const ds of config.gearing.datasets) {
-        /* A dataset with a verificationGroup (owner decision 2026-10-06) ages from the NEWER of
-           its own date and that group's lastVerifiedAt. readGearing passes the output of
-           currentVerification, which nulls lastVerifiedAt once the published facts change, so
-           only a verification of the facts now on the page can re-date them. A failed or
-           overdue verification still reports below as gearing-verify-<group>; this only stops
-           a weekly-verified dataset from reading as a months-old harvest. */
-        const own = gearing.dates?.[ds.file] ?? null;
-        const stamp = ds.verificationGroup && !gearing.verificationError
-          ? gearing.verification?.groups?.[ds.verificationGroup]?.lastVerifiedAt : null;
-        const verified = typeof stamp === "string" && Number.isFinite(Date.parse(stamp))
-          && ISO_DATE.test(dateOf(stamp)) && dateOf(stamp) <= nowDate ? dateOf(stamp) : null;
-        const byVerification = verified != null && (own == null || verified > dateOf(own));
-        const date = byVerification ? verified : own;
-        const age = date ? ageDays(nowDate, date) : null;
-        const basis = !ds.verificationGroup ? ""
-          : byVerification ? ` — last ${ds.verificationGroup} source verification (${ds.dateField} ${own ?? "none"})`
-          : ` — ${ds.dateField}; ${verified ? `last ${ds.verificationGroup} verification ${verified} is not newer` : `no current ${ds.verificationGroup} verification`}`;
-        report.push(`${ds.key}: ${date ?? "no dated state"}${age != null ? ` (${age}d, max ${ds.maxAgeDays}d)` : ""}${basis}`);
-        if (date == null) {
-          violations.push(`${ds.key}: gearing/data/${ds.file} carries no ${ds.dateField} date${ds.verificationGroup ? ` and no current ${ds.verificationGroup} verification` : ""}`);
-          keys.push(ds.key);
-        } else if (age > ds.maxAgeDays) {
-          violations.push(`${ds.key} (gearing/data/${ds.file}) is ${age} days stale — max ${ds.maxAgeDays}d${ds.verificationGroup ? ` (newer of ${ds.dateField} and the last ${ds.verificationGroup} source verification; check gearing-verify.yml too)` : ""}. Check the weekly guide workflow or the dataset's harvest procedure in gearing/README.md`);
-          keys.push(ds.key);
-        }
-        if (ds.dateField === "structuralSync.checkedAt" && age != null && age < 0) {
-          violations.push(`${ds.key}: local consistency check date is in the future`);
-          keys.push(ds.key);
-        }
-      }
-      if (config.gearing.structuralSync && gearing.structuralSyncError) {
-        violations.push(`gearing-specs-sync: ${gearing.structuralSyncError}`);
-        keys.push("gearing-specs-sync");
-      }
-      for (const name of config.gearing.verification?.groups ?? []) {
-        const item = gearing.verification?.groups?.[name], stamp = item?.lastVerifiedAt;
-        const hours = stamp && Number.isFinite(Date.parse(stamp)) ? (nowMs - Date.parse(stamp)) / 3600000 : null;
-        const limit = config.gearing.verification.maxAgeDays;
-        report.push(`gearing-verify-${name}: ${item?.status ?? "missing"}, last verified ${stamp ?? "never"}`);
-        if (gearing.verificationError || item?.status !== "verified" || hours == null || hours < 0 || hours > limit * 24) {
-          keys.push(`gearing-verify-${name}`);
-          violations.push(`gearing-verify-${name}: ${gearing.verificationError ?? item?.reason ?? "missing verification"}; weekly verification must succeed within ${limit} days`);
-        }
-      }
-      /* The check that actually earns its keep. Age only says a harvest is old; THIS says the
-         page is publishing something the tracker has already corrected — which is what
-         happened with a superseded Preservation Evoker set bonus. Cheap, exact, no clock. */
-      if (gearing.tierSetDrift > 0) {
-        violations.push(`gearing-tierset-sync: ${gearing.tierSetDrift} spec(s) carry tier-set text the tracker has since corrected — run \`node gearing/src/harvest-specs.mjs\``);
-        keys.push("gearing-tierset-sync");
-      }
     }
   }
   // A configured key that itself ends in the suffix would read as accepted downstream.
@@ -1026,51 +954,9 @@ if (isMain) {
   const manifest = await readJson("data/run-manifest.json").catch(() => null);
   const data = await loadData(root);
 
-  /* Read gearing's dates SOFT — mirroring src/build.mjs's copy-if-present treatment of the
-     subproject. A checkout without gearing/ must not fail the heartbeat, but it also must not
-     pass in silence, so absence is reported rather than skipped. Only the heartbeat reads this;
-     checkManifest never sees it. */
-  const readGearing = async () => {
-    if (!config.gearing?.datasets?.length) return null;
-    const dates = {};
-    let present = false;
-    for (const ds of config.gearing.datasets) {
-      try {
-        const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", ds.file), "utf8"));
-        present = true;
-        dates[ds.file] = ds.dateField.split(".").reduce((value, key) => value?.[key], doc) ?? null;
-      } catch { dates[ds.file] = null; }
-    }
-    let tierSetDrift = 0;
-    try {
-      const { syncTrackerFields } = await import("../gearing/src/sync-tracker-fields.mjs");
-      tierSetDrift = (await syncTrackerFields({ check: true })).filter(c => c.textChanged).length;
-    } catch { /* subproject absent or unreadable — the per-file report above already says so */ }
-    let structuralSyncError = null;
-    if (present && config.gearing.structuralSync) {
-      try {
-        const { loadSpecSyncInputs, checkSpecSync } = await import("../gearing/src/harvest-specs.mjs");
-        const doc = JSON.parse(await readFile(path.join(root, "gearing", "data", "specs.json"), "utf8"));
-        checkSpecSync(doc, await loadSpecSyncInputs({ root: path.join(root, "gearing") }));
-      } catch (error) {
-        dates["specs.json"] = null;
-        structuralSyncError = error.message;
-      }
-    }
-    let verification = null, verificationError = null;
-    if (present && config.gearing.verification) {
-      try {
-        const { currentVerification } = await import("../gearing/src/verify-sources.mjs");
-        const doc = JSON.parse(await readFile(path.join(root, "gearing/data/source-verification.json"), "utf8"));
-        verification = await currentVerification(doc, path.join(root, "gearing"));
-      } catch (error) { verificationError = error.message; }
-    }
-    return { present, dates, tierSetDrift, structuralSyncError, verification, verificationError };
-  };
-
   let failures = [];
   if (mode === "age") {
-    const { violations, report, fingerprint } = checkFreshness(config, manifest, data, now, await readGearing());
+    const { violations, report, fingerprint } = checkFreshness(config, manifest, data, now);
     for (const line of report) console.log("  " + line);
     console.log(`fingerprint=${fingerprint || "clean"}`);
     failures = violations;

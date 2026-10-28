@@ -16,7 +16,6 @@ const PORT = Number(process.env.PORT || 8317);
 const FILES = new Map([
   ["/", { name: "index.html", type: "text/html; charset=utf-8" }],
   ["/index.html", { name: "index.html", type: "text/html; charset=utf-8" }],
-  ["/gearing.html", { name: "gearing.html", type: "text/html; charset=utf-8" }],
   ["/forecast-report.html", { name: "forecast-report.html", type: "text/html; charset=utf-8" }],
   ["/s1.html", { name: "s1.html", type: "text/html; charset=utf-8" }],
   ["/favicon-192.png", { name: "favicon-192.png", type: "image/png" }],

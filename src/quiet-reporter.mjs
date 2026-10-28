@@ -157,7 +157,7 @@ function formatFailure(failure) {
      first two failures, then died inside node's event machinery with a stack that reads like
      a harness bug rather than a test failure, losing every later failure AND the summary
      counts that are this reporter's entire reason to exist. The repo has subtests in
-     ui-invariants and three gearing files, and both nightly agent prompts run test:quiet, so
+     ui-invariants, and both nightly agent prompts run test:quiet, so
      this was reachable on any red run in the lane the reporter was written for.
      (Found 2026-08-15 by running it against a deliberately failing fixture; there was no
      test for this file at all.) */

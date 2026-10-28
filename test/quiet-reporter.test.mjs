@@ -16,7 +16,7 @@ import path from "node:path";
  * sets the wrapper's `cause` to the bare string "N subtests failed", and `"actual" in error`
  * throws a TypeError on a primitive. It printed the first two failures, then died inside
  * node's stream machinery — losing every later failure and the summary counts. The repo has
- * subtests in ui-invariants and three gearing files, so this was reachable on any red run.
+ * subtests in ui-invariants, so this was reachable on any red run.
  *
  * THE INVARIANT THAT MATTERS: the quiet lane must agree with the default lane on the COUNTS
  * and the EXIT CODE. Everything else is presentation. */

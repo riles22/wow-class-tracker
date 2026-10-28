@@ -153,21 +153,6 @@ export async function build(root = ROOT) {
     const icon = await readFile(path.join(root, "src", "assets", name));
     await writeFile(path.join(root, "dist", name), icon);
   }));
-  // The gearing subproject builds its own self-contained page (gearing/README.md);
-  // publishing means copying that artifact alongside index.html so Pages serves it at
-  // /gearing.html. Copy-if-present: a checkout without gearing/ still builds the tracker.
-  try {
-    const gearing = await readFile(path.join(root, "gearing", "wow-s2-gearing.html"));
-    await writeFile(path.join(root, "dist", "gearing.html"), gearing);
-  } catch (error) {
-    /* ENOENT only — a checkout without gearing/ still builds the tracker. Any OTHER error
-       (unreadable, partial write, a directory in its place) must be LOUD: dist/gearing.html is
-       committed, so swallowing it would leave the previous build's page in the tree while the
-       masthead tab links to it unconditionally — a silently stale second published page with
-       nothing anywhere reporting it. Same discipline the season-archive read above already
-       uses. (audit 2026-08-14) */
-    if (error?.code !== "ENOENT") throw error;
-  }
   // Season-archive pages, regenerated from their frozen records every build.
   for (const { name, page } of archivePages) {
     await writeFile(path.join(root, "dist", name), page);

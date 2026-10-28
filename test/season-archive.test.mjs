@@ -62,7 +62,7 @@ test("renderer escapes hostile data, ships zero script, and keeps hrefs on the a
   const hrefs = [...html.matchAll(/href=(?:"([^"]*)"|'([^']*)')/g)].map(m => m[1] ?? m[2]);
   assert.ok(hrefs.length > 5, "sanity: the page must carry its chrome links");
   for (const href of hrefs) {
-    assert.match(href, /^(?:https:|#|data:image\/|\/wow-class-tracker\/|(?:index|gearing|s1)\.html$)/,
+    assert.match(href, /^(?:https:|#|data:image\/|\/wow-class-tracker\/|(?:index|s1)\.html$)/,
       `unsanctioned href on the archive page: ${href}`);
   }
 

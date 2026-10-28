@@ -1,7 +1,5 @@
-gearing/data/*.json text eol=lf
-
-# The tracker's own data files, for the same reason gearing/data already had it — and
-# because the mismatch actively blocks work. Every writer here emits LF
+# The tracker's own data files, because a line-ending mismatch actively blocks work.
+# Every writer here emits LF
 # (JSON.stringify(...) + "\n"), while core.autocrlf=true checks the files out as CRLF, so
 # git reported a phantom modification the moment any script touched one: `git status`
 # showed M while `git diff` was empty. That is not cosmetic — the local-run skill refuses
@@ -11,15 +9,13 @@ gearing/data/*.json text eol=lf
 data/*.json         text eol=lf
 data/history/*.json text eol=lf
 
-# Built HTML must stay LF in the WORKING TREE, not just in the blob. Both artifacts carry
+# Built HTML must stay LF in the WORKING TREE, not just in the blob. The built pages carry
 # a Content-Security-Policy whose script-src is a sha256 of their inline script, and the
 # build hashes LF because the HTML parser normalizes newlines before the browser hashes.
 # With core.autocrlf=true (the default on Windows) a fresh checkout would rewrite these to
 # CRLF, the hash would no longer match, and the browser would silently refuse to run the
-# app — a blank page from `git clone` alone, with nothing in the diff to explain it. That
-# also protects gearing/README.md's promise that the single file can just be opened.
-dist/*.html                 text eol=lf
-gearing/wow-s2-gearing.html text eol=lf
+# app — a blank page from `git clone` alone, with nothing in the diff to explain it.
+dist/*.html text eol=lf
 
 # The pre-staged flip-day test patch must apply byte-exact with `git apply` on the day —
 # an autocrlf rewrite at checkout would make its hunks whitespace-mismatch the LF test

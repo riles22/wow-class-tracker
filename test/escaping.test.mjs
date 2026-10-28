@@ -73,15 +73,14 @@ test("the CSP hash list covers every script the artifact ships (audit 2026-07-24
 });
 
 /* ---- the shared escape (CodeQL triage 2026-09-22) --------------------------------------
-   Both pages are self-contained under a hashed CSP, so neither can import the helper at run
-   time; each template carries a copy. These pin the copies to src/html-safety.mjs so a
-   quote-less or null-unsafe variant cannot creep back into either page. */
-test("both published templates define the shared esc() exactly once, byte-identical", async () => {
-  for (const rel of ["src/template.html", "gearing/src/app.template.html"]) {
-    const html = await readFile(path.join(ROOT, rel), "utf8");
-    assert.ok(html.includes(ESC_SOURCE), `${rel} must define esc exactly as src/html-safety.mjs ESC_SOURCE`);
-    assert.equal(html.split("const esc =").length - 1, 1, `${rel} must define esc once`);
-  }
+   The tracker page is self-contained under a hashed CSP, so it cannot import the helper at
+   run time; its template carries a copy. This pins the copy to src/html-safety.mjs so a
+   quote-less or null-unsafe variant cannot creep back into the page. */
+test("the tracker template defines the shared esc() exactly once, byte-identical", async () => {
+  const rel = "src/template.html";
+  const html = await readFile(path.join(ROOT, rel), "utf8");
+  assert.ok(html.includes(ESC_SOURCE), `${rel} must define esc exactly as src/html-safety.mjs ESC_SOURCE`);
+  assert.equal(html.split("const esc =").length - 1, 1, `${rel} must define esc once`);
 });
 
 test("esc() covers & < > \" and ', so one call is safe in element text and in quoted attributes", () => {

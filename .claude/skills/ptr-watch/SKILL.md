@@ -135,8 +135,8 @@ configured:
   `realm: "live"`, citing a us/eu Blizzard forums `forumUrl` or a Wowhead `wowheadUrl`;
   never worldofwarcraft.blizzard.com, which the host allowlist refuses (widening it is a
   reviewed code edit, not a data workaround). `specsAffected` and `highlights` must agree
-  (Midnight roster names, Devourer included), and a set-bonus line bumps `tierSet` and
-  syncs the gearing mirror as in step 3. Never distil hotfix posts into a patch-notes
+  (Midnight roster names, Devourer included), and a set-bonus line bumps `tierSet` as in
+  step 3. Never distil hotfix posts into a patch-notes
   entry. If the notes are not posted yet, say so in the run report and log them later.
 - **Consolidated notes for a FUTURE in-season patch posted before it is live go in the
   RUN REPORT, never in `data/ptr-builds.json`.** A `kind: "patch-notes"` entry must carry `patch`
@@ -229,14 +229,9 @@ posture above.
    only: it is the one `spec.ptr` edit a live change may make, see step 4). `npm test` enforces
    the pairing: a set-touching highlight whose spec's `tierSet.asOf` predates the
    build date fails validation (the tier-set upkeep gate in `src/validate.mjs`).
-   **Nightly tier-set publishing is supported (2026-09-05):** the trusted
-   publish job now runs `node gearing/src/harvest-specs.mjs`, its `--check`, and
-   `npm run gearing:build` BEFORE Gate 1, then explicitly stages the derived gearing
-   files. After changing a tracker tier set, run those same commands before your
-   local tests so both pages agree. Agent-generated gearing files still do not travel
-   in the refresh artifact; publish independently re-derives them from the verified
-   tracker data. Do not defer a fetched set-bonus change for that former limitation,
-   omit its highlight, or weaken either tier-set gate.
+   Do not defer a fetched set-bonus change, omit its highlight, or weaken that gate.
+   (The gear explorer's mirror of the tier sets, and its sync step, were removed with
+   the explorer on 2026-10-28.)
 3a. **Three channels, not one** (2026-08-01). The feed tracks official forum BUILD
    posts. Wowhead also publishes datamined tuning articles and **PTR hotfix** round-ups —
    "Last night, a few hotfixes were pushed to the Patch 12.1 PTR" — which are neither

@@ -16,12 +16,6 @@ on:
       - "test/**"
       - "package.json"
       - ".github/workflows/deploy.yml"
-      # The gearing subproject is part of the deployed site (its artifact ships as
-      # dist/gearing.html), but this filter predated the 2026-08-04 merge — so a
-      # gearing-only change (e.g. the 08-05 trinket disclaimer, PR #46) silently never
-      # redeployed and had to be dispatched by hand. Found 2026-08-05 while verifying
-      # that deploy on the live site.
-      - "gearing/**"
   workflow_dispatch:
     inputs:
       commit_sha:
@@ -157,7 +151,7 @@ jobs:
         with:
           name: deployment-expected-${{ github.run_id }}
           path: ${{ runner.temp }}/deployment-verification
-      - name: Verify all three public pages match this commit
+      - name: Verify both public pages match this commit
         env:
           PAGE_URL: ${{ needs.deploy.outputs.page_url }}
         run: |

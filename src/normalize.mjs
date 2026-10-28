@@ -99,9 +99,7 @@ export const PHASES = {
      liveLabel, outside a launched cycle), so once it is set a live entry may name 12.1.5, and
      check-refresh's label-flip gate below. `since` is the one recorded launch date; the Bloodmallet
      adoption rule (refresh-metrics skill, which holds on LABEL_FLIP_DUE below until this
-     is set) and the creator-take framing rule (watch-creators skill) read it. The gearing
-     page's chip is a hand-kept literal that must name the same live patch; a root build
-     test compares the two. */
+     is set) and the creator-take framing rule (watch-creators skill) read it. */
   livePatch: { label: "12.1.5", since: "2026-10-13" },
   seasonOrder: ["s1", "s2"],
   seasonLabels: { s1: "12.0.7", s2: "12.1" },
@@ -133,8 +131,8 @@ export const LABEL_FLIP_DUE = "2026-10-13";
    stamp reads "PTR:" and names the cycle instead; the live patch is then livePatch, else
    liveLabel, which the chip no longer shows. The label falls back to the marker exactly as
    validate.mjs's cycle patch does, so a missing label reads as still on the PTR. validate.mjs
-   bounds the build feed's live entries by this, and gearing's chip must name it; build
-   tests hold both in step with the stamp. */
+   bounds the build feed's live entries by this; a build test holds it in step with the
+   stamp. */
 export function displayedLivePatch(phases = PHASES) {
   const label = phases.ptr ? String(phases.ptr.label ?? phases.ptr.marker ?? "") : null;
   if (label != null && !label.includes("PTR")) return label;

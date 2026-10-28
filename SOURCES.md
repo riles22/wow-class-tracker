@@ -101,7 +101,7 @@ The tracker also renders its OWN computed 12.1 forecast (projection lane). It is
 | **Murlok.io** | Avg M+ rating of each spec's top-50 players | "top-50 ceiling" — NOT popularity, NOT a tier |
 | **Bloodmallet (SimC, tier MID1)** | Best-build DPS at 1/2/3/5/8/15 targets | powers ST/Cleave/AoE fight profiles (DPS only; Augmentation unsimmable) |
 | **SimulationCraft nightly** | Best hero-variant Patchwerk DPS per DPS spec from the engine-official MID1_Raid report (daily) | pure ST, fixed profile — a sim baseline next to Bloodmallet, never a tier |
-| ~~**SimulationCraft MID2 reference profiles** (`gearing/` only)~~ | **RETIRED 2026-08-18** — gearing-s2-scope Phase A removed the entire SimC reference pipeline from `gearing/`; guide-consensus ranking (Icy Veins + Wowhead + Method harvested stat priorities) replaced sim-derived weights. The ADRs (`docs/adr-simc-*.md`) are history. | |
+| ~~**SimulationCraft MID2 reference profiles** (`gearing/` only)~~ | **RETIRED 2026-08-18** — gearing-s2-scope Phase A removed the entire SimC reference pipeline from `gearing/`; guide-consensus ranking (Icy Veins + Wowhead + Method harvested stat priorities) replaced sim-derived weights, and the gear explorer itself was removed on 2026-10-28. The ADRs (`docs/adr-simc-*.md`) are history. | |
 | **Robydoby PTR raid sheets** (Google Sheets, public CSV) | Per-spec 99th-pct raw DPS + HPS from curated WCL zone-54 testing parses, newest Venomous Abyss week (separate DPS & Healer sheets) | community-curated top-end percentile; DPS + healer specs; **best-effort — deliberately NOT in the refresh contract** (`required-sources.json`), so a volunteer sheet going quiet never reddens a night; **credit Robydoby with a visible link wherever used** (the sheets ask for it) |
 | **WoWMeta** | `lowerBound` — the 95% CI lower bound of a spec's MEAN official Blizzard M+ rating across ALL logged players | population-wide MEAN, sample-size-penalised — **not a ceiling** (Murlok is the ceiling) and not popularity. Fetch the JSON API (`data.wowmeta.com`), never the HTML: the page is a stale prerender and its letters cluster on player count. |
 | **Mythicstats** | Representation % in the top 2000 keys per weekly period | true meta-share (the axis Murlok's fixed-50 sample can't measure); ordinary HTML at `/period/latest`, following its current-period redirect |
@@ -125,15 +125,14 @@ rest of the period lands; an omitted share above
 source replaces published data. Receipts and prepared updates travel in a
 separate pre-agent artifact, checked by `src/check-stable-metrics.mjs` at publish.
 
-**The gearing SimC lane is RETIRED (2026-08-18, gearing-s2-scope Phase A).** The MID2
-scale-factor ledger, its curated run manifest, the curated-same-gear provenance campaign,
-and the provider-neutral healer ledger (Questionably Epic was the candidate; it never
-contributed an accepted record) were all removed with the pipeline — gearing now ranks by
-harvested guide consensus with SCOPED stat priorities, `custom` weights survive as an
-announcing override, and the tracker item catalog stays authoritative for inherited
-secondaries, tertiaries, sockets, bonus IDs, and cantrip effects. The two ADRs under
-`docs/` record why the lane existed and why it went. (This section described the lane in
-present tense until the 2026-08-19 audit, E3.)
+**The gearing SimC lane is RETIRED (2026-08-18, gearing-s2-scope Phase A), and the gear
+explorer it served was removed from the project on 2026-10-28.** The MID2 scale-factor
+ledger, its curated run manifest, the curated-same-gear provenance campaign, and the
+provider-neutral healer ledger (Questionably Epic was the candidate; it never contributed
+an accepted record) were all removed with the pipeline; from then until its removal the
+explorer ranked by harvested guide consensus with SCOPED stat priorities. The two ADRs
+under `docs/` record why the lane existed and why it went, and the explorer's code stays
+in git history (last present at `59d1c85`).
 
 ## 3 · Per-fight tiers → the Fight selector
 
@@ -229,10 +228,10 @@ the heartbeat alerts when intake verification is more than 48 hours old.
 - **Raidbots** — run-your-own-sims tool; no public per-spec aggregates (re-verified).
   Linked as a Tools row in every spec drawer.
 - **QE Live** — Voulk's client-side healer gear evaluator. It WAS the candidate provider
-  for the gearing app's healer-reference ledger; that ledger retired unfilled with the
-  SimC lane (2026-08-18, gearing-s2-scope Phase A — healers now rank by harvested guide
-  consensus like every other role), so QE stays a linked tool and a research reference,
-  never an ingestion source. Its blog publishes dated Midnight healer articles. Voulk
+  for the old gear explorer's healer-reference ledger; that ledger retired unfilled with the
+  SimC lane (2026-08-18, gearing-s2-scope Phase A), and the explorer itself was removed on
+  2026-10-28, so QE stays a linked tool and a research reference, never an ingestion
+  source. Its blog publishes dated Midnight healer articles. Voulk
   himself is a creator entry (Wowhead Healing Expert — Prevoker/Resto Druid).
 - **u.gg/wow** — separate provider with different methodology/filters; not a verified Archon mirror or dependable export.
 

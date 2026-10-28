@@ -57,8 +57,8 @@ policy this replaces, and any older paragraph about waiting for 12.2, are histor
 - `npm run audit:creators` — creator/expert-layer audit (scope, firewall, supersession,
   discovery reachability). A REPORT, not a gate; `--strict` exits 1 on any HIGH finding.
 - `npm run serve` — preview `dist/` at http://localhost:8317 (serves every published
-  page: `/` → index.html, `/gearing.html` → the gearing explorer, `/s1.html` → the
-  frozen Season-1 archive; serve.mjs allowlists each by name)
+  page: `/` → index.html, `/forecast-report.html` → the forecast report card, `/s1.html` →
+  the frozen Season-1 archive; serve.mjs allowlists each by name)
 - `npm run report-card` — grade the frozen pre-launch projection. Pre-settlement it runs in
   DRIFT mode against the CURRENT live consensus. Pre-flip that consensus was 12.0.7 and
   the forecast was *designed* to diverge from it; post-flip (2026-08-18) the live
@@ -66,18 +66,6 @@ policy this replaces, and any older paragraph about waiting for 12.2, are histor
   still not a grade, because week-one tier lists churn hard.
   Only GRADE mode (after the settled S2 consensus exists — arrives by itself ~09-01 via
   `SETTLE_DAYS`) scores the forecast.
-- `npm run gearing:build` — rebuild `gearing/wow-s2-gearing.html`. **Required after any edit
-  to `gearing/src/app.template.html`**: the artifact is committed, and a template edit
-  without a rebuild publishes nothing (a test pins this since 2026-08-14).
-  `npm run gearing:test` runs gearing's tests alone — every file in `gearing/test/`, **79**
-  tests as of 2026-09-26 (read the count off the run: it grows with gearing work, and this
-  line said 44 until that date, by which time master held 77). It ran only
-  `project.test.mjs` (12) until 2026-08-23: Phase A correctly trimmed a five-file enumeration
-  to one file, and Phases B and G9 added the guide-harvest and enhancements-parser suites
-  without re-extending it, so a third of gearing's tests answered to no gearing command. It is
-  a glob now (`node --test "gearing/test/*.test.mjs"`; Node expands it on both shells), so a
-  new test file joins automatically — though the root `npm test` already
-  discovers them, which is why a broken gearing reds the nightly publish gate.
 - `node src/check-refresh.mjs --manifest|--age` — refresh integrity gates (nightly
   publish contract / staleness heartbeat) against `data/required-sources.json`
 
@@ -374,11 +362,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   displayed abbreviations. Supporting text uses readable text tokens in all views.
   The compact phone preamble still shows source count, snapshot date, retained-source
   dates, the 0–100 definition, S threshold and within-role qualifier. At 375×812 the
-  first complete tracker card and gearing recommendation now fit on the opening
-  screen; older Console measurements below are historical. Gearing discloses full
-  scoring/source detail nearby, labels custom picks explicitly, leaves custom-mode
-  trinkets unranked, and preserves item tooltip access after partial renders. Archive
-  navigation wraps on phones, and its named table regions scroll by keyboard.
+  first complete tracker card now fits on the opening screen; older Console
+  measurements below are historical. Archive navigation wraps on phones, and its named
+  table regions scroll by keyboard.
   [Implementation and verification](docs/ui-ux-audit-fixes-2026-09-09.md).
 - **`SNAPSHOT_PHASE` (`render.mjs`) — the 12.1 flip is DONE** (2026-08-18: `"12.1-ptr"`
   → `"12.1-live"`, and the gate below self-silenced as designed; this bullet is the
@@ -398,11 +384,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   owner launch commit made three edits** (it carried more than the label — the ptr-preview
   retirement and the nightly prompt wording among them; `docs/1215-launch-runbook.md`
   lists the whole commit): it set `livePatch`, updated the literal pin in
-  `test/normalize.test.mjs`, and changed the gearing
-  page's chip (`pc-full`/`pc-short` in `gearing/src/app.template.html`, then
-  `npm run gearing:build`). Gearing's chip is a hand-kept literal, like the rest of the
-  mirrored bar, so `livePatch` does not reach it; a root build test compares it with the
-  live patch and reds until it matches. On the page it is **display-only**: `eraTokensFor`
+  `test/normalize.test.mjs`, and changed the gear explorer's hand-kept chip. That page was
+  removed on 2026-10-28, so a future label flip is the first two edits only. On the page it
+  is **display-only**: `eraTokensFor`
   (build.mjs) reads it for exactly three tokens, the masthead chip (`__ERA_CHIP__`), its
   phone form (`__ERA_SHORT__`) and the "Live:" stamp. `__ERA_BASELINE__`, the column
   qualifiers, lag chips and frozen-lane text stay on `liveLabel`, and the drawer headings
@@ -576,8 +560,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   637px that preceded the first spec row; the page now reaches the grid at **363px** and
   shows **15 specs above the fold** on a 1440x900 screen (27 once the grid is scrolled to the
   top — the two figures answer different questions and both are quoted here deliberately).
-  The bar carries the mark, the name in Cinzel at 18px, the patch chip, both site tabs,
-  search, and all three tools — **Ladder, Compare all AND the ? legend**. The other seven
+  The bar carries the mark, the name in Cinzel at 18px, the patch chip, search, and all
+  three tools — **Ladder, Compare all AND the ? legend** (it also carried both site tabs
+  until the gear explorer was removed on 2026-10-28). The other seven
   controls stay in two tight rows below it, unchanged. Nothing moved into an overflow menu.
   **Deliberately spent:** the 46px Cinzel wordmark, the `#stars` starfield canvas (and its
   43-line animation IIFE), the animated `.rule`, and the eyebrow. Keeping the starfield
@@ -598,143 +583,18 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   transition durations, which flip with the same control and survive every layout. Its
   stronger checks — overlay/chart entrance classes and animation names — are untouched.
   Note `.chev` transitions two properties, so its duration reads `"0.18s, 0.15s"`.
-- **Gearing carries the same bar** (2026-08-22). The 2026-08-05 rebrand aligned the two
-  pages; compressing the tracker's masthead broke that alignment in the other direction —
-  gearing still had the 179px Cinzel header the tracker had just dropped. Gearing's header
-  is now the same 60px `.topbar` with the same anatomy in the same order (mark, name in
-  Cinzel 18px, patch chip with a `.pc-short` phone form, separator, both tabs inline), and
-  its `header` is 88px against 179 with the first control at **144px** against 603.
-  **Its `.sitetab` had to be restyled too, and that is the trap**: gearing keeps its OWN
-  copy of the tab CSS, so aligning only the tracker left gearing's tabs as a 42px tab STRIP
-  inside a 60px bar and pushed the bar to 86px. Any future change to one page's bar has to
-  be made in both templates — they mirror each other by hand, not by shared code.
-  `h1` also had to come off its `clamp(28px,5vw,46px)`; the bar's name is `.brandname`.
-- **Gearing's BiS rows carry Console's density too** (2026-08-22, the pass after the bar).
-  67 rows at 69-105px each made the panel 4,710px; simple rows are **34px** now and the
-  panel is 3,896px, with the document 5,612px -> 4,662px at 1440.
-  The change that did most of it: `.src` used to be `grid-column:3/5`, i.e. its own second
-  line, which cost ~30px a row while roughly **500px sat unused** beside the stat meta at
-  1440. It is a fifth column at >=900px and drops back to its own line below that, where
-  the width genuinely is not there. Gearing already had a `<=640px` block that stacks meta
-  and src onto one column; the new `<=899px` rule sits above it and only covers tablets.
-  **The column needs a FLOOR, not just a fraction.** As `minmax(0,1.1fr)` it collapsed to
-  58px on rows with wide stat meta and truncated 20 labels; `minmax(140px,1.1fr)` clears
-  the longest dungeon name ("Temple of Sethraliss", 132px) and truncation is zero — verified
-  across four specs and at 1440 / 800 / 375.
-  Console's colour-and-type law holds here as on the tracker: the item NAME stays in the
-  body font because it is prose; rank, stat meta and source are mono.
-  A `title` was briefly added to `.src` for the truncated cases and then REMOVED once the
-  floor made truncation impossible — a tooltip duplicating fully visible text is exactly
-  the noise this audit spent its time deleting.
-- **Gearing's recommendations panel is a SLOT SHEET** (2026-08-22, Option A of the gearing
-  design audit — Riley chose it from three structural options; the canvas records the two
-  that lost and why). One row per equipment slot, each a `<details>` that expands to that
-  slot's candidates. Sheet **460px** against 2,829px of cards; the panel 3,015 -> 1,755px
-  and the document 5,475 -> 2,521px. Rows are 32px desktop / 50px phone.
-  **The point of it is the tier merge.** `renderBis` filtered the pool with
-  `!TIER_SET_SLOTS.has(it.slot)`, so Head/Shoulder/Chest/Hands/Legs were excluded from the
-  recommendations grid entirely and only ever appeared under a tab named after the
-  Catalyst — the character was split across two tabs by a game mechanic rather than by any
-  question a player asks. Tier slots are ordinary rows now, marked with a `T` badge, and
-  the leftover `"Tier slots — guide picks without drop data"` card is gone because those
-  picks fold into their own slot rows. A test pins all five tier slots onto the sheet, the
-  badge, and the absence of that card.
-  Note `renderTier` is NOT the same view for those slots — it is a Catalyst conversion
-  planner built from `isCatalystBase`, a different item filter. So the sheet's tier rows
-  and the Catalyst tab legitimately show different items: the guide's pick versus the
-  conversion bases. Moving the per-slot half of that planner into the slot rows is the
-  next stage, with the cross-slot plan staying as a reference page.
-  **Trinkets are ONE row covering both slots, deliberately.** The guides rank them as a
-  pool and decline to name a pair, so two rows would repeat the same list and assert a
-  1st/2nd the sources never gave. The row's body is `trinketCard` whole — a first attempt
-  dropped it and would have lost the per-source letter tiers, the dense consensus ranking
-  and the "stat fit is never computed" note, all of which are deliberate (G8). The gearing
-  test caught that; `.sbody .card` just strips the nested frame.
-  **Stage 2 added a per-slot footer** (`slotFooter`): the ENCHANT for that slot and, for a
-  tier slot, the CATALYST route (token, base count, direct-tier item, pointer to the full
-  plan). Both previously lived on their own tabs, so answering "what do I do about my
-  chest" meant visiting three places. Eight of thirteen slots carry a footer for Frost
-  Mage — the five tier slots plus every slot the guides publish an enchant for; Back and
-  Wrist have none because the harvested data has none, which is data, not a bug.
-  **The footer obeys G6 totality**: its consensus chip is gated on `usingCustom`, because
-  guide-consensus surfaces must leave `#bis` entirely while custom weights are active. The
-  gearing test caught the ungated version — `assert.doesNotMatch(bisHtml, /data-consensus=/)`.
-  Note `usingCustom` is `customModeSelected() && !!customWeights()`, so selecting Custom in
-  the dropdown without entering weights does NOT engage it; a browser spot-check that only
-  flips the select is checking nothing.
-  **Deliberately NOT in the footer:** the season-wide item-level ladder. It is identical
-  for all thirteen slots, so repeating it thirteen times would be exactly the noise this
-  audit exists to delete — it stays one reference page. Per-slot "where and how high" is
-  already on each candidate row as its source and its `up to N`.
-  ⚠️ **Slicing the sheet in a test: bound by the NEXT `.sname`, never by `</details>`.**
-  Every candidate row contains its own item-details disclosure, so the first `</details>`
-  after a slot's name closes inside that slot's first row and the slice captures one id
-  instead of the whole slot. Both Neck assertions hit this.
-- **The six tabs are now the sheet plus a five-item Reference row** (2026-08-22, Option A
-  stage 3). `Gear recommendations` stopped being a tab: it is `#p-bis`, always on, and the
-  other five — Tier & Catalyst, Enhancements, Upgrade checker, Loot sources, Item levels —
-  are `aria-expanded` disclosure buttons in a `<nav class="refrow">` over `role="region"`
-  panels, all closed on load. A **tablist was the wrong control** once the sheet stopped
-  being one of the alternatives: a tablist asserts that exactly one of its panels is open,
-  and here the correct default is none. `activateTab` toggles rather than selects, so a
-  second click on the open button closes it. Document 2,531px against 5,475 before the
-  option, and the whole page is reachable without opening anything.
-  **Three placement defects came out of MEASURING it, not looking at it** — all three now
-  pinned in `gearing/test/project.test.mjs`:
-  (a) the nav kept the old tab strip’s DOM position, i.e. *above* `<main>`, so the five
-  things just demoted to reference were still the first thing under the setup card;
-  (b) `weaponLoadoutCards()` emitted before the sheet, putting the first slot row at
-  **1,785px** — a setup is chosen as a complete pair so it stays a card, but it is not what
-  the page is about, and it now follows the sheet (first slot **593px**);
-  (c) ⚠️ **`#bis` is a two-column grid and the sheet has to span it.** Boxed into one 623px
-  column, the desktop 8-column row template (min 640px with padding) overflowed **all 13
-  rows** and truncated **88 elements** — and the responsive breakpoints could not save it,
-  because a media query measures the **viewport**, not the column an element happens to sit
-  in. `#bis .sheet{grid-column:1/-1}`; verified 0 truncated elements at 1440 with all 13
-  slots open, and 1 at 375 (a long item name meeting `.sitem`’s deliberate ellipsis).
-- **The five reference panels got Console density last** (2026-08-22, after stage 3). They
-  kept the pre-audit 13px/10px table sizing right through the option, because they were
-  behind tabs — demoting the tabs did not shrink them, it only stopped them being the first
-  thing on the page. `table.src-tbl` now matches `.shead`/`.srow`: a 9.5px mono uppercase
-  header and 6px cell padding, with **cells staying in the body font because they hold item
-  and dungeon NAMES**, which is prose — the same colour-and-type law as the BiS rows.
-  `table.paths` keeps its `nowrap` (every cell is a number or a difficulty name) and takes
-  the density only. Loot sources 2,883 → 2,568px, Item levels 1,474 → 1,255px, row 58 → 49px.
-  ⚠️ **This is where the `.src` class collision surfaced, and it was a real page-level bug.**
-  `.src` is the generic small-mono meta style — divs, spans and table cells use it across the
-  whole page — but the 2026-08-22 BiS density pass gave the bare selector the candidate row’s
-  `grid-column:5` + `white-space:nowrap` + ellipsis. `grid-column` is inert on a `<td>`, but
-  `nowrap` is not, and a `td` cannot clip the way a grid item does: the Loot sources table
-  grew to **2,197px** and the document scrolled sideways to **2,292px at a 1,440px viewport**.
-  It shipped in `d91bfa5` and stayed invisible for a day because the panel was behind a tab
-  nobody had measured. The truncating behaviour is `.row > .src` now, in both the base rule
-  and the two breakpoints; three assertions pin it. When adding a rule to a generic-sounding
-  class here, **check where else the name is emitted first** — `.src` has 16 emit sites.
-  For the record, the wide `table.paths` at 375px is NOT a defect: it sits in a
-  `.card.wide.table-scroll` with `overflow-x:auto`, so the table scrolls and the page does not.
-- ⚠️ **`.row` is keyed on its CONTAINER as well as the viewport** (2026-08-23). The BiS density
-  pass gave `.row` a fifth `minmax(140px,1.1fr)` track, so the five-track template needs ~600px —
-  but the two weapon-setup cards sit in a **~506px** column of the two-column `#bis` grid, and the
-  `@media(max-width:899px)` fallback that drops the fifth column **measures the viewport**. Result:
-  each card spilled **103px** past its border at every width from **901 to 1280px** — 1100px is an
-  ordinary laptop — with the text landing on the neighbouring card and the whole document scrolling
-  sideways. `.card{container-type:inline-size}` plus an `@container (max-width:620px)` twin of the
-  same rule; the cards keep their side-by-side comparison, which spanning the grid would have lost.
-  **This is the THIRD time the viewport-vs-container gap has bitten in one week** (the slot sheet,
-  the `.src` collision, this), which is why the fix is general rather than another one-off span.
-  Containment is safe here because nothing `position:fixed/absolute` lives inside a `.card` — `#tip`
-  and `.skip-link` are both body-level; re-check that before putting a positioned element in a card.
-  Verified 0 overflowing rows of 149 at 375 / 950 / 1100 / 1280 with every slot and panel open.
-- **Gearing no longer opens on Frost Mage** (2026-08-22). It was a hardcoded
-  `sel.value = 'Mage|Frost'` with nothing behind it, so every visitor landed on someone
-  else's spec. Order is now: a `#spec=` deep link, then the spec you last looked at
-  (`localStorage` key `wow-s2-gearing:spec`), then the top of the list.
-  **`localStorage` is `typeof`-guarded like `location` and `history`** — the client-boot
-  test runs that source through `new Function("document","innerWidth","innerHeight", …)`
-  and an unguarded read throws there instead of failing a useful assertion.
-  Two gearing tests had been using the Frost Mage default as an implicit fixture and now
-  select the spec they need; one already had a `setSpec` helper it had never called for
-  its first assertion. An app default is not a test fixture.
+- **The gear explorer was removed on 2026-10-28** (owner decision: it was not living up to
+  what the owner wanted from it). It was a second self-contained page, `gearing.html`, built
+  from the `gearing/` subproject and reached through a two-tab strip in both mastheads and a
+  ⚙ Gearing link in every spec drawer. All of it went in one change: the subproject, its two
+  weekly workflows, the nightly's mirror sync, the tier-set mirror gate in validate.mjs, its
+  freshness block in `data/required-sources.json`, and the tab strip, since one page needs
+  no tabs (the archive page keeps its two). `gearing.html` now returns 404. The design
+  record this file held for it (the 2026-08-22 bar, density, slot-sheet and reference-row
+  passes) is in git history, the code last at `59d1c85`; `docs/gearing-s2-scope.md` and the
+  SimC ADRs are history. One lesson from that work applies to any page here: a media query
+  measures the viewport, not the column an element sits in, and that gap bit the explorer
+  three times in one week.
 ⚠️ **`.tiercell` sizing is coupled to the tier COLUMN width, and the coupling is silent.**
   It is a `34px auto` grid, sized when the tier was a badge plate in a 70px column. Console
   made the tier a bare glyph in a 40px column, which left the `.tind` marker slot **4px**,
@@ -785,8 +645,9 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   (2) Ignoring `prefers-reduced-motion` is DELIBERATE, not an oversight — `ui-invariants`
   emulates `reducedMotion: "reduce"` and then asserts motion stays ON, because the reference
   site does and this one ships a persisted control instead. Changing it reds that invariant by
-  design; it is an owner decision, and the live argument for revisiting is that gearing honours
-  the OS while the tracker does not.
+  design; it is an owner decision. (The main argument for revisiting it was that the gear
+  explorer honoured the OS setting while the tracker did not; that page was removed on
+  2026-10-28.)
 - **Client-side UX lanes** (template-only, no build step): URL-hash deep links (state +
   open drawer, `applyHash`/`writeHash`), localStorage watchlist (★ + Starred filter),
   the "What changed" strip (narrates the movement-baseline diff), and Compare (pin ≤3
@@ -815,49 +676,18 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   `qual`, threaded into `rowHTML` as `quals` and rendered in the mobile-only `.mtag`.
   **Any new explanatory `title=` in the grid needs a visible counterpart or it does not
   exist for half the audience.**
-- **Shared brand across both pages** (2026-08-05): the gearing page reads as the same
-  site as the tracker, not a different product. The palette already matched (rebrand
-  2026-08-04); the VOICE did not, which is what made the tab jarring. Gearing now uses the
-  tracker's masthead vocabulary — mono eyebrow, brand mark, Cinzel title at the same size /
-  letter-spacing / text-shadow, the animated `.rule` (with a reduced-motion guard it
-  previously lacked). **Its three webfonts are EMBEDDED as base64 woff2, not linked**
-  (Cinzel 700 + Inter and JetBrains Mono as variable latin subsets, ~124KB base64 total):
-  `gearing/README.md` promises a fully offline single file, so a Google Fonts link would
-  silently break that guarantee. All three are OFL-licensed. Two traps if you touch this:
-  the mono stack must list `'JetBrains Mono'` FIRST (it was `ui-monospace,"JetBrains
-  Mono"`, so the system face won and the embed did nothing), and the check that matters is
-  `url(http…)` count in the built HTML — an external *anchor* href is fine, an external
-  font/style URL is not.
-- **Gearing deep link + CSP** (2026-08-07, the last two Phase-B items). Each spec drawer
-  carries a **⚙ Gearing** link to `gearing.html#spec=<slug>`, where `<slug>` is the
-  tracker's own `slugOf()` — **one identifier vocabulary across both pages**, verified
-  1:1 for all 40 specs in both directions with no collisions (safe because
-  `gearing/data/specs.json` is generated from the tracker's, and the lookup still fails
-  soft: an unknown slug falls back to gearing's default rather than breaking the page).
-  Gearing reads it in `specFromHash()` and writes it back with `replaceState` on change
-  only, so an untouched URL stays clean. **Gearing now ships its own hashed CSP**, built
-  the same way as the tracker's but STRICTER — `default-src 'none'` with no external
-  origin at all, because its fonts and item icons are data: URIs. Three traps here:
-  (a) `gearing/src/build.mjs` must normalize CRLF→LF *before* hashing or the hash is
-  unmatchable from a Windows checkout; (b) the gearing client-boot test evaluates the app
-  through `new Function("document","innerWidth","innerHeight", …)` — there is **no
-  `location` and no `history`** in that scope, so every URL touch in gearing's client code
-  must be `typeof`-guarded or that test dies; (c) the injection UI invariant's relative-href
-  allowlist is now a pinned regex accepting `index.html`/`gearing.html` with an optional
-  `[a-z0-9=&-]` fragment — `slugOf` can only emit that charset, so no roster value can
-  widen it.
 - **Footer order** (2026-08-05, Riley; amended at the 2026-08-18 launch review): the
   footer opens with **Sources & snapshot dates** and the build feed, then the "Past
   seasons" archive links and the credits. The `.footbrand` identity block this bullet
   used to place was REMOVED entirely at the launch review — do not reintroduce it.
-- **Site tabs** (2026-08-05): the masthead ends in a two-tab strip — **Spec Tracker**
-  (`index.html`) and **⚙ S2 Gearing** (`gearing.html`) — mirrored at the head of the
-  gearing page, which lost its old one-way `.backlink`. Gearing used to be a fourth CTA
-  button in the controls row, which read as a tool *inside* the tracker rather than the
-  separate page it is. Consequences to keep in mind: `src/serve.mjs` now routes an
-  allowlisted page set instead of always serving `index.html` (otherwise the tab is a
-  local no-op), and the injection UI invariant's relative-href allowlist is exactly
-  `index.html` + `gearing.html` — any other relative href is still a finding.
+- **Site tabs** (2026-08-05 to 2026-10-28): the masthead ended in a two-tab strip linking
+  the tracker and the gear explorer, and each spec drawer carried a ⚙ Gearing deep link;
+  both left with that page. Two things outlived them: `src/serve.mjs` routes an allowlisted
+  page set (`/`, `/forecast-report.html`, `/s1.html`) instead of always serving
+  `index.html`, and the injection UI invariant's relative-href allowlist is exactly
+  `index.html`, `forecast-report.html` and `s1.html`, with no fragment, because the gearing
+  deep link was the only relative href that carried one. Any other relative href is still a
+  finding.
 - **Fight view**: `data/encounter-tiers.json` holds Archon per-boss (throughput) and
   per-dungeon (score) tiers — single-source by design, labeled as Archon in the UI; the
   Fight selector swaps the matching tier column. Refresh alongside the tier lists.
@@ -875,20 +705,10 @@ layer, with honesty rules and access etiquette. Keep it in sync when adding sour
   (asOf = build date, source = the forum post) — the tier-set upkeep gate in
   validate.mjs fails the run when a set-touching build highlight lands without the
   spec's `tierSet.asOf` catching up.
-  **Since 2026-08-23 the same upkeep is checked one page over** (owner decision): gearing keeps
-  its OWN copy of `set2/set4/asOf` and renders it as fact, and nothing compared the two, so they
-  drifted **five times** — most recently publishing "Genesis duration increased by 4 seconds" on
-  one page of the site while the other said 8. The daily `--age` heartbeat was the sole detector
-  and the nightly originally could not clear it, so every occurrence waited for a human local
-  run. `validateData` now compares
-  `gearing/data/specs.json` against `data/specs.json`. Resynchronize with
-  `node gearing/src/harvest-specs.mjs && node gearing/src/harvest-specs.mjs --check && npm run gearing:build`.
-  **Since 2026-09-05 the trusted nightly publish stage runs that local synchronization before
-  Gate 1**, then explicitly stages the gearing data and artifact. This is the root validator
-  reaching INTO `gearing/`, which it otherwise never does — read-only, one-directional, an absent
-  subproject skips, and only specs present in BOTH are compared so a lagging roster is not an
-  error. Consequence to know: **bumping a tracker `tierSet` now requires syncing the mirror in the
-  same change**, which is why the upkeep gate’s own test bumps both.
+  `data/specs.json` is the only copy again. The gear explorer kept its own mirror of
+  `set2/set4/asOf`, compared by a validate.mjs mirror gate from 2026-08-23 and synced by the
+  nightly from 2026-09-05; the mirror, the gate and the sync left with that page on
+  2026-10-28.
 - `spec.survivability` = Archon's raid survivability tier (merge via apply-metrics.mjs
   `survivability` key) — shown in the drawer's Source ratings box.
 - `spec.playstyle` = `{ range: "Melee"|"Ranged", mobility: 1-5, utility: 1-5, complexity: 1-5, notes }`,
@@ -1397,8 +1217,9 @@ test/     normalize · validate · render · build · apply-metrics · apply-rat
           dist/index.html, and since 2026-10-06 nothing in the suite rebuilds it, so after
           any template.html change build first, then run them for real:
           `npm i --no-save playwright@1.61.1 && npx playwright install chromium && npm run build && npm test`)
-dist/     index.html + gearing.html  (generated — open directly in a browser; the two
-          LIVE pages, linked to each other by the masthead tab strip)
+dist/     index.html  (generated — open directly in a browser; the one LIVE page, which
+          the gear explorer's gearing.html joined until its removal on 2026-10-28)
+          + forecast-report.html — the forecast report card the forecast banner links to
           + s1.html — the frozen Season-1 archive page (footer-linked; one
           <season>.html per season-archive record — serve.mjs and the injection
           invariant's href allowlist name each one explicitly)
@@ -1414,7 +1235,8 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           at 07-24 while 07-25-premerge existed, so an obedient reader picked the wrong
           "newest"). `ls docs/` is the authority. ·
           adr-simc-reference-pipeline.md + adr-simc-curated-profiles.md — the gearing SimC
-          lane's ADRs, which gearing-s2-scope Phase A RETIRED (2026-08-18) — history now ·
+          lane's ADRs, which gearing-s2-scope Phase A RETIRED (2026-08-18) — history, as is
+          the whole gear explorer since its removal on 2026-10-28 ·
           era-prose-scope.md — the launch-label mechanism (build-time era tokens) ·
           archive/ — preserved run logs from a retired agent runtime; a RECORD, not
           instructions, and historically wrong about the project as it now stands.
@@ -1446,7 +1268,8 @@ docs/     working notes (finder-audit.md — HISTORY, the Spec Finder was remove
           Re-verified 2026-08-14: applied to the current tree it reds exactly the two
           deliberate flip-only pins (check-refresh's age gate, normalize's PHASES
           vocabulary) and nothing else — that is the check to re-run if it is ever edited.
-          gearing-s2-scope.md — the SCOPED gearing overhaul (2026-08-12, eight owner
+          gearing-s2-scope.md — HISTORY since the gear explorer was removed on
+          2026-10-28 (code last at `59d1c85`). The SCOPED gearing overhaul (2026-08-12, eight owner
           decisions G1-G8 locked): guide-consensus ranking replaces sim-derived weights, the
           SimC reference pipeline is REMOVED from gearing (it also un-pins the six gear
           data files blocking the re-harvest), three guide sources (Icy Veins + Wowhead
@@ -1496,27 +1319,16 @@ no auth (`yt-dlp --flat-playlist twitch.tv/<user>/videos`, titles are informativ
 Twitch serves NO captions — `--list-subs` returns "has no subtitles". The distiller runs on
 captions, so Twitch is a manual LEADS signal at best, never an automated take source.
 
-gearing/  the Season 2 gear & loot explorer — a SELF-CONTAINED subproject (own data/,
-          harvesters, validator, tests, build → gearing/wow-s2-gearing.html; see
-          gearing/README.md). Imported 2026-08-04 from the standalone project; audited
-          in docs/s2-transition-scope.md (Decision 4). The tracker build copies its
-          artifact to dist/gearing.html (copy-if-present); the shared site tabs link to it.
-          Since 2026-09-05, gearing-refresh.yml refreshes Icy Veins, Wowhead and Method
-          guides weekly (Tuesday 08:37 UTC) and on manual dispatch. Loot/rule-source
-          harvests remain manual. Its tests run under the root `npm test` (node --test
-          discovers them). Read-only input coupling: harvest-specs derives capabilities
-          from the tracker and reviewed local armor, weapon and fallback inputs; nothing
-          in gearing/ writes outside gearing/. Nightly publish synchronizes and rebuilds
-          the gearing mirror. structuralSync.checkedAt records local consistency only;
-          source evidence dates and the historical 12.0.7 fallback review date stay intact.
+(gearing/  REMOVED 2026-10-28: the Season 2 gear & loot explorer, a self-contained
+          subproject imported 2026-08-04 and published as dist/gearing.html. Its code,
+          data, harvesters, tests and two weekly workflows are in git history, last at
+          `59d1c85`. The root .gitignore ignores `gearing/`, so the ignored scratch an
+          older checkout still holds there is never staged.)
 legacy/   original single-file tracker (pre-conversion reference)
 .github/  workflows/deploy.yml (build+deploy Pages on push) · workflows/ci.yml (tests on
           every push) · workflows/freshness.yml (daily staleness heartbeat → alert issue) ·
           workflows/nightly.yml + workflows/dispatch-nightly.yml (the refresh + its
-          auto-kick) · workflows/gearing-refresh.yml (weekly verified guide refresh) ·
-          workflows/gearing-verify.yml (weekly source check of tier bonuses, Catalyst and
-          loot; publishes the verification status, never replaces game facts) ·
-          workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
+          auto-kick) · workflows/wcl-probe.yml (dispatch-only WCL/diagnostic probe) ·
           workflows/dispatched-run-alert.yml (reusable last job of ci/deploy/nightly: a
           bot-started run that fails comments on issue 15) ·
           dependabot.yml (weekly grouped action-SHA + pip bumps; requirements.txt pins
@@ -1641,8 +1453,7 @@ baselines always come from committed history) → **`node src/freeze-season.mjs`
 deterministic season freeze: any outlet whose pages flipped season tonight has its final
 live-season letters lifted from git history, so the consensus keeps its composition
 instead of publishing a recomposition as spec movement — needs publish's `fetch-depth: 0`,
-which is why it cannot run agent-side) → deterministic gearing capability sync,
-`harvest-specs.mjs --check` and `npm run gearing:build` → `npm test` →
+which is why it cannot run agent-side) → `npm test` →
 `npm run build` → `node src/check-refresh.mjs --manifest` (which cross-checks WCL rows
 against the pre-agent evidence artifact and takes its anomaly ack ONLY from the
 human `anomaly_ack` workflow input and its per-source churn ack ONLY from
@@ -1702,10 +1513,8 @@ key. `wowmeta` deliberately carries none (owner note 2026-08-21 on its row).
 `wcl-live-raid`/`wcl-live-mplus` no longer age at all: their `maxAgeDays` is null, the
 same form `blizzard-ptr` and `creators` already used, so the heartbeat skips them while
 the manifest row, the WCL evidence cross-check and the row floor still hold them to
-account. The five gearing datasets that a weekly source verification covers (raid,
-dungeons, tier, Catalyst allocations, Catalyst rules) age from the newer of their own
-date and that group's current `lastVerifiedAt` in `gearing/data/source-verification.json`;
-the sheet, icons, specs and guide datasets have no such field and keep their own dates.
+account. (The gear explorer's datasets were a `gearing` block of their own until the
+explorer was removed on 2026-10-28.)
 The A1 blind spot is FIXED (2026-07-24 audit): the history-snapshot
 proof-of-life signal now counts only when strictly newer than the manifest date, so a
 same-dated snapshot can no longer cap the measured age at 24h and mask a missed night.
@@ -1737,30 +1546,17 @@ scheduled task runs again (the owner's desktop task `wow-ptr-watch`, daily, veri
 2026-10-04) and catches up transcripts, Icy Veins and the browser lane (local-run skill,
 Scope).
 
-**Weekly guide publishing** (`gearing-refresh.yml`, 2026-09-05) shares the nightly
-publisher lock. Each of the three active guide harvesters runs independently with
-`--force`; failed or incomplete source verification preserves that source's published
-file. `src/check-gearing-guides.mjs` checks source identity, per-spec verification,
-dates and unexpected coverage losses before local capability sync, gearing build,
-`npm test` and the root build. Only the three guide files, capability mirror and
-generated artifacts are staged. A push race fails rather than rebasing; a successful
-push dispatches deployment and browser checks. The final step,
-`src/surface-guide-refresh.mjs`, fails the run for any failed provider, even when verified
-providers were published, with one exception since 2026-10-28 (owner decision): a harvest
-that stopped after three consecutive transport failures (an HTTP 403, Wowhead's AWS WAF
-challenge, which answers HTTP 202, or timeouts) records `blocked` in its staging file and
-only warns, because the site walled the runner and that provider's published guide stays
-as it was. Icy Veins and Wowhead have walled the runners every week since 2026-09-29. An
-outcome or staging file the step cannot read fails closed. The
-freshness heartbeat continues to age-check current guide evidence; the historical
-12.0.7 stat fallback is checked for preserved contents and provenance rather than
-being presented as a periodically refreshed live feed.
+**Weekly guide publishing** (`gearing-refresh.yml`, 2026-09-05) and the weekly gear source
+verification (`gearing-verify.yml`) served only the gear explorer and were removed with it on
+2026-10-28; both are in git history at `59d1c85`, with `src/check-gearing-guides.mjs` and
+`src/surface-guide-refresh.mjs`.
 
 **Browser and release verification (2026-09-05):** the independent CI browser job
-runs the tracker, gearing, forecast-report and archive invariants in Chromium,
+runs the tracker, forecast-report and archive invariants in Chromium,
 Firefox and WebKit. The Pages
-workflow keeps browsers outside publication and verifies all three public HTML
-pages after deployment against the normalized hashes from that build's separate
+workflow keeps browsers outside publication and verifies both deployed pages
+(`index.html` and `forecast-report.html`, the gear explorer's page having left on
+2026-10-28) after deployment against the normalized hashes from that build's separate
 SHA-bound artifact. A stale or mismatched page fails the deploy workflow after
 bounded propagation retries; a successful upload alone is not verification.
 

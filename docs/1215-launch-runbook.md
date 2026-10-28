@@ -783,7 +783,11 @@ Riley's ack: when `check-refresh --manifest` prints the per-source churn line fo
 `icyveins` (or the consensus movement line), an unattended run keeps the stored letters
 and reports the counts, and Riley reviews them in an attended local run.
 
-**C4. Gearing: Kith'ix loot and Venomstones** once live tooltips resolve (all 12 Kith'ix item
+**C4. Gearing: Kith'ix loot and Venomstones** — **CLOSED 2026-10-28 without landing: the
+owner removed the gear explorer from the project that day, so there is no raid catalog,
+guide harvest or Venomstone estimate left to update.** The rest of this entry, and the
+Venomstone bullet above, are the record of what it would have taken. Originally: once live
+tooltips resolve (all 12 Kith'ix item
 ids returned 404 before launch). A reviewed code change: `harvest-raid.mjs` and
 `validate-data.mjs` hard-code eight bosses and their counts. Re-harvest with
 `WOW_ACCEPT_LOOT_CHANGES=1`. Launch day, 2026-10-13, is a Tuesday, so the weekly
@@ -809,7 +813,9 @@ a partition until C2; Bloodmallet partial or stale until wholesale adoption; M+ 
 if WCL unexpectedly adds a partition to zone 55. Pre-existing, not 12.1.5: the Archon wall,
 wowmeta, murlok, the Method page self-date, `icyveins` (listed whenever the last local Icy
 Veins refresh is more than 4 days old; see C3), `wcl-live-raid`/`wcl-live-mplus`, and the
-gearing verification and loot-age rows. The floor is 5 for good (owner decision 2026-10-27).
+gearing verification and loot-age rows (gone since 2026-10-28, when the gear explorer and
+its `gearing` freshness block were removed). The floor is 5 for good (owner decision
+2026-10-27).
 
 **Launch +7: review the retained letters** (owner decision 2026-10-04: keep retention,
 disclose it, review it here). Two of the four consensus sources carry letters that predate

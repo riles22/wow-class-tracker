@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-export const DEPLOYED_PAGES = Object.freeze(["index.html", "gearing.html", "forecast-report.html"]);
+export const DEPLOYED_PAGES = Object.freeze(["index.html", "forecast-report.html"]);
 const NORMALIZATION = "html-newlines-lf";
 const normalizeHtml = html => html.replace(/\r\n?/g, "\n");
 const digest = html => createHash("sha256").update(normalizeHtml(html), "utf8").digest("hex");
@@ -29,7 +29,7 @@ export function validateDeploymentManifest(manifest, expectedSha) {
   if (manifest.schemaVersion !== 1 || manifest.normalization !== NORMALIZATION) throw new Error("Unsupported deployment manifest format or normalization.");
   if (!Array.isArray(manifest.pages) || manifest.pages.length !== DEPLOYED_PAGES.length ||
       manifest.pages.some((page, index) => page?.path !== DEPLOYED_PAGES[index] || !/^[a-f0-9]{64}$/.test(page.sha256) || !Number.isSafeInteger(page.bytes) || page.bytes <= 0)) {
-    throw new Error("Deployment manifest must contain the three expected pages and valid hashes/sizes in canonical order.");
+    throw new Error("Deployment manifest must contain the two expected pages and valid hashes/sizes in canonical order.");
   }
 }
 
@@ -143,7 +143,7 @@ async function main(args) {
       onAttempt: attempt => console.log(`Deployment verification ${attempt.attempt}/10: ${attempt.pages.map(page => `${page.path} ${page.ok ? "verified" : page.error}`).join("; ")}`),
     });
     if (!report.ok) throw new Error(`Deployment verification failed for ${report.commitSha} after ${report.attempt} attempts.`);
-    console.log(`All three published pages match build ${report.commitSha}.`);
+    console.log(`Both published pages match build ${report.commitSha}.`);
   }
 }
 

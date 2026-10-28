@@ -36,7 +36,6 @@
 /src/restore-transcript-state.mjs @riles22
 /src/transcript-state-auth.mjs @riles22
 /src/reconcile-transcript-state.mjs @riles22
-/src/check-gearing-guides.mjs @riles22
 /src/check-stable-metrics.mjs @riles22
 /src/fetch-stable-metrics.mjs @riles22
 /src/stable-metric-parsers.mjs @riles22
@@ -56,7 +55,6 @@
 /CLAUDE.md @riles22
 /.claude/skills/*/SKILL.md @riles22
 /src/fetch-source-health.mjs @riles22
-/gearing/src/harvest-specs.mjs @riles22
 /src/apply-ratings.mjs @riles22
 /src/apply-metrics.mjs @riles22
 # The freeze lane writes the two append-only records above, so it belongs with the

@@ -17,7 +17,7 @@ function fixture(t) {
 const htmlResponse = html => new Response(html, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
 const options = extra => ({ expectedSha: commitSha, baseUrl, attempts: 1, retryMs: 0, ...extra });
 
-test("all three pages must match the trusted commit's exact HTML, normalizing only line endings", async t => {
+test("both pages must match the trusted commit's exact HTML, normalizing only line endings", async t => {
   const { pages, manifest, dist } = fixture(t);
   for (const [path, html] of Object.entries(pages)) writeFileSync(join(dist, path), html.replaceAll("\n", "\r\n"));
   assert.deepEqual(createDeploymentManifest({ dist, commitSha }), manifest);
@@ -27,7 +27,7 @@ test("all three pages must match the trusted commit's exact HTML, normalizing on
     return htmlResponse(pages[url.pathname.split("/").at(-1)].replaceAll("\n", "\r\n"));
   } }));
   assert.equal(report.ok, true);
-  assert.equal(calls.length, 3);
+  assert.equal(calls.length, 2);
   assert.ok(calls.every(({ url, init }) => url.searchParams.get("release") === commitSha && init.redirect === "manual" && init.signal instanceof AbortSignal));
 });
 
@@ -40,7 +40,7 @@ test("a stale page causes bounded propagation retries and all pages are rechecke
   }, sleep: async () => { waits++; } }));
   assert.equal(report.ok, true);
   assert.equal(report.attempt, 2);
-  assert.equal(calls, 6);
+  assert.equal(calls, 4);
   assert.equal(waits, 1);
 });
 
@@ -84,7 +84,7 @@ test("wrong commit, missing page, or unsafe URL fail before contacting the site"
   const { manifest, dist } = fixture(t);
   const fetchImpl = async () => assert.fail("Invalid verification inputs must not fetch.");
   await assert.rejects(verifyDeployment(options({ manifest, expectedSha: "b".repeat(40), fetchImpl })), /trusted expected commit/);
-  await assert.rejects(verifyDeployment(options({ manifest: { ...manifest, pages: manifest.pages.slice(0, 2) }, fetchImpl })), /three expected pages/);
+  await assert.rejects(verifyDeployment(options({ manifest: { ...manifest, pages: manifest.pages.slice(0, 1) }, fetchImpl })), /two expected pages/);
   await assert.rejects(verifyDeployment(options({ manifest, baseUrl: "https://example.test/tracker/?redirect=elsewhere", fetchImpl })), /base URL/);
   assert.throws(() => createDeploymentManifest({ dist, commitSha: "master" }), /40-character/);
   rmSync(join(dist, "forecast-report.html"));
@@ -108,13 +108,11 @@ test("publisher dispatches bind checkout and page verification to the published 
   const ci = readFileSync(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
   assert.match(deploy, /workflow_dispatch:\s+inputs:\s+commit_sha:/);
   assert.match(deploy, /DEPLOY_SHA: \$\{\{ inputs\.commit_sha \|\| github\.sha \}\}/);
-  for (const name of ["nightly", "gearing-refresh", "gearing-verify"]) {
-    const workflow = readFileSync(new URL(`../.github/workflows/${name}.yml`, import.meta.url), "utf8");
-    assert.match(workflow, /gh workflow run deploy\.yml --ref master -f commit_sha="\$\(git rev-parse HEAD\)"/,
-      `${name} must dispatch the commit it just pushed`);
-    assert.match(workflow, /gh workflow run ci\.yml --ref master -f commit_sha="\$\(git rev-parse HEAD\)"/,
-      `${name} browser checks must run against the commit it just pushed`);
-  }
+  const nightly = readFileSync(new URL("../.github/workflows/nightly.yml", import.meta.url), "utf8");
+  assert.match(nightly, /gh workflow run deploy\.yml --ref master -f commit_sha="\$\(git rev-parse HEAD\)"/,
+    "nightly must dispatch the commit it just pushed");
+  assert.match(nightly, /gh workflow run ci\.yml --ref master -f commit_sha="\$\(git rev-parse HEAD\)"/,
+    "nightly browser checks must run against the commit it just pushed");
   const build = deploy.slice(deploy.indexOf("  build:"), deploy.indexOf("  deploy:"));
   const verify = deploy.slice(deploy.indexOf("  verify:"));
   for (const job of [build, verify]) {

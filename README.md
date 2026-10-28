@@ -8,8 +8,7 @@ Season 2 opened 18 Aug 2026; Season 1's final standings live on as a frozen arch
 A multi-source class/spec performance tracker for **World of Warcraft: Midnight** (Patch
 12.1 — *"Curse of Ula'tek"*). All 40 Midnight specs, rated across several tier lists into a
 single consensus, layered with live-season numbers, per-spec 12.1 change reads, and the
-tracker's own forecast for the coming season — compiled into one self-contained HTML page,
-plus a companion Season 2 gearing explorer.
+tracker's own forecast for the coming season — compiled into one self-contained HTML page.
 
 **▶ Live: https://riles22.github.io/wow-class-tracker/**
 
@@ -64,9 +63,6 @@ Made by **[riles22](https://github.com/riles22)**. A personal project — if you
   consensus, the forecast and the metric ranks, sortable and filterable per column. Two kinds
   of absence render differently on purpose — `·` means no such measurement exists for that
   role, `—` means it exists but hasn't landed.
-- **Season 2 gearing explorer** — a second self-contained page (`gearing.html`, reachable from
-  the masthead tabs) covering raid, dungeon, catalyst and tier-set loot per spec; every spec
-  drawer deep-links straight into it.
 - **Cited creator takes** — a distilled, linked opinion layer that never feeds tiers — plus
   curated class Discords and creators.
 
