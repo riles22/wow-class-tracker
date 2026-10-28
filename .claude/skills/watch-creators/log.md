@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (nightly, ~16:51 UTC) — 44/44 feeds; queue 0 -> 3; 0 takes
+
+- Supadata ok, 0 requested (queue was empty). Queued 3 in-scope: Dalaran Gaming hEkrgB_5EQU (Sub Rogue nerf livestream, now a VOD per the 10-28 local probe), Musguete yNuLD4HPm7I "Why Everyone is Wrong About the Sub Rogue Nerfs!" (Rogue scope incl. Subtlety), Preheat sv7VFOGWx70 "LIVE: Testing Fire Buffs - Mythic Raid" (published 00:23, a VOD by now). Left unseen: Shindigg 6YywELuKeqw "HOW NERFED IS SUB ROGUE??" (his scope is Outlaw/Assassination, not Subtlety; bare Twitch-link restream), Sha V3g3e81pEjI (season commentary), Tactyks/leak/Supatease/Dalaran Sl4ScXzWh90 (WoW Forever), Dratnos vault, key PoVs and streams (Bansherz, Whispyr, Kalamazi, Critcake, MadSkillzzTV, AutomaticJak, Megasett, YoDaTV). 0 takes, 0 metaNotes.
+
 ## 2026-10-28 (local scheduled, ~14:10 UTC, before today's nightly) — queue 0 -> 0; one probe, no captions; 0 takes
 
 - Queue empty, so nothing to drain. One yt-dlp probe (android client) on Dalaran Gaming hEkrgB_5EQU "BIG SUBTLETY ROGUE NERF THIS WEEK!": metadata answered (8,684 s, `was_live` True, uploaded 2026-10-27) but no caption track was written; a long live VOD has no local route, so it stays unseen for the nightly's Supadata lane. No sweep after that. 0 takes, 0 metaNotes, nothing queued or skipped.

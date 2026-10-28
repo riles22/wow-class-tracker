@@ -5,7 +5,7 @@
       "topicId": 2336376,
       "patch": "12.1",
       "era": "live",
-      "checkedAt": "2026-10-27T20:32:15.878Z",
+      "checkedAt": "2026-10-28T16:50:25.454Z",
       "removedSections": [
         {
           "id": "2336376:1:2026-08-18:classes:death-knight:1",
@@ -2656,16 +2656,250 @@
       "topicId": 2382684,
       "patch": "12.1.5",
       "era": "live",
-      "checkedAt": "2026-10-27T20:04:52.597Z",
+      "checkedAt": "2026-10-28T16:50:25.454Z",
       "removedSections": [],
       "posts": [
         {
           "id": 30477527,
           "postNumber": 1,
-          "version": 14,
-          "updatedAt": "2026-10-27T01:01:16.745Z",
-          "bodySha256": "776c1b77c7b4d9546a3266ec3474d19ecc3bee956c02e550998c1db667fd8e61",
+          "version": 16,
+          "updatedAt": "2026-10-28T00:43:05.396Z",
+          "bodySha256": "1d025a5cdb445f5298edff865b255b45c0fd87762903459ffb3b8b121b87380e",
           "sections": [
+            {
+              "id": "2382684:1:2026-10-27:classes:druid:1",
+              "date": "2026-10-27",
+              "category": "Classes",
+              "class": "Druid",
+              "specKeys": [
+                "Druid|Feral",
+                "Druid|Restoration"
+              ],
+              "sha256": "c7342ab023f75911cc4900de3ebe57fff570886e7e1f113976430a7c8f842cb3",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Classes section for Druid (Feral: all damage +5%; Restoration: Verdancy +60%, Regrowth +10%, Improved Swiftmend 40% (was 30%), all PvE only): the compilation restating the “Class Tuning Incoming - October 27” pass (us.forums topic 2390748, still post 1 version 1) as it shipped with the weekly maintenance. Every line matches the stored 2026-10-23 live build entry word for word, which already carries this coverage, so it is resolved irrelevant rather than applied (an applied reference must cite this compilation's own topic, and a second entry would count the restated lines twice in the outlook tally; ptr-watch lifecycle rule). No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:classes:hunter:1",
+              "date": "2026-10-27",
+              "category": "Classes",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship"
+              ],
+              "sha256": "842f6745e23432be6a9357b631eaf354f64435ced3ae6e7766c206f6910c1875",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Classes section for Hunter (Marksmanship: Trick Shots 85% (was 75%), Explosive Shot +10%, Volley +10%): the compilation restating the “Class Tuning Incoming - October 27” pass (us.forums topic 2390748, still post 1 version 1) as it shipped with the weekly maintenance. Every line matches the stored 2026-10-23 live build entry word for word, which already carries this coverage, so it is resolved irrelevant rather than applied (an applied reference must cite this compilation's own topic, and a second entry would count the restated lines twice in the outlook tally; ptr-watch lifecycle rule). No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:classes:mage:1",
+              "date": "2026-10-27",
+              "category": "Classes",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire"
+              ],
+              "sha256": "3a257b5fe69bf32cc669b3fd93e0b870487eba3df308f4cd2151fcee480a0bc0",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Classes section for Mage (Fire: all damage done +5%, PvE only): the compilation restating the “Class Tuning Incoming - October 27” pass (us.forums topic 2390748, still post 1 version 1) as it shipped with the weekly maintenance. Every line matches the stored 2026-10-23 live build entry word for word, which already carries this coverage, so it is resolved irrelevant rather than applied (an applied reference must cite this compilation's own topic, and a second entry would count the restated lines twice in the outlook tally; ptr-watch lifecycle rule). No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:classes:monk:1",
+              "date": "2026-10-27",
+              "category": "Classes",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Mistweaver"
+              ],
+              "sha256": "ebc6fe8180c5455e168044828537f93eb2d3dc7018b9515f3ebda8239093ed2c",
+              "resolution": {
+                "disposition": "applied",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. Mistweaver spec heading: a Mistline healing-target bug fix with no tuning value that appears nowhere but this compilation (it is not in the October 27 tuning announcement), logged as one spec line in the new 2026-10-27 hotfix feed entry. No set bonus is touched.",
+                "references": [
+                  {
+                    "kind": "build",
+                    "date": "2026-10-27",
+                    "highlight": "Mistweaver Monk — Resolved an issue that caused the Mistline talent to sometimes not properly heal the lowest health target."
+                  }
+                ]
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:classes:rogue:1",
+              "date": "2026-10-27",
+              "category": "Classes",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Subtlety"
+              ],
+              "sha256": "39f09163d70d90d3f47b617e3d426a23bb515d5c73c1f7ac873bc04dc4cab08f",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Classes section for Rogue (Subtlety: all ability damage -8%; Trickster: Fazed 5% (was 7%)): the compilation restating the “Class Tuning Incoming - October 27” pass (us.forums topic 2390748, still post 1 version 1) as it shipped with the weekly maintenance. Every line matches the stored 2026-10-23 live build entry word for word, which already carries this coverage, so it is resolved irrelevant rather than applied (an applied reference must cite this compilation's own topic, and a second entry would count the restated lines twice in the outlook tally; ptr-watch lifecycle rule). No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:classes:warlock:1",
+              "date": "2026-10-27",
+              "category": "Classes",
+              "class": "Warlock",
+              "specKeys": [
+                "Warlock|Affliction",
+                "Warlock|Destruction"
+              ],
+              "sha256": "e58c46a7dd58ba2cea34acc8b5fc9de5fd8778e0602cc8918e8d5245d78aa377",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Classes section for Warlock (Affliction: Unstable Affliction +20%, PvE only; Destruction: Rain of Fire +20%): the compilation restating the “Class Tuning Incoming - October 27” pass (us.forums topic 2390748, still post 1 version 1) as it shipped with the weekly maintenance. Every line matches the stored 2026-10-23 live build entry word for word, which already carries this coverage, so it is resolved irrelevant rather than applied (an applied reference must cite this compilation's own topic, and a second entry would count the restated lines twice in the outlook tally; ptr-watch lifecycle rule). No set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:death-knight:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Death Knight",
+              "specKeys": [
+                "Death Knight|Unholy"
+              ],
+              "sha256": "d8bbe735d49c4ac76692b40fd1ee2c5ad215448ff90761ac97c17ac2b3e23a2f",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Unholy, San’layn Vampiric Strike damage -20% in PvP, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:demon-hunter:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Demon Hunter",
+              "specKeys": [
+                "Demon Hunter|Devourer"
+              ],
+              "sha256": "1bb9f555f1d1eb73efd1dab3b2dd961cee503317e3048fc8c83ea3ee18dd07a8",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Devourer, Collapsing Star damage +20% in PvP, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:evoker:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Evoker",
+              "specKeys": [
+                "Evoker|Preservation"
+              ],
+              "sha256": "a9785fdb50ff230a0db8a8d386a37a040665bb892dbff3a83b17a02572133c58",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Preservation, two Chronowarden PvP healing changes, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:hunter:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Hunter",
+              "specKeys": [
+                "Hunter|Marksmanship"
+              ],
+              "sha256": "da48d6463284199c19ee18dd7fdca3ca8cc6403dd5343bf41b1457723741b22a",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Marksmanship, Kill Shot, Deathblow and Black Arrow PvP changes, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:mage:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Mage",
+              "specKeys": [
+                "Mage|Fire",
+                "Mage|Frost"
+              ],
+              "sha256": "b474c08a77d03c8c13b5ac8a1693ac3fb4308c91a8ceff2edef433df483169be",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Fire all damage -5% in PvP and two Frostfire PvP damage increases for Frost, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:monk:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Monk",
+              "specKeys": [
+                "Monk|Mistweaver"
+              ],
+              "sha256": "455f07eae6ce5b13016505cb01e5c0ecb59c1e22b06b04f4e82f6bc7762a2e63",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Mistweaver, two Conduit of the Celestials PvP increases, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:paladin:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Paladin",
+              "specKeys": [
+                "Paladin|Holy"
+              ],
+              "sha256": "5b7870704149f19f8066bfebe3b2502a1c6a692311d839896c873c3061063d39",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Holy, all healing +5% and Divine Favor mana-cost change in PvP, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:priest:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Priest",
+              "specKeys": [
+                "Priest|Holy"
+              ],
+              "sha256": "136623d42753e16b2c71f4d0279665aca18308828f5a986e9ed79585bc514033",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Holy, Prayer of Healing and Archon PvP healing changes, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:rogue:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Rogue",
+              "specKeys": [
+                "Rogue|Assassination"
+              ],
+              "sha256": "67c2847154eec9075a9f80aa8fafcc951d2f810eaf3c4f9410ebb67c00300fbb",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Assassination, three Deathstalker PvP damage changes, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
+            {
+              "id": "2382684:1:2026-10-27:player-versus-player:shaman:1",
+              "date": "2026-10-27",
+              "category": "Player versus Player",
+              "class": "Shaman",
+              "specKeys": [
+                "Shaman|Restoration"
+              ],
+              "sha256": "707c1dd28d8856d4d722e574466a16182307b6711b94f63df098aa800778f9ee",
+              "resolution": {
+                "disposition": "irrelevant",
+                "reason": "Reviewed 2026-10-28 (nightly) against official hotfix topic 2382684, post 1, version 16 (last edited 2026-10-28T00:43:05.396Z), read from the deterministic receipt text with its list nesting intact and cross-checked against the Wowhead mirror news=383617. This is the post's October 27 Player versus Player section: Restoration, Healing Stream / Stormstream Totem healing +20% in PvP, every line under the Player versus Player heading and stated “in PvP combat”. PvP is out of scope for this PvE tracker (ptr-watch rule 3c), so nothing here becomes a highlight, reaches a spec drawer or votes in the PvE outlook tally; the same lines were excluded from the 2026-10-23 tuning-announcement entry. No PvE fact is affected and no set bonus is touched. Future section edits still require review."
+              }
+            },
             {
               "id": "2382684:1:2026-10-26:classes:shaman:1",
               "date": "2026-10-26",
