@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (nightly re-run, ~20:40 UTC) — Bloodmallet adopted wholesale (24); SimC re-verified; WCL 348/320
+
+- Bloodmallet: 24 of 24 stored-pool specs returned MID2 charts (ptr "0"), every one dated 2026-10-28, on/after the 12.1.5 release (PHASES.livePatch.since 2026-10-13); Fire Mage and Subtlety now return data. Balance, Augmentation, Devastation still error 4/4 (not in the stored pool). Adopted wholesale: 24 profiles merged at 2026-10-28, max value move 16.2% (median 0.1%), no ack needed. Pool uniform MID2.
+- SimC MID2_Raid.txt same run as the 16:51 merge (12.1.5.70575, HEAD 6a4500db0f, Last-Modified 28 Oct 07:30:59 GMT): 24/24 stored values match, nothing to merge.
+- WoWMeta: manifest snapshotDate 2026-09-15; rankings Last-Modified 20 Oct; 40 rows, 0 value/n diffs; nothing merged (partial).
+- Murlok collector success (source <time> 2026-10-28 18:10Z), 40 rows applied. Mythicstats collector invalid (period 1087, 0 rows); stored period-1086 series unchanged.
+- WCL collector success: raid 348 rows (12 sparse cuts, 0 failed), mplus 320 rows (0 failed); 0 retired. Archon numbers walled (403), unchanged.
+
 ## 2026-10-28 (nightly, ~16:51 UTC) — SimC new run 24 merged; Bloodmallet held mid re-sim; Mythicstats invalid
 
 - SimC MID2_Raid.txt new run HEAD 6a4500db0f (hotfix 2026-10-28, build 12.1.5.70575), 24/24 merged at asOf 2026-10-28, all moved, max 7.39%. Bloodmallet mid re-sim: 22 charts MID2 dated 10-28, but Fire Mage and Subtlety Rogue (stored, both retuned Oct 27) error 6/6 -> whole pool HELD (no pre/post-tuning mix), stored 24 at 10-21. Murlok 40 from collector (source date 10-28). Mythicstats collector invalid (period 1087, population unverified), stored period 1086 unchanged. WoWMeta 2026-09-15, 40/40 identical. WCL collector: raid success 348, M+ partial 319 (Resto Shaman cut 61877 future timestamp). Archon walled.

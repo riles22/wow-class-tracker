@@ -8960,7 +8960,7 @@
       "patchContext": "Season 2 live (12.1.5) — \"Are Sub Rogues Still Viable? Nerf Analysis\", published 2026-10-23: a 4-minute reaction to the Subtlety nerf in the class tuning announced for the October 27 reset (all ability damage -8%, plus a further Trickster reduction), checked by knocking 10% off top Subtlety players' current damage in logged keys. It supersedes his 2026-10-21 Trickster guide read, which expected no meaningful nerf. He says he still has to test the change in game. No tier letters or rank list, so there is no predictions panel.",
       "claim": "He says the nerf sounds large but is not that bad: taking 10% off the damage of top Subtlety players in current logs still leaves them at the top of the meters, in one log still almost 100k ahead of a Shaman. Netting it against the earlier 14% buff he calls the result about a 6% gain overall, and expects Subtlety to stay the top damage spec. He still expects Trickster to outperform Deathstalker, which he calls harder to min-max.",
       "url": "https://youtu.be/DCJenKX1uXA?t=81",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -9188,7 +9188,7 @@
       "patchContext": "Season 2 live (12.1.5) — his walkthrough of the class tuning announced for the October 27 weekly reset (\"That Didn't Last Long... Sub Rogue Nerfs & Weekly Class Tuning\", published 2026-10-24), PvE section. The later PvP section (including the Resto Shaman totem, Holy Paladin, Preservation, Frost and Marksmanship PvP lines) is out of scope for this PvE tracker and is not distilled, and the Warlock segment is outside the classes he is registered for.",
       "claim": "He calls the 8% ability-damage cut and the Trickster debuff reduction (7% to 5%) an expected and notable nerf after Subtlety became the hardest-hitting spec of 12.1.5: top-end burst drops quite significantly, but he expects it to stay competitive and Trickster to remain the build in dungeons and raids. Supersedes his 2026-10-04 read.",
       "url": "https://youtu.be/ZlqJuSOXVPc?t=182",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Evoker",
@@ -9236,6 +9236,30 @@
       "patchContext": "Season 2 live (12.1.5) — \"Which Demon Hunter spec is Best for Mythic+? | Midnight Season 2\" (published 2026-10-25), his Mythic+ spec-choice explainer for Demon Hunter built on his own dungeon-route sims (a +20 Den of Nalorakk route) and his own key logs. Read as Mythic+ only: he frames every comparison per key and never discusses raid.",
       "claim": "Shadarek calls Devourer (Annihilator) another great Mythic+ option: in his dungeon-route sims it goes from about 439k on Fel-Scarred Havoc to about 494k, roughly 12% ahead of Fel-Scarred and about 26% ahead of Aldrachi Reaver, and he thinks the Annihilator sim may still undercount its AoE. Its priority damage is much better than before after several single-target buffs this season, though single target is still not its strength. He finds it easier to play than last season, very tanky up to about +22, but harder to survive than Havoc around +22 to +23 because Blur is weaker and it lacks physical damage reduction. He rates Fel-Scarred Havoc and Devourer as close, decided by group buffs (Battle Shout favours Havoc, Arcane Intellect favours Devourer) and personal preference.",
       "url": "https://youtu.be/AlIT9jruzMY?t=736",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-27",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — reset-day livestream VOD \"BIG SUBTLETY ROGUE NERF THIS WEEK! BUT IS IT DEAD..?\" (published 2026-10-27), in which he plays Subtlety in his own Mythic+ keys after the October 27 class tuning went live. Read as Mythic+ only: every test in the stream is a dungeon key and raid is not discussed. Most of the 143-minute stream is WoW: Forever name-reservation and PvP chat, which is not distilled. Supersedes his 2026-10-24 walkthrough of the same nerf, which read the announced numbers before he had played them.",
+      "claim": "Dalaran Gaming tested Subtlety in his own keys on the day the October 27 nerf went live. In the first key he found it still hitting very hard, only a little behind a Paladin in the group, and judged that the change trims Subtlety's unreasonably high AoE while leaving its AoE very high. After the second key he concluded that the nerf, big on paper, barely changed anything in practice: with gear, stats and consumables he calls poor and no try-hard play he still did over 400k, and he believes Subtlety was further ahead than Blizzard intended and is still ahead.",
+      "url": "https://youtu.be/hEkrgB_5EQU?t=7982",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Musguete",
+      "date": "2026-10-28",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"Why Everyone is Wrong About the Sub Rogue Nerfs! STILL KING!\" (published 2026-10-28), a 5-minute follow-up after the October 27 Subtlety nerf went live, comparing his own damage clips and logged Mythic+ keys from before and after the change. Read as Mythic+ only: all of his evidence is keys. Supersedes his 2026-10-23 reaction to the same nerf, made before he had tested it in game. No tier letters or rank list, so there is no predictions panel.",
+      "claim": "Musguete compares Subtlety before and after the October 27 nerf in his own clips and in logged keys. Burst is lower and damage is about 8% down, but its sustained damage still tops the meters and single target is barely different (still around 400k in his clip, against 500k peaks before). The top logged Subtlety runs on +24 Den of Nalorakk and King's Rest lost only about 20-30k DPS (574k to about 554k; 582k to 550k). He does not think the nerf matters in most keys, perhaps only at +23 and +24, and expects Subtlety to stay the best and highest-damage spec in Mythic+.",
+      "url": "https://youtu.be/yNuLD4HPm7I?t=83",
       "superseded": false
     }
   ],
