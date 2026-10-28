@@ -788,7 +788,20 @@ ids returned 404 before launch). A reviewed code change: `harvest-raid.mjs` and
 `validate-data.mjs` hard-code eight bosses and their counts. Re-harvest with
 `WOW_ACCEPT_LOOT_CHANGES=1`. Launch day, 2026-10-13, is a Tuesday, so the weekly
 gearing-refresh (08:37 UTC) runs that day and may end red, as it did on 2026-09-29 and
-10-06; failed providers keep their files by design.
+10-06; failed providers keep their files by design. It ended red on 10-13, 10-20 and
+10-27 as well, and in those three runs Method's fresh harvest also failed the tests (the
+Kith'ix rows, then a trinket pin), so Method published nothing for three weeks. Since
+2026-10-28 a provider whose harvest stops after three transport failures in a row only
+warns (`src/surface-guide-refresh.mjs`); any other failure still ends the run red.
+Blocked as of 2026-10-14: Wowhead, which `harvest-raid.mjs` reads, served an AWS WAF
+challenge from home and from CI. Until C4 lands, guide rows that cite Kith'ix resolve to
+`unknown` (147 Icy Veins rows in the 2026-10-14 harvest and again on 2026-10-28; 143
+Method rows on 2026-10-28, eight of which spell the boss "Kythix"), and the unknown-row
+cap in `gearing/test/guides.test.mjs` leaves them out. Once the raid catalog has the boss,
+that test fails while any guide still holds a Kith'ix row, so the C4 change also
+re-harvests the guides. The resolver invents no aliases, so after C4 a "Kythix" row
+resolves only through its item id, and one that stays unknown counts toward the cap like
+other unmatched text. Icy Veins needs a local run with `--curl`.
 
 **C5. Freshness expectations.** Compare `check-refresh --age` at launch +3 days against the
 baseline. Expected because of 12.1.5: `wcl-leaderboard-raid` partial from the day WCL adds

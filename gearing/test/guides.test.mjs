@@ -3,7 +3,8 @@
 // pins a recipe against the real markup, including the traps that were found the hard way:
 // the possessive-apostrophe variance (King's/Kings' Rest), Method's &rsquo; entities and
 // its "Temple of Sethrallis" typo, Wowhead's tie-in-one-li lists, and Icy Veins' paired
-// grids with data-wowhead item identity.
+// grids with data-wowhead item identity (data-iv-tooltip since October 2026, excerpt
+// saved 2026-10-14).
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -11,8 +12,8 @@ import { readFile } from "node:fs/promises";
 import { buildGuidePayload, canonicalRosters, canonicalSlot, decodeEntities, nameKey,
   normApostrophes, normalizeDropSource, normalizeStatRun, parseSoftCaps, resolveDropSource }
   from "../src/lib-guides.mjs";
-import { articleDate, parseIcyVeinsBis, parseIcyVeinsPriorities }
-  from "../src/harvest-guide-icyveins.mjs";
+import { articleDate, harvestSpec, parseIcyVeinsBis, parseIcyVeinsPriorities,
+  parseIcyVeinsTrinketTiers, tierPieceIds } from "../src/harvest-guide-icyveins.mjs";
 import { gathererNames, guideAuthor, guideBody, guideDate, parseWowheadBis,
   parseWowheadPriorities } from "../src/harvest-guide-wowhead.mjs";
 import { methodDate, parseMethodBis, parseMethodPriorities }
@@ -21,6 +22,7 @@ import { methodDate, parseMethodBis, parseMethodPriorities }
 const fixture = (name) => readFile(new URL(`./fixtures/guides/${name}`, import.meta.url), "utf8");
 const json = async (path) => JSON.parse(await readFile(new URL(`../${path}`, import.meta.url), "utf8"));
 const rosters = canonicalRosters(await json("data/raid-items.json"), await json("data/dungeon-items.json"));
+const tierPieces = tierPieceIds(await json("data/tier-items.json"));
 
 test("name joins absorb apostrophe placement, entities, and leading articles", () => {
   assert.equal(nameKey("King's Rest"), nameKey("Kings' Rest"));
@@ -119,6 +121,89 @@ test("Icy Veins: BiS grid pair parses items, names, and normalized sources", asy
   assert.equal(head.boss, "Ula'tek");
   assert.ok(overall.some((r) => r.sourceKind === "world")); // Tidebound Grotto trinket
   assert.ok(overall.some((r) => r.sourceKind === "crafted"));
+});
+
+// The markup every page had moved to by 2026-10-14: data-iv-tooltip="wow/item/NNN?..." on a
+// "wow-tooltip spell_icon_span" element, the name in a plain inner <span>, and a Catalyst
+// result naming its base item in original=. Excerpt saved 2026-10-14.
+test("Icy Veins 2026-10 markup: tooltip ids, Catalyst rows keyed to the base, trinket tiers", async () => {
+  const html = await fixture("icyveins-frost-bis-2026-10.html");
+  assert.equal(articleDate(html), "2026-10-12");
+  const rows = parseIcyVeinsBis(html, rosters, tierPieces);
+  const overall = rows.filter((r) => r.list === "overall");
+  const raid = rows.filter((r) => r.list === "raid");
+  assert.equal(overall.length, 16);
+  assert.equal(raid.length, 16);
+  assert.ok(rows.every((r) => /^\d+$/.test(r.itemId)));
+  // The page shows the Catalyst result; its base is what drops, so the base is the
+  // candidate (the Wowhead harvester's rule) — the same id the 2026-08 markup listed.
+  const head = overall.find((r) => r.slot === "Head");
+  assert.equal(head.itemId, "271874");
+  assert.equal(head.catalyzedResultId, "271564");
+  assert.equal(head.itemName, null, "the result's name is never filed under the base's id");
+  assert.equal(head.boss, "Ula'tek");
+  // The id pair marks a Catalyst row even where the drop text omits "Catalyst from".
+  const hands = overall.find((r) => r.slot === "Hands");
+  assert.equal(hands.sourceText, "Coiled Altar");
+  assert.deepEqual([hands.itemId, hands.catalyzedResultId], ["268243", "271565"]);
+  // A tier piece that drops directly carries no original and stays itself.
+  const shoulder = raid.find((r) => r.slot === "Shoulder");
+  assert.equal(shoulder.itemId, "271562");
+  assert.ok(!("catalyzedResultId" in shoulder));
+  assert.equal(shoulder.itemName, "Primal Leywarden's Manaflux");
+  assert.equal(overall.find((r) => r.slot === "Neck").itemName, "Aqirbane Reliquary");
+  // Another database prefix: the 12.1.5 Kith'ix trinket is wowxptr/item/281215.
+  const tendril = rows.filter((r) => r.itemId === "281215");
+  assert.deepEqual(tendril.map((r) => [r.list, r.itemName]),
+    [["overall", "Twisted Horror's Tendril"], ["raid", "Twisted Horror's Tendril"]]);
+  assert.deepEqual(parseIcyVeinsTrinketTiers(html), [
+    { tier: "S", itemIds: ["270170", "270167", "270164", "250224", "273796"] },
+    { tier: "A", itemIds: ["250259", "250215", "250214", "270161", "273794"] },
+    { tier: "B", itemIds: ["274493", "251792", "270169"] },
+    { tier: "C", itemIds: ["193757", "251785", "270168", "251786", "251784"] },
+  ]);
+});
+
+test("Icy Veins: original= marks a Catalyst row only on a tier piece that differs from it", async () => {
+  // Both shapes appeared in the 2026-10-14 harvest. Windwalker Monk's shoulders and
+  // Elemental Shaman's hands named their own id. Devastation Evoker's Mythic+ boots
+  // (159388) named a pair of legs (159375), which put Icy Veins' vote on the legs.
+  // The excerpt is edited here to reproduce each one.
+  const html = (await fixture("icyveins-frost-bis-2026-10.html"))
+    // The raid list's shoulders: a tier piece shown with no original.
+    .replace('wow/item/271562?bonus=12854:13335:13694:13697"',
+      'wow/item/271562?bonus=12854:13335:13694:13697&amp;original=271562"')
+    // The raid list's legs, which are not a tier piece, naming a pair of boots.
+    .replace('wow/item/268236?bonus=12854"', 'wow/item/268236?bonus=12854&amp;original=268255"');
+  // The expected rows match the unedited page, so check that both edits landed.
+  assert.ok(html.includes("271562?bonus=12854:13335:13694:13697&amp;original=271562")
+    && html.includes("268236?bonus=12854&amp;original=268255"), "fixture edits did not apply");
+  const raid = parseIcyVeinsBis(html, rosters, tierPieces).filter((r) => r.list === "raid");
+  const shoulder = raid.find((r) => r.slot === "Shoulder");
+  assert.deepEqual([shoulder.itemId, shoulder.itemName, "catalyzedResultId" in shoulder],
+    ["271562", "Primal Leywarden's Manaflux", false]);
+  const legs = raid.find((r) => r.slot === "Legs");
+  assert.deepEqual([legs.itemId, legs.itemName, "catalyzedResultId" in legs, legs.boss],
+    ["268236", "Initiate's Sacrificial Tights", false, "Nek'zali the Soulcoiler"]);
+  // A Catalyst row is still read as one.
+  assert.equal(raid.find((r) => r.slot === "Head").catalyzedResultId, "271564");
+  // Without the tier pieces the parser cannot tell, so it refuses rather than guess.
+  assert.throws(() => parseIcyVeinsBis(html, rosters), /pass the tier pieces/);
+});
+
+test("Icy Veins: a fetched BiS page that parses no rows fails the spec as drift", async () => {
+  // The 2026-10-14 failure: the stat page still parsed, so the both-empty guard passed and
+  // a priorities-only record was staged as verified. An unreadable item attribute stands in
+  // for the next markup change.
+  const pages = {
+    "-stat-priority": await fixture("icyveins-hpal-stat-widgets.html"),
+    "-gear-best-in-slot": (await fixture("icyveins-frost-bis-2026-10.html"))
+      .replaceAll("data-iv-tooltip=", "data-next-tooltip="),
+    "-gems-enchants-consumables": null,
+  };
+  const fetchPage = async (url) => pages[Object.keys(pages).find((suffix) => url.endsWith(suffix))];
+  await assert.rejects(harvestSpec({ spec: "Holy", class: "Paladin", role: "Healer" }, fetchPage, rosters),
+    /BiS page fetched but no BiS rows parsed/);
 });
 
 test("Wowhead: printHtml body, Gatherer names, markup BiS table", async () => {
@@ -287,16 +372,39 @@ test("enhancements data invariants: no ability/trinket pollution, no fragments, 
   }
 });
 
+// Kith'ix, the Venomous Abyss' ninth boss, opened with 12.1.5, and the raid catalog does not
+// have it yet: harvest-raid.mjs reads Wowhead's boss guides, which served an AWS WAF
+// challenge on 2026-10-14 (12.1.5 launch runbook, C4). Every guide row citing it is
+// `unknown` until then: 147 Icy Veins rows on 2026-10-14 and again on 2026-10-28, and 143
+// Method rows on 2026-10-28, eight of which spell the boss "Kythix". Those rows are real
+// guide content and the unknown lane is never rendered, so the cap leaves them out while the
+// catalog lacks the boss. Once C4 adds it, a re-harvest resolves the Kith'ix rows to `raid`,
+// and any that remain unknown fail this test, so the C4 change has to carry the re-harvest.
+// The resolver invents no aliases, so a "Kythix" row can resolve only through its item id;
+// after C4 any that stay unknown count toward the cap like other unmatched text.
+const BOSS_PENDING_CATALOG = "Kith'ix";
+const PENDING_SPELLINGS = [BOSS_PENDING_CATALOG, "Kythix"];
+
 test("unknown-kind rows stay capped — recipe drift trips loudly, never accumulates", async () => {
+  const bossKey = new RegExp(`\\b${nameKey(BOSS_PENDING_CATALOG)}\\b`);
+  const pendingKey = new RegExp(`\\b(?:${PENDING_SPELLINGS.map(nameKey).join("|")})\\b`);
+  const catalogHasBoss = (await json("data/raid-items.json")).bosses
+    .some((b) => bossKey.test(nameKey(b.name)));
   for (const id of GUIDE_SOURCES) {
     const g = await json(`data/guides/${id}.json`);
     const unknown = Object.values(g.specs).flatMap((s) => s.bis.filter((r) => r.sourceKind === "unknown"));
+    const citing = unknown.filter((r) => (catalogHasBoss ? bossKey : pendingKey).test(nameKey(r.sourceText || "")));
+    if (catalogHasBoss)
+      assert.equal(citing.length, 0, `${id}: ${citing.length} rows citing ${BOSS_PENDING_CATALOG} are still `
+        + "unknown although the raid catalog has the boss; re-harvest this guide");
+    const counted = unknown.filter((r) => !citing.includes(r));
     // Method legitimately sources old-expansion dungeons in its alternatives rows and
     // names NPCs outside every catalog we hold ("Vexhul") — real published content, kept
     // verbatim. The cap is calibrated above the 2026-08-18 measured counts (5/0/66) so
     // growth trips review without flagging what the guides actually say.
-    assert.ok(unknown.length <= 80,
-      `${id}: ${unknown.length} unknown-source rows (cap 80) — first: ${JSON.stringify(unknown[0]?.sourceText)}`);
+    assert.ok(counted.length <= 80,
+      `${id}: ${counted.length} unknown-source rows (cap 80, not counting ${citing.length} citing `
+      + `${BOSS_PENDING_CATALOG}) — first: ${JSON.stringify(counted[0]?.sourceText)}`);
     assert.ok(unknown.every((r) => r.sourceTextUnmatched && r.sourceText),
       `${id}: unknown rows must keep their verbatim sourceText and the unmatched flag`);
   }

@@ -270,16 +270,33 @@ export function parseSoftCaps(text) {
   return caps;
 }
 
+/** The browser User-Agent both transports can send. */
+export const BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36";
+
+/** The header set the tier-list refresh sends Icy Veins from home (refresh-tiers skill), names
+ *  capitalised as a browser sends them over HTTP/1.1. curl writes a header name exactly as
+ *  given, and the case mattered on 2026-10-14: this set got HTTP 200, while the same
+ *  User-Agent on a lowercase `user-agent:` line got 403 on three pages running. */
+export const BROWSER_HEADERS = {
+  "User-Agent": BROWSER_UA,
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "Accept-Language": "en-US,en;q=0.9",
+};
+
+/** HTTP 202 is a challenge, never the page: Wowhead's AWS WAF answers a walled request with
+ *  202 and a 2,020-byte script (GitHub runners, every night since 2026-10-13). Both transports
+ *  treat it as a refusal so the harvest runner counts it with 403s and timeouts. */
+const CHALLENGE_STATUS = 202;
+
 /** Shared fetch with retries, a hard timeout, + polite spacing (residential transports). */
 export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, timeoutMs = 30000 } = {}) {
   let failure;
   for (let attempt = 1; attempt <= tries; attempt++) {
     try {
       const r = await fetch(url, { signal: AbortSignal.timeout(timeoutMs),
-        headers: { "user-agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
-      ...headers } });
-      if (r.ok) {
+        headers: { "user-agent": BROWSER_UA, ...headers } });
+      if (r.ok && r.status !== CHALLENGE_STATUS) {
         const text = await r.text();
         await new Promise((resolve) => setTimeout(resolve, delayMs));
         return text;
@@ -294,11 +311,14 @@ export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, 
 
 /** curl transport for hosts whose TLS fingerprinting 403s Node's fetch but passes curl —
  *  Wowhead does exactly this (measured 2026-08-18: Node fetch 403 in 123ms, plain curl 200).
- *  Same retry/spacing contract as fetchText. */
-export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs = 30 } = {}) {
+ *  Same retry/spacing contract as fetchText. `headers` are sent as -H lines, names as given;
+ *  with none, curl sends its own User-Agent, which some hosts refuse (Icy Veins, 2026-10-14:
+ *  plain curl 403, curl with BROWSER_HEADERS 200, from a residential connection). */
+export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs = 30, headers = {} } = {}) {
   const { execFile } = await import("node:child_process");
+  const headerArgs = Object.entries(headers).flatMap(([name, value]) => ["-H", `${name}: ${value}`]);
   const run = () => new Promise((resolve) => {
-    execFile("curl", ["-sS", "--max-time", String(timeoutMs), "-L", "--write-out", "\n%{http_code}", url],
+    execFile("curl", ["-sS", "--max-time", String(timeoutMs), "-L", ...headerArgs, "--write-out", "\n%{http_code}", url],
       { maxBuffer: 32 * 1024 * 1024, windowsHide: true },
       (error, stdout) => {
         const match = stdout?.match(/\n(\d{3})$/);
@@ -310,7 +330,7 @@ export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs 
   for (let attempt = 1; attempt <= tries; attempt++) {
     const { error, status, text } = await run();
     if (!error && status === 404) return null;
-    if (!error && status >= 200 && status < 300 && text && text.length > 1000) {
+    if (!error && status >= 200 && status < 300 && status !== CHALLENGE_STATUS && text && text.length > 1000) {
       await new Promise((resolve) => setTimeout(resolve, delayMs));
       return text;
     }

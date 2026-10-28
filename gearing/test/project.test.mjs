@@ -696,14 +696,25 @@ test("client app: consensus-first ranking, source-labeled Builds, custom overrid
   //     The fake DOM keeps raw markup, and esc() escapes ' since the CodeQL triage (2026-09-22).
   assert.match(document.ids.get("bis").innerHTML, /Aln&#39;hara Lantern/);
   assert.match(document.ids.get("bis").innerHTML, /Weapons &mdash; guide picks without drop data/);
-  // (2) Guide-only trinkets RANK: Wavecaller's Seastone (3/3 world) must carry a rank
-  //     number, sharing rank 1 with the 3/3 catalog trinket — not dangle unranked.
+  // (2) Guide-only trinkets RANK: a guide-only pick (for Frost Mage, Wavecaller's Seastone,
+  //     a world drop) must carry the rank its consensus count earns, in one dense ordering
+  //     with the catalog trinkets, not dangle unranked below them. Seastone was 3/3 until
+  //     Icy Veins (2026-10-12) and Method (by 2026-10-20) picked the Kith'ix trinket, and
+  //     only Wowhead still names it, so neither the counts nor the item are pinned.
   {
     const bisNow2 = document.ids.get("bis").innerHTML;
-    const seastone = bisNow2.match(/<div class="row" data-guide-only="true" data-id="270167">[\s\S]*?<\/span>/);
-    assert.ok(seastone, "Wavecaller's Seastone renders as a guide-only trinket row");
-    assert.match(seastone[0], /Guide-consensus rank[^>]*>1</,
-      "the 3/3 world trinket shares rank 1, never unranked below ranked rows");
+    // Trinkets are the sheet's last slot; the weapon setup cards after it rank their own rows.
+    const start = bisNow2.indexOf("<h3>Trinkets<");
+    const next = bisNow2.indexOf("<h3", start + 1);
+    const trinkets = bisNow2.slice(start, next === -1 ? undefined : next);
+    const ranked = [...trinkets.matchAll(
+      /<div class="row"( data-guide-only="true")? data-id="(\d+)"><span class="rank"[^>]*>(\d+)<\/span>([\s\S]*?)<\/div>/g)]
+      .map(([, guideOnly, id, rank, body]) => ({ id, rank: Number(rank), guideOnly: !!guideOnly,
+        count: guideOnly ? Number(body.match(/data-consensus="(\d+)"/)[1]) : app.consensusOf(id) }));
+    const earned = (count) => new Set(ranked.filter((r) => r.count >= count).map((r) => r.count)).size;
+    assert.ok(ranked.some((r) => r.guideOnly), "a guide-only trinket renders as a ranked row");
+    for (const r of ranked)
+      assert.equal(r.rank, earned(r.count), `trinket ${r.id} (${r.count}/3) carries the rank its consensus earns`);
   }
   // (3) The unknown/stale-id lanes never surface: no named candidate in the payload may
   //     carry a kind outside crafted/world (Method's 63 sourceTextUnmatched rows hold

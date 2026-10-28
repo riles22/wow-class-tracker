@@ -4,6 +4,8 @@
 // carrying polluting data-wowhead refs, augment-rune section present) and Holy Paladin
 // (<ul><li>-wrapped cells, a two-enchant Rings cell with a parenthetical scope, a
 // hero-talent SPELL oil exception, a mana potion, and NO augment-rune section).
+// The two "-2026-10" fixtures, saved 2026-10-14, are the same pages after the item markup
+// moved to data-iv-tooltip on a "wow-tooltip spell_icon_span" element.
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -91,4 +93,44 @@ test("Holy Paladin: li-wrapped cells, two-candidate Rings, spell oil exception, 
     { spellId: "1278895", name: "Hearty Silvermoon Parade" },
     { id: "242747", name: "Hearty Royal Roast" },
   ]);
+});
+
+test("2026-10 markup, Frost Mage: the same lanes parse, and the FAQ is still stripped", async () => {
+  const enh = parseIcyVeinsEnhancements(await fixture("iv-frost-mage-enh-2026-10.html"));
+  validateEnhancements(enh, "Frost Mage");
+  assert.deepEqual(enh.enchants.map((e) => e.slot),
+    ["Finger", "Main Hand", "Chest", "Head", "Shoulder", "Feet", "Legs"]);
+  const finger = enh.enchants.find((e) => e.slot === "Finger");
+  assert.deepEqual(finger.candidates, [{ id: "243957", name: "Eyes of the Eagle" }]);
+  assert.match(finger.note, /whatever your sim tells you/);
+  assert.deepEqual(enh.consumables.weaponBuff, [{ id: "243733", name: "Thalassian Phoenix Oil" }]);
+  assert.deepEqual(enh.consumables.augmentRune, [{ id: "259085", name: "Void-Touched Augment Rune" }]);
+  // gem names now sit in a plain <span>, with no quality class
+  assert.deepEqual(enh.gems.unique, [{ id: "240983", name: "Indecipherable Eversong Diamond" }]);
+  assert.deepEqual(enh.gems.filler, [{ id: "240908", name: "Flawless Masterful Garnet" }]);
+  assert.deepEqual(enh.consumables.food.map((c) => c.id), ["255846", "255845", "242275", "255847"]);
+  // the FAQ dropdown carries the same three refs as in August; none may leak
+  assert.ok(!allCands(enh).some((c) => c.spellId === "1247025" || c.spellId === "1246811"));
+  assert.equal(allCands(enh).filter((c) => c.id === "241288").length, 1);
+});
+
+test("2026-10 markup, Holy Paladin: stat-string alt name, two Rings, spell refs", async () => {
+  const enh = parseIcyVeinsEnhancements(await fixture("iv-holy-paladin-enh-2026-10.html"));
+  validateEnhancements(enh, "Holy Paladin");
+  assert.deepEqual(enh.enchants.map((e) => e.slot),
+    ["Main Hand", "Head", "Shoulder", "Chest", "Legs", "Feet", "Finger"]);
+  const finger = enh.enchants.find((e) => e.slot === "Finger");
+  assert.deepEqual(finger.candidates, [
+    { id: "243959", name: "Enchant Ring - Zul'jin's Mastery" },
+    { id: "244015", name: "Silvermoon's Alacrity" },
+  ]);
+  assert.match(finger.note, /\(Damage\)/);
+  assert.ok(enh.consumables.weaponBuff.some(
+    (c) => c.spellId === "433568" && c.name === "Rite of Sanctification"));
+  assert.deepEqual(enh.consumables.manaPotion, [{ id: "241301", name: "Lightfused Mana Potion" }]);
+  assert.ok(!("augmentRune" in enh.consumables));
+  assert.deepEqual(enh.gems.unique.map((c) => c.id), ["240968", "240983"]);
+  assert.deepEqual(enh.gems.filler.map((c) => c.id), ["240900", "240908", "240892", "240917"]);
+  assert.deepEqual(enh.consumables.flask.map((c) => c.id), ["241322", "241325", "241326"]);
+  assert.deepEqual(enh.consumables.food[0], { spellId: "1278895", name: "Hearty Silvermoon Parade" });
 });
