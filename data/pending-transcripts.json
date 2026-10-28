@@ -1,6 +1,28 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [],
+  "videos": [
+    {
+      "id": "hEkrgB_5EQU",
+      "creator": "Dalaran Gaming",
+      "title": "BIG SUBTLETY ROGUE NERF THIS WEEK! BUT IS IT DEAD..? - World of Warcraft (Livestream)",
+      "published": "2026-10-27",
+      "queuedAt": "2026-10-28"
+    },
+    {
+      "id": "yNuLD4HPm7I",
+      "creator": "Musguete",
+      "title": "Why Everyone is Wrong About the Sub Rogue Nerfs! STILL KING!",
+      "published": "2026-10-28",
+      "queuedAt": "2026-10-28"
+    },
+    {
+      "id": "sv7VFOGWx70",
+      "creator": "Preheat",
+      "title": "LIVE: Testing Fire Buffs - Mythic Raid",
+      "published": "2026-10-28",
+      "queuedAt": "2026-10-28"
+    }
+  ],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

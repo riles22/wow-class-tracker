@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (nightly, ~16:51 UTC) — SimC new run 24 merged; Bloodmallet held mid re-sim; Mythicstats invalid
+
+- SimC MID2_Raid.txt new run HEAD 6a4500db0f (hotfix 2026-10-28, build 12.1.5.70575), 24/24 merged at asOf 2026-10-28, all moved, max 7.39%. Bloodmallet mid re-sim: 22 charts MID2 dated 10-28, but Fire Mage and Subtlety Rogue (stored, both retuned Oct 27) error 6/6 -> whole pool HELD (no pre/post-tuning mix), stored 24 at 10-21. Murlok 40 from collector (source date 10-28). Mythicstats collector invalid (period 1087, population unverified), stored period 1086 unchanged. WoWMeta 2026-09-15, 40/40 identical. WCL collector: raid success 348, M+ partial 319 (Resto Shaman cut 61877 future timestamp). Archon walled.
+
 ## 2026-10-27 (interactive local, read 2026-10-28 ~02:25 UTC = 10-27 19:25 PT) — Archon browser lane: seven number series and survivability refreshed; three value-move groups owner-acked
 
 - Transport and era checks as in refresh-tiers' entry for this run: the owner's Brave, nine ordinary page loads, `lastUpdated` 2026-10-27T12:00Z on all nine, so every row's `asOf` is 2026-10-27. The checker wrote 200 number rows and 40 survivability tiers. Fire Mage had no stored row in Mythic DPS or raid Popularity and now has one.

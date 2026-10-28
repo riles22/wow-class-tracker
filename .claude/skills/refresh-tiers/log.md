@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (nightly, ~16:51 UTC) — Method 80/80, 0 moves; IV/Wowhead/Archon walled
+
+- Method (direct GET 200): 40/40 per bracket, Devourer A both, Season 2 bodies; M+ Last Updated 14 Oct, raid 10 Aug; 0 moves; snapshots -> 10-28. Icy Veins 403 x6, Wowhead 202 WAF x6, Archon 403 Cloudflare: nothing parsed; stored letters from today's owner local run (IV/Wowhead 10-28) and the 10-27 browser lane retained.
+
 ## 2026-10-28 (local scheduled, ~14:10 UTC, before today's nightly) — Icy Veins and Wowhead verified: 0 of 160 letters changed; Archon unchanged cut, not re-read
 
 - Icy Veins: all six pages HTTP 200 via home curl (browser UA + Accept + Accept-Language), one `<table class="tier-list">` each after stripping `<style>`. Raid 27/7/6, M+ 27/7/6, every letter non-null, 0 unmatched, 0 role mismatches, 0 duplicates, Devourer on both DPS pages; titles name 12.1.5, bodies Season 2, so `seasonVerified` stays "s2". dateModified unchanged (raid 10-25 / 10-11 / 08-29, M+ 10-25 / 10-12 / 10-12). 0 of 80 letters moved; snapshots -> 2026-10-28.

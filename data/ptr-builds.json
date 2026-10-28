@@ -3,6 +3,23 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-10-27",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "Live 12.1.5 hotfixes for October 27 — the October 27 class tuning pass applied with the weekly maintenance (already logged as the 2026-10-23 “Class Tuning Incoming - October 27” entry, topic 2390748, and NOT restated here so it is not counted twice in the outlook tally), plus one new class bug fix (Mistweaver Monk: Mistline, no tuning value) and Items / Labyrinth fixes. Read from the canonical source: Linxy's running 12.1.5 hotfix compilation (us.forums topic 2382684, title now “World of Warcraft: Midnight Hotfixes - October 27”, post 1 at version 16, last edited 2026-10-28T00:43:05Z), via the deterministic official-notes receipt with its heading nesting INTACT, and cross-checked line for line against the Wowhead mirror news=383617 (RSS pubDate 2026-10-27T20:08:50). The Mistline line sits under an explicit SPEC heading (Monk › Mistweaver). The Classes lines for Feral and Restoration Druid, Marksmanship Hunter, Fire Mage, Subtlety Rogue and Affliction/Destruction Warlock match the 2026-10-23 entry word for word. The Player versus Player block (Unholy DK, Devourer DH, Preservation Evoker, Marksmanship Hunter, Fire and Frost Mage, Mistweaver Monk, Holy Paladin, Holy Priest, Assassination Rogue, Restoration Shaman) is OUT OF SCOPE for this PvE tracker and is not distilled. NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “Venomous Abyss” appear zero times in the October 27 block), so no spec.tierSet date advances. Citation: https://us.forums.blizzard.com/en/wow/t/world-of-warcraft-midnight-hotfixes-october-27/2382684/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383617/world-of-warcraft-midnight-hotfixes-october-27",
+      "icyveinsUrl": null,
+      "specsAffected": [
+        "Mistweaver Monk"
+      ],
+      "highlights": [
+        "Mistweaver Monk — Resolved an issue that caused the Mistline talent to sometimes not properly heal the lowest health target.",
+        "Non-class: Items — fixed tabards hiding the Rexxar armor set. Labyrinth — fixed some scenarios not granting Great Vault credit."
+      ]
+    },
+    {
       "date": "2026-10-26",
       "kind": "hotfix",
       "realm": "live",

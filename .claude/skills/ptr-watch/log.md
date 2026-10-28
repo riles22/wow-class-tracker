@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-28 (nightly, ~16:51 UTC) — Oct 27 hotfixes logged; 16 ledger sections resolved; 1 feed entry
+
+- Ledger: live-hotfixes 2336376 post 1 still v56. live-hotfixes-1215 2382684 post 1 v14 -> v16 (title "Midnight Hotfixes - October 27", edited 2026-10-28T00:43Z): 16 new Oct 27 sections. The five Classes sections for Druid, Hunter, Mage, Rogue, Warlock restate the "Class Tuning Incoming - October 27" pass word for word (still post 1 v1) -> irrelevant, covered by the 2026-10-23 entry. Monk › Mistweaver Mistline fix appears only in the compilation -> applied to a NEW 2026-10-27 hotfix entry (realm live, wowheadUrl news=383617, plus Items/Labyrinth Non-class line). Ten PvP sections -> irrelevant (out of scope). check-official-notes passes.
+- Wowhead RSS (top news=383630), news index and blue tracker swept: no other class tuning, no new hotfix compilation topic. 12.1.7 PTR items not logged (PHASES.ptr null). No 12.2 PTR. Writeup gap: Demonology Warlock only (deliberate null).
+
 ## 2026-10-27 (nightly re-run, ~20:33 UTC) — no new class tuning; ledger checkedAt only; 0 feed entries
 
 - Ledger: live-hotfixes 2336376 post 1 still v56. live-hotfixes-1215 2382684: collector got HTTP 503 (prior ledger retained, written as received); my own retry ~20:40 read post 1 v14 ("Midnight Hotfixes - October 26", updated 2026-10-27T01:01Z), unchanged. 0 unresolved; check-official-notes passes.
