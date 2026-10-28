@@ -57,6 +57,12 @@ test("weekly guide publication isolates failed sources and keeps explicit valida
   assert.ok(text.indexOf("git push origin HEAD:master") < text.indexOf("gh workflow run deploy.yml"));
   assert.match(text,/git add -- gearing\/data\/guides\/icyveins\.json gearing\/data\/guides\/wowhead\.json gearing\/data\/guides\/method\.json gearing\/data\/specs\.json gearing\/wow-s2-gearing\.html dist\//);
   assert.match(text,/Surface incomplete source refreshes\s+if: always\(\)/);
+  // surface-guide-refresh.mjs reads each outcome from the source id in capitals; a renamed
+  // variable would reach it as a missing outcome and fail every run.
+  const surface=text.slice(text.indexOf("- name: Surface incomplete source refreshes"));
+  for(const source of ["icyveins","wowhead","method"])
+    assert.match(surface,new RegExp(`${source.toUpperCase()}: \\$\\{\\{ steps\\.${source}\\.outcome \\}\\}`));
+  assert.match(surface,/run: node src\/surface-guide-refresh\.mjs$/m);
   assert.doesNotMatch(text,/git add \.|git add -A|git rebase|git push[^\n]*--force/);
 });
 

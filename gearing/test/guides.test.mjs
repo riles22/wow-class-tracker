@@ -375,20 +375,25 @@ test("enhancements data invariants: no ability/trinket pollution, no fragments, 
 // Kith'ix, the Venomous Abyss' ninth boss, opened with 12.1.5, and the raid catalog does not
 // have it yet: harvest-raid.mjs reads Wowhead's boss guides, which served an AWS WAF
 // challenge on 2026-10-14 (12.1.5 launch runbook, C4). Every guide row citing it is
-// `unknown` until then, 147 Icy Veins rows on 2026-10-14. Those rows are real guide content
-// and the unknown lane is never rendered, so the cap leaves them out while the catalog lacks
-// the boss. Once C4 adds it, a re-harvest resolves them to `raid`, and any that remain
-// unknown fail this test, so the C4 change has to carry the re-harvest.
+// `unknown` until then: 147 Icy Veins rows on 2026-10-14 and again on 2026-10-28, and 143
+// Method rows on 2026-10-28, eight of which spell the boss "Kythix". Those rows are real
+// guide content and the unknown lane is never rendered, so the cap leaves them out while the
+// catalog lacks the boss. Once C4 adds it, a re-harvest resolves the Kith'ix rows to `raid`,
+// and any that remain unknown fail this test, so the C4 change has to carry the re-harvest.
+// The resolver invents no aliases, so a "Kythix" row can resolve only through its item id;
+// after C4 any that stay unknown count toward the cap like other unmatched text.
 const BOSS_PENDING_CATALOG = "Kith'ix";
+const PENDING_SPELLINGS = [BOSS_PENDING_CATALOG, "Kythix"];
 
 test("unknown-kind rows stay capped — recipe drift trips loudly, never accumulates", async () => {
-  const pendingKey = new RegExp(`\\b${nameKey(BOSS_PENDING_CATALOG)}\\b`);
+  const bossKey = new RegExp(`\\b${nameKey(BOSS_PENDING_CATALOG)}\\b`);
+  const pendingKey = new RegExp(`\\b(?:${PENDING_SPELLINGS.map(nameKey).join("|")})\\b`);
   const catalogHasBoss = (await json("data/raid-items.json")).bosses
-    .some((b) => pendingKey.test(nameKey(b.name)));
+    .some((b) => bossKey.test(nameKey(b.name)));
   for (const id of GUIDE_SOURCES) {
     const g = await json(`data/guides/${id}.json`);
     const unknown = Object.values(g.specs).flatMap((s) => s.bis.filter((r) => r.sourceKind === "unknown"));
-    const citing = unknown.filter((r) => pendingKey.test(nameKey(r.sourceText || "")));
+    const citing = unknown.filter((r) => (catalogHasBoss ? bossKey : pendingKey).test(nameKey(r.sourceText || "")));
     if (catalogHasBoss)
       assert.equal(citing.length, 0, `${id}: ${citing.length} rows citing ${BOSS_PENDING_CATALOG} are still `
         + "unknown although the raid catalog has the boss; re-harvest this guide");

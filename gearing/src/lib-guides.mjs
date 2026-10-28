@@ -284,6 +284,11 @@ export const BROWSER_HEADERS = {
   "Accept-Language": "en-US,en;q=0.9",
 };
 
+/** HTTP 202 is a challenge, never the page: Wowhead's AWS WAF answers a walled request with
+ *  202 and a 2,020-byte script (GitHub runners, every night since 2026-10-13). Both transports
+ *  treat it as a refusal so the harvest runner counts it with 403s and timeouts. */
+const CHALLENGE_STATUS = 202;
+
 /** Shared fetch with retries, a hard timeout, + polite spacing (residential transports). */
 export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, timeoutMs = 30000 } = {}) {
   let failure;
@@ -291,7 +296,7 @@ export async function fetchText(url, { tries = 3, headers = {}, delayMs = 1500, 
     try {
       const r = await fetch(url, { signal: AbortSignal.timeout(timeoutMs),
         headers: { "user-agent": BROWSER_UA, ...headers } });
-      if (r.ok) {
+      if (r.ok && r.status !== CHALLENGE_STATUS) {
         const text = await r.text();
         await new Promise((resolve) => setTimeout(resolve, delayMs));
         return text;
@@ -325,7 +330,7 @@ export async function fetchTextCurl(url, { tries = 3, delayMs = 1500, timeoutMs 
   for (let attempt = 1; attempt <= tries; attempt++) {
     const { error, status, text } = await run();
     if (!error && status === 404) return null;
-    if (!error && status >= 200 && status < 300 && text && text.length > 1000) {
+    if (!error && status >= 200 && status < 300 && status !== CHALLENGE_STATUS && text && text.length > 1000) {
       await new Promise((resolve) => setTimeout(resolve, delayMs));
       return text;
     }

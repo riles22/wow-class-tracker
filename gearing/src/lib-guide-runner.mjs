@@ -8,6 +8,10 @@ import { fileURLToPath } from "node:url";
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 import { validateEnhancements } from "./lib-guides.mjs";
 
+/** A refusal or an unanswered request (a 403 or 429, a WAF challenge, a 5xx, a timeout), as
+ *  opposed to a page that answered and did not parse. */
+export const TRANSPORT_FAILURE = /HTTP (?:202|403|429|5\d\d)|timeout|timed out|fetch failed|verification|challenge/i;
+
 const hash = (bytes) => createHash("sha256").update(bytes || "").digest("hex");
 const readOptional = async (path) => {
   try { return await readFile(path, "utf8"); }
@@ -72,6 +76,7 @@ export async function runGuideHarvest({ sourceId, sourceName, dated, harvestSpec
   if (stage.sourceId !== sourceId || stage.priorHash !== priorHash
     || JSON.stringify(stage.targetKeys) !== JSON.stringify(targetKeys))
     throw new Error(`staging differs from the source or requested specs; remove ${stagePath} to start a new refresh`);
+  delete stage.blocked; // a resumed refresh earns its own verdict
   const raid = JSON.parse(await readFile(join(root, "data", "raid-items.json"), "utf8"));
   const dungeons = JSON.parse(await readFile(join(root, "data", "dungeon-items.json"), "utf8"));
   let consecutiveTransportFailures = 0;
@@ -87,12 +92,17 @@ export async function runGuideHarvest({ sourceId, sourceName, dated, harvestSpec
       console.log(`  + ${key}: ${record === null ? "verified absence" : `${record.priorities.length} priorities · ${record.bis.length} BiS rows`}`);
     } catch (error) {
       stage.failures[key] = { attemptedAt: today, reason: String(error.message || error).slice(0, 300) };
-      consecutiveTransportFailures = /HTTP (?:403|429|5\d\d)|timeout|timed out|fetch failed|verification|challenge/i.test(stage.failures[key].reason)
+      consecutiveTransportFailures = TRANSPORT_FAILURE.test(stage.failures[key].reason)
         ? consecutiveTransportFailures + 1 : 0;
       console.error(`  ! ${key}: ${stage.failures[key].reason}`);
     }
+    // Three refusals in a row mean the site is walling this connection, which no retry
+    // within the run will change. The staging file says so, and the weekly workflow warns
+    // on a blocked source instead of failing (surface-guide-refresh.mjs). A pass that ends
+    // with scattered failures is not blocked: access worked, so a re-run should publish.
+    if (consecutiveTransportFailures >= 3) stage.blocked = { at: today, reason: stage.failures[key].reason };
     await writeAtomic(stagePath, stage);
-    if (consecutiveTransportFailures >= 3)
+    if (stage.blocked)
       throw new Error(`${sourceName}: stopped after three consecutive transport failures; published source unchanged; retry when access recovers`);
   }
   const failures = targetKeys.filter(key => !stage.verified[key]);

@@ -33,15 +33,22 @@ import { canonicalRosters, fetchText, fetchTextCurl, canonicalSlot, normApostrop
 const kebab = (s) => s.toLowerCase().replace(/['’]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const roleSlug = (r) => (/tank/i.test(r) ? "tank" : /heal/i.test(r) ? "healer" : "dps");
 
-async function fetchWowhead(url) {
+export async function fetchWowhead(url, { curl = fetchTextCurl, node = fetchText } = {}) {
   // curl FIRST: Wowhead 403s Node fetch by TLS fingerprint but serves curl (2026-08-18).
-  let direct;
-  try { direct = await fetchTextCurl(url); }
-  catch { /* the documented HTML proxy is the fallback transport */ }
+  let direct, refused;
+  try { direct = await curl(url); }
+  catch (error) { refused = error.message; } // the documented HTML proxy is the fallback transport
   if (direct === null) return null; // origin HTTP 404, verified absence
-  if (direct && direct.includes("WH.markup.printHtml")) return direct;
-  const proxied = await fetchText(`https://r.jina.ai/${url}`, { headers: { "x-return-format": "html" } });
-  if (proxied && proxied.includes("WH.markup.printHtml")) return proxied;
+  if (direct?.includes("WH.markup.printHtml")) return direct;
+  let proxied, proxyFailure;
+  try { proxied = await node(`https://r.jina.ai/${url}`, { headers: { "x-return-format": "html" } }); }
+  catch (error) { proxyFailure = error.message; }
+  if (proxied?.includes("WH.markup.printHtml")) return proxied;
+  // A refused direct request keeps the failure a transport failure, so three in a row stop the
+  // harvest as blocked. Until this kept the refusal, the runners' AWS WAF challenge surfaced as
+  // "markup missing" and failed all 40 specs (2026-10-27). A page that answered without the
+  // markup is recipe drift and stays a failure of its own.
+  if (refused) throw new Error(`${refused}; the r.jina.ai fallback ${proxyFailure ? `failed too: ${proxyFailure}` : "returned no guide markup"}`);
   throw new Error(`Wowhead guide unavailable or markup missing: ${url}`);
 }
 

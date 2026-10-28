@@ -79,8 +79,11 @@ failures. A changed source or requested scope refuses that staging; remove that 
 staging file to begin a new refresh. A verified HTTP 404 is an absence, while a 403,
 timeout, or unusable response is a failure. Only a completed, validated attempt
 replaces the source, through an atomic rename.
-Three consecutive block/rate-limit/server/transport failures stop that source early;
-the command retains successful staging and leaves its published data unchanged.
+Three consecutive block/rate-limit/server/transport failures stop that source early
+and record `blocked` in its staging file; the command retains successful staging and
+leaves its published data unchanged. An HTTP 202 counts as a block: it is Wowhead's
+AWS WAF challenge, never the page. A pass that reaches its last spec is never
+`blocked`, however it failed, because access worked and a rerun should publish.
 Icy Veins refuses Node's fetch (HTTP 403 from CI and from a residential connection,
 2026-10-14) and refuses curl's own User-Agent too. From home,
 `node src/harvest-guide-icyveins.mjs --force --curl` fetches through curl with the
@@ -93,9 +96,13 @@ The weekly publisher runs `node src/check-gearing-guides.mjs` from the repositor
 before tests/build. It compares each source against trusted HEAD, requires complete
 verification receipts, and refuses more than 25% loss of specs, priorities, BiS rows,
 enhancement candidates, or tiered trinkets.
-Successful providers may publish independently; failed providers keep their previous
-files, and the workflow still finishes red to surface the failure. Staging artifacts
-are diagnostic only; a new scheduled run performs a new verification attempt.
+Successful providers may publish independently, and failed providers keep their
+previous files. The workflow's last step (`node src/surface-guide-refresh.mjs`, from the
+repository root) warns for a provider whose staging records `blocked`, since the site
+walled the runner and the tracker's freshness heartbeat still ages the guide it kept,
+and finishes red for any other failure, or when it cannot read an outcome or staging
+file. Staging artifacts are diagnostic only; a new scheduled run performs a new
+verification attempt.
 
 Each fetched record or verified absence carries `verifiedAt`; `published` remains
 the author's publication date. The source's `harvestedAt` is the **oldest** verification

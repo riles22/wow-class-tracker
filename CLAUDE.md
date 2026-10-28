@@ -1744,8 +1744,14 @@ file. `src/check-gearing-guides.mjs` checks source identity, per-spec verificati
 dates and unexpected coverage losses before local capability sync, gearing build,
 `npm test` and the root build. Only the three guide files, capability mirror and
 generated artifacts are staged. A push race fails rather than rebasing; a successful
-push dispatches deployment and browser checks. The final step still fails the run if
-any provider failed, even when successfully verified providers were published. The
+push dispatches deployment and browser checks. The final step,
+`src/surface-guide-refresh.mjs`, fails the run for any failed provider, even when verified
+providers were published, with one exception since 2026-10-28 (owner decision): a harvest
+that stopped after three consecutive transport failures (an HTTP 403, Wowhead's AWS WAF
+challenge, which answers HTTP 202, or timeouts) records `blocked` in its staging file and
+only warns, because the site walled the runner and that provider's published guide stays
+as it was. Icy Veins and Wowhead have walled the runners every week since 2026-09-29. An
+outcome or staging file the step cannot read fails closed. The
 freshness heartbeat continues to age-check current guide evidence; the historical
 12.0.7 stat fallback is checked for preserved contents and provenance rather than
 being presented as a periodically refreshed live feed.

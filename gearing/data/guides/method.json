@@ -3,11 +3,11 @@
   "source": "Method",
   "sourceId": "method",
   "dated": true,
-  "harvestedAt": "2026-10-06",
+  "harvestedAt": "2026-10-28",
   "specs": {
     "Blood Death Knight": {
       "guideUrl": "https://www.method.gg/guides/blood-death-knight/gearing",
-      "published": "2026-09-04",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -401,11 +401,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Frost Death Knight": {
       "guideUrl": "https://www.method.gg/guides/frost-death-knight/gearing",
-      "published": "2026-09-27",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "Single Target",
@@ -440,11 +440,12 @@
           "slot": "Head",
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
-          "sourceText": "Vexhul",
-          "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "sourceText": "Kythix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": "Vexhul"
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -519,9 +520,9 @@
           "slot": "Waist",
           "itemId": "268259",
           "itemName": "Girdle of Toxic Regret",
-          "sourceText": "Ula'tek",
+          "sourceText": "Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -550,13 +551,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band of the Swarmcaller",
+          "sourceText": "Kythix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -607,11 +609,12 @@
           "slot": "Head",
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
-          "sourceText": "Vexhul",
-          "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "sourceText": "Kythix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": "Vexhul"
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -685,9 +688,9 @@
           "slot": "Waist",
           "itemId": "268259",
           "itemName": "Girdle of Toxic Regret",
-          "sourceText": "Ula'tek",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -727,13 +730,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band of the Swarmcaller",
+          "sourceText": "Kythix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -853,7 +857,7 @@
           "list": "mplus",
           "slot": "Waist",
           "itemId": "159418",
-          "itemName": "Girdle of Pestilent Putification",
+          "itemName": "Girdle of Pestilent Putrification",
           "sourceText": "Kings Rest",
           "sourceKind": "dungeon",
           "boss": null,
@@ -876,10 +880,10 @@
           "slot": "Feet",
           "itemId": "159412",
           "itemName": "Auric Puddle Stompers",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -1061,11 +1065,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Unholy Death Knight": {
       "guideUrl": "https://www.method.gg/guides/unholy-death-knight/gearing",
-      "published": "2026-09-24",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "Single Target",
@@ -1100,12 +1104,12 @@
           "slot": "Head",
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
-          "sourceText": "Murder Row (Catalyst)",
-          "sourceKind": "dungeon",
+          "sourceText": "Kythix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -1180,9 +1184,9 @@
           "slot": "Waist",
           "itemId": "268259",
           "itemName": "Girdle of Toxic Regret",
-          "sourceText": "Ula'tek",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -1211,23 +1215,24 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band of the Swarmcaller",
+          "sourceText": "Kythix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "273792",
+          "itemName": "Band of the Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -1268,11 +1273,12 @@
           "slot": "Head",
           "itemId": "271474",
           "itemName": "Baleful Grave-Knight's Casque",
-          "sourceText": "Vexhul",
-          "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "sourceText": "Kythix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": "Vexhul"
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -1346,9 +1352,9 @@
           "slot": "Waist",
           "itemId": "268259",
           "itemName": "Girdle of Toxic Regret",
-          "sourceText": "Ula'tek",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -1388,13 +1394,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band of the Swarmcaller",
+          "sourceText": "Kythix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -1514,7 +1521,7 @@
           "list": "mplus",
           "slot": "Waist",
           "itemId": "159418",
-          "itemName": "Girdle of Pestilent Putification",
+          "itemName": "Girdle of Pestilent Putrification",
           "sourceText": "Kings Rest",
           "sourceKind": "dungeon",
           "boss": null,
@@ -1537,10 +1544,10 @@
           "slot": "Feet",
           "itemId": "159412",
           "itemName": "Auric Puddle Stompers",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -1548,12 +1555,11 @@
           "slot": "Finger",
           "itemId": "273792",
           "itemName": "Band of the Amani Warlord",
-          "sourceText": "Atlar of Fangs",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Altar of Fangs",
-          "droppedBy": "Zul'jan",
-          "sourceTextUnmatched": true
+          "droppedBy": null
         },
         {
           "list": "mplus",
@@ -1709,11 +1715,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Havoc Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/havoc-demon-hunter/gearing",
-      "published": "2026-09-17",
+      "published": "2026-10-16",
       "priorities": [],
       "bis": [
         {
@@ -1765,14 +1771,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "239048",
-          "itemName": "Vest Of Reverent Adoration",
-          "sourceText": "Kings' Rest (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -1945,14 +1951,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "268235",
-          "itemName": "Vestment Of The Awakening",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -2384,11 +2390,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Devourer Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/devourer-demon-hunter/gearing",
-      "published": "2026-09-18",
+      "published": "2026-10-18",
       "priorities": [
         {
           "label": "General",
@@ -2454,14 +2460,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "239048",
-          "itemName": "Vest Of Reverent Adoration",
-          "sourceText": "Kings' Rest (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -2522,17 +2528,6 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
           "itemId": "158366",
           "itemName": "Charged Sandstone Band",
           "sourceText": "Temple of Sethraliss",
@@ -2540,6 +2535,18 @@
           "boss": null,
           "dungeon": "Temple of Sethraliss",
           "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -2555,13 +2562,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "250215",
-          "itemName": "Freightrunner's Flask",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -2634,14 +2642,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "268235",
-          "itemName": "Vestment Of The Awakening",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -2713,24 +2721,26 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -2901,23 +2911,23 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "273796",
-          "itemName": "Vile Vial Of Volatile Venom",
-          "sourceText": "Altar of Fangs",
+          "itemId": "250215",
+          "itemName": "Freightrunner's Flask",
+          "sourceText": "Murder Row",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Altar of Fangs",
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250214",
-          "itemName": "Lightspire Core",
-          "sourceText": "The Blinding Vale",
+          "itemId": "250224",
+          "itemName": "Mindpiercer's Sigil",
+          "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "The Blinding Vale",
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -3048,16 +3058,6 @@
               "name": "Flask Of The Magisters"
             }
           ],
-          "combatPotion": [
-            {
-              "id": "241288",
-              "name": "Potion Of Recklessness"
-            },
-            {
-              "id": "241308",
-              "name": "Light's Potential"
-            }
-          ],
           "healthPotion": [
             {
               "id": "271884",
@@ -3088,11 +3088,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Vengeance Demon Hunter": {
       "guideUrl": "https://www.method.gg/guides/vengeance-demon-hunter/gearing",
-      "published": "2026-08-27",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -3158,13 +3158,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "271540",
-          "itemName": "Abyssal Doomhound's Coreguard",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -3237,24 +3238,26 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270175",
-          "itemName": "Voracious Heart Of Ula'tek",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -3337,13 +3340,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "271540",
-          "itemName": "Abyssal Doomhound's Coreguard",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -3414,24 +3418,26 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270175",
-          "itemName": "Voracious Heart Of Ula'tek",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -3762,11 +3768,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Balance Druid": {
       "guideUrl": "https://www.method.gg/guides/balance-druid/gearing",
-      "published": "2026-08-15",
+      "published": "2026-10-16",
       "priorities": [
         {
           "label": "General",
@@ -3832,14 +3838,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "251159",
-          "itemName": "War Trial Vestments",
-          "sourceText": "Den of Nalorakk (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk",
-          "viaCatalyst": true
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -3855,12 +3861,12 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "159337",
-          "itemName": "Grips Of Electrified Defense",
-          "sourceText": "Temple of Sethraliss (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
+          "itemId": "268234",
+          "itemName": "Ruthless Slaughtergrips",
+          "sourceText": "Sszorak (Catalyst)",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
+          "dungeon": null,
           "droppedBy": null,
           "viaCatalyst": true
         },
@@ -3912,13 +3918,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -3934,13 +3941,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -4012,14 +4020,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "268235",
-          "itemName": "Vestment Of The Awakening",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix(Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -4092,13 +4100,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -4114,8 +4123,8 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
           "sourceText": "The Lost Explorers",
           "sourceKind": "raid",
           "boss": "The Lost Explorers",
@@ -4412,11 +4421,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Feral Druid": {
       "guideUrl": "https://www.method.gg/guides/feral-druid/gearing",
-      "published": "2026-10-01",
+      "published": "2026-10-28",
       "priorities": [],
       "bis": [
         {
@@ -4455,6 +4464,18 @@
         },
         {
           "list": "overall",
+          "slot": "Chest",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
           "slot": "Wrist",
           "itemId": "244576",
           "itemName": "Silvermoon Agent's Deflectors",
@@ -4489,24 +4510,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -4524,7 +4535,7 @@
           "slot": "Trinket",
           "itemId": "270173",
           "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "The Coiled Altar",
+          "sourceText": "The Coiled Altar Kith'ix",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
           "dungeon": null,
@@ -4693,11 +4704,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Guardian Druid": {
       "guideUrl": "https://www.method.gg/guides/guardian-druid/gearing",
-      "published": "2026-09-03",
+      "published": "2026-10-14",
       "priorities": [],
       "bis": [
         {
@@ -4743,128 +4754,6 @@
           "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Chest",
-          "itemId": "271531",
-          "itemName": "Enigmatic Dreamwatcher's Lunar Raiment",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Wrist",
-          "itemId": "251135",
-          "itemName": "Fury-Fletched Armlets",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Hands",
-          "itemId": "251124",
-          "itemName": "Gauntlets Of Fevered Defense",
-          "sourceText": "Murder Row (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null,
-          "viaCatalyst": true
-        },
-        {
-          "list": "overall",
-          "slot": "Waist",
-          "itemId": "268256",
-          "itemName": "Sash Of The Forlorn Vessel",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Legs",
-          "itemId": "268225",
-          "itemName": "Coiled Hex Legguards",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Feet",
-          "itemId": "268247",
-          "itemName": "Breakwater Boots",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "159459",
-          "itemName": "Ritual Binder's Ring",
-          "sourceText": "Kings' Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
-          "boss": null,
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270175",
-          "itemName": "Voracious Heart Of Ula'tek",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270165",
-          "itemName": "Keeper's Seething Core",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Main Hand",
-          "itemId": "268215",
-          "itemName": "Abyssal Broodfiend's Bardiche",
-          "sourceText": "Ula'tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
@@ -4916,13 +4805,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "271531",
-          "itemName": "Enigmatic Dreamwatcher's Lunar Raiment",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -4982,13 +4872,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -5332,11 +5223,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Restoration Druid": {
       "guideUrl": "https://www.method.gg/guides/restoration-druid/gearing",
-      "published": "2026-09-13",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "For Raiding",
@@ -5693,11 +5584,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Augmentation Evoker": {
       "guideUrl": "https://www.method.gg/guides/augmentation-evoker/gearing",
-      "published": "2026-08-25",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "Scalecommander",
@@ -5743,11 +5634,11 @@
         {
           "list": "overall",
           "slot": "Neck",
-          "itemId": "268265",
-          "itemName": "Aqirbane Reliquary",
-          "sourceText": "Ula'tek",
+          "itemId": "268251",
+          "itemName": "Amulet Of The Twin Fangs",
+          "sourceText": "Twin Fangs",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Twin Fangs",
           "dungeon": null,
           "droppedBy": null
         },
@@ -5800,14 +5691,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "193752",
-          "itemName": "Galerattle Gauntlets",
-          "sourceText": "Ruby Life Pools (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Ruby Life Pools",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -5846,13 +5737,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -5868,24 +5760,25 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
-          "boss": null,
+          "itemId": "270168",
+          "itemName": "Font Of Venomous Rage",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "250224",
-          "itemName": "Mindpiercer's Sigil",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -5924,11 +5817,11 @@
         {
           "list": "raid",
           "slot": "Neck",
-          "itemId": "268265",
-          "itemName": "Aqirbane Reliquary",
-          "sourceText": "Ula'tek",
+          "itemId": "268251",
+          "itemName": "Amulet Of The Twin Fangs",
+          "sourceText": "Twin Fangs",
           "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "boss": "The Twin Fangs",
           "dungeon": null,
           "droppedBy": null
         },
@@ -5980,15 +5873,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "271502",
-          "itemName": "Calamitous Echo's Ebon Greathorns",
-          "sourceText": "Entomed Sentinels (Tier Token)",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "sourceTextFuzzy": true,
-          "viaTierToken": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -6027,13 +5919,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -6049,24 +5942,25 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
-          "boss": null,
+          "itemId": "270168",
+          "itemName": "Font Of Venomous Rage",
+          "sourceText": "Ula'tek",
+          "sourceKind": "raid",
+          "boss": "Ula'tek",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270170",
-          "itemName": "Vexhul's Everflowing Gland",
-          "sourceText": "Twin Fangs",
-          "sourceKind": "raid",
-          "boss": "The Twin Fangs",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -6369,11 +6263,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Devastation Evoker": {
       "guideUrl": "https://www.method.gg/guides/devastation-evoker/gearing",
-      "published": "2026-08-25",
+      "published": "2026-10-16",
       "priorities": [
         {
           "label": "General",
@@ -6393,13 +6287,14 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "268230",
-          "itemName": "Crown Of The Eternal Fang",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
+          "itemId": "239035",
+          "itemName": "Sethraliss' Fanged Helm",
+          "sourceText": "Temple of Selthraliss(Catalyst)",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null,
+          "sourceTextFuzzy": true,
           "viaCatalyst": true
         },
         {
@@ -6461,14 +6356,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "271502",
-          "itemName": "Calamitous Echo's Ebon Greathorns",
-          "sourceText": "Entombed Sentinels (Tier Token)",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaTierToken": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -6496,33 +6391,34 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268258",
-          "itemName": "Boots Of The Reckless Wayfarer",
-          "sourceText": "The Lost Explorers",
+          "itemId": "268233",
+          "itemName": "Ferocious Scaleboots",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -6540,13 +6436,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -6641,15 +6538,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "271502",
-          "itemName": "Calamitous Echo's Ebon Greathorns",
-          "sourceText": "Entomed Sentinels (Tier Token)",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "sourceTextFuzzy": true,
-          "viaTierToken": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -6677,11 +6573,11 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268258",
-          "itemName": "Boots Of The Reckless Wayfarer",
-          "sourceText": "The Lost Explorers",
+          "itemId": "268233",
+          "itemName": "Ferocious Scaleboots",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -6699,13 +6595,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -6721,13 +6618,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -6754,13 +6652,14 @@
         {
           "list": "mplus",
           "slot": "Head",
-          "itemId": "251220",
-          "itemName": "Voidscarred Crown",
-          "sourceText": "Voidscar Arena (Catalyst)",
+          "itemId": "239035",
+          "itemName": "Sethraliss' Fanged Helm",
+          "sourceText": "Temple of Selthraliss(Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null,
+          "sourceTextFuzzy": true,
           "viaCatalyst": true
         },
         {
@@ -7038,15 +6937,15 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Preservation Evoker": {
       "guideUrl": "https://www.method.gg/guides/preservation-evoker/gearing",
-      "published": "2026-08-20",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
-          "primary": "Intellect",
+          "primary": null,
           "secondaries": [
             "Mast",
             "Crit",
@@ -7055,7 +6954,7 @@
           ],
           "leadsWithItemLevel": false,
           "softCaps": [],
-          "raw": "Raid: Intellect > Mastery > Crit > Haste = Vers"
+          "raw": "Raid Intellect > Mastery > Crit > Haste > Vers"
         },
         {
           "label": "Healing focus",
@@ -7121,12 +7020,12 @@
         {
           "list": "overall",
           "slot": "Back",
-          "itemId": "251132",
-          "itemName": "Speakeasy Shroud",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
+          "itemId": "268253",
+          "itemName": "Silken Voodoo Drape",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -7155,14 +7054,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips Of Swirling Fury",
-          "sourceText": "Nymrissa Wavecaller (Catalyst)",
-          "sourceKind": "world",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -7191,9 +7090,9 @@
           "slot": "Feet",
           "itemId": "268233",
           "itemName": "Ferocious Scaleboots",
-          "sourceText": "The Venomous Abyss",
+          "sourceText": "Sszorak / Temple of Sethraliss",
           "sourceKind": "raid",
-          "boss": null,
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -7202,21 +7101,21 @@
           "slot": "Finger",
           "itemId": "268249",
           "itemName": "Vile Alchemist's Band",
-          "sourceText": "The Venomous Abyss",
+          "sourceText": "Vashnik the Malignant",
           "sourceKind": "raid",
-          "boss": null,
+          "boss": "Vashnik the Malignant",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix / Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -7257,10 +7156,10 @@
           "slot": "Off Hand",
           "itemId": "251191",
           "itemName": "Luminescent Sprout",
-          "sourceText": "The Blinding Vale",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "The Blinding Vale",
+          "sourceText": "The Blinding Vale / Entombed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -7344,14 +7243,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips Of Swirling Fury",
-          "sourceText": "Nymrissa Wavecaller (Catalyst)",
-          "sourceKind": "world",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -7390,22 +7289,23 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Finger",
           "itemId": "268249",
           "itemName": "Vile Alchemist's Band",
-          "sourceText": "The Venomous Abyss",
+          "sourceText": "Vashnik the Malignant",
           "sourceKind": "raid",
-          "boss": null,
+          "boss": "Vashnik the Malignant",
           "dungeon": null,
           "droppedBy": null
         },
@@ -7617,8 +7517,8 @@
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250255",
-          "itemName": "Unstable Felheart Crystal",
+          "itemId": "250215",
+          "itemName": "Freightrunner's Flask",
           "sourceText": "Murder Row",
           "sourceKind": "dungeon",
           "boss": null,
@@ -7643,57 +7543,31 @@
             "slot": "Head",
             "candidates": [
               {
-                "id": "244007",
-                "name": "Enchant Helm - Empowered Rune Of Avoidance"
-              },
-              {
                 "id": "243951",
                 "name": "Enchant Helm - Empowered Hex Of Leeching"
               }
             ],
-            "note": "Leech is more valuable in raid, while Avoidance is favored in Mythic+. As a result, is the better choice for Mythic+, whereas performs better in raid."
+            "note": ":"
           },
           {
             "slot": "Shoulder",
             "candidates": [
               {
-                "id": "243991",
-                "name": "Enchant Shoulders - Amirdrassil's Grace"
-              },
-              {
                 "id": "244021",
                 "name": "Enchant Shoulders - Silvermoon's Mending"
               }
             ],
-            "note": "For the same reason, is preferred in Mythic+, while is stronger in raid."
+            "note": ":"
           },
           {
             "slot": "Chest",
             "candidates": [
               {
-                "id": "244003",
-                "name": "Enchant Chest - Mark Of The Magister"
-              },
-              {
                 "id": "243977",
                 "name": "Enchant Chest - Mark Of The Worldsoul"
               }
             ],
-            "note": "is the default choice in Midnight, as mana management has become more demanding after the removal of . If mana is not an issue, is the stronger alternative"
-          },
-          {
-            "slot": "Feet",
-            "candidates": [
-              {
-                "id": "243953",
-                "name": "Enchant Boots - Lynx's Dexterity"
-              },
-              {
-                "id": "243983",
-                "name": "Enchant Boots - Shaladrassil's Roots"
-              }
-            ],
-            "note": "is the better option for Mythic+, while performs better in raid."
+            "note": ":"
           },
           {
             "slot": "Legs",
@@ -7702,28 +7576,17 @@
                 "id": "240155",
                 "name": "Arcanoweave Spellthread"
               }
-            ],
-            "note": "is the best option, as it increases maximum mana by 4% and provides additional Intellect."
+            ]
           },
           {
-            "slot": "Finger",
+            "slot": "Feet",
             "candidates": [
               {
-                "id": "243959",
-                "name": "Enchant Ring - Zul'jin's Mastery"
+                "id": "243983",
+                "name": "Enchant Boots - Shaladrassil's Roots"
               }
             ],
-            "note": "Since Mastery is your strongest secondary stat, is the best choice."
-          },
-          {
-            "slot": "Main Hand",
-            "candidates": [
-              {
-                "id": "244029",
-                "name": "Enchant Weapon - Acuity Of The Ren'dorei"
-              }
-            ],
-            "note": "is the best option."
+            "note": ":"
           }
         ],
         "gems": {
@@ -7733,49 +7596,45 @@
               "name": "Telluric Eversong Diamond"
             },
             {
-              "id": "240967",
-              "name": "Powerful Eversong Diamond"
+              "id": "240983",
+              "name": "Indecipherable Eversong Diamond"
             }
           ],
           "filler": [
             {
-              "id": "263897",
-              "name": "Radiant Jewelbinder"
+              "id": "275707",
+              "name": "Miasmic Jewelbinder"
             },
             {
               "id": "249920",
               "name": "Eye Of Midnight"
             },
             {
-              "id": "240910",
-              "name": "Flawless Versatile Garnet"
-            },
-            {
               "id": "240900",
               "name": "Flawless Quick Amethyst"
             },
             {
-              "id": "240918",
-              "name": "Flawless Masterful Lapis"
-            },
-            {
-              "id": "240892",
-              "name": "Flawless Masterful Peridot"
+              "id": "240908",
+              "name": "Flawless Masterful Garnet"
             }
           ],
-          "note": "In Midnight both rings and the neck always come with a socket, and additional sockets cannot be added to them. You can, however, add sockets to your Helm Bracers Belt The item for this is called Radiant Jewelbinder and can be purchased from the vendor next to the Great Vault in Silvermoon. This results in six total gem slots, or seven if you use Eye Of Midnight , which has two sockets. Your neck can be fitted with a unique gem. Telluric Eversong Diamond is the default choice, as it helps you with your mana in longer encounters. If mana is not a concern, Powerful Eversong Diamond becomes the stronger alternative. To maximize the effect of these unique gems, you should equip four different gem colors. Use Flawless Versatile Garnet (Red) Flawless Quick Amethyst (Purple) Flawless Masterful Lapis (Blue) Flawless Masterful Peridot (Green). Once you have one of each colour equipped, fill any remaining sockets with Flawless Quick Amethyst for the best value."
+          "note": "In Midnight both rings and the neck always come with a socket, and additional sockets cannot be added to them. You can, however, add sockets to your Helm Bracers Belt The item for this is called Miasmic Jewelbinder and can be purchased from the vendor next to the Great Vault in Silvermoon. This results in six total gem slots, or seven if you use Eye Of Midnight , which has two sockets. Your neck can be fitted with a unique gem. Telluric Eversong Diamond is the default choice, as it helps you with your mana in longer encounters. If mana is not a concern, Indecipherable Eversong Diamond becomes the stronger alternative. For your remaining sockets, Flawless Quick Amethyst and Flawless Masterful Garnet are usually the best option. Compare your options in QE Live when optimizing your current gear. If you use Telluric Eversong Diamond , make sure to use all four different gem colors needed for its effect."
         },
         "consumables": {
           "flask": [
             {
               "id": "241322",
               "name": "Flask Of The Magisters"
+            },
+            {
+              "id": "241324",
+              "name": "Flask Of The Blood Knights"
             }
           ],
           "combatPotion": [
             {
-              "id": "241308",
-              "name": "Light's Potential"
+              "id": "241288",
+              "name": "Potion Of Recklessness"
             }
           ],
           "manaPotion": [
@@ -7814,11 +7673,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Beast Mastery Hunter": {
       "guideUrl": "https://www.method.gg/guides/beast-mastery-hunter/gearing",
-      "published": "2026-09-05",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -7920,14 +7779,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "160213",
-          "itemName": "Sepulchral Construct's Gloves",
-          "sourceText": "King's Rest (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -7977,24 +7836,26 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270168",
-          "itemName": "Font of Venomous Rage",
-          "sourceText": "Ula'Tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -8089,13 +7950,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips Of Swirling Fury",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -8145,24 +8007,26 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270168",
-          "itemName": "Font of Venomous Rage",
-          "sourceText": "Ula'Tek",
-          "sourceKind": "raid",
-          "boss": "Ula'tek",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -8459,11 +8323,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Marksmanship Hunter": {
       "guideUrl": "https://www.method.gg/guides/marksmanship-hunter/gearing",
-      "published": "2026-09-05",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -8552,13 +8416,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "193752",
-          "itemName": "Galerattle Gauntlets",
-          "sourceText": "Ruby Life Pools",
-          "sourceKind": "dungeon",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Ruby Life Pools",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -8586,34 +8451,35 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
+          "itemId": "268258",
+          "itemName": "Boots Of The Reckless Wayfarer",
+          "sourceText": "The Lost Explorers",
+          "sourceKind": "raid",
+          "boss": "The Lost Explorers",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
           "sourceText": "Sszorak",
           "sourceKind": "raid",
           "boss": "Sszorak",
           "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "251136",
-          "itemName": "Signet Of Snarling Servitude",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -8721,13 +8587,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "268238",
-          "itemName": "Grips Of Swirling Fury",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -8755,24 +8622,25 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268233",
-          "itemName": "Ferocious Scaleboots",
-          "sourceText": "Sszorak",
+          "itemId": "268258",
+          "itemName": "Boots Of The Reckless Wayfarer",
+          "sourceText": "The Lost Explorers",
           "sourceKind": "raid",
-          "boss": "Sszorak",
+          "boss": "The Lost Explorers",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -9100,11 +8968,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Survival Hunter": {
       "guideUrl": "https://www.method.gg/guides/survival-hunter/gearing",
-      "published": "2026-09-03",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -9137,12 +9005,12 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "271492",
-          "itemName": "Skulking Viper's Weeping Fangs",
-          "sourceText": "Voidscar Arena",
+          "itemId": "239035",
+          "itemName": "Sethraliss' Fanged Helm",
+          "sourceText": "Temple of Sethraliss",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
@@ -9204,13 +9072,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "160213",
-          "itemName": "Sepulchral Construct's Gloves",
-          "sourceText": "Kings Rest",
-          "sourceKind": "dungeon",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -9249,23 +9118,24 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "273792",
-          "itemName": "Band Of The Amani Warlord",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Altar of Fangs",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Voidscar Arena",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -9282,11 +9152,11 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "The Colled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
           "sourceTextUnmatched": true
@@ -9373,13 +9243,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "271493",
-          "itemName": "Skulking Viper's Hidepiercers",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -9417,22 +9288,23 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -9450,13 +9322,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270173",
-          "itemName": "Zul'jin's Guillotine Technique",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -9770,11 +9643,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Arcane Mage": {
       "guideUrl": "https://www.method.gg/guides/arcane-mage/gearing",
-      "published": "2026-09-13",
+      "published": "2026-10-16",
       "priorities": [
         {
           "label": "General",
@@ -9882,13 +9755,14 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "271563",
-          "itemName": "Primal Leywarden's Tailored Legwraps",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -9904,13 +9778,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -9938,13 +9813,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -10059,13 +9935,14 @@
         {
           "list": "raid",
           "slot": "Legs",
-          "itemId": "271563",
-          "itemName": "Primal Leywarden's Tailored Legwraps",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -10081,13 +9958,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -10114,13 +9992,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -10436,11 +10315,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Fire Mage": {
       "guideUrl": "https://www.method.gg/guides/fire-mage/gearing",
-      "published": "2026-08-17",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -10746,11 +10625,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Frost Mage": {
       "guideUrl": "https://www.method.gg/guides/frost-mage/gearing",
-      "published": "2026-08-11",
+      "published": "2026-10-16",
       "priorities": [
         {
           "label": "General",
@@ -10858,13 +10737,14 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "271563",
-          "itemName": "Primal Leywarden's Tailored Legwraps",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -10880,13 +10760,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -10902,13 +10783,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -11034,13 +10916,14 @@
         {
           "list": "raid",
           "slot": "Legs",
-          "itemId": "271563",
-          "itemName": "Primal Leywarden's Tailored Legwraps",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -11056,13 +10939,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -11078,13 +10962,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -11406,11 +11291,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Brewmaster Monk": {
       "guideUrl": "https://www.method.gg/guides/brewmaster-monk/gearing",
-      "published": "2026-08-11",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -11487,12 +11372,12 @@
         {
           "list": "overall",
           "slot": "Wrist",
-          "itemId": "159300",
-          "itemName": "Kula's Butchering Wristwraps",
-          "sourceText": "Kings' Rest",
-          "sourceKind": "dungeon",
+          "itemId": "244576",
+          "itemName": "Silvermoon Agent's Deflectors",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -11533,13 +11418,14 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "244569",
-          "itemName": "Silvermoon Agent's Sneakers",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "272240",
+          "itemName": "Miststalker's Striders",
+          "sourceText": "Labyrinth of Kindo'jan",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -11555,8 +11441,8 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "240949",
-          "itemName": "Masterwork Sin'dorei Band",
+          "itemId": "251513",
+          "itemName": "Loa Worshiper's Band",
           "sourceText": "Crafting",
           "sourceKind": "crafted",
           "boss": null,
@@ -11657,11 +11543,11 @@
         {
           "list": "raid",
           "slot": "Wrist",
-          "itemId": "268240",
-          "itemName": "Restless Spirit Shackles",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "244576",
+          "itemName": "Silvermoon Agent's Deflectors",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -11702,19 +11588,19 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "244569",
-          "itemName": "Silvermoon Agent's Sneakers",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268261",
+          "itemName": "Bespittled Slitherslippers",
+          "sourceText": "Twin Fangs",
+          "sourceKind": "raid",
+          "boss": "The Twin Fangs",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "240949",
-          "itemName": "Masterwork Sin'dorei Band",
+          "itemId": "251513",
+          "itemName": "Loa Worshiper's Band",
           "sourceText": "Crafting",
           "sourceKind": "crafted",
           "boss": null,
@@ -11825,12 +11711,12 @@
         {
           "list": "mplus",
           "slot": "Wrist",
-          "itemId": "159300",
-          "itemName": "Kula's Butchering Wristwraps",
-          "sourceText": "Kings' Rest",
-          "sourceKind": "dungeon",
+          "itemId": "244576",
+          "itemName": "Silvermoon Agent's Deflectors",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -11871,23 +11757,23 @@
         {
           "list": "mplus",
           "slot": "Feet",
-          "itemId": "244569",
-          "itemName": "Silvermoon Agent's Sneakers",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "159327",
+          "itemName": "Sand-Shined Snakeskin Sandals",
+          "sourceText": "Temple of Sethraliss",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Temple of Sethraliss",
           "droppedBy": null
         },
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "162544",
-          "itemName": "Jade Ophidian Band",
-          "sourceText": "Temple of Sethraliss",
-          "sourceKind": "dungeon",
+          "itemId": "251513",
+          "itemName": "Loa Worshiper's Band",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -12054,11 +11940,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Mistweaver Monk": {
       "guideUrl": "https://www.method.gg/guides/mistweaver-monk/gearing",
-      "published": "2026-08-27",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "Raid / Mythic+",
@@ -12080,12 +11966,11 @@
           "slot": "Head",
           "itemId": "271875",
           "itemName": "Gaze Of The Coiled Watcher",
-          "sourceText": "Ula'tek (Catalyst)",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
-          "viaCatalyst": true
+          "droppedBy": null
         },
         {
           "list": "overall",
@@ -12103,35 +11988,34 @@
           "slot": "Shoulder",
           "itemId": "251223",
           "itemName": "Somber Spaulders",
-          "sourceText": "Voidscar Arena (Catalyst)",
+          "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Voidscar Arena",
-          "droppedBy": null,
-          "viaCatalyst": true
+          "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Back",
-          "itemId": "193763",
-          "itemName": "Fireproof Drape",
-          "sourceText": "Ruby Life Pools",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Ruby Life Pools",
+          "itemId": "268253",
+          "itemName": "Silken Voodoo Drape",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "268235",
-          "itemName": "Vestment Of The Awakening",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -12158,22 +12042,22 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "159301",
-          "itemName": "Primal Dinomancer's Belt",
-          "sourceText": "Kings' Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
+          "itemId": "268256",
+          "itemName": "Sash Of The Forlorn Vessel",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "271518",
-          "itemName": "Pantaloons Of The Monkey King",
-          "sourceText": "The Lost Explorers",
+          "itemId": "268225",
+          "itemName": "Coiled Hex Legguards",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12235,9 +12119,21 @@
         {
           "list": "overall",
           "slot": "Main Hand",
-          "itemId": "245770",
-          "itemName": "Aln'hara Cane",
-          "sourceText": "Crafted (Crit / Haste)",
+          "itemId": "281056",
+          "itemName": "Sanctified Knight's Phoenixblade",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
+          "slot": "Off Hand",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted",
           "sourceKind": "crafted",
           "boss": null,
           "dungeon": null,
@@ -12279,24 +12175,25 @@
         {
           "list": "raid",
           "slot": "Back",
-          "itemId": "268248",
-          "itemName": "Amani Summoning Shawl",
-          "sourceText": "Nek'zali the Soulcoiler",
+          "itemId": "268253",
+          "itemName": "Silken Voodoo Drape",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "268235",
-          "itemName": "Vestment Of The Awakening",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -12400,13 +12297,26 @@
         {
           "list": "raid",
           "slot": "Main Hand",
-          "itemId": "268205",
-          "itemName": "Venomancer's Winged Channeler",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281056",
+          "itemName": "Sanctified Knight's Phoenixblade",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "raid",
+          "slot": "Off Hand",
+          "itemId": "268197",
+          "itemName": "Spine Of The Hissing Abyss",
+          "sourceText": "Entomed Sentinels",
+          "sourceKind": "raid",
+          "boss": "Entombed Sentinels",
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextFuzzy": true
         },
         {
           "list": "mplus",
@@ -12698,11 +12608,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Windwalker Monk": {
       "guideUrl": "https://www.method.gg/guides/windwalker-monk/gearing",
-      "published": "2026-08-18",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -12767,13 +12677,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "271522",
-          "itemName": "Battle Gi Of The Monkey King",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -12789,12 +12700,12 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "271520",
-          "itemName": "Monkey King's Fighting Fists",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
-          "dungeon": null,
+          "itemId": "251124",
+          "itemName": "Gauntlets Of Fevered Defense",
+          "sourceText": "Murder Row",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Murder Row",
           "droppedBy": null
         },
         {
@@ -12833,23 +12744,24 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Voidscar Arena",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -12933,13 +12845,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "271522",
-          "itemName": "Battle Gi Of The Monkey King",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -12955,11 +12868,11 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "271520",
-          "itemName": "Monkey King's Fighting Fists",
-          "sourceText": "Entombed Sentinels",
+          "itemId": "268234",
+          "itemName": "Ruthless Slaughtergrips",
+          "sourceText": "Sszorak",
           "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "boss": "Sszorak",
           "dungeon": null,
           "droppedBy": null
         },
@@ -12999,13 +12912,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -13272,6 +13186,15 @@
                 "name": "Enchant Ring - Eyes Of The Eagle"
               }
             ]
+          },
+          {
+            "slot": "Main Hand",
+            "candidates": [
+              {
+                "id": "273071",
+                "name": "Enchant Weapon - Rite Of The Hash'ey"
+              }
+            ]
           }
         ],
         "gems": {
@@ -13344,11 +13267,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Holy Paladin": {
       "guideUrl": "https://www.method.gg/guides/holy-paladin/gearing",
-      "published": "2026-08-27",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "Overall",
@@ -13368,14 +13291,14 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "251126",
-          "itemName": "Greathelm Of Temptation",
-          "sourceText": "Murder Row (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -13493,13 +13416,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -13548,14 +13472,14 @@
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler/Catalyst",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -13673,13 +13597,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -14028,23 +13953,24 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Protection Paladin": {
       "guideUrl": "https://www.method.gg/guides/protection-paladin/gearing",
-      "published": "2026-09-03",
+      "published": "2026-10-14",
       "priorities": [],
       "bis": [
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -14152,13 +14078,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -14174,13 +14101,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270165",
-          "itemName": "Keeper's Seething Core",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -14218,13 +14146,14 @@
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -14342,24 +14271,26 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270165",
-          "itemName": "Keeper's Seething Core",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -14699,11 +14630,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Retribution Paladin": {
       "guideUrl": "https://www.method.gg/guides/retribution-paladin/gearing",
-      "published": "2026-10-06",
+      "published": "2026-10-13",
       "priorities": [],
       "bis": [
         {
@@ -14711,12 +14642,12 @@
           "slot": "Head",
           "itemId": "271465",
           "itemName": "Warhelm Of The Consecrated Flame",
-          "sourceText": "Nek'zali the Soulcoiler(Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -14734,7 +14665,7 @@
           "slot": "Shoulder",
           "itemId": "271463",
           "itemName": "Pauldrons Of The Consecrated Flame",
-          "sourceText": "Murder Row(Catalyst)",
+          "sourceText": "Murder Row (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Murder Row",
@@ -14757,7 +14688,7 @@
           "slot": "Chest",
           "itemId": "271468",
           "itemName": "Bulwark Of The Consecrated Flame",
-          "sourceText": "The Coiled Altar(Catalyst)",
+          "sourceText": "The Coiled Altar (Catalyst)",
           "sourceKind": "raid",
           "boss": "The Coiled Altar",
           "dungeon": null,
@@ -14780,7 +14711,7 @@
           "slot": "Hands",
           "itemId": "271466",
           "itemName": "Gauntlets Of The Consecrated Flame",
-          "sourceText": "Den of Nalorakk(Catalyst)",
+          "sourceText": "Den of Nalorakk (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Den of Nalorakk",
@@ -14803,7 +14734,7 @@
           "slot": "Legs",
           "itemId": "271464",
           "itemName": "Greaves Of The Consecrated Flame",
-          "sourceText": "Ula'tek(Catalyst)",
+          "sourceText": "Ula'tek (Catalyst)",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
@@ -14824,13 +14755,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -14879,14 +14811,14 @@
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "271465",
+          "itemName": "Warhelm Of The Consecrated Flame",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -14926,11 +14858,12 @@
           "slot": "Chest",
           "itemId": "271468",
           "itemName": "Bulwark Of The Consecrated Flame",
-          "sourceText": "Vashnik the Malignant",
+          "sourceText": "The Coiled Altar (Catalyst)",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "The Coiled Altar",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "raid",
@@ -14970,12 +14903,11 @@
           "slot": "Legs",
           "itemId": "271878",
           "itemName": "Chausses Of Unbound Rancor",
-          "sourceText": "Ula'tek (Catalyst)",
+          "sourceText": "Ula'tek",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null,
-          "viaCatalyst": true
+          "droppedBy": null
         },
         {
           "list": "raid",
@@ -15002,13 +14934,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -15266,11 +15199,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Discipline Priest": {
       "guideUrl": "https://www.method.gg/guides/discipline-priest/gearing",
-      "published": "2026-09-17",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -15921,11 +15854,11 @@
           "note": "Unique Gem: Telluric Eversong Diamond . The extra mana can come in handy on longer fights. After that you should follow your stat weights but here are some options: Flawless Deadly Peridot Flawless Masterful Peridot Flawless Quick Amethyst Flawless Quick Garnet"
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Holy Priest": {
       "guideUrl": "https://www.method.gg/guides/holy-priest/gearing",
-      "published": "2026-09-17",
+      "published": "2026-10-13",
       "priorities": [],
       "bis": [
         {
@@ -16022,14 +15955,14 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "159234",
-          "itemName": "Down-Lined Breeches",
-          "sourceText": "King's Rest (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -16201,14 +16134,14 @@
         {
           "list": "raid",
           "slot": "Legs",
-          "itemId": "268236",
-          "itemName": "Initiate's Sacrificial Tights",
-          "sourceText": "Nek'zali (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -16561,11 +16494,11 @@
           "note": "Unique Gem: Telluric Eversong Diamond . The extra mana can come in handy on longer fights. After that you follow your stat weights: Raiding : Flawless Masterful Garnet / Flawless Deadly Amethyst M+ : Flawless Deadly Peridot / Flawless Versatile Peridot"
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Shadow Priest": {
       "guideUrl": "https://www.method.gg/guides/shadow-priest/gearing",
-      "published": "2026-08-27",
+      "published": "2026-10-14",
       "priorities": [],
       "bis": [
         {
@@ -16685,13 +16618,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -16707,13 +16641,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -16890,11 +16825,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Assassination Rogue": {
       "guideUrl": "https://www.method.gg/guides/assassination-rogue/gearing",
-      "published": "2026-08-12",
+      "published": "2026-10-18",
       "priorities": [
         {
           "label": "General",
@@ -16958,13 +16893,14 @@
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "251159",
-          "itemName": "War Trial Vestments",
-          "sourceText": "Den of Nalorakk (Catalyzed)",
-          "sourceKind": "dungeon",
+          "itemId": "281236",
+          "itemName": "Chestwrap Of Palpable Terror",
+          "sourceText": "Kith'ix (Catalyzed)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -17013,13 +16949,13 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "251153",
-          "itemName": "Arctic Explorer's Legwraps",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
+          "itemId": "244569",
+          "itemName": "Silvermoon Agent's Sneakers",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "overall",
@@ -17035,13 +16971,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -17057,13 +16994,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -17079,12 +17017,12 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "237837",
-          "itemName": "Farstrider's Mercy",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "275070",
+          "itemName": "Sharpened Lightwood Slasher",
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -17470,11 +17408,11 @@
           "note": "Always use the Indecipherable Eversong Diamond in one slot. Fill the rest of the slots with Haste or Crit."
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Outlaw Rogue": {
       "guideUrl": "https://www.method.gg/guides/outlaw-rogue/gearing",
-      "published": "2026-08-12",
+      "published": "2026-10-18",
       "priorities": [
         {
           "label": "General",
@@ -17532,17 +17470,6 @@
           "sourceText": "Nek'zali the Soulcoiler",
           "sourceKind": "raid",
           "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Chest",
-          "itemId": "271513",
-          "itemName": "Chosen Bloodslayer's Banded Poncho",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
           "dungeon": null,
           "droppedBy": null
         },
@@ -17709,17 +17636,6 @@
           "sourceText": "Nek'zali the Soulcoiler",
           "sourceKind": "raid",
           "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "raid",
-          "slot": "Chest",
-          "itemId": "271513",
-          "itemName": "Chosen Bloodslayer's Banded Poncho",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
           "dungeon": null,
           "droppedBy": null
         },
@@ -18148,11 +18064,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Subtlety Rogue": {
       "guideUrl": "https://www.method.gg/guides/subtlety-rogue/gearing",
-      "published": "2026-08-19",
+      "published": "2026-10-16",
       "priorities": [
         {
           "label": "General",
@@ -18220,12 +18136,12 @@
           "slot": "Chest",
           "itemId": "271513",
           "itemName": "Chosen Bloodslayer's Banded Poncho",
-          "sourceText": "King's Rest (Catalyst)",
-          "sourceKind": "dungeon",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -18298,13 +18214,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -18459,11 +18376,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Elemental Shaman": {
       "guideUrl": "https://www.method.gg/guides/elemental-shaman/gearing",
-      "published": "2026-09-01",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -18565,14 +18482,14 @@
         {
           "list": "overall",
           "slot": "Hands",
-          "itemId": "160213",
-          "itemName": "Sepulchral Construct's Gloves",
-          "sourceText": "Kings' Rest (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Kings' Rest",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -18622,13 +18539,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "273792",
-          "itemName": "Band Of The Amani Warlord",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Altar of Fangs",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -18644,13 +18562,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270164",
-          "itemName": "Gebbo's Bottomless Bag",
-          "sourceText": "The Lost Explorers",
-          "sourceKind": "raid",
-          "boss": "The Lost Explorers",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -18745,13 +18664,14 @@
         {
           "list": "raid",
           "slot": "Hands",
-          "itemId": "271484",
-          "itemName": "Hexing Grips Of The Ophidian Oracle",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "281238",
+          "itemName": "Aberrant Commander's Gauntlets",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -18801,13 +18721,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268266",
-          "itemName": "Alluring Bubbleband",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -19083,23 +19004,23 @@
           ],
           "filler": [
             {
-              "id": "240900",
-              "name": "Flawless Quick Amethyst"
+              "id": "240898",
+              "name": "Flawless Deadly Amethyst"
             },
             {
               "id": "240908",
               "name": "Flawless Masterful Garnet"
             },
             {
-              "id": "240918",
-              "name": "Flawless Masterful Lapis"
+              "id": "240914",
+              "name": "Flawless Deadly Lapis"
             },
             {
-              "id": "240892",
-              "name": "Flawless Masterful Peridot"
+              "id": "240890",
+              "name": "Flawless Deadly Peridot"
             }
           ],
-          "note": "As always, simming will give you better results for your exact situation. Currently I can recommend using one of each of the following: Powerful Eversong Diamond Flawless Quick Amethyst Flawless Masterful Garnet Flawless Masterful Lapis Then fill the rest with Flawless Masterful Peridot ."
+          "note": "As always, simming will give you better results for your exact situation. Currently I can recommend using one of each of the following: Powerful Eversong Diamond Flawless Deadly Amethyst Flawless Masterful Garnet Flawless Deadly Lapis Then fill the rest with Flawless Deadly Peridot ."
         },
         "consumables": {
           "healthPotion": [
@@ -19110,11 +19031,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Enhancement Shaman": {
       "guideUrl": "https://www.method.gg/guides/enhancement-shaman/gearing",
-      "published": "2026-08-24",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -19205,11 +19126,12 @@
           "slot": "Hands",
           "itemId": "271484",
           "itemName": "Hexing Grips Of The Ophidian Oracle",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -19259,13 +19181,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "273792",
-          "itemName": "Band Of The Amani Warlord",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Altar of Fangs",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -19384,11 +19307,12 @@
           "slot": "Hands",
           "itemId": "271484",
           "itemName": "Hexing Grips Of The Ophidian Oracle",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -19438,13 +19362,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -19802,11 +19727,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Restoration Shaman": {
       "guideUrl": "https://www.method.gg/guides/restoration-shaman/gearing",
-      "published": "2026-08-11",
+      "published": "2026-10-16",
       "priorities": [
         {
           "label": "Raid",
@@ -19983,13 +19908,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -20160,13 +20086,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -20489,11 +20416,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Affliction Warlock": {
       "guideUrl": "https://www.method.gg/guides/affliction-warlock/gearing",
-      "published": "2026-08-12",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -20527,11 +20454,12 @@
           "slot": "Head",
           "itemId": "271874",
           "itemName": "Venomkeeper's Horrific Cowl",
-          "sourceText": "Ula'tek",
+          "sourceText": "Ula'tek (Catalyst)",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
@@ -20549,21 +20477,22 @@
           "slot": "Shoulder",
           "itemId": "239031",
           "itemName": "Brood Cleanser's Amice",
-          "sourceText": "Temple of Sethraliss",
+          "sourceText": "Temple of Sethraliss (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
           "slot": "Back",
-          "itemId": "251132",
-          "itemName": "Speakeasy Shroud",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
+          "itemId": "239656",
+          "itemName": "Adherent's Silken Shroud",
+          "sourceText": "Tailoring",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -20571,33 +20500,35 @@
           "slot": "Chest",
           "itemId": "239032",
           "itemName": "Robes Of The Reborn Serpent",
-          "sourceText": "Temple of Sethraliss",
+          "sourceText": "Temple of Sethraliss (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
           "slot": "Wrist",
-          "itemId": "251154",
-          "itemName": "Winter's Embrace Bracers",
-          "sourceText": "Den of Nalorakk",
-          "sourceKind": "dungeon",
+          "itemId": "239648",
+          "itemName": "Martyr's Bindings",
+          "sourceText": "Tailoring",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Den of Nalorakk",
-          "droppedBy": "Nalorakk"
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Hands",
           "itemId": "159247",
           "itemName": "Handwraps Of Oscillating Polarity",
-          "sourceText": "Temple of Sethraliss",
+          "sourceText": "Temple of Sethraliss (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
@@ -20613,8 +20544,31 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "273786",
-          "itemName": "Leggings Of Entwined Serpents",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
+          "slot": "Feet",
+          "itemId": "268255",
+          "itemName": "Cackling Soultreads",
+          "sourceText": "The Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
+          "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Finger",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
           "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
@@ -20623,47 +20577,26 @@
         },
         {
           "list": "overall",
-          "slot": "Feet",
-          "itemId": "268218",
-          "itemName": "Nek'zali's Spiritwalkers",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Finger",
-          "itemId": "251136",
-          "itemName": "Signet Of Snarling Servitude",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
+          "itemId": "268266",
+          "itemName": "Alluring Bubbleband",
           "sourceText": "Nymrissa Wavecaller",
           "sourceKind": "world",
           "boss": null,
           "dungeon": null,
           "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -20789,44 +20722,46 @@
         {
           "list": "raid",
           "slot": "Legs",
-          "itemId": "271545",
-          "itemName": "Damned Necrolyte's Leg Bindings",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268218",
-          "itemName": "Nek'zali's Spiritwalkers",
-          "sourceText": "Nek'zali the Soulcoiler",
+          "itemId": "268255",
+          "itemName": "Cackling Soultreads",
+          "sourceText": "The Coiled Altar",
           "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Murder Row",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Murder Row",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "268266",
+          "itemName": "Alluring Bubbleband",
+          "sourceText": "Nymrissa Wavecaller",
+          "sourceKind": "world",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -20844,13 +20779,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -20879,11 +20815,12 @@
           "slot": "Head",
           "itemId": "251199",
           "itemName": "Worldroot Canopy",
-          "sourceText": "The Blinding Vale",
+          "sourceText": "The Blinding Vale (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "The Blinding Vale",
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "mplus",
@@ -20921,13 +20858,14 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "239032",
-          "itemName": "Robes Of The Reborn Serpent",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "273785",
+          "itemName": "Primordial Robe Of Rites",
+          "sourceText": "Altar of Fangs (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "dungeon": "Altar of Fangs",
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "mplus",
@@ -20943,13 +20881,14 @@
         {
           "list": "mplus",
           "slot": "Hands",
-          "itemId": "159247",
-          "itemName": "Handwraps Of Oscillating Polarity",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "273773",
+          "itemName": "Handwraps Of Blasphemous Rites",
+          "sourceText": "Temple of Sethraliss (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Temple of Sethraliss",
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "mplus",
@@ -20967,11 +20906,12 @@
           "slot": "Legs",
           "itemId": "273786",
           "itemName": "Leggings Of Entwined Serpents",
-          "sourceText": "Altar of Fangs",
+          "sourceText": "Altar of Fangs (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
           "dungeon": "Altar of Fangs",
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "mplus",
@@ -20987,34 +20927,34 @@
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "Temple of Sethraliss",
+          "itemId": "159459",
+          "itemName": "Ritual Binder's Ring",
+          "sourceText": "King's Rest",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Temple of Sethraliss",
+          "dungeon": "Kings' Rest",
           "droppedBy": null
         },
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "251136",
-          "itemName": "Signet Of Snarling Servitude",
-          "sourceText": "Murder Row",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
           "list": "mplus",
           "slot": "Trinket",
-          "itemId": "250215",
-          "itemName": "Freightrunner's Flask",
-          "sourceText": "Murder Row",
+          "itemId": "250224",
+          "itemName": "Mindpiercer's Sigil",
+          "sourceText": "Voidscar Arena",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -21031,13 +20971,24 @@
         {
           "list": "mplus",
           "slot": "Main Hand",
-          "itemId": "251123",
-          "itemName": "Nibbles' Training Rod",
-          "sourceText": "Murder Row",
+          "itemId": "273778",
+          "itemName": "Polished Lightwood Channeler",
+          "sourceText": "Altar of Fangs",
           "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
+        },
+        {
+          "list": "mplus",
+          "slot": "Off Hand",
+          "itemId": "271681",
+          "itemName": "Perennial Frostbound Charm",
+          "sourceText": "Den of Nalorakk",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Den of Nalorakk",
+          "droppedBy": "Nalorakk"
         }
       ],
       "enhancements": {
@@ -21176,11 +21127,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Demonology Warlock": {
       "guideUrl": "https://www.method.gg/guides/demonology-warlock/gearing",
-      "published": "2026-09-27",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -21279,12 +21230,12 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "239649",
-          "itemName": "Martyr's Waistwrap",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
+          "itemId": "251222",
+          "itemName": "Ethereal Netherwrap",
+          "sourceText": "Voidscar Arena",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Voidscar Arena",
           "droppedBy": null
         },
         {
@@ -21323,35 +21274,37 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270169",
-          "itemName": "Hex Lord's Dooming Idol",
-          "sourceText": "The Coiled Altar",
-          "sourceKind": "raid",
-          "boss": "The Coiled Altar",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "overall",
-          "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "273649",
+          "itemName": "Stormbound Emblem Of Dazar",
+          "sourceText": "King's Rest",
+          "sourceKind": "dungeon",
+          "boss": null,
+          "dungeon": "Kings' Rest",
           "droppedBy": null
+        },
+        {
+          "list": "overall",
+          "slot": "Trinket",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -21367,11 +21320,11 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "268197",
-          "itemName": "Spine Of The Hissing Abyss",
-          "sourceText": "Entombed Sentinels",
-          "sourceKind": "raid",
-          "boss": "Entombed Sentinels",
+          "itemId": "245769",
+          "itemName": "Aln'hara Lantern",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         }
@@ -21485,11 +21438,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Destruction Warlock": {
       "guideUrl": "https://www.method.gg/guides/destruction-warlock/gearing",
-      "published": "2026-08-15",
+      "published": "2026-10-13",
       "priorities": [
         {
           "label": "General",
@@ -21556,11 +21509,12 @@
           "slot": "Chest",
           "itemId": "268221",
           "itemName": "Tidebound Sorcereress's Robes",
-          "sourceText": "Nymrissa Wavecaller",
+          "sourceText": "Nymrissa Wavecaller (Catalyst)",
           "sourceKind": "world",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
@@ -21599,13 +21553,14 @@
         {
           "list": "overall",
           "slot": "Legs",
-          "itemId": "271545",
-          "itemName": "Damned Necrolyte's Leg Bindings",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -21621,23 +21576,24 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "158366",
-          "itemName": "Charged Sandstone Band",
-          "sourceText": "King's Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
+          "itemId": "268252",
+          "itemName": "Apex Brute's Claw Ring",
+          "sourceText": "Sszorak",
+          "sourceKind": "raid",
+          "boss": "Sszorak",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -21654,13 +21610,14 @@
         {
           "list": "overall",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -21734,11 +21691,12 @@
           "slot": "Chest",
           "itemId": "268221",
           "itemName": "Tidebound Sorcereress's Robes",
-          "sourceText": "Nymrissa Wavecaller",
+          "sourceText": "Nymrissa Wavecaller (Catalyst)",
           "sourceKind": "world",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "raid",
@@ -21777,13 +21735,14 @@
         {
           "list": "raid",
           "slot": "Legs",
-          "itemId": "271545",
-          "itemName": "Damned Necrolyte's Leg Bindings",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281235",
+          "itemName": "Voidweaver's Leggings",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -21799,22 +21758,23 @@
         {
           "list": "raid",
           "slot": "Finger",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
+        },
+        {
+          "list": "raid",
+          "slot": "Finger",
           "itemId": "268252",
           "itemName": "Apex Brute's Claw Ring",
           "sourceText": "Sszorak",
           "sourceKind": "raid",
           "boss": "Sszorak",
-          "dungeon": null,
-          "droppedBy": null
-        },
-        {
-          "list": "raid",
-          "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
           "dungeon": null,
           "droppedBy": null
         },
@@ -21832,13 +21792,14 @@
         {
           "list": "raid",
           "slot": "Trinket",
-          "itemId": "270167",
-          "itemName": "Wavecaller's Seastone",
-          "sourceText": "Nymrissa Wavecaller",
-          "sourceKind": "world",
+          "itemId": "281215",
+          "itemName": "Twisted Horror's Tendril",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -21910,8 +21871,8 @@
         {
           "list": "mplus",
           "slot": "Chest",
-          "itemId": "271549",
-          "itemName": "Damned Necrolyte's Rattling Robes",
+          "itemId": "273785",
+          "itemName": "Primordial Robe Of Rites",
           "sourceText": "Altar of Fangs (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
@@ -21933,8 +21894,8 @@
         {
           "list": "mplus",
           "slot": "Hands",
-          "itemId": "271547",
-          "itemName": "Damned Necrolyte's Charred Grasps",
+          "itemId": "273773",
+          "itemName": "Handwraps Of Blasphemous Rites",
           "sourceText": "Altar of Fangs (Catalyst)",
           "sourceKind": "dungeon",
           "boss": null,
@@ -22156,11 +22117,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Arms Warrior": {
       "guideUrl": "https://www.method.gg/guides/arms-warrior/gearing",
-      "published": "2026-09-25",
+      "published": "2026-10-25",
       "priorities": [
         {
           "label": "General",
@@ -22180,14 +22141,14 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -22215,23 +22176,23 @@
         {
           "list": "overall",
           "slot": "Back",
-          "itemId": "193763",
-          "itemName": "Fireproof Drape",
-          "sourceText": "Ruby Life Pools",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Ruby Life Pools",
+          "itemId": "268253",
+          "itemName": "Silken Voodoo Drape",
+          "sourceText": "Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "239036",
-          "itemName": "Desert Guardian's Breastplate",
-          "sourceText": "Temple of Sethraliss (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
+          "itemId": "268222",
+          "itemName": "Reckless Spirit Breastplate",
+          "sourceText": "Coiled Altar (Catalyst)",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null,
           "viaCatalyst": true
         },
@@ -22261,11 +22222,11 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "237830",
-          "itemName": "Spellbreaker's Girdle",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268259",
+          "itemName": "Girdle Of Toxic Regret",
+          "sourceText": "Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -22283,11 +22244,11 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268245",
-          "itemName": "Entombed Cultist's Sabatons",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -22305,13 +22266,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "252258",
-          "itemName": "Sickening Signet Of Atroxus",
-          "sourceText": "Voidscar Arena",
-          "sourceKind": "dungeon",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Voidscar Arena",
-          "droppedBy": null
+          "dungeon": null,
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -22349,14 +22311,14 @@
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -22395,14 +22357,14 @@
         {
           "list": "raid",
           "slot": "Chest",
-          "itemId": "271459",
-          "itemName": "Cuirass Of The Jade Warlord",
-          "sourceText": "Vashnik the Malignant (Tier Token)",
+          "itemId": "268222",
+          "itemName": "Reckless Spirit Breastplate",
+          "sourceText": "Coiled Altar (Catalyst)",
           "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null,
-          "viaTierToken": true
+          "viaCatalyst": true
         },
         {
           "list": "raid",
@@ -22430,11 +22392,11 @@
         {
           "list": "raid",
           "slot": "Waist",
-          "itemId": "237830",
-          "itemName": "Spellbreaker's Girdle",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
-          "boss": null,
+          "itemId": "268259",
+          "itemName": "Girdle Of Toxic Regret",
+          "sourceText": "Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
           "dungeon": null,
           "droppedBy": null
         },
@@ -22443,20 +22405,21 @@
           "slot": "Legs",
           "itemId": "271878",
           "itemName": "Chausses Of Unbound Rancor",
-          "sourceText": "Ula'tek",
+          "sourceText": "Ula'tek (Catalyst)",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268245",
-          "itemName": "Entombed Cultist's Sabatons",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -22474,13 +22437,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -22711,11 +22675,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Fury Warrior": {
       "guideUrl": "https://www.method.gg/guides/fury-warrior/gearing",
-      "published": "2026-08-11",
+      "published": "2026-10-25",
       "priorities": [
         {
           "label": "General",
@@ -22735,14 +22699,14 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "251126",
-          "itemName": "Greathelm Of Temptation",
-          "sourceText": "Murder Row (Catalyst)",
-          "sourceKind": "dungeon",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
           "boss": null,
-          "dungeon": "Murder Row",
+          "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -22770,23 +22734,23 @@
         {
           "list": "overall",
           "slot": "Back",
-          "itemId": "251190",
-          "itemName": "Bloodthorn Burnous",
-          "sourceText": "The Blinding Vale",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "The Blinding Vale",
+          "itemId": "268253",
+          "itemName": "Silken Voodoo Drape",
+          "sourceText": "Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
           "list": "overall",
           "slot": "Chest",
-          "itemId": "193753",
-          "itemName": "Breastplate Of Soaring Terror",
-          "sourceText": "Ruby Life Pools (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Ruby Life Pools",
+          "itemId": "268222",
+          "itemName": "Reckless Spirit Breastplate",
+          "sourceText": "Coiled Altar (Catalyst)",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null,
           "viaCatalyst": true
         },
@@ -22816,12 +22780,12 @@
         {
           "list": "overall",
           "slot": "Waist",
-          "itemId": "159418",
-          "itemName": "Girdle Of Pestilent Purification",
-          "sourceText": "King's Rest",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Kings' Rest",
+          "itemId": "268259",
+          "itemName": "Girdle Of Toxic Regret",
+          "sourceText": "Coiled Altar",
+          "sourceKind": "raid",
+          "boss": "The Coiled Altar",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -22829,20 +22793,21 @@
           "slot": "Legs",
           "itemId": "271878",
           "itemName": "Chausses Of Unbound Rancor",
-          "sourceText": "Ula'tek",
+          "sourceText": "Ula'tek (Catalyst)",
           "sourceKind": "raid",
           "boss": "Ula'tek",
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "viaCatalyst": true
         },
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "268260",
-          "itemName": "Scaled Fiend's Warboots",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -22860,13 +22825,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "268249",
-          "itemName": "Vile Alchemist's Band",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -22904,25 +22870,26 @@
         {
           "list": "overall",
           "slot": "Off Hand",
-          "itemId": "237846",
-          "itemName": "Blood Knight's Warblade",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
+          "itemId": "280799",
+          "itemName": "Lu'selama, Light's Justice",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler (Catalyst)",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Kith'ix (Catalyst)",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null,
-          "viaCatalyst": true
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -23018,11 +22985,11 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268260",
-          "itemName": "Scaled Fiend's Warboots",
-          "sourceText": "Vashnik the Malignant",
-          "sourceKind": "raid",
-          "boss": "Vashnik the Malignant",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafted",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -23040,13 +23007,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "268252",
-          "itemName": "Apex Brute's Claw Ring",
-          "sourceText": "Sszorak",
-          "sourceKind": "raid",
-          "boss": "Sszorak",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -23084,13 +23052,14 @@
         {
           "list": "raid",
           "slot": "Off Hand",
-          "itemId": "237846",
-          "itemName": "Blood Knight's Warblade",
-          "sourceText": "Crafted",
-          "sourceKind": "crafted",
+          "itemId": "280799",
+          "itemName": "Lu'selama, Light's Justice",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "mplus",
@@ -23299,11 +23268,11 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     },
     "Protection Warrior": {
       "guideUrl": "https://www.method.gg/guides/protection-warrior/gearing",
-      "published": "2026-08-11",
+      "published": "2026-10-14",
       "priorities": [
         {
           "label": "General",
@@ -23322,13 +23291,14 @@
         {
           "list": "overall",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Tier - Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -23425,12 +23395,12 @@
         {
           "list": "overall",
           "slot": "Feet",
-          "itemId": "273777",
-          "itemName": "Poison-Proof Stompers",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Altar of Fangs",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -23447,13 +23417,14 @@
         {
           "list": "overall",
           "slot": "Finger",
-          "itemId": "240949",
-          "itemName": "Masterwork Sin'dorei Band",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "overall",
@@ -23502,13 +23473,14 @@
         {
           "list": "raid",
           "slot": "Head",
-          "itemId": "268229",
-          "itemName": "Skullguard Of The Risen Sacrifice",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "281239",
+          "itemName": "Corroded Hulk's Skullcap",
+          "sourceText": "Tier - Kith'ix",
+          "sourceKind": "unknown",
+          "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -23524,14 +23496,13 @@
         {
           "list": "raid",
           "slot": "Shoulder",
-          "itemId": "239037",
-          "itemName": "C'thraxxi Binders Pauldrons",
-          "sourceText": "Temple of Sethraliss (Catalyst)",
-          "sourceKind": "dungeon",
-          "boss": null,
-          "dungeon": "Temple of Sethraliss",
-          "droppedBy": null,
-          "viaCatalyst": true
+          "itemId": "271454",
+          "itemName": "Raging Pauldrons Of The Jade Warlord",
+          "sourceText": "Tier - The Lost Explorers",
+          "sourceKind": "raid",
+          "boss": "The Lost Explorers",
+          "dungeon": null,
+          "droppedBy": null
         },
         {
           "list": "raid",
@@ -23605,11 +23576,11 @@
         {
           "list": "raid",
           "slot": "Feet",
-          "itemId": "268245",
-          "itemName": "Entombed Cultist's Sabatons",
-          "sourceText": "Nek'zali the Soulcoiler",
-          "sourceKind": "raid",
-          "boss": "Nek'zali the Soulcoiler",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
+          "boss": null,
           "dungeon": null,
           "droppedBy": null
         },
@@ -23627,13 +23598,14 @@
         {
           "list": "raid",
           "slot": "Finger",
-          "itemId": "240949",
-          "itemName": "Masterwork Sin'dorei Band",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "281029",
+          "itemName": "Band Of The Swarmcaller",
+          "sourceText": "Kith'ix",
+          "sourceKind": "unknown",
           "boss": null,
           "dungeon": null,
-          "droppedBy": null
+          "droppedBy": null,
+          "sourceTextUnmatched": true
         },
         {
           "list": "raid",
@@ -23786,12 +23758,12 @@
         {
           "list": "mplus",
           "slot": "Feet",
-          "itemId": "273777",
-          "itemName": "Poison-Proof Stompers",
-          "sourceText": "Altar of Fangs",
-          "sourceKind": "dungeon",
+          "itemId": "237828",
+          "itemName": "Spellbreaker's March",
+          "sourceText": "Crafting",
+          "sourceKind": "crafted",
           "boss": null,
-          "dungeon": "Altar of Fangs",
+          "dungeon": null,
           "droppedBy": null
         },
         {
@@ -23808,12 +23780,12 @@
         {
           "list": "mplus",
           "slot": "Finger",
-          "itemId": "240949",
-          "itemName": "Masterwork Sin'dorei Band",
-          "sourceText": "Crafting",
-          "sourceKind": "crafted",
+          "itemId": "273792",
+          "itemName": "Band Of The Amani Warlord",
+          "sourceText": "Altar of Fangs",
+          "sourceKind": "dungeon",
           "boss": null,
-          "dungeon": null,
+          "dungeon": "Altar of Fangs",
           "droppedBy": null
         },
         {
@@ -23925,12 +23897,8 @@
             "slot": "Main Hand",
             "candidates": [
               {
-                "id": "244029",
-                "name": "Enchant Weapon - Acuity Of The Ren'dore"
-              },
-              {
-                "id": "243973",
-                "name": "Enchant Weapon - Berserker's Rage"
+                "id": "273071",
+                "name": "Enchant Weapon - Rite Of The Hash'ey"
               }
             ]
           }
@@ -24003,7 +23971,7 @@
           ]
         }
       },
-      "verifiedAt": "2026-10-06"
+      "verifiedAt": "2026-10-28"
     }
   },
   "coverage": {

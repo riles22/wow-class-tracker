@@ -4,9 +4,10 @@ import { mkdtemp, mkdir, readFile, writeFile, rm, access } from "node:fs/promise
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createServer } from "node:http";
-import { runGuideHarvest } from "../src/lib-guide-runner.mjs";
+import { runGuideHarvest, TRANSPORT_FAILURE } from "../src/lib-guide-runner.mjs";
 import { BROWSER_HEADERS, BROWSER_UA, buildGuidePayload, fetchText, fetchTextCurl } from "../src/lib-guides.mjs";
 import { icyVeinsFetcher } from "../src/harvest-guide-icyveins.mjs";
+import { fetchWowhead } from "../src/harvest-guide-wowhead.mjs";
 
 const json = async path => JSON.parse(await readFile(new URL(`../${path}`, import.meta.url), "utf8"));
 async function fixture(t) {
@@ -58,6 +59,7 @@ test("failed forced harvest preserves downstream candidates and reports retrieva
   assert.deepEqual(stage.verified, {});
   assert.equal(Object.keys(stage.failures).length, 2);
   assert.equal(stage.failures["Frost Mage"].reason, "HTTP 403");
+  assert.equal(stage.blocked, undefined, "a pass that reached its end is never a block, however it failed");
 });
 
 test("partial forced failure stages success, resumes only failed specs, and retains mixed-age verification", async t => {
@@ -145,7 +147,7 @@ test("first-run single-spec harvest keeps never-attempted coverage pending and s
 test("fetch transports distinguish origin 404 from HTTP errors and timeouts", async t => {
   const server = createServer((req, res) => {
     if (req.url === "/slow") return;
-    res.statusCode = req.url === "/missing" ? 404 : req.url === "/blocked" ? 403 : 200;
+    res.statusCode = req.url === "/missing" ? 404 : req.url === "/blocked" ? 403 : req.url === "/challenge" ? 202 : 200;
     res.end("guide body ".repeat(200));
   });
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
@@ -155,6 +157,8 @@ test("fetch transports distinguish origin 404 from HTTP errors and timeouts", as
     const opts = { tries: 1, delayMs: 0 };
     assert.equal(await fetcher(`${base}/missing`, opts), null);
     await assert.rejects(fetcher(`${base}/blocked`, opts), /HTTP 403/);
+    // Wowhead's AWS WAF answers a walled request 202 with a script long enough to pass for a page
+    await assert.rejects(fetcher(`${base}/challenge`, opts), /HTTP 202/);
     assert.match(await fetcher(`${base}/ok`, opts), /^guide body/);
     await assert.rejects(fetcher(`${base}/slow`, { ...opts, timeoutMs: fetcher === fetchText ? 20 : 0.02 }), /fetch failed/);
   }
@@ -202,7 +206,34 @@ test("repeated transport refusals stop early and never replace the published gui
   } }), /stopped after three consecutive transport failures/);
   assert.equal(calls,3);
   assert.equal(await readFile(f.path,"utf8"),f.bytes);
-  const staging = JSON.parse(await readFile(join(f.root,".guide-work","icyveins.json"),"utf8"));
+  const stagePath = join(f.root,".guide-work","icyveins.json");
+  const staging = JSON.parse(await readFile(stagePath,"utf8"));
   assert.equal(Object.keys(staging.failures).length,3);
   assert.deepEqual(staging.verified,{});
+  // the weekly workflow reads this marker to warn instead of failing (surface-guide-refresh.mjs)
+  assert.deepEqual(staging.blocked,{ at:"2026-09-04", reason:"HTTP 429 Too Many Requests" });
+  // a resumed refresh that gets through and then fails on a parse is broken, not blocked
+  await assert.rejects(f.run({ args:["--force"], harvestSpec: async s => {
+    if (s.spec === "Frost") throw new Error("Frost Mage: guide has no parsed priorities or BiS");
+    return structuredClone(f.guide.specs["Frost Mage"]);
+  } }), /1 spec retrievals failed/);
+  assert.equal(JSON.parse(await readFile(stagePath,"utf8")).blocked, undefined);
+});
+
+test("a walled Wowhead page fails as a transport failure, and a page without guide markup does not", async () => {
+  const url = "https://www.wowhead.com/guide/classes/mage/frost/bis-gear";
+  const walled = async () => { throw new Error(`curl fetch failed for ${url}: HTTP 202`); };
+  const bare = async () => "<html>" + "no guide here ".repeat(100) + "</html>";
+  const guide = async () => "<script>WH.markup.printHtml(\"[b]guide[/b]\")</script>";
+  // 2026-10-27 on a runner: curl met the AWS WAF challenge and r.jina.ai answered without markup
+  await assert.rejects(fetchWowhead(url, { curl: walled, node: bare }),
+    e => TRANSPORT_FAILURE.test(e.message) && /HTTP 202; the r\.jina\.ai fallback returned no guide markup$/.test(e.message));
+  await assert.rejects(fetchWowhead(url, { curl: walled, node: async () => { throw new Error("fetch failed for proxy: HTTP 451"); } }),
+    e => TRANSPORT_FAILURE.test(e.message) && /HTTP 202; the r\.jina\.ai fallback failed too: .*HTTP 451$/.test(e.message));
+  // Wowhead answered but the page changed: recipe drift, even when the proxy also fails
+  for (const node of [bare, async () => { throw new Error("fetch failed for proxy: HTTP 429"); }])
+    await assert.rejects(fetchWowhead(url, { curl: bare, node }),
+      e => !TRANSPORT_FAILURE.test(e.message) && /markup missing/.test(e.message));
+  assert.equal(await fetchWowhead(url, { curl: async () => null, node: bare }), null);
+  assert.match(await fetchWowhead(url, { curl: walled, node: guide }), /WH\.markup\.printHtml/);
 });

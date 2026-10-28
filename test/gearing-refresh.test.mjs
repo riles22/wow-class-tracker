@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { checkGearingGuides, GEARING_GUIDE_SOURCES } from "../src/check-gearing-guides.mjs";
+import { surfaceGuideRefresh, workflowCommand } from "../src/surface-guide-refresh.mjs";
 
 const roster = ["A Fixture", "B Fixture", "C Fixture", "D Fixture"];
 const options = { roster, nowDate: "2026-09-05" };
@@ -135,6 +136,41 @@ test("guide gate rejects missing/invalid/regressed verification and disguised fe
   delete error.icyveins.coverage.specsAbsent[0].verifiedAt;
   error.icyveins.coverage.specsAbsent[0].reason = "HTTP 404";
   assert.throws(() => checkGearingGuides(prior, error, options), /verification date/);
+});
+
+test("a harvest stopped by transport failures warns; every other unsuccessful harvest fails the run", () => {
+  const ok = { icyveins: "success", wowhead: "success", method: "success" };
+  assert.deepEqual(surfaceGuideRefresh(ok), {
+    summary: ["Icy Veins: verified", "Wowhead: verified", "Method: verified"], warnings: [], errors: [] });
+  // the 2026-10-27 run: Icy Veins behind Cloudflare, Wowhead behind the AWS WAF challenge
+  const stage = (sourceId, reason) => ({ sourceId, blocked: { at: "2026-10-27", reason } });
+  const walled = surfaceGuideRefresh({ ...ok, icyveins: "failure", wowhead: "failure" }, {
+    icyveins: stage("icyveins", "fetch failed for https://example.com/a: HTTP 403"),
+    wowhead: stage("wowhead", "curl fetch failed for https://example.com/b: HTTP 202"),
+  }, { icyveins: "2026-09-22", wowhead: "2026-09-30" });
+  assert.deepEqual(walled.errors, []);
+  assert.deepEqual(walled.warnings, [
+    "Icy Veins: blocked (fetch failed for https://example.com/a: HTTP 403); published guide unchanged, verified through 2026-09-22",
+    "Wowhead: blocked (curl fetch failed for https://example.com/b: HTTP 202); published guide unchanged, verified through 2026-09-30",
+  ]);
+  // no block marker (a parse failure, recipe drift, scattered failures), a marker without a
+  // reason, or another source's staging: the failure stays red
+  for (const staged of [undefined, null, { sourceId: "method", failures: { "Frost Mage": { reason: "markup missing" } } },
+    { sourceId: "method", blocked: {} }, { sourceId: "method", blocked: { reason: "" } }, stage("wowhead", "HTTP 403")]) {
+    const result = surfaceGuideRefresh({ ...ok, method: "failure" }, { method: staged });
+    assert.deepEqual(result.warnings, []);
+    assert.match(result.errors.join("\n"), /^Method: harvest failure and not a transport block; published guide unchanged\./);
+  }
+  // an outcome that is not a plain failure fails closed, block marker or not
+  for (const outcome of [undefined, "", "cancelled", "skipped"]) {
+    const result = surfaceGuideRefresh({ ...ok, wowhead: outcome }, { wowhead: stage("wowhead", "HTTP 403") });
+    assert.equal(result.warnings.length, 0);
+    assert.equal(result.errors.length, 1, String(outcome));
+  }
+});
+
+test("a surfaced message stays on its workflow command's line", () => {
+  assert.equal(workflowCommand("warning", "a\r\n::error::b 100%"), "::warning::a%0D%0A::error::b 100%25");
 });
 
 test("guide gate accepts the current complete three-source roster without changing its evidence", async () => {

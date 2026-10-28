@@ -86,15 +86,13 @@ jobs:
         run: |
           gh workflow run deploy.yml --ref master -f commit_sha="$(git rev-parse HEAD)"
           gh workflow run ci.yml --ref master -f commit_sha="$(git rev-parse HEAD)"
+      # A source whose harvest stopped on transport failures alone (a 403, the AWS WAF
+      # challenge, timeouts) is walled, not broken: it keeps its published guide and warns,
+      # and the freshness heartbeat ages that guide. Any other failed harvest fails the run.
       - name: Surface incomplete source refreshes
         if: always()
         env:
-          IV: ${{ steps.icyveins.outcome }}
-          WH: ${{ steps.wowhead.outcome }}
+          ICYVEINS: ${{ steps.icyveins.outcome }}
+          WOWHEAD: ${{ steps.wowhead.outcome }}
           METHOD: ${{ steps.method.outcome }}
-        run: |
-          printf 'Icy Veins: %s\nWowhead: %s\nMethod: %s\n' "$IV" "$WH" "$METHOD" >> "$GITHUB_STEP_SUMMARY"
-          if [ "$IV" != success ] || [ "$WH" != success ] || [ "$METHOD" != success ]; then
-            echo "::error::Some guides could not be verified; their published source remains unchanged. Review the staging artifact."
-            exit 1
-          fi
+        run: node src/surface-guide-refresh.mjs
