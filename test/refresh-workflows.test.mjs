@@ -4,24 +4,22 @@ import assert from "node:assert/strict";
 import { readFileSync, readdirSync } from "node:fs";
 const workflow = name => readFileSync(new URL(`../.github/workflows/${name}.yml`,import.meta.url),"utf8").replace(/\r\n?/g, "\n");
 
-test('all four page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
+test('all three page browser checks run in every browser job and historical receipts are immutable during refresh', () => {
   const ci = workflow('ci');
   assert.match(ci, /browser: \[chromium, firefox, webkit\]/);
   const browserCommand = ci.match(/run: node --test ([^\r\n]+)/)?.[1];
   assert.ok(browserCommand, 'CI runs the page browser suites');
   for (const file of ['test/ui-invariants.test.mjs', 'test/forecast-report-ui.test.mjs',
-    'test/season-archive-ui.test.mjs', 'gearing/test/ui-invariants.test.mjs'])
+    'test/season-archive-ui.test.mjs'])
     assert.ok(browserCommand.split(/\s+/).includes(file), `${file} runs in the browser matrix`);
   assert.match(workflow('nightly'), /git diff --quiet HEAD --[^\n]*data\/predictions\//);
 });
 
-test("nightly checks the trusted refresh base before overlay and gates gearing before publication",()=>{
+test("nightly checks the trusted refresh base before overlay and publishes without a rebase or force-push",()=>{
   const text=workflow("nightly");
   assert.ok(text.indexOf("run: node src/check-refresh-base.mjs") < text.indexOf("- name: Download refresh output"));
   assert.match(text,/REFRESH_BASE_SHA: \$\{\{ github\.sha \}\}/);
   assert.ok(text.indexOf("run: node src/fetch-source-health.mjs") < text.indexOf("- name: Primary full refresh"));
-  assert.ok(text.indexOf("node gearing/src/harvest-specs.mjs --check") < text.indexOf('- name: "Gate 1:'));
-  assert.match(text,/git add -- gearing\/data\/specs\.json gearing\/wow-s2-gearing\.html/);
   assert.doesNotMatch(text,/git rebase|git push[^\n]*--force/);
 });
 
@@ -44,26 +42,6 @@ test("the failed-publish report fences gate output with a fence the output canno
     ["x\n``````` seven\n``` three\n", 8],
     ["no trailing newline ````", 5],
   ]) assert.equal(fenceFor(body), "`".repeat(length), JSON.stringify(body));
-});
-
-test("weekly guide publication isolates failed sources and keeps explicit validation and paths",()=>{
-  const text=workflow("gearing-refresh");
-  assert.match(text,/group: nightly-refresh/);
-  for(const source of ["icyveins","wowhead","method"]){
-    assert.match(text,new RegExp(`id: ${source}\\s+continue-on-error: true\\s+timeout-minutes: 12\\s+run: node gearing/src/harvest-guide-${source}\\.mjs --force`));
-  }
-  assert.ok(text.indexOf("node src/check-gearing-guides.mjs") < text.indexOf("npm test"));
-  assert.ok(text.indexOf("npm test") < text.indexOf("git commit"));
-  assert.ok(text.indexOf("git push origin HEAD:master") < text.indexOf("gh workflow run deploy.yml"));
-  assert.match(text,/git add -- gearing\/data\/guides\/icyveins\.json gearing\/data\/guides\/wowhead\.json gearing\/data\/guides\/method\.json gearing\/data\/specs\.json gearing\/wow-s2-gearing\.html dist\//);
-  assert.match(text,/Surface incomplete source refreshes\s+if: always\(\)/);
-  // surface-guide-refresh.mjs reads each outcome from the source id in capitals; a renamed
-  // variable would reach it as a missing outcome and fail every run.
-  const surface=text.slice(text.indexOf("- name: Surface incomplete source refreshes"));
-  for(const source of ["icyveins","wowhead","method"])
-    assert.match(surface,new RegExp(`${source.toUpperCase()}: \\$\\{\\{ steps\\.${source}\\.outcome \\}\\}`));
-  assert.match(surface,/run: node src\/surface-guide-refresh\.mjs$/m);
-  assert.doesNotMatch(text,/git add \.|git add -A|git rebase|git push[^\n]*--force/);
 });
 
 test("every job pins one explicit Ubuntu image, so the runner OS changes only by a reviewed commit", () => {

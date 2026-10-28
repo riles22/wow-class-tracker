@@ -11,7 +11,7 @@
 -->
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-zBrIMuD3X9GmfJMQX2UERVxo8YGkSpAdbA6JUmyyUMI='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/3NTl1fh6tUK+XrWgiteHJOzsAHDEvuRt06lxXbXBeQ=' 'sha256-QgsB6J8i4u0IuC/C+Sc1bQTJ9JaKBirvIKALOb8rVUU='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="author" content="riles22">
 <title>Spec Tracker — WoW multi-source spec consensus</title>
@@ -134,7 +134,6 @@ try {
     .tbsep{display:none}
     .pc-full{display:none}
     .pc-short{display:inline}
-    .sitetabs{gap:10px; margin-left:auto; font-size:12px}
     .topbar .search{flex:1 1 100%; order:1}
     .topbar .finderbtn{order:2}
   }
@@ -191,28 +190,6 @@ try {
     margin-top:0; display:flex; gap:6px 14px; flex-wrap:wrap; min-width:0
   }
   .stamp b{color:var(--ink-dim); font-weight:500}
-
-  /* ---------- site tabs ----------
-     Top-level navigation between the two artifacts this project publishes: the Spec
-     Tracker (index.html) and the Season 2 gearing explorer (gearing.html). Gearing used
-     to sit in the controls row as a fourth CTA button, which read as a tool INSIDE the
-     tracker rather than the separate page it is. Sits at the foot of the masthead so the
-     strip is the boundary between site chrome and the panel it selects, tab-style.
-     Two pages, so these are links, not buttons — the current one is aria-current. */
-  /* Inline in the bar now, not a tab strip under a tall header. */
-  .sitetabs{display:flex; gap:10px; margin:0; padding:0; border-bottom:0; position:static; flex:none}
-  .sitetab{
-    font-family:var(--body); font-size:12.5px; font-weight:600; text-decoration:none;
-    color:var(--ink-faint); background:transparent; border:0;
-    border-radius:6px; padding:5px 3px;
-    display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
-    transition:color .15s, box-shadow .15s
-  }
-  .sitetab:hover{color:var(--ink)}
-  .sitetab[aria-current="page"]{color:var(--ink); box-shadow:inset 0 -2px 0 var(--accent)}
-  .sitetab:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
-  @media(pointer:coarse){ .sitetab{min-height:44px} }
-  @media(max-width:560px){ .sitetab{font-size:12.5px; padding:9px 12px 10px} }
 
   /* ---------- controls ---------- */
   .controls{
@@ -446,13 +423,8 @@ try {
   .cmp-tray .cmp-item{display:flex; align-items:center; gap:8px; font-size:13px}
   .cmp-tray .cmp-item button{background:none; border:0; color:var(--ink-faint); cursor:pointer; font-size:13px}
   .cmp-tray .cmp-go{font-family:var(--body); font-weight:600; font-size:13px; background:var(--accent); color:#160a24; border:0; border-radius:8px; padding:7px 12px; cursor:pointer}
-  .cmpbtn, .gearlink{font-family:var(--body); font-size:12px; font-weight:600; color:var(--accent-2); background:none; border:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent); border-radius:7px; padding:3px 9px; cursor:pointer; margin-left:8px}
+  .cmpbtn{font-family:var(--body); font-size:12px; font-weight:600; color:var(--accent-2); background:none; border:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent); border-radius:7px; padding:3px 9px; cursor:pointer; margin-left:8px}
   .cmpbtn.on{background:var(--accent-2); color:#08222e; border-color:var(--accent-2)}
-  /* the drawer's link into the gearing explorer — shares the Compare pill's shape */
-  .gearlink{display:inline-block; text-decoration:none; color:var(--gold);
-    border-color:color-mix(in srgb,var(--gold) 40%,transparent)}
-  .gearlink:hover{border-color:var(--gold); color:var(--gold)}
-  .gearlink:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px}
   .cmp-table{width:100%; border-collapse:collapse; font-size:13px}
   .cmp-table th, .cmp-table td{padding:8px 10px; text-align:left; border-bottom:1px solid var(--edge); vertical-align:top}
   .cmp-table th:first-child, .cmp-table td:first-child{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-faint); white-space:nowrap}
@@ -1097,8 +1069,7 @@ try {
   html[data-reduce-motion="true"] .seg button,
   html[data-reduce-motion="true"] .finderbtn,
   html[data-reduce-motion="true"] .fopt,
-  html[data-reduce-motion="true"] .toggle,
-  html[data-reduce-motion="true"] .sitetab{transition:none; transform:none}
+  html[data-reduce-motion="true"] .toggle{transition:none; transform:none}
   html[data-reduce-motion="true"] .finderbtn:hover,
   html[data-reduce-motion="true"] .finderbtn:active,
   html[data-reduce-motion="true"] .seg button:active,
@@ -1113,17 +1084,14 @@ try {
      100px health banner were 402 of the 637px that preceded the first spec row. What is
      deliberately spent: the 46px Cinzel wordmark, the starfield canvas, the animated rule
      and the eyebrow. What is kept: the mark, the name in Cinzel at 18px, the patch chip,
-     both site tabs, and every one of the ten controls. -->
+     and every one of the ten controls. The site tabs left with the gearing page
+     (2026-10-28): one page needs no tab strip. -->
 <header class="masthead">
   <div class="topbar">
     <a id="brandhome" class="brandlink" href="#" title="Back to the default view"><svg class="brandmark" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="14" fill="#130B22" stroke="#B57BEE" stroke-opacity=".45" stroke-width="2.5"/><rect x="12" y="13" width="40" height="9" rx="4.5" fill="#F0C24B"/><rect x="12" y="27.5" width="29" height="9" rx="4.5" fill="#C77DFF"/><rect x="12" y="42" width="19" height="9" rx="4.5" fill="#6AA8F0"/></svg></a>
     <h1 class="brandname">Spec Tracker</h1>
     <span class="patchchip"><span class="pc-full">12.1.5 — CURSE OF ULA'TEK</span><span class="pc-short">12.1.5</span></span>
     <span class="tbsep" aria-hidden="true"></span>
-    <nav class="sitetabs" aria-label="Sections">
-      <a class="sitetab" href="index.html" aria-current="page">Tracker</a>
-      <a class="sitetab" href="gearing.html" title="Season 2 gearing — best-per-slot, loot sources, item-level ladder, SimC upgrade check">Gearing</a>
-    </nav>
     <input class="search" id="search" type="search" placeholder="Search spec, class, or role…" aria-label="Search spec or class">
     <button class="finderbtn" id="ladderbtn" type="button" aria-label="Ladder"><span aria-hidden="true">📊</span><span class="btw">Ladder</span></button>
     <button class="finderbtn" id="allbtn" type="button" aria-label="Compare all"><span aria-hidden="true">⊞</span><span class="btw">Compare all</span></button>
@@ -1211,7 +1179,7 @@ try {
      where #tlcount lives (a pinned invariant reads it). -->
 <div class="pitch">
   <p class="pitchline">Every major tier list, distilled into <b>one consensus</b> — with a <b class="pm">±</b> wherever they disagree.</p>
-  <div class="sub"><details class="sub-more"><summary>How to read it</summary>Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen. The <b>⚙ S2 Gearing</b> tab is a separate explorer for Season-2 gear and loot sources.<p>A healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown.</p></details></div>
+  <div class="sub"><details class="sub-more"><summary>How to read it</summary>Where every spec of <b>WoW: Midnight</b> stands — <b>not one site's opinion</b>, but every major tier list distilled into a single consensus with a <b>±</b> wherever they disagree, layered with live numbers, sim profiles, and per-spec patch reads. <span id="tlcount">Several</span> tier lists feed a computed <b>consensus</b>, with a <b>±</b> marker where they disagree — flip between them with <b>View</b>, or pick <b>Ours: 12.1&nbsp;✦</b> for this site's own Season-2 forecast (a projection, never a source). Filter, sort, or search the roster, and click <b>any row</b> for the full read: patch changes, current numbers with ranks, sim fight profile, and community takes. Two tools up top: <b>📊 The Ladder</b> draws any measured ranking as a chart, and <b>⊞ Compare all</b> is the whole roster against every rating and rank on one screen.<p>A healer's S is best among healers, not across the whole game. Open any row for its per-source breakdown.</p></details></div>
 </div>
 
 <main class="wrap" id="main">
@@ -2124,7 +2092,7 @@ function drawerHTML(s){
   // on open, so render() rebuilds ~1.3K visible nodes instead of ~9.3K (85% was drawers).
   return `<div class="drawer-in"><div class="drawer-grid">
      <div>${left}${previewNotesHTML(s)}${showCycle?buildChangesHTML(s):""}${metricsHTML(s)}${showPtr?ptrDummyHTML(s):""}${timelineHTML(s)}</div>
-     <div>${cmpBtnHTML(s)}${gearingLinkHTML(s)}${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
+     <div>${cmpBtnHTML(s)}${tierset}${profileHTML(s)}${sourceBreakdownHTML(s)}${takesHTML(s)}${metaNotesHTML(s)}${communityHTML(s)}</div>
    </div></div>`;
 }
 
@@ -2732,7 +2700,7 @@ function setSort(key){
    listener pair on #matrix replaces 40 per-row pairs re-created every render. */
 const openRows = new Set();
 /* Sections that are the ANSWER, not the archive — never folded. */
-const DRAWER_ALWAYS_OPEN = new Set(["d-summary", "cmpbtn", "gearlink"]);
+const DRAWER_ALWAYS_OPEN = new Set(["d-summary", "cmpbtn"]);
 
 /* Group a drawer column's children into [heading, ...content] runs and wrap each run in a
    collapsed <details>. Two shapes exist and both must work:
@@ -3360,16 +3328,6 @@ const cmpOv = document.createElement("div"); cmpOv.className = "finder-ov"; cmpO
 function cmpBtnHTML(s){
   const key = `${s.class}|${s.spec}`, on = COMPARE.has(key);
   return `<button class="cmpbtn${on?' on':''}" type="button" data-cmp="${esc(key)}" aria-pressed="${on?'true':'false'}">${on?'✓ In compare':'⚖ Compare'}</button>`;
-}
-
-/* Straight into the gearing explorer with this spec already selected, instead of landing
-   on the page and re-picking the spec you just came from. Deliberately a real <a href>,
-   not a JS navigation: middle-click and open-in-new-tab work, and it degrades without JS.
-   The fragment is slugOf(), the same identifier gearing's specFromHash() reads — one
-   vocabulary across both pages. slugOf lowercases and collapses non-alphanumerics to "-",
-   so the fragment can only ever be [a-z0-9-] no matter what the roster data says. */
-function gearingLinkHTML(s){
-  return `<a class="gearlink" href="gearing.html#spec=${esc(slugOf(s))}" title="Season 2 gearing for ${esc(s.spec)} ${esc(s.class)} — best-per-slot, loot sources, item-level ladder, SimC upgrade check">⚙ Gearing</a>`;
 }
 function syncCmpButtons(){
   document.querySelectorAll(".cmpbtn[data-cmp]").forEach(b=>{

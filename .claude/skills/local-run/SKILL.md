@@ -274,8 +274,7 @@ not moved since 2026-08-25 when the lane took them on.
    2(b)'s interactive lane runs in the same browser, queue-only. Long `was_live` VODs have
    no browser route.
 
-Gearing guide pages are not in the lane yet (the harvesters fetch by URL and take no saved
-page). Bloodmallet, Murlok and Mythicstats answer plain HTTP, so they stay out of it.
+Bloodmallet, Murlok and Mythicstats answer plain HTTP, so they stay out of the lane.
 
 Independently regenerating data CI already produced is what makes a push unmergeable —
 two independently regenerated datasets do not merge mechanically (proven 2026-07-31,
@@ -319,18 +318,9 @@ no-staleness-gate policy still holds *within* whichever scope you pick.
    2026-07-31: it never gets tier-list rows, and when it is in scope it follows
    refresh-metrics' WoWMeta recipe. (Until 2026-10-06 this line said to hold WoWMeta while
    it was under review, citing a refresh-tiers log entry pruned long ago.)
-4. **Gearing guide harvest** (a separate weekly workflow since 2026-09-05, with
-   local catch-up when a provider fails):
-   when `gearing/data/guides/*.json` `harvestedAt` ages past ~7 days during the launch
-   window (through ~09-15; the contract's 30d thresholds are the backstop, not the
-   target), re-run the three harvesters from `gearing/`:
-   `node src/harvest-guide-icyveins.mjs --force && node src/harvest-guide-wowhead.mjs
-   --force && node src/harvest-guide-method.mjs --force`, then `npm run gearing:build`
-   from the repo root and let the root suite gate it. Loot/tier/catalyst re-harvests
-   (`harvest-raid` / `harvest-dungeons` / `harvest-tier` / `harvest-catalyst-allocations`)
-   only on a loot-change signal or owner ask — each has fail-closed change gates that
-   will tell you if reality moved. NEVER re-run `harvest-sheet.mjs` as-is (it would
-   regress the owner-supplied Gandalin ilvl data — gearing/README.md).
+
+The gear explorer, and the guide harvest this list carried as its fourth item, were removed
+from the project on 2026-10-28; there is no gearing step.
 
 ## Orchestration limits (a scheduled run is unattended)
 
@@ -359,8 +349,6 @@ per bracket and each page's own date; then the browser lane: each site read, sto
 what) or skipped, Archon's series lines (✓ written, = unchanged, – empty, ✗ refused and
 why) and any value-move finding with how it was acked or held; then builds/hotfixes
 found; 12.2 PTR announcement check; videos processed and queue count before→after;
-gearing guide harvest
-run-or-skipped and why;
 takes **and** metaNotes added; sources refreshed vs verified-unchanged; whether the
 manifest was rewritten or deliberately left alone and why; what `check-refresh
 --manifest` printed; what was rebuilt; whether you pushed, or held the push and for which
@@ -382,8 +370,7 @@ day is safe, so check run state before **every** push:
    gh run list --workflow nightly.yml --status pending
    ```
    `pending` is not optional. The `nightly-refresh` concurrency group (cancel-in-progress
-   false, shared with `gearing-refresh.yml` and `gearing-verify.yml`) holds back a run that
-   arrives while another run has the lock, and GitHub's concurrency docs call that state
+   false) holds back a run that arrives while another run has the lock, and GitHub's concurrency docs call that state
    `pending`, not `queued`. On 2026-09-15 run 34990700222 waited 5 minutes that way.
 2. The previous master commit's runs must be finished, in this order: nightly publish, the
    deploy it dispatches, then the Tests run it dispatches:

@@ -960,14 +960,6 @@ jobs:
       - name: Show what the refresh changed
         run: git status --porcelain && git --no-pager diff --stat || true
 
-      # Local consistency only: preserves original weapon/armor/fallback source dates.
-      # Runs in the trusted publish stage, never accepts gearing files from an agent.
-      - name: Synchronize gearing capabilities from verified local inputs
-        run: |
-          node gearing/src/harvest-specs.mjs
-          node gearing/src/harvest-specs.mjs --check
-          npm run gearing:build
-
       - name: "Gate 1: validate + unit tests"
         run: npm test
 
@@ -1033,7 +1025,6 @@ jobs:
         run: |
           set -euo pipefail
           node src/check-skill-logs.mjs --stage
-          git add -- gearing/data/specs.json gearing/wow-s2-gearing.html
           if git diff --cached --quiet; then
             echo "Nothing to commit"
             echo "pushed=false" >> "$GITHUB_OUTPUT"
@@ -1049,7 +1040,7 @@ jobs:
           SUMMARY="$(node -e 'const m=JSON.parse(require("fs").readFileSync("data/run-manifest.json","utf8")); console.log(String(m.summary??"refresh").replace(/[^\x20-\x7E]/g," ").replace(/\s+/g," ").trim().slice(0,180))')"
           git commit -m "Nightly refresh $(date -u +%F): ${SUMMARY}" -m "Co-Authored-By: Claude <noreply@anthropic.com>"
           if ! git push origin master; then
-            # A manual update can change source code or gearing inputs after our gates.
+            # A manual update can change source code or data after our gates.
             # Replaying only the HTML build after a rebase would publish an untested tree.
             echo "::error::Publish push rejected; re-run the full refresh against current master. No force push or partial revalidation."
             exit 1

@@ -390,43 +390,6 @@ test("freshness heartbeat flags an old manifest run and per-source staleness (da
   assert.equal(fresh.fingerprint, "");
 });
 
-test("gearing freshness is heartbeat-only and reports absence rather than passing silently (2026-08-08)", () => {
-  /* The gearing subproject had no staleness surface anywhere: not required-sources, not
-     check-refresh, not freshness.yml, and its own validator's "stale" strings are all count
-     assertions. The nightly redeployed an 08-02 page nightly and nothing would have noticed.
-     Three properties matter and each is asserted below: it lives OUTSIDE requirements[] so the
-     publish gate can never demand a manifest row for a subproject the nightly cannot refresh;
-     a checkout without gearing/ is reported, not skipped; and the tier-set sync check measures
-     WRONGNESS (the page publishing text the tracker already corrected) rather than mere age. */
-  const cfg = { ...config, gearing: { datasets: [
-    { key: "gearing-raid", file: "raid-items.json", dateField: "harvestedAt", maxAgeDays: 30 }
-  ] } };
-  const data = freshData();
-
-  const stale = checkFreshness(cfg, goodManifest(), data, "2026-09-20",
-    { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 0 });
-  assert.ok(stale.violations.some(v => v.includes("gearing-raid") && v.includes("stale")),
-    JSON.stringify(stale.violations));
-
-  const ok = checkFreshness(cfg, goodManifest(), data, "2026-08-14",
-    { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 0 });
-  assert.ok(!ok.violations.some(v => v.includes("gearing-raid")), "12 days is inside a 30-day threshold");
-
-  // Absence is REPORTED, never silent — a missing subproject must not read as a clean bill.
-  const absent = checkFreshness(cfg, goodManifest(), data, "2026-08-14", { present: false, dates: {}, tierSetDrift: 0 });
-  assert.ok(absent.report.some(l => l.includes("gearing: not present")), JSON.stringify(absent.report));
-  assert.ok(!absent.violations.some(v => v.includes("gearing")), "a checkout without gearing/ must not fail the heartbeat");
-
-  // Drift fires regardless of age — this is the Preservation Evoker shape.
-  const drift = checkFreshness(cfg, goodManifest(), data, "2026-08-14",
-    { present: true, dates: { "raid-items.json": "2026-08-02" }, tierSetDrift: 2 });
-  assert.ok(drift.violations.some(v => v.includes("gearing-tierset-sync") && v.includes("harvest-specs")),
-    JSON.stringify(drift.violations));
-
-  // And it stays out of requirements[], so checkManifest can never demand a gearing row.
-  assert.ok(!(config.requirements ?? []).some(r => String(r.key).startsWith("gearing")));
-});
-
 test("freshness heartbeat uses startedAt at full-timestamp precision — 36h means 36h, not whole days", () => {
   const m = { ...goodManifest(), startedAt: "2026-07-14T02:00:00Z" };
   const stale = checkFreshness(config, m, freshData(), "2026-07-15T20:00:00Z"); // 42h after startedAt
@@ -435,38 +398,6 @@ test("freshness heartbeat uses startedAt at full-timestamp precision — 36h mea
 
   const ok = checkFreshness(config, m, freshData(), "2026-07-15T10:00:00Z"); // 32h
   assert.deepEqual(ok.violations, []);
-});
-
-test("gearing structural receipts never hide drift or claim future verification", () => {
-  const cfg = { ...config, gearing: { structuralSync: true, datasets: [
-    { key: "gearing-specs", file: "specs.json", dateField: "structuralSync.checkedAt", maxAgeDays: 30 }
-  ] } };
-  const state = { present: true, dates: { "specs.json": "2026-08-14" }, tierSetDrift: 0 };
-  assert.ok(!checkFreshness(cfg, goodManifest(), freshData(), "2026-08-14", state).fingerprint.includes("gearing"));
-  const drift = checkFreshness(cfg, goodManifest(), freshData(), "2026-08-14",
-    {...state, structuralSyncError:"recorded provenance differs from current inputs"});
-  assert.ok(drift.fingerprint.includes("gearing-specs-sync"));
-  assert.ok(drift.violations.some(v=>v.includes("recorded provenance differs")));
-  const future = checkFreshness(cfg, goodManifest(), freshData(), "2026-08-13", state);
-  assert.ok(future.violations.some(v=>v.includes("check date is in the future")));
-});
-
-test("weekly source verification alerts on missed runs, changed facts, errors and future receipts", () => {
-  const cfg = { ...config, gearing: { datasets: [
-    { key: "gearing-tier", file: "tier-items.json", dateField: "harvestedAt", maxAgeDays: 30 }
-  ], verification: { maxAgeDays: 9, groups: ["tierBonuses"] } } };
-  const state = { present: true, dates: { "tier-items.json": "2026-08-10" },
-    verification: { groups: { tierBonuses: { status: "verified", reason: "Matches reviewed source", lastVerifiedAt: "2026-08-14T12:00:00.000Z" } } } };
-  assert.ok(!checkFreshness(cfg, goodManifest(), freshData(), "2026-08-15", state).fingerprint.includes("gearing"));
-  for (const stamp of ["2026-08-01T12:00:00.000Z", "2026-08-16T12:00:00.000Z", "invalid", null]) {
-    const changed = structuredClone(state); changed.verification.groups.tierBonuses.lastVerifiedAt = stamp;
-    assert.ok(checkFreshness(cfg, goodManifest(), freshData(), "2026-08-15", changed).fingerprint.includes("gearing-verify-tierBonuses"));
-  }
-  for (const changed of [
-    { ...state, verification: null },
-    { ...state, verificationError: "Published facts changed" },
-    { ...state, verification: { groups: { tierBonuses: { ...state.verification.groups.tierBonuses, status: "review-required" } } } },
-  ]) assert.ok(checkFreshness(cfg, goodManifest(), freshData(), "2026-08-15", changed).fingerprint.includes("gearing-verify-tierBonuses"));
 });
 
 test("a newer history snapshot counts as proof of life (local refreshes count), date-grained", () => {
@@ -965,7 +896,7 @@ test("age gate: once flipped, the check goes quiet forever", async () => {
 
 const LABEL_KEY = "live-patch-label";
 const SEASON_OPENING = "12.1"; // fixture: the season's opening label, which a mid-season patch leaves in place
-const labelFlipAt = (now, labelFlip) => checkFreshness(config, goodManifest(), freshData(), now, null,
+const labelFlipAt = (now, labelFlip) => checkFreshness(config, goodManifest(), freshData(), now,
   { labelFlip: { liveLabel: SEASON_OPENING, ...labelFlip } });
 
 test("label-flip gate: inert while no due date is recorded, at any date", () => {
@@ -1306,16 +1237,16 @@ test("acceptedStale: an entry anywhere but a requirement or its published block 
   // The two positions the heartbeat reads are not misplaced.
   assert.deepEqual(misplacedAcceptances(acceptWorld(ACCEPT)), []);
   assert.deepEqual(misplacedAcceptances({ requirements: [{ ...pubConfig.requirements[0], published: { maxAgeDays: 9, acceptedStale: ACCEPT } }] }), []);
-  // A gearing dataset, the top level and a nested block are read by nothing.
+  // The top level, a nested block and the official-notes section are read by nothing.
   const elsewhere = { maxRunAgeHours: 36, acceptedStale: ACCEPT,
     requirements: [{ ...alphaReq, date: { ...alphaReq.date, acceptedStale: ACCEPT } }],
-    gearing: { datasets: [{ key: "gearing-raid", file: "raid-items.json", dateField: "harvestedAt", maxAgeDays: 30, acceptedStale: ACCEPT }] } };
+    officialNotes: { acceptedStale: ACCEPT } };
   assert.deepEqual(misplacedAcceptances(elsewhere),
-    ["acceptedStale", "requirements[0].date.acceptedStale", "gearing.datasets[0].acceptedStale"]);
+    ["acceptedStale", "requirements[0].date.acceptedStale", "officialNotes.acceptedStale"]);
   const stale = heartbeatOn(elsewhere, "2026-07-15");
   assert.equal(stale.fingerprint, "accepted-stale-invalid,alpha", "nothing was accepted, so the stale key stays plain");
   assert.equal(stale.violations.filter(v => v.startsWith("accepted-stale-invalid: ")).length, 3, stale.violations.join("\n"));
-  assert.ok(stale.violations.includes("accepted-stale-invalid: gearing.datasets[0].acceptedStale is not read by the heartbeat, which reads acceptedStale only on requirements[] and requirements[].published, so it accepts nothing; move or remove it in data/required-sources.json"),
+  assert.ok(stale.violations.includes("accepted-stale-invalid: officialNotes.acceptedStale is not read by the heartbeat, which reads acceptedStale only on requirements[] and requirements[].published, so it accepts nothing; move or remove it in data/required-sources.json"),
     stale.violations.join("\n"));
   assert.equal(heartbeatOn(elsewhere, "2026-07-15", freshData(["2026-07-15", "2026-07-15"])).fingerprint, "accepted-stale-invalid",
     "red even with nothing stale");
@@ -1344,51 +1275,7 @@ test("maxAgeDays null: no heartbeat age check, while the publish gate still hold
   assert.ok(honest.degraded.some(d => d.startsWith("wclx: unreachable")));
 });
 
-test("gearing: a dataset with a verificationGroup ages from the newer of its own date and that group's last verification", () => {
-  /* Owner decision 2026-10-06. Weekly source verification re-proves the raid, dungeon, tier,
-     allocation and Catalyst-rule facts without re-harvesting them, so their own harvest or
-     review dates only grew older. currentVerification nulls lastVerifiedAt once the published
-     facts change, so a verification can only re-date the facts it actually checked. */
-  const cfg = { maxRunAgeHours: 36, requirements: [], gearing: { datasets: [
-    { key: "gearing-raid", file: "raid-items.json", dateField: "harvestedAt", verificationGroup: "raid", maxAgeDays: 30 },
-    { key: "gearing-sheet", file: "sheet-rewards.json", dateField: "harvestedAt", maxAgeDays: 30 }
-  ], verification: { maxAgeDays: 9, groups: ["raid"] } } };
-  const day = "2026-09-20";
-  const run = (raid, { harvested = "2026-08-02", ...extra } = {}) =>
-    checkFreshness(cfg, { run: day, startedAt: `${day}T10:41:00Z` }, freshData(), `${day}T19:23:00Z`,
-      { present: true, tierSetDrift: 0, dates: { "raid-items.json": harvested, "sheet-rewards.json": "2026-08-02" },
-        verification: { groups: { raid } }, ...extra });
-  const lastGood = { status: "unverified", reason: "Harvester rejected the source", lastVerifiedAt: "2026-09-15T04:59:12.883Z" };
-
-  // The last SUCCESSFUL verification dates the facts while this week's failed attempt still
-  // reports as gearing-verify-raid. A dataset without a group keeps its own date.
-  const r = run(lastGood);
-  assert.equal(r.fingerprint, "gearing-sheet,gearing-verify-raid", r.violations.join("\n"));
-  assert.ok(r.report.some(l => l.startsWith("gearing-raid: 2026-09-15 (5d, max 30d) — last raid source verification (harvestedAt 2026-08-02")),
-    r.report.join("\n"));
-  // A newer harvest beats an older verification.
-  const harvested = run(lastGood, { harvested: "2026-09-18" });
-  assert.ok(harvested.report.some(l => l.startsWith("gearing-raid: 2026-09-18 (2d, max 30d) — harvestedAt; last raid verification 2026-09-15 is not newer")),
-    harvested.report.join("\n"));
-  // No usable verification: the dataset falls back to its own date, and says so.
-  for (const [label, raid, extra] of [
-    ["facts changed since the verification", { ...lastGood, lastVerifiedAt: null }, {}],
-    ["verification unreadable", lastGood, { verificationError: "Invalid gearing verification report schema" }],
-    ["stamp from the future", { ...lastGood, lastVerifiedAt: "2026-09-21T04:59:12.883Z" }, {}],
-    ["unparseable stamp", { ...lastGood, lastVerifiedAt: "last Tuesday" }, {}],
-  ]) {
-    const fallback = run(raid, extra);
-    assert.ok(fallback.fingerprint.split(",").includes("gearing-raid"), `${label}: ${fallback.fingerprint}`);
-    assert.ok(fallback.violations.some(v => v.startsWith("gearing-raid (gearing/data/raid-items.json) is 49 days stale — max 30d (newer of harvestedAt and the last raid source verification; check gearing-verify.yml too)")),
-      `${label}: ${fallback.violations.join("\n")}`);
-  }
-  // Absence is reported against both dates; a verification alone can date a dataset.
-  assert.ok(run({ ...lastGood, lastVerifiedAt: null }, { harvested: null }).violations
-    .includes("gearing-raid: gearing/data/raid-items.json carries no harvestedAt date and no current raid verification"));
-  assert.ok(!run(lastGood, { harvested: null }).fingerprint.split(",").includes("gearing-raid"));
-});
-
-test("the real contract: every acceptance is well-formed and reachable, and every gearing verificationGroup exists", async () => {
+test("the real contract: every acceptance is well-formed and reachable", async () => {
   /* Structure only. There is deliberately no date assertion: a lapsed acceptance is the
      heartbeat's news to deliver, and a date check here would red every nightly's Gate 1 instead. */
   const contract = JSON.parse(await readFile(new URL("../data/required-sources.json", import.meta.url), "utf8"));
@@ -1412,10 +1299,5 @@ test("the real contract: every acceptance is well-formed and reachable, and ever
   // Turning the age check off removes nothing else: the success-claim and floor teeth need both.
   for (const req of contract.requirements.filter(r => r.maxAgeDays === null && r.evidence)) {
     assert.ok(req.date && req.rows?.min > 0, `${req.key}: an evidence-gated requirement with no age check must keep its date probe and row floor`);
-  }
-  for (const ds of contract.gearing?.datasets ?? []) {
-    if (ds.verificationGroup == null) continue;
-    assert.ok(contract.gearing.verification?.groups?.includes(ds.verificationGroup),
-      `${ds.key}: verificationGroup "${ds.verificationGroup}" is not one of gearing.verification.groups`);
   }
 });

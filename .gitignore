@@ -36,8 +36,9 @@ source-health/
 metrics-fetch/
 official-notes/
 
-# The SimC pipeline was retired 2026-08-18 (gearing-s2-scope Phase A), but its local run
-# scratch and crash-leftover lock files may still exist on machines that ran it — keep
-# ignoring both so they can never be staged by accident.
-gearing/.simc-work/
-gearing/data/*.promotion.lock
+# The gear explorer (gearing/) was removed 2026-10-28. Checkouts that ran it keep its
+# ignored local scratch (.guide-work/, .simc-work/, a local AGENTS.md), because git leaves
+# ignored files behind when the tracked ones go, and the gearing/.gitignore that covered
+# .guide-work/ went with them. Ignore the whole directory so a leftover is never staged
+# and never dirties the local run's clean-tree precheck.
+gearing/

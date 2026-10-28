@@ -630,18 +630,15 @@ test("no agent-writable field can inject markup or a handler into the rendered p
             if(e.rel === "apple-touch-icon" && e.type === "image/png" && e.sizes.value === "180x180" && href === "/wow-class-tracker/apple-touch-icon.png") return false;
             return true;
           })
-          // The pages this build publishes are the ONLY sanctioned relative hrefs. Both
-          // appear because the masthead tab strip links the pair in both directions
-          // (2026-08-05) — index.html is the tracker's own tab, gearing.html its sibling.
-          // gearing.html may carry a fragment: the drawer deep-links a spec into the
-          // explorer as gearing.html#spec=<slug> (2026-08-07). The fragment charset is
-          // pinned to [a-z0-9=&-] because slugOf() lowercases and collapses everything
-          // else to "-", so no roster value can widen it — a scheme or path cannot be
-          // smuggled through. s1.html is the frozen Season-1 archive's footer link
-          // (2026-08-12) — a deliberate one-name addition, not a pattern; the 12.2 cycle
-          // adds s2 here as its own reviewed edit. Anchored both ends; any other relative
+          // The pages this build publishes are the ONLY sanctioned relative hrefs:
+          // index.html (the tracker itself), forecast-report.html (the forecast banner) and
+          // s1.html, the frozen Season-1 archive's footer link (2026-08-12) — a deliberate
+          // one-name addition, not a pattern; the 12.2 cycle adds s2 here as its own
+          // reviewed edit. The gear explorer's gearing.html, and its #spec=<slug> deep link,
+          // left with the explorer (2026-10-28), and with them the only relative href that
+          // carried a fragment, so none may now. Anchored both ends; any other relative
           // href, or a path prefix wrapped around one of these, is still a finding.
-          .filter(e => !/^(?:index|gearing|s1|forecast-report)\.html(?:#[a-z0-9=&-]*)?$/.test(e.getAttribute("href") ?? ""))
+          .filter(e => !/^(?:index|s1|forecast-report)\.html$/.test(e.getAttribute("href") ?? ""))
           .filter(e => !/^(https:|#|$)/.test(e.getAttribute("href") ?? "")).length,
         markVisible: document.body.innerText.includes(mark),
         // Count the sinks the probe actually reached. A poisoned field whose section never
@@ -1822,29 +1819,6 @@ ui("Compare all announces raw scores, ranks, and mixed PTR score ordering accura
   await page.keyboard.press('Space');
   assert.equal(await direction(),'ascending');
   assert.equal(await first(),targets[0]);
-});
-
-ui("Gearing keeps its link label and never changes the comparison selection", async page => {
-  const row = page.locator('.row').first();
-  await row.locator('.spec-txt').click();
-  const gear = row.locator('a.gearlink');
-  const href = await gear.getAttribute('href');
-  assert.match(href, /^gearing\.html#spec=/);
-  // Keep this page loaded to observe state and errors, while allowing the click
-  // to pass through the same drawer handlers as a real navigation.
-  await page.evaluate(()=>document.addEventListener('click', event=>{
-    if(event.target.closest('a.gearlink')) event.preventDefault();
-  }));
-  await gear.click();
-  assert.deepEqual(await page.evaluate(()=>[...COMPARE]), []);
-  await row.locator('.cmpbtn[data-cmp]').click();
-  const selected = await page.evaluate(()=>[...COMPARE]);
-  assert.equal(selected.length, 1);
-  assert.equal(await gear.innerText(), '⚙ Gearing');
-  assert.equal(await gear.getAttribute('aria-pressed'), null);
-  assert.equal(await gear.getAttribute('href'), href);
-  await gear.click();
-  assert.deepEqual(await page.evaluate(()=>[...COMPARE]), selected);
 });
 
 ui("tracker search matches role names and displayed role abbreviations", async page => {

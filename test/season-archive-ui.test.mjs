@@ -39,7 +39,7 @@ test("archive phone navigation stays visible and wide tables scroll by keyboard"
         const box = el.getBoundingClientRect(), masthead = el.closest(".masthead").getBoundingClientRect();
         return { left: box.left, right: box.right, top: box.top, bottom: box.bottom, mastheadBottom: masthead.bottom };
       }));
-      assert.equal(tabs.length, 3);
+      assert.equal(tabs.length, 2);
       for (const tab of tabs) {
         assert.ok(tab.left >= 0 && tab.right <= width, `all archive tabs fit at ${width}px`);
         assert.ok(tab.bottom <= tab.mastheadBottom + 1, "wrapped tabs are not clipped by the masthead");

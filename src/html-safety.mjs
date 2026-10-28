@@ -1,21 +1,22 @@
-/* HTML-output safety shared by both published pages (CodeQL triage, 2026-09-22).
+/* HTML-output safety for the tracker build (CodeQL triage, 2026-09-22). The gear explorer's
+   build shared it until that page was removed on 2026-10-28.
 
    esc() is the one escape. It covers all five characters that matter (& < > " '), so the
-   same helper is safe in element text and in quoted attribute values. Both pages are
-   self-contained (a hashed CSP admits no external script), so src/template.html and
-   gearing/src/app.template.html each carry a byte-identical copy of ESC_SOURCE, and
-   test/escaping.test.mjs fails if either copy drifts. The builds use esc() directly.
+   same helper is safe in element text and in quoted attribute values. The tracker page is
+   self-contained (a hashed CSP admits no external script), so src/template.html carries a
+   byte-identical copy of ESC_SOURCE, and test/escaping.test.mjs fails if that copy drifts.
+   The build uses esc() directly.
 
    inlineScripts() and scriptTagCount() feed the build-time CSP hash. Extraction uses no
    regular expression: a regex tag matcher misses variants such as `</script >`, and the
-   parser, not the regex, decides where a script ends. So the builds hash only the bare
-   `<script>` blocks the templates author, refuse a body that contains any other script end
-   tag, and refuse an output with more script start tags (any case, any attributes) than
+   parser, not the regex, decides where a script ends. So the build hashes only the bare
+   `<script>` blocks the template authors, refuses a body that contains any other script end
+   tag, and refuses an output with more script start tags (any case, any attributes) than
    its template has. */
 
 export const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/** The exact definition line each published template must contain. */
+/** The exact definition line the tracker template must contain. */
 export const ESC_SOURCE = `const esc = ${esc};`;
 
 /** Bodies of the bare `<script>` blocks, in document order. */

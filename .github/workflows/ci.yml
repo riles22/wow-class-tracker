@@ -144,7 +144,7 @@ jobs:
           echo "::error::Could not download $PLAYWRIGHT_BROWSER in two attempts."
           exit 1
       - name: UI invariants
-        run: node --test test/ui-invariants.test.mjs test/forecast-report-ui.test.mjs test/season-archive-ui.test.mjs gearing/test/ui-invariants.test.mjs
+        run: node --test test/ui-invariants.test.mjs test/forecast-report-ui.test.mjs test/season-archive-ui.test.mjs
 
   # The publishers dispatch this workflow as github-actions[bot] after each push, and
   # GitHub emails nobody when such a run fails. This last job comments on issue 15

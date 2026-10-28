@@ -2,10 +2,10 @@ name: Alert on a failed dispatched run
 
 # GitHub emails a failed run only to the user who triggered it (for a schedule, the user
 # who last edited the cron). A run that github-actions[bot] starts with `gh workflow run`
-# therefore fails in silence: nightly.yml, gearing-refresh.yml and gearing-verify.yml
-# dispatch ci.yml and deploy.yml after every push, and dispatch-nightly.yml dispatches
-# nightly.yml. Eleven of those dispatched Tests runs failed between 2026-09-16 and 09-24,
-# and nothing told the owner. Deploy runs before Tests, so a UI break could stay live.
+# therefore fails in silence: nightly.yml dispatches ci.yml and deploy.yml after every
+# push, and dispatch-nightly.yml dispatches nightly.yml. Eleven of those dispatched Tests
+# runs failed between 2026-09-16 and 09-24, and nothing told the owner. Deploy runs
+# before Tests, so a UI break could stay live.
 #
 # WHY A FINAL JOB AND NOT A `workflow_run` LISTENER: GitHub creates no workflow_run run
 # for a run whose actor is github-actions[bot]. The GITHUB_TOKEN loop protection covers
