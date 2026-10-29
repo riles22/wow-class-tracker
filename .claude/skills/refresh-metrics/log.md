@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-29 (nightly, ~17:10 UTC) — SimC new run 24; Mythicstats 1087 40 rows; Murlok 40; Bloodmallet unchanged
+
+- Murlok + Mythicstats from collector receipts only (apply-metrics metrics-fetch/updates.json, 80 rows): Murlok source date 2026-10-29; Mythicstats period 1087, 40 rows, sum 100.2, 0 retired (yesterday's invalid parse cleared). check-stable-metrics passes.
+- SimC MID2_Raid.txt new run HEAD 710c2408bf (was 6a4500db0f), 12.1.5.70575: 24/24 specs, all changed, max 0.1%, asOf 2026-10-29.
+- Bloodmallet: 24 MID2 charts dated 2026-10-28, byte-identical targets; Balance/Augmentation/Devastation error 4/4. Nothing merged.
+- WoWMeta snapshotDate 2026-09-15, rankings Last-Modified 10-20, 40 rows identical: partial. WCL from collector: raid 348 rows (12 sparse), M+ 320. Archon walled (403).
+
 ## 2026-10-28 (nightly re-run, ~20:40 UTC) — Bloodmallet adopted wholesale (24); SimC re-verified; WCL 348/320
 
 - Bloodmallet: 24 of 24 stored-pool specs returned MID2 charts (ptr "0"), every one dated 2026-10-28, on/after the 12.1.5 release (PHASES.livePatch.since 2026-10-13); Fire Mage and Subtlety now return data. Balance, Augmentation, Devastation still error 4/4 (not in the stored pool). Adopted wholesale: 24 profiles merged at 2026-10-28, max value move 16.2% (median 0.1%), no ack needed. Pool uniform MID2.

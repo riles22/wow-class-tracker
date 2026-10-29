@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-29 (nightly, ~17:07 UTC) — 44/44 feeds; 1 take distilled; queue 1 -> 1
+
+- Supadata ok: 1 requested, 1 fetched (55 counted requests in the 30-day window). YoDaTV jF-D_m2DIlA "A QUICK Prot Pal Talents Update for 12.1.5..." (2026-10-28, 121 chunks) distilled into one Protection Paladin M+ take, mixed, t=131, framed "Season 2 live (12.1.5)": after timing every +22 mostly in pugs it felt comfortable, Solace healing very strong in AoE (25%+ of his healing, 30-40% on trash), damage the one problem (a bit low vs Blood DK, maybe above Guardian geared). Supersedes his 2026-10-23 M+ take (B, "probably the worst tank"). Talent-choice details not distilled. Paladin latest updated. Wowhead byline, so no firewall (owner decision 2026-10-06).
+- Queued 1: Dalaran Gaming o13UUnglWvQ "The 5 BEST Specs For Mythic+ In Patch 12.1.5 | WoW Meta Update" (2026-10-29; takes only for his scoped specs). Left unseen: Maximum f4aocza_1BQ (RWF manifesto reaction) and ZnlH9PE69ZM (stream), Psybear/Tactyks/Jedith/Kalamazi/Supatease WoW: Forever uploads, Dalaran gEeisrRx9XY (PvP) and oNSHD0vQXAs (housing), izen dSdAXw3fWN8 (drama), Sha V3g3e81pEjI, Shindigg 6YywELuKeqw/YjMn0-CNpG4, key PoVs and streams (YoDaTV, Shadarek, Bansherz, Whispyr, Critcake, LBNinja7, MadSkillzzTV). 0 metaNotes.
+
 ## 2026-10-29 (local scheduled run, ~14:15 UTC) — 2 takes distilled; queue 3 -> 1
 
 - Dalaran Gaming uHpG5CnzGVE (2026-10-28, yt-dlp captions): one live 12.1.5 Mythic+ Subtlety take, buff, t=9331; supersedes his 2026-10-27 M+ take (hEkrgB_5EQU). His Assassination/Outlaw group-finder remark is not a strength read and was not distilled. Rogue latest updated.
