@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-29 (local scheduled run, ~14:12 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
+
+- Official-note ledger: both live hotfix threads re-read; only the two checkedAt values moved, check-official-notes passes. No new live class tuning to log. 12.1.7 items in the Wowhead RSS are not logged (no PTR cycle is open, PHASES.ptr null). No 12.2 PTR thread.
+
 ## 2026-10-28 (nightly re-run, ~20:40 UTC) — nothing new since the 16:51 run; ledger checkedAt only; 0 feed entries
 
 - Ledger: live-hotfixes 2336376 post 1 still v56; live-hotfixes-1215 2382684 post 1 still v16 ("Midnight Hotfixes - October 27"); pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

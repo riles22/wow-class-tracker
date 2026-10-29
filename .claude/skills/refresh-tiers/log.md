@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-29 (local scheduled run, ~14:10 UTC) — IV 80/80 and Wowhead 80/80, 0 moves; Archon browser lane 80/80, 16 moves
+
+- Icy Veins (local residential fetch, 6 pages saved and parsed, one table.tier-list each): 80 rows, 0 TBD, Devourer present, Season 2 cue present -> s2. 0 letter moves. Page dateModified raid 10-25 / 10-11 / 08-29 (DPS/healer/tank), M+ 10-25 / 10-12 / 10-12, matching stored published. Snapshots -> 2026-10-29.
+- Wowhead (Claude in Chrome, [tier-list=rows] blocks): 80 rows, 0 roster misses, 0 letter moves. dateModified raid 10-12 / 08-31 / 10-12, M+ 10-22 / 10-13 / 10-23, matching stored published. Snapshots -> 2026-10-29.
+- Archon (Claude in Chrome, src/archon-capture.mjs snippet, all 9 capture hashes verified): letters from the Heroic throughput and M+ score lists, 80 rows. 16 letter moves: raid 9 (Augmentation, Frost DK, Marksmanship, Arms, Windwalker, Demonology, Retribution A->B; Destruction B->C; Protection Paladin A->S), M+ 7 (Assassination A->B, Havoc A->B, Guardian S->A; Protection Paladin, Vengeance, Brewmaster, Protection Warrior A->B). lastUpdated heroic + M+ 2026-10-28, Mythic pages 2026-10-29. Raid season cue null as on prior runs; titles say Midnight and Devourer is listed, so s2 kept. 10 Archon snapshots -> 2026-10-29. Number families merged too (Mythic 95th-pct DPS/HPS asOf 10-29, Heroic DPS/HPS and M+ score asOf 10-28, popularity, survivability with 4 letter changes).
+- Gates: source churn archon:raid 9 / archon:mplus 7 (limits 25/10), 0 two-step; no anomaly or value-move lines. Manifest deliberately untouched (partial run); check-refresh --manifest fails only on startedAt freshness, as expected.
+
 ## 2026-10-28 (nightly re-run, ~20:40 UTC) — Method 80/80, 0 moves; IV/Wowhead/Archon walled
 
 - Method (curl, browser headers, 200): M+ 40/40 (27/7/6; the 8 dungeon tooltips fail roster match by design), raid 40/40; bodies rank Midnight Season 2 (Venomous Abyss), Devourer A in both -> s2. Page dates unchanged (M+ 14 Oct, raid 10 Aug). apply-ratings 80, 0 letter moves.

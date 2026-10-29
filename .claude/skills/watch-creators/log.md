@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-29 (local scheduled run, ~14:15 UTC) — 2 takes distilled; queue 3 -> 1
+
+- Dalaran Gaming uHpG5CnzGVE (2026-10-28, yt-dlp captions): one live 12.1.5 Mythic+ Subtlety take, buff, t=9331; supersedes his 2026-10-27 M+ take (hEkrgB_5EQU). His Assassination/Outlaw group-finder remark is not a strength read and was not distilled. Rogue latest updated.
+- Preheat sv7VFOGWx70 (2026-10-28, yt-dlp captions): group Mythic raid stream; only his own-voice lines distilled. One live 12.1.5 raid Fire take, neutral (in his read the ~5% buff does not make Fire competitive: playing it "for science", and his guide-refresh footage is "not getting a great impression"), t=1555. His 2026-08-09 Fire take is bracket both, a different lens, so not superseded. Raid-mates' Fire asides not attributed. Mage latest updated.
+- YoDaTV jF-D_m2DIlA stays queued: yt-dlp captions HTTP 429. The browser caption lane was not attempted.
+
 ## 2026-10-28 (nightly re-run, ~20:40 UTC) — 44/44 feeds; 2 takes distilled; queue 3 -> 3
 
 - Supadata ok: 3 requested, 2 fetched (hEkrgB_5EQU 2725 chunks, yNuLD4HPm7I 122), sv7VFOGWx70 (Preheat Fire Mythic raid stream) unavailable, retry after 2026-10-29T20:39Z, stays queued. 56 counted requests in the 30-day window.

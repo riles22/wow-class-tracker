@@ -2,20 +2,6 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "sv7VFOGWx70",
-      "creator": "Preheat",
-      "title": "LIVE: Testing Fire Buffs - Mythic Raid",
-      "published": "2026-10-28",
-      "queuedAt": "2026-10-28"
-    },
-    {
-      "id": "uHpG5CnzGVE",
-      "creator": "Dalaran Gaming",
-      "title": "BLIZZARD NERFED SUBTLETY...BUT ITS STILL THE BEST DPS IN THE GAME? - World of Warcraft (Livestream)",
-      "published": "2026-10-28",
-      "queuedAt": "2026-10-28"
-    },
-    {
       "id": "jF-D_m2DIlA",
       "creator": "YoDaTV",
       "title": "A QUICK Prot Pal Talents Update for 12.1.5...",

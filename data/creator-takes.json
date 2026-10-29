@@ -9248,7 +9248,7 @@
       "patchContext": "Season 2 live (12.1.5) — reset-day livestream VOD \"BIG SUBTLETY ROGUE NERF THIS WEEK! BUT IS IT DEAD..?\" (published 2026-10-27), in which he plays Subtlety in his own Mythic+ keys after the October 27 class tuning went live. Read as Mythic+ only: every test in the stream is a dungeon key and raid is not discussed. Most of the 143-minute stream is WoW: Forever name-reservation and PvP chat, which is not distilled. Supersedes his 2026-10-24 walkthrough of the same nerf, which read the announced numbers before he had played them.",
       "claim": "Dalaran Gaming tested Subtlety in his own keys on the day the October 27 nerf went live. In the first key he found it still hitting very hard, only a little behind a Paladin in the group, and judged that the change trims Subtlety's unreasonably high AoE while leaving its AoE very high. After the second key he concluded that the nerf, big on paper, barely changed anything in practice: with gear, stats and consumables he calls poor and no try-hard play he still did over 400k, and he believes Subtlety was further ahead than Blizzard intended and is still ahead.",
       "url": "https://youtu.be/hEkrgB_5EQU?t=7982",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -9261,6 +9261,30 @@
       "claim": "Musguete compares Subtlety before and after the October 27 nerf in his own clips and in logged keys. Burst is lower and damage is about 8% down, but its sustained damage still tops the meters and single target is barely different (still around 400k in his clip, against 500k peaks before). The top logged Subtlety runs on +24 Den of Nalorakk and King's Rest lost only about 20-30k DPS (574k to about 554k; 582k to 550k). He does not think the nerf matters in most keys, perhaps only at +23 and +24, and expects Subtlety to stay the best and highest-damage spec in Mythic+.",
       "url": "https://youtu.be/yNuLD4HPm7I?t=83",
       "superseded": false
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-28",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — his day-after livestream \"BLIZZARD NERFED SUBTLETY...BUT ITS STILL THE BEST DPS IN THE GAME?\" (published 2026-10-28), pugging +20 Mythic+ keys as Subtlety a day after the October 27 nerf went live. Read as Mythic+ only: every key in the stream is a dungeon and raid is not discussed. His aside that Assassination and Outlaw are less sought after in group finder is a group-finder observation, not a strength read, and is not distilled. Supersedes his 2026-10-27 reset-day stream.",
+      "claim": "After timing two +20 keys he says the nerf left Subtlety's damage only a little lower than before: it still feels very high, and he thinks most players who had not read the patch notes would not notice the change. He calls the spec really strong, singling out the burst from Nimble Flurry and Black Powder on final bosses, and stresses he got there with a death, no special lineups or consumable tricks, and gear he considers poor.",
+      "url": "https://youtu.be/uHpG5CnzGVE?t=9331"
+    },
+    {
+      "superseded": false,
+      "class": "Mage",
+      "spec": "Fire",
+      "creator": "Preheat",
+      "date": "2026-10-28",
+      "sentiment": "neutral",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — Mythic raid livestream \"LIVE: Testing Fire Buffs - Mythic Raid\" (published 2026-10-28), playing Fire in his guild's Mythic raid the week its roughly 5% buff went live. Read as raid only: every pull is a Mythic raid boss. It is a group stream with several voices, so only lines framed in his own voice as the streamer and guide author are distilled; raid-mates' asides about Fire are not. Does not supersede his 2026-08-09 roundtable read, which covers both brackets.",
+      "claim": "Preheat plays Fire in Mythic raid explicitly to test its buff, telling viewers up front he does not think it is actually that good and is playing it for science. Later, while gathering footage to refresh his Fire guide, he says he is not getting a great impression of it. He also notes his own gear is not well suited to Fire, and he finds it doing well on some fights, so his read is that the buff does not make Fire competitive rather than a measured verdict.",
+      "url": "https://youtu.be/sv7VFOGWx70?t=1555"
     }
   ],
   "metaNotes": [
