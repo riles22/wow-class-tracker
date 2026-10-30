@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-30 (nightly, ~16:55 UTC) — 44/44 feeds; 3 takes distilled; queue 1 -> 2
+
+- Supadata ok: o13UUnglWvQ (Dalaran Gaming, "The 5 BEST Specs For Mythic+ In Patch 12.1.5", 2026-10-29) fetched, 319 chunks. Distilled 3 live 12.1.5 M+ takes inside his scope: Elemental Shaman buff (best ranged pick, utility kit), Subtlety Rogue buff (still very strong after the first nerf, more nerfs expected), Assassination Rogue buff (not far behind Subtlety). Superseded his 10-28 and 08-24 M+ Subtlety takes and 08-24 M+ Assassination take. Arms, Blood DK, Holy Paladin picks outside his classes; bear-druid passing mention not a read. Not a ranked list, so no creator-predictions panel.
+- Queued 2 (keyword filter): izen CmN6itxLO_Y "Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match" (10-29); Sha V3g3e81pEjI "Yapping about Season 2..." (10-28). Left unseen: key/raid VODs, PvP duels, WoW: Forever leveling/addon content, Shindigg's Sub-nerf raid stream (Subtlety outside his Outlaw/Assassination scope).
+
 ## 2026-10-30 (local scheduled run, ~14:00 UTC) — 0 takes; queue 1 -> 1
 
 - Queue drain: the one queued video, Dalaran Gaming o13UUnglWvQ "These 5 Specs Are ABSOLUTELY DESTROYING Mythic+ in 12.1.5" (2026-10-29, 614 s, not was_live), got no captions. yt-dlp (android client) HTTP 429. Browser lane (Brave, logged in, CC on): the player's own pot-bearing timedtext json3 request also came back 429, so stopped there, no retries. Left queued for the nightly's Supadata lane. 0 takes, 0 metaNotes.

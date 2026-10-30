@@ -6270,7 +6270,7 @@
       "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24; the dungeon half of his Subtlety segment, where he separates how popular the spec is from how it actually performs",
       "url": "https://youtu.be/LoCCPjj7J6c?t=465",
       "claim": "In keys he reports Subtlety as extremely popular, with many players preferring the playstyle, and places its performance only ever so slightly behind Assassination — and only at the highest key levels, a gap he expects gear to close fairly easily. The popularity is the larger part of his dungeon claim; the performance gap he names is narrow and top-end only.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -6282,7 +6282,7 @@
       "patchContext": "Season 2 live — his week-one \"five specs standing out\" video, published 2026-08-24; a direct comparison of the two Rogue DPS specs at the top of the key ladder",
       "url": "https://youtu.be/LoCCPjj7J6c?t=470",
       "claim": "Comparing the Rogue DPS specs in keys, he says it can technically be argued that Assassination is a little better than Subtlety at the most bleeding-edge, record-breaking key levels, while Subtlety remains the more popular pick below that ceiling.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -9263,7 +9263,7 @@
       "superseded": false
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Subtlety",
       "creator": "Dalaran Gaming",
@@ -9297,6 +9297,42 @@
       "patchContext": "Season 2 live (12.1.5) — \"A QUICK Prot Pal Talents Update for 12.1.5...\" (published 2026-10-28): a short mid-season talent update after a week back on Protection Paladin, timing +22 keys mostly in pugs. Supersedes his 2026-10-23 Mythic+ tier-list read of the spec.",
       "claim": "After timing every +22 dungeon on Protection Paladin, mostly in pugs, he says it felt comfortable: only the first boss of Murder Row needed a planned cooldown order, and Solace healing is very strong in AoE, doing upwards of 25% of his healing in keys and 30-40% on trash, which is why he now takes it to cover the Sentinel nerf. The one problem he names is damage, which is a bit low, especially compared to Blood DK, though he thinks it may edge out Guardian once properly geared; Lightsmith is in his view better than Templar in every way.",
       "url": "https://youtu.be/jF-D_m2DIlA?t=131"
+    },
+    {
+      "superseded": false,
+      "class": "Shaman",
+      "spec": "Elemental",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-29",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — his \"The 5 BEST Specs For Mythic+ In Patch 12.1.5 | WoW Meta Update\" video (published 2026-10-29), a Mythic+-only pick list made after the 12.1.5 launch. Read as Mythic+ only: raid is not assessed. Its Arms Warrior, Blood Death Knight and Holy Paladin picks are outside his registered classes and are not attributed to him; his passing mention that bear druids remain playable is not a strength read and is not distilled.",
+      "claim": "He names Elemental the ranged pick for Mythic+ in 12.1.5: in his view it is the strongest and most versatile ranged DPS for most groups and has pulled ahead of the other ranged specs this season, pairing competitive damage with the best utility kit for the Season 2 dungeons (poison-cleansing and movement totems, curse dispels, purges, a short interrupt, Bloodlust and its mastery buff), which he says makes it close to a must-have in groups.",
+      "url": "https://youtu.be/o13UUnglWvQ?t=171"
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-29",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — his \"The 5 BEST Specs For Mythic+ In Patch 12.1.5 | WoW Meta Update\" video (published 2026-10-29), a Mythic+-only pick list made after the 12.1.5 launch. Read as Mythic+ only: raid is not assessed. Its Arms Warrior, Blood Death Knight and Holy Paladin picks are outside his registered classes and are not attributed to him; his passing mention that bear druids remain playable is not a strength read and is not distilled.",
+      "claim": "He leaves Subtlety off his five only because its strength is so recent, saying it currently does more damage than nearly every other spec and is still very strong after the first 12.1.5 nerf, with top burst and the Rogue defensive toolkit. He expects further nerfs over the coming weeks and says it leads on damage unless those are heavy.",
+      "url": "https://youtu.be/o13UUnglWvQ?t=300"
+    },
+    {
+      "superseded": false,
+      "class": "Rogue",
+      "spec": "Assassination",
+      "creator": "Dalaran Gaming",
+      "date": "2026-10-29",
+      "sentiment": "buff",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — his \"The 5 BEST Specs For Mythic+ In Patch 12.1.5 | WoW Meta Update\" video (published 2026-10-29), a Mythic+-only pick list made after the 12.1.5 launch. Read as Mythic+ only: raid is not assessed. Its Arms Warrior, Blood Death Knight and Holy Paladin picks are outside his registered classes and are not attributed to him; his passing mention that bear druids remain playable is not a strength read and is not distilled.",
+      "claim": "Discussing Subtlety's expected nerfs, he says Assassination is not far behind it and is where players would move if Subtlety were cut, so he still considers investing in a Rogue for Mythic+ this season worthwhile.",
+      "url": "https://youtu.be/o13UUnglWvQ?t=401"
     }
   ],
   "metaNotes": [

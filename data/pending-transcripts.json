@@ -2,11 +2,18 @@
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
   "videos": [
     {
-      "id": "o13UUnglWvQ",
-      "creator": "Dalaran Gaming",
-      "title": "The 5 BEST Specs For Mythic+ In Patch 12.1.5 | WoW Meta Update",
+      "id": "CmN6itxLO_Y",
+      "creator": "izen (Izenhart)",
+      "title": "Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match",
       "published": "2026-10-29",
-      "queuedAt": "2026-10-29"
+      "queuedAt": "2026-10-30"
+    },
+    {
+      "id": "V3g3e81pEjI",
+      "creator": "Sha",
+      "title": "Yapping about Season 2...",
+      "published": "2026-10-28",
+      "queuedAt": "2026-10-30"
     }
   ],
   "skipped": [
