@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-30 (local scheduled run, ~14:00 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
+
+- Official-note ledger: fetch-official-notes re-read both live hotfix compilations (2336376, 2382684); data/official-notes.json unchanged.
+- Wowhead RSS: no new live class tuning or hotfix compilation since the Oct 27 hotfixes. New: 12.1.7 PTR development notes (news=383651; Talebound demo content, no class tuning). Report-only: PHASES.ptr is null and 12.1.7 is an in-season PTR patch, so nothing is logged to the feed. No 12.2 PTR thread. 0 feed entries.
+
 ## 2026-10-29 (nightly, ~17:07 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
 
 - Official-note ledger: live-hotfixes 2336376 post 1 v56 and live-hotfixes-1215 2382684 post 1 v16 unchanged; only checkedAt moved; check-official-notes passes.

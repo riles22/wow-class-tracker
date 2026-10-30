@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-30 (local scheduled run, ~14:00 UTC) — 0 takes; queue 1 -> 1
+
+- Queue drain: the one queued video, Dalaran Gaming o13UUnglWvQ "These 5 Specs Are ABSOLUTELY DESTROYING Mythic+ in 12.1.5" (2026-10-29, 614 s, not was_live), got no captions. yt-dlp (android client) HTTP 429. Browser lane (Brave, logged in, CC on): the player's own pot-bearing timedtext json3 request also came back 429, so stopped there, no retries. Left queued for the nightly's Supadata lane. 0 takes, 0 metaNotes.
+
 ## 2026-10-29 (nightly, ~17:07 UTC) — 44/44 feeds; 1 take distilled; queue 1 -> 1
 
 - Supadata ok: 1 requested, 1 fetched (55 counted requests in the 30-day window). YoDaTV jF-D_m2DIlA "A QUICK Prot Pal Talents Update for 12.1.5..." (2026-10-28, 121 chunks) distilled into one Protection Paladin M+ take, mixed, t=131, framed "Season 2 live (12.1.5)": after timing every +22 mostly in pugs it felt comfortable, Solace healing very strong in AoE (25%+ of his healing, 30-40% on trash), damage the one problem (a bit low vs Blood DK, maybe above Guardian geared). Supersedes his 2026-10-23 M+ take (B, "probably the worst tank"). Talent-choice details not distilled. Paladin latest updated. Wowhead byline, so no firewall (owner decision 2026-10-06).

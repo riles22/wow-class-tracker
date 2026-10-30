@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-30 (local scheduled run, ~14:00 UTC) — IV 80/80 and Wowhead 80/80, 0 moves; Archon browser lane 80/80, 22 moves
+
+- Icy Veins (local residential fetch, 6 pages saved and parsed, one table.tier-list each): 80 rows, 0 TBD, Devourer present, Season 2 cue present -> s2. 0 letter moves; page dates match stored published. Snapshots -> 2026-10-30.
+- Wowhead (Claude in Chrome on Brave, [tier-list=rows] blocks): 80 rows, 0 roster misses, 0 letter moves. dateModified raid 10-12 / 08-31 / 10-12, M+ 10-22 / 10-13 / 10-23, unchanged. Snapshots -> 2026-10-30.
+- Archon (Claude in Chrome on Brave, src/archon-capture.mjs snippet, all 9 capture hashes verified): Heroic throughput + M+ score lists, 80 rows. 22 letter moves. Raid 21, mostly reversing yesterday's Heroic re-cut: B->A Frost DK, Devourer, Balance, Augmentation, Devastation, Marksmanship, Arcane, Frost Mage, Windwalker, Retribution, Shadow, Enhancement, Affliction, Demonology, Arms; C->B Survival, Assassination, Elemental, Destruction; Blood A->B; Protection Paladin S->A. M+ 1: Havoc B->A. lastUpdated heroic + M+ 2026-10-29, Mythic pages 2026-10-30; M+ says Season 2, raid cue null as on prior runs (Midnight titles, Devourer listed) so s2 kept. 10 Archon snapshots -> 2026-10-30. Number families merged too (200 metric rows); survivability 40 tiers, 3 changes (Blood B->A, Brewmaster B->A, Protection Paladin C->B).
+- Gates: source churn archon:raid 21 / archon:mplus 1 (limits 25/10), 0 two-step; no anomaly or value-move lines. Manifest deliberately untouched (partial run).
+
 ## 2026-10-29 (nightly, ~17:10 UTC) — Method only; 0 moves
 
 - Method (browser-header curl, HTTP 200): 40/40 M+ and 40/40 raid (27/7/6), Devourer A both, bodies rank Midnight Season 2; page dates M+ 2026-10-14, raid 2026-08-10 unchanged. 0 letter moves; snapshots -> 2026-10-29.
