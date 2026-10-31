@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (nightly, ~15:55 UTC) — 44/44 feeds; 11 metaNotes distilled; queue 2 -> 1
+
+- Supadata ok: 2 requested, 2 fetched (57 counted requests in the 30-day window). izen CmN6itxLO_Y "Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match" (2026-10-29, 504 chunks) -> 11 M+ metaNotes framed "Season 2 live (12.1.5)": Subtlety positive (still #1 after the nerf, 28% -> 20% in 20+ keys), Arms positive, Elemental positive (weak priority damage noted), Arcane negative (S -> A, ~180 score behind), Havoc mixed, Assassination positive, Feral mixed, Guardian positive, Blood positive (very highest keys), Holy Paladin positive, Restoration Shaman mixed. Superseded 12 older izen M+-lens notes (two live Havoc ones, 10-07 and 10-10); his 10-18 "both" notes left live (different lens). Frost DK / Windwalker / Devourer / Outlaw / Ret were list-mentions only, Holy Priest explicitly not a read: not distilled. izen latest updated.
+- Sha V3g3e81pEjI "Yapping about Season 2..." (845 chunks) read: season rant, no Brewmaster strength read -> skipped[].
+- Queued 1: Nintern 0zMa_NjtScE "Let's Talk About Annihilator..." (10-31, Devourer/Havoc scope). Left unseen: WoW: Forever uploads (Tactyks DbEq6GIOHbY tank tuning, NeekapHere, Psybear, Supatease, Dalaran e384LFYBqjs), Bansherz K5GLVoEfP1E MM key PoV, PvP duels, key PoVs and streams.
+
 ## 2026-10-30 (nightly, ~16:55 UTC) — 44/44 feeds; 3 takes distilled; queue 1 -> 2
 
 - Supadata ok: o13UUnglWvQ (Dalaran Gaming, "The 5 BEST Specs For Mythic+ In Patch 12.1.5", 2026-10-29) fetched, 319 chunks. Distilled 3 live 12.1.5 M+ takes inside his scope: Elemental Shaman buff (best ranged pick, utility kit), Subtlety Rogue buff (still very strong after the first nerf, more nerfs expected), Assassination Rogue buff (not far behind Subtlety). Superseded his 10-28 and 08-24 M+ Subtlety takes and 08-24 M+ Assassination take. Arms, Blood DK, Holy Paladin picks outside his classes; bear-druid passing mention not a read. Not a ranked list, so no creator-predictions panel.

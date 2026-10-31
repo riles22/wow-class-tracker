@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (nightly, ~15:55 UTC) — SimC rerun 24; Murlok 40; Mythicstats 1087 39 (+1 retired); Bloodmallet unchanged; WCL 351/320
+
+- SimC MID2_Raid.txt Last-Modified 31 Oct 07:29, same build HEAD 710c2408bf (12.1.5.70575); fresh run, 24/24 changed, max 0.11%, merged at 2026-10-31.
+- Murlok collector 40 rows (source date 10-31). Mythicstats collector period 1087: 39 rows, Devastation Evoker omitted and retired (within the 0.5-point bound). WoWMeta snapshotDate 2026-09-15, 40/40 identical. Bloodmallet 24 charts all 2026-10-28, identical; Balance/Augmentation/Devastation error. WCL collector: raid success 351 (9 sparse), M+ success 320. Archon walled.
+
 ## 2026-10-30 (nightly, ~16:55 UTC) — SimC rerun 24; Murlok 40; Mythicstats 1087 40; Bloodmallet unchanged; WCL 349/320
 
 - SimC MID2_Raid.txt Last-Modified 30 Oct 07:29, same build HEAD 710c2408bf (12.1.5.70575); fresh run, 24/24 changed, max 0.15%, merged at 2026-10-30.

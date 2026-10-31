@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (nightly, ~15:55 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
+
+- Official-note ledger: live-hotfixes 2336376 post 1 v56 unchanged; live-hotfixes-1215 2382684 post 1 v16 -> v18 (edited 2026-10-31T02:17Z) adds an October 30 section with no Classes heading (Housing, Items, Labyrinth); every class section hash unchanged, so pending written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (items since 10-29), news index and blue tracker swept: no Midnight class tuning since the Oct 27 entry. news=383670 "Massive Talent Tree Changes to Druids and Paladins" is WoW: Forever (a different game, out of scope). Blue tracker: Midnight Hotfixes October 30 (the 2382684 edit above), Talebound demo live, 12.1.7 PTR dev notes 2383391 (already report-only). No new hotfix compilation topic, no 12.2 PTR. Writeup gap unchanged (read-only between cycles). 0 feed entries.
+
 ## 2026-10-30 (nightly, ~16:55 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
 
 - Official-note ledger: live-hotfixes 2336376 post 1 v56 and live-hotfixes-1215 2382684 post 1 v16 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (nightly, ~15:55 UTC) — Method only; 0 moves
+
+- Method (browser-header curl, 200 x2): 40/40 per bracket, S2 bodies, Devourer present, 0 moves; snapshots -> 2026-10-31; page dates M+ 2026-10-14, raid 2026-08-10. Icy Veins 403 x6 (Cloudflare), Wowhead 202 x6 (AWS WAF), Archon 403 (Cloudflare): stored letters retained, nothing parsed.
+
 ## 2026-10-30 (nightly, ~16:55 UTC) — Method only; 0 moves
 
 - Method raid 40/40 and M+ 40/40 (27/7/6), 0 moves, Season 2 bodies, Devourer present; page dates raid 2026-08-10, M+ 2026-10-14; snapshots -> 2026-10-30. Transport: browser-header curl.
