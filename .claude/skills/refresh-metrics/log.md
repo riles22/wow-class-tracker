@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (local scheduled run, ~18:00 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers
+
+- Archon via Claude in Chrome (Brave), src/archon-capture.mjs, all series ✓: Mythic 95th DPS 33 rows asOf 10-30 (median +0.3%, max +1.6% Feral), Mythic HPS 7 asOf 10-31 (max +0.5%), Heroic DPS 33 asOf 10-30 (median +0.5%), Heroic HPS 7 asOf 10-30, M+ score 40 asOf 10-30 (median +0.1%, max +0.8% Blood), raid Popularity 40 (13 changed, max 0.3 pts), M+ Popularity 40 (11 changed, max 0.2 pts). Parses changed on every row. No value-move or family-median findings from check-refresh.
+- Survivability (Mythic raid) 40 tiers, 7 changed: Elemental S->A, Enhancement S->A, Shadow C->B, Devastation C->B, Balance C->B, Blood A->B, Protection Paladin B->C.
+- Nothing else re-fetched: WCL, Murlok, Mythicstats, SimC and Bloodmallet are the nightly's from earlier today.
+
 ## 2026-10-31 (nightly, ~15:55 UTC) — SimC rerun 24; Murlok 40; Mythicstats 1087 39 (+1 retired); Bloodmallet unchanged; WCL 351/320
 
 - SimC MID2_Raid.txt Last-Modified 31 Oct 07:29, same build HEAD 710c2408bf (12.1.5.70575); fresh run, 24/24 changed, max 0.11%, merged at 2026-10-31.

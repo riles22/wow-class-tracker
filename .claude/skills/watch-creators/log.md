@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (local scheduled run, ~18:00 UTC) — queue 1 -> 0; 0 takes, 0 metaNotes
+
+- Anonymous yt-dlp captions worked again for the first time in several local runs: Nintern 0zMa_NjtScE "Let's Talk About Annihilator..." (10-31, 26 min) read in full -> skipped[]. It is a hero-talent design critique of Annihilator against Void-Scarred, with redesign ideas for 12.2; no Devourer or Vengeance strength or tuning read.
+- For a human: in that video Nintern says he is now the Method Devourer Demon Hunter guide writer. His credential in community.json does not say so yet; widening it is an owner edit.
+- Next fetch, Tactyks DbEq6GIOHbY "Massive TANK TUNING Right Before WoW Forever Launch" (10-31), drew HTTP 429 on the caption download; stopped the sweep there per the 429 rule. Left UNSEEN, not queued: Wowhead's only new class tuning item is for WoW: Forever (news "Massive Talent Tree Changes to Druids and Paladins"), out of scope, so it should not spend metered requests. Next local run can fetch it free. Dalaran e384LFYBqjs ("WoW Into An ARPG", 10-31) also left unseen, not attempted.
+
 ## 2026-10-31 (nightly, ~15:55 UTC) — 44/44 feeds; 11 metaNotes distilled; queue 2 -> 1
 
 - Supadata ok: 2 requested, 2 fetched (57 counted requests in the 30-day window). izen CmN6itxLO_Y "Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match" (2026-10-29, 504 chunks) -> 11 M+ metaNotes framed "Season 2 live (12.1.5)": Subtlety positive (still #1 after the nerf, 28% -> 20% in 20+ keys), Arms positive, Elemental positive (weak priority damage noted), Arcane negative (S -> A, ~180 score behind), Havoc mixed, Assassination positive, Feral mixed, Guardian positive, Blood positive (very highest keys), Holy Paladin positive, Restoration Shaman mixed. Superseded 12 older izen M+-lens notes (two live Havoc ones, 10-07 and 10-10); his 10-18 "both" notes left live (different lens). Frost DK / Windwalker / Devourer / Outlaw / Ret were list-mentions only, Holy Priest explicitly not a read: not distilled. izen latest updated.

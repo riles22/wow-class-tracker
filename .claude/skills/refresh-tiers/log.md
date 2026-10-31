@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-10-31 (local scheduled run, ~18:00 UTC) — IV 80/80, Wowhead 80/80, Archon 80/80; 0 letter moves
+
+- Icy Veins (home curl, browser UA + Accept + Accept-Language, HTTP 200 x6; one table.tier-list per page after stripping style blocks): 80 rows, 80 non-null, 0 TBD, 0 unmatched, Devourer present, Season 2 cue -> s2. 0 moves. dateModified raid 10-25 / 10-11 / 08-29, M+ 10-25 / 10-12 / 10-12, matching stored published. Titles now read "Midnight (12.1.5)". Snapshots -> 2026-10-31.
+- Wowhead (Claude in Chrome on Brave, chosen by device id and navigator.brave; one [tier-list=rows] block per page, read after unescaping): 80 rows, 0 roster misses, 0 moves. dateModified raid 10-12 / 08-31 / 10-12, M+ 10-22 / 10-13 / 10-23, unchanged. Snapshots -> 2026-10-31.
+- Archon (same browser, src/archon-capture.mjs snippet, all 9 capture hashes verified, exit 0): Heroic throughput + M+ score lists, 80 rows, 0 letter moves. lastUpdated 2026-10-30 on eight pages, Mythic healer 2026-10-31. M+ cue Season 2; raid cue null as on prior runs (Midnight titles, Devourer listed), s2 kept. 10 Archon snapshots -> 2026-10-31. No challenge on any page.
+- Gates: source churn "no letter changed"; 0 tier moves vs 2026-10-31. Manifest deliberately untouched (partial run).
+
 ## 2026-10-31 (nightly, ~15:55 UTC) — Method only; 0 moves
 
 - Method (browser-header curl, 200 x2): 40/40 per bracket, S2 bodies, Devourer present, 0 moves; snapshots -> 2026-10-31; page dates M+ 2026-10-14, raid 2026-08-10. Icy Veins 403 x6 (Cloudflare), Wowhead 202 x6 (AWS WAF), Archon 403 (Cloudflare): stored letters retained, nothing parsed.

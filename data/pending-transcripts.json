@@ -1,14 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "0zMa_NjtScE",
-      "creator": "Nintern",
-      "title": "Let's Talk About Annihilator...",
-      "published": "2026-10-31",
-      "queuedAt": "2026-10-31"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3284,6 +3276,13 @@
       "creator": "Sha",
       "title": "Yapping about Season 2...",
       "reason": "Transcript read (Supadata, 2026-10-31): a season rant while opening vaults — dungeon pool and the 12.1.5 dungeon nerfs, raid fatigue, Venomstones, Brewmaster gear preferences and a Subtlety Rogue gearing challenge. He enjoys every spec he has played; no Brewmaster (or other spec) strength read to distil.",
+      "verifiedAt": "2026-10-31"
+    },
+    {
+      "id": "0zMa_NjtScE",
+      "creator": "Nintern",
+      "title": "Let's Talk About Annihilator...",
+      "reason": "Transcript read (local yt-dlp, 2026-10-31): a hero-talent design critique of Annihilator vs Void-Scarred with redesign proposals for 12.2 (remove passive Voidfall-stack nodes, add a melee or Void Ray interaction, a Blur defensive). No Devourer or Vengeance strength, ranking or tuning read; it only restates that his own build does not change. Nothing to distil.",
       "verifiedAt": "2026-10-31"
     }
   ],
