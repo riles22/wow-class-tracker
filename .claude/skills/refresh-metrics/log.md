@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-01 (local scheduled run, ~15:30 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers
+
+- Archon via Claude in Chrome (Brave), src/archon-capture.mjs, all series ✓: Mythic 95th DPS 33 rows asOf 11-01 (median +0.3%, max +1.0% Prot Warrior), Mythic HPS 7 asOf 11-01 (max +0.2%), Heroic DPS 33 asOf 10-31 (median +3.0%, max +5.2% Destruction), Heroic HPS 7 asOf 10-31 (median +4.5%), M+ score 40 asOf 10-31 (median +0.3%, max +0.8% Destruction), raid Popularity 40 (12 changed, max 0.2 pts), M+ Popularity 40 (11 changed, max 0.2 pts). Parses changed on every row. No value-move or family-median findings from check-refresh.
+- Survivability (Mythic raid) 40 tiers, 3 changed: Elemental A->S, Enhancement A->S, Subtlety B->A. Elemental and Enhancement went S->A on 10-31 and back today; Archon's survivability cut is flipping on small samples.
+
 ## 2026-10-31 (local scheduled run, ~18:00 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers
 
 - Archon via Claude in Chrome (Brave), src/archon-capture.mjs, all series ✓: Mythic 95th DPS 33 rows asOf 10-30 (median +0.3%, max +1.6% Feral), Mythic HPS 7 asOf 10-31 (max +0.5%), Heroic DPS 33 asOf 10-30 (median +0.5%), Heroic HPS 7 asOf 10-30, M+ score 40 asOf 10-30 (median +0.1%, max +0.8% Blood), raid Popularity 40 (13 changed, max 0.3 pts), M+ Popularity 40 (11 changed, max 0.2 pts). Parses changed on every row. No value-move or family-median findings from check-refresh.

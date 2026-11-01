@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-01 (local scheduled run, ~15:30 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (1 move), Archon 80/80 (14 moves)
+
+- Icy Veins (home curl, browser UA + Accept + Accept-Language, HTTP 200 x6; one table.tier-list per page after stripping style blocks): 80 rows, 80 non-null, 0 TBD, 0 unmatched, Devourer present, Season 2 cue -> s2. 0 moves. dateModified raid 10-25 / 10-11 / 08-29, M+ 10-25 / 10-12 / 10-12, all equal to stored published. Snapshots -> 2026-11-01.
+- Wowhead (Claude in Chrome on Brave, Browser 1 deviceId 1dc1b761, navigator.brave "object"; one [tier-list=rows] block per page after unescaping): 80 rows, 0 roster misses, titles "Midnight Season 2". 1 move: Restoration Druid raid B -> A; that page (raid healer) dateModified 2026-10-31 (was 08-31), published updated. Other dateModified unchanged. Snapshots -> 2026-11-01.
+- Archon (same browser, src/archon-capture.mjs, 9 pages, no challenge; heroic + M+ lastUpdated 2026-10-31, Mythic pages 2026-11-01): 80 letter rows, 14 changed. Raid DPS 9 (Devourer, Frost Mage, Devastation, Enhancement, Balance, Arcane, Shadow A->B; Survival, Elemental B->C), raid tank 2 (Prot Paladin A->S, Blood B->A), M+ DPS 1 (Fire C->B), M+ tank 2 (Brewmaster, Prot Warrior B->C). Churn: archon:raid 11 / archon:mplus 3, 0 two-step, under the 25/10 limits. Snapshots -> 2026-11-01 on the 6 letter pages + 4 Mythic/survivability entries.
+- Transport note for the next run: a javascript_tool return is cut at about 1,000 characters, so the capture objects were written into the page as a <pre> and read with get_page_text (full text, hash-checked by the checker).
+
 ## 2026-10-31 (local scheduled run, ~18:00 UTC) — IV 80/80, Wowhead 80/80, Archon 80/80; 0 letter moves
 
 - Icy Veins (home curl, browser UA + Accept + Accept-Language, HTTP 200 x6; one table.tier-list per page after stripping style blocks): 80 rows, 80 non-null, 0 TBD, 0 unmatched, Devourer present, Season 2 cue -> s2. 0 moves. dateModified raid 10-25 / 10-11 / 08-29, M+ 10-25 / 10-12 / 10-12, matching stored published. Titles now read "Midnight (12.1.5)". Snapshots -> 2026-10-31.
