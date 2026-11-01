@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-01 (nightly, ~17:00 UTC) — 44/44 feeds; 0 takes; queue 0 -> 2
+
+- Supadata ok, 0 requested (queue empty), 55 counted requests in the 30-day window.
+- Queued 2 (keyword filter): izen yv5fMo14vXM "12.1.5 Mythic+ Top Specs" (10-31; tank debate per description); AutomaticJak fAvaNiiKvJo "The S2 M+ Falloff" (11-01). Left unseen: Bansherz s3eLacFCfAo / K5GLVoEfP1E (MM key runs with logs), YoDaTV L5GBwGizRUg (Blood DK damage guide), Tactyks DbEq6GIOHbY and other WoW: Forever uploads, PvP duels, key PoVs and streams. 0 metaNotes.
+
 ## 2026-10-31 (local scheduled run, ~18:00 UTC) — queue 1 -> 0; 0 takes, 0 metaNotes
 
 - Anonymous yt-dlp captions worked again for the first time in several local runs: Nintern 0zMa_NjtScE "Let's Talk About Annihilator..." (10-31, 26 min) read in full -> skipped[]. It is a hero-talent design critique of Annihilator against Void-Scarred, with redesign ideas for 12.2; no Devourer or Vengeance strength or tuning read.

@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-01 (nightly, ~17:00 UTC) — SimC new build 24; Murlok 40; Mythicstats 1087 39; Bloodmallet unchanged; WCL 352/320
+
+- SimC MID2_Raid.txt Last-Modified 01 Nov 07:47, new build 12.1.5.70688 (hotfix 2026-10-31, HEAD 2248cde18a; was 70575/710c2408bf): 24/24 stored specs, max move 0.09%, merged at 2026-11-01.
+- Murlok collector 40 rows (source date 11-01). Mythicstats collector period 1087: 39 rows (Devastation still omitted, already retired). WoWMeta snapshotDate 2026-09-15, 40/40 identical. Bloodmallet 24 charts all 2026-10-28, identical; Balance/Augmentation/Devastation error. WCL collector: raid success 352 (8 sparse), M+ success 320. Archon walled. Robydoby not fetched (closed PTR cycle, outside the contract).
+
 ## 2026-11-01 (local scheduled run, ~15:30 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers
 
 - Archon via Claude in Chrome (Brave), src/archon-capture.mjs, all series ✓: Mythic 95th DPS 33 rows asOf 11-01 (median +0.3%, max +1.0% Prot Warrior), Mythic HPS 7 asOf 11-01 (max +0.2%), Heroic DPS 33 asOf 10-31 (median +3.0%, max +5.2% Destruction), Heroic HPS 7 asOf 10-31 (median +4.5%), M+ score 40 asOf 10-31 (median +0.3%, max +0.8% Destruction), raid Popularity 40 (12 changed, max 0.2 pts), M+ Popularity 40 (11 changed, max 0.2 pts). Parses changed on every row. No value-move or family-median findings from check-refresh.
