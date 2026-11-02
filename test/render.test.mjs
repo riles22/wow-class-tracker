@@ -710,6 +710,12 @@ test("dataHealth surfaces a frozen TIER-LIST source (the WoWMeta blind spot)", a
   const laggy = [{ id: "wowhead", name: "Wowhead", kind: "tier-list",
     pages: [{ snapshot: "2026-07-31" }, { snapshot: "2026-07-31" }, { snapshot: "2026-06-01" }] }];
   assert.equal(tierListHealth(laggy)[0].asOf, "2026-06-01", "newest page must not mask a stalled one");
+  // …but only a LETTER page can lag the list. An ancillary page feeds no letters
+  // (2026-11-02: Archon's dormant per-boss pages dated its whole list 2026-08-18).
+  const side = tierListHealth([{ id: "archon", name: "Archon", kind: "tier-list",
+    pages: [{ snapshot: "2026-11-02" }, { snapshot: "2026-08-18", ancillary: true }] }])[0];
+  assert.equal(side.asOf, "2026-11-02", "an ancillary page must not date the tier list");
+  assert.equal(side.pages, 1);
 
   // Attestation: "published" is claimed only when EVERY page carries one. A mixed source
   // falls back to the weaker wording AND the older date rather than printing a

@@ -2132,15 +2132,26 @@ for (const fresh of [false, true]) test(`the phone opening screen includes a com
 ui("source registry keeps credits and page dates distinct in a contained layout", async page => {
   const sources = payload().sources.filter(s=>Array.isArray(s.pages));
   assert.equal(await page.locator('#srclist .srcfold').count(), sources.length);
+  const dh = payload().dataHealth;
+  const today = await page.evaluate(() => new Date().toISOString().slice(0,10));
+  const ref = dh.latest > today ? dh.latest : today;
   for (const source of sources) {
     const fold = page.locator(`.srcfold[data-source="${source.id}"]`);
     const summary = fold.locator('summary');
     assert.equal(await summary.locator('.srccredit').count(), 0, 'credits do not crowd the summary date');
     const snapshots = source.pages.map(p=>p.snapshot).filter(Boolean).sort();
-    const latest = snapshots.at(-1);
+    // Dated by the newest data held, not the registry pages alone: a metric feed refreshes
+    // its numbers without re-stamping them (2026-11-02: Murlok read 09-17 holding 11-01 data).
+    const numbers = dh.all.filter(s=>s.source===source.id && s.kind!=='tier-list').map(s=>s.asOf).sort().at(-1);
+    const latest = [snapshots.at(-1), numbers].filter(Boolean).sort().at(-1);
     if (latest) {
       assert.equal(await summary.locator('time').getAttribute('datetime'), latest);
-      assert.match(await summary.innerText(), /Latest snapshot/);
+      assert.match(await summary.innerText(), /Latest data/);
+      // Gold only past the banner's own limit, never merely for missing the latest capture day.
+      const limit = source.kind === 'tier-list' ? dh.tierStaleDays : dh.staleDays;
+      const behind = Math.round((Date.parse(ref) - Date.parse(latest)) / 86400000);
+      assert.equal(await summary.locator('.when.stale').count(), Number(behind > limit),
+        `${source.id} is gold only when its newest data is over ${limit} days old (${behind})`);
     } else assert.equal(await summary.locator('time').count(), 0, 'undated tools do not gain a date');
     if (new Set(snapshots).size > 1) assert.match(await summary.innerText(), /mixed dates/);
     if (source.author) assert.equal(await fold.locator('.srccredit').textContent(), source.author);
