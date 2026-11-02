@@ -17061,7 +17061,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match\" (published 2026-10-29): his weekly Mythic+ meta recap for week 11 of the season (week three of 12.1.5), read off spec representation and average score in 20+ keys and the top 5% of keys. Recorded two days into the reset that applied the October 27 class tuning, so he flags the post-nerf sample as small. It replaces his 2026-10-22 and 2026-10-24 M+ reads for the specs it covers.",
       "note": "He says Guardian has edged ahead of Blood as the more played tank in 20+ keys (by about 1% in the top half of keys), though Blood still leads in the very highest keys.",
       "url": "https://youtu.be/CmN6itxLO_Y?t=737",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Death Knight",
@@ -17073,7 +17073,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match\" (published 2026-10-29): his weekly Mythic+ meta recap for week 11 of the season (week three of 12.1.5), read off spec representation and average score in 20+ keys and the top 5% of keys. Recorded two days into the reset that applied the October 27 class tuning, so he flags the post-nerf sample as small. It replaces his 2026-10-22 and 2026-10-24 M+ reads for the specs it covers.",
       "note": "He says Blood is still clearly ahead in the very highest keys, closer to 75/25 than 50/50 over Guardian, even though Guardian is now slightly more played across 20+ keys.",
       "url": "https://youtu.be/CmN6itxLO_Y?t=830",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -17097,6 +17097,30 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Mythic+ in 12.1.5: The New Top 3 | The Fall Of Arcane | BDK vs Guardian Cage Match\" (published 2026-10-29): his weekly Mythic+ meta recap for week 11 of the season (week three of 12.1.5), read off spec representation and average score in 20+ keys and the top 5% of keys. Recorded two days into the reset that applied the October 27 class tuning, so he flags the post-nerf sample as small. It replaces his 2026-10-22 and 2026-10-24 M+ reads for the specs it covers.",
       "note": "He says Restoration Shaman's M+ presence remains a niche in physical and melee compositions, where Windfury helps attack-power damage, while every other popular group defaults to Holy Paladin; its representation rose slightly this reset.",
       "url": "https://youtu.be/CmN6itxLO_Y?t=955",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-31",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"12.1.5 Mythic+ Top Specs\" (published 2026-10-31): a Saturday video devoted to the Blood Death Knight versus Guardian Druid debate for high Mythic+ keys, weighing damage taken, self-healing, tank damage, Mark of the Wild and ease of play off example logs and spec popularity. He calls himself neutral and ends without a clear winner. It replaces his 2026-10-29 M+ reads for these two specs.",
+      "note": "He says the top groups are still picking Blood over Guardian, and that top tanks who play it say Blood is better at surviving the most dangerous high-key pulls, which he puts down to the extra defensives it can layer, though he calls the two tanks even overall.",
+      "url": "https://youtu.be/yv5fMo14vXM?t=1026",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-10-31",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"12.1.5 Mythic+ Top Specs\" (published 2026-10-31): a Saturday video devoted to the Blood Death Knight versus Guardian Druid debate for high Mythic+ keys, weighing damage taken, self-healing, tank damage, Mark of the Wild and ease of play off example logs and spec popularity. He calls himself neutral and ends without a clear winner. It replaces his 2026-10-29 M+ reads for these two specs.",
+      "note": "He calls Guardian and Blood even for high keys with no clear winner: Guardian has grown to roughly match Blood's popularity, Mark of the Wild offsets much of its lower personal damage, and he argues its simpler play may mean fewer mistakes, though it is at more risk of dying on the most dangerous pulls.",
+      "url": "https://youtu.be/yv5fMo14vXM?t=1125",
       "superseded": false
     }
   ]

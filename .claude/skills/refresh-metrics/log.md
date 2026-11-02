@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-02 (nightly, ~20:35 UTC) — SimC new git build 24; Murlok 40; Mythicstats 1087 39; Bloodmallet unchanged; WCL 353/319
+
+- SimC MID2_Raid.txt Last-Modified 02 Nov 07:29, header 12.1.5.70688 Live, git HEAD b522cded8c (was 2248cde18a): 24/24 stored specs, max move 1.28%, merged at 2026-11-02.
+- Murlok collector 40 rows (source date 11-02). Mythicstats collector period 1087: 39 rows (Devastation still omitted, 0 newly retired). WoWMeta snapshotDate 2026-09-15, 40/40 identical. Bloodmallet 24 charts all 2026-10-28, identical; Balance/Augmentation/Devastation error 3/3. WCL collector: raid success 353 (7 sparse), M+ partial 319 (Frost Mage on encounter 12993 invalid: future run timestamp). Archon walled. Robydoby not fetched (closed PTR cycle).
+
 ## 2026-11-01 (nightly, ~17:00 UTC) — SimC new build 24; Murlok 40; Mythicstats 1087 39; Bloodmallet unchanged; WCL 352/320
 
 - SimC MID2_Raid.txt Last-Modified 01 Nov 07:47, new build 12.1.5.70688 (hotfix 2026-10-31, HEAD 2248cde18a; was 70575/710c2408bf): 24/24 stored specs, max move 0.09%, merged at 2026-11-01.

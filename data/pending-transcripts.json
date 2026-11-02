@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "yv5fMo14vXM",
-      "creator": "izen (Izenhart)",
-      "title": "12.1.5 Mythic+ Top Specs",
-      "published": "2026-10-31",
-      "queuedAt": "2026-11-01"
-    },
-    {
-      "id": "fAvaNiiKvJo",
-      "creator": "AutomaticJak",
-      "title": "The S2 M+ Falloff",
-      "published": "2026-11-01",
-      "queuedAt": "2026-11-01"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3299,6 +3284,13 @@
       "title": "Let's Talk About Annihilator...",
       "reason": "Transcript read (local yt-dlp, 2026-10-31): a hero-talent design critique of Annihilator vs Void-Scarred with redesign proposals for 12.2 (remove passive Voidfall-stack nodes, add a melee or Void Ray interaction, a Blur defensive). No Devourer or Vengeance strength, ranking or tuning read; it only restates that his own build does not change. Nothing to distil.",
       "verifiedAt": "2026-10-31"
+    },
+    {
+      "id": "fAvaNiiKvJo",
+      "creator": "AutomaticJak",
+      "title": "The S2 M+ Falloff",
+      "reason": "Transcript read (Supadata, ~33 seconds): a short clip on low Season 2 Mythic+ key volume and raid-favouring rewards; no spec-level read.",
+      "verifiedAt": "2026-11-02"
     }
   ],
   "seen": [

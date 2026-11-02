@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-02 (nightly, ~20:35 UTC) — 44/44 feeds; queue 2 -> 0; 0 takes, 2 metaNotes
+
+- Supadata verdict ok: 2 requested, 2 fetched (55 counted in the 30-day window).
+- izen yv5fMo14vXM "12.1.5 Mythic+ Top Specs" (2026-10-31, Blood DK vs Guardian for high keys): 2 M+ metaNotes (Blood positive, Guardian positive; he calls them even), superseding his 2026-10-29 M+ notes for both specs.
+- AutomaticJak fAvaNiiKvJo "The S2 M+ Falloff": ~33-second clip on low S2 key volume, no spec read -> skipped[].
+- RSS: 44/44 feeds 200. New since the last run are key-run streams/POVs (Shadarek, Bansherz, Critcake, Shindigg), WoW: Forever and Talebound content, and PvP duels: none pass the nightly keyword filter; left unseen, 0 queued.
+
 ## 2026-11-02 (local scheduled run, ~15:25 UTC) — queue 2 -> 2; 0 takes, 0 metaNotes
 
 - izen yv5fMo14vXM "12.1.5 Mythic+ Top Specs": anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on timedtext; one retry without the android client, 429 again. Stopped there; AutomaticJak fAvaNiiKvJo not attempted. Browser caption lane not attempted (it also drew 429 on 10-30). Both stay in videos[] for the nightly's Supadata drain. No RSS re-sweep (queue-only scope).
