@@ -3074,6 +3074,21 @@ if(META.latestSnapshot){
 
 /* ---------- footer: source registry (tier lists + metrics + notes feeds) ---------- */
 function sourceRegistryHTML(){
+/* A source is dated by the NEWEST data we hold from it (2026-11-02). Metric feeds refresh
+   their numbers every run without re-stamping their registry pages, so the page snapshots
+   alone had Murlok at 09-17 and Mythicstats at 10-02 while both held numbers from the night
+   before. Gold uses the banner's own limits against the reader's clock. The old rule (older
+   than the newest snapshot of ANY source) turned every source gold that was not captured on
+   the latest capture day, Method included, one day after its refresh. */
+const dh = DATA.dataHealth;
+const newestNumbers = new Map();
+for (const s of dh?.all ?? []) {
+  if (!s.source || s.kind === "tier-list") continue;
+  if (!newestNumbers.has(s.source) || s.asOf > newestNumbers.get(s.source)) newestNumbers.set(s.source, s.asOf);
+}
+const todayISO = new Date().toISOString().slice(0,10);
+const ref = dh?.latest && dh.latest > todayISO ? dh.latest : todayISO;
+const gap = (from,to) => Math.round((Date.parse(to)-Date.parse(from))/86400000);
 return SOURCES.filter(s=>Array.isArray(s.pages)).map(src=>{
   let flagged = 0;
   const pages = (src.pages||[]).map(p=>{
@@ -3109,17 +3124,21 @@ return SOURCES.filter(s=>Array.isArray(s.pages)).map(src=>{
      must not be something you have to go looking for. Deliberately not copied onto the
      summary — exactly one chip per out-of-step page is a pinned invariant. */
   const dates = (src.pages||[]).map(p=>p.snapshot).filter(Boolean).sort();
-  const freshest = dates.length ? dates[dates.length-1] : null;
-  const stale = !!(freshest && META.latestSnapshot && freshest < META.latestSnapshot);
+  const captured = dates.length ? dates[dates.length-1] : null;
+  const numbers = newestNumbers.get(src.id) ?? null;
+  const freshest = numbers && (!captured || numbers > captured) ? numbers : captured;
+  const limit = src.kind === "tier-list" ? (dh?.tierStaleDays ?? 14) : (dh?.staleDays ?? 7);
+  const stale = !!(freshest && gap(freshest, ref) > limit);
   const n = (src.pages||[]).length;
   const mixed = new Set(dates).size > 1, undated = n - dates.length;
   const counts = `${n} page${n===1?"":"s"}${mixed ? " · mixed dates" : ""}${undated && src.kind!=="reference" ? ` · ${undated} undated` : ""}`;
-  const stamp = freshest ? `<span class="srcdate-label">Latest snapshot</span><time datetime="${esc(freshest)}">${esc(freshest)}</time>`
+  const stamp = freshest ? `<span class="srcdate-label">Latest data</span><time datetime="${esc(freshest)}">${esc(freshest)}</time>`
     : `<span class="srcdate-label">${src.kind==="reference" ? "Reference" : "Snapshot"}</span>${src.kind==="reference" ? "Tool links" : "Not recorded"}`;
+  const numbersNote = freshest && freshest !== captured ? "Latest data = date of the newest numbers we hold; they refresh on their own, so they can be newer than a page’s snapshot. " : "";
   return `<details class="srcfold" data-source="${esc(src.id)}"${flagged ? " open" : ""}>
     <summary><span class="srcname">${esc(src.name)}<span class="srcmeta"><span>${esc(kind)}</span><span class="srccount">${counts}</span></span></span><span class="when${stale?" stale":""}">${stamp}</span></summary>
     <div class="srcdetail">${src.author ? `<p class="srccredit">${esc(src.author)}</p>` : ""}
-    ${src.kind!=="reference" || dates.length ? `<p class="srcdate-note">Snapshot = date captured.${(src.pages||[]).some(p=>p.published) ? " Page updated = publisher’s date." : ""}</p>` : ""}
+    ${src.kind!=="reference" || dates.length ? `<p class="srcdate-note">${numbersNote}Snapshot = date captured.${(src.pages||[]).some(p=>p.published) ? " Page updated = publisher’s date." : ""}</p>` : ""}
     <ul class="srcpages">${pages}</ul></div></details>`;
 }).join("");
 }

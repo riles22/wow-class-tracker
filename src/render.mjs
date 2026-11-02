@@ -1841,7 +1841,13 @@ export function tierListHealth(sources) {
   const out = [];
   for (const source of sources ?? []) {
     if (source.kind !== "tier-list") continue;
+    /* Letter pages only (2026-11-02). An ancillary page feeds no letters, so it cannot date
+       the list: Archon's two Season 1 per-boss/per-dungeon pages, last read 2026-08-18 and
+       era-gated off the page, had the banner calling the whole Archon tier list "last
+       fetched 2026-08-18" on a day its six letter pages had just been read. Their data dates
+       itself elsewhere (encounter-tiers.json asOf; Archon's numbers ride the metric path). */
     const dated = (source.pages ?? [])
+      .filter(p => !p.ancillary)
       .map(p => ({ date: p.published ?? p.snapshot ?? null, attested: p.published ? "published" : "self" }))
       .filter(d => d.date);
     if (!dated.length) continue;
