@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-02 (local scheduled run, ~15:25 UTC) — queue 2 -> 2; 0 takes, 0 metaNotes
+
+- izen yv5fMo14vXM "12.1.5 Mythic+ Top Specs": anonymous yt-dlp (android client) reached the subtitle step and got HTTP 429 on timedtext; one retry without the android client, 429 again. Stopped there; AutomaticJak fAvaNiiKvJo not attempted. Browser caption lane not attempted (it also drew 429 on 10-30). Both stay in videos[] for the nightly's Supadata drain. No RSS re-sweep (queue-only scope).
+
 ## 2026-11-01 (nightly, ~17:00 UTC) — 44/44 feeds; 0 takes; queue 0 -> 2
 
 - Supadata ok, 0 requested (queue empty), 55 counted requests in the 30-day window.
