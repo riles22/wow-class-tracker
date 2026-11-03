@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-03 (local scheduled run, ~15:15 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers
+
+- Brave via Claude in Chrome, src/archon-capture.mjs, exit 0, no value-move or family-median findings. Mythic DPS 33 rows asOf 11-03 (median +0.3%, max +3.2% Fire Mage), Mythic HPS 7 (+0.3%), Heroic DPS 33 asOf 11-02 (+0.2%), Heroic HPS 7 (+0.1%), M+ score 40 asOf 11-02/11-03 (+0.1%), raid + M+ Popularity 40 each (max 0.1 pt), survivability 40 tiers asOf 11-03 (0 changed). Merged with apply-metrics.
+
 ## 2026-11-02 (nightly, ~20:35 UTC) — SimC new git build 24; Murlok 40; Mythicstats 1087 39; Bloodmallet unchanged; WCL 353/319
 
 - SimC MID2_Raid.txt Last-Modified 02 Nov 07:29, header 12.1.5.70688 Live, git HEAD b522cded8c (was 2248cde18a): 24/24 stored specs, max move 1.28%, merged at 2026-11-02.

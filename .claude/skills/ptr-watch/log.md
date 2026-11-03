@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-03 (local scheduled run, ~15:20 UTC) — read-only check; 0 feed entries; no 12.2 PTR
+
+- Forum topics by JSON: 2336376 post 1 v56 and 2382684 post 1 v18 (updated 2026-10-31) unchanged; 12.1.7 PTR notes 2383391 last post 2026-10-29. No ledger receipts locally; ledger untouched.
+- Wowhead RSS: new class-tuning items since the nightly ("WoW: Forever Official Development Notes and Class Tuning", the Druid/Rogue first-strike passive) are both WoW: Forever, out of scope. No Midnight tuning, no new hotfix topic, no 12.2 PTR.
+
 ## 2026-11-02 (nightly, ~20:35 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
 
 - Official-note ledger: live-hotfixes 2336376 post 1 v56 and live-hotfixes-1215 2382684 post 1 v18 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
