@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-03 (nightly, ~18:05 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
+
+- Official-note ledger: live-hotfixes 2336376 post 1 v56 and live-hotfixes-1215 2382684 post 1 v18 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- Wowhead RSS (items since 11-02), news index and blue tracker swept: no Midnight class tuning since the Oct 27 entry. New items are WoW: Forever (launch Nov 4, dev notes/class tuning for Forever), 12.1.7 Aqir-invasion removal note: out of scope or report-only. 12.1.7 PTR dev-notes topic 2383391 still at post 5 (2026-10-29). No new hotfix compilation topic, no 12.2 PTR. Writeup gap unchanged at 1 (Demonology Warlock; read-only between cycles).
+
 ## 2026-11-03 (local scheduled run, ~15:20 UTC) — read-only check; 0 feed entries; no 12.2 PTR
 
 - Forum topics by JSON: 2336376 post 1 v56 and 2382684 post 1 v18 (updated 2026-10-31) unchanged; 12.1.7 PTR notes 2383391 last post 2026-10-29. No ledger receipts locally; ledger untouched.

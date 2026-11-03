@@ -1,35 +1,35 @@
 {
-  "run": "2026-11-02",
-  "startedAt": "2026-11-02T20:33:24Z",
-  "summary": "Nightly: Method 0 moves; SimC new git build (24); WCL 353/319 (M+ 1 invalid cut); izen 2 metaNotes; 0 feed entries; IV/Wowhead/Archon walled",
+  "run": "2026-11-03",
+  "startedAt": "2026-11-03T18:04:00Z",
+  "summary": "Nightly: Method 0 moves; SimC new git build (24); Murlok 40; Mythicstats 1087 39; WCL 353/319 (M+ 1 invalid cut); 0 takes/metaNotes; 0 feed entries; IV/Wowhead/Archon walled",
   "sources": [
     {
       "source": "icyveins",
       "result": "blocked",
-      "previousAsOf": "2026-11-02",
-      "newAsOf": "2026-11-02",
-      "detail": "All six registered pages by curl with browser UA + Accept + Accept-Language: HTTP 403 x6 (~3.2 KB Cloudflare \"Just a moment\" page, 0 tier-list-entry markers; runner block since 2026-09-23). Nothing parsed. Stored 80 letters, snapshots 2026-11-02 (today's earlier local run), published and seasonVerified s2 unchanged; not verified by this run."
+      "previousAsOf": "2026-11-03",
+      "newAsOf": "2026-11-03",
+      "detail": "All six registered www.icy-veins.com pages by curl with browser UA + Accept + Accept-Language: HTTP 403 x6 (~5.7 KB Cloudflare \"Just a moment\" page, 0 tier-list-entry markers; runner block since 2026-09-23). Nothing parsed. Stored 80 letters, snapshots 2026-11-03 (today's earlier local run), published and seasonVerified s2 unchanged; not verified by this run."
     },
     {
       "source": "method",
       "result": "success",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-02",
-      "detail": "Both pages HTTP 200 (browser-header curl). Parsed div.tier__tier / tier__title / data-original-title looked up whole: 40/40 per bracket (27 DPS / 7 healer / 6 tank); the 8 dungeon tooltips on the M+ page fail roster match by design. Bodies rank Midnight Season 2, Devourer present -> seasonVerified s2. Page dates M+ 2026-10-14, raid 2026-08-10 (published unchanged). apply-ratings 80, 0 letter moves; snapshots -> 2026-11-02."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-03",
+      "detail": "Both pages HTTP 200 (browser-header curl). Parsed div.tier__tier / tier__title / data-original-title looked up whole: 40/40 per bracket (27 DPS / 7 healer / 6 tank); the 8 dungeon tooltips on the M+ page fail roster match by design. Bodies rank Midnight Season 2, Devourer present -> seasonVerified s2. Page dates M+ 2026-10-14, raid 2026-08-10 (published unchanged). apply-ratings 80, 0 letter moves; snapshots -> 2026-11-03."
     },
     {
       "source": "wowhead",
       "result": "blocked",
-      "previousAsOf": "2026-11-02",
-      "newAsOf": "2026-11-02",
-      "detail": "All six registered pages answered HTTP 202 with the 2,020-byte AWS WAF JavaScript challenge (0 tier-list=rows blocks) on a full browser-header GET; news RSS, news index and blue tracker on the same host answered 200. No challenge solved, no proxy. Stored 80 letters, snapshots 2026-11-02 (today's earlier local browser-lane run), published and seasonVerified s2 unchanged; not verified by this run."
+      "previousAsOf": "2026-11-03",
+      "newAsOf": "2026-11-03",
+      "detail": "All six registered pages answered HTTP 202 with the 2,020-byte AWS WAF JavaScript challenge (0 tier-list=rows blocks) on a full browser-header GET; news RSS, news index and blue tracker on the same host answered 200. No challenge solved, no proxy. Stored 80 letters, snapshots 2026-11-03 (today's earlier local browser-lane run), published and seasonVerified s2 unchanged; not verified by this run."
     },
     {
       "source": "archon-tiers",
       "result": "blocked",
-      "previousAsOf": "2026-11-02",
-      "newAsOf": "2026-11-02",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored letters, seasonVerified s2 and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-03",
+      "newAsOf": "2026-11-03",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; stored letters, seasonVerified s2 and stored date 2026-11-03 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-encounters",
@@ -41,51 +41,51 @@
     {
       "source": "archon-survivability",
       "result": "blocked",
-      "previousAsOf": "2026-11-02",
-      "newAsOf": "2026-11-02",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the survivability tiers and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-03",
+      "newAsOf": "2026-11-03",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the survivability tiers and stored date 2026-11-03 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-metrics",
       "result": "blocked",
-      "previousAsOf": "2026-11-02",
-      "newAsOf": "2026-11-02",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct DPS (Mythic) rows and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-03",
+      "newAsOf": "2026-11-03",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct DPS (Mythic) rows and stored date 2026-11-03 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-hps",
       "result": "blocked",
-      "previousAsOf": "2026-11-02",
-      "newAsOf": "2026-11-02",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct HPS (Mythic) rows and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-03",
+      "newAsOf": "2026-11-03",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct HPS (Mythic) rows and stored date 2026-11-03 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-heroic-dps",
       "result": "blocked",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-01",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct DPS (Heroic) rows and stored date 2026-11-01 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-02",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct DPS (Heroic) rows (coverage) and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-heroic-hps",
       "result": "blocked",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-01",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct HPS (Heroic) rows and stored date 2026-11-01 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-02",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the 95th-pct HPS (Heroic) rows (coverage) and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-mplus-score",
       "result": "blocked",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-01",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the M+ score (95th pct) rows (coverage) and stored date 2026-11-01 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-02",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the M+ score (95th pct) rows (coverage) and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "archon-popularity",
       "result": "blocked",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-01",
-      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~3.3 KB, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the Popularity rows (coverage) and stored date 2026-11-01 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-02",
+      "detail": "Ordinary browser-header GET of two Archon letter pages (M+ healer, heroic raid tank): HTTP 403 (~6 KB Cloudflare challenge, no __NEXT_DATA__); source-health receipt agrees (heroic raid DPS 403 cloudflare-challenge, M+ DPS 200 human-verification). No challenge solved or replayed, no proxy. Nothing parsed; the Popularity rows (coverage) and stored date 2026-11-02 unchanged (from today's earlier local browser-lane run), retained per the owner-confirmed outage rule; not verified by this run."
     },
     {
       "source": "wowmeta",
@@ -111,58 +111,58 @@
     {
       "source": "murlok",
       "result": "success",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-02",
-      "detail": "Deterministic collector receipt (metrics-fetch/evidence.json): status success, 3 pages HTTP 200, 40 rows (27/7/6), source <time datetime> 2026-11-02 (~18:10Z). Applied only metrics-fetch/updates.json via apply-metrics.mjs; check-stable-metrics passes."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-03",
+      "detail": "Deterministic collector receipt (metrics-fetch/evidence.json): status success, 3 pages HTTP 200, 40 rows (27/7/6), source <time datetime> 2026-11-03 (~10:10Z). Applied only metrics-fetch/updates.json via apply-metrics.mjs; check-stable-metrics passes."
     },
     {
       "source": "bloodmallet",
       "result": "partial",
       "previousAsOf": "2026-10-28",
       "newAsOf": "2026-10-28",
-      "detail": "talent_target_scaling/castingpatchwerk for all 27 DPS specs (retried on error): all 24 stored-pool specs returned MID2 charts (ptr \"0\"), every chart dated 2026-10-28 (on/after the 12.1.5 release 2026-10-13), every target value identical to stored, nothing merged. Chart date is 5 days old (no re-sim since), so partial. Balance, Augmentation, Devastation still error 3/3."
+      "detail": "talent_target_scaling/castingpatchwerk for all 27 DPS specs (retried on error): all 24 stored-pool specs returned MID2 charts (ptr \"0\"), every chart dated 2026-10-28 (on/after the 12.1.5 release 2026-10-13), every target value identical to stored, nothing merged. Chart date is 6 days old (no re-sim since), so partial. Balance, Augmentation, Devastation still error 3/3."
     },
     {
       "source": "simulationcraft",
       "result": "success",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-02",
-      "detail": "MID2_Raid.txt HTTP 200 (Last-Modified 02 Nov 07:29:12 GMT), new git build: header \"12.1.5.70688 Live (hotfix 2026-10-31/70688, git build HEAD b522cded8c)\" (was 2248cde18a). DPS Ranking block, longest-prefix match, best variant per spec: 24/24 stored specs, max move 1.28%; merged at asOf 2026-11-02."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-03",
+      "detail": "MID2_Raid.txt HTTP 200 (Last-Modified 03 Nov 07:49 GMT), new git build: header \"12.1.5.70688 Live (hotfix 2026-10-31/70688, git build HEAD 36e21fecf8)\" (was b522cded8c). DPS Ranking block, longest-prefix match, best variant per spec: 24/24 stored specs, max move 0.12%; merged at asOf 2026-11-03."
     },
     {
       "source": "mythicstats",
-      "result": "partial",
+      "result": "success",
       "previousAsOf": "2026-10-31",
-      "newAsOf": "2026-10-31",
-      "detail": "Deterministic collector receipt: status success, /period/latest -> period 1087 HTTP 200, 39 rows (26/7/6), sum 100.3; Devastation Evoker omitted by the chart (already retired, 0 newly retired). Undated source: changed values dated by fetch, unchanged ones keep their asOf, so the coverage date stays 2026-10-31 (2 days old) -> partial. Applied only metrics-fetch/updates.json; check-stable-metrics passes."
+      "newAsOf": "2026-11-03",
+      "detail": "Deterministic collector receipt: status success, /period/latest -> period 1087 HTTP 200, 39 rows (26/7/6), sum 99.9; Devastation Evoker omitted by the chart (already retired, 0 newly retired). Undated source: changed values dated by fetch (coverage now 2026-11-03). Applied only metrics-fetch/updates.json; check-stable-metrics passes."
     },
     {
       "source": "blizzard-ptr",
       "result": "success",
       "previousAsOf": null,
       "newAsOf": null,
-      "detail": "Official ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v18 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes. Wowhead RSS, news index, blue tracker swept: no new Midnight class tuning (WoW: Forever items out of scope; 12.1.7 PTR report-only), no new hotfix topic, no 12.2 PTR. 0 feed entries."
+      "detail": "Official ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v18 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes. Wowhead RSS, news index, blue tracker swept: no new Midnight class tuning (WoW: Forever items out of scope; 12.1.7 PTR dev notes 2383391 still post 5, report-only), no new hotfix topic, no 12.2 PTR. 0 feed entries."
     },
     {
       "source": "creators",
       "result": "success",
       "previousAsOf": null,
       "newAsOf": null,
-      "detail": "44/44 creator RSS feeds HTTP 200. Supadata ok: 2 requested, 2 fetched (55 counted in 30-day window). izen yv5fMo14vXM distilled: 2 M+ metaNotes (Blood, Guardian), superseding his 10-29 notes; AutomaticJak fAvaNiiKvJo skipped (no spec read). 0 takes; 0 queued; queue empty."
+      "detail": "44/44 creator RSS feeds HTTP 200. Supadata ok: 0 requested (queue empty; 51 counted in 30-day window). New uploads are key-run POVs/streams, WoW: Forever, Talebound, PvP duels and guides: none pass the nightly keyword filter; left unseen, 0 queued. 0 takes, 0 metaNotes."
     },
     {
       "source": "wcl-leaderboard-raid",
       "result": "success",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-02",
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-03",
       "detail": "Deterministic collector (wcl-fetch/evidence.json): bracket status success - 353 median rows; 7 sparse cuts (retain prior observations); 0 failed cuts; minimum 200; landed 353 rows from zone 53 partition 2 (12.1.5); 0 rows retired; no supersededBy. Per-encounter top-100-entry medians, not population medians. check-wcl-metrics passes."
     },
     {
       "source": "wcl-leaderboard-mplus",
       "result": "partial",
-      "previousAsOf": "2026-11-01",
-      "newAsOf": "2026-11-02",
-      "detail": "Deterministic collector: bracket status partial - 319 median rows landed (zone 55, partition 1, +10); 0 empty/sparse cuts; 1 invalid cut: Frost Mage on encounter 12993 (ranking run timestamp in the future, 2026-11-02T21:05:33Z > observed 20:30:27Z), its prior observation retained unchanged; minimum 280; 0 retired; no supersededBy. Per-encounter top-100-entry medians, not population medians. check-wcl-metrics passes."
+      "previousAsOf": "2026-11-02",
+      "newAsOf": "2026-11-03",
+      "detail": "Deterministic collector: bracket status partial - 319 median rows landed (zone 55, partition 1, +10); 0 empty/sparse cuts; 1 invalid cut: Demonology Warlock on encounter 12993 (ranking run timestamp in the future, 2026-11-03T18:10:31Z > observed 18:01:31Z), any prior observation retained unchanged; minimum 280; 0 retired; no supersededBy. Per-encounter top-100-entry medians, not population medians. check-wcl-metrics passes."
     }
   ]
 }

@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-03 (nightly, ~18:15 UTC) — SimC new git build 24; Murlok 40; Mythicstats 1087 39; Bloodmallet unchanged; WCL 353/319
+
+- SimC MID2_Raid.txt Last-Modified 03 Nov 07:49, header 12.1.5.70688 Live, git HEAD 36e21fecf8 (was b522cded8c): 24/24 stored specs, max move 0.12%, merged at 2026-11-03.
+- Murlok 40 rows (source date 2026-11-03); Mythicstats period 1087, 39 rows, sum 99.9, Devastation omitted (already retired, 0 newly retired). Applied only metrics-fetch/updates.json; check-stable-metrics passes.
+- Bloodmallet: 24 MID2 charts all dated 2026-10-28, identical to stored; Balance/Augmentation/Devastation error 3/3. WoWMeta: snapshotDate 2026-09-15, 40 rows identical. Archon walled (403).
+- WCL collector: raid success 353 (7 sparse), M+ partial 319 (1 invalid cut: Demonology Warlock 12993, future run timestamp). 0 retired. check-wcl-metrics passes.
+
 ## 2026-11-03 (local scheduled run, ~15:15 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers
 
 - Brave via Claude in Chrome, src/archon-capture.mjs, exit 0, no value-move or family-median findings. Mythic DPS 33 rows asOf 11-03 (median +0.3%, max +3.2% Fire Mage), Mythic HPS 7 (+0.3%), Heroic DPS 33 asOf 11-02 (+0.2%), Heroic HPS 7 (+0.1%), M+ score 40 asOf 11-02/11-03 (+0.1%), raid + M+ Popularity 40 each (max 0.1 pt), survivability 40 tiers asOf 11-03 (0 changed). Merged with apply-metrics.
