@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-04 (local scheduled run, ~15:25 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes run locally: 2336376 post 1 v56 and 2382684 post 1 v18 (updated 2026-10-31); pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes then reports a revision/inventory mismatch on that field alone).
+- Wowhead RSS: since the nightly only WoW: Forever items (launch today) and 12.1.7 report-only items. 12.1.7 PTR notes 2383391 last post 2026-10-29. Forum search shows no new hotfix compilation topic; no 12.2 PTR.
+
 ## 2026-11-03 (nightly, ~18:05 UTC) — 0 changed ledger sections; 0 feed entries; no 12.2 PTR
 
 - Official-note ledger: live-hotfixes 2336376 post 1 v56 and live-hotfixes-1215 2382684 post 1 v18 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
