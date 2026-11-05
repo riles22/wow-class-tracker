@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-05 (local scheduled run, ~15:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes reports a mismatch on that field alone).
+- Wowhead RSS since the last run: WoW: Forever launch items and Talebound; no retail class tuning. Topic 2382684 now titled "Hotfixes - October 30", no new compilation topic. 12.1.7 notes 2383391 last post 2026-10-29. Forum search shows only player threads about 12.2; no 12.2 PTR.
+
 ## 2026-11-04 (nightly, ~18:20 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - Official-note ledger: 2336376 post 1 v56 and 2382684 post 1 v18 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

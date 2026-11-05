@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-05 (local scheduled run, ~15:30 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
+
+- Archon: Mythic rows asOf 2026-11-05, Heroic and M+ rows asOf 2026-11-04 (each page's own lastUpdated). Medians: Mythic DPS +0.6%, Mythic HPS +0.4%, Heroic DPS +0.3%, Heroic HPS +0.2%, M+ score +0.1%; largest +1.5% (Protection Warrior Mythic). No value-move finding. 10 survivability tiers changed.
+- WCL, Bloodmallet, Murlok, Mythicstats, SimC and WoWMeta not touched (nightly lanes).
+
 ## 2026-11-04 (nightly, ~18:25 UTC) — Bloodmallet re-sim 24 adopted; SimC rerun 24; Murlok 40; Mythicstats invalid; WCL 355/320
 
 - Bloodmallet: all 24 stored-pool charts MID2, ptr "0", dated 2026-11-04 (SimC 36e21fe), all on/after the 12.1.5 release, so adopted wholesale; max target move 1.6%. Balance/Augmentation/Devastation still error 3/3.
