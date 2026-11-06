@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-06 (local scheduled run, ~15:15 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
+
+- pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). Seen 552, skipped 470, unchanged. Feeds not re-diffed this run; the unfiltered sweep stays undone.
+
 ## 2026-11-05 (local scheduled run, ~15:15 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). All 44 feeds answered a read-only diff: 435 unseen videos dated on or after 2026-06-18, the newest mostly WoW: Forever launch streams. Nothing added to any lane; the unfiltered sweep stays undone.

@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-06 (local scheduled run, ~15:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes reports a mismatch on that field alone).
+- Wowhead RSS since the last run: WoW: Forever launch items, plus 11-05 and 11-06 Venomous Abyss encounter nerfs (Ula'tek, Coiled Altar, Twin Fangs, Vashnik); hotfix round-up news=383777 is encounter and NPC changes with no class tuning, so 0 feed entries. Topic 2382684 still "Hotfixes - October 30" (post 1 v18, 10-31), no new compilation topic. 12.1.7 notes 2383391 last post 2026-10-29. Forum search shows only player threads about 12.2; no 12.2 PTR.
+
 ## 2026-11-05 (local scheduled run, ~15:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes reports a mismatch on that field alone).
