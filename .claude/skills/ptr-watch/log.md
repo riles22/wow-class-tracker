@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-10 (local scheduled run, ~15:30 UTC) — ledger revision recorded; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes run locally: topic 2382684 post 1 revised v18 -> v22 (new updatedAt and bodySha256); no class-section change, so the ledger takes the pending receipt and check-official-notes --base=HEAD passes.
+- Wowhead RSS since 11-06: news=383795 (12.1.5 hotfixes for November 6) and 383783 (Ula'tek nerf) are Venomous Abyss encounter changes only, no class names; 383808 is a dungeon kill-XP buff; 383790 is WoW: Forever pet tuning, not retail. 0 feed entries. No 12.2 PTR item in the feed.
+
 ## 2026-11-06 (local scheduled run, ~15:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes reports a mismatch on that field alone).

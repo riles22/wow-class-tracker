@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-10 (local scheduled run, ~15:30 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
+
+- Archon: all rows asOf 2026-11-10 (each page's own lastUpdated). Medians: Mythic DPS +1.0%, Mythic HPS +0.5%, Heroic DPS +0.9%, Heroic HPS +0.2%, M+ score +0.3%; largest -2.1% (Subtlety Rogue Mythic). No value-move finding. 3 survivability tiers changed.
+- WCL, Bloodmallet, Murlok, Mythicstats, SimC and WoWMeta not touched (nightly lanes). Nightlies 11-05 through 11-09 (runs 42082326077, 42263639302, 42392124602, 42501550801, 42698444178) all failed the refresh contract on the Fury Warrior Ula'tek leaderboard value move (stored 12941, n=14; fetched 91817 then 125134); needs the owner's value_move_ack. Stored row left as it is.
+
 ## 2026-11-06 (local scheduled run, ~15:15 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
 
 - Archon: Mythic rows asOf 2026-11-06, Heroic and M+ rows asOf 2026-11-05 (each page's own lastUpdated). Medians: Mythic DPS +0.4%, Mythic HPS +0.2%, Heroic DPS +0.4%, Heroic HPS +0.1%, M+ score +0.1%; largest +3.9% (Outlaw Rogue Mythic). No value-move finding. 11 survivability tiers changed.
