@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (nightly, ~16:00 UTC) — 44/44 feeds; 2 queued; 0 takes, 0 metaNotes
+
+- Supadata ok, 0 requested (queue empty). Unseen since 11-04: mostly WoW: Forever leveling, key-run POVs/streams and PvP duels; left unseen (keyword filter).
+- Queued: izen BSc3DUC1WHE "12.1.5 Mythic+ Week 12 Meta Update" (11-05) and NeekapHere xglEKOfSohU "Unsealed Wrath! New Ret Paladin Capstone Testing" (11-10; may be 12.1.7 PTR content, frame as preview if so). izen's 11-07 raid-nerf and 11-09 raid-difficulty talks left unseen (no spec reads per descriptions).
+
 ## 2026-11-11 (local scheduled run, ~15:30 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). Seen 552, skipped 470, unchanged. Feeds not re-diffed this run; the nightly that does discovery has not published since 11-04, so new videos since then are undiscovered.

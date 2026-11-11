@@ -3,6 +3,24 @@
   "thread": "https://us.forums.blizzard.com/en/wow/t/midnight-curse-of-ulatek-ptr-development-notes/2317811",
   "builds": [
     {
+      "date": "2026-11-06",
+      "kind": "hotfix",
+      "realm": "live",
+      "label": "“The Venomous Abyss Raid Tuning Incoming” (Linxy, us.forums topic 2402937, post 1, created 2026-11-06T00:24:26Z, read at version 3, last edited 2026-11-07T00:18:14Z, with its heading nesting intact) — encounter tuning across five Venomous Abyss bosses that the post says lands over the following days and is recorded in the hotfix compilation when live. Logged by the 2026-11-11 nightly under the 2026-10-06 owner decision for standalone official topics with no class content (the 2026-10-06 Ula’tek and 2026-10-12 dungeon-and-raid precedents); the 11-06 and 11-10 local runs had read it but not logged it. NO CLASS OR SPEC LINE: specsAffected is deliberately empty, so nothing reaches a spec drawer or votes in any outlook tally; it is logged because raid difficulty is the context the raid letters are read against. Logged as kind hotfix because validation refuses a forumUrl on a hotfix, so the topic is cited here. The wowheadUrl is Wowhead’s mirror “Massive Nerfs to The Venomous Abyss Raid - Large Nerfs to Ula'tek on Every Difficulty” (news=383776, 2026-11-05 18:26 US-Central, id taken from Wowhead’s news-search endpoint because the item has left the RSS window); the article page answers 403 from here, so it was not read or diffed and the forum text is the one distilled. NO SET BONUS IS TOUCHED (“set bonus”, “-piece” and “tier set” appear zero times in the post). Citation: https://us.forums.blizzard.com/en/wow/t/the-venomous-abyss-raid-tuning-incoming/2402937/1.",
+      "forumPostNumber": null,
+      "forumUrl": null,
+      "wowheadUrl": "https://www.wowhead.com/news=383776",
+      "icyveinsUrl": null,
+      "specsAffected": [],
+      "highlights": [
+        "Non-class: The Venomous Abyss, Entombed Sentinels — reduced the maximum scale of Blood Venom pools on Heroic and Mythic difficulty; Blood Venom pool duration reduced to 2 minutes on Mythic difficulty (was 5 minutes).",
+        "Non-class: The Venomous Abyss, Vashnik, the Malignant — Malignance damage reduced by 37% on Mythic difficulty; Malignance damage over time duration reduced to 16 seconds on Mythic difficulty.",
+        "Non-class: The Venomous Abyss, Twin Fangs — Visceral Burst damage reduced by 40% on Mythic difficulty.",
+        "Non-class: The Venomous Abyss, The Coiled Altar — Axegrinder movement speed reduced by 20% on all difficulties; Axegrinder damage reduced by 20% on Mythic difficulty; Gloombomb damage reduced by 20% on Mythic difficulty; Venom Rupture damage reduced by 15% on Mythic difficulty; Malevolent Resonance damage reduced by 60%; Gravebound Soul Fragments last an additional 2 seconds before fading away on Mythic difficulty; the number of Spiteful Soulcoilers that spawn from Spiritcackle reduced to 1 on Mythic difficulty (was 2), so they now spawn as on Heroic (developers’ note).",
+        "Non-class: The Venomous Abyss, Ula’tek — health scaling adjusted (and base health reduced) on Raid Finder, Normal and Heroic for Ula’tek, Blightscale Rawling, Blightscale Viper, Blightscale Shrieker and Weakened Doomscale to better account for smaller raids; Ula’tek health reduced by 15% on Heroic; Unchecked Rage damage reduced by 61% on all difficulties; Caustic Waves impact damage reduced by 32% on Heroic and Mythic, and its damage over time reduced by 75% on Normal, 61% on Heroic and 89% on Mythic; Malice damage reduced by 63% on Normal and Heroic and 45% on Mythic; Virulent Spit damage reduced by 46% on Raid Finder, 33% on Normal and Heroic and 36% on Mythic; Falling Debris damage reduced by 46% on Raid Finder, 33% on Normal and Heroic and 77% on Mythic; Viscous Echoes impact damage reduced by 53% and damage over time by 25% on all difficulties; fewer eggs summoned by Call of the Serpent on Normal and Heroic; fewer Serpent’s Bite targets on all difficulties; fewer Grasping Fangs targets on Normal and Heroic; 2 eggs removed from each side in Phase 2 (8 per side) on Heroic; no additional Caustic Waves from Spectral Tails in Phase 3 on Heroic; Noxious Splash initial damage reduced by 33% and damage over time by 84% on Mythic; Putrid Membrane duration reduced to 20 seconds on Mythic (was 30 seconds)."
+      ]
+    },
+    {
       "date": "2026-10-27",
       "kind": "hotfix",
       "realm": "live",

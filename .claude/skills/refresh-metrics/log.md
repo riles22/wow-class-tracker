@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (nightly, ~16:00 UTC) — SimC 24, Bloodmallet 24, Murlok 40; Mythicstats held; WCL value-move still red
+
+- SimC MID2_Raid.txt new build 12.1.5.70783 (HEAD de11f57df7), Last-Modified 11 Nov: 24/24 merged at 2026-11-11, max move 0.15%.
+- Bloodmallet: 24 MID2 charts all dated 2026-11-11 (>= 12.1.5 release), adopted wholesale, max move 0.4%; Balance/Augmentation/Devastation still error 3/3.
+- Murlok collector success (source date 11-11), 40 rows applied. Mythicstats collector invalid (period 1089, population not verified), nothing applied. WoWMeta snapshotDate still 09-15, 40 rows identical.
+- WCL collector 357/320 landed. check-refresh still fails on Fury Ula'tek leaderboard 12941 (n 14) -> 178918 (n 33); other Fury raid cuts 207k-338k, so the old value was the outlier. Needs owner value_move_ack.
+
 ## 2026-11-11 (local scheduled run, ~15:30 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
 
 - Archon: rows asOf each page's own lastUpdated (Mythic DPS 2026-11-11, Heroic DPS 2026-11-10, M+ DPS and Tank 2026-11-10, M+ Healer 2026-11-11). Mythic DPS median +0.1%, largest +1.8% (Fire Mage 304338 -> 309759); largest elsewhere: Mythic HPS +0.8%, Heroic DPS +0.3%, Heroic HPS +0.5%, M+ score +0.3%. Popularity: 16 raid and 8 M+ rows changed, at most 0.2 points. No value-move finding. 0 survivability tiers changed.

@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (nightly, ~16:00 UTC) — ledger unchanged; 1 feed entry (11-06 raid tuning); no 12.2 PTR
+
+- Official receipts: 2336376 post 1 v56 and 2382684 post 1 v22 unchanged; pending differs only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
+- RSS / news index / blue tracker since 11-10: WoW: Forever only. No new hotfix compilation topic, no 12.2 PTR.
+- Logged the 11-06 "The Venomous Abyss Raid Tuning Incoming" topic 2402937 (post 1 v3, created 2026-11-06T00:24Z) as a non-class hotfix entry dated 2026-11-06 under the 2026-10-06 owner decision; the 11-06 and 11-10 local runs had read it but logged nothing. Wowhead mirror news=383776, found via the news-search XHR (out of the RSS window; article page 403 here). Set-bonus keywords: 0.
+
 ## 2026-11-11 (local scheduled run, ~15:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes reports a mismatch on that field alone). Topic 2382684 still "Hotfixes - November 6", post 1 v22 (2026-11-07).
