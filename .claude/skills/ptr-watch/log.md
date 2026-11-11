@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (local scheduled run, ~15:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone (check-official-notes reports a mismatch on that field alone). Topic 2382684 still "Hotfixes - November 6", post 1 v22 (2026-11-07).
+- Wowhead RSS since 11-10: every item is WoW: Forever (class tuning news=383826, hotfixes 383837 and 383819), not retail. Forum topic 2404092 "Class Tuning Incoming - November 10" is also WoW: Forever (Hunter pets, Voidwalker, Affliction, Enhancement); read the first post before logging anything with that title. 0 feed entries. No new compilation topic; forum search shows only player threads about 12.2; no 12.2 PTR.
+
 ## 2026-11-10 (local scheduled run, ~15:30 UTC) — ledger revision recorded; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes run locally: topic 2382684 post 1 revised v18 -> v22 (new updatedAt and bodySha256); no class-section change, so the ledger takes the pending receipt and check-official-notes --base=HEAD passes.

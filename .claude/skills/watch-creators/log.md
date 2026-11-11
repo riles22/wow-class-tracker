@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (local scheduled run, ~15:30 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
+
+- pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). Seen 552, skipped 470, unchanged. Feeds not re-diffed this run; the nightly that does discovery has not published since 11-04, so new videos since then are undiscovered.
+
 ## 2026-11-10 (local scheduled run, ~15:30 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). Seen 552, skipped 470, unchanged. Feeds not re-diffed this run; the unfiltered sweep stays undone.
