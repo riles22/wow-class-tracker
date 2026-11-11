@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "BSc3DUC1WHE",
-      "creator": "izen (Izenhart)",
-      "title": "12.1.5 Mythic+ Week 12 Meta Update | For 10 The Players Doing Keys This Week",
-      "published": "2026-11-05",
-      "queuedAt": "2026-11-11"
-    },
-    {
-      "id": "xglEKOfSohU",
-      "creator": "NeekapHere",
-      "title": "Unsealed Wrath! New Ret Paladin Capstone Testing How It Works",
-      "published": "2026-11-10",
-      "queuedAt": "2026-11-11"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3306,6 +3291,13 @@
       "title": "The S2 M+ Falloff",
       "reason": "Transcript read (Supadata, ~33 seconds): a short clip on low Season 2 Mythic+ key volume and raid-favouring rewards; no spec-level read.",
       "verifiedAt": "2026-11-02"
+    },
+    {
+      "id": "xglEKOfSohU",
+      "creator": "NeekapHere",
+      "title": "Unsealed Wrath! New Ret Paladin Capstone Testing How It Works",
+      "reason": "Transcript read (Supadata, ~12 minutes): WoW: Forever content, not Midnight — he tests the level-40 Retribution capstone Unsealed Wrath (stored seal stacks, Seal of Command and Seal of Righteousness procs) on open-world mobs after dinging 40. No Midnight/Season 2 spec read.",
+      "verifiedAt": "2026-11-11"
     }
   ],
   "seen": [

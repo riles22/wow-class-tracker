@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (nightly re-run, ~18:05 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- Ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v22 unchanged since the ~16:00 run; pending differed only in checkedAt, written as received; 0 unresolved.
+- Wowhead RSS (40 items), news index and blue tracker: only WoW: Forever items since 11-07; no new Midnight hotfix compilation topic, no class tuning post, no 12.2 PTR. Raid tuning topic 2402937 still version 3 (already logged as the 11-06 entry).
+- Writeup coverage (read-only): 1 spec without a writeup (Demonology Warlock, deliberate).
+
 ## 2026-11-11 (nightly, ~16:00 UTC) — ledger unchanged; 1 feed entry (11-06 raid tuning); no 12.2 PTR
 
 - Official receipts: 2336376 post 1 v56 and 2382684 post 1 v22 unchanged; pending differs only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

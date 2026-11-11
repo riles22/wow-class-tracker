@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (nightly re-run, ~18:05 UTC) — 44/44 feeds; queue 2 -> 0; 0 takes, 5 metaNotes
+
+- Supadata fetched both queued videos. izen BSc3DUC1WHE ("12.1.5 Mythic+ Week 12 Meta Update", 11-05): 5 M+ metaNotes — Subtlety positive, Assassination mixed, Arms positive, Elemental positive, Arcane negative — each superseding his 10-29 M+ read for that spec. Not distilled: tank (Blood/Guardian popularity restates his 10-31 read), healer status quo (unchanged from 10-29), and the "second clump" (Feral, Windwalker, Ret, Havoc, Devourer, Frost DK), which is list membership only.
+- NeekapHere xglEKOfSohU -> skipped[]: WoW: Forever level-40 Ret capstone testing, not Midnight.
+- New unseen uploads since 11-03 are key-run POVs, streams, WoW: Forever, and izen's raid-difficulty/encounter-nerf/open-world talks (zz_JPeU7emM, qvLsfu_Q-uM, gIOJmuXULhE) with no spec read in title/description; none queued, left unseen.
+
 ## 2026-11-11 (nightly, ~16:00 UTC) — 44/44 feeds; 2 queued; 0 takes, 0 metaNotes
 
 - Supadata ok, 0 requested (queue empty). Unseen since 11-04: mostly WoW: Forever leveling, key-run POVs/streams and PvP duels; left unseen (keyword filter).

@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-11 (nightly re-run, ~18:05 UTC) — all rechecks unchanged; Mythicstats held
+
+- SimC: downloads.simulationcraft.org failed TLS name check this run; www.simulationcraft.org/reports/MID2_Raid.txt served the same report (Last-Modified 11 Nov 07:29, HEAD de11f57df7): 24/24 identical, nothing merged.
+- Bloodmallet: 24 MID2 charts dated 2026-11-11, all values identical to stored; Balance/Augmentation/Devastation still error 3/3.
+- Murlok collector success (source 11-11), 40 rows re-applied unchanged. Mythicstats collector invalid (period 1089, population not verified), nothing applied. WoWMeta snapshotDate 09-15, 40 rows identical.
+- WCL collector 357/320 landed (3 sparse raid cuts retained); check-refresh value-move passes now (thin-board note rule, #122).
+
 ## 2026-11-11 (nightly, ~16:00 UTC) — SimC 24, Bloodmallet 24, Murlok 40; Mythicstats held; WCL value-move still red
 
 - SimC MID2_Raid.txt new build 12.1.5.70783 (HEAD de11f57df7), Last-Modified 11 Nov: 24/24 merged at 2026-11-11, max move 0.15%.
