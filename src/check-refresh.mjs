@@ -380,8 +380,20 @@ export function checkValueMove(config, data, prevData, ack = null) {
   // alone reddening otherwise-healthy nights. Units errors — the shape this exists for —
   // happen on large-magnitude series, so gate on absolute size first.
   const minMag = config.minValueMagnitude ?? 100;
+  /* Thin leaderboards (2026-11-11). A WCL leaderboard row is the median of the entries on
+     page 1. While a board is still under one full page (`hasMorePages: false`) that median
+     is a handful of entries, and it steps hard as kills land: Fury Warrior's Mythic Ula'tek
+     row was committed at 12941 on 14 entries while 22 other DPS specs sat at 225k-465k,
+     then read 91817, 125134 and 152026 as the board filled, and each step failed the row
+     limit and blocked six whole nights (11-05 to 11-10). The row limit exists to catch a
+     units or column-parse error, and these rows are not parsed by an agent: the collector
+     seals them and check-wcl-metrics holds them to its artifact exactly. So a row whose
+     COMMITTED value came from a board under one full page is reported as a note, not an
+     error. A full board still answers to the row limit, and every leaderboard family still
+     answers to the family-median limit, which is where a collector units error shows. */
+  const leaderboard = m => m.sample?.kind === "leaderboard-entries";
   const index = specs => {
-    const byKey = new Map(), byFamily = new Map();
+    const byKey = new Map(), byFamily = new Map(), thin = new Set(), boards = new Set();
     const add = (key, fam, value) => {
       if (typeof value !== "number") return;
       byKey.set(key, value);
@@ -390,7 +402,9 @@ export function checkValueMove(config, data, prevData, ack = null) {
     };
     for (const s of specs ?? []) {
       for (const m of s.metrics ?? []) {
-        add(`${s.class}|${s.spec}|${m.source}|${m.bracket}|${m.name}`, `${m.source}|${m.bracket}|${m.name}`, m.value);
+        const key = `${s.class}|${s.spec}|${m.source}|${m.bracket}|${m.name}`;
+        add(key, `${m.source}|${m.bracket}|${m.name}`, m.value);
+        if (leaderboard(m)) { boards.add(key); if (m.sample.hasMorePages === false) thin.add(key); }
       }
       // Sim and Dummy Dome numbers live OUTSIDE spec.metrics, and reading only
       // spec.metrics left 244 large-magnitude values completely unguarded — a 1000x
@@ -405,8 +419,9 @@ export function checkValueMove(config, data, prevData, ack = null) {
         add(`${s.class}|${s.spec}|${s.ptrDummy.source}|dummy|targets.${count}`, `${s.ptrDummy.source}|dummy|targets.${count}`, value);
       }
     }
-    return { byKey, byFamily };
+    return { byKey, byFamily, thin, boards };
   };
+  const notes = [];
   const median = arr => {
     if (!arr.length) return null;
     const a = [...arr].sort((x, y) => x - y);
@@ -419,7 +434,9 @@ export function checkValueMove(config, data, prevData, ack = null) {
     if (now == null || was === 0) continue; // new/removed rows are the row floors' job
     if (Math.abs(was) < minMag) continue;   // percentages and other near-zero series
     const move = Math.abs(now - was) / Math.abs(was);
-    if (move > maxRow) {
+    if (move > maxRow && prev.thin.has(key) && cur.boards.has(key)) {
+      notes.push(`thin leaderboard: "${key}" went ${was} → ${now} (${Math.round(move * 100)}%) — the committed board was under one full page, so the row limit does not apply`);
+    } else if (move > maxRow) {
       errors.push(`value move: "${key}" went ${was} → ${now} (${Math.round(move * 100)}% vs the last committed state, max ${Math.round(maxRow * 100)}%) — units/column-parse shape; a real upstream jump needs a reviewed limit change in required-sources.json`);
     }
   }
@@ -434,9 +451,9 @@ export function checkValueMove(config, data, prevData, ack = null) {
     }
   }
   if (errors.length && ack) {
-    return { errors: [], notes: [`value-move guard: ${errors.length} finding(s) approved by human ack — ${ack}`], acked: errors };
+    return { errors: [], notes: [`value-move guard: ${errors.length} finding(s) approved by human ack — ${ack}`, ...notes], acked: errors };
   }
-  return { errors };
+  return notes.length ? { errors, notes } : { errors };
 }
 
 /* --- the heartbeat ----------------------------------------------------------------- */

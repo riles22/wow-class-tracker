@@ -1015,6 +1015,14 @@ and the page's own `published` date rides alongside `snapshot`.
    `parse_error` with `evidence.detail`, every WCL row stays exactly as committed, and
    the rest of the night still publishes while the refresh job goes red as the alert
    (owner decision 2026-10-27; before that it blocked the whole night).
+   **A thin board does not answer to the per-row value-move limit** (2026-11-11). A row
+   whose COMMITTED value came from a board under one full page (`sample.hasMorePages:
+   false`) is a median of a handful of entries and steps hard as kills land, so
+   `checkValueMove` prints a move past `maxValueMovePct` on it as a `thin leaderboard:`
+   note instead of an error. Fury Warrior's Mythic Ula'tek row (12941 on 14 entries, then
+   152026 on 30) blocked six nightlies, 11-05 to 11-10, before this. Full boards keep the
+   row limit and every family keeps the family-median limit; a row with no collector
+   `sample` gets no pass.
    The fixed recipe covers 9 raid bosses (zone 53, partition 2 "12.1.5" since the reviewed
    switch of 2026-10-26, Mythic difficulty 5, size 20: the eight 12.1 bosses plus Kith'ix
    3513, which joined in that switch; excludes world boss Nymrissa 3379) and 8 dungeons

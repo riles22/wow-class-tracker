@@ -536,6 +536,53 @@ test("checkValueMove catches units/column-parse shapes, not normal churn (audit 
   assert.ok(acked.acked.length > 0, "the acked findings are still reported for the record");
 });
 
+test("checkValueMove notes a row committed from a WCL board under one full page instead of failing on it", () => {
+  const cfg = { ...config, maxValueMovePct: 0.60, maxFamilyMedianMovePct: 0.35, minValueMagnitude: 100 };
+  const name = "Leaderboard median DPS (S2 Mythic: Ula'tek, top 100)";
+  const row = (value, hasMorePages, sample = { kind: "leaderboard-entries", hasMorePages }) =>
+    ({ source: "warcraftlogs", bracket: "raid", name, value, asOf: "2026-11-03", ...(sample ? { sample } : {}) });
+  // Six full boards and one thin one, as committed on 2026-11-03 (Fury Warrior, n=14).
+  const mk = (thinRow, others = [400000, 410000, 420000, 430000, 440000, 450000]) => ({ specs: [
+    ...others.map((v, i) => ({ class: "C", spec: `S${i}`, role: "DPS", metrics: [row(v, true)] })),
+    { class: "Warrior", spec: "Fury", role: "DPS", metrics: [thinRow] },
+  ] });
+  const base = mk(row(12941, false));
+
+  // The real case: the thin board fills and its median steps 1075%. A note, not an error.
+  const filling = checkValueMove(cfg, mk(row(152026, false)), base);
+  assert.deepEqual(filling.errors, []);
+  assert.equal(filling.notes.length, 1);
+  assert.match(filling.notes[0], /^thin leaderboard: "Warrior\|Fury\|warcraftlogs\|raid\|Leaderboard median DPS .*12941 → 152026 \(1075%\)/);
+  // The board reaching a full page that night is the same growth.
+  assert.deepEqual(checkValueMove(cfg, mk(row(300000, true)), base).errors, []);
+
+  // A FULL committed board still answers to the row limit, whatever the new board says.
+  const full = mk(row(300000, true));
+  for (const now of [row(12941, false), row(12941, true)]) {
+    const moved = checkValueMove(cfg, mk(now), full);
+    assert.equal(moved.errors.length, 1);
+    assert.match(moved.errors[0], /^value move: "Warrior\|Fury/);
+  }
+  // The exemption reads the collector's own sample: a row that has lost it, or never had
+  // one, is not a leaderboard row and gets no pass.
+  assert.equal(checkValueMove(cfg, mk(row(152026, false, null)), base).errors.length, 1);
+  assert.equal(checkValueMove(cfg, mk(row(152026, false)), mk(row(12941, false, null))).errors.length, 1);
+  assert.equal(checkValueMove(cfg, mk(row(152026, false)), mk(row(12941, false, { kind: "leaderboard-entries" }))).errors.length, 1,
+    "an absent hasMorePages is not a thin board");
+
+  // A collector units error still reds: full boards trip the row limit and the family
+  // median moves, thin row or not.
+  const units = checkValueMove(cfg, mk(row(12.9, false), [400, 410, 420, 430, 440, 450]), base);
+  assert.equal(units.errors.filter(e => /^value move/.test(e)).length, 6);
+  assert.ok(units.errors.some(e => /^family median move/.test(e)));
+
+  // Ordinary churn on a thin board says nothing at all, and an ack keeps the notes.
+  assert.deepEqual(checkValueMove(cfg, mk(row(15000, false)), base), { errors: [] });
+  const acked = checkValueMove(cfg, mk(row(152026, false), [400, 410, 420, 430, 440, 450]), base, "reviewed");
+  assert.deepEqual(acked.errors, []);
+  assert.ok(acked.notes.some(n => /^thin leaderboard/.test(n)) && acked.notes.some(n => /approved by human ack/.test(n)));
+});
+
 test("the value-move ack is a separate human token from the anomaly ack, and its waivers are printed", async () => {
   /* Both gates are human-only, but they are unrelated judgements. Feeding one token to
      both meant a human re-running to approve a citable mass TIER retune also, silently,
