@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-12 (local scheduled run, ~15:15 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
+
+- Archon: rows asOf each page's own lastUpdated (2026-11-12 on Mythic DPS and M+ healer, 2026-11-11 on the rest). Mythic DPS 33 rows, median +0.4%, largest +1.5%; Mythic HPS 7 rows, median +0.3%; Heroic DPS 33 rows, median -0.2%; Heroic HPS 7 rows; M+ score 40 rows (32 changed). Popularity: 16 raid and 5 M+ rows changed. No value-move finding. 2 survivability tiers changed: Demonology Warlock C -> B, Guardian Druid A -> B.
+- WCL, Bloodmallet, Murlok, Mythicstats, SimC and WoWMeta not touched (nightly lanes). The nightly published again on 11-11 (7fa8b35, 72c7d1a) after #122; today's nightly had not started when this run pushed.
+
 ## 2026-11-11 (nightly re-run, ~18:05 UTC) — all rechecks unchanged; Mythicstats held
 
 - SimC: downloads.simulationcraft.org failed TLS name check this run; www.simulationcraft.org/reports/MID2_Raid.txt served the same report (Last-Modified 11 Nov 07:29, HEAD de11f57df7): 24/24 identical, nothing merged.

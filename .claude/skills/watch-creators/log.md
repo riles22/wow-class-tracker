@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-12 (local scheduled run, ~15:15 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
+
+- pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). Seen 552, skipped 471, unchanged by this run. All 44 feeds answered a read-only diff: 438 unseen videos dated on or after 2026-06-18. New since the 11-11 nightly: WoW: Forever leveling and PvP, key-run POVs and streams, and izen yXD9Rrs9H2w "Investigating The Claims of The Mythic+ Dungeon Pool Being Cringe" (11-11; dungeon-pool talk, no spec read in title or description). Nothing added to any lane; the unfiltered sweep stays undone.
+
 ## 2026-11-11 (nightly re-run, ~18:05 UTC) — 44/44 feeds; queue 2 -> 0; 0 takes, 5 metaNotes
 
 - Supadata fetched both queued videos. izen BSc3DUC1WHE ("12.1.5 Mythic+ Week 12 Meta Update", 11-05): 5 M+ metaNotes — Subtlety positive, Assassination mixed, Arms positive, Elemental positive, Arcane negative — each superseding his 10-29 M+ read for that spec. Not distilled: tank (Blood/Guardian popularity restates his 10-31 read), healer status quo (unchanged from 10-29), and the "second clump" (Feral, Windwalker, Ret, Havoc, Devourer, Frost DK), which is list membership only.
