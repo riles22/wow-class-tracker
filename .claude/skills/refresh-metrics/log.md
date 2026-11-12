@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-12 (nightly, ~18:40 UTC) — WCL 358/320; Murlok 40; Mythicstats 40 (period 1089); SimC 24 merged
+
+- WCL collector: raid success 358 rows (2 sparse cuts), M+ success 320; 0 retired; check-wcl-metrics passes.
+- Murlok and Mythicstats collector receipts both success; applied metrics-fetch/updates.json (80 rows); check-stable-metrics passes. Mythicstats period 1089 landed (was held 11-11 as invalid).
+- SimC MID2_Raid.txt Last-Modified 12 Nov 07:29, same build HEAD de11f57df7 (re-run): 24/24 merged at 2026-11-12, max move 0.08%.
+- Bloodmallet: 24 MID2 charts dated 11-11, identical to stored; Balance/Augmentation/Devastation still error. Nothing merged.
+- WoWMeta: snapshotDate 2026-09-15, rankings Last-Modified 20 Oct, 40/40 identical; partial. Archon numbers walled (403).
+
 ## 2026-11-12 (local scheduled run, ~15:15 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
 
 - Archon: rows asOf each page's own lastUpdated (2026-11-12 on Mythic DPS and M+ healer, 2026-11-11 on the rest). Mythic DPS 33 rows, median +0.4%, largest +1.5%; Mythic HPS 7 rows, median +0.3%; Heroic DPS 33 rows, median -0.2%; Heroic HPS 7 rows; M+ score 40 rows (32 changed). Popularity: 16 raid and 5 M+ rows changed. No value-move finding. 2 survivability tiers changed: Demonology Warlock C -> B, Guardian Druid A -> B.

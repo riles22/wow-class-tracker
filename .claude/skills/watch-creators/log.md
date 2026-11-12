@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-12 (nightly, ~18:40 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata verdict ok, 0 requested (queue empty). 168 unseen uploads dated 11-04 on: ~108 WoW: Forever leveling/guides, the rest key-run POVs and streams, Dalaran Gaming PvP duels, and talks with no spec read in title/description (izen yXD9Rrs9H2w dungeon pool, qvLsfu_Q-uM raid difficulty, zz_JPeU7emM raid nerfs; NeekapHere ZyPvtHUxAw8 raid difficulties). Dalaran Gaming dz1VdnAdTt8 "Surprise Class Tuning (Shaman Nerfs, Free Gold Buffs)" matches the WoW: Forever Nov 10 hotfixes, not retail. None queued; all left unseen.
+
 ## 2026-11-12 (local scheduled run, ~15:15 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). Seen 552, skipped 471, unchanged by this run. All 44 feeds answered a read-only diff: 438 unseen videos dated on or after 2026-06-18. New since the 11-11 nightly: WoW: Forever leveling and PvP, key-run POVs and streams, and izen yXD9Rrs9H2w "Investigating The Claims of The Mythic+ Dungeon Pool Being Cringe" (11-11; dungeon-pool talk, no spec read in title or description). Nothing added to any lane; the unfiltered sweep stays undone.
