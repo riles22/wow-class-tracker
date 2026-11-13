@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-13 (nightly, ~18:10 UTC) — WCL 358 (partial)/320; Murlok 40; Mythicstats 40 (period 1089); SimC 24 merged
+
+- WCL collector: raid partial — 358 rows landed, 2 cuts invalid (Restoration Druid and Enhancement Shaman on encounter 3497: ranking run timestamp in the future), prior observations kept; M+ success 320. check-wcl-metrics passes.
+- Murlok (source date 2026-11-13) and Mythicstats (period 1089, sum 100.3, 0 retired) applied from metrics-fetch/updates.json; check-stable-metrics passes.
+- SimC MID2_Raid.txt Last-Modified 13 Nov 07:29, same build HEAD de11f57df7 (re-run): 24/24 merged at 2026-11-13, max move 0.16%.
+- Bloodmallet: 24 MID2 charts all dated 2026-11-11, canonical counts identical to stored; Balance/Augmentation/Devastation still error body. Nothing merged (partial).
+- WoWMeta: snapshotDate 2026-09-15, 40 rows identical. Archon numbers: Cloudflare 403, blocked.
+
 ## 2026-11-13 (local scheduled run, ~15:30 UTC) — Archon numbers via browser lane; 200 rows + 40 survivability tiers
 
 - Archon (owner's Brave, archon-capture.mjs exit 0, hashes pass; lastUpdated 11-12 or 11-13 per page): Mythic 95th-pct DPS 33 rows, median move +0.5%, largest +1.5% (Vengeance DH 151751 -> 153993); Mythic HPS 7 rows, median +0.2%, largest +1.2%; Heroic DPS 33 rows, median +0.1%, largest -0.8%; Heroic HPS 7 rows, largest +0.4%; M+ score 40 rows (29 changed), largest -0.3%; raid Popularity 22 changed (largest 0.8 pts, Blood DK 48.6 -> 49.4); M+ Popularity 2 changed. No value-move finding.

@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-13 (nightly, ~18:10 UTC) — 44/44 feeds; queue 0 -> 2; 0 takes, 0 metaNotes
+
+- Supadata summary: verdict ok, 0 requested (queue was empty), 29 counted in the 30-day window.
+- 61 unseen uploads since 11-11: WoW: Forever leveling/PvP clips, retail key-run POVs and streams, PvP duels (Dalaran Gaming 12.1.5 duels — PvP, out of scope), izen's M+ dungeon-pool video (no spec read in title/description; left unseen).
+- Queued 2 in keyword scope: Musguete AzRTPWYhqzo "This is WHY Sub Rogue is KING in M+!!" (Subtlety in scope; key run with a spec-strength title) and Zorthas G6xbA6g_rvw "Classes Shouldn't Change in .5 Patches" (general creator; possible metaNotes).
+
 ## 2026-11-13 (local scheduled run, ~15:30 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - pending-transcripts.json videos[] empty, so nothing to fetch (queue-only scope). No feed diff run this time; nothing added to any lane; the unfiltered sweep stays undone.
