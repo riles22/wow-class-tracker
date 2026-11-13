@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-13 (local scheduled run, ~15:30 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (6 moves)
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, Devourer present, Midnight Season 2 bodies; dateModified equals every stored `published`; 0 moves; snapshots -> 2026-11-13.
+- Wowhead (owner's Brave via Claude in Chrome, device confirmed by navigator.brave): 6 pages, one tier-list block each, 80/80, 0 moves; dateModified equals every stored `published`; snapshots -> 2026-11-13.
+- Archon (same browser, ordinary loads, no challenge; archon-capture.mjs exit 0, all hashes pass; lastUpdated 2026-11-12 on Heroic DPS/Healer/Tank and M+ DPS, 2026-11-13 on M+ Healer, M+ Tank and the three Mythic pages): 6 letter moves. Raid DPS (Heroic throughput list): Affliction Warlock A -> S, Demonology Warlock A -> S, Arcane Mage B -> A. M+ healer (score list): Mistweaver Monk B -> C, Preservation Evoker B -> C, Restoration Druid B -> C. Churn archon:raid 3, archon:mplus 3, 0 two-step; 10 entries stamped. Method not re-read (nightly lane). No seasonVerified change; freeze-season had nothing to do.
+
 ## 2026-11-12 (nightly, ~18:40 UTC) — Method 0 moves; IV/Wowhead/Archon walled
 
 - Method (browser-header curl, 200): 40/40 per bracket, S2 body, Devourer present; Last Updated M+ 14 Oct, raid 10 Aug; 0 moves; snapshots -> 2026-11-12.

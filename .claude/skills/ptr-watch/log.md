@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-13 (local scheduled run, ~15:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes run locally: 138 + 23 class sections; pending differs from the ledger only in checkedAt, so the ledger was left alone. Topic 2382684 still "Hotfixes - November 6", post 1 v22 (2026-11-07); 2336376 post 1 v56.
+- Wowhead RSS (40 items), news index (20 posts) and blue tracker (50 entries) all answered 200 to home curl. Since 11-10 every item is WoW: Forever except lore news=383633 and "New Brutal Armor Transmog Sets Datamined in Patch 12.1.7" (news=383863; cosmetics, report only). Forum search: no new Midnight hotfix compilation topic, no retail class tuning (2404092 is WoW: Forever), only player threads about 12.2; no 12.2 PTR. Raid tuning topic 2402937 still post 1 v3; 12.1.7 notes 2383391 still 5 posts (last 10-29). 0 feed entries.
+- Writeup coverage (read-only): 1 spec without a writeup (Demonology Warlock, deliberate).
+
 ## 2026-11-12 (nightly, ~18:40 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - Ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v22 unchanged; pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.
