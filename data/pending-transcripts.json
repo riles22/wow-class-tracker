@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "AzRTPWYhqzo",
-      "creator": "Musguete",
-      "title": "This is WHY Sub Rogue is KING in M+!! +22 kings rest",
-      "published": "2026-11-13",
-      "queuedAt": "2026-11-13"
-    },
-    {
-      "id": "G6xbA6g_rvw",
-      "creator": "Zorthas",
-      "title": "Classes Shouldn't Change in .5 Patches",
-      "published": "2026-11-13",
-      "queuedAt": "2026-11-13"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",
@@ -3313,6 +3298,13 @@
       "title": "Unsealed Wrath! New Ret Paladin Capstone Testing How It Works",
       "reason": "Transcript read (Supadata, ~12 minutes): WoW: Forever content, not Midnight — he tests the level-40 Retribution capstone Unsealed Wrath (stored seal stacks, Seal of Command and Seal of Righteousness procs) on open-world mobs after dinging 40. No Midnight/Season 2 spec read.",
       "verifiedAt": "2026-11-11"
+    },
+    {
+      "id": "AzRTPWYhqzo",
+      "creator": "Musguete",
+      "title": "This is WHY Sub Rogue is KING in M+!! +22 kings rest",
+      "reason": "Transcript read in full 2026-11-14 (yt-dlp auto-captions, 32-minute video, 348 caption words): a +22 key-run POV with no commentary. Every caption is in-game NPC dialogue or stray sound; he never speaks about Subtlety, so the title's claim has no spoken read behind it. Nothing for takes[].",
+      "verifiedAt": "2026-11-14"
     }
   ],
   "seen": [

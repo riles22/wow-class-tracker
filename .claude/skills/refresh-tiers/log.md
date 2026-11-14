@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-14 (local scheduled run, ~15:30 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (3 moves)
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, Devourer present, Midnight Season 2 bodies; dateModified equals every stored published (raid 10-25/10-11/08-29, M+ 10-25/10-12/10-12). 0 letter moves; snapshots -> 2026-11-14.
+- Wowhead (Brave via Claude in Chrome): 6 pages, one tier-list block each, 80/80, Midnight Season 2; dateModified 10-12, 11-03, 10-12 (raid DPS/Healer/Tank), 10-22, 10-13, 10-23 (M+) = stored published. 0 moves; snapshots -> 2026-11-14.
+- Archon (Brave, archon-capture.mjs exit 0, no challenge): lastUpdated 2026-11-13 on seven pages, 2026-11-14 on Mythic Healer and Mythic Tank. 3 letter moves, all raid: Enhancement Shaman B->A, Protection Paladin S->A, Brewmaster Monk C->B. M+ 0 moves. check-refresh churn archon:raid 3 (0 two-step).
+- Method not fetched (nightly lane).
+
 ## 2026-11-13 (nightly, ~18:10 UTC) — Method 0 moves; IV/Wowhead/Archon walled
 
 - Transport: browser-header curl from the runner. Method both pages 200: 40/40 per bracket (27/7/6), 80 non-null, Devourer present, Midnight Season 2; Last Updated M+ 14 Oct, raid 10 Aug (match published-evidence). 0 letter moves; snapshots -> 2026-11-13.

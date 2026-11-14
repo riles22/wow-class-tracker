@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-14 (local scheduled run, ~15:30 UTC) — Archon browser lane numbers + survivability only
+
+- Archon numbers from the same capture as the letters (checker all ✓): Mythic DPS 33 rows (median +0.2%, largest +1.5% Frost Mage 310711->315356), Mythic HPS 7 (largest -0.3%), Heroic DPS 33 (largest -0.5% Augmentation 274003->272618), Heroic HPS 7 (largest -0.5%), M+ score 40 (31 changed, largest -0.3%), raid Popularity 22 changed (largest 0.5 pts, Blood DK 49.4->49.9), M+ Popularity 6 changed. No value-move finding.
+- Survivability (Mythic raid) 40 tiers, 8 changed: Survival Hunter B->A, Marksmanship B->A, Restoration Shaman A->B, Vengeance DH S->A, Brewmaster S->A, Guardian Druid S->B, Blood DK A->B, Protection Paladin A->C.
+- 10 Archon registry entries stamped 2026-11-14. Per-boss/per-dungeon pages not in the lane. WCL, Murlok, Mythicstats, SimC, Bloodmallet left to the nightly.
+
 ## 2026-11-13 (nightly, ~18:10 UTC) — WCL 358 (partial)/320; Murlok 40; Mythicstats 40 (period 1089); SimC 24 merged
 
 - WCL collector: raid partial — 358 rows landed, 2 cuts invalid (Restoration Druid and Enhancement Shaman on encounter 3497: ranking run timestamp in the future), prior observations kept; M+ success 320. check-wcl-metrics passes.

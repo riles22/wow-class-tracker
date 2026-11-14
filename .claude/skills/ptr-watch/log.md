@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-14 (local scheduled run, ~15:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: success, 138 + 23 class sections; 2336376 post 1 v56 and 2382684 post 1 v22 unchanged. Pending differed only in checkedAt; data/official-notes.json left as committed.
+- Wowhead RSS 200 (40 items). New: news=383874 "Blizzard on Encounter Design in Season 3" (forum topic 2414817, 11-13, a design post with no class tuning; report only) and 12.1.7 PTR cosmetic datamining (383864, 383863; report only). The rest is WoW: Forever.
+- Wowhead blue tracker 403 to home curl today (200 yesterday), not retried; the forum's blizzard-tracker posts.json and search.json (both 200) covered it. Raid tuning topic 2402937 still post 1 v3; 2383391 last post 10-29; no new Midnight hotfix compilation, no retail class tuning (2404092 is WoW: Forever). No 12.2 PTR.
+- Writeup coverage not re-run (lane dormant between cycles).
+
 ## 2026-11-13 (nightly, ~18:05 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - Ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v22 unchanged (0 changed sections); pending differed only in checkedAt, written as received; 0 unresolved; check-official-notes passes.

@@ -12961,7 +12961,7 @@
       "note": "He says all three rogue specs look very good and builds a melee comp around rogue plus Arms."
     },
     {
-      "superseded": false,
+      "superseded": true,
       "class": "Rogue",
       "spec": "Subtlety",
       "creator": "Zorthas",
@@ -17181,6 +17181,30 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"12.1.5 Mythic+ Week 12 Meta Update | For 10 The Players Doing Keys This Week\" (published 2026-11-05): his weekly Mythic+ meta recap of key results up to the November 3 reset, taken as WoW: Forever launched, covering the Subtlety/Assassination split after the Subtlety nerf, the Blood/Guardian tank split, the most popular compositions and Arcane's fall from the top group. It replaces his 2026-10-29 M+ read for this spec.",
       "note": "He says Arcane, once among the highest-rated specs on average, has fallen out of the top three, that he can no longer find a mage in the top results, and that the current top composition has given up on a dedicated priority-damage spec of the kind Arcane used to be.",
       "url": "https://youtu.be/BSc3DUC1WHE?t=1000",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "Zorthas",
+      "date": "2026-11-13",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, from his video arguing against class changes in .5 patches, about two weeks after the 2026-10-27 Subtlety nerf.",
+      "note": "He says Subtlety is still the best DPS in keys after the roughly 11% nerf, which he works out as only about 3.5% of a group's damage and already overcome by routing and gear. Beyond damage he credits it with being very good at killing the totems and shields common this season and calls Atrophic Poison's 5% damage reduction an incredibly strong group buff, and he expects Rogue to be meta again next season if its damage holds. His complaint is with how it got there (a last-minute 14% buff at the 12.1.5 launch, then a nerf two weeks later), not with the spec.",
+      "url": "https://youtu.be/G6xbA6g_rvw?t=343",
+      "superseded": false
+    },
+    {
+      "class": "Hunter",
+      "spec": "Marksmanship",
+      "creator": "Zorthas",
+      "date": "2026-11-13",
+      "sentiment": "negative",
+      "bracket": "both",
+      "patchContext": "Season 2 live (12.1.5) — general read on the 12.1.5 Marksmanship talent swap, from his video arguing against class changes in .5 patches. Not a tier placement; he was playing it as a raid alt.",
+      "note": "He says 12.1.5 removed the talent that let Rapid Fire consume a proc automatically, which the whole rotation was built around, and replaced it with flat damage: a 7% DPS loss by his figure with no compensation, and a rotation everyone had to relearn mid-season. He gave up his own Marksmanship raid alt after the patch, and objects that the spec is reworked every season and again between seasons.",
+      "url": "https://youtu.be/G6xbA6g_rvw?t=374",
       "superseded": false
     }
   ]

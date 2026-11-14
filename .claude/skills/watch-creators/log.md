@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-14 (local scheduled run, ~15:30 UTC) — queue 2 -> 0; 0 takes, 2 metaNotes, 1 verified skip
+
+- yt-dlp anonymous lane worked for both queued videos (no 429). RSS discovery left to the nightly.
+- Musguete AzRTPWYhqzo "This is WHY Sub Rogue is KING in M+!!" (32 min): captions are in-game NPC dialogue only, no commentary. Moved to skipped[] with the reason.
+- Zorthas G6xbA6g_rvw "Classes Shouldn't Change in .5 Patches" (2026-11-13, read in full; general creator, so metaNotes only): Subtlety M+ positive (t=343, still the best DPS after the Oct 27 nerf; supersedes his 2026-08-18 Subtlety M+ note, his raid note stays live) and Marksmanship negative, bracket both (t=374, the 12.1.5 talent swap as an uncompensated loss by his figure). His 2026-08-09 Marksmanship note is an M+ tier placement, a different lens, left live.
+- Not distilled: Devourer (Void-Scarred fix good but late; no current strength read), the Unholy buff-then-nerf history, and a general "balance looks better" remark. No tier list in the video, so no creator-predictions panel.
+- community.json: Zorthas latest updated (generalCreators entry, not overrides-managed).
+
 ## 2026-11-13 (nightly, ~18:10 UTC) — 44/44 feeds; queue 0 -> 2; 0 takes, 0 metaNotes
 
 - Supadata summary: verdict ok, 0 requested (queue was empty), 29 counted in the 30-day window.
