@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-14 (nightly, ~16:50 UTC) — WCL 360/320; Murlok 40; Mythicstats 40 (period 1089); SimC 24 merged
+
+- WCL collector: raid success 360 (the two invalid cuts of 11-13 are back), M+ success 320. Not touched by the agent; check-wcl-metrics passes.
+- Murlok source date 2026-11-14 and Mythicstats period 1089 applied from metrics-fetch/updates.json (80 rows); check-stable-metrics passes.
+- SimC MID2_Raid.txt Last-Modified 14 Nov 07:33, new build HEAD 0d194013c7: 24/24 merged at 2026-11-14, max move 0.23%.
+- Bloodmallet: 24 charts still dated 2026-11-11 and identical; Balance, Augmentation, Devastation error body. Nothing merged (partial).
+- WoWMeta snapshotDate 2026-09-15, 40 rows identical (partial). Archon numbers blocked (403 challenge).
+
 ## 2026-11-14 (local scheduled run, ~15:30 UTC) — Archon browser lane numbers + survivability only
 
 - Archon numbers from the same capture as the letters (checker all ✓): Mythic DPS 33 rows (median +0.2%, largest +1.5% Frost Mage 310711->315356), Mythic HPS 7 (largest -0.3%), Heroic DPS 33 (largest -0.5% Augmentation 274003->272618), Heroic HPS 7 (largest -0.5%), M+ score 40 (31 changed, largest -0.3%), raid Popularity 22 changed (largest 0.5 pts, Blood DK 49.4->49.9), M+ Popularity 6 changed. No value-move finding.

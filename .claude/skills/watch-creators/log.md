@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-14 (nightly, ~16:50 UTC) — 44/44 feeds; queue 0 -> 1; 0 takes, 0 metaNotes
+
+- Supadata summary: verdict ok, 0 requested (queue was empty), 29 counted in the 30-day window.
+- New uploads since the 11-13 nightly: WoW: Forever leveling/streams, key-run POVs (Shadarek, Bansherz, Critcake), Dalaran Gaming 12.1.5 PvP duels (out of scope), Sha's Back Seat Tanking guide; left unseen (keyword filter).
+- Queued 1: izen LEXd87NUnDc "Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season" (11-13; description promises M+ best specs, possible metaNotes).
+
 ## 2026-11-14 (local scheduled run, ~15:30 UTC) — queue 2 -> 0; 0 takes, 2 metaNotes, 1 verified skip
 
 - yt-dlp anonymous lane worked for both queued videos (no 429). RSS discovery left to the nightly.
