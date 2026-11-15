@@ -8,7 +8,7 @@
         "icyveins": "S",
         "method": "S",
         "wowhead": "S",
-        "archon": "A"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "S",
@@ -41,37 +41,37 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 155549,
+        "value": 155892,
         "unit": "DPS",
-        "n": 27624,
+        "n": 27350,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 49.9,
+        "value": 50.3,
         "unit": "%",
-        "n": 27624,
+        "n": 27350,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4032,
+        "value": 4034,
         "unit": "score",
-        "n": 200667,
-        "asOf": "2026-11-13"
+        "n": 185400,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 26,
+        "value": 25.9,
         "unit": "%",
-        "n": 200667,
-        "asOf": "2026-11-13"
+        "n": 185400,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -140,10 +140,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 136508,
+        "value": 130020,
         "unit": "DPS",
-        "n": 117159,
-        "asOf": "2026-11-13"
+        "n": 142529,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -619,10 +619,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 319004,
+        "value": 319975,
         "unit": "DPS",
-        "n": 18426,
-        "asOf": "2026-11-13"
+        "n": 18187,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -630,26 +630,26 @@
         "name": "Popularity",
         "value": 4.9,
         "unit": "%",
-        "n": 18426,
-        "asOf": "2026-11-13"
+        "n": 18187,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3896,
+        "value": 3897,
         "unit": "score",
-        "n": 67715,
-        "asOf": "2026-11-13"
+        "n": 63031,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 2.9,
+        "value": 3,
         "unit": "%",
-        "n": 67715,
-        "asOf": "2026-11-13"
+        "n": 63031,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -795,10 +795,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 286068,
+        "value": 276755,
         "unit": "DPS",
-        "n": 159586,
-        "asOf": "2026-11-13"
+        "n": 191681,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -1233,7 +1233,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -1270,7 +1270,7 @@
         "icyveins": "S",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
@@ -1301,10 +1301,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 310548,
+        "value": 310779,
         "unit": "DPS",
-        "n": 8740,
-        "asOf": "2026-11-13"
+        "n": 8554,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -1312,17 +1312,17 @@
         "name": "Popularity",
         "value": 2.3,
         "unit": "%",
-        "n": 8740,
-        "asOf": "2026-11-13"
+        "n": 8554,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3802,
+        "value": 3801,
         "unit": "score",
-        "n": 42657,
-        "asOf": "2026-11-13"
+        "n": 39601,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -1330,8 +1330,8 @@
         "name": "Popularity",
         "value": 1.9,
         "unit": "%",
-        "n": 42657,
-        "asOf": "2026-11-13"
+        "n": 39601,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -1477,10 +1477,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 268559,
+        "value": 261195,
         "unit": "DPS",
-        "n": 83850,
-        "asOf": "2026-11-13"
+        "n": 102291,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -1915,7 +1915,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -1951,7 +1951,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A+",
@@ -1980,37 +1980,37 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 309983,
+        "value": 310378,
         "unit": "DPS",
-        "n": 18972,
-        "asOf": "2026-11-13"
+        "n": 18733,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5,
+        "value": 5.1,
         "unit": "%",
-        "n": 18972,
-        "asOf": "2026-11-13"
+        "n": 18733,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3871,
+        "value": 3879,
         "unit": "score",
-        "n": 72042,
-        "asOf": "2026-11-13"
+        "n": 67284,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3.1,
+        "value": 3.2,
         "unit": "%",
-        "n": 72042,
-        "asOf": "2026-11-13"
+        "n": 67284,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -2156,10 +2156,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 265505,
+        "value": 259103,
         "unit": "DPS",
-        "n": 130750,
-        "asOf": "2026-11-13"
+        "n": 152002,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -2594,7 +2594,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -2663,10 +2663,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 311016,
+        "value": 311316,
         "unit": "DPS",
-        "n": 9311,
-        "asOf": "2026-11-13"
+        "n": 9096,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -2674,26 +2674,26 @@
         "name": "Popularity",
         "value": 2.5,
         "unit": "%",
-        "n": 9311,
-        "asOf": "2026-11-13"
+        "n": 9096,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3920,
+        "value": 3923,
         "unit": "score",
-        "n": 68036,
-        "asOf": "2026-11-13"
+        "n": 62749,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 3,
+        "value": 2.9,
         "unit": "%",
-        "n": 68036,
-        "asOf": "2026-11-13"
+        "n": 62749,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -2839,10 +2839,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 276122,
+        "value": 268747,
         "unit": "DPS",
-        "n": 71146,
-        "asOf": "2026-11-13"
+        "n": 87309,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -3277,7 +3277,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -3313,7 +3313,7 @@
       "raid": {
         "icyveins": "B",
         "wowhead": "B",
-        "archon": "B",
+        "archon": "C",
         "method": "B"
       },
       "mplus": {
@@ -3342,28 +3342,28 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 154279,
+        "value": 153772,
         "unit": "DPS",
-        "n": 3073,
+        "n": 3003,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.6,
+        "value": 5.5,
         "unit": "%",
-        "n": 3073,
+        "n": 3003,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3736,
+        "value": 3731,
         "unit": "score",
-        "n": 56167,
-        "asOf": "2026-11-13"
+        "n": 51978,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -3371,8 +3371,8 @@
         "name": "Popularity",
         "value": 7.3,
         "unit": "%",
-        "n": 56167,
-        "asOf": "2026-11-13"
+        "n": 51978,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -3441,10 +3441,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 132647,
+        "value": 126687,
         "unit": "DPS",
-        "n": 34958,
-        "asOf": "2026-11-13"
+        "n": 42503,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -3895,7 +3895,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "A",
@@ -3925,10 +3925,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 304270,
+        "value": 304502,
         "unit": "DPS",
-        "n": 23609,
-        "asOf": "2026-11-13"
+        "n": 23320,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -3936,17 +3936,17 @@
         "name": "Popularity",
         "value": 6.3,
         "unit": "%",
-        "n": 23609,
-        "asOf": "2026-11-13"
+        "n": 23320,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3664,
+        "value": 3662,
         "unit": "score",
-        "n": 55660,
-        "asOf": "2026-11-13"
+        "n": 51189,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -3954,8 +3954,8 @@
         "name": "Popularity",
         "value": 2.4,
         "unit": "%",
-        "n": 55660,
-        "asOf": "2026-11-13"
+        "n": 51189,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -4093,10 +4093,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 268177,
+        "value": 265250,
         "unit": "DPS",
-        "n": 108188,
-        "asOf": "2026-11-13"
+        "n": 128839,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -4518,7 +4518,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -4582,19 +4582,19 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 297638,
+        "value": 296814,
         "unit": "DPS",
-        "n": 2067,
-        "asOf": "2026-11-13"
+        "n": 2057,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 0.5,
+        "value": 0.6,
         "unit": "%",
-        "n": 2067,
-        "asOf": "2026-11-13"
+        "n": 2057,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -4602,8 +4602,8 @@
         "name": "M+ score (95th pct)",
         "value": 3849,
         "unit": "score",
-        "n": 34962,
-        "asOf": "2026-11-13"
+        "n": 32019,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -4611,8 +4611,8 @@
         "name": "Popularity",
         "value": 1.5,
         "unit": "%",
-        "n": 34962,
-        "asOf": "2026-11-13"
+        "n": 32019,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -4740,10 +4740,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 251298,
+        "value": 245925,
         "unit": "DPS",
-        "n": 52772,
-        "asOf": "2026-11-13"
+        "n": 64226,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -5175,7 +5175,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -5225,7 +5225,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "S",
@@ -5252,28 +5252,28 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 155895,
+        "value": 155402,
         "unit": "DPS",
-        "n": 4650,
+        "n": 4469,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.4,
+        "value": 8.2,
         "unit": "%",
-        "n": 4650,
+        "n": 4469,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3971,
+        "value": 3981,
         "unit": "score",
-        "n": 219112,
-        "asOf": "2026-11-13"
+        "n": 203002,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -5281,8 +5281,8 @@
         "name": "Popularity",
         "value": 28.4,
         "unit": "%",
-        "n": 219112,
-        "asOf": "2026-11-13"
+        "n": 203002,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -5341,10 +5341,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 131108,
+        "value": 126672,
         "unit": "DPS",
-        "n": 84007,
-        "asOf": "2026-11-13"
+        "n": 103358,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -5821,37 +5821,37 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 463857,
+        "value": 464031,
         "unit": "HPS",
-        "n": 12438,
+        "n": 12113,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 11.1,
+        "value": 11,
         "unit": "%",
-        "n": 12438,
+        "n": 12113,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3662,
+        "value": 3660,
         "unit": "score",
-        "n": 73482,
-        "asOf": "2026-11-13"
+        "n": 68588,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 9.5,
+        "value": 9.6,
         "unit": "%",
-        "n": 73482,
-        "asOf": "2026-11-13"
+        "n": 68588,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -5938,10 +5938,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 351161,
+        "value": 338020,
         "unit": "HPS",
-        "n": 96103,
-        "asOf": "2026-11-13"
+        "n": 116700,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -6420,10 +6420,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 321536,
+        "value": 322276,
         "unit": "DPS",
-        "n": 11938,
-        "asOf": "2026-11-13"
+        "n": 11790,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -6431,17 +6431,17 @@
         "name": "Popularity",
         "value": 3.2,
         "unit": "%",
-        "n": 11938,
-        "asOf": "2026-11-13"
+        "n": 11790,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3742,
+        "value": 3741,
         "unit": "score",
-        "n": 8591,
-        "asOf": "2026-11-13"
+        "n": 7803,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -6449,8 +6449,8 @@
         "name": "Popularity",
         "value": 0.4,
         "unit": "%",
-        "n": 8591,
-        "asOf": "2026-11-13"
+        "n": 7803,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -6578,10 +6578,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 272618,
+        "value": 265458,
         "unit": "DPS",
-        "n": 21717,
-        "asOf": "2026-11-13"
+        "n": 25925,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -7003,7 +7003,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -7039,7 +7039,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -7068,10 +7068,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 312797,
+        "value": 311427,
         "unit": "DPS",
-        "n": 3346,
-        "asOf": "2026-11-13"
+        "n": 3263,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -7079,17 +7079,17 @@
         "name": "Popularity",
         "value": 0.9,
         "unit": "%",
-        "n": 3346,
-        "asOf": "2026-11-13"
+        "n": 3263,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3577,
+        "value": 3575,
         "unit": "score",
-        "n": 16101,
-        "asOf": "2026-11-13"
+        "n": 14759,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -7097,8 +7097,8 @@
         "name": "Popularity",
         "value": 0.7,
         "unit": "%",
-        "n": 16101,
-        "asOf": "2026-11-13"
+        "n": 14759,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -7228,10 +7228,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 268735,
+        "value": 260471,
         "unit": "DPS",
-        "n": 26501,
-        "asOf": "2026-11-13"
+        "n": 32138,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -7659,9 +7659,9 @@
       }
     ],
     "survivability": {
-      "tier": "B",
+      "tier": "C",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -7727,9 +7727,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 446502,
+        "value": 447042,
         "unit": "HPS",
-        "n": 16820,
+        "n": 16577,
         "asOf": "2026-11-14"
       },
       {
@@ -7738,17 +7738,17 @@
         "name": "Popularity",
         "value": 15.1,
         "unit": "%",
-        "n": 16820,
+        "n": 16577,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3703,
+        "value": 3702,
         "unit": "score",
-        "n": 26280,
-        "asOf": "2026-11-13"
+        "n": 24253,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -7756,8 +7756,8 @@
         "name": "Popularity",
         "value": 3.4,
         "unit": "%",
-        "n": 26280,
-        "asOf": "2026-11-13"
+        "n": 24253,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -7844,10 +7844,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 343046,
+        "value": 330762,
         "unit": "HPS",
-        "n": 42847,
-        "asOf": "2026-11-13"
+        "n": 51628,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -8327,10 +8327,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 287655,
+        "value": 287413,
         "unit": "DPS",
-        "n": 22617,
-        "asOf": "2026-11-13"
+        "n": 22046,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -8338,17 +8338,17 @@
         "name": "Popularity",
         "value": 6,
         "unit": "%",
-        "n": 22617,
-        "asOf": "2026-11-13"
+        "n": 22046,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3697,
+        "value": 3696,
         "unit": "score",
-        "n": 250710,
-        "asOf": "2026-11-13"
+        "n": 233306,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -8356,8 +8356,8 @@
         "name": "Popularity",
         "value": 10.9,
         "unit": "%",
-        "n": 250710,
-        "asOf": "2026-11-13"
+        "n": 233306,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -8503,10 +8503,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 242901,
+        "value": 239661,
         "unit": "DPS",
-        "n": 303503,
-        "asOf": "2026-11-13"
+        "n": 360602,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -8941,7 +8941,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -9009,19 +9009,19 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 314933,
+        "value": 316163,
         "unit": "DPS",
-        "n": 22229,
-        "asOf": "2026-11-13"
+        "n": 22169,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 5.9,
+        "value": 6,
         "unit": "%",
-        "n": 22229,
-        "asOf": "2026-11-13"
+        "n": 22169,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -9029,8 +9029,8 @@
         "name": "M+ score (95th pct)",
         "value": 3681,
         "unit": "score",
-        "n": 27666,
-        "asOf": "2026-11-13"
+        "n": 25540,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -9038,8 +9038,8 @@
         "name": "Popularity",
         "value": 1.2,
         "unit": "%",
-        "n": 27666,
-        "asOf": "2026-11-13"
+        "n": 25540,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -9168,10 +9168,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 285716,
+        "value": 280378,
         "unit": "DPS",
-        "n": 83008,
-        "asOf": "2026-11-13"
+        "n": 91914,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -9614,7 +9614,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -9651,7 +9651,7 @@
         "icyveins": "B",
         "method": "C",
         "wowhead": "C",
-        "archon": "C"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "A",
@@ -9680,10 +9680,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 297460,
+        "value": 298082,
         "unit": "DPS",
-        "n": 953,
-        "asOf": "2026-11-13"
+        "n": 929,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -9691,17 +9691,17 @@
         "name": "Popularity",
         "value": 0.3,
         "unit": "%",
-        "n": 953,
-        "asOf": "2026-11-13"
+        "n": 929,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3717,
+        "value": 3703,
         "unit": "score",
-        "n": 14450,
-        "asOf": "2026-11-13"
+        "n": 13354,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -9709,8 +9709,8 @@
         "name": "Popularity",
         "value": 0.6,
         "unit": "%",
-        "n": 14450,
-        "asOf": "2026-11-13"
+        "n": 13354,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -9846,10 +9846,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 256714,
+        "value": 250325,
         "unit": "DPS",
-        "n": 15981,
-        "asOf": "2026-11-13"
+        "n": 18795,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -10284,7 +10284,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -10351,10 +10351,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 305504,
+        "value": 306230,
         "unit": "DPS",
-        "n": 44795,
-        "asOf": "2026-11-13"
+        "n": 44056,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -10362,17 +10362,17 @@
         "name": "Popularity",
         "value": 11.9,
         "unit": "%",
-        "n": 44795,
-        "asOf": "2026-11-13"
+        "n": 44056,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3904,
+        "value": 3905,
         "unit": "score",
-        "n": 256776,
-        "asOf": "2026-11-13"
+        "n": 237959,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -10380,8 +10380,8 @@
         "name": "Popularity",
         "value": 11.1,
         "unit": "%",
-        "n": 256776,
-        "asOf": "2026-11-13"
+        "n": 237959,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -10527,10 +10527,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 272357,
+        "value": 266288,
         "unit": "DPS",
-        "n": 288409,
-        "asOf": "2026-11-13"
+        "n": 357268,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -10965,7 +10965,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -11033,8 +11033,8 @@
         "name": "M+ score (95th pct)",
         "value": 3658,
         "unit": "score",
-        "n": 13411,
-        "asOf": "2026-11-13"
+        "n": 12615,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -11042,8 +11042,8 @@
         "name": "Popularity",
         "value": 0.6,
         "unit": "%",
-        "n": 13411,
-        "asOf": "2026-11-13"
+        "n": 12615,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -11171,10 +11171,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 250273,
+        "value": 245115,
         "unit": "DPS",
-        "n": 9649,
-        "asOf": "2026-11-13"
+        "n": 11532,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -11550,10 +11550,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 312353,
+        "value": 312708,
         "unit": "DPS",
-        "n": 792,
-        "asOf": "2026-11-13"
+        "n": 798,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -11561,8 +11561,8 @@
         "name": "Popularity",
         "value": 0.2,
         "unit": "%",
-        "n": 792,
-        "asOf": "2026-11-13"
+        "n": 798,
+        "asOf": "2026-11-15"
       },
       {
         "source": "mythicstats",
@@ -11639,7 +11639,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -11705,10 +11705,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 315356,
+        "value": 315668,
         "unit": "DPS",
-        "n": 5890,
-        "asOf": "2026-11-13"
+        "n": 5753,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -11716,17 +11716,17 @@
         "name": "Popularity",
         "value": 1.6,
         "unit": "%",
-        "n": 5890,
-        "asOf": "2026-11-13"
+        "n": 5753,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3530,
+        "value": 3538,
         "unit": "score",
-        "n": 40889,
-        "asOf": "2026-11-13"
+        "n": 38412,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -11734,8 +11734,8 @@
         "name": "Popularity",
         "value": 1.8,
         "unit": "%",
-        "n": 40889,
-        "asOf": "2026-11-13"
+        "n": 38412,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -11873,10 +11873,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 273121,
+        "value": 262693,
         "unit": "DPS",
-        "n": 47031,
-        "asOf": "2026-11-13"
+        "n": 57172,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -12321,7 +12321,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -12358,7 +12358,7 @@
         "icyveins": "A",
         "method": "A",
         "wowhead": "B",
-        "archon": "B"
+        "archon": "C"
       },
       "mplus": {
         "icyveins": "A+",
@@ -12388,28 +12388,28 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 137397,
+        "value": 137375,
         "unit": "DPS",
-        "n": 6844,
+        "n": 6814,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 12.4,
+        "value": 12.5,
         "unit": "%",
-        "n": 6844,
+        "n": 6814,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3666,
+        "value": 3662,
         "unit": "score",
-        "n": 34608,
-        "asOf": "2026-11-13"
+        "n": 31852,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -12417,8 +12417,8 @@
         "name": "Popularity",
         "value": 4.5,
         "unit": "%",
-        "n": 34608,
-        "asOf": "2026-11-13"
+        "n": 31852,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -12487,10 +12487,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 129082,
+        "value": 124873,
         "unit": "DPS",
-        "n": 32556,
-        "asOf": "2026-11-13"
+        "n": 38207,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -12971,9 +12971,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 427884,
+        "value": 427820,
         "unit": "HPS",
-        "n": 7407,
+        "n": 7277,
         "asOf": "2026-11-14"
       },
       {
@@ -12982,17 +12982,17 @@
         "name": "Popularity",
         "value": 6.6,
         "unit": "%",
-        "n": 7407,
+        "n": 7277,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3707,
+        "value": 3705,
         "unit": "score",
-        "n": 50934,
-        "asOf": "2026-11-13"
+        "n": 46953,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -13000,8 +13000,8 @@
         "name": "Popularity",
         "value": 6.6,
         "unit": "%",
-        "n": 50934,
-        "asOf": "2026-11-13"
+        "n": 46953,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -13088,10 +13088,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 348166,
+        "value": 333308,
         "unit": "HPS",
-        "n": 49957,
-        "asOf": "2026-11-13"
+        "n": 61082,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -13571,10 +13571,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 314874,
+        "value": 315313,
         "unit": "DPS",
-        "n": 12001,
-        "asOf": "2026-11-13"
+        "n": 11816,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -13582,17 +13582,17 @@
         "name": "Popularity",
         "value": 3.2,
         "unit": "%",
-        "n": 12001,
-        "asOf": "2026-11-13"
+        "n": 11816,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3842,
+        "value": 3821,
         "unit": "score",
-        "n": 45391,
-        "asOf": "2026-11-13"
+        "n": 41715,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -13600,8 +13600,8 @@
         "name": "Popularity",
         "value": 2,
         "unit": "%",
-        "n": 45391,
-        "asOf": "2026-11-13"
+        "n": 41715,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -13747,10 +13747,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 273497,
+        "value": 264766,
         "unit": "DPS",
-        "n": 76082,
-        "asOf": "2026-11-13"
+        "n": 89483,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -14185,7 +14185,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -14222,7 +14222,7 @@
         "icyveins": "B",
         "method": "S",
         "wowhead": "B",
-        "archon": "C"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "S",
@@ -14258,9 +14258,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 393009,
+        "value": 393197,
         "unit": "HPS",
-        "n": 20202,
+        "n": 19860,
         "asOf": "2026-11-14"
       },
       {
@@ -14269,26 +14269,26 @@
         "name": "Popularity",
         "value": 18.1,
         "unit": "%",
-        "n": 20202,
+        "n": 19860,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4035,
+        "value": 4038,
         "unit": "score",
-        "n": 232808,
-        "asOf": "2026-11-13"
+        "n": 215047,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 30.2,
+        "value": 30.1,
         "unit": "%",
-        "n": 232808,
-        "asOf": "2026-11-13"
+        "n": 215047,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -14375,10 +14375,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 305042,
+        "value": 296984,
         "unit": "HPS",
-        "n": 173283,
-        "asOf": "2026-11-13"
+        "n": 212639,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -14859,18 +14859,18 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 164069,
+        "value": 164191,
         "unit": "DPS",
-        "n": 8678,
+        "n": 8452,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 15.7,
+        "value": 15.5,
         "unit": "%",
-        "n": 8678,
+        "n": 8452,
         "asOf": "2026-11-14"
       },
       {
@@ -14879,17 +14879,17 @@
         "name": "M+ score (95th pct)",
         "value": 3766,
         "unit": "score",
-        "n": 179297,
-        "asOf": "2026-11-13"
+        "n": 166256,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 23.2,
+        "value": 23.3,
         "unit": "%",
-        "n": 179297,
-        "asOf": "2026-11-13"
+        "n": 166256,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -14958,10 +14958,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 139440,
+        "value": 135644,
         "unit": "DPS",
-        "n": 76345,
-        "asOf": "2026-11-13"
+        "n": 90471,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -15441,10 +15441,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 316402,
+        "value": 316750,
         "unit": "DPS",
-        "n": 25782,
-        "asOf": "2026-11-13"
+        "n": 25142,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -15452,26 +15452,26 @@
         "name": "Popularity",
         "value": 6.8,
         "unit": "%",
-        "n": 25782,
-        "asOf": "2026-11-13"
+        "n": 25142,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3820,
+        "value": 3828,
         "unit": "score",
-        "n": 237660,
-        "asOf": "2026-11-13"
+        "n": 221775,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 10.3,
+        "value": 10.4,
         "unit": "%",
-        "n": 237660,
-        "asOf": "2026-11-13"
+        "n": 221775,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -15617,10 +15617,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 282307,
+        "value": 274165,
         "unit": "DPS",
-        "n": 369591,
-        "asOf": "2026-11-13"
+        "n": 439233,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -16055,7 +16055,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -16123,9 +16123,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 419434,
+        "value": 417725,
         "unit": "HPS",
-        "n": 871,
+        "n": 866,
         "asOf": "2026-11-14"
       },
       {
@@ -16134,17 +16134,17 @@
         "name": "Popularity",
         "value": 0.8,
         "unit": "%",
-        "n": 871,
+        "n": 866,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3757,
+        "value": 3760,
         "unit": "score",
-        "n": 37036,
-        "asOf": "2026-11-13"
+        "n": 34432,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -16152,8 +16152,8 @@
         "name": "Popularity",
         "value": 4.8,
         "unit": "%",
-        "n": 37036,
-        "asOf": "2026-11-13"
+        "n": 34432,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -16240,10 +16240,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 293875,
+        "value": 283277,
         "unit": "HPS",
-        "n": 11972,
-        "asOf": "2026-11-13"
+        "n": 14658,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -16720,9 +16720,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 442585,
+        "value": 443096,
         "unit": "HPS",
-        "n": 29958,
+        "n": 29408,
         "asOf": "2026-11-14"
       },
       {
@@ -16731,7 +16731,7 @@
         "name": "Popularity",
         "value": 26.8,
         "unit": "%",
-        "n": 29958,
+        "n": 29408,
         "asOf": "2026-11-14"
       },
       {
@@ -16740,17 +16740,17 @@
         "name": "M+ score (95th pct)",
         "value": 3768,
         "unit": "score",
-        "n": 164510,
-        "asOf": "2026-11-13"
+        "n": 152521,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 21.3,
+        "value": 21.4,
         "unit": "%",
-        "n": 164510,
-        "asOf": "2026-11-13"
+        "n": 152521,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -16837,10 +16837,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 365809,
+        "value": 354585,
         "unit": "HPS",
-        "n": 222782,
-        "asOf": "2026-11-13"
+        "n": 263265,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -17289,7 +17289,7 @@
         "icyveins": "A+",
         "method": "A",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "B",
@@ -17318,10 +17318,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 305756,
+        "value": 306358,
         "unit": "DPS",
-        "n": 12914,
-        "asOf": "2026-11-13"
+        "n": 12633,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -17329,8 +17329,8 @@
         "name": "Popularity",
         "value": 3.4,
         "unit": "%",
-        "n": 12914,
-        "asOf": "2026-11-13"
+        "n": 12633,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -17338,8 +17338,8 @@
         "name": "M+ score (95th pct)",
         "value": 3687,
         "unit": "score",
-        "n": 51356,
-        "asOf": "2026-11-13"
+        "n": 47507,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -17347,8 +17347,8 @@
         "name": "Popularity",
         "value": 2.2,
         "unit": "%",
-        "n": 51356,
-        "asOf": "2026-11-13"
+        "n": 47507,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -17494,10 +17494,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 266006,
+        "value": 263849,
         "unit": "DPS",
-        "n": 70829,
-        "asOf": "2026-11-13"
+        "n": 84058,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -17932,7 +17932,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -17969,7 +17969,7 @@
         "icyveins": "A+",
         "method": "B",
         "wowhead": "A",
-        "archon": "B"
+        "archon": "A"
       },
       "mplus": {
         "icyveins": "S+",
@@ -18001,28 +18001,28 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 313365,
+        "value": 313485,
         "unit": "DPS",
-        "n": 7622,
-        "asOf": "2026-11-13"
+        "n": 7632,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 2,
+        "value": 2.1,
         "unit": "%",
-        "n": 7622,
-        "asOf": "2026-11-13"
+        "n": 7632,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3892,
+        "value": 3889,
         "unit": "score",
-        "n": 28763,
-        "asOf": "2026-11-13"
+        "n": 26504,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -18030,8 +18030,8 @@
         "name": "Popularity",
         "value": 1.2,
         "unit": "%",
-        "n": 28763,
-        "asOf": "2026-11-13"
+        "n": 26504,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -18167,10 +18167,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 269728,
+        "value": 261769,
         "unit": "DPS",
-        "n": 37152,
-        "asOf": "2026-11-13"
+        "n": 41628,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -18605,7 +18605,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -18674,10 +18674,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 292398,
+        "value": 292708,
         "unit": "DPS",
-        "n": 505,
-        "asOf": "2026-11-13"
+        "n": 501,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -18685,17 +18685,17 @@
         "name": "Popularity",
         "value": 0.1,
         "unit": "%",
-        "n": 505,
-        "asOf": "2026-11-13"
+        "n": 501,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3731,
+        "value": 3722,
         "unit": "score",
-        "n": 6153,
-        "asOf": "2026-11-13"
+        "n": 5681,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -18703,8 +18703,8 @@
         "name": "Popularity",
         "value": 0.3,
         "unit": "%",
-        "n": 6153,
-        "asOf": "2026-11-13"
+        "n": 5681,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -18840,10 +18840,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 248811,
+        "value": 241966,
         "unit": "DPS",
-        "n": 7323,
-        "asOf": "2026-11-13"
+        "n": 8449,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -19280,7 +19280,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -19317,7 +19317,7 @@
         "icyveins": "S",
         "method": "B",
         "wowhead": "B",
-        "archon": "A"
+        "archon": "S"
       },
       "mplus": {
         "icyveins": "S+",
@@ -19350,10 +19350,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 320456,
+        "value": 321257,
         "unit": "DPS",
-        "n": 22624,
-        "asOf": "2026-11-13"
+        "n": 22137,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -19361,17 +19361,17 @@
         "name": "Popularity",
         "value": 6,
         "unit": "%",
-        "n": 22624,
-        "asOf": "2026-11-13"
+        "n": 22137,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4022,
+        "value": 4024,
         "unit": "score",
-        "n": 231421,
-        "asOf": "2026-11-13"
+        "n": 213773,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -19379,8 +19379,8 @@
         "name": "Popularity",
         "value": 10,
         "unit": "%",
-        "n": 231421,
-        "asOf": "2026-11-13"
+        "n": 213773,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -19526,10 +19526,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 277073,
+        "value": 271543,
         "unit": "DPS",
-        "n": 216715,
-        "asOf": "2026-11-13"
+        "n": 254475,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -19964,7 +19964,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -20001,7 +20001,7 @@
         "icyveins": "B",
         "method": "B",
         "wowhead": "B",
-        "archon": "C"
+        "archon": "B"
       },
       "mplus": {
         "icyveins": "S+",
@@ -20028,10 +20028,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 292652,
+        "value": 292837,
         "unit": "DPS",
-        "n": 20397,
-        "asOf": "2026-11-13"
+        "n": 19915,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -20039,26 +20039,26 @@
         "name": "Popularity",
         "value": 5.4,
         "unit": "%",
-        "n": 20397,
-        "asOf": "2026-11-13"
+        "n": 19915,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4036,
+        "value": 4040,
         "unit": "score",
-        "n": 222863,
-        "asOf": "2026-11-13"
+        "n": 205526,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "Popularity",
-        "value": 9.7,
+        "value": 9.6,
         "unit": "%",
-        "n": 222863,
-        "asOf": "2026-11-13"
+        "n": 205526,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -20204,10 +20204,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 251460,
+        "value": 249075,
         "unit": "DPS",
-        "n": 184281,
-        "asOf": "2026-11-13"
+        "n": 216710,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -20642,7 +20642,7 @@
     "survivability": {
       "tier": "S",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -20710,10 +20710,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 307710,
+        "value": 308997,
         "unit": "DPS",
-        "n": 4130,
-        "asOf": "2026-11-13"
+        "n": 4011,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -20721,8 +20721,8 @@
         "name": "Popularity",
         "value": 1.1,
         "unit": "%",
-        "n": 4130,
-        "asOf": "2026-11-13"
+        "n": 4011,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -20730,8 +20730,8 @@
         "name": "M+ score (95th pct)",
         "value": 3802,
         "unit": "score",
-        "n": 47841,
-        "asOf": "2026-11-13"
+        "n": 43899,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -20739,8 +20739,8 @@
         "name": "Popularity",
         "value": 2.1,
         "unit": "%",
-        "n": 47841,
-        "asOf": "2026-11-13"
+        "n": 43899,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -20886,10 +20886,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 271166,
+        "value": 263861,
         "unit": "DPS",
-        "n": 48405,
-        "asOf": "2026-11-13"
+        "n": 56128,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -21325,7 +21325,7 @@
     "survivability": {
       "tier": "A",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -21395,28 +21395,28 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Mythic)",
-        "value": 386938,
+        "value": 386513,
         "unit": "HPS",
-        "n": 24038,
+        "n": 23741,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 21.5,
+        "value": 21.6,
         "unit": "%",
-        "n": 24038,
+        "n": 23741,
         "asOf": "2026-11-14"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3893,
+        "value": 3894,
         "unit": "score",
-        "n": 185996,
-        "asOf": "2026-11-13"
+        "n": 172425,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -21424,8 +21424,8 @@
         "name": "Popularity",
         "value": 24.1,
         "unit": "%",
-        "n": 185996,
-        "asOf": "2026-11-13"
+        "n": 172425,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -21512,10 +21512,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct HPS (Heroic)",
-        "value": 322217,
+        "value": 308761,
         "unit": "HPS",
-        "n": 198991,
-        "asOf": "2026-11-13"
+        "n": 231714,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -21991,10 +21991,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 307992,
+        "value": 308403,
         "unit": "DPS",
-        "n": 8481,
-        "asOf": "2026-11-13"
+        "n": 8549,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -22002,17 +22002,17 @@
         "name": "Popularity",
         "value": 2.3,
         "unit": "%",
-        "n": 8481,
-        "asOf": "2026-11-13"
+        "n": 8549,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3576,
+        "value": 3575,
         "unit": "score",
-        "n": 20370,
-        "asOf": "2026-11-13"
+        "n": 18545,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -22020,8 +22020,8 @@
         "name": "Popularity",
         "value": 0.9,
         "unit": "%",
-        "n": 20370,
-        "asOf": "2026-11-13"
+        "n": 18545,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -22159,10 +22159,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 279994,
+        "value": 276806,
         "unit": "DPS",
-        "n": 28013,
-        "asOf": "2026-11-13"
+        "n": 36346,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -22606,7 +22606,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -22657,10 +22657,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 315890,
+        "value": 316272,
         "unit": "DPS",
-        "n": 29487,
-        "asOf": "2026-11-13"
+        "n": 28900,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -22668,8 +22668,8 @@
         "name": "Popularity",
         "value": 7.8,
         "unit": "%",
-        "n": 29487,
-        "asOf": "2026-11-13"
+        "n": 28900,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -22677,8 +22677,8 @@
         "name": "M+ score (95th pct)",
         "value": 3776,
         "unit": "score",
-        "n": 179533,
-        "asOf": "2026-11-13"
+        "n": 165952,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -22686,8 +22686,8 @@
         "name": "Popularity",
         "value": 7.8,
         "unit": "%",
-        "n": 179533,
-        "asOf": "2026-11-13"
+        "n": 165952,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -22833,10 +22833,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 280070,
+        "value": 271401,
         "unit": "DPS",
-        "n": 254458,
-        "asOf": "2026-11-13"
+        "n": 307395,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -23271,7 +23271,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -23334,10 +23334,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 302232,
+        "value": 299677,
         "unit": "DPS",
-        "n": 4281,
-        "asOf": "2026-11-13"
+        "n": 4141,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -23345,17 +23345,17 @@
         "name": "Popularity",
         "value": 1.1,
         "unit": "%",
-        "n": 4281,
-        "asOf": "2026-11-13"
+        "n": 4141,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3538,
+        "value": 3528,
         "unit": "score",
-        "n": 20877,
-        "asOf": "2026-11-13"
+        "n": 19579,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -23363,8 +23363,8 @@
         "name": "Popularity",
         "value": 0.9,
         "unit": "%",
-        "n": 20877,
-        "asOf": "2026-11-13"
+        "n": 19579,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -23510,10 +23510,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 266469,
+        "value": 252805,
         "unit": "DPS",
-        "n": 26483,
-        "asOf": "2026-11-13"
+        "n": 30280,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -23948,7 +23948,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Ranged",
@@ -24023,28 +24023,28 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 317924,
+        "value": 318369,
         "unit": "DPS",
-        "n": 33011,
-        "asOf": "2026-11-13"
+        "n": 32395,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "raid",
         "name": "Popularity",
-        "value": 8.8,
+        "value": 8.7,
         "unit": "%",
-        "n": 33011,
-        "asOf": "2026-11-13"
+        "n": 32395,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 4050,
+        "value": 4065,
         "unit": "score",
-        "n": 207696,
-        "asOf": "2026-11-13"
+        "n": 191991,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -24052,8 +24052,8 @@
         "name": "Popularity",
         "value": 9,
         "unit": "%",
-        "n": 207696,
-        "asOf": "2026-11-13"
+        "n": 191991,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -24199,10 +24199,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 285601,
+        "value": 273431,
         "unit": "DPS",
-        "n": 257188,
-        "asOf": "2026-11-13"
+        "n": 308568,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -24637,7 +24637,7 @@
     "survivability": {
       "tier": "C",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -24712,10 +24712,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 296105,
+        "value": 295941,
         "unit": "DPS",
-        "n": 1932,
-        "asOf": "2026-11-13"
+        "n": 1910,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -24723,17 +24723,17 @@
         "name": "Popularity",
         "value": 0.5,
         "unit": "%",
-        "n": 1932,
-        "asOf": "2026-11-13"
+        "n": 1910,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
         "bracket": "mplus",
         "name": "M+ score (95th pct)",
-        "value": 3690,
+        "value": 3688,
         "unit": "score",
-        "n": 35357,
-        "asOf": "2026-11-13"
+        "n": 33038,
+        "asOf": "2026-11-14"
       },
       {
         "source": "archon",
@@ -24741,8 +24741,8 @@
         "name": "Popularity",
         "value": 1.5,
         "unit": "%",
-        "n": 35357,
-        "asOf": "2026-11-13"
+        "n": 33038,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -24888,10 +24888,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 247884,
+        "value": 242717,
         "unit": "DPS",
-        "n": 39477,
-        "asOf": "2026-11-13"
+        "n": 49439,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",
@@ -25329,7 +25329,7 @@
     "survivability": {
       "tier": "B",
       "source": "archon",
-      "asOf": "2026-11-13"
+      "asOf": "2026-11-15"
     },
     "playstyle": {
       "range": "Melee",
@@ -25398,9 +25398,9 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Mythic)",
-        "value": 160243,
+        "value": 160088,
         "unit": "DPS",
-        "n": 4450,
+        "n": 4333,
         "asOf": "2026-11-14"
       },
       {
@@ -25409,7 +25409,7 @@
         "name": "Popularity",
         "value": 8,
         "unit": "%",
-        "n": 4450,
+        "n": 4333,
         "asOf": "2026-11-14"
       },
       {
@@ -25418,8 +25418,8 @@
         "name": "M+ score (95th pct)",
         "value": 3678,
         "unit": "score",
-        "n": 81505,
-        "asOf": "2026-11-13"
+        "n": 76097,
+        "asOf": "2026-11-15"
       },
       {
         "source": "archon",
@@ -25427,8 +25427,8 @@
         "name": "Popularity",
         "value": 10.6,
         "unit": "%",
-        "n": 81505,
-        "asOf": "2026-11-13"
+        "n": 76097,
+        "asOf": "2026-11-15"
       },
       {
         "source": "warcraftlogs",
@@ -25487,10 +25487,10 @@
         "source": "archon",
         "bracket": "raid",
         "name": "95th pct DPS (Heroic)",
-        "value": 142703,
+        "value": 139486,
         "unit": "DPS",
-        "n": 54801,
-        "asOf": "2026-11-13"
+        "n": 66388,
+        "asOf": "2026-11-14"
       },
       {
         "source": "warcraftlogs",

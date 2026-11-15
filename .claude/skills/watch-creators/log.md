@@ -24,6 +24,15 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-15 (local scheduled run, ~15:20 UTC) — queue 1 -> 0; 0 takes, 10 metaNotes
+
+- yt-dlp anonymous lane: HTTP 429 on the caption download (one probe, not retried). Used the in-browser lane for the one queued video: the player's own timedtext request replayed inside the Brave tab (json3, 539 caption events, 1,963 words, read in full). RSS discovery left to the nightly.
+- izen LEXd87NUnDc "Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season" (2026-11-13, 10:46; general creator, so metaNotes only), 10 M+ notes: Subtlety (t=217, settled as the best spec after its nerf), Arms and Elemental (t=278, the trio still about 49% of high-key DPS), Blood positive and Guardian mixed (t=355, Guardian about two thirds of tanks on aggregate but Blood ahead at 23-24), Holy Paladin (t=405, about 70% of healers), Restoration Shaman mixed (t=530, physical groups), Retribution, Devourer and Demonology positive (t=467, off-meta specs with good weekly results).
+- Superseded, same M+ lens: his 11-05 Subtlety/Arms/Elemental, 10-31 Blood/Guardian, 10-29 Holy Paladin/Restoration Shaman, 10-24 Demonology, 10-07 Devourer and 09-22 Retribution notes. His raid and season-tier-list (bracket both) notes stay live.
+- Not distilled: Havoc and Beast Mastery (named only as specs seen queuing, no strength read) and the participation figures. No tier list in the video, so no creator-predictions panel.
+- For a human: three older izen M+ pairs each carry two live notes (Unholy 08-16 + 10-16, Beast Mastery 08-29 + 09-22, Survival 08-29 + 09-23); not touched by this run.
+- community.json: izen latest updated (generalCreators entry).
+
 ## 2026-11-14 (nightly, ~16:50 UTC) — 44/44 feeds; queue 0 -> 1; 0 takes, 0 metaNotes
 
 - Supadata summary: verdict ok, 0 requested (queue was empty), 29 counted in the 30-day window.
