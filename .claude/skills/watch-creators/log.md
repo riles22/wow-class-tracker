@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-15 (nightly, ~17:30 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata verdict ok, 0 requested (queue empty; 27 counted in the 30-day window).
+- Unseen uploads since 11-13: WoW: Forever content (Psybear BobPabHNFHQ "This Balance Druid Build Is Surely Getting Nerfed??" is tagged #WoWforever/#wowclassic, so not Midnight), key-run POVs (Shadarek, Bansherz, AutomaticJak, Shindigg, Critcake), PvP duels (Dalaran Gaming), Dalaran Gaming p1H6cvFzro4 Season 3 raid-design news (no spec reads in title/description). Nothing queued; all left unseen (no durable dismissal).
+
 ## 2026-11-15 (local scheduled run, ~15:20 UTC) — queue 1 -> 0; 0 takes, 10 metaNotes
 
 - yt-dlp anonymous lane: HTTP 429 on the caption download (one probe, not retried). Used the in-browser lane for the one queued video: the player's own timedtext request replayed inside the Brave tab (json3, 539 caption events, 1,963 words, read in full). RSS discovery left to the nightly.
