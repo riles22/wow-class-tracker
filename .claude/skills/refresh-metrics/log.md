@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-16 (nightly, ~20:45 UTC) — WCL 360/320; Murlok 40; Mythicstats 38 (period 1089, 2 retired); SimC 24 merged
+
+- WCL collector success (raid zone 53 p2 360 rows, M+ zone 55 p1 320 rows), not edited; one thin-board note (Fury Ula'tek 132463 -> 241780).
+- Murlok 40 rows at 2026-11-16. Mythicstats period 1089: Devastation Evoker and Fire Mage omitted by the chart and retired per the 2026-09-25 rule.
+- SimC MID2_Raid.txt Last-Modified 16 Nov, HEAD 0d194013c7: 24/24 merged at 2026-11-16, max move 0.13%.
+- Bloodmallet: 24 charts still dated 2026-11-11, values identical; Balance/Augmentation/Devastation error body. Nothing merged (partial).
+- WoWMeta: snapshotDate 2026-09-15, 40 values identical. Nothing merged (partial). Archon blocked.
+
 ## 2026-11-16 (local scheduled run, ~15:10 UTC) — Archon browser lane numbers + survivability only
 
 - Archon (Brave, archon-capture.mjs exit 0): 200 metric rows + 40 survivability tiers merged. Mythic 95th-pct DPS 33 rows (median +0.3%, largest +0.8% Feral), Mythic HPS 7 (largest +0.3%), Heroic DPS 33 (median +0.1%, largest +0.4% Survival), Heroic HPS 7 (largest +0.4%), M+ score 40 (36 changed, largest -0.8% Vengeance), popularity raid 40 / M+ 40. Survivability: 0 changed. Rows carry their own page's date (Heroic 2026-11-15, the rest 2026-11-16).

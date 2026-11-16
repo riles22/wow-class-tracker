@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-16 (nightly, ~20:45 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata verdict ok, 0 requested (queue empty; 27 counted in the 30-day window).
+- Unseen uploads since the 11-15 nightly: WoW: Forever content (Kalamazi 0H6cao9yTxA Forever Warlock sims, Psybear, Supatease, Shindigg, Bansherz, NeekapHere, Tettles), key-run POVs/streams (Bansherz, AutomaticJak, Shadarek, Critcake, Shindigg, Hopeful), Sha's tanking breakdown (guide-shaped), Dalaran Gaming PvP duels. izen C9AQaiKbUEg and Dalaran p1H6cvFzro4 discuss Blizzard's raid encounter-design blog post (no spec-strength read in title/description); not queued, left unseen.
+
 ## 2026-11-16 (local scheduled run, ~15:10 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - data/pending-transcripts.json videos[] was empty after the reset to the 11-15 nightly, so there was nothing to fetch or distil. RSS discovery left to the nightly.
