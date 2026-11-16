@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-16 (local scheduled run, ~15:10 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (2 moves)
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, Devourer present, titles Midnight 12.1.5, Season 2 bodies; dateModified equals every stored published (raid 10-25/10-11/08-29, M+ 10-25/10-12/10-12). 0 letter moves; snapshots -> 2026-11-16.
+- Wowhead (Brave via Claude in Chrome): 6 pages, one tier-list block each, 80/80, Midnight Season 2; dateModified 10-12, 11-03, 10-12 (raid DPS/Healer/Tank), 10-22, 10-13, 10-23 (M+) = stored published. 0 moves; snapshots -> 2026-11-16.
+- Archon (Brave, archon-capture.mjs exit 0, no challenge): lastUpdated 2026-11-15 on the three Heroic pages; 2026-11-16 on the three M+ pages and the three Mythic pages. 2 letter moves: raid Devourer A->S (Heroic throughput), M+ Vengeance B->C (score). check-refresh churn archon:raid 1, archon:mplus 1 (0 two-step), under the 25/10 limit.
+- The javascript tool cuts a returned string at about 1,000 characters, so the DPS pages were read by storing the snippet's JSON on window and returning 800-character slices; the checker's hash confirmed each reassembled page.
+- Method left to the nightly.
+
 ## 2026-11-15 (nightly, ~17:30 UTC) — Method 80/80 (0 moves); IV, Wowhead, Archon blocked
 
 - Method curl 200: raid 4 blocks 40/40, M+ 40/40, Devourer present, S2; 0 changes; page dates 10 Aug / 14 Oct unchanged. Snapshots -> 2026-11-15.

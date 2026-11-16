@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-16 (local scheduled run, ~15:10 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: success, 138 + 23 class sections (2336376 post 1 still v56); pending identical to the ledger apart from checkedAt, so data/official-notes.json was left as committed.
+- Wowhead RSS 200 (40 items, newest 383806): every item since the 11-15 nightly is WoW: Forever. Forum blizzard-tracker posts.json 200: newest still 2416343 (WoW: Forever XP). Forum search: the first query answered 500, a second 200; no new Midnight hotfix compilation topic (2382684 is still the newest) and no retail class tuning post.
+- Raid tuning topic 2402937 still post 1 v3; 12.1.7 notes 2383391 last post 10-29, post 1 v2. No 12.2 PTR.
+- Writeup coverage not re-run (lane dormant between cycles).
+
 ## 2026-11-15 (nightly, ~17:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes: 2336376 post 1 v56 and 2382684 post 1 v22 unchanged; pending differed only in checkedAt and was installed. check-official-notes passes.
