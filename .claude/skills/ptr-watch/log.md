@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-17 (nightly, ~19:25 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: success, 138 + 23 class sections (2336376 post 1 v56, 2382684 post 1 v22); pending differed only in checkedAt and was installed; check-official-notes passes, 0 unresolved.
+- Wowhead RSS 200 (40 items, newest 383910): WoW: Forever news plus news=383908 / 383907 (11-17): Patch 12.1.7 "Echoes of the Worldcore" and the Talebound mode release on December 1. Content only, no class tuning or set-bonus lines (keyword scan of both bodies). Blizzard's own announcement is topic 2419657 (post 1, no tuning). 12.1.7 is a future in-season patch, not a cycle: not logged in the feed.
+- Forum blizzard-tracker posts.json: newest 2419757 (Blackmaw Hold abuse actions, WoW: Forever); no new Midnight hotfix compilation topic. Raid tuning topic 2402937 still post 1 v3.
+
 ## 2026-11-17 (local scheduled run, ~15:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes: success, 138 + 23 class sections (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, so data/official-notes.json was left as committed (check-official-notes reports the mismatch on that field alone).
