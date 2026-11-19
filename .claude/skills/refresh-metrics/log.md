@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-19 (nightly, ~19:12 UTC) — WCL 360+320; Murlok 40 + Mythicstats 40 applied; sims unchanged
+
+- WCL collector success: raid 360 / M+ 320 landed, no retirements; legacy aggregates unreachable. check-wcl-metrics passes.
+- Murlok: collector success, 40 rows at source date 2026-11-19 (35 values moved). Mythicstats: collector success this time (period 1090, 40 rows, sum 100.2, no retirements; last night's run was invalid); 37 values moved, 2 specs returned. check-stable-metrics passes.
+- SimC MID2_Raid.txt Last-Modified 18 Nov (HEAD 261a211590), 24/24 identical, nothing merged. Bloodmallet 24 MID2 charts dated 11-18 identical; Balance/Augmentation/Devastation error body. WoWMeta snapshotDate 2026-09-15, 40/40 identical. Archon numbers blocked.
+
 ## 2026-11-19 (local scheduled run, ~15:20 UTC) — Archon browser lane numbers only (survivability 0 changed)
 
 - Archon (Brave, archon-capture.mjs exit 0): 200 metric rows + 40 survivability tiers merged. Mythic 95th-pct DPS 33 rows (33 changed, median +0.3%, largest +1.5% Survival Hunter 300350 -> 304991), Mythic HPS 7 (largest +0.3% Holy Priest), Heroic DPS 33 (median -0.1%, largest -0.8% Vengeance), Heroic HPS 7 (largest -0.3% Discipline), M+ score 40 (31 changed, largest +0.6% Outlaw), popularity raid 40 (20 changed, largest 0.2 points) / M+ 40 (7 changed). Survivability: 0 changed. Rows carry their own page's date (Heroic and M+ DPS/Tank 2026-11-18, M+ Healer and Mythic 2026-11-19).
