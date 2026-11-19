@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-19 (local scheduled run, ~15:20 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: success, 138 + 23 class sections (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from the two checkedAt stamps, 0 unresolved, so data/official-notes.json was left as committed (check-official-notes reports the mismatch on that field alone).
+- Wowhead RSS 200 (40 items), news index 200 (newest 383924), blue tracker 200, forum blizzard-tracker posts.json 200 (newest still 2403040 post 12, WoW: Forever hotfixes): since the 11-18 nightly only WoW: Forever items and news=383920 (11-18, "All Mythic Difficulty Achievements Removed from Talebound on Patch 12.1.7 PTR"), which is 12.1.7 PTR material with no class tuning: not logged, PHASES.ptr is null. No retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR.
+- Raid tuning topic 2402937 still post 1 v3 (updated 11-07).
+- Writeup coverage not re-run (lane dormant between cycles).
+
 ## 2026-11-18 (nightly, ~19:05 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.

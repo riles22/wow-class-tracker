@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-19 (local scheduled run, ~15:20 UTC) — Archon browser lane numbers only (survivability 0 changed)
+
+- Archon (Brave, archon-capture.mjs exit 0): 200 metric rows + 40 survivability tiers merged. Mythic 95th-pct DPS 33 rows (33 changed, median +0.3%, largest +1.5% Survival Hunter 300350 -> 304991), Mythic HPS 7 (largest +0.3% Holy Priest), Heroic DPS 33 (median -0.1%, largest -0.8% Vengeance), Heroic HPS 7 (largest -0.3% Discipline), M+ score 40 (31 changed, largest +0.6% Outlaw), popularity raid 40 (20 changed, largest 0.2 points) / M+ 40 (7 changed). Survivability: 0 changed. Rows carry their own page's date (Heroic and M+ DPS/Tank 2026-11-18, M+ Healer and Mythic 2026-11-19).
+- check-refresh --manifest after the merge: no value-move finding; only the expected local-run startedAt line.
+- WCL, Murlok, Mythicstats (invalid receipt on the 11-18 nightly, not touched here), SimC, Bloodmallet, WoWMeta left to the nightly.
+
 ## 2026-11-18 (nightly, ~19:05 UTC) — WCL 360/320; Murlok 40; Mythicstats invalid; SimC 24; Bloodmallet 24 re-sim merged
 
 - WCL collector success: raid 360 / M+ 320 landed, no retirements; check-wcl-metrics passes.
