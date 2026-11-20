@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-20 (local scheduled run, ~16:20 UTC) — Archon browser lane: numbers + 6 survivability tiers
+
+- Archon (Brave, archon-capture.mjs exit 0): 200 metric rows + 40 survivability tiers merged. Mythic 95th-pct DPS 33 rows (33 changed, median +0.5%, largest +1.4% Vengeance Demon Hunter 156435 -> 158596), Mythic HPS 7 (median +0.4%, largest +1.6% Discipline Priest 420114 -> 426764), Heroic DPS 33 (median -2.8%, largest -5.7% Destruction Warlock 265888 -> 250788), Heroic HPS 7 (median -3.6%, largest -4.2% Mistweaver 351423 -> 336819), M+ score 40 (27 changed, largest +0.2% Elemental 4090 -> 4100), popularity raid 40 (21 changed, largest 0.7 points Blood DK 51.2 -> 51.9) / M+ 40 (6 changed, largest 0.1). The Heroic fall is a re-cut of the whole page: parse counts changed on every row and the Heroic letters moved with it (refresh-tiers log).
+- Survivability (Mythic raid): 6 changed. Assassination, Windwalker, Affliction B -> A; Arms, Devastation C -> B; Restoration Druid A -> B.
+- Rows carry their own page's date (Heroic and M+ 2026-11-19, Mythic 2026-11-20).
+- check-refresh --manifest after the merge: no value-move or family-median finding; only the expected local-run startedAt line.
+- WCL, Murlok, Mythicstats, SimC, Bloodmallet, WoWMeta left to the nightly.
+
 ## 2026-11-19 (nightly, ~19:12 UTC) — WCL 360+320; Murlok 40 + Mythicstats 40 applied; sims unchanged
 
 - WCL collector success: raid 360 / M+ 320 landed, no retirements; legacy aggregates unreachable. check-wcl-metrics passes.

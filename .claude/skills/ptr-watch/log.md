@@ -24,6 +24,14 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-20 (local scheduled run, ~16:20 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: success, 138 + 23 class sections; pending identical to the ledger apart from the checkedAt stamps, 0 unresolved, so data/official-notes.json was left as committed (check-official-notes reports the mismatch on that field alone).
+- Wowhead RSS 200 (40 items, newest 11-20 16:00 UTC), forum blizzard-tracker posts.json 200 (newest 2403040 post 13, WoW: Forever hotfixes for November 19). Since the 11-19 nightly: WoW: Forever items, "Blizzard Previews Talebound Rewards in Patch 12.1.7" (11-19, forum topic 2422557) and "New Winter Veil Music on Patch 12.1.7 PTR" (11-20). The two 12.1.7 items carry no class tuning and are PTR/preview material: not logged, PHASES.ptr is null. No retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR.
+- Transport: curl drew HTTP 403 (919 bytes) on wowhead.com/news and /blue-tracker this run (both 200 on 11-19). The blue tracker was read in Brave instead and matches the forum listing; the news index rendered no article links to an in-page read, so it was not checked; the RSS is today's.
+- Raid tuning topic 2402937 still post 1 v3 (updated 11-07).
+- Writeup coverage not re-run (lane dormant between cycles).
+
 ## 2026-11-19 (nightly, ~19:12 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.

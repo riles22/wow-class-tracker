@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-20 (local scheduled run, ~16:20 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (12 raid moves)
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, one tier-list table each, Devourer present, titles Midnight 12.1.5, Season 2 bodies; dateModified equals every stored published (raid 10-25/10-11/08-29, M+ 10-25/10-12/10-12). 0 letter moves; snapshots -> 2026-11-20.
+- Wowhead (Brave via Claude in Chrome, chosen by device id, navigator.brave object): 6 pages, one tier-list block each, 80/80, titles Midnight Season 2; dateModified 10-12, 11-03, 10-12 (raid DPS/Healer/Tank), 10-22, 10-13, 10-23 (M+) = stored published. 0 moves; snapshots -> 2026-11-20.
+- Archon (Brave, archon-capture.mjs exit 0, all nine page hashes verified, no challenge): lastUpdated 2026-11-19 on the three Heroic pages and all three M+ pages, 2026-11-20 on the three Mythic pages. Heroic raid throughput list re-cut (95th-pct numbers fell a median 2.8% DPS / 3.6% HPS with it): 12 letter moves, every one a single tier and 11 of them upward. DPS 10: Subtlety and Devourer A -> S; Balance, Shadow, Assassination, Unholy, Devastation, Havoc B -> A; Survival and Elemental C -> B. Healer 1: Holy Paladin C -> B. Tank 1: Guardian C -> B. M+ 0 moves in all three series. Raid pages carry no "Season N" cue; body names The Venomous Abyss and 12.1.5. check-refresh: source churn vs HEAD archon:raid 12 (0 two-step), under the 25/10 limits; no anomaly finding.
+- Method left to the nightly.
+
 ## 2026-11-19 (nightly, ~19:12 UTC) — Method 0 moves; IV/Wowhead/Archon blocked
 
 - Method (browser-header curl, 200): raid 40/40 S6 A11 B17 C6, M+ 40/40 S6 A12 B18 C4; Devourer present; body Midnight Season 2; 0 changes; snapshots -> 2026-11-19; published unchanged (raid 08-10, M+ 10-14).
