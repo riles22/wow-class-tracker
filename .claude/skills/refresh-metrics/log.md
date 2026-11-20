@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-20 (nightly, ~18:50 UTC) — WCL 360+320; Murlok 40 + Mythicstats 40 applied; sims unchanged
+
+- WCL collector success: raid 360 (zone 53 p2), M+ 320 (zone 55 bracket 9); no retirements; check-wcl-metrics passes.
+- Stable collectors: Murlok 40 rows (source date 2026-11-20); Mythicstats period 1090, 40 rows, sum 100.2, no retirements. Applied metrics-fetch/updates.json only; check-stable-metrics passes.
+- WoWMeta snapshotDate still 2026-09-15, 40/40 identical. SimC MID2_Raid.txt Last-Modified 18 Nov, HEAD 261a211590, 24/24 identical. Bloodmallet 24 MID2 charts dated 2026-11-18, identical; Balance/Augmentation/Devastation error body. Both sims partial (2 days old).
+- Archon numbers blocked (Cloudflare / human verification); stored values from the local browser lane unchanged.
+
 ## 2026-11-20 (local scheduled run, ~16:20 UTC) — Archon browser lane: numbers + 6 survivability tiers
 
 - Archon (Brave, archon-capture.mjs exit 0): 200 metric rows + 40 survivability tiers merged. Mythic 95th-pct DPS 33 rows (33 changed, median +0.5%, largest +1.4% Vengeance Demon Hunter 156435 -> 158596), Mythic HPS 7 (median +0.4%, largest +1.6% Discipline Priest 420114 -> 426764), Heroic DPS 33 (median -2.8%, largest -5.7% Destruction Warlock 265888 -> 250788), Heroic HPS 7 (median -3.6%, largest -4.2% Mistweaver 351423 -> 336819), M+ score 40 (27 changed, largest +0.2% Elemental 4090 -> 4100), popularity raid 40 (21 changed, largest 0.7 points Blood DK 51.2 -> 51.9) / M+ 40 (6 changed, largest 0.1). The Heroic fall is a re-cut of the whole page: parse counts changed on every row and the Heroic letters moved with it (refresh-tiers log).

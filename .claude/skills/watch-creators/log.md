@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-20 (nightly, ~18:50 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata summary verdict ok, 0 requested (queue empty; 22 counted in the 30-day window).
+- Unseen uploads since 11-18 triaged on title + media:description under the nightly keyword filter: WoW: Forever streams/guides (MadSkillzzTV, Supatease, Jedith, Psybear, Shindigg, Shadarek, Bansherz, Kalamazi, Preheat, NeekapHere, AutomaticJak), PvP duels (Dalaran Gaming), key-run/raid VODs (Shadarek +23 Devourer, AutomaticJak +23, Musguete Sub +22, Critcake/Whispyr/Kalamazi raid, LBNinja7), anniversary/12.1.7/gearing talk (izen, Dalaran Gaming, Sha x2, Tettles), non-WoW (Maximum GTA streams). None queued; left unseen per the budget/keyword-cut rule.
+
 ## 2026-11-20 (local scheduled run, ~16:20 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - data/pending-transcripts.json videos[] was empty after the reset to the 11-19 nightly (skipped 472), so there was nothing to fetch or distil. RSS discovery left to the nightly.
