@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-21 (local scheduled run, ~19:00 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (5 M+ tank moves)
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, one tier-list table each, Devourer present, titles Midnight 12.1.5, Season 2 bodies; dateModified equals every stored published (raid 10-25/10-11/08-29, M+ 10-25/10-12/10-12). 0 letter moves; snapshots -> 2026-11-21.
+- Wowhead (Brave via Claude in Chrome, chosen by device id, navigator.brave object): 6 pages, one tier-list block each, 80/80, titles Midnight Season 2; dateModified 10-12, 11-03, 10-12 (raid DPS/Healer/Tank), 10-22, 10-13, 10-23 (M+) = stored published. 0 moves; snapshots -> 2026-11-21.
+- Archon (Brave, archon-capture.mjs exit 0, all nine page hashes verified, no challenge): lastUpdated 2026-11-21 on all nine pages. Raid letters 0 changed (Heroic throughput), M+ DPS/Healer 0 changed. M+ tank score list re-cut: Guardian S -> A; Protection Paladin, Vengeance, Protection Warrior, Brewmaster B -> C (list now S 1 / A 1 / B 0 / C 4). Consensus: Guardian Druid M+ S -> A+. check-refresh: source churn vs HEAD archon:mplus 5 (0 two-step), under the 25/10 limits; no anomaly finding. Transport note: in-page output is capped near 1 KB per call, so each page's capture JSON was read in 880-character slices and reassembled; the checker's hash verified every page.
+- Method left to the nightly.
+
 ## 2026-11-21 (nightly, ~17:50 UTC) — Method 0 moves; IV/Wowhead/Archon blocked
 
 - Method (browser-header curl, 200): raid 40/40 (S6 A11 B17 C6), M+ 40/40 (S6 A12 B18 C4), Devourer present, body Midnight Season 2; 0 letter changes; page dates raid 10 Aug, M+ 14 Oct (unchanged); snapshots 2026-11-21.
