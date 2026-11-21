@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-21 (nightly, ~17:50 UTC) — WCL 360+320; Murlok 40 + Mythicstats 40 applied; sims unchanged
+
+- WCL collector success: raid 360, M+ 320 landed, no retirements; check-wcl-metrics passes.
+- Murlok 40 rows (source date 2026-11-21) + Mythicstats period 1090 40 rows (sum 100.5, no retirements) applied from metrics-fetch/updates.json; check-stable-metrics passes.
+- SimC MID2_Raid.txt Last-Modified 18 Nov, HEAD 261a211590, 24/24 identical. Bloodmallet 24 MID2 charts dated 11-18, identical; Balance/Augmentation/Devastation still error body. WoWMeta snapshotDate 2026-09-15, 40/40 identical. Archon numbers blocked (403/human verification).
+
 ## 2026-11-20 (nightly, ~18:50 UTC) — WCL 360+320; Murlok 40 + Mythicstats 40 applied; sims unchanged
 
 - WCL collector success: raid 360 (zone 53 p2), M+ 320 (zone 55 bracket 9); no retirements; check-wcl-metrics passes.

@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-21 (nightly, ~17:50 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.
+- Wowhead RSS 200 (40 items, newest 11-21 15:00 UTC) and forum blizzard-tracker posts.json 200 (newest 2403040 post 14, WoW: Forever hotfixes). Since the 11-20 nightly: WoW: Forever items, the 12.1.7 WoW Weekly (2423714), Talebound/Echoes of the Worldcore (Dec 1) previews, 12.1.7 PTR Winter Veil music. No retail class tuning; 12.1.7 PTR material not logged (PHASES.ptr null). No new Midnight hotfix compilation topic, no 12.2 PTR. Raid tuning topic 2402937 still post 1 v3.
+- Writeup coverage not re-run (lane dormant between cycles).
+
 ## 2026-11-20 (nightly, ~18:50 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.
