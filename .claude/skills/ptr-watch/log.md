@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-22 (local scheduled run, ~15:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: success, 138 + 23 class sections; pending identical to the ledger apart from the checkedAt stamps, 0 unresolved, so data/official-notes.json was left as committed (check-official-notes then reports the receipt/ledger mismatch, which is only those stamps).
+- Wowhead RSS 200 (newest 11-22 15:00 UTC) and forum blizzard-tracker posts.json 200 (newest 2403040 post 14, WoW: Forever hotfixes for November 20): no retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR since the 11-21 runs.
+
 ## 2026-11-21 (local scheduled run, ~19:00 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes: success, 138 + 23 class sections; pending identical to the ledger apart from the checkedAt stamps, 0 unresolved, so data/official-notes.json was left as committed.
