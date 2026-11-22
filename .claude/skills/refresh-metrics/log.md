@@ -24,6 +24,8 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+- 2026-11-22 (nightly, ~18:05 UTC) · WCL collector success: raid 360 + M+ 320 rows landed, no retirements · Murlok 40 rows (source date 11-22) + Mythicstats period 1090 40 rows (sum 100.1, no retirements) applied from metrics-fetch/updates.json · SimC MID2_Raid.txt unchanged (Last-Modified 11-18, HEAD 261a211590), 24/24 identical · Bloodmallet 24/24 MID2 charts still 11-18, identical; Balance/Augmentation/Devastation error body · WoWMeta snapshotDate 09-15, 40/40 identical · Archon numbers blocked (wall).
+
 ## 2026-11-22 (local scheduled run, ~15:30 UTC) — Archon browser lane: 200 metric rows + 40 survivability tiers merged
 
 - Archon (Brave, archon-capture.mjs exit 0): 95th pct DPS (Mythic) 33 rows asOf 11-22, median +0.2%, largest -1.6% (Fire Mage 309017 -> 304067); HPS (Mythic) 7 rows, median +0.1%; DPS (Heroic) 33 rows asOf 11-21 (page label unchanged, values moved), median +0.2%, largest +0.4%; HPS (Heroic) 7 rows, median +0.1%; M+ score 40 rows, 31 changed, largest -0.3%; raid Popularity 13 changed (largest 0.2 pts, Blood DK 53 -> 53.2), M+ Popularity 6 changed (largest 0.2 pts); survivability 40 tiers, 0 changed. No value-move or family-median finding in check-refresh --manifest.
