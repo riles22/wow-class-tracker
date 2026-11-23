@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-23 (nightly, ~22:20 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.
+- Wowhead RSS 200 (40 items, newest 11-23 15:20 UTC), news index (data.news.newsData) and blue tracker (data.blueTracker.default, newest Kaivax 'Epic Mount Riding Skill' 11-23). WoW: Forever items, anniversary, Talebound and the 12.1.7 'Echoes of the Worldcore' Dec 1 release announcement (blue topic 2419657) only; no retail class tuning, no new Midnight hotfix compilation topic (newest still 2382684 'Hotfixes - November 6'), no 12.2 PTR. 12.1.7 PTR items (Winter Veil music, Talebound achievements) carry no class tuning; not logged.
+
 ## 2026-11-23 (local scheduled run, ~15:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes: success, 138 + 23 class sections; pending identical to the ledger apart from the checkedAt stamps, 0 unresolved, so data/official-notes.json was left as committed.

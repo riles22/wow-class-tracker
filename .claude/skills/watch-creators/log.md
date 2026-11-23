@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-23 (nightly, ~22:20 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata summary verdict ok, 0 requested (queue empty; 19 counted in the 30-day window).
+- Unseen uploads since the 11-22 nightly triaged on title + media:description under the nightly keyword filter: WoW: Forever streams/guides/shorts (Supatease x6 new, Shindigg, Bansherz, MadSkillzzTV x2, Psybear x2, Kalamazi, izen Forever first impressions, AutomaticJak 'The Forever Effect'), PvP duels (Dalaran Gaming), 12.1.7 release-date talk (Dalaran Gaming), key/stream VODs (Shadarek Havoc +24s, Critcake 23 keys, Musguete Mythic reclear, Shindigg resil push, Hopeful, LBNinja7 0-Mythic finale). None queued; left unseen per the budget/keyword-cut rule.
+
 ## 2026-11-23 (local scheduled run, ~15:30 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - data/pending-transcripts.json held 0 queued videos, so there was nothing to drain with yt-dlp; feed discovery left to the nightly.
