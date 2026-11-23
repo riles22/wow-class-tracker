@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-23 (local scheduled run, ~15:30 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
+
+- data/pending-transcripts.json held 0 queued videos, so there was nothing to drain with yt-dlp; feed discovery left to the nightly.
+
 ## 2026-11-22 (nightly, ~18:05 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
 
 - Supadata summary verdict ok, 0 requested (queue empty; 19 counted in the 30-day window).

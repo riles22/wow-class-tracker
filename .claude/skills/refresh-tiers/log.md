@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-23 (local scheduled run, ~15:30 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (1 raid move)
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, one tier-list table each, Devourer present, titles Midnight (12.1.5); dateModified equals every stored published (raid 10-25/10-11/08-29, M+ 10-25/10-12/10-12). 0 letter moves; snapshots -> 2026-11-23.
+- Wowhead (Brave via Claude in Chrome, chosen by device id, navigator.brave object): 6 pages, one tier-list block each, 80/80, titles Midnight Season 2; dateModified 10-12, 11-03, 10-12 (raid DPS/Healer/Tank), 10-22, 10-13, 10-23 (M+) = stored published. 0 moves; snapshots -> 2026-11-23.
+- Archon (Brave, archon-capture.mjs exit 0, all nine page hashes verified, no challenge): lastUpdated 2026-11-22 on the three Heroic letter pages, 2026-11-23 on the M+ and Mythic pages. One letter move: raid (Heroic throughput) Feral Druid B -> C, reversing the 11-22 C -> B; every other letter unchanged. check-refresh: source churn archon:raid 1 (0 two-step). Transport: capture function kept in archon.gg sessionStorage and re-run per page; capture read back in 900-character slices; the checker's hash verified every page.
+- Method left to the nightly.
+
 - 2026-11-22 (nightly, ~18:05 UTC) · Method raid 40/40 + M+ 40/40 by browser-header curl, 0 letter changes, page dates 10 Aug / 14 Oct unchanged, snapshots 2026-11-22 · Icy Veins 403 Cloudflare, Wowhead 202 AWS WAF, Archon 403 / human verification: all blocked, stored letters and dates (11-22 local run) unchanged.
 
 ## 2026-11-22 (local scheduled run, ~15:30 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon 80/80 (1 raid move)
