@@ -24,6 +24,12 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-24 (nightly, ~21:00 UTC) — 44/44 feeds; queue 0 -> 2; 0 takes, 0 metaNotes
+
+- Supadata summary verdict ok, 0 requested (queue empty; 15 counted in the 30-day window). All 44 feeds HTTP 200 (Zorthas needed a second fetch).
+- Queued under the nightly keyword filter: izen vL4TdeyRpBw "The 2nd Least Played Week in 4 Expansions! | Midnight's Mythic+ Meta Recap" (S2 12.1.5 M+ week 13 meta recap, metaNote candidate) and Obli RhEhlaQIOw8 "The Death Knight changes we need in Season 3 of Midnight" (Frost/Unholy, may carry a live read).
+- Left unseen (keyword/budget cut): WoW: Forever streams/shorts (Supatease x4, MadSkillzzTV, Bansherz, Psybear, Shindigg, Dalaran Gaming x2), PvP duels (Dalaran Gaming), key/stream VODs (Shadarek Havoc +24s and Murder Row +24, Critcake 23 resil x2, Hopeful x2, Shindigg resil push), Kalamazi stream, NeekapHere weekly news, AutomaticJak "Why Blizzard Kills Their Seasons" (design opinion).
+
 ## 2026-11-24 (local scheduled run, ~16:00 UTC) — queue 0 -> 0; 0 takes, 0 metaNotes
 
 - data/pending-transcripts.json held 0 queued videos, so there was nothing to drain with yt-dlp; feed discovery left to the nightly.
