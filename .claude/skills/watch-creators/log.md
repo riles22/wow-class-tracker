@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-25 (nightly, ~20:20 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata summary verdict ok, 0 requested (queue empty; 13 counted in the 30-day window). All 44 feeds HTTP 200.
+- New since the 11-24 nightly, all left unseen under the nightly keyword filter: izen TPbrqJjG9GY "This Is BAD News | But Actually, Maybe (Perhaps) Good News" (description + chapters: Ascendant Venomstone system commentary and M+ scaling design, no spec reads), WoW: Forever streams/shorts/guides (Supatease x6, Shadarek, MadSkillzzTV, Dalaran Gaming, Bansherz, Kalamazi), key/stream VODs (Shadarek Ruby Life Pools +24 and +24 farming, Musguete Sub +22, Shindigg, Critcake), PvP duels (Dalaran Gaming).
+
 ## 2026-11-25 (local scheduled run, ~16:00 UTC) — queue 2 -> 0; 6 metaNotes, 2 takes
 
 - Transcripts: yt-dlp drew HTTP 429 on the first caption download (one probe, not retried), so both queued videos were read through the in-browser queue-only lane (Brave, the player's own `timedtext` json3 response after toggling captions). Both read in full.

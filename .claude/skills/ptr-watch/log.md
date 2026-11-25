@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-25 (nightly, ~20:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v24); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.
+- Wowhead RSS 200 (40 items, newest 11-25 13:44) and forum blizzard-tracker posts.json 200 (newest 2429074). Kaivax "Balance Druid Adjustments - November 25" (topic 2429007) and "Alterac Valley Adjustments" are WoW: Forever (category 347; leveling talents such as Improved Wrath), not retail. Otherwise WoW: Forever, 12.1.7 and shop items. No retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR. 0 feed entries. Writeup gaps (read-only): Warlock Demonology only.
+
 ## 2026-11-25 (local scheduled run, ~16:00 UTC) — 12.1.5 hotfix post v22 -> v24 (Items only); 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes: both sources success (138 + 23 class sections). Topic 2382684 retitled "Midnight Hotfixes - November 24", post 1 v24 (updated 11-25 00:35 UTC, new body hash). The only new content is a November 24 Items entry (Ascendant Venomstone drop quantities: Mythic raid bosses 4, Heroic 2, M+ +10/+14/+18 1/2/3, tier 11 delve coffers 1, Nightmare Prey caches 1). No class section changed, 0 unresolved; pending installed; check-official-notes --base=HEAD passes.
