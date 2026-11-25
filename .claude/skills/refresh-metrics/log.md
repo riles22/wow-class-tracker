@@ -24,6 +24,8 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+- 2026-11-25 (local scheduled run, ~16:00 UTC) · Archon browser lane (Brave): the first page returned a human-verification interstitial, no `__NEXT_DATA__`. Stopped at the first challenge, nothing clicked or retried; no Archon numbers or survivability tiers merged, stored values and dates from the 11-24 local run retained.
+
 ## 2026-11-24 (nightly, ~21:00 UTC) — WCL 360+320; Murlok 40, Mythicstats 40 applied; sims unchanged
 
 - WCL collector: success, raid 360 / M+ 320 landed (zone 53 p2, zone 55 p1 +10); legacy aggregates unreachable. check-wcl-metrics passes.

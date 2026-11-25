@@ -8265,7 +8265,7 @@
       "patchContext": "Season 2 live — \"Single target damage is INSANE / Unholy DK Midnight Season 2 update\" (published 2026-09-24), a short Warcraft Logs read-through recorded the day after Blizzard fixed the Blightfall bug he had spent two videos reporting. Everything in it is read off the first ~24 hours of logs, a limit he states repeatedly himself. Supersedes his 2026-09-17 Unholy M+ read.",
       "url": "https://youtu.be/kB0bop0aUpI?t=328",
       "claim": "On keys he declines to call it: Unholy and Frost are \"kind of a bit neck and neck\", with some dungeons favouring each, and he says a sample of less than 24 hours is not a basis for deciding which is better. He argues the buff should help — the faster boss pulls from Unholy's single target speed a key up — but notes Frost was already matching Unholy's numbers before it, so there is no reason Frost cannot keep doing so. His conclusion is explicitly permissive rather than directional: \"key-wise, play what you want, doesn't really matter\". He also cautions against reading the top M+ logs as spec evidence at all, since the Unholy names at the top are strong key players whose routes and groups carry the number.",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Priest",
@@ -8372,7 +8372,8 @@
       "bracket": "raid",
       "patchContext": "Season 2 live — \"The Inevitable Unholy Nerf is coming.\" (published 2026-10-03), a ten-minute solo read of the announced October 6 class tuning, recorded before the change is live. He reads it off Mythic Warcraft Logs with his own estimate of the loss applied by hand; he notes he has not personally pulled some of the weaker fights on Mythic. Supersedes his 2026-09-24 Unholy raid read.",
       "url": "https://youtu.be/ikERYz-aMy8?t=66",
-      "claim": "Obli reads the Blightfall cut (200% to 100% of the remaining plague damage) as a deserved and healthy nerf: he cites it as roughly a 7-10% single-target and about 7% AoE loss, and argues it had to come because Blightfall gave Unholy top single target without giving up its AoE. Applying a 10% cut to his own Mythic log, he expects Unholy to drop from \"overbearingly strong\" on single target to in line with Frost and the rest of the field, while still placing well on its best bosses — he names Vashnik, Sszorak and Coiled Altar, flagging the last as where the cut will be most interesting because Blightfall stacks with Inevitable's execute bonus and so inflates the current logs there. Where Unholy was already weak (he names Lost Explorers, Entombed Sentinels and Twin Fangs, the last the biggest drop) he expects it to fall a long way, and he worries it will now need add padding to post good boss damage, which could push Frost up. He still calls it the best spec to play and says a great Unholy will beat a good Frost or Marksmanship player. He also reads the Augmentation reattribution fix as a further small loss only for groups playing with an Augmentation Evoker, while saying he is unsure what it means."
+      "claim": "Obli reads the Blightfall cut (200% to 100% of the remaining plague damage) as a deserved and healthy nerf: he cites it as roughly a 7-10% single-target and about 7% AoE loss, and argues it had to come because Blightfall gave Unholy top single target without giving up its AoE. Applying a 10% cut to his own Mythic log, he expects Unholy to drop from \"overbearingly strong\" on single target to in line with Frost and the rest of the field, while still placing well on its best bosses — he names Vashnik, Sszorak and Coiled Altar, flagging the last as where the cut will be most interesting because Blightfall stacks with Inevitable's execute bonus and so inflates the current logs there. Where Unholy was already weak (he names Lost Explorers, Entombed Sentinels and Twin Fangs, the last the biggest drop) he expects it to fall a long way, and he worries it will now need add padding to post good boss damage, which could push Frost up. He still calls it the best spec to play and says a great Unholy will beat a good Frost or Marksmanship player. He also reads the Augmentation reattribution fix as a further small loss only for groups playing with an Augmentation Evoker, while saying he is unsure what it means.",
+      "superseded": true
     },
     {
       "class": "Demon Hunter",
@@ -9333,6 +9334,30 @@
       "patchContext": "Season 2 live (12.1.5) — his \"The 5 BEST Specs For Mythic+ In Patch 12.1.5 | WoW Meta Update\" video (published 2026-10-29), a Mythic+-only pick list made after the 12.1.5 launch. Read as Mythic+ only: raid is not assessed. Its Arms Warrior, Blood Death Knight and Holy Paladin picks are outside his registered classes and are not attributed to him; his passing mention that bear druids remain playable is not a strength read and is not distilled.",
       "claim": "Discussing Subtlety's expected nerfs, he says Assassination is not far behind it and is where players would move if Subtlety were cut, so he still considers investing in a Rogue for Mythic+ this season worthwhile.",
       "url": "https://youtu.be/o13UUnglWvQ?t=401"
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-11-24",
+      "sentiment": "mixed",
+      "bracket": "raid",
+      "patchContext": "Season 2 live (12.1.5) — \"The Death Knight changes we need in Season 3 of Midnight\" (published 2026-11-24), a seventeen-minute solo video that is mostly a Season 3 design wishlist for Frost and Unholy (tier sets, Frostbane, Rider of the Apocalypse, parryable openers, pet bugs, Soul Reaper, Gargoyle). Only his short closing assessment of where Unholy stands now is recorded here; the wishlist is not a strength read. He says up front that he has played little lately beyond a weekly raid. Supersedes his 2026-10-03 Unholy raid read.",
+      "url": "https://youtu.be/RhEhlaQIOw8?t=920",
+      "claim": "Looking back over the season, Obli says Unholy eventually settled into a decent place after being a lot worse at the start of the tier, but he does not rate it as a great DPS spec and thinks Frost still beats it in most cases. He contrasts this with Mythic+, where he calls it fine, so the weaker verdict is his raid and overall one; he also notes that with this season's crit levels Raise Abomination has outscaled Gargoyle on single target.",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Unholy",
+      "creator": "Obli",
+      "date": "2026-11-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — \"The Death Knight changes we need in Season 3 of Midnight\" (published 2026-11-24), a seventeen-minute solo video that is mostly a Season 3 design wishlist for Frost and Unholy (tier sets, Frostbane, Rider of the Apocalypse, parryable openers, pet bugs, Soul Reaper, Gargoyle). Only his short closing assessment of where Unholy stands now is recorded here; the wishlist is not a strength read. He says up front that he has played little lately beyond a weekly raid. Supersedes his 2026-09-24 Unholy M+ read.",
+      "url": "https://youtu.be/RhEhlaQIOw8?t=930",
+      "claim": "Obli calls Unholy absolutely fine for Mythic+, with two reservations: its pets are still bugged often enough to make dungeons the place it is hardest to enjoy, and it lacks the funnel damage that he says is all that matters in high keys, which is why he considers Frost simply the better choice there. He also says its two-target cleave remains weak.",
+      "superseded": false
     }
   ],
   "metaNotes": [
@@ -17181,7 +17206,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"12.1.5 Mythic+ Week 12 Meta Update | For 10 The Players Doing Keys This Week\" (published 2026-11-05): his weekly Mythic+ meta recap of key results up to the November 3 reset, taken as WoW: Forever launched, covering the Subtlety/Assassination split after the Subtlety nerf, the Blood/Guardian tank split, the most popular compositions and Arcane's fall from the top group. It replaces his 2026-10-29 M+ read for this spec.",
       "note": "He says Arcane, once among the highest-rated specs on average, has fallen out of the top three, that he can no longer find a mage in the top results, and that the current top composition has given up on a dedicated priority-damage spec of the kind Arcane used to be.",
       "url": "https://youtu.be/BSc3DUC1WHE?t=1000",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Rogue",
@@ -17217,7 +17242,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season\" (published 2026-11-13): his weekly Mythic+ recap of the first full reset after WoW: Forever launched, covering the roughly 28% drop in M+ participation, the unchanged Subtlety/Arms/Elemental top three, the Blood/Guardian tank split and the healer picks. It replaces his 2026-11-05 M+ read for this spec.",
       "note": "He says Subtlety's nerf and the player drop that followed are now behind it and it has settled as basically the best spec of the season at high key levels, still the most popular DPS in 20+ keys over the last few resets.",
       "url": "https://youtu.be/LEXd87NUnDc?t=217",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Warrior",
@@ -17253,7 +17278,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season\" (published 2026-11-13): his weekly Mythic+ recap of the first full reset after WoW: Forever launched, covering the roughly 28% drop in M+ participation, the unchanged Subtlety/Arms/Elemental top three, the Blood/Guardian tank split and the healer picks. It replaces his 2026-10-31 M+ read for this spec.",
       "note": "He says Blood stays ahead of Guardian at the very top: the most popular compositions are still run with Blood, and in the 23 to 24 key range the tank split leans to Blood by quite a bit, even though aggregate top-key numbers show fewer than a third of tanks playing it.",
       "url": "https://youtu.be/LEXd87NUnDc?t=355",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Druid",
@@ -17265,7 +17290,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season\" (published 2026-11-13): his weekly Mythic+ recap of the first full reset after WoW: Forever launched, covering the roughly 28% drop in M+ participation, the unchanged Subtlety/Arms/Elemental top three, the Blood/Guardian tank split and the healer picks. It replaces his 2026-10-31 M+ read for this spec.",
       "note": "He says aggregate top-key numbers show about two thirds of tanks playing Guardian, yet the most popular compositions are still run by Blood and the very highest keys (23 to 24) lean to Blood by quite a bit rather than to Guardian.",
       "url": "https://youtu.be/LEXd87NUnDc?t=355",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -17277,7 +17302,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season\" (published 2026-11-13): his weekly Mythic+ recap of the first full reset after WoW: Forever launched, covering the roughly 28% drop in M+ participation, the unchanged Subtlety/Arms/Elemental top three, the Blood/Guardian tank split and the healer picks. It replaces his 2026-10-29 M+ read for this spec.",
       "note": "He says Holy Paladin still holds around 70% of healer popularity in high keys, if not more, with nothing changed on the healer side this reset.",
       "url": "https://youtu.be/LEXd87NUnDc?t=405",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Shaman",
@@ -17289,7 +17314,7 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season\" (published 2026-11-13): his weekly Mythic+ recap of the first full reset after WoW: Forever launched, covering the roughly 28% drop in M+ participation, the unchanged Subtlety/Arms/Elemental top three, the Blood/Guardian tank split and the healer picks. It replaces his 2026-10-29 M+ read for this spec.",
       "note": "He says the healer picture is unchanged: Holy Paladin for the traditional compositions, and Restoration Shaman for the melee or fully physical groups that still show up here and there.",
       "url": "https://youtu.be/LEXd87NUnDc?t=530",
-      "superseded": false
+      "superseded": true
     },
     {
       "class": "Paladin",
@@ -17325,6 +17350,78 @@
       "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"Season 2, Week 13 | Inspecting The Least Played M+ Week Of The Season\" (published 2026-11-13): his weekly Mythic+ recap of the first full reset after WoW: Forever launched, covering the roughly 28% drop in M+ participation, the unchanged Subtlety/Arms/Elemental top three, the Blood/Guardian tank split and the healer picks. It replaces his 2026-10-24 M+ read for this spec.",
       "note": "He names Demonology among the off-meta specs whose weekly results have been good for the past weeks, roughly matching some of the top specs, and says it is often seen queuing in the 20 to 22 key range, though Subtlety, Elemental and Arms stay on top.",
       "url": "https://youtu.be/LEXd87NUnDc?t=467",
+      "superseded": false
+    },
+    {
+      "class": "Rogue",
+      "spec": "Subtlety",
+      "creator": "izen (Izenhart)",
+      "date": "2026-11-24",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap\" (published 2026-11-24): his Mythic+ recap of the two resets since his week-13 video, covering participation (he puts the week among the least played of the last four expansions), Subtlety taking over the priority-damage slot from Arcane, the Blood/Guardian tank split and the Holy Paladin/Restoration Shaman healer gap. It replaces his 2026-11-13 M+ read for this spec.",
+      "note": "He says Subtlety remains the strongest pick in high keys and has taken over the priority-damage role Arcane used to fill, for the plain reason that it does more damage overall; it also benefits from the attack-power buff Arms brings. He cautions against reading too much into any single top log.",
+      "url": "https://youtu.be/vL4TdeyRpBw?t=234",
+      "superseded": false
+    },
+    {
+      "class": "Mage",
+      "spec": "Arcane",
+      "creator": "izen (Izenhart)",
+      "date": "2026-11-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap\" (published 2026-11-24): his Mythic+ recap of the two resets since his week-13 video, covering participation (he puts the week among the least played of the last four expansions), Subtlety taking over the priority-damage slot from Arcane, the Blood/Guardian tank split and the Holy Paladin/Restoration Shaman healer gap. It replaces his 2026-11-05 M+ read for this spec.",
+      "note": "He says Arcane has now been outside the top three for about a month, and more clearly so in recent weeks, having lost the priority-damage slot to Subtlety; it still appears as an alternative pick rather than disappearing.",
+      "url": "https://youtu.be/vL4TdeyRpBw?t=234",
+      "superseded": false
+    },
+    {
+      "class": "Death Knight",
+      "spec": "Blood",
+      "creator": "izen (Izenhart)",
+      "date": "2026-11-24",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap\" (published 2026-11-24): his Mythic+ recap of the two resets since his week-13 video, covering participation (he puts the week among the least played of the last four expansions), Subtlety taking over the priority-damage slot from Arcane, the Blood/Guardian tank split and the Holy Paladin/Restoration Shaman healer gap. It replaces his 2026-11-13 M+ read for this spec.",
+      "note": "He says Blood is still the tank of the very highest keys, with the top groups favouring it over Guardian.",
+      "url": "https://youtu.be/vL4TdeyRpBw?t=344",
+      "superseded": false
+    },
+    {
+      "class": "Druid",
+      "spec": "Guardian",
+      "creator": "izen (Izenhart)",
+      "date": "2026-11-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap\" (published 2026-11-24): his Mythic+ recap of the two resets since his week-13 video, covering participation (he puts the week among the least played of the last four expansions), Subtlety taking over the priority-damage slot from Arcane, the Blood/Guardian tank split and the Holy Paladin/Restoration Shaman healer gap. It replaces his 2026-11-13 M+ read for this spec.",
+      "note": "He says Guardian has only about a quarter to a third of Blood's popularity in the very highest keys but is the more popular tank across the larger base of lower keys, and that the gap from Guardian down to the remaining tanks is roughly 200 to 250 score.",
+      "url": "https://youtu.be/vL4TdeyRpBw?t=344",
+      "superseded": false
+    },
+    {
+      "class": "Paladin",
+      "spec": "Holy",
+      "creator": "izen (Izenhart)",
+      "date": "2026-11-24",
+      "sentiment": "positive",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap\" (published 2026-11-24): his Mythic+ recap of the two resets since his week-13 video, covering participation (he puts the week among the least played of the last four expansions), Subtlety taking over the priority-damage slot from Arcane, the Blood/Guardian tank split and the Holy Paladin/Restoration Shaman healer gap. It replaces his 2026-11-13 M+ read for this spec.",
+      "note": "He says Holy Paladin is still the top Mythic+ healer, with Restoration Shaman about 130 points behind it and a larger gap to every other healer.",
+      "url": "https://youtu.be/vL4TdeyRpBw?t=520",
+      "superseded": false
+    },
+    {
+      "class": "Shaman",
+      "spec": "Restoration",
+      "creator": "izen (Izenhart)",
+      "date": "2026-11-24",
+      "sentiment": "mixed",
+      "bracket": "mplus",
+      "patchContext": "Season 2 live (12.1.5) — M+ outlook, \"The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap\" (published 2026-11-24): his Mythic+ recap of the two resets since his week-13 video, covering participation (he puts the week among the least played of the last four expansions), Subtlety taking over the priority-damage slot from Arcane, the Blood/Guardian tank split and the Holy Paladin/Restoration Shaman healer gap. It replaces his 2026-11-13 M+ read for this spec.",
+      "note": "He says Restoration Shaman is the clear second healer, about 130 points behind Holy Paladin and well ahead of the rest, and is usually seen paired with melee or physical compositions.",
+      "url": "https://youtu.be/vL4TdeyRpBw?t=413",
       "superseded": false
     }
   ]

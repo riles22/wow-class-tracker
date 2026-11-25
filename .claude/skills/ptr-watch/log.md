@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-25 (local scheduled run, ~16:00 UTC) — 12.1.5 hotfix post v22 -> v24 (Items only); 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: both sources success (138 + 23 class sections). Topic 2382684 retitled "Midnight Hotfixes - November 24", post 1 v24 (updated 11-25 00:35 UTC, new body hash). The only new content is a November 24 Items entry (Ascendant Venomstone drop quantities: Mythic raid bosses 4, Heroic 2, M+ +10/+14/+18 1/2/3, tier 11 delve coffers 1, Nightmare Prey caches 1). No class section changed, 0 unresolved; pending installed; check-official-notes --base=HEAD passes.
+- Wowhead RSS 200 (40 items, newest 11-25 09:00; one item covers the venomstone change) and forum blizzard-tracker posts.json 200 (newest 2382684 #175). Otherwise WoW: Forever, anniversary and 12.1.7 (PTR-only, dated December 1) items. No retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR. 0 feed entries.
+
 ## 2026-11-24 (nightly, ~21:00 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v22); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.

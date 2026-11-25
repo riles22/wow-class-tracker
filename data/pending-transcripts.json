@@ -1,21 +1,6 @@
 {
   "note": "Machine-readable transcript queue. Maintained by the watch-creators skill (agents): append in-scope videos whose transcript could not be read this run; remove a video ONLY after it was distilled or transcript-verified-skipped. Drained by the deterministic src/fetch-transcripts.mjs step when TRANSCRIPT_API_KEY is configured (25/run cap, free-tier budget). Seeded 2026-07-17 from the watch-creators log's pending section.",
-  "videos": [
-    {
-      "id": "vL4TdeyRpBw",
-      "creator": "izen (Izenhart)",
-      "title": "The 2nd Least Played Week in 4 Expansions! | Midnigh's Mythic+ Meta Recap",
-      "published": "2026-11-24",
-      "queuedAt": "2026-11-24"
-    },
-    {
-      "id": "RhEhlaQIOw8",
-      "creator": "Obli",
-      "title": "The Death Knight changes we need in Season 3 of Midnight",
-      "published": "2026-11-24",
-      "queuedAt": "2026-11-24"
-    }
-  ],
+  "videos": [],
   "skipped": [
     {
       "id": "02rLfzEKLq4",

@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-25 (local scheduled run, ~16:00 UTC) — queue 2 -> 0; 6 metaNotes, 2 takes
+
+- Transcripts: yt-dlp drew HTTP 429 on the first caption download (one probe, not retried), so both queued videos were read through the in-browser queue-only lane (Brave, the player's own `timedtext` json3 response after toggling captions). Both read in full.
+- izen vL4TdeyRpBw (11-24, 11 min, 1,947 words): 6 M+ metaNotes (Subtlety positive, Arcane mixed, Blood positive, Guardian mixed, Holy Paladin positive, Restoration Shaman mixed), each superseding his older live M+ note for that spec (Arcane 11-05, the rest 11-13). Not distilled: Arms and Elemental (top-three status only implied on screen, 11-13 notes stay live), Retribution, Devourer, Frost DK, Havoc, Feral, Windwalker (list mentions), participation figures. No tier list, so no creator-predictions panel.
+- Obli RhEhlaQIOw8 (11-24, 17 min, 3,704 words): almost entirely a Season 3 design wishlist, which is not a strength read. His closing assessment is: 2 Unholy takes (raid mixed, M+ mixed) superseding his 10-03 raid and 09-24 M+ reads. No Frost take: the Frost material is a comparison inside the Unholy read, too thin to replace his 09-19 Frost reads.
+- `latest` advanced for both creators. audit:creators: 0 HIGH. No RSS discovery this run (queue drain only).
+
 ## 2026-11-24 (nightly, ~21:00 UTC) — 44/44 feeds; queue 0 -> 2; 0 takes, 0 metaNotes
 
 - Supadata summary verdict ok, 0 requested (queue empty; 15 counted in the 30-day window). All 44 feeds HTTP 200 (Zorthas needed a second fetch).
