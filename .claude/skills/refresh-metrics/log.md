@@ -24,6 +24,8 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+- 2026-11-26 (nightly, ~20:00 UTC) · WCL leaderboards (collector): raid 360 + M+ 320 landed, 0 retired. Murlok collector success (40 rows, source date 2026-11-26) applied. Mythicstats collector success (period 1091, 40 rows, sum 100.2, 0 retired) applied. Bloodmallet 24 MID2 charts dated 2026-11-25, identical to stored (Balance/Augmentation/Devastation error body); nothing merged. SimC MID2_Raid.txt Last-Modified 11-18 unchanged. WoWMeta snapshotDate 2026-09-15, 0/40 differ. Archon numbers blocked.
+
 - 2026-11-25 (nightly, ~20:20 UTC) · WCL leaderboards (collector): raid 360 + M+ 320 landed, 0 retired. Murlok collector success (source date 11-25), 40 rows applied. Mythicstats collector INVALID on period 1091 ("top-2000 population could not be verified"), 0 rows, stored series retained. Bloodmallet: all 24 stored-pool specs re-simmed 2026-11-25 (MID2, ptr "0"), merged wholesale, max move 0.19%; Balance/Augmentation/Devastation still error. SimC MID2_Raid HEAD 261a211590 unchanged (11-18). WoWMeta snapshotDate 09-15, 0/40 lowerBound diffs. Archon blocked (Cloudflare 403).
 
 - 2026-11-25 (local scheduled run, ~16:00 UTC) · Archon browser lane (Brave): the first page returned a human-verification interstitial, no `__NEXT_DATA__`. Stopped at the first challenge, nothing clicked or retried; no Archon numbers or survivability tiers merged, stored values and dates from the 11-24 local run retained.

@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-26 (nightly, ~20:00 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- Supadata summary verdict ok, 0 requested (queue empty; 11 counted in the 30-day window). All 44 feeds HTTP 200.
+- New since the 11-25 nightly, all left unseen under the nightly keyword filter: WoW: Forever streams/shorts/guides (Supatease x9, Shadarek x2, MadSkillzzTV x2, Dalaran Gaming x2, Bansherz, Psybear, Shindigg, Sha, Kalamazi x3), key/stream VODs (Shadarek Havoc +24 x3, Shindigg, Critcake, Musguete Sub +22), PvP duels (Dalaran Gaming x2), Shadarek mJJgyaX5Lsk Havoc how-to (guide-shaped), Whispyr SZsoiLbTJtQ Ula'tek walkthrough (boss guide), AutomaticJak qzmr6qjggaI season-design commentary, Megasett and LBNinja7 shorts.
+
 ## 2026-11-25 (nightly, ~20:20 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
 
 - Supadata summary verdict ok, 0 requested (queue empty; 13 counted in the 30-day window). All 44 feeds HTTP 200.

@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-26 (nightly, ~20:00 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v24); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.
+- Wowhead RSS 200 (40 items, newest 11-25 23:24), news index page 1 (newest news=384000) and forum blizzard-tracker posts.json 200 (newest topic 2403040, WoW: Forever hotfixes). Only WoW: Forever, 12.1.7 and shop items; the Midnight Hotfixes November 24 post is 2382684 v24, already in the ledger. No retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR. 0 feed entries. Writeup gaps (read-only): Warlock Demonology only.
+
 ## 2026-11-25 (nightly, ~20:15 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes receipts: both sources success (2336376 post 1 v56, 2382684 post 1 v24); pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.

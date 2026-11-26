@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-26 (nightly, ~20:00 UTC) — Method 80/80 (0 moves); IV, Wowhead, Archon blocked
+
+- Method (browser-header curl, 200): raid 40/40 (S6 A11 B17 C6), M+ 40/40 (S6 A12 B18 C4), Devourer present, bodies Midnight Season 2; page dates raid 2026-08-10, M+ 2026-10-14; snapshot -> 2026-11-26.
+- Icy Veins 403 Cloudflare (5,858 B), Wowhead 202 AWS WAF (2,020 B), Archon 403 Cloudflare (5,969 B; collector: 403 raid, human-verification M+). Nothing parsed; letters and dates unchanged.
+
 ## 2026-11-25 (nightly, ~20:20 UTC) — Method 80/80 (0 moves); IV, Wowhead, Archon blocked
 
 - Method (browser-header curl, HTTP 200): raid 40/40 (S6 A11 B17 C6), M+ 40/40 (S6 A12 B18 C4), Devourer present, bodies rank Midnight Season 2; page dates 10-14 (M+), 08-10 (raid). 0 letter changes; snapshots 11-25.
