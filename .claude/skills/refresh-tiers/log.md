@@ -24,6 +24,13 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-27 (local scheduled run, ~16:20 UTC) — IV 80/80 (0 moves), Wowhead 80/80 (0 moves), Archon stopped at a challenge
+
+- Icy Veins (home curl, browser headers): 6 pages 200, 27/7/6 per bracket, 80 non-null, one tier-list table each, Devourer present, titles Midnight (12.1.5), Season 2 cue; dateModified = stored published (raid 10-25/10-11/08-29, M+ 10-25/10-12/10-12); 0 letter moves; snapshot -> 11-27.
+- Wowhead (Brave, `WH.markup` tier-list rows): 6 pages, one tier-list block each, 80/80, titles Midnight Season 2; dateModified raid 10-12/11-03/10-12, M+ 10-22/10-13/10-23 = stored published; 0 letter moves; snapshot -> 11-27.
+- Archon (Brave): the first page (heroic raid DPS) returned the "Human Verification" interstitial with no `__NEXT_DATA__`. Stopped there, nothing clicked or retried; letters, numbers and dates from the 11-24 local run retained, Archon snapshots not advanced. Second local run in a row stopped this way (11-25, 11-27).
+- check-refresh --manifest: source churn vs HEAD "no letter changed"; only the expected partial-run startedAt line.
+
 ## 2026-11-26 (nightly, ~20:00 UTC) — Method 80/80 (0 moves); IV, Wowhead, Archon blocked
 
 - Method (browser-header curl, 200): raid 40/40 (S6 A11 B17 C6), M+ 40/40 (S6 A12 B18 C4), Devourer present, bodies Midnight Season 2; page dates raid 2026-08-10, M+ 2026-10-14; snapshot -> 2026-11-26.

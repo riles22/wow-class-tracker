@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-27 (local scheduled run, ~16:20 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- RSS discovery: 44/44 feeds 200; 447 in-cycle ids outside the four lanes (the handed-forward backlog, mostly WoW: Forever streams and shorts). New since the 11-26 nightly: WoW: Forever guides and streams (leak UC7VzjyPxTM, Dalaran Gaming u5OVwu1PJ7Q, MadSkillzzTV, Shindigg, Shadarek, Psybear), Supatease shorts, a Dalaran Gaming PvP duel stream. None carries a retail spec read by title or description; all left unseen.
+- Transcripts: one yt-dlp caption probe (izen TPbrqJjG9GY) drew HTTP 429, not retried: the caption flag still holds. The queue was empty, so the in-browser queue-only lane had nothing to read. Nothing queued (fetch broadly, queue narrowly; the nightly already judged TPbrqJjG9GY as system commentary with no spec reads).
+
 ## 2026-11-26 (nightly, ~20:00 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
 
 - Supadata summary verdict ok, 0 requested (queue empty; 11 counted in the 30-day window). All 44 feeds HTTP 200.
