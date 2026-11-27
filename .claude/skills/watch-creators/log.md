@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-27 (nightly, ~19:50 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- RSS: 44/44 feeds 200. Supadata verdict ok, 0 requested (queue empty). New since the local run: Supatease WoW: Forever shorts, Psybear Forever stream, Shindigg Forever prebis stream, Dalaran Gaming duel stream; earlier-triaged key VODs, Havoc how-to (mJJgyaX5Lsk) and Ula'tek walkthrough (SZsoiLbTJtQ) are guide-shaped. Nothing passes the nightly keyword filter as a spec read; all left unseen, nothing queued.
+
 ## 2026-11-27 (local scheduled run, ~16:20 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
 
 - RSS discovery: 44/44 feeds 200; 447 in-cycle ids outside the four lanes (the handed-forward backlog, mostly WoW: Forever streams and shorts). New since the 11-26 nightly: WoW: Forever guides and streams (leak UC7VzjyPxTM, Dalaran Gaming u5OVwu1PJ7Q, MadSkillzzTV, Shindigg, Shadarek, Psybear), Supatease shorts, a Dalaran Gaming PvP duel stream. None carries a retail spec read by title or description; all left unseen.
