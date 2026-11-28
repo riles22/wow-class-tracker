@@ -24,6 +24,10 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-28 (nightly, ~18:30 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- 44/44 RSS feeds HTTP 200 (seen-set 1389). Supadata summary verdict ok, 0 requested (7 counted in the 30-day window). Unseen uploads since 11-20 triaged on title + media:description under the nightly keyword filter: WoW: Forever content, PvP duels/tier lists, key/stream VODs (Shadarek, Critcake, Shindigg, Bansherz), guide-shaped videos (Shadarek DPS how-to / route-sim guide, Megasett UI guide) and news commentary (izen Venomstones, AutomaticJak). All left unseen; nothing queued.
+
 ## 2026-11-28 (local scheduled run, ~18:00 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
 
 - RSS discovery: 44/44 feeds 200; 448 in-cycle ids outside the four lanes (the handed-forward backlog, mostly WoW: Forever streams and shorts). 26 published since 11-26 12:00 UTC: WoW: Forever guides, streams and shorts (Supatease, Dalaran Gaming, MadSkillzzTV, Psybear, Shindigg, Shadarek, Bansherz, leak, izen Kkxdl70FeFA player stats), two Dalaran Gaming PvP duel videos, Megasett's UI guide O9VhqAgpTZE, Shadarek's dungeon-route sim how-to 0J-1Bx-nTAA, two Critcake key/raid streams, and AutomaticJak mLgg-0RCa_4 ("Blizzard Is Sorry.....Again", raid-design commentary by its description). None carries a retail spec read by title or description; all left unseen.

@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-28 (nightly, ~18:30 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
+
+- fetch-official-notes: both sources success (2336376 post 1 v56, 2382684 post 1 v24, updated 11-25 00:35 UTC). Pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.
+- Wowhead RSS 200 (40 items, newest 11-28 15:43 UTC, WoW: Forever Dire Maul item), news index page 1 (newest 383989, same item) and forum blizzard-tracker posts.json (newest 2403040 #16, WoW: Forever hotfixes, 11-25 23:25). Nothing new since the 11-28 local run: no retail class tuning, no new Midnight hotfix compilation topic, no 12.2 PTR. 12.1.7 PTR (in-season) is still not a cycle, nothing logged. 0 feed entries.
+
 ## 2026-11-28 (local scheduled run, ~18:00 UTC) — ledger unchanged; 0 feed entries; no 12.2 PTR
 
 - fetch-official-notes: both sources success (138 + 23 class sections; 2336376 post 1 v56, 2382684 post 1 v24, updated 11-25 00:35 UTC). Pending identical to the ledger apart from checkedAt, 0 unresolved; installed; check-official-notes --base=HEAD passes.

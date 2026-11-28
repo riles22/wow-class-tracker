@@ -1,28 +1,28 @@
 {
-  "run": "2026-11-27",
-  "startedAt": "2026-11-27T19:41:37Z",
-  "summary": "Nightly: WCL raid 360 + M+ 320 landed; Murlok + Mythicstats applied; Method 0 moves; IV/Wowhead/Archon blocked; Bloodmallet/SimC unchanged; 0 feed; 0 queued",
+  "run": "2026-11-28",
+  "startedAt": "2026-11-28T18:28:11Z",
+  "summary": "Nightly: WCL raid 360 + M+ 320 landed; Murlok + Mythicstats applied; Method 0 moves; IV/Wowhead/Archon blocked; Bloodmallet/SimC/WoWMeta unchanged; 0 feed; 0 queued",
   "sources": [
     {
       "source": "icyveins",
       "result": "blocked",
-      "previousAsOf": "2026-11-27",
-      "newAsOf": "2026-11-27",
-      "detail": "dps-rankings-tier-list HTTP 403 Cloudflare challenge (5,880 bytes, 0 tier-list-entry) on a browser-header curl from the runner. Nothing parsed; letters and dates unchanged (re-verified by the 11-27 local run)."
+      "previousAsOf": "2026-11-28",
+      "newAsOf": "2026-11-28",
+      "detail": "All six pages HTTP 403 Cloudflare challenge (5,852-5,889 bytes, 0 tier-list-entry) on a browser-header curl from the runner. Nothing parsed; letters and dates unchanged (re-verified by the 11-28 local run)."
     },
     {
       "source": "method",
       "result": "success",
-      "previousAsOf": "2026-11-26",
-      "newAsOf": "2026-11-27",
-      "detail": "Both pages HTTP 200 (browser-header curl), <style> stripped, div.tier__tier/tier__title/data-original-title looked up whole: raid 40/40 (S6 A11 B17 C6), M+ 40/40 (S6 A12 B18 C4), Devourer present, bodies rank Midnight Season 2 (s2). 0 letter changes. Page dates: M+ 2026-10-14, raid 2026-08-10."
+      "previousAsOf": "2026-11-27",
+      "newAsOf": "2026-11-28",
+      "detail": "Both pages HTTP 200 (browser-header curl), <style> stripped, div.tier__tier/tier__title/data-original-title looked up whole: raid 40/40 (S6 A11 B17 C6), M+ 40/40 (S6 A12 B18 C4; dungeon blocks rejected by roster match), Devourer present, bodies rank Midnight Season 2 (s2). 0 letter changes. Page dates: M+ 2026-10-14, raid 2026-08-10."
     },
     {
       "source": "wowhead",
       "result": "blocked",
-      "previousAsOf": "2026-11-27",
-      "newAsOf": "2026-11-27",
-      "detail": "dps-rankings-raids answered HTTP 202 AWS WAF challenge (2,020 bytes, 0 tier-list markers) on a full browser-header curl. Not solved; nothing parsed; letters and dates unchanged (re-verified by the 11-27 local run)."
+      "previousAsOf": "2026-11-28",
+      "newAsOf": "2026-11-28",
+      "detail": "All six guide pages answered HTTP 202 AWS WAF challenge (2,020 bytes, 0 tier-list markers) on a full browser-header curl. Not solved; nothing parsed; letters and dates unchanged (re-verified by the 11-28 local run)."
     },
     {
       "source": "archon-tiers",
@@ -111,16 +111,16 @@
     {
       "source": "murlok",
       "result": "success",
-      "previousAsOf": "2026-11-26",
-      "newAsOf": "2026-11-27",
-      "detail": "Deterministic collector receipt (metrics-fetch/evidence.json, checked 19:39Z): status success, 3 pages HTTP 200, 40 rows (27/7/6), source <time datetime> 2026-11-27; updates.json applied via apply-metrics; check-stable-metrics passes."
+      "previousAsOf": "2026-11-27",
+      "newAsOf": "2026-11-28",
+      "detail": "Deterministic collector receipt (metrics-fetch/evidence.json, checked 18:26Z): status success, 3 pages HTTP 200, 40 rows (27/7/6), source <time datetime> 2026-11-28; updates.json applied via apply-metrics; check-stable-metrics passes."
     },
     {
       "source": "bloodmallet",
       "result": "partial",
       "previousAsOf": "2026-11-25",
       "newAsOf": "2026-11-25",
-      "detail": "talent_target_scaling/castingpatchwerk for all 27 DPS specs (retried on error): all 24 stored-pool specs return MID2 charts (ptr \"0\") dated 2026-11-25, byte-identical to stored; no re-sim since, nothing merged. Balance, Augmentation, Devastation still return the error body."
+      "detail": "talent_target_scaling/castingpatchwerk for all 27 DPS specs (retried on error): all 24 stored-pool specs return MID2 charts dated 2026-11-25, identical to stored; no re-sim since, nothing merged. Balance, Augmentation, Devastation still return the error body."
     },
     {
       "source": "simulationcraft",
@@ -134,35 +134,35 @@
       "result": "success",
       "previousAsOf": "2026-11-26",
       "newAsOf": "2026-11-26",
-      "detail": "Deterministic collector receipt: /period/latest -> period 1091 HTTP 200, status success, 40 rows (role totals 31.6/28.6/20/20, sum 100.2), 0 omitted/retired; undated source, values unchanged so dates kept; updates.json applied; check-stable-metrics passes."
+      "detail": "Deterministic collector receipt: /period/latest -> period 1091 HTTP 200, status success, 40 rows (role totals 32.5/27.7/20/20.1, sum 100.3), 0 omitted/retired; undated source (changed values dated by fetch, unchanged kept); updates.json applied; check-stable-metrics passes."
     },
     {
       "source": "blizzard-ptr",
       "result": "success",
       "previousAsOf": null,
       "newAsOf": null,
-      "detail": "Official ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v24 unchanged; pending differed only in checkedAt, installed; check-official-notes passes. Wowhead RSS (40 items, newest 11-27 shop sale), news index and forum blizzard-tracker swept: WoW: Forever and shop items only; no retail class tuning, no new hotfix topic, no 12.2 PTR. 0 feed entries."
+      "detail": "Official ledger: live-hotfixes (2336376) post 1 v56 and live-hotfixes-1215 (2382684) post 1 v24 unchanged; pending differed only in checkedAt, installed; check-official-notes passes. Wowhead RSS (40 items, newest 11-28 WoW: Forever item), news index and forum blizzard-tracker swept: no retail class tuning, no new hotfix topic, no 12.2 PTR. 0 feed entries."
     },
     {
       "source": "creators",
       "result": "success",
       "previousAsOf": null,
       "newAsOf": null,
-      "detail": "44/44 creator RSS feeds HTTP 200. Supadata verdict ok, 0 requested (queue empty; 11 counted in 30-day window). New uploads triaged on title + description under the nightly keyword filter: WoW: Forever content, PvP duels, key/stream VODs and guide-shaped videos left unseen. 0 queued, 0 takes, 0 metaNotes."
+      "detail": "44/44 creator RSS feeds HTTP 200. Supadata verdict ok, 0 requested (queue empty; 7 counted in 30-day window). New uploads triaged on title + description under the nightly keyword filter: WoW: Forever content, PvP duels, key/stream VODs and guide-shaped videos left unseen. 0 queued, 0 takes, 0 metaNotes."
     },
     {
       "source": "wcl-leaderboard-raid",
       "result": "success",
-      "previousAsOf": "2026-11-26",
-      "newAsOf": "2026-11-27",
-      "detail": "Deterministic collector (wcl-fetch/evidence.json, attempted 2026-11-27T19:37:37Z): bracket status success - 360 median rows (zone 53 partition 2, Mythic size 20), 0 empty/sparse, 0 failed; landed 360; nothing retired; check-wcl-metrics passes."
+      "previousAsOf": "2026-11-27",
+      "newAsOf": "2026-11-28",
+      "detail": "Deterministic collector (wcl-fetch/evidence.json, attempted 2026-11-28T18:24:36Z): bracket status success - 360 median rows (zone 53 partition 2, Mythic size 20), 0 empty/sparse, 0 failed; landed 360; nothing retired; check-wcl-metrics passes."
     },
     {
       "source": "wcl-leaderboard-mplus",
       "result": "success",
-      "previousAsOf": "2026-11-26",
-      "newAsOf": "2026-11-27",
-      "detail": "Deterministic collector (wcl-fetch/evidence.json, attempted 2026-11-27T19:37:37Z): bracket status success - 320 median rows (zone 55 partition 1, +10 bracket 9), 0 empty/sparse, 0 failed; landed 320; nothing retired; check-wcl-metrics passes."
+      "previousAsOf": "2026-11-27",
+      "newAsOf": "2026-11-28",
+      "detail": "Deterministic collector (wcl-fetch/evidence.json, attempted 2026-11-28T18:24:36Z): bracket status success - 320 median rows (zone 55 partition 1, +10 bracket 9), 0 empty/sparse, 0 failed; landed 320; nothing retired; check-wcl-metrics passes."
     }
   ]
 }
