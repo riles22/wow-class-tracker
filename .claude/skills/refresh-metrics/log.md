@@ -24,6 +24,8 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+- 2026-11-28 (local scheduled run, ~18:00 UTC) · Archon browser lane (Brave): the first page (heroic raid DPS) returned the "Human Verification" interstitial, no `__NEXT_DATA__`. Stopped at the first challenge, nothing clicked or retried; no Archon numbers or survivability tiers merged, stored values and dates from the 11-24 local run retained (third local run in a row: 11-25, 11-27, 11-28).
+
 - 2026-11-27 (nightly, ~19:50 UTC) · WCL collector raid 360 / M+ 320 landed (success, nothing retired). Murlok 40 rows (source 11-27) + Mythicstats period 1091 40 rows (unchanged values) applied from metrics-fetch/updates.json. Bloodmallet 24/24 MID2 byte-identical at 11-25 (Balance/Aug/Dev still error) -> partial. SimC MID2_Raid.txt unchanged (11-18, HEAD 261a211590) -> partial. WoWMeta snapshotDate 09-15, 0/40 diffs -> partial. Archon blocked.
 
 - 2026-11-27 (local scheduled run, ~16:20 UTC) · Archon browser lane (Brave): the first page returned the human-verification interstitial, no `__NEXT_DATA__`. Stopped at the first challenge, nothing clicked or retried; no Archon numbers or survivability tiers merged, stored values and dates from the 11-24 local run retained (second local run in a row: 11-25, 11-27).

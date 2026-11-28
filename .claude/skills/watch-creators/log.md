@@ -24,6 +24,11 @@ or by phrase: a prune deletes both. On 2026-10-06 three files still pointed at r
 entries pruned weeks earlier. A rule other files need goes in SKILL.md; when an entry's
 history matters, cite the commit that added it.
 
+## 2026-11-28 (local scheduled run, ~18:00 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
+
+- RSS discovery: 44/44 feeds 200; 448 in-cycle ids outside the four lanes (the handed-forward backlog, mostly WoW: Forever streams and shorts). 26 published since 11-26 12:00 UTC: WoW: Forever guides, streams and shorts (Supatease, Dalaran Gaming, MadSkillzzTV, Psybear, Shindigg, Shadarek, Bansherz, leak, izen Kkxdl70FeFA player stats), two Dalaran Gaming PvP duel videos, Megasett's UI guide O9VhqAgpTZE, Shadarek's dungeon-route sim how-to 0J-1Bx-nTAA, two Critcake key/raid streams, and AutomaticJak mLgg-0RCa_4 ("Blizzard Is Sorry.....Again", raid-design commentary by its description). None carries a retail spec read by title or description; all left unseen.
+- Transcripts: one yt-dlp caption probe (AutomaticJak mLgg-0RCa_4) drew HTTP 429, not retried: the caption flag still holds. The queue was empty, so the in-browser queue-only lane had nothing to read. Nothing queued (fetch broadly, queue narrowly; mLgg-0RCa_4's title has no class/spec/Season signal, so the nightly's filter judges it).
+
 ## 2026-11-27 (nightly, ~19:50 UTC) — 44/44 feeds; queue 0 -> 0; 0 takes, 0 metaNotes
 
 - RSS: 44/44 feeds 200. Supadata verdict ok, 0 requested (queue empty). New since the local run: Supatease WoW: Forever shorts, Psybear Forever stream, Shindigg Forever prebis stream, Dalaran Gaming duel stream; earlier-triaged key VODs, Havoc how-to (mJJgyaX5Lsk) and Ula'tek walkthrough (SZsoiLbTJtQ) are guide-shaped. Nothing passes the nightly keyword filter as a spec read; all left unseen, nothing queued.
